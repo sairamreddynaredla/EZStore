@@ -98,7 +98,7 @@ const ProductDetails = () => {
           <div>
 
             {/* PRODUCT GALLERY */}
-            <ProductGallery product={product} />
+            <ProductGallery key={product.id} product={product} />
 
             {/* DELIVERY BOX */}
             <div className="mt-8">

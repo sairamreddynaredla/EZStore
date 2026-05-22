@@ -249,8 +249,8 @@ export const products = [
 
     images: [
       'https://m.media-amazon.com/images/I/71C7OcYaC1L._SX425_.jpg',
-      'https://m.media-amazon.com/images/I/71C7OcYaC1L._SX425_.jpg',
-      'https://m.media-amazon.com/images/I/71C7OcYaC1L._SX425_.jpg',
+      'https://image.chewy.com/is/image/catalog/117326_MAIN._AC_SL400_V1566415516_.jpg',
+      'https://image.chewy.com/is/image/catalog/104085_MAIN._AC_SL400_V1532470712_.jpg',
     ],
 
     description:
