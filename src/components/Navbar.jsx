@@ -16,6 +16,7 @@ import {
 } from "react-icons/fa";
 
 import useCart from "../hooks/usecart";
+import logo from "../assets/logo/ezstore-logo.png";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -66,7 +67,7 @@ function Navbar() {
           className="flex items-center gap-2 shrink-0"
         >
           <img
-            src="/src/assets/logo/ezstore-logo.png"
+            src={logo}
             alt="EZStore Logo"
             className="h-10 md:h-12 object-contain"
           />
