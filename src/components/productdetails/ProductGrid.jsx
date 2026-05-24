@@ -1,15 +1,13 @@
 import { Link } from 'react-router-dom'
-
-import {
-  FaHeart,
-  FaShoppingCart,
-} from 'react-icons/fa'
-
+import { FaHeart } from 'react-icons/fa'
+import AddToCartButton from '../products/AddToCartButton'
 import useCart from '../../hooks/usecart'
+import { useWishlist } from '../../context/usewishlist'
 
 const ProductGrid = ({ products }) => {
 
   const { addToCart } = useCart()
+  const { addToWishlist, removeFromWishlist, isInWishlist } = useWishlist()
 
   return (
     <div className='grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4'>
@@ -31,7 +29,8 @@ const ProductGrid = ({ products }) => {
                 </div>
               )}
               <button
-                className='absolute right-4 top-4 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-600 shadow-sm transition hover:bg-orange-500 hover:text-white'
+                onClick={(e) => { e.preventDefault(); isInWishlist(product.id) ? removeFromWishlist(product.id) : addToWishlist(product) }}
+                className={`absolute right-4 top-4 z-10 flex h-8 w-8 items-center justify-center rounded-full shadow-sm transition hover:bg-orange-500 hover:text-white ${isInWishlist(product.id) ? 'bg-red-500 text-white' : 'bg-white text-gray-600'}`}
                 aria-label='Add to wishlist'
               >
                 <FaHeart size={12} />
@@ -73,19 +72,14 @@ const ProductGrid = ({ products }) => {
                 )}
                 {product.fastDelivery && <span className='rounded-full bg-slate-100 px-2 py-1'>Fast delivery</span>}
               </div>
-              <button
-                onClick={() =>
-                  addToCart({
-                    ...product,
-                    selectedVariant: activeVariant,
-                    quantity: 1,
-                  })
+              <AddToCartButton
+                product={{ ...product, selectedVariant: activeVariant }}
+                isOutOfStock={product.stock <= 0}
+                onAddToCart={(prod, quantity) =>
+                  addToCart({ ...prod, quantity })
                 }
-                className='mt-auto inline-flex w-full items-center justify-center gap-2 rounded-xl bg-orange-500 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-600'
-              >
-                <FaShoppingCart size={13} />
-                Add to cart
-              </button>
+                quantity={1}
+              />
             </div>
           </div>
         );

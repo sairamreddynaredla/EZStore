@@ -1,7 +1,8 @@
 import { Heart } from "lucide-react";
 import { useState } from "react";
 
-const WishlistButton = ({ isWishlisted = false, productId, onWishlistToggle }) => {
+// Accepts full product object for dynamic wishlist
+const WishlistButton = ({ isWishlisted = false, product, onWishlistToggle }) => {
   const [isAnimating, setIsAnimating] = useState(false);
 
   const handleWishlistClick = (e) => {
@@ -11,8 +12,8 @@ const WishlistButton = ({ isWishlisted = false, productId, onWishlistToggle }) =
     const nextState = !isWishlisted;
     setIsAnimating(true);
 
-    if (onWishlistToggle) {
-      onWishlistToggle(productId, nextState);
+    if (onWishlistToggle && product) {
+      onWishlistToggle(product, nextState);
     }
 
     setTimeout(() => setIsAnimating(false), 500);

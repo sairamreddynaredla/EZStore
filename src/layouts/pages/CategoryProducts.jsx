@@ -5,9 +5,25 @@ import Navbar from "../../components/Navbar"
 import ProductCard from "../../components/products/ProductCard"
 import ShopSidebar from "../../components/shop/ShopSidebar"
 import { products } from "../../data/products"
+import useCart from "../../hooks/usecart"
+import { useWishlist } from "../../context/usewishlist"
 
 const CategoryProducts = () => {
 
+  const { addToCart } = useCart()
+  const { addToWishlist, removeFromWishlist } = useWishlist()
+
+  const handleAddToCart = (product, quantity = 1) => {
+    addToCart({ ...product, quantity })
+  }
+
+  const handleWishlistToggle = (product, isWishlisted) => {
+    if (isWishlisted) {
+      addToWishlist(product)
+    } else {
+      removeFromWishlist(product.id)
+    }
+  }
 
   const { category } = useParams()
   const [sortBy, setSortBy] = useState("best-selling")
@@ -188,6 +204,8 @@ const CategoryProducts = () => {
                 <ProductCard
                   key={product.id}
                   product={product}
+                  onAddToCart={handleAddToCart}
+                  onWishlistToggle={handleWishlistToggle}
                 />
 
               ))}

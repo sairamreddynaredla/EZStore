@@ -1,5 +1,6 @@
 import { useState } from "react";
 import useCart from "../../hooks/usecart";
+import AddToCartButton from "../products/AddToCartButton";
 import BuyNowButton from "../BuyNowButton";
 
 const ProductInfo = ({ product, handleBuyNow }) => {
@@ -255,18 +256,16 @@ const ProductInfo = ({ product, handleBuyNow }) => {
 
       <div className="space-y-4 pt-4">
         <div className="grid gap-3 sm:grid-cols-[1fr_1fr]">
-          <button
-            onClick={() =>
-              addToCart({
-                ...product,
-                selectedVariant,
-                quantity,
-              })
-            }
-            className="inline-flex min-w-45 items-center justify-center rounded-xl bg-orange-500 px-10 py-4 text-sm font-semibold text-white shadow-sm transition hover:bg-orange-600"
-          >
-            Add To Cart
-          </button>
+          <AddToCartButton
+            product={{
+              ...product,
+              selectedVariant,
+              quantity,
+            }}
+            isOutOfStock={product.stock <= 0}
+            onAddToCart={addToCart}
+            quantity={quantity}
+          />
           <BuyNowButton
             onClick={handleBuyNow}
             disabled={product.stock === 0}

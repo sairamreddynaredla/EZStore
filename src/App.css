@@ -1,3 +1,13 @@
+/* Pet E-commerce Footer Theme Colors */
+:root {
+  --footer-bg: #f7c873; /* warm yellow */
+  --footer-dark-bg: #f5b041; /* deeper gold */
+  --footer-text: #3d2c00; /* dark brown */
+  --footer-link: #e67e22; /* orange accent */
+  --footer-link-hover: #a04000; /* deep orange */
+  --footer-border: #ffe5b4; /* light gold border */
+  --footer-social-bg: #fff3e0; /* light orange for icons */
+}
 .counter {
   font-size: 16px;
   padding: 5px 10px;

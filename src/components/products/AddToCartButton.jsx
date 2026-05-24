@@ -1,9 +1,10 @@
 import { ShoppingCart, Check } from "lucide-react";
 import { useState } from "react";
 
+
+// Accepts a full product object for dynamic cart addition
 const AddToCartButton = ({
-  productId,
-  productName,
+  product,
   isOutOfStock = false,
   onAddToCart,
   quantity = 1,
@@ -19,8 +20,8 @@ const AddToCartButton = ({
 
     setIsAdding(true);
 
-    if (onAddToCart) {
-      await onAddToCart(productId, quantity);
+    if (onAddToCart && product) {
+      await onAddToCart(product, quantity);
     }
 
     setIsAdding(false);
@@ -40,7 +41,7 @@ const AddToCartButton = ({
             ? "bg-gray-300 text-gray-500 cursor-not-allowed"
             : "bg-orange-500 hover:bg-orange-600 text-white shadow-lg hover:shadow-xl"
       }`}
-      aria-label={`Add ${productName} to cart`}
+      aria-label={`Add ${product?.name} to cart`}
     >
       {isAdding ? (
         <>

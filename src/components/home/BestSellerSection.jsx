@@ -1,8 +1,25 @@
 import { Link } from "react-router-dom"
 import products from "../../data/products"
 import ProductCard from "../products/ProductCard"
+import useCart from "../../hooks/usecart"
+import { useWishlist } from "../../context/usewishlist"
 
 const BestSellerSection = () => {
+
+  const { addToCart } = useCart()
+  const { addToWishlist, removeFromWishlist } = useWishlist()
+
+  const handleAddToCart = (product, quantity = 1) => {
+    addToCart({ ...product, quantity })
+  }
+
+  const handleWishlistToggle = (product, isWishlisted) => {
+    if (isWishlisted) {
+      addToWishlist(product)
+    } else {
+      removeFromWishlist(product.id)
+    }
+  }
 
   // SHOW ONLY FIRST 6 PRODUCTS
   const bestSellerProducts = products.slice(0, 6)
@@ -46,6 +63,8 @@ const BestSellerSection = () => {
             <ProductCard
               key={product.id}
               product={product}
+              onAddToCart={handleAddToCart}
+              onWishlistToggle={handleWishlistToggle}
             />
           ))}
 

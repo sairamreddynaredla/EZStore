@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { FaHeart, FaShoppingCart, FaStar } from 'react-icons/fa'
+import { FaHeart, FaStar } from 'react-icons/fa'
+import AddToCartButton from '../../components/products/AddToCartButton'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import { brands } from '../../data/brands'
@@ -102,20 +103,17 @@ const ProductCard = ({ product }) => {
           </div>
 
           {/* Add to Cart Button */}
-          <button
-            onClick={(e) => {
-              e.preventDefault()
+          <AddToCartButton
+            product={{ ...product, selectedVariant: activeVariant }}
+            isOutOfStock={product.stock <= 0}
+            onAddToCart={(prod, quantity) =>
               addToCart({
-                ...product,
-                selectedVariant: activeVariant,
-                quantity: 1,
+                ...prod,
+                quantity,
               })
-            }}
-            className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 rounded-lg transition-all duration-300 flex items-center justify-center gap-2"
-          >
-            <FaShoppingCart size={14} />
-            Add to Cart
-          </button>
+            }
+            quantity={1}
+          />
         </div>
       </div>
     </Link>

@@ -1,9 +1,10 @@
 import {
   Flame,
-  ShoppingCart,
   Star,
   Heart,
 } from "lucide-react"
+import AddToCartButton from '../products/AddToCartButton'
+import useCart from '../../hooks/usecart'
 
 const hotPicks = [
 
@@ -73,6 +74,7 @@ const featuredProducts = [
 ]
 
 const HotPickSection = () => {
+  const { addToCart } = useCart()
 
   return (
 
@@ -275,13 +277,12 @@ const HotPickSection = () => {
 
                   {/* BUTTON */}
 
-                  <button className="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-2xl font-semibold flex items-center justify-center gap-2 transition">
-
-                    <ShoppingCart size={18} />
-
-                    Add To Cart
-
-                  </button>
+                  <AddToCartButton
+                    product={product}
+                    isOutOfStock={false}
+                    onAddToCart={(prod, quantity) => addToCart({ ...prod, quantity })}
+                    quantity={1}
+                  />
 
                 </div>
 

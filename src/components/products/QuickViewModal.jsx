@@ -132,8 +132,7 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
             {/* BUTTONS */}
             <div className="flex gap-3 pt-4">
               <AddToCartButton
-                productId={product.id}
-                productName={product.name}
+                product={product}
                 isOutOfStock={product.stock <= 0}
                 onAddToCart={onAddToCart}
                 quantity={quantity}

@@ -56,7 +56,7 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
 
         <WishlistButton
           isWishlisted={isInWishlist(product.id)}
-          productId={product.id}
+          product={product}
           onWishlistToggle={onWishlistToggle}
         />
       </div>
@@ -101,8 +101,7 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
 
         <div className="mt-auto">
           <AddToCartButton
-            productId={product.id}
-            productName={product.name}
+            product={product}
             isOutOfStock={isOutOfStock}
             onAddToCart={onAddToCart}
             quantity={1}

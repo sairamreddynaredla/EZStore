@@ -1,165 +1,227 @@
+import { Link } from "react-router-dom";
 import ezstoreLogo from "../assets/logo/ezstore-logo.png";
 
+const socialLinks = [
+  { href: "https://facebook.com", icon: "https://img.icons8.com/ios-filled/50/ffffff/facebook-new.png", label: "Facebook" },
+  { href: "https://twitter.com", icon: "https://img.icons8.com/ios-filled/50/ffffff/twitter.png", label: "Twitter" },
+  { href: "https://instagram.com", icon: "https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png", label: "Instagram" },
+  { href: "https://youtube.com", icon: "https://img.icons8.com/ios-filled/50/ffffff/youtube-play.png", label: "YouTube" },
+];
+
+const footerLinks = {
+  Pets: [
+    { label: "Dogs", to: "/category/dog-food" },
+    { label: "Cats", to: "/category/cat-food" },
+    { label: "Birds", to: "/category/bird-food" },
+    { label: "Fish", to: "/category/fish-food" },
+    { label: "Rabbits", to: "/category/rabbit-food" },
+    { label: "Hamsters", to: "/category/hamster-food" },
+  ],
+  "About EZStore": [
+    { label: "Our Story", to: "#" },
+    { label: "Careers", to: "#" },
+    { label: "News & Updates", to: "#" },
+    { label: "Store Locations", to: "#" },
+    { label: "EZStore Promise", to: "#" },
+  ],
+  "Popular Brands": [
+    { label: "Pedigree", to: "#" },
+    { label: "Royal Canin", to: "#" },
+    { label: "Whiskas", to: "#" },
+    { label: "Drools", to: "#" },
+    { label: "Farmina", to: "#" },
+    { label: "Orijen", to: "#" },
+  ],
+  "Help & Support": [
+    { label: "Help Center", to: "#" },
+    { label: "Returns & Refunds", to: "#" },
+    { label: "Track Your Order", to: "#" },
+    { label: "Contact Support", to: "#" },
+    { label: "Feedback", to: "#" },
+  ],
+};
+
+const trustBadges = [
+  { icon: "🚚", title: "Free Delivery", subtitle: "On orders above ₹499" },
+  { icon: "🔄", title: "Easy Returns", subtitle: "30-day return policy" },
+  { icon: "🔒", title: "Secure Payments", subtitle: "100% safe & encrypted" },
+  { icon: "🏆", title: "Trusted Brands", subtitle: "100+ premium brands" },
+];
+
 const Footer = () => {
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
   return (
-    <footer className="bg-white text-[#1A1A1A] mt-12 pt-12 pb-6 px-4 md:px-8 border-t">
+    <footer style={{ background: "var(--footer-bg)", color: "var(--footer-text)" }}>
 
-      {/* Main Footer */}
-      <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-5 gap-10">
-
-        {/* Logo Section */}
-        <div>
-          <img src={ezstoreLogo} alt="EZStore Logo" className="h-10 mb-3" />
-          <p className="text-sm text-gray-600 leading-6 mb-6">
-            Redefining pet shopping with premium food, accessories,
-            and trusted brands designed to improve your pet’s life.
-          </p>
-
-          {/* Accepted Payments */}
-          <div>
-            <h3 className="font-semibold mb-3">
-              Accepted Payments
-            </h3>
-
-            <div className="flex items-center gap-3 flex-wrap">
-
-              <div className="bg-white border border-gray-200 rounded-md px-3 py-2 shadow-sm">
-                <img
-                  src="https://img.icons8.com/color/48/stripe.png"
-                  alt="Stripe"
-                  className="h-5 object-contain"
-                />
+      {/* ── Trust Badges Bar ── */}
+      <div
+        className="border-b"
+        style={{ borderColor: "var(--footer-border)", background: "var(--footer-dark-bg)" }}
+      >
+        <div className="max-w-[1440px] mx-auto px-6 md:px-10 py-5">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {trustBadges.map((badge) => (
+              <div key={badge.title} className="flex items-center gap-3">
+                <span className="text-2xl">{badge.icon}</span>
+                <div>
+                  <p className="text-sm font-bold leading-tight" style={{ color: "var(--footer-text)" }}>
+                    {badge.title}
+                  </p>
+                  <p className="text-xs leading-tight opacity-75" style={{ color: "var(--footer-text)" }}>
+                    {badge.subtitle}
+                  </p>
+                </div>
               </div>
-
-              <div className="bg-white border border-gray-200 rounded-md px-3 py-2 shadow-sm">
-                <img
-                  src="https://img.icons8.com/color/48/visa.png"
-                  alt="Visa"
-                  className="h-5 object-contain"
-                />
-              </div>
-
-              <div className="bg-white border border-gray-200 rounded-md px-3 py-2 shadow-sm">
-                <img
-                  src="https://img.icons8.com/color/48/mastercard-logo.png"
-                  alt="MasterCard"
-                  className="h-5 object-contain"
-                />
-              </div>
-
-              <div className="bg-white border border-gray-200 rounded-md px-3 py-2 shadow-sm">
-                <img
-                  src="https://img.icons8.com/color/48/google-pay-india.png"
-                  alt="Google Pay"
-                  className="h-5 object-contain"
-                />
-              </div>
-
-              <div className="bg-white border border-gray-200 rounded-md px-3 py-2 shadow-sm">
-                <img
-                  src="https://img.icons8.com/ios-filled/50/mac-os.png"
-                  alt="Apple Pay"
-                  className="h-5 object-contain"
-                />
-              </div>
-
-            </div>
+            ))}
           </div>
         </div>
-
-        {/* Pets */}
-        <div>
-          <h3 className="font-semibold text-lg mb-4">
-            Pets
-          </h3>
-
-          <ul className="space-y-3 text-sm text-gray-600">
-            <li><a href="#">Dogs</a></li>
-            <li><a href="#">Cats</a></li>
-            <li><a href="#">Birds</a></li>
-            <li><a href="#">Fish</a></li>
-            <li><a href="#">Rabbits</a></li>
-            <li><a href="#">Hamsters</a></li>
-          </ul>
-        </div>
-
-        {/* About */}
-        <div>
-          <h3 className="font-semibold text-lg mb-4">
-            About EZStore
-          </h3>
-
-          <ul className="space-y-3 text-sm text-gray-600">
-            <li><a href="#">Our Story</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">News & Updates</a></li>
-            <li><a href="#">Store Locations</a></li>
-            <li><a href="#">EZStore Promise</a></li>
-          </ul>
-        </div>
-
-        {/* Brands */}
-        <div>
-          <h3 className="font-semibold text-lg mb-4">
-            Popular Brands
-          </h3>
-
-          <ul className="space-y-3 text-sm text-gray-600">
-            <li><a href="#">Pedigree</a></li>
-            <li><a href="#">Royal Canin</a></li>
-            <li><a href="#">Whiskas</a></li>
-            <li><a href="#">Drools</a></li>
-            <li><a href="#">Farmina</a></li>
-          </ul>
-        </div>
-
-        {/* Help */}
-        <div>
-          <h3 className="font-semibold text-lg mb-4">
-            Help & Support
-          </h3>
-
-          <ul className="space-y-3 text-sm text-gray-600">
-            <li><a href="#">Help Center</a></li>
-            <li><a href="#">Returns & Refunds</a></li>
-            <li><a href="#">Track Your Order</a></li>
-            <li><a href="#">Contact Support</a></li>
-            <li><a href="#">Feedback</a></li>
-          </ul>
-        </div>
-
       </div>
 
-      {/* Bottom Footer */}
-      <div className="border-t border-gray-200 mt-10 pt-5">
+      
 
-        <div className="max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-3 items-center gap-4 text-xs text-gray-500">
+      {/* ── Main Footer Grid ── */}
+      <div className="max-w-[1440px] mx-auto px-6 md:px-10 py-14">
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-10 lg:gap-14">
 
-          {/* Left */}
-          <div className="text-center md:text-left">
-            © {new Date().getFullYear()} EZStore. All rights reserved.
+          {/* Brand Column */}
+          <div className="md:col-span-2 flex flex-col gap-6">
+            <div>
+              <img src={ezstoreLogo} alt="EZStore" className="h-12 mb-4" />
+              <p className="text-sm leading-relaxed opacity-80" style={{ color: "var(--footer-text)" }}>
+                Redefining pet shopping with premium food, accessories, and trusted brands — designed to improve your pet's life every day.
+              </p>
+            </div>
+
+            {/* Social Icons */}
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-3 opacity-60" style={{ color: "var(--footer-text)" }}>
+                Follow Us
+              </p>
+              <div className="flex gap-2">
+                {socialLinks.map((link) => (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={link.label}
+                    className="h-9 w-9 rounded-full flex items-center justify-center transition-all hover:scale-110"
+                    style={{ background: "var(--footer-link)" }}
+                  >
+                    <img src={link.icon} alt={link.label} className="h-4 w-4" />
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Payments */}
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-3 opacity-60" style={{ color: "var(--footer-text)" }}>
+                Accepted Payments
+              </p>
+              <div className="flex items-center gap-2 flex-wrap">
+                {[
+                  { src: "https://img.icons8.com/color/48/stripe.png", alt: "Stripe" },
+                  { src: "https://img.icons8.com/color/48/visa.png", alt: "Visa" },
+                  { src: "https://img.icons8.com/color/48/mastercard-logo.png", alt: "MasterCard" },
+                  { src: "https://img.icons8.com/color/48/google-pay-india.png", alt: "Google Pay" },
+                  { src: "https://img.icons8.com/ios-filled/50/mac-os.png", alt: "Apple Pay" },
+                ].map((p) => (
+                  <div
+                    key={p.alt}
+                    className="h-8 w-12 bg-white rounded-md flex items-center justify-center shadow-sm p-1"
+                  >
+                    <img src={p.src} alt={p.alt} className="h-full w-full object-contain" />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Center */}
-          <div className="text-center">
-            Designed & Developed by Virtu Tech Solutions
-          </div>
-
-          {/* Right */}
-          <div className="flex gap-5 justify-center md:justify-end">
-
-            <a href="#" className="hover:text-[#F53B3B]">
-              Terms of Service
-            </a>
-
-            <a href="#" className="hover:text-[#F53B3B]">
-              Privacy Policy
-            </a>
-
-          </div>
+          {/* Link Columns */}
+          {Object.entries(footerLinks).map(([heading, links]) => (
+            <div key={heading} className="flex flex-col gap-4">
+              <h4
+                className="text-sm font-bold uppercase tracking-widest"
+                style={{ color: "var(--footer-text)" }}
+              >
+                {heading}
+              </h4>
+              <div
+                className="w-8 h-0.5 rounded-full"
+                style={{ background: "var(--footer-link)" }}
+              />
+              <ul className="flex flex-col gap-2.5">
+                {links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      to={link.to}
+                      className="text-sm transition-all hover:translate-x-1 inline-block"
+                      style={{ color: "var(--footer-text)", opacity: 0.75 }}
+                      onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.color = "var(--footer-link)"; }}
+                      onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.75; e.currentTarget.style.color = "var(--footer-text)"; }}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
 
         </div>
+      </div>
 
+      {/* ── Bottom Bar ── */}
+      <div
+        className="border-t"
+        style={{ background: "var(--footer-dark-bg)", borderColor: "var(--footer-border)" }}
+      >
+        <div className="max-w-[1440px] mx-auto px-6 md:px-10 py-5">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-xs" style={{ color: "var(--footer-text)" }}>
+
+            <span className="opacity-75">
+              © {new Date().getFullYear()} EZStore. All rights reserved.
+            </span>
+
+            <span className="opacity-75 text-center">
+              Designed & Developed by{" "}
+              <a
+                href="https://www.virtutechsolutions.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold hover:underline"
+                style={{ color: "var(--footer-link)" }}
+              >
+                Virtu Tech Solutions
+              </a>
+            </span>
+
+            <div className="flex items-center gap-5">
+              {["Terms of Service", "Privacy Policy", "Cookie Policy"].map((item) => (
+                <a
+                  key={item}
+                  href="#"
+                  className="opacity-75 hover:opacity-100 hover:underline transition-opacity"
+                  style={{ color: "var(--footer-text)" }}
+                >
+                  {item}
+                </a>
+              ))}
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      {/* ── Back to Top ── */}
+      <div
+        onClick={scrollToTop}
+        className="w-full py-3 text-center text-xs font-bold uppercase tracking-widest cursor-pointer transition-opacity hover:opacity-80 select-none"
+        style={{ background: "var(--footer-link)", color: "#fff" }}
+      >
+        ↑ Back to Top
       </div>
 
     </footer>
