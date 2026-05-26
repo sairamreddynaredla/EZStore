@@ -20,6 +20,11 @@ const WishList = () => {
 
   const { addToCart } = useCart()
 
+  const handleAddToCart = (product, quantity) => {
+    addToCart({ ...product, quantity })
+    removeFromWishlist(product.id)
+  }
+
   return (
 
     <div className='bg-[#f8f8f8] min-h-screen'>
@@ -291,10 +296,9 @@ const WishList = () => {
                       product={{
                         ...product,
                         selectedVariant: activeVariant,
-                        quantity: 1,
                       }}
                       isOutOfStock={product.stock <= 0}
-                      onAddToCart={addToCart}
+                      onAddToCart={handleAddToCart}
                       quantity={1}
                     />
 

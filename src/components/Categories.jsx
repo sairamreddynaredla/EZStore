@@ -1,4 +1,6 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useRef } from "react"
 
 const dog =
   "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=300&auto=format&fit=crop"
@@ -20,102 +22,156 @@ const hamster =
 
 const categories = [
   {
-    title: 'Dog Food',
+    title: "Dog",
     image: dog,
-    color: 'bg-blue-100',
-    slug: 'dog-food',
+    color: "bg-blue-100",
+    slug: "dog-food",
   },
-
   {
-    title: 'Cat Food',
+    title: "Cat",
     image: cat,
-    color: 'bg-orange-100',
-    slug: 'cat-food',
+    color: "bg-orange-100",
+    slug: "cat-food",
   },
-
   {
-    title: 'Bird Food',
+    title: "Bird",
     image: bird,
-    color: 'bg-yellow-100',
-    slug: 'bird-food',
+    color: "bg-yellow-100",
+    slug: "bird-food",
   },
-
   {
-    title: 'Fish Food',
+    title: "Fish",
     image: fish,
-    color: 'bg-pink-100',
-    slug: 'fish-food',
+    color: "bg-pink-100",
+    slug: "fish-food",
   },
-
   {
-    title: 'Rabbit Food',
+    title: "Rabbit",
     image: rabbit,
-    color: 'bg-green-100',
-    slug: 'rabbit-food',
+    color: "bg-green-100",
+    slug: "rabbit-food",
   },
-
   {
-    title: 'Hamster Food',
+    title: "Hamster",
     image: hamster,
-    color: 'bg-red-100',
-    slug: 'hamster-food',
+    color: "bg-red-100",
+    slug: "hamster-food",
   },
 ]
 
+
 function Categories() {
+  const scrollRef = useRef(null)
+
   return (
-    <section className='px-6 md:px-10 py-20 bg-[#f8f8f8]'>
 
-      <div className='text-center mb-14'>
+    <section className="py-20 bg-[#f8f8f8] overflow-hidden">
 
-        <h2 className='text-4xl md:text-5xl font-bold'>
-          Browse by Pet Category
+      {/* Heading */}
+      <div className="text-center mb-16">
+
+        <h2 className="text-5xl md:text-6xl font-bold">
+          Browse by Exclusive Category
         </h2>
 
-        <p className='text-gray-500 mt-4 text-lg'>
-          Explore foods for all your lovely pets
-        </p>
-
       </div>
 
-      <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8'>
 
-        {categories.map((item, index) => (
-
-          <Link
-            key={index}
-            to={`/category/${item.slug}`}
-            className={`${item.color}
-            rounded-[30px]
-            p-6
-            text-center
-            hover:scale-105
-            duration-300
-            cursor-pointer
-            shadow-sm
-            hover:shadow-xl`}
+      {/* Main Slider */}
+      <div className="w-full flex flex-col items-center justify-center">
+        {/* Slider Wrapper */}
+        <div className="w-full max-w-[1400px] overflow-x-visible flex flex-col items-center">
+          {/* Cards */}
+          <div
+            ref={scrollRef}
+            className="
+              flex
+              items-center
+              gap-6
+              overflow-x-auto
+              scroll-smooth
+              px-0 md:px-20
+              py-4
+              snap-x
+              snap-mandatory
+              [&::-webkit-scrollbar]:hidden
+              [-ms-overflow-style:none]
+              [scrollbar-width:none]
+              justify-center
+            "
+            style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}
           >
-
-            <div className='overflow-hidden rounded-[20px]'>
-
-              <img
-                src={item.image}
-                alt='category'
-                className='w-full h-40 object-cover mx-auto hover:scale-110 duration-500'
-              />
-
-            </div>
-
-            <h3 className='mt-5 font-bold text-xl'>
-              {item.title}
-            </h3>
-
-          </Link>
-
-        ))}
-
+            {categories.map((item, index) => (
+              <Link
+                key={index}
+                to={`/category/${item.slug}`}
+                className={`${item.color}
+                  min-w-[220px]
+                  max-w-[220px]
+                  h-[340px]
+                  rounded-[40px]
+                  flex
+                  flex-col
+                  items-center
+                  justify-center
+                  shadow-md
+                  hover:shadow-2xl
+                  hover:-translate-y-2
+                  hover:scale-105
+                  duration-300
+                  snap-center
+                  flex-shrink-0
+                  transition-all
+                  `}
+              >
+                {/* Centered Image */}
+                <div className="flex items-center justify-center w-full">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-36 h-36 rounded-full object-cover border-[6px] border-white shadow-lg"
+                  />
+                </div>
+                {/* Title (only pet name) */}
+                <h3 className="mt-8 text-3xl font-bold text-gray-800">
+                  {item.title}
+                </h3>
+              </Link>
+            ))}
+          </div>
+        </div>
+        {/* Arrows below cards, visually separated */}
+        <div className="flex flex-row items-center justify-center gap-8 mt-12 mb-2 w-full">
+          <button
+            onClick={() => {
+              if (scrollRef.current) {
+                scrollRef.current.scrollBy({
+                  left: -240, // scroll by one card width
+                  behavior: "smooth",
+                });
+              }
+            }}
+            className="bg-white shadow-xl w-14 h-14 rounded-full flex items-center justify-center hover:scale-110 duration-300"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft size={30} />
+          </button>
+          <button
+            onClick={() => {
+              if (scrollRef.current) {
+                scrollRef.current.scrollBy({
+                  left: 240, // scroll by one card width
+                  behavior: "smooth",
+                });
+              }
+            }}
+            className="bg-white shadow-xl w-14 h-14 rounded-full flex items-center justify-center hover:scale-110 duration-300"
+            aria-label="Scroll right"
+          >
+            <ChevronRight size={30} />
+          </button>
+        </div>
       </div>
-
     </section>
   )
 }

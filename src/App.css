@@ -1,5 +1,17 @@
-/* Pet E-commerce Footer Theme Colors */
+/* EZ Store Brand Theme Colors */
 :root {
+  /* Primary Colors */
+  --primary: #1F6B52;
+  --secondary: #7BAE7F;
+  --cta: #F59E0B;
+  --background: #FAF9F6;
+  --cards: #FFFFFF;
+  --headings: #1A1A1A;
+  --text: #4B5563;
+  --border: #E5E7EB;
+  --success: #16A34A;
+  
+  /* Footer Colors (Legacy) */
   --footer-bg: #f7c873; /* warm yellow */
   --footer-dark-bg: #f5b041; /* deeper gold */
   --footer-text: #3d2c00; /* dark brown */

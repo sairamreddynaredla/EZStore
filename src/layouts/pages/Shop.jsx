@@ -23,20 +23,16 @@ const Shop = () => {
   const { addToWishlist, removeFromWishlist, wishlist: wishlistItems } = useWishlist()
 
   // WISHLIST TOGGLE HANDLER
-  const handleWishlistToggle = (productId, isAdding) => {
+  const handleWishlistToggle = (product, isAdding) => {
     if (isAdding) {
-      const product = products.find(p => p.id === productId)
-      if (product) {
-        addToWishlist(product)
-      }
+      addToWishlist(product)
     } else {
-      removeFromWishlist(productId)
+      removeFromWishlist(product.id)
     }
   }
 
   // ADD TO CART HANDLER
-  const handleAddToCart = async (productId, quantity) => {
-    const product = products.find(p => p.id === productId)
+  const handleAddToCart = async (product, quantity) => {
     if (product) {
       addToCart({ ...product, quantity })
     }

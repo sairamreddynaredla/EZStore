@@ -35,6 +35,7 @@ import OrderSuccess from "./layouts/pages/OrderSuccess";
 import WishList from "./layouts/pages/WishList";
 
 import Checkout from "./layouts/pages/CheckOut";
+import BrandProducts from "./layouts/pages/BrandProducts";
 const App = () => {
 
   return (
@@ -101,6 +102,10 @@ const App = () => {
         <Route
           path="/brands"
           element={<Brands />}
+        />
+        <Route
+          path="/brands/:brandSlug"
+          element={<BrandProducts />}
         />
 
         {/* BEST SELLERS */}

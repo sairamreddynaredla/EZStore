@@ -1,20 +1,32 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import Home from '../pages/Home'
-import Login from '../pages/Login'
-import Register from '../pages/Register'
-import CategoryProducts from '../pages/CategoryProducts'
-import ProductDetails from '../pages/ProductDetails'
+/* PAGES */
+import Home from '../layouts/pages/Home'
+import Login from '../layouts/pages/Login'
+import Register from '../layouts/pages/Register'
+
+import CategoryProducts from '../layouts/pages/CategoryProducts'
+
+import ProductDetails from '../layouts/pages/ProductDetails'
+
 import BreedDetails from '../layouts/pages/BreedDetails'
 import BreedCategory from '../layouts/pages/BreedCategory'
+
 import Shop from '../layouts/pages/Shop'
 import BestSellers from '../layouts/pages/BestSellers'
+
 import Blogs from '../layouts/pages/Blogs'
-import BlogDetails from '../pages/BlogDetails'
+import BlogDetails from '../layouts/pages/BlogDetails'
+
 import Cart from '../layouts/pages/Cart'
 import WishList from '../layouts/pages/WishList'
+
 import CheckOut from '../layouts/pages/CheckOut'
 import OrderSuccess from '../layouts/pages/OrderSuccess'
+
+/* NEW */
+import Brands from '../layouts/pages/Brands'
+import BrandProducts from '../layouts/pages/BrandProducts'
 
 function AppRoutes() {
   return (
@@ -46,6 +58,14 @@ function AppRoutes() {
           element={<CategoryProducts />}
         />
 
+        {/* ========================= */}
+        {/* BRANDS NESTED ROUTES */}
+        {/* ========================= */}
+
+
+        <Route path='/brands' element={<Brands />} />
+        <Route path='/brands/:brandSlug' element={<BrandProducts />} />
+
         {/* PRODUCT DETAILS PAGE */}
         <Route
           path='/product/:id'
@@ -74,12 +94,6 @@ function AppRoutes() {
         <Route
           path='/best-sellers'
           element={<BestSellers />}
-        />
-
-        {/* BRANDS PAGE */}
-        <Route
-          path='/brands'
-          element={<Shop />}
         />
 
         {/* BLOGS PAGE */}

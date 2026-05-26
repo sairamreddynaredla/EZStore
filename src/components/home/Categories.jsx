@@ -20,42 +20,42 @@ const hamster =
 
 const categories = [
   {
-    title: "Dog Food",
+    title: "Dog",
     image: dog,
     color: "bg-blue-100",
     link: "/breeds/dog",
   },
 
   {
-    title: "Cat Food",
+    title: "Cat",
     image: cat,
     color: "bg-orange-100",
     link: "/breeds/cat",
   },
 
   {
-    title: "Bird Food",
+    title: "Bird",
     image: bird,
     color: "bg-yellow-100",
     link: "/breeds/bird",
   },
 
   {
-    title: "Fish Food",
+    title: "Fish",
     image: fish,
     color: "bg-pink-100",
     link: "/breeds/fish",
   },
 
   {
-    title: "Rabbit Food",
+    title: "Rabbit",
     image: rabbit,
     color: "bg-green-100",
     link: "/breeds/rabbit",
   },
 
   {
-    title: "Hamster Food",
+    title: "Hamster",
     image: hamster,
     color: "bg-red-100",
     link: "/breeds/hamster",
@@ -63,17 +63,15 @@ const categories = [
 ]
 
 function Categories() {
-
   return (
-
     <section className="px-6 md:px-10 py-20 bg-[#f9f9f9]">
 
+      {/* HEADING */}
       <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-
         Browse by Exclusive Category
-
       </h2>
 
+      {/* CATEGORY GRID */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
 
         {categories.map((item, index) => (
@@ -81,25 +79,23 @@ function Categories() {
           <Link
             to={item.link}
             key={index}
-            className={`${item.color} rounded-[35px] p-8 text-center hover:scale-105 duration-300 cursor-pointer shadow-sm hover:shadow-xl`}
+            className={`${item.color} rounded-[35px] p-8 flex flex-col items-center justify-center text-center hover:scale-105 duration-300 cursor-pointer shadow-sm hover:shadow-xl`}
           >
 
-            {/* IMAGE */}
-            <div className="w-32 h-32 md:w-36 md:h-36 mx-auto rounded-full overflow-hidden border-4 border-white shadow-lg">
+            {/* IMAGE CONTAINER */}
+            <div className="w-36 h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-white shadow-lg flex items-center justify-center">
 
               <img
                 src={item.image}
                 alt={item.title}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover object-center"
               />
 
             </div>
 
             {/* TITLE */}
             <h3 className="mt-6 font-bold text-xl md:text-2xl text-gray-900">
-
               {item.title}
-
             </h3>
 
           </Link>
@@ -109,7 +105,6 @@ function Categories() {
       </div>
 
     </section>
-
   )
 }
 

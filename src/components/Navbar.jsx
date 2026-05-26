@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
+import BrandsDropdown from "./BrandsDropdown";
 import {
   FaShoppingCart,
   FaHeart,
@@ -20,10 +21,10 @@ function Navbar() {
   const navLinks = [
     { to: "/", label: "Home" },
     { to: "/pets", label: "Pets" },
-    { to: "/brands", label: "Brands" },
+    // Brands handled separately for dropdown
     { to: "/best-sellers", label: "Best Sellers" },
-    { to: "/blogs", label: "Blog" },
   ];
+  const [showBrands, setShowBrands] = useState(false);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -36,73 +37,94 @@ function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-50 bg-[#0D2B5C]/90 backdrop-blur-md shadow-lg border-b border-white/10">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-6 py-4 gap-4">
-          <NavLink to="/" className="flex items-center gap-2 shrink-0">
+      <header className="fixed top-0 left-0 w-full z-50 bg-[#FAF9F6]/95 backdrop-blur-sm shadow-md border-b border-[#E5E7EB]">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-3 md:py-4 gap-6">
+          <NavLink to="/" className="flex items-center gap-1 shrink-0 group hover:opacity-80 transition-opacity duration-300">
             <img src={logo} alt="EZStore Logo" className="h-10 md:h-12 object-contain" />
           </NavLink>
 
-          <nav className="hidden md:flex items-center gap-1 lg:gap-2">
+          <nav className="hidden md:flex items-center gap-1">
             {navLinks.map((link) => (
               <NavLink
                 key={link.to}
                 to={link.to}
                 className={({ isActive }) =>
-                  `font-medium transition-all duration-300 px-3 py-2 rounded-lg whitespace-nowrap ${
+                  `font-medium transition-all duration-300 px-4 py-2.5 rounded-full whitespace-nowrap ${
                     isActive
-                      ? "text-[#F53B3B] bg-white/10"
-                      : "text-white hover:text-[#F53B3B] hover:bg-white/5"
+                      ? "text-[#1F6B52] bg-[#E8F5F0]"
+                      : "text-[#4B5563] hover:text-[#1F6B52] hover:bg-[#F5F5F5]"
                   }`
                 }
               >
                 {link.label}
               </NavLink>
             ))}
+            {/* Brands Dropdown */}
+            <div
+              className="relative group"
+              onMouseEnter={() => setShowBrands(true)}
+              onMouseLeave={() => setShowBrands(false)}
+              onClick={() => {
+                setShowBrands(true);
+                setTimeout(() => {
+                  const dropdown = document.querySelector(".brands-dropdown-scroll");
+                  if (dropdown) dropdown.scrollIntoView({ behavior: "smooth", block: "start" });
+                }, 100);
+              }}
+            >
+              <span
+                className="font-medium transition-all duration-300 px-4 py-2.5 rounded-full whitespace-nowrap text-[#4B5563] hover:text-[#1F6B52] hover:bg-[#F5F5F5] cursor-pointer select-none"
+                style={{ userSelect: "none" }}
+              >
+                Brands
+              </span>
+              {showBrands && <div className="brands-dropdown-scroll"><BrandsDropdown /></div>}
+            </div>
           </nav>
 
           <form
             onSubmit={handleSearch}
-            className="hidden lg:flex items-center bg-white/10 border border-white/20 rounded-full px-4 py-2 gap-2 flex-1 max-w-sm"
+            className="hidden lg:flex items-center bg-white border border-[#E5E7EB] rounded-full px-5 py-2.5 gap-3 flex-1 max-w-md shadow-sm hover:shadow-md hover:border-[#1F6B52] focus-within:shadow-md focus-within:border-[#1F6B52] transition-all duration-300"
           >
-            <FaSearch className="text-white/60 text-sm" />
+            <FaSearch className="text-[#4B5563] text-sm" />
             <input
               type="text"
               placeholder="Search pets, brands..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="bg-transparent text-white placeholder-white/50 text-sm outline-none w-full"
+              className="bg-transparent text-[#1A1A1A] placeholder-[#4B5563] text-sm outline-none w-full"
             />
           </form>
 
-          <div className="hidden md:flex items-center gap-5 text-white text-xl shrink-0">
-            <Link to="/wishlist" className="hover:text-[#F53B3B] transition-all duration-300">
-              <FaHeart />
+          <div className="hidden md:flex items-center gap-6 text-[#4B5563] text-lg shrink-0">
+            <Link to="/wishlist" className="p-2 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group">
+              <FaHeart className="group-hover:scale-110 transition-transform duration-300" />
             </Link>
-            <Link to="/cart" className="relative hover:text-[#F53B3B] transition-all duration-300">
-              <FaShoppingCart />
+            <Link to="/cart" className="relative p-2 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group">
+              <FaShoppingCart className="group-hover:scale-110 transition-transform duration-300" />
               {totalItems > 0 && (
-                <span className="absolute -top-2 -right-2 bg-[#F53B3B] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold">
+                <span className="absolute top-0 right-0 bg-[#1F6B52] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold shadow-sm">
                   {totalItems}
                 </span>
               )}
             </Link>
-            <Link to="/login" className="hover:text-[#F53B3B] transition-all duration-300">
-              <FaUser />
+            <Link to="/login" className="p-2 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group">
+              <FaUser className="group-hover:scale-110 transition-transform duration-300" />
             </Link>
           </div>
 
           <button
-            className="md:hidden text-white text-2xl"
+            className="md:hidden p-2 text-[#4B5563] hover:bg-[#F5F5F5] rounded-lg transition-all duration-300"
             onClick={() => setMobileMenu(!mobileMenu)}
             aria-label="Toggle Menu"
           >
-            {mobileMenu ? <FaTimes /> : <FaBars />}
+            {mobileMenu ? <FaTimes className="text-2xl" /> : <FaBars className="text-2xl" />}
           </button>
         </div>
 
         {mobileMenu && (
-          <div className="md:hidden bg-[#0D2B5C] border-t border-white/10 px-4 py-4 flex flex-col gap-2 animate-in fade-in slide-in-from-top-2 duration-300">
-            <div className="space-y-1">
+          <div className="md:hidden bg-[#FAF9F6] border-t border-[#E5E7EB] px-5 py-4 flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-300 shadow-sm">
+            <div className="space-y-2">
               {navLinks.map((link) => (
                 <NavLink
                   key={link.to}
@@ -111,8 +133,8 @@ function Navbar() {
                   className={({ isActive }) =>
                     `block text-base font-medium transition-all duration-300 px-4 py-3 rounded-lg w-full text-left ${
                       isActive
-                        ? "text-[#F53B3B] bg-white/10"
-                        : "text-white hover:text-[#F53B3B] hover:bg-white/5"
+                        ? "text-[#1F6B52] bg-[#E8F5F0]"
+                        : "text-[#4B5563] hover:text-[#1F6B52] hover:bg-[#F5F5F5]"
                     }`
                   }
                 >
@@ -121,40 +143,40 @@ function Navbar() {
               ))}
             </div>
 
-            <div className="h-px bg-white/10 my-2"></div>
+            <div className="h-px bg-[#E5E7EB] my-2"></div>
 
-            <form onSubmit={handleSearch} className="flex items-center bg-white/10 border border-white/20 rounded-lg px-3 py-2 gap-2">
-              <FaSearch className="text-white/60 text-sm" />
+            <form onSubmit={handleSearch} className="flex items-center bg-white border border-[#E5E7EB] rounded-lg px-4 py-3 gap-3 shadow-sm">
+              <FaSearch className="text-[#4B5563] text-sm" />
               <input
                 type="text"
                 placeholder="Search..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="bg-transparent text-white placeholder-white/50 text-sm outline-none w-full"
+                className="bg-transparent text-[#1A1A1A] placeholder-[#4B5563] text-sm outline-none w-full"
               />
             </form>
 
-            <div className="h-px bg-white/10 my-2"></div>
+            <div className="h-px bg-[#E5E7EB] my-2"></div>
 
-            <div className="flex items-center justify-around text-white text-lg pt-2 pb-1">
+            <div className="flex items-center justify-around text-[#4B5563] text-lg pt-3 pb-2">
               <Link
                 to="/wishlist"
                 onClick={() => setMobileMenu(false)}
-                className="flex flex-col items-center gap-1 hover:text-[#F53B3B] transition-all duration-300"
+                className="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group"
               >
-                <FaHeart className="text-xl" />
-                <span className="text-xs">Wishlist</span>
+                <FaHeart className="text-xl group-hover:scale-110 transition-transform duration-300" />
+                <span className="text-xs font-medium">Wishlist</span>
               </Link>
 
               <Link
                 to="/cart"
                 onClick={() => setMobileMenu(false)}
-                className="relative flex flex-col items-center gap-1 hover:text-[#F53B3B] transition-all duration-300"
+                className="relative flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group"
               >
-                <FaShoppingCart className="text-xl" />
-                <span className="text-xs">Cart</span>
+                <FaShoppingCart className="text-xl group-hover:scale-110 transition-transform duration-300" />
+                <span className="text-xs font-medium">Cart</span>
                 {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-2 bg-[#F53B3B] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold">
+                  <span className="absolute top-1 right-1 bg-[#1F6B52] text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-bold shadow-sm">
                     {totalItems}
                   </span>
                 )}
@@ -163,16 +185,16 @@ function Navbar() {
               <Link
                 to="/login"
                 onClick={() => setMobileMenu(false)}
-                className="flex flex-col items-center gap-1 hover:text-[#F53B3B] transition-all duration-300"
+                className="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group"
               >
-                <FaUser className="text-xl" />
-                <span className="text-xs">Account</span>
+                <FaUser className="text-xl group-hover:scale-110 transition-transform duration-300" />
+                <span className="text-xs font-medium">Account</span>
               </Link>
             </div>
           </div>
         )}
       </header>
-      <div className="h-20 md:h-24" aria-hidden="true" />
+      <div className="h-20 md:h-[68px]" aria-hidden="true" />
     </>
   );
 }

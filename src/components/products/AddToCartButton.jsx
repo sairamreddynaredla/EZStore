@@ -1,4 +1,4 @@
-import { ShoppingCart, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { useState } from "react";
 
 
@@ -36,10 +36,10 @@ const AddToCartButton = ({
       disabled={isOutOfStock || isAdding}
       className={`w-full py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all duration-300 transform hover:scale-105 active:scale-95 ${
         isAdded
-          ? "bg-green-500 text-white"
+          ? "bg-[#16A34A] text-white"
           : isOutOfStock
             ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-            : "bg-orange-500 hover:bg-orange-600 text-white shadow-lg hover:shadow-xl"
+            : "bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-lg hover:shadow-xl"
       }`}
       aria-label={`Add ${product?.name} to cart`}
     >
@@ -57,7 +57,6 @@ const AddToCartButton = ({
         "Out of Stock"
       ) : (
         <>
-          <ShoppingCart size={20} />
           Add to Cart
         </>
       )}

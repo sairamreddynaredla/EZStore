@@ -9,8 +9,8 @@ const BestSellers = () => {
   const { addToWishlist, removeFromWishlist } = useWishlist();
 
   // Handler for Add to Cart
-  const handleAddToCart = (product) => {
-    addToCart(product);
+  const handleAddToCart = (product, quantity = 1) => {
+    addToCart({ ...product, quantity });
   };
 
   // Handler for Wishlist toggle
