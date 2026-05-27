@@ -498,25 +498,6 @@ export const products = [
 },
 
 {
-  id: 19,
-  name: 'Dog Training Biscuits',
-  brand: 'Pedigree',
-  category: 'dog-food',
-  subCategory: 'treats',
-  pet: 'Dog',
-  flavor: 'Milk & Chicken',
-  lifeStage: 'Adult',
-  rating: 4.3,
-  reviews: 70,
-  stock: 27,
-  image: 'https://m.media-amazon.com/images/I/61IJWFXvs7L.jpg_BO30,255,255,255_UF750,750_SR1910,1000,0,C_ZJPHNwYW4gZm9yZWdyb3VuZD0iIzBGMTExMSIgZm9udD0iQW1hem9uRW1iZXIgNjYiPjQuMzwvc3Bhbj4=,60,875,420,420,0,0_PIRIOFOURANDHALF-medium-V2,TopLeft,190,885_ZJPHNwYW4gZm9yZWdyb3VuZD0iIzU2NTk1OSIgZm9udD0iQW1hem9uRW1iZXIgNjYiPig2LDA3MCk8L3NwYW4+,650,875,420,420,0,0_QL100_.jpg',
-  description: 'Crunchy biscuits for dog training rewards.',
-  variants: [
-    { weight: '500g', price: 2.49, originalPrice: 3.49 },
-  ],
-},
-
-{
   id: 20,
   name: 'Acana Puppy Recipe',
   brand: 'Acana',
@@ -1470,7 +1451,7 @@ export const products = [
   lifeStage: 'All',
   rating: 4.4,
   reviews: 33,
- stock: 21,
+  stock: 21,
   image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyQljPQnpJeHIs9SEGe9RQ9WrkZXZHQ336sw&s',
   description: 'Crunchy honey treats for birds.',
   variants: [
@@ -1909,6 +1890,7 @@ export const products = [
     },
   ],
 },
+
 {
   id: 91,
   name: 'Baby Hamster Growth Mix',

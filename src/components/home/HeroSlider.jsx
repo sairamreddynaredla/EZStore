@@ -1,19 +1,18 @@
-import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
 const heroBanners = [
   {
-    image: "/src/assets/banners/dog-food-banner.jpg", // Replace with your actual image path
-    title: "Vet-Approved Nutrition",
-    offer: "Up to 37% OFF",
-    subtitle: "on Dog Food",
-    cta: "Shop Now",
+    image: "/src/assets/banners/tiny-friends-banner.png", // New banner image
+    title: "Tiny Friends, Big Love",
+    offer: "",
+    subtitle: "Everything your little companions need for a happy and healthy life.",
+    cta: "Explore Small Pets",
     bg: "#F7F0E3",
-    pet: "Dog"
+    pet: "Small Pets"
   },
   {
-    image: "/src/assets/banners/cat-food-banner.jpg",
+    image: "/src/assets/banners/cat-banner.jpeg",
     title: "Premium Cat Food",
     offer: "Flat 25% OFF",
     subtitle: "on Cat Food",
@@ -27,7 +26,7 @@ const heroBanners = [
 const HeroSlider = () => {
   return (
     <section className="px-6 py-4 bg-[#F7F0E3]">
-      <div className="rounded-[32px] overflow-hidden relative min-h-[320px] flex items-center justify-center">
+      <div className="rounded-4xl overflow-hidden relative min-h-80 flex items-center justify-center">
         <Swiper
           autoplay={{ delay: 3500 }}
           loop
