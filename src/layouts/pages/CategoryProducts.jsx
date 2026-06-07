@@ -54,6 +54,7 @@ const CategoryProducts = ({ petType }) => {
 
   const [sortBy, setSortBy] = useState("best-selling")
   const [filters, setFilters] = useState(DEFAULT_FILTERS)
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false)
 
   // ── Slug / pet resolution ──────────────────────────────────────────────
   const genericPetCategoryMap = {
@@ -360,9 +361,31 @@ const CategoryProducts = ({ petType }) => {
         </div>
 
         {/* MAIN LAYOUT */}
-        <div className="flex gap-8">
+        <div className="flex flex-col md:flex-row gap-8">
+          {/* MOBILE FILTER TOGGLE BUTTON - Only visible on mobile */}
+          <button
+            onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
+            className="md:hidden w-full px-4 py-2 bg-[#1F6B52] text-white rounded-lg font-semibold flex items-center justify-center gap-2 mb-4"
+            aria-expanded={isMobileFilterOpen}
+          >
+            <span>{isMobileFilterOpen ? "✕" : "☰"}</span>
+            {isMobileFilterOpen ? "Close Filters" : "Show Filters"}
+          </button>
+
+          {/* Mobile Overlay Background */}
+          {isMobileFilterOpen && (
+            <div
+              className="fixed inset-0 bg-black/50 md:hidden z-40"
+              onClick={() => setIsMobileFilterOpen(false)}
+            />
+          )}
+
           {/* SIDEBAR */}
-          <div className="w-65 shrink-0">
+          <div className={`w-65 shrink-0 transition-all duration-300 ${
+            isMobileFilterOpen 
+              ? "fixed left-0 top-0 z-50 w-72 h-screen overflow-y-auto pt-20" 
+              : "hidden md:block"
+          }`}>
             <ShopSidebar
               filters={filters}
               onFilterChange={handleFilterChange}

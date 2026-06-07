@@ -44,6 +44,8 @@ const CategoryLayout = ({ petType: propPetType }) => {
     price: [0, 99999],
   });
 
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+
   const filterOptions = useMemo(() => {
     const brandCounts = new Map();
     const breedSizeCounts = new Map();
@@ -170,6 +172,8 @@ const CategoryLayout = ({ petType: propPetType }) => {
             filters={filterOptions}
             selectedFilters={selectedFilters}
             onFilterChange={handleFilterChange}
+            isMobileOpen={isMobileOpen}
+            setIsMobileOpen={setIsMobileOpen}
           />
         </aside>
         <section className="flex-1">
