@@ -5,6 +5,8 @@ import Footer from "../../components/Footer"
 import { products } from "../../data/products"
 import { brands } from "../../data/brands"
 import ProductCard from "../../components/products/ProductCard"
+import useCart from "../../hooks/usecart"
+import { useWishlist } from "../../context/WishListContext"
 
 const BrandProducts = () => {
   const { brandSlug } = useParams()
@@ -26,6 +28,18 @@ const BrandProducts = () => {
     return productBrand === normalizedBrand
   })
 
+  const { addToCart } = useCart();
+  const { addToWishlist, removeFromWishlist } = useWishlist();
+
+  const handleAddToCart = (product, quantity = 1) => {
+    addToCart({ ...product, quantity });
+  };
+
+  const handleWishlistToggle = (product, isAdding) => {
+    if (isAdding) addToWishlist(product);
+    else removeFromWishlist(product.id);
+  };
+
   return (
     <div className="bg-[#f8f8f8] min-h-screen">
       <Navbar />
@@ -39,7 +53,12 @@ const BrandProducts = () => {
         {filteredProducts.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {filteredProducts.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard
+                key={product.id}
+                product={product}
+                onAddToCart={handleAddToCart}
+                onWishlistToggle={handleWishlistToggle}
+              />
             ))}
           </div>
         ) : (

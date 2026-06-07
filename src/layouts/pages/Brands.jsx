@@ -89,16 +89,31 @@ const BrandsPage = () => {
       title: 'Upto 15% OFF',
       description: 'Top picks from Applod with best-seller packs for happy pets.',
       image: acanaLogo,
+      link: '/brands/acana',
     },
     {
       title: 'Upto 50% OFF',
       description: 'Fresh grooming and lifestyle essentials for every breed.',
       image: droolsLogo,
+      link: '/brands/drools',
     },
     {
       title: 'Featured Brands',
       description: 'Explore premium nutrition brands and latest launches.',
       image: royalCaninLogo,
+      link: '/brands/royal-canin',
+    },
+    {
+      title: 'Bundle Deals',
+      description: 'Save more with curated bundle offers on essentials.',
+      image: goodiesLogo,
+      link: '/brands/goodies',
+    },
+    {
+      title: 'Limited Time',
+      description: 'Flash discounts on trending items — grab them fast.',
+      image: jerhighLogo,
+      link: '/brands/jerhigh',
     },
   ]
 
@@ -165,30 +180,7 @@ const BrandsPage = () => {
               </div>
             </div>
 
-            <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
-              <h3 className="text-lg font-semibold text-slate-900 mb-4">Brand Spotlight</h3>
-              <div className="space-y-4">
-                {spotlightItems.map((item) => (
-                  <div key={item.title} className="rounded-3xl bg-[#F8FAFF] p-4">
-                    <div className="flex items-center gap-4 mb-3">
-                      <div className="h-16 w-16 rounded-3xl bg-white p-3 flex items-center justify-center shadow-sm">
-                        <img src={item.image} alt={item.title} className="max-h-full max-w-full object-contain" />
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-[#1F2937]">{item.title}</p>
-                        <p className="text-xs text-gray-500">{item.description}</p>
-                      </div>
-                    </div>
-                    <Link
-                      to="/brands"
-                      className="inline-flex items-center justify-center rounded-full bg-[#1F6B52] px-4 py-2 text-xs font-semibold text-white"
-                    >
-                      Shop Now
-                    </Link>
-                  </div>
-                ))}
-              </div>
-            </div>
+            {/* Left-side Brand Spotlight removed as requested */}
           </aside>
 
           <main className="space-y-8">
@@ -227,20 +219,18 @@ const BrandsPage = () => {
                 <Link
                   key={brand.id}
                   to={`/brands/${brand.slug}`}
-                  className="group block rounded-4xl bg-white border border-gray-100 p-6 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-transform duration-300"
+                  className="group block rounded-3xl bg-white border border-gray-100 p-4 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-transform duration-300"
                 >
-                  <div className="flex h-40 items-center justify-center rounded-3xl bg-[#F5F7FB] p-6">
+                  <div className="flex h-32 items-center justify-center rounded-2xl bg-[#F5F7FB] p-4">
                     <img
                       src={logoMap[brand.logo] || royalCaninLogo}
                       alt={brand.name}
-                      className="max-h-full max-w-full object-contain"
+                      className="max-h-20 max-w-full object-contain"
                     />
                   </div>
-                  <div className="mt-5 text-center">
-                    <h2 className="text-lg font-semibold text-[#0F172A]">{brand.name}</h2>
-                    <p className="text-sm text-gray-500 mt-2">
-                      {brand.featured ? 'Trusted popular brand' : 'Emerging pet brand'}
-                    </p>
+                  <div className="mt-4 text-center">
+                    <h2 className="text-base font-semibold text-[#0F172A]">{brand.name}</h2>
+                    {/* Label removed per request */}
                   </div>
                 </Link>
               ))}
@@ -249,26 +239,33 @@ const BrandsPage = () => {
 
           <aside className="hidden xl:block">
             <div className="sticky top-24 space-y-6">
-              <div className="rounded-4xl bg-[#1F6B52] p-6 text-white shadow-lg">
-                <h3 className="text-2xl font-bold mb-4">Brand Spotlight</h3>
-                <p className="text-sm text-slate-200 mb-6">
+              <div className="rounded-4xl p-6 shadow-lg">
+                <h3 className="text-2xl font-bold mb-2">Brand Spotlight</h3>
+                <p className="text-sm text-gray-600 mb-4">
                   Get the latest offers on premium brands and shop top-rated products curated for your pet.
                 </p>
-                <div className="flex items-center gap-4 bg-white/10 rounded-[28px] p-4">
-                  <div className="h-16 w-16 rounded-3xl bg-white p-3 flex items-center justify-center">
-                    <img src={royalCaninLogo} alt="Spotlight" className="max-h-full max-w-full object-contain" />
-                  </div>
-                  <div>
-                    <p className="text-sm uppercase tracking-[0.2em] text-slate-200">Exclusive</p>
-                    <p className="text-lg font-bold">15% off select packs</p>
-                  </div>
+                <div className="space-y-4">
+                  {spotlightItems.map((item) => (
+                    <div key={item.title} className="rounded-2xl bg-[#1F6B52] p-3 text-white flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-lg bg-white p-1 flex items-center justify-center">
+                            <img src={item.image} alt={item.title} className="max-h-full max-w-full object-contain" />
+                          </div>
+                          <div>
+                            <p className="text-[10px] uppercase tracking-[0.12em] text-slate-200">Offer</p>
+                            <p className="text-sm font-bold">{item.title}</p>
+                            <p className="text-xs text-slate-200 mt-1">{item.description}</p>
+                          </div>
+                        </div>
+                        <Link
+                          to={item.link || '/brands'}
+                          className="ml-4 inline-flex items-center justify-center rounded-full bg-white px-3 py-2 text-xs font-semibold text-[#1F6B52]"
+                        >
+                          Explore
+                        </Link>
+                      </div>
+                  ))}
                 </div>
-                <Link
-                  to="/shop"
-                  className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-[#1F6B52] shadow-md transition hover:bg-slate-100"
-                >
-                  Explore Offers
-                </Link>
               </div>
               <div className="rounded-4xl bg-white border border-gray-100 p-6 shadow-sm">
                 <h3 className="text-lg font-semibold text-slate-900 mb-3">Why shop brands here?</h3>

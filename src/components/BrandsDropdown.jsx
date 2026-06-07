@@ -66,9 +66,9 @@ const BrandsDropdown = ({ onBrandSelect }) => {
   return (
     <div
       className="
-        absolute
+        fixed
         left-1/2
-        top-full
+        top-20
         mt-3
         -translate-x-1/2
         w-[95vw]
@@ -76,7 +76,7 @@ const BrandsDropdown = ({ onBrandSelect }) => {
         bg-white
         shadow-2xl
         rounded-2xl
-        z-50
+        z-[60]
         p-6
         md:p-8
         border
@@ -84,6 +84,8 @@ const BrandsDropdown = ({ onBrandSelect }) => {
         max-h-[85vh]
         overflow-y-auto
       "
+      role="dialog"
+      aria-modal="true"
     >
       <div className="mb-8 text-center">
         <h2 className="text-2xl font-bold mb-3">Popular Brands</h2>
