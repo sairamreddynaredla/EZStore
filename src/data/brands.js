@@ -120,6 +120,7 @@ export const getFeaturedBrands = () => {
 
 // Get brand logo filename
 export const getBrandLogo = (brandName) => {
-  const brand = brands.find(b => b.name.toLowerCase() === brandName.toLowerCase())
+  const nameToFind = String(brandName ?? '').toLowerCase()
+  const brand = brands.find((b) => String(b.name ?? '').toLowerCase() === nameToFind)
   return brand?.logo
 }

@@ -1,65 +1,104 @@
-import { Check } from "lucide-react";
 import { useState } from "react";
+import { Plus, Minus } from "lucide-react";
+import useCart from "../../hooks/usecart";
+import { trackAddToCart } from "../../utils/analytics";
 
-
-// Accepts a full product object for dynamic cart addition
+/**
+ * Zigly-style Add to Cart button:
+ * - Default: outlined "Add to Cart" (red border + red text on white bg, fills on hover)
+ * - In cart: inline − qty + stepper with red bg
+ * - Synced to cart state
+ */
 const AddToCartButton = ({
   product,
   isOutOfStock = false,
   onAddToCart,
-  quantity = 1,
 }) => {
-  const [isAdding, setIsAdding] = useState(false);
-  const [isAdded, setIsAdded] = useState(false);
+  const { cartItems, increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
+  const [flash, setFlash] = useState(false);
 
-  const handleAddToCart = async (e) => {
+  const selectedVariant = product?.selectedVariant || product?.variants?.[0];
+  const weight = selectedVariant?.weight || "1kg";
+
+  const cartItem = cartItems.find(
+    (item) =>
+      item.id === product?.id &&
+      (item.selectedVariant?.weight || "1kg") === weight
+  );
+  const cartQty = cartItem?.quantity || 0;
+  const inCart  = cartQty > 0;
+
+  const handleAdd = (e) => {
     e.preventDefault();
     e.stopPropagation();
-
-    if (isOutOfStock) return;
-
-    setIsAdding(true);
-
-    if (onAddToCart && product) {
-      await onAddToCart(product, quantity);
-    }
-
-    setIsAdding(false);
-    setIsAdded(true);
-
-    setTimeout(() => setIsAdded(false), 2000);
+    if (isOutOfStock || !product) return;
+    const payload = { ...product, selectedVariant };
+    if (onAddToCart) onAddToCart(payload, 1);
+    try { trackAddToCart(payload, 1); } catch (err) { /* ignore analytics errors */ }
+    setFlash(true);
+    setTimeout(() => setFlash(false), 1200);
   };
 
+  const handleIncrease = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    increaseQuantity(product.id, weight);
+  };
+
+  const handleDecrease = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (cartQty <= 1) removeFromCart(product.id, weight);
+    else decreaseQuantity(product.id, weight);
+  };
+
+  // Out of stock
+  if (isOutOfStock) {
+    return (
+      <button
+        disabled
+        className="w-full py-3 rounded-xl text-sm font-semibold bg-gray-100 text-gray-400 cursor-not-allowed"
+      >
+        Out of Stock
+      </button>
+    );
+  }
+
+  // In cart → stepper
+  if (inCart) {
+    return (
+      <div
+        onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+        className="w-full flex items-center justify-between bg-[#F59E0B] rounded-xl h-12 overflow-hidden"
+      >
+        <button
+          onClick={handleDecrease}
+          className="w-12 h-full flex items-center justify-center text-white hover:bg-[#D97706] transition-colors"
+        >
+          <Minus size={16} strokeWidth={2.5} />
+        </button>
+        <span className="text-white font-bold text-[15px] select-none">{cartQty}</span>
+        <button
+          onClick={handleIncrease}
+          className="w-12 h-full flex items-center justify-center text-white hover:bg-[#D97706] transition-colors"
+        >
+          <Plus size={16} strokeWidth={2.5} />
+        </button>
+      </div>
+    );
+  }
+
+  // Default → Add to Cart (use secondary primary styling)
   return (
     <button
-      onClick={handleAddToCart}
-      disabled={isOutOfStock || isAdding}
-      className={`w-full py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all duration-300 transform hover:scale-105 active:scale-95 ${
-        isAdded
-          ? "bg-[#16A34A] text-white"
-          : isOutOfStock
-            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-            : "bg-[#F59E0B] hover:bg-[#D97706] text-white shadow-lg hover:shadow-xl"
+      onClick={handleAdd}
+      className={`w-full py-3 rounded-xl text-[13.5px] font-semibold transition-all duration-200 active:scale-95 ${
+        flash
+          ? "btn-primary"
+          : "btn-secondary"
       }`}
-      aria-label={`Add ${product?.name} to cart`}
     >
-      {isAdding ? (
-        <>
-          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-          Adding...
-        </>
-      ) : isAdded ? (
-        <>
-          <Check size={20} />
-          Added!
-        </>
-      ) : isOutOfStock ? (
-        "Out of Stock"
-      ) : (
-        <>
-          Add to Cart
-        </>
-      )}
+      {flash ? "Added!" : "Add to Cart"}
     </button>
   );
 };

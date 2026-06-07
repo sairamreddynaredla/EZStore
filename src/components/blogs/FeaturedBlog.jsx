@@ -9,7 +9,7 @@ const FeaturedBlog = () => {
 
   return (
     <div className="mb-14">
-      <div className="relative rounded-[32px] overflow-hidden h-[500px]">
+      <div className="relative rounded-4xl overflow-hidden h-125">
 
         <img
           src={featuredBlog.image}

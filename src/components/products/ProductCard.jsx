@@ -1,112 +1,233 @@
-import { FaBalanceScale, FaTruck } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import ProductBadges from "./ProductBadges";
-import RatingStars from "./RatingStars";
-import PriceSection from "./PriceSection";
-import WishlistButton from "./WishlistButton";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Heart } from "lucide-react";
 import AddToCartButton from "./AddToCartButton";
 import { useWishlist } from "../../context/usewishlist";
+import {
+  resolveProductImage,
+  resolveProductImageFallback,
+} from "../../utils/productImage";
 
 const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
-  const { isInWishlist } = useWishlist();
-  const firstVariant = product.variants?.[0] || {};
-  const currentPrice = firstVariant.price ?? product.price ?? 0;
-  const originalPrice = firstVariant.originalPrice ?? product.originalPrice ?? 0;
-  const soldCount = product.soldCount ?? product.sales ?? 0;
-  const isOutOfStock = product.stock <= 0;
-  const isLowStock = product.stock > 0 && product.stock < 10;
-  const cardBadge =
-    product.rating >= 4.7
-      ? "Top Rated"
-      : (product.soldCount ?? product.sales ?? 0) > 250
-      ? "Best Seller"
-      : null;
+  const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
+
+  // Selected variant state — default to first variant
+  const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
+  const [imageSrc, setImageSrc] = useState(resolveProductImage(product));
+
+  useEffect(() => {
+    setImageSrc(resolveProductImage(product));
+  }, [product]);
+
+  // Reset selected variant when product changes (e.g., new listing data)
+  useEffect(() => {
+    setSelectedVariantIdx(0);
+  }, [product?.id]);
+
+  const variants = product.variants || [];
+  const selectedVariant = variants[selectedVariantIdx] || variants[0] || {};
+
+  const currentPrice   = Number(selectedVariant.price ?? product.price ?? 0);
+  const originalPrice  = Number(selectedVariant.originalPrice ?? product.originalPrice ?? 0);
+  const discount       = originalPrice > currentPrice
+    ? Math.round(((originalPrice - currentPrice) / originalPrice) * 100)
+    : 0;
+
+  const isOutOfStock = (product.stock ?? 1) <= 0;
+  const wishlisted   = isInWishlist(product.id);
+
+  const navigate = useNavigate();
+
+  const handleWishlist = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (wishlisted) removeFromWishlist(product.id);
+    else addToWishlist(product);
+    if (onWishlistToggle) onWishlistToggle(product, !wishlisted);
+  };
+
+  const handleVariantClick = (e, idx) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSelectedVariantIdx(idx);
+  };
+
+  // For AddToCartButton — pass the selected variant on the product
+  const productWithVariant = { ...product, selectedVariant };
 
   return (
     <Link
       to={`/product/${product.id}`}
-      className="group flex h-full flex-col overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:border-slate-300 hover:shadow-lg"
+      state={{ product }}
+      className="group relative flex flex-col bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300"
     >
-      <div className="relative border-b border-slate-200 bg-slate-50 px-4 pt-4">
-        <div className="aspect-square w-full overflow-hidden rounded-[22px] bg-white">
-          <img
-            src={product.images?.[0] || product.image}
-            alt={product.name}
-            className="h-full w-full object-contain transition-transform duration-300 group-hover:scale-105"
-          />
-        </div>
-
-        <div className="absolute left-4 top-4 flex flex-wrap gap-2">
-          {cardBadge && (
-            <span className="rounded-full bg-slate-950 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-white">
-              {cardBadge}
-            </span>
-          )}
-          {product.fastDelivery && (
-            <span className="rounded-full bg-[#eef4ff] px-3 py-1 text-[11px] font-semibold text-[#1f3bb3]">
-              Fast shipping
-            </span>
-          )}
-          {product.isNew && (
-            <span className="rounded-full bg-[#fff5e6] px-3 py-1 text-[11px] font-semibold text-[#d97706]">
-              New
-            </span>
-          )}
-        </div>
-
-        <WishlistButton
-          isWishlisted={isInWishlist(product.id)}
-          product={product}
-          onWishlistToggle={onWishlistToggle}
-        />
+      {/* ── TOP BANNER ── */}
+      <div className="bg-[#1B3A6B] text-white text-[11px] font-medium text-center py-2 px-3 tracking-wide">
+        Enjoy offers on Checkout!
       </div>
 
-      <div className="flex flex-1 flex-col gap-3 px-4 py-5 text-sm text-slate-700">
-        <p className="text-[11px] uppercase tracking-[0.24em] text-slate-400">
-          {product.brand}
-        </p>
+      {/* ── IMAGE AREA ── */}
+      {/* ── IMAGE AREA — fixed 1:1 aspect ratio so all cards align ── */}
+      <div className="relative bg-white px-4 pt-4 pb-2">
+        {/* Wishlist */}
+        <button
+          onClick={handleWishlist}
+          className="absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm hover:scale-110 transition-transform"
+          aria-label="Wishlist"
+        >
+          <Heart
+            size={18}
+            className={wishlisted ? "fill-red-500 text-red-500" : "text-gray-400 hover:text-red-400"}
+          />
+        </button>
 
-        <h3 className="min-h-[3rem] text-base font-semibold leading-tight text-slate-900 transition-colors duration-300 group-hover:text-orange-600">
+        {/* Veg/Non-veg indicator — top left */}
+        <div className="absolute top-3 left-3 z-10">
+          {product.vegType === "Veg" ? (
+            <div className="w-4 h-4 border-2 border-green-600 flex items-center justify-center">
+              <div className="w-2 h-2 rounded-full bg-green-600" />
+            </div>
+          ) : (
+            <div className="w-4 h-4 border-2 border-red-600 flex items-center justify-center">
+              <div
+                className="w-0 h-0"
+                style={{
+                  borderLeft: "4px solid transparent",
+                  borderRight: "4px solid transparent",
+                  borderBottom: "7px solid #dc2626",
+                }}
+              />
+            </div>
+          )}
+        </div>
+
+        {/* Fixed 1:1 aspect ratio container */}
+        <div className="relative w-full aspect-square overflow-hidden">
+          <img
+            src={imageSrc}
+            alt={product.name}
+            className="absolute inset-0 w-full h-full object-contain transition-transform duration-500 group-hover:scale-105 p-2 cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate(`/product/${product.id}`, { state: { product } });
+            }}
+            onError={(e) => {
+              e.currentTarget.onerror = null;
+              const fallbackImage = resolveProductImageFallback(product);
+              if (imageSrc !== fallbackImage) {
+                setImageSrc(fallbackImage);
+              } else {
+                e.currentTarget.src = "/assets/placeholder-product.svg";
+              }
+            }}
+          />
+
+          {/* Rating badge — bottom-left over image */}
+          {product.rating > 0 && (
+            <div className="absolute bottom-2 left-2 flex items-center gap-1 bg-white rounded-full px-2 py-0.5 shadow-sm border border-gray-100 z-10">
+              <span className="text-[11px] font-bold text-gray-800">{product.rating.toFixed(2)}</span>
+              <span className="text-yellow-400 text-[11px]">★</span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* ── CONTENT ── */}
+      <div className="flex flex-col flex-1 px-4 pb-4 pt-1">
+
+        {/* Brand + veg-icon row */}
+        <div className="flex items-center justify-between mb-1">
+          <span className="text-[12px] text-gray-500 font-medium">{product.brand}</span>
+          {/* red triangle icon matching Zigly */}
+          <span className="text-red-500">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <polygon points="7,1 13,13 1,13" fill="#ef4444" />
+            </svg>
+          </span>
+        </div>
+
+        {/* Product name */}
+        <h3 className="text-[13.5px] font-semibold text-gray-900 leading-snug line-clamp-2 min-h-10 mb-3">
           {product.name}
         </h3>
 
-        <div className="flex items-center gap-2 text-xs text-slate-500">
-          <RatingStars rating={product.rating || 0} reviewCount={product.reviews || 0} size="sm" />
-          <span className="text-slate-400">•</span>
-          <span>{soldCount.toLocaleString()} sold</span>
-        </div>
-
-        <div className="flex items-center gap-3">
-          <div>
-            <span className="block text-2xl font-semibold text-slate-900">
-              ${currentPrice}
-            </span>
-            {originalPrice > currentPrice && (
-              <span className="text-sm text-slate-400 line-through">
-                ${originalPrice}
-              </span>
+        {/* ── VARIANT SELECTOR ── */}
+        {variants.length > 0 && (
+          <div className="flex flex-wrap gap-1.5 mb-3 relative">
+            {variants.slice(0, 4).map((v, idx) => {
+              const vDiscount = v.originalPrice > v.price
+                ? Math.round(((v.originalPrice - v.price) / v.originalPrice) * 100)
+                : 0;
+              const isActive = idx === selectedVariantIdx;
+              return (
+                <button
+                  key={idx}
+                  onClick={(e) => handleVariantClick(e, idx)}
+                  className={`relative flex flex-col items-center px-2.5 py-1.5 rounded border text-[11px] font-semibold transition-all min-w-12 ${
+                    isActive
+                      ? "border-[#1B3A6B] bg-[#1B3A6B] text-white"
+                      : "border-gray-300 text-gray-700 bg-white hover:border-[#1B3A6B]"
+                  }`}
+                >
+                  <span>{v.weight}</span>
+                  {vDiscount > 0 && (
+                    <span
+                      className={`text-[9px] font-bold ${
+                        isActive ? "text-orange-300" : "text-orange-500"
+                      }`}
+                    >
+                      {vDiscount}%
+                    </span>
+                  )}
+                </button>
+              );
+            })}
+            {/* scroll arrow if more variants */}
+            {variants.length > 4 && (
+              <button
+                onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                className="flex items-center justify-center w-7 h-7 rounded border border-gray-300 text-gray-400 self-center text-xs"
+              >
+                ›
+              </button>
             )}
           </div>
-          {originalPrice > currentPrice && (
-            <span className="rounded-full bg-red-100 px-2 py-1 text-xs font-semibold text-red-600">
-              {Math.round(((originalPrice - currentPrice) / originalPrice) * 100)}% off
+        )}
+
+        {/* ── DELIVERY DATE ── */}
+        {product.deliveryDate && (
+          <div className="flex items-center gap-1.5 bg-blue-50 rounded-lg px-2.5 py-1.5 mb-3">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" className="text-blue-500 shrink-0">
+              <path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z" stroke="#3b82f6" strokeWidth="1.8" strokeLinejoin="round"/>
+              <circle cx="5.5" cy="18.5" r="2.5" stroke="#3b82f6" strokeWidth="1.8"/>
+              <circle cx="18.5" cy="18.5" r="2.5" stroke="#3b82f6" strokeWidth="1.8"/>
+            </svg>
+            <span className="text-[11px] text-blue-700 font-medium">{product.deliveryDate}</span>
+          </div>
+        )}
+
+        {/* ── PRICE ROW ── */}
+        <div className="flex items-center justify-between mb-3">
+          <div className="flex items-baseline gap-2">
+            {originalPrice > currentPrice && (
+              <span className="text-[12px] text-gray-400 line-through">${originalPrice.toFixed(2)}</span>
+            )}
+            <span className="text-[20px] font-bold text-gray-900">${currentPrice.toFixed(2)}</span>
+          </div>
+          {discount > 0 && (
+            <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">
+              {discount}% Off
             </span>
           )}
         </div>
 
-        <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500">
-          {isLowStock && <span className="rounded-full bg-red-50 px-2 py-1 text-red-600">Only {product.stock} left</span>}
-          {product.deliveryDate && <span>Delivery by {product.deliveryDate}</span>}
-        </div>
-
-        <div className="mt-auto">
-          <AddToCartButton
-            product={product}
-            isOutOfStock={isOutOfStock}
-            onAddToCart={onAddToCart}
-            quantity={1}
-          />
-        </div>
+        {/* ── ADD TO BAG BUTTON ── */}
+        <AddToCartButton
+          product={productWithVariant}
+          isOutOfStock={isOutOfStock}
+          onAddToCart={onAddToCart}
+          quantity={1}
+        />
       </div>
     </Link>
   );

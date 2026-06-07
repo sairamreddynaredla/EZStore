@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom'
 
 import { products } from '../../data/products'
+import {
+  resolveProductImage,
+  resolveProductImageFallback,
+} from '../../utils/productImage'
 
 const FeaturedProducts = () => {
 
@@ -48,15 +52,21 @@ const FeaturedProducts = () => {
             <Link
               to={`/product/${product.id}`}
               key={product.id}
-              className='group flex h-full flex-col overflow-hidden rounded-[24px] border border-slate-200 bg-white shadow-sm transition duration-300 hover:border-slate-300 hover:shadow-lg'
-            >
-
-              <div className='relative bg-slate-50 p-4'>
+              className='group flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:border-slate-300 hover:shadow-lg'
                 <div className='aspect-square w-full overflow-hidden rounded-[20px] bg-white'>
                   <img
-                    src={product.image}
+                    src={resolveProductImage(product)}
                     alt={product.name}
                     className='h-full w-full object-contain transition-transform duration-300 group-hover:scale-105'
+                    onError={(e) => {
+                      e.currentTarget.onerror = null
+                      const fallback = resolveProductImageFallback(product)
+                      if (e.currentTarget.src !== fallback) {
+                        e.currentTarget.src = fallback
+                      } else {
+                        e.currentTarget.src = '/assets/placeholder-product.svg'
+                      }
+                    }}
                   />
                 </div>
 

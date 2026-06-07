@@ -18,4 +18,18 @@ export default defineConfig([
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
   },
+  {
+    files: ['scripts/**/*.js'],
+    languageOptions: {
+      globals: globals.node,
+      parserOptions: { sourceType: 'module' },
+    },
+  },
+  {
+    files: ['tailwind.config.*', 'tailwind.config.*.js', 'tailwind.config.extended.js'],
+    languageOptions: {
+      globals: globals.node,
+      parserOptions: { sourceType: 'script' },
+    },
+  },
 ])

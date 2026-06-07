@@ -1,22 +1,23 @@
 import Navbar from '../../components/Navbar'
 import { useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, useLocation } from 'react-router-dom'
 import { products } from "../../data/products";
 
 
 import ProductGallery from '../../components/productdetails/ProductGallery'
 import ProductInfo from '../../components/productdetails/ProductInfo'
+import BuyBox from '../../components/productdetails/BuyBox'
 import DeliveryBox from '../../components/productdetails/DeliveryBox'
 import SimilarProducts from '../../components/productdetails/SimilarProducts'
 import useCart from '../../hooks/usecart'
 import { useWishlist } from '../../context/usewishlist'
-import BuyNowButton from '../../components/BuyNowButton'
 
 const ProductDetails = () => {
 
   const navigate = useNavigate();
 
   const { id } = useParams()
+  const location = useLocation()
 
   const [openSection, setOpenSection] = useState('details')
 
@@ -28,13 +29,31 @@ const ProductDetails = () => {
     )
   }
 
-  // FIND PRODUCT
-  const product = products.find(
+  // FIND PRODUCT — prefer router state when navigating from a product list to
+  // avoid accidental collisions when product IDs are duplicated across
+  // different sections of the data file. Fall back to lookup by `id` so
+  // direct URLs still work.
+  const productFromState = location?.state?.product
+  const product = productFromState ?? products.find(
     (item) => item.id === Number(id)
   )
 
+  const [selectedVariant, setSelectedVariant] = useState(product?.variants?.[0] || {})
+  const [quantity, setQuantity] = useState(1)
+
   const { addToCart } = useCart()
   const { addToWishlist, removeFromWishlist } = useWishlist()
+
+  const formatCategoryLabel = (category) => {
+    if (!category) return 'Unknown';
+    return category
+      .replace(/[-_]/g, ' ')
+      .split(' ')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
+  const productCategoryLabel = product?.productCategory || formatCategoryLabel(product?.category);
 
   const handleAddToCart = async (productId, quantity = 1) => {
     const productToAdd = products.find((item) => item.id === Number(productId))
@@ -93,13 +112,13 @@ const ProductDetails = () => {
 
   return (
 
-    <div className="bg-[#f8f8f8] min-h-screen pt-28">
+    <div className="bg-[#f8f8f8] min-h-screen">
 
       {/* NAVBAR */}
       <Navbar />
 
       {/* PAGE */}
-      <div className="max-w-[1450px] mx-auto px-4 md:px-8 py-10">
+      <div className="max-w-362.5 mx-auto px-4 md:px-8 py-10">
 
         {/* BREADCRUMB */}
         <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 mb-8">
@@ -113,7 +132,7 @@ const ProductDetails = () => {
           <span>&gt;</span>
 
           <span className="capitalize">
-            {product.category}
+            {productCategoryLabel}
           </span>
 
           <span>&gt;</span>
@@ -125,29 +144,65 @@ const ProductDetails = () => {
         </div>
 
         {/* PRODUCT SECTION */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_0.95fr] gap-14 bg-white rounded-[40px] p-6 md:p-10 shadow-sm border border-gray-100">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr_0.75fr] gap-14 bg-white rounded-[40px] p-6 md:p-10 shadow-sm border border-gray-100">
 
           {/* LEFT */}
           <div>
-
-            {/* PRODUCT GALLERY */}
             <ProductGallery key={product.id} product={product} />
-
-            {/* DELIVERY BOX */}
             <div className="mt-8">
-
               <DeliveryBox />
-
             </div>
+          </div>
 
+          {/* CENTER */}
+          <div className="flex flex-col">
+            <ProductInfo
+              product={product}
+              handleBuyNow={handleBuyNow}
+              selectedVariant={selectedVariant}
+              setSelectedVariant={setSelectedVariant}
+              quantity={quantity}
+              setQuantity={setQuantity}
+            />
           </div>
 
           {/* RIGHT */}
-          <div className="flex flex-col lg:sticky lg:top-28 self-start">
-            <ProductInfo product={product} handleBuyNow={handleBuyNow} />
+          <div className="lg:sticky lg:top-28 self-start">
+            <BuyBox
+              product={product}
+              selectedVariant={selectedVariant}
+              setSelectedVariant={setSelectedVariant}
+              quantity={quantity}
+              setQuantity={setQuantity}
+              addToCart={addToCart}
+              handleBuyNow={handleBuyNow}
+            />
           </div>
-
         </div>
+
+        {/* JSON-LD structured data for product (helps search engines) */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org/",
+            "@type": "Product",
+            "name": product.name,
+            "image": product.images || product.image || [],
+            "description": product.description,
+            "sku": product.sku || String(product.id),
+            "brand": { "@type": "Brand", "name": product.brand },
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "USD",
+              "price": (product.variants?.[0]?.price || product.price) || "0",
+              "availability": product.stock > 0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"
+            },
+            "aggregateRating": {
+              "@type": "AggregateRating",
+              "ratingValue": product.rating || 0,
+              "reviewCount": product.reviews || 0
+            }
+          })}
+        </script>
 
         {/* ACCORDION */}
         <div className="mt-10 bg-white rounded-[35px] overflow-hidden border border-gray-200 shadow-sm">
@@ -303,32 +358,46 @@ const ProductDetails = () => {
 
             {openSection === 'more' && (
 
-              <div className="px-8 pb-8 text-gray-700 leading-8">
+              <div className="px-8 pb-8 text-gray-700">
 
-                <p>
-                  <span className="font-semibold">Brand:</span>{' '}
-                  {product.brand}
-                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-                <p>
-                  <span className="font-semibold">Flavor:</span>{' '}
-                  {product.flavor || 'Chicken'}
-                </p>
+                  <div className="rounded-3xl bg-slate-50 px-4 py-4">
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="text-sm font-semibold text-slate-900">Brand:</span>
+                      <span className="text-sm text-slate-600 text-right">{product.brand}</span>
+                    </div>
+                  </div>
 
-                <p>
-                  <span className="font-semibold">Pet Type:</span>{' '}
-                  {product.pet || 'Dog'}
-                </p>
+                  <div className="rounded-3xl bg-slate-50 px-4 py-4">
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="text-sm font-semibold text-slate-900">Pet Type:</span>
+                      <span className="text-sm text-slate-600 text-right">{product.pet || 'Dog'}</span>
+                    </div>
+                  </div>
 
-                <p>
-                  <span className="font-semibold">Life Stage:</span>{' '}
-                  {product.lifeStage || 'Adult'}
-                </p>
+                  <div className="rounded-3xl bg-slate-50 px-4 py-4">
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="text-sm font-semibold text-slate-900">Life Stage:</span>
+                      <span className="text-sm text-slate-600 text-right">{product.lifeStage || 'Adult'}</span>
+                    </div>
+                  </div>
 
-                <p>
-                  <span className="font-semibold">Category:</span>{' '}
-                  {product.category}
-                </p>
+                  <div className="rounded-3xl bg-slate-50 px-4 py-4">
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="text-sm font-semibold text-slate-900">Category:</span>
+                      <span className="text-sm text-slate-600 text-right wrap-break-word">{productCategoryLabel}</span>
+                    </div>
+                  </div>
+
+                  <div className="rounded-3xl bg-slate-50 px-4 py-4">
+                    <div className="flex items-center justify-between gap-4">
+                      <span className="text-sm font-semibold text-slate-900">Flavor:</span>
+                      <span className="text-sm text-slate-600 text-right">{product.flavor || 'Chicken'}</span>
+                    </div>
+                  </div>
+
+                </div>
 
               </div>
 
@@ -364,6 +433,7 @@ const ProductDetails = () => {
           </div>
 
         )}
+
 
       </div>
 

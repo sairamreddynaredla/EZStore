@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <rect width="100%" height="100%" fill="#f3f4f6"/>
+  <g fill="#1E3A8A" font-family="Inter, Arial, sans-serif">
+    <rect x="40" y="80" width="520" height="360" rx="16" fill="#ffffff" stroke="#e5e7eb"/>
+    <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-size="28">Blue Buffalo</text>
+    <text x="50%" y="62%" dominant-baseline="middle" text-anchor="middle" font-size="18">Jerky Cuts</text>
+  </g>
+</svg>

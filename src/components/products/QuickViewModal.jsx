@@ -1,12 +1,21 @@
-import { X, Heart, ShoppingCart } from "lucide-react";
-import { useState } from "react";
+import { X, Heart } from "lucide-react";
+import { useEffect, useState } from "react";
 import RatingStars from "./RatingStars";
 import PriceSection from "./PriceSection";
 import AddToCartButton from "./AddToCartButton";
+import {
+  resolveProductImage,
+  resolveProductImageFallback,
+} from "../../utils/productImage";
 
 const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
   const [selectedVariant, setSelectedVariant] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [imageSrc, setImageSrc] = useState(resolveProductImage(product));
+
+  useEffect(() => {
+    setImageSrc(resolveProductImage(product));
+  }, [product]);
 
   if (!isOpen || !product) return null;
 
@@ -39,11 +48,20 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
         {/* CONTENT */}
         <div className="grid md:grid-cols-2 gap-6 p-4 md:p-8">
           {/* IMAGE */}
-          <div className="flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-6">
+          <div className="flex items-center justify-center bg-linear-to-br from-gray-50 to-gray-100 rounded-xl p-6">
             <img
-              src={product.images?.[0] || product.image}
+              src={imageSrc}
               alt={product.name}
               className="max-h-96 object-contain"
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                const fallbackImage = resolveProductImageFallback(product);
+                if (imageSrc !== fallbackImage) {
+                  setImageSrc(fallbackImage);
+                } else {
+                  e.currentTarget.src = "/assets/placeholder-product.svg";
+                }
+              }}
             />
           </div>
 

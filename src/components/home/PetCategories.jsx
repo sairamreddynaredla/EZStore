@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 
-import dog from "../../assets/categories/dog.jpeg";
-import cat from "../../assets/categories/cat.jpeg";
-import bird from "../../assets/categories/bird.jpeg";
-import fish from "../../assets/categories/fish.jpeg";
-import rabbit from "../../assets/categories/rabbit.jpeg";
-import hamster from "../../assets/categories/rats.jpeg";
+import dog from "../../assets/categories/dog.png";
+import cat from "../../assets/categories/cat.png";
+import bird from "../../assets/categories/bird.png";
+import fish from "../../assets/categories/fish.png";
+import rabbit from "../../assets/categories/rabbit.png";
+import hamster from "../../assets/categories/hamster.png";
 
 const categories = [
   {

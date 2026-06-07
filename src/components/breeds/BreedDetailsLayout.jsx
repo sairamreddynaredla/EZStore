@@ -4,6 +4,15 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import dogBreedsDetails from "../../data/dogBreedsDetails";
 
+const sections = [
+  "overview",
+  "nutrition",
+  "training",
+  "puppy-care",
+  "lifestyle",
+  "faq",
+];
+
 const BreedDetailsLayout = () => {
   const { slug } = useParams();
 
@@ -13,15 +22,6 @@ const BreedDetailsLayout = () => {
 
   const [activeSection, setActiveSection] =
     useState("overview");
-
-  const sections = [
-    "overview",
-    "nutrition",
-    "training",
-    "puppy-care",
-    "lifestyle",
-    "faq",
-  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -110,7 +110,7 @@ const BreedDetailsLayout = () => {
       </div>
 
       {/* HERO */}
-      <section className="w-[88%] mx-auto mt-14 bg-[#f5e7d7] rounded-[32px] p-12 flex flex-col lg:flex-row gap-16 items-center">
+      <section className="w-[88%] mx-auto mt-14 bg-[#f5e7d7] rounded-2xl p-12 flex flex-col lg:flex-row gap-16 items-center">
 
         <div className="flex-1">
           <img
@@ -182,7 +182,7 @@ const BreedDetailsLayout = () => {
             <img
               src={section.image}
               alt={section.title}
-              className="w-full h-[520px] object-cover hover:scale-105 transition-all duration-500"
+              className="w-full h-130 object-cover hover:scale-105 transition-all duration-500"
             />
           </div>
 
@@ -329,7 +329,7 @@ const BreedDetailsLayout = () => {
                 <img
                   src={item.image}
                   alt={item.name}
-                  className="w-full h-[220px] object-cover"
+                  className="w-full h-55 object-cover"
                 />
 
                 <h4 className="p-5 text-lg font-semibold">

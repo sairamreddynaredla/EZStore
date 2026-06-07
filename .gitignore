@@ -7,9 +7,18 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# temp files
+.tmp*
+.gitdiff_temp.txt
+image_list.txt
+print_titles.py
+update_images.py
+
+# build files
+node_modules/
+dist/
+dist-ssr/
+build/
 *.local
 
 # Editor directories and files
@@ -25,3 +34,4 @@ dist-ssr
 
 .vercel
 *.zip
+.env*

@@ -5,9 +5,7 @@ import {
 } from 'react-router-dom'
 
 import Navbar from '../../components/Navbar'
-import Footer from '../../components/Footer'
-
-import ProductFilters from '../../components/products/ProductFilters'
+import ShopSidebar from '../../components/shop/ShopSidebar'
 import ProductGrid from '../../components/products/ProductGrid'
 import ProductSort from '../../components/products/ProductSort'
 import ProductSearch from '../../components/products/ProductSearch'
@@ -20,7 +18,7 @@ const Shop = () => {
 
   const location = useLocation()
   const { addToCart } = useCart()
-  const { addToWishlist, removeFromWishlist, wishlist: wishlistItems } = useWishlist()
+  const { addToWishlist, removeFromWishlist } = useWishlist()
 
   // WISHLIST TOGGLE HANDLER
   const handleWishlistToggle = (product, isAdding) => {
@@ -42,9 +40,6 @@ const Shop = () => {
   const queryParams =
     new URLSearchParams(location.search)
 
-  const petParam =
-    queryParams.get('pet')
-
   const searchParam =
     queryParams.get('search')
 
@@ -52,80 +47,134 @@ const Shop = () => {
     queryParams.get('sale')
 
   // SEARCH
-  const [search, setSearch] =
-    useState(() => searchParam || '')
+  const [search, setSearch] = useState(() => searchParam || '')
+
+  const DEFAULT_FILTERS = {
+    brands: [],
+    petTypes: [],
+    productCategories: [],
+    productTypes: [],
+    flavors: [],
+    weights: [],
+    lifeStages: [],
+    breedSizes: [],
+    sizes: [],
+    vegTypes: [],
+    price: [0, 99999],
+    includeOutOfStock: false,
+    ratings: [],
+    dealsOnly: false,
+    specialDiets: [],
+  }
+
+  const [filters, setFilters] = useState(DEFAULT_FILTERS)
 
   // SORT
-  const [sort, setSort] =
-    useState('featured')
-
+  const [sort, setSort] = useState('featured')
   // FILTER STATES
-  const [selectedPet, setSelectedPet] =
-    useState(() =>
+  const [selectedPet, setSelectedPet] = useState('all')
 
-      petParam
-        ? petParam.charAt(0).toUpperCase() +
-            petParam.slice(1)
-        : 'all'
-    )
+  const handleFilterChange = (type, value) => {
+    setFilters((prev) => {
+      if (type === 'price') return { ...prev, price: value }
+      if (type === 'includeOutOfStock') return { ...prev, includeOutOfStock: value }
+      if (type === 'dealsOnly') return { ...prev, dealsOnly: value }
 
-  const [selectedCategory, setSelectedCategory] =
-    useState('all')
+      const arr = prev[type] || []
+      return {
+        ...prev,
+        [type]: arr.includes(value) ? arr.filter((v) => v !== value) : [...arr, value],
+      }
+    })
+  }
 
-  // FILTER PRODUCTS
+  const handleClearFilters = () => {
+    setFilters(DEFAULT_FILTERS)
+  }
+
   let filtered = products.filter((product) => {
-
+    const searchValue = search.toLowerCase()
     const matchesSearch =
+      String(product.name ?? '').toLowerCase().includes(searchValue) ||
+      String(product.brand ?? '').toLowerCase().includes(searchValue) ||
+      String(product.category ?? '').toLowerCase().includes(searchValue) ||
+      String(product.pet ?? '').toLowerCase().includes(searchValue)
 
-      product.name
-        .toLowerCase()
-        .includes(search.toLowerCase())
+    const matchesPet = selectedPet === 'all' ? true : product.pet === selectedPet
 
-      ||
+    const matchesSale = filters.dealsOnly
+      ? (product.variants || []).some((variant) => variant.originalPrice > variant.price)
+      : true
 
-      product.brand
-        .toLowerCase()
-        .includes(search.toLowerCase())
+    const matchesAvailability = filters.includeOutOfStock ? true : (product.stock ?? 1) > 0
 
-      ||
+    const matchesProductCategories = filters.productCategories.length
+      ? filters.productCategories.includes(product.productCategory)
+      : true
 
-      product.category
-        .toLowerCase()
-        .includes(search.toLowerCase())
+    const matchesBrands = filters.brands.length ? filters.brands.includes(product.brand) : true
 
-      ||
+    const matchesBreedSize = filters.breedSizes.length
+      ? filters.breedSizes.includes(product.breedSize)
+      : true
 
-      product.pet
-        .toLowerCase()
-        .includes(search.toLowerCase())
+    const matchesFlavor = filters.flavors.length ? filters.flavors.includes(product.flavor) : true
 
-    const matchesPet =
+    const matchesPetLifeStages = filters.lifeStages.length
+      ? filters.lifeStages.includes(product.lifeStage)
+      : true
 
-      selectedPet === 'all'
-        ? true
-        : product.pet === selectedPet
+    const productWeights = Array.isArray(product.weight)
+      ? product.weight
+      : product.weight
+        ? [product.weight]
+        : []
+    const variantWeights = (product.variants || []).map((variant) => variant.weight).filter(Boolean)
+    const matchesWeight = filters.weights.length
+      ? [...productWeights, ...variantWeights].some((weight) => filters.weights.includes(weight))
+      : true
 
-    const matchesCategory =
+    const matchesRatings = filters.ratings.length
+      ? filters.ratings.some((rating) => Math.floor(product.rating || 0) >= rating)
+      : true
 
-      selectedCategory === 'all'
-        ? true
-        : product.subCategory ===
-          selectedCategory
+    const matchesVegTypes = filters.vegTypes.length
+      ? filters.vegTypes.includes(product.vegType)
+      : true
 
-    // SALE FILTER
-    const matchesSale =
+    const matchesSizes = filters.sizes.length ? filters.sizes.includes(product.size) : true
 
-      saleParam === 'true'
-        ? product.variants?.[0]
-            ?.originalPrice >
-          product.variants?.[0]?.price
-        : true
+    const matchesSpecialDiets = filters.specialDiets.length
+      ? filters.specialDiets.some((diet) =>
+          (String(product.specialDiet || '')).toLowerCase().includes(diet.toLowerCase())
+        )
+      : true
+
+    const matchesProductTypes = filters.productTypes.length
+      ? filters.productTypes.includes(product.subCategory)
+      : true
+
+    const matchesPrice = Array.isArray(filters.price)
+      ? (product.variants || []).some((variant) => variant.price <= Number(filters.price[1]))
+      : true
 
     return (
       matchesSearch &&
       matchesPet &&
-      matchesCategory &&
-      matchesSale
+      matchesSale &&
+      matchesAvailability &&
+      matchesProductCategories &&
+      matchesBrands &&
+      matchesBreedSize &&
+      matchesFlavor &&
+      matchesPetLifeStages &&
+      matchesWeight &&
+      matchesRatings &&
+      matchesVegTypes &&
+      matchesSizes &&
+      matchesSpecialDiets &&
+      matchesProductTypes &&
+      matchesPrice
     )
   })
 
@@ -168,7 +217,7 @@ const Shop = () => {
       <Navbar />
 
       {/* PAGE */}
-      <div className='max-w-[1440px] mx-auto px-4 md:px-8 py-12'>
+      <div className='max-w-360 mx-auto px-4 md:px-8 py-12'>
 
         {/* HEADER */}
         <div className='flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10'>
@@ -256,17 +305,13 @@ const Shop = () => {
         <div className='flex gap-8'>
 
           {/* SIDEBAR */}
-          <div className='hidden xl:block w-[300px] flex-shrink-0'>
-
-            <ProductFilters
-              selectedCategory={
-                selectedCategory
-              }
-              setSelectedCategory={
-                setSelectedCategory
-              }
+          <div className='hidden xl:block w-75 shrink-0'>
+            <ShopSidebar
+              filters={filters}
+              onFilterChange={handleFilterChange}
+              onClearFilters={handleClearFilters}
+              products={products}
             />
-
           </div>
 
           {/* PRODUCTS */}

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import {
   createContext,
   useContext,
@@ -5,6 +6,7 @@ import {
   useReducer,
 } from "react";
 import { WISHLIST_ACTIONS } from "./wishlistconstants";
+import { trackAddToWishlist, trackRemoveFromWishlist } from '../utils/analytics';
 
 const WishlistContext = createContext();
 
@@ -60,6 +62,7 @@ export const WishlistProvider = ({ children }) => {
   }, [state.items]);
 
   const addToWishlist = (product) => {
+    try { trackAddToWishlist(product); } catch (err) { }
     dispatch({
       type: WISHLIST_ACTIONS.ADD_TO_WISHLIST,
       payload: product,
@@ -67,6 +70,7 @@ export const WishlistProvider = ({ children }) => {
   };
 
   const removeFromWishlist = (id) => {
+    try { trackRemoveFromWishlist(id); } catch (err) { }
     dispatch({
       type: WISHLIST_ACTIONS.REMOVE_FROM_WISHLIST,
       payload: id,

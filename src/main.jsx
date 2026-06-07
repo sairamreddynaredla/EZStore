@@ -1,32 +1,16 @@
 import { StrictMode } from 'react'
-
 import { createRoot } from 'react-dom/client'
-
 import './index.css'
-
 import App from './App.jsx'
+import { WishlistProvider } from './context/WishListContext'
+import ErrorBoundary from './components/ErrorBoundary'
 
-import CartProvider from './context/CartProvider'
-
-import {
-  WishlistProvider,
-} from './context/WishListContext'
-
-createRoot(
-  document.getElementById('root')
-).render(
-
+createRoot(document.getElementById('root')).render(
   <StrictMode>
-
-    <WishlistProvider>
-
-      <CartProvider>
-
+    <ErrorBoundary>
+      <WishlistProvider>
         <App />
-
-      </CartProvider>
-
-    </WishlistProvider>
-
+      </WishlistProvider>
+    </ErrorBoundary>
   </StrictMode>,
 )

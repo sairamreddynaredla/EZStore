@@ -80,7 +80,7 @@ function Categories() {
       {/* Main Slider */}
       <div className="w-full flex flex-col items-center justify-center">
         {/* Slider Wrapper */}
-        <div className="w-full max-w-[1400px] overflow-x-visible flex flex-col items-center">
+        <div className="w-full max-w-350 overflow-x-visible flex flex-col items-center">
           {/* Cards */}
           <div
             ref={scrollRef}
@@ -96,7 +96,7 @@ function Categories() {
               snap-mandatory
               [&::-webkit-scrollbar]:hidden
               [-ms-overflow-style:none]
-              [scrollbar-width:none]
+              scrollbar-none
               justify-center
             "
             style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}
@@ -106,9 +106,9 @@ function Categories() {
                 key={index}
                 to={`/category/${item.slug}`}
                 className={`${item.color}
-                  min-w-[220px]
-                  max-w-[220px]
-                  h-[340px]
+                  min-w-55
+                  max-w-55
+                  h-85
                   rounded-[40px]
                   flex
                   flex-col
@@ -120,7 +120,7 @@ function Categories() {
                   hover:scale-105
                   duration-300
                   snap-center
-                  flex-shrink-0
+                  shrink-0
                   transition-all
                   `}
               >

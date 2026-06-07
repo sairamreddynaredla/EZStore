@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import BrandsDropdown from "./BrandsDropdown";
+import NavbarDropdown from "./navbar/NavbarDropdown";
 import {
   FaShoppingCart,
   FaHeart,
@@ -9,8 +9,8 @@ import {
   FaTimes,
   FaSearch,
 } from "react-icons/fa";
-import useCart from "../hooks/usecart";
-import logo from "../assets/logo/ezstore-logo.png";
+import { useCart } from "../hooks/usecart";
+import logo from "../assets/logo/ezstore-logo-optimized.png";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -18,13 +18,10 @@ function Navbar() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [search, setSearch] = useState("");
 
+  // Remove Home and Pets, Brands handled separately
   const navLinks = [
-    { to: "/", label: "Home" },
-    { to: "/pets", label: "Pets" },
-    // Brands handled separately for dropdown
     { to: "/best-sellers", label: "Best Sellers" },
   ];
-  const [showBrands, setShowBrands] = useState(false);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -37,49 +34,29 @@ function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full z-50 bg-[#FAF9F6]/95 backdrop-blur-sm shadow-md border-b border-[#E5E7EB]">
+      <header className="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-sm shadow-md border-b border-[#E5E7EB]">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-3 md:py-4 gap-6">
           <NavLink to="/" className="flex items-center gap-1 shrink-0 group hover:opacity-80 transition-opacity duration-300">
-            <img src={logo} alt="EZStore Logo" className="h-10 md:h-12 object-contain" />
+            <img src={logo} alt="EZStore Logo" className="h-10 md:h-12 object-contain mix-blend-multiply" />
           </NavLink>
 
           <nav className="hidden md:flex items-center gap-1">
-            {navLinks.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                className={({ isActive }) =>
-                  `font-medium transition-all duration-300 px-4 py-2.5 rounded-full whitespace-nowrap ${
-                    isActive
-                      ? "text-[#1F6B52] bg-[#E8F5F0]"
-                      : "text-[#4B5563] hover:text-[#1F6B52] hover:bg-[#F5F5F5]"
-                  }`
-                }
-              >
-                {link.label}
-              </NavLink>
-            ))}
-            {/* Brands Dropdown */}
-            <div
-              className="relative group"
-              onMouseEnter={() => setShowBrands(true)}
-              onMouseLeave={() => setShowBrands(false)}
-              onClick={() => {
-                setShowBrands(true);
-                setTimeout(() => {
-                  const dropdown = document.querySelector(".brands-dropdown-scroll");
-                  if (dropdown) dropdown.scrollIntoView({ behavior: "smooth", block: "start" });
-                }, 100);
-              }}
-            >
-              <span
-                className="font-medium transition-all duration-300 px-4 py-2.5 rounded-full whitespace-nowrap text-[#4B5563] hover:text-[#1F6B52] hover:bg-[#F5F5F5] cursor-pointer select-none"
-                style={{ userSelect: "none" }}
-              >
-                Brands
-              </span>
-              {showBrands && <div className="brands-dropdown-scroll"><BrandsDropdown /></div>}
-            </div>
+              <NavbarDropdown />
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  className={({ isActive }) =>
+                    `font-medium transition-all duration-300 px-4 py-2.5 rounded-full whitespace-nowrap ${
+                      isActive
+                        ? "text-[#1F6B52] bg-[#E8F5F0]"
+                        : "text-[#4B5563] hover:text-[#1F6B52] hover:bg-[#F5F5F5]"
+                    }`
+                  }
+                >
+                  {link.label}
+                </NavLink>
+              ))}
           </nav>
 
           <form
@@ -123,8 +100,48 @@ function Navbar() {
         </div>
 
         {mobileMenu && (
-          <div className="md:hidden bg-[#FAF9F6] border-t border-[#E5E7EB] px-5 py-4 flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-300 shadow-sm">
+          <div className="md:hidden bg-white border-t border-[#E5E7EB] px-5 py-4 flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-300 shadow-sm">
             <div className="space-y-2">
+              {/* Mobile: Dogs and Cats dropdowns as links */}
+              <NavLink
+                to="/dogs/dry-food"
+                onClick={() => setMobileMenu(false)}
+                className={({ isActive }) =>
+                  `block text-base font-medium transition-all duration-300 px-4 py-3 rounded-lg w-full text-left ${
+                    isActive
+                      ? "text-[#1F6B52] bg-[#E8F5F0]"
+                      : "text-[#4B5563] hover:text-[#1F6B52] hover:bg-[#F5F5F5]"
+                  }`
+                }
+              >
+                Dogs
+              </NavLink>
+              <NavLink
+                to="/cats/dry-food"
+                onClick={() => setMobileMenu(false)}
+                className={({ isActive }) =>
+                  `block text-base font-medium transition-all duration-300 px-4 py-3 rounded-lg w-full text-left ${
+                    isActive
+                      ? "text-[#1F6B52] bg-[#E8F5F0]"
+                      : "text-[#4B5563] hover:text-[#1F6B52] hover:bg-[#F5F5F5]"
+                  }`
+                }
+              >
+                Cats
+              </NavLink>
+              <NavLink
+                to="/brands"
+                onClick={() => setMobileMenu(false)}
+                className={({ isActive }) =>
+                  `block text-base font-medium transition-all duration-300 px-4 py-3 rounded-lg w-full text-left ${
+                    isActive
+                      ? "text-[#1F6B52] bg-[#E8F5F0]"
+                      : "text-[#4B5563] hover:text-[#1F6B52] hover:bg-[#F5F5F5]"
+                  }`
+                }
+              >
+                Brands
+              </NavLink>
               {navLinks.map((link) => (
                 <NavLink
                   key={link.to}
@@ -194,7 +211,7 @@ function Navbar() {
           </div>
         )}
       </header>
-      <div className="h-20 md:h-[68px]" aria-hidden="true" />
+      <div className="h-20 md:h-17" aria-hidden="true" />
     </>
   );
 }

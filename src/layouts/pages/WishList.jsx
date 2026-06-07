@@ -3,7 +3,10 @@ import Navbar from '../../components/Navbar'
 import { Link } from 'react-router-dom'
 
 import { FaHeart } from 'react-icons/fa'
-import AddToCartButton from '../../components/products/AddToCartButton'
+import {
+  resolveProductImage,
+  resolveProductImageFallback,
+} from '../../utils/productImage'
 
 import {
   useWishlist,
@@ -33,7 +36,7 @@ const WishList = () => {
       <Navbar />
 
       {/* PAGE */}
-      <div className='max-w-[1440px] mx-auto px-5 md:px-10 py-16'>
+      <div className='max-w-360 mx-auto px-5 md:px-10 py-16'>
 
         {/* TITLE */}
         <div className='flex items-center justify-between mb-12 flex-wrap gap-5'>
@@ -119,17 +122,14 @@ const WishList = () => {
                 product?.variants?.[0]
 
               const discountPercentage =
-                Math.round(
-
-                  (
-                    (
-                      activeVariant.originalPrice -
-                      activeVariant.price
+                activeVariant?.originalPrice > activeVariant?.price
+                  ? Math.round(
+                      (
+                        (activeVariant.originalPrice - activeVariant.price) /
+                        activeVariant.originalPrice
+                      ) * 100
                     )
-                    /
-                    activeVariant.originalPrice
-                  ) * 100
-                )
+                  : 0
 
               return (
 
@@ -138,7 +138,7 @@ const WishList = () => {
                   className='
                     group
                     bg-white
-                    rounded-[32px]
+                    rounded-4xl
                     overflow-hidden
                     shadow-sm
                     hover:shadow-2xl
@@ -152,14 +152,16 @@ const WishList = () => {
                 >
 
                   {/* IMAGE */}
-                  <div className='relative bg-[#f8f8f8] h-[320px] overflow-hidden p-6'>
+                  <div className='relative bg-[#f8f8f8] h-80 overflow-hidden p-6'>
 
                     {/* DISCOUNT */}
+                    {discountPercentage > 0 && (
                     <div className='absolute top-5 left-5 z-10 bg-[#F53B3B] text-white px-4 py-2 rounded-full text-xs font-bold tracking-wide'>
 
                       {discountPercentage}% OFF
 
                     </div>
+                    )}
 
                     {/* REMOVE */}
                     <button
@@ -199,7 +201,7 @@ const WishList = () => {
                     >
 
                       <img
-                        src={product.image}
+                        src={resolveProductImage(product)}
                         alt={product.name}
                         className='
                           w-full
@@ -209,6 +211,15 @@ const WishList = () => {
                           transition-transform
                           duration-700
                         '
+                        onError={(e) => {
+                          e.currentTarget.onerror = null
+                          const fallback = resolveProductImageFallback(product)
+                          if (e.currentTarget.src !== fallback) {
+                            e.currentTarget.src = fallback
+                          } else {
+                            e.currentTarget.src = '/assets/placeholder-product.svg'
+                          }
+                        }}
                       />
 
                     </Link>
@@ -237,7 +248,7 @@ const WishList = () => {
                           text-[#0D2B5C]
                           leading-8
                           line-clamp-2
-                          min-h-[64px]
+                          min-h-16
                           hover:text-[#F53B3B]
                           transition-all
                         '
@@ -291,16 +302,13 @@ const WishList = () => {
 
                     </div>
 
-                    {/* BUTTON */}
-                    <AddToCartButton
-                      product={{
-                        ...product,
-                        selectedVariant: activeVariant,
-                      }}
-                      isOutOfStock={product.stock <= 0}
-                      onAddToCart={handleAddToCart}
-                      quantity={1}
-                    />
+                    {/* ADD TO CART BUTTON */}
+                    <button
+                      onClick={() => handleAddToCart({ ...product, selectedVariant: activeVariant }, 1)}
+                      className='w-full py-3 mt-5 rounded-2xl bg-[#1F6B52] text-white font-semibold text-sm hover:bg-[#1A5844] transition-colors'
+                    >
+                      Add to Cart
+                    </button>
 
                   </div>
 

@@ -3,6 +3,7 @@ import { FaHeart } from 'react-icons/fa'
 import AddToCartButton from '../products/AddToCartButton'
 import useCart from '../../hooks/usecart'
 import { useWishlist } from '../../context/usewishlist'
+import { resolveProductImage, resolveProductImageFallback } from '../../utils/productImage'
 
 const ProductGrid = ({ products }) => {
 
@@ -20,7 +21,7 @@ const ProductGrid = ({ products }) => {
         return (
           <div
             key={product.id}
-            className='group flex flex-col overflow-hidden rounded-[24px] border border-gray-200 bg-white transition-all duration-300 hover:border-gray-300 hover:shadow-xl'
+            className='group flex flex-col overflow-hidden rounded-3xl border border-gray-200 bg-white transition-all duration-300 hover:border-gray-300 hover:shadow-xl'
           >
             <div className='relative bg-slate-50 overflow-hidden p-4'>
               {discountPercentage > 0 && (
@@ -38,9 +39,18 @@ const ProductGrid = ({ products }) => {
               <Link to={`/product/${product.id}`} className='block'>
                 <div className='aspect-square w-full overflow-hidden rounded-[20px] bg-white'>
                   <img
-                    src={product.image}
+                    src={resolveProductImage(product)}
                     alt={product.name}
                     className='h-full w-full object-contain transition-transform duration-300 group-hover:scale-105'
+                    onError={(e) => {
+                      e.currentTarget.onerror = null;
+                      const fallbackImage = resolveProductImageFallback(product);
+                      if (e.currentTarget.src !== fallbackImage) {
+                        e.currentTarget.src = fallbackImage;
+                      } else {
+                        e.currentTarget.src = '/assets/placeholder-product.svg';
+                      }
+                    }}
                   />
                 </div>
               </Link>
@@ -51,7 +61,7 @@ const ProductGrid = ({ products }) => {
                 {product.brand}
               </p>
               <Link to={`/product/${product.id}`} className='block'>
-                <h2 className='line-clamp-2 min-h-[48px] text-sm font-semibold leading-6 text-slate-900 transition-colors duration-300 group-hover:text-orange-600'>
+                <h2 className='line-clamp-2 min-h-12 text-sm font-semibold leading-6 text-slate-900 transition-colors duration-300 group-hover:text-orange-600'>
                   {product.name}
                 </h2>
               </Link>

@@ -40,11 +40,11 @@ const Register = () => {
 
               </div>
 
-              <h2 className='text-6xl font-bold leading-[75px] mb-8'>
+              <h2 className='text-6xl font-bold leading-18.75 mb-8'>
                 Create Your Pet Care Account
               </h2>
 
-              <p className='text-xl leading-[40px] text-orange-100'>
+              <p className='text-xl leading-10 text-orange-100'>
                 Join thousands of pet lovers
                 shopping premium nutrition,
                 treats, toys, and healthcare
@@ -83,6 +83,8 @@ const Register = () => {
                 />
 
                 <input
+                  id='register-fullname'
+                  name='fullName'
                   type='text'
                   placeholder='Full Name'
                   className='w-full border border-gray-300 focus:border-orange-500 outline-none pl-14 pr-5 py-5 rounded-2xl text-lg'
@@ -99,6 +101,8 @@ const Register = () => {
                 />
 
                 <input
+                  id='register-email'
+                  name='email'
                   type='email'
                   placeholder='Email Address'
                   className='w-full border border-gray-300 focus:border-orange-500 outline-none pl-14 pr-5 py-5 rounded-2xl text-lg'
@@ -115,6 +119,8 @@ const Register = () => {
                 />
 
                 <input
+                  id='register-password'
+                  name='password'
                   type='password'
                   placeholder='Password'
                   className='w-full border border-gray-300 focus:border-orange-500 outline-none pl-14 pr-5 py-5 rounded-2xl text-lg'
@@ -131,6 +137,8 @@ const Register = () => {
                 />
 
                 <input
+                  id='register-confirm-password'
+                  name='confirmPassword'
                   type='password'
                   placeholder='Confirm Password'
                   className='w-full border border-gray-300 focus:border-orange-500 outline-none pl-14 pr-5 py-5 rounded-2xl text-lg'
@@ -139,9 +147,11 @@ const Register = () => {
               </div>
 
               {/* TERMS */}
-              <label className='flex items-start gap-3 text-gray-600 text-sm leading-7'>
+              <label htmlFor='register-terms' className='flex items-start gap-3 text-gray-600 text-sm leading-7'>
 
                 <input
+                  id='register-terms'
+                  name='terms'
                   type='checkbox'
                   className='mt-1'
                 />
@@ -161,13 +171,13 @@ const Register = () => {
               {/* DIVIDER */}
               <div className='flex items-center gap-4 py-2'>
 
-                <div className='flex-1 h-[1px] bg-gray-200'></div>
+                <div className='flex-1 h-px bg-gray-200'></div>
 
                 <span className='text-gray-400'>
                   OR
                 </span>
 
-                <div className='flex-1 h-[1px] bg-gray-200'></div>
+                <div className='flex-1 h-px bg-gray-200'></div>
 
               </div>
 

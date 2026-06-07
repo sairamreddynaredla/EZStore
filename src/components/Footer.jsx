@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ezstoreLogo from "../assets/logo/ezstore-logo.png";
+import ezstoreLogo from "../assets/logo/ezstore-logo-optimized.png";
 
 const socialLinks = [
   { href: "https://facebook.com", icon: "https://img.icons8.com/ios-filled/50/1877F2/facebook-new.png", label: "Facebook" },
@@ -42,7 +42,7 @@ const footerLinks = {
 };
 
 const trustBadges = [
-  { icon: "🚚", title: "Free Delivery", subtitle: "On orders above ₹499" },
+  { icon: "🚚", title: "Free Delivery", subtitle: "On orders above $499" },
   { icon: "🔄", title: "Easy Returns", subtitle: "30-day return policy" },
   { icon: "🔒", title: "Secure Payments", subtitle: "100% safe & encrypted" },
   { icon: "🏆", title: "Trusted Brands", subtitle: "100+ premium brands" },
@@ -59,7 +59,7 @@ const Footer = () => {
         className="border-b"
         style={{ borderColor: "var(--footer-border)", background: "var(--footer-dark-bg)" }}
       >
-        <div className="max-w-[1440px] mx-auto px-6 md:px-10 py-5">
+        <div className="max-w-360 mx-auto px-6 md:px-10 py-5">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {trustBadges.map((badge) => (
               <div key={badge.title} className="flex items-center gap-3">
@@ -81,7 +81,7 @@ const Footer = () => {
       
 
       {/* ── Main Footer Grid ── */}
-      <div className="max-w-[1440px] mx-auto px-6 md:px-10 py-14">
+      <div className="max-w-360 mx-auto px-6 md:px-10 py-14">
         <div className="grid grid-cols-1 md:grid-cols-6 gap-10 lg:gap-14">
 
           {/* Brand Column */}
@@ -178,7 +178,7 @@ const Footer = () => {
         className="border-t"
         style={{ background: "var(--footer-dark-bg)", borderColor: "var(--footer-border)" }}
       >
-        <div className="max-w-[1440px] mx-auto px-6 md:px-10 py-5">
+        <div className="max-w-360 mx-auto px-6 md:px-10 py-5">
           <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-xs" style={{ color: "var(--footer-text)" }}>
 
             <span className="opacity-75">

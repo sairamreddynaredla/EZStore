@@ -21,8 +21,8 @@ const BestSellerSection = () => {
     }
   }
 
-  // SHOW ONLY FIRST 6 PRODUCTS
-  const bestSellerProducts = products.slice(0, 6)
+  // SHOW ONLY FIRST 5 PRODUCTS
+  const bestSellerProducts = products.slice(0, 5)
 
   return (
     <section className="py-14 bg-[#f7f3ee]">
@@ -57,7 +57,7 @@ const BestSellerSection = () => {
         </div>
 
         {/* PRODUCTS */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-5">
 
           {bestSellerProducts.map((product) => (
             <ProductCard

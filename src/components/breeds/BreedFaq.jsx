@@ -16,7 +16,7 @@ const BreedFAQ = ({ breed }) => {
 
           <div
             key={index}
-            className="bg-white border rounded-[24px] p-6 shadow-sm hover:shadow-lg transition-all duration-300"
+            className="bg-white border rounded-3xl p-6 shadow-sm hover:shadow-lg transition-all duration-300"
           >
 
             <h3 className="font-bold text-xl mb-3">

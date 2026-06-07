@@ -1,4 +1,3 @@
-import React from "react";
 import { brands } from "../data/brands";
 import { useNavigate } from "react-router-dom";
 

@@ -10,6 +10,7 @@ const Checkout = () => {
   const {
     cartItems,
     totalPrice,
+    clearCart,
   } = useCart()
 
   // FORM DATA
@@ -105,6 +106,7 @@ const Checkout = () => {
 
     if (!isValid) return
 
+    clearCart()
     navigate('/order-success')
   }
 
@@ -114,16 +116,16 @@ const Checkout = () => {
 
       <Navbar />
 
-      <div className='max-w-7xl mx-auto px-5 md:px-10 pt-40 pb-16'>
+<div className='max-w-7xl mx-auto px-4 sm:px-5 md:px-10 pt-10 pb-16'>
 
         {/* TITLE */}
-        <h1 className='text-5xl md:text-6xl font-bold mb-12 leading-tight'>
+        <h1 className='text-4xl sm:text-5xl md:text-6xl font-bold mb-12 leading-tight'>
 
           Secure Checkout
 
         </h1>
 
-        <div className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-10'>
 
           {/* LEFT SIDE */}
           <div className='lg:col-span-2 space-y-8'>
@@ -424,7 +426,7 @@ const Checkout = () => {
           {/* RIGHT SIDE */}
           <div>
 
-            <div className='bg-white rounded-[35px] p-8 shadow-sm sticky top-24'>
+            <div className='bg-white rounded-[35px] p-8 shadow-sm lg:sticky lg:top-24'>
 
               <h2 className='text-3xl font-bold mb-8'>
                 Order Summary

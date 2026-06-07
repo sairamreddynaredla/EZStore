@@ -1,109 +1,138 @@
 import { Link } from "react-router-dom"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+import { useRef } from "react"
+import dogExclusiveImage from "../../assets/Exclusive Category/dog exclusive.png"
+import catExclusiveImage from "../../assets/Exclusive Category/cat-exclusive.png"
+import birdExclusiveImage from "../../assets/Exclusive Category/bird-exclusive.png"
+import fishExclusiveImage from "../../assets/Exclusive Category/fish-exclusive.png"
+import hamsterExclusiveImage from "../../assets/Exclusive Category/hamster-exclusive.png"
+import rabbitImage from "../../assets/categories/rabbit.png"
 
-const dog =
-  "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=300&auto=format&fit=crop"
-
-const cat =
-  "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=300&auto=format&fit=crop"
-
-const bird =
-  "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=300&auto=format&fit=crop"
-
-const fish =
-  "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=300&auto=format&fit=crop"
-
-const rabbit =
-  "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=300&auto=format&fit=crop"
-
-const hamster =
-  "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=300&auto=format&fit=crop"
+const dog = dogExclusiveImage
+const cat = catExclusiveImage
+const bird = birdExclusiveImage
+const fish = fishExclusiveImage
+const rabbit = rabbitImage
+const hamster = hamsterExclusiveImage
 
 const categories = [
   {
     title: "Dog",
     image: dog,
     color: "bg-blue-100",
-    link: "/breeds/dog",
+    slug: "dog",
   },
 
   {
     title: "Cat",
     image: cat,
     color: "bg-orange-100",
-    link: "/breeds/cat",
+    slug: "cat",
   },
 
   {
     title: "Bird",
     image: bird,
     color: "bg-yellow-100",
-    link: "/breeds/bird",
+    slug: "bird",
   },
 
   {
     title: "Fish",
     image: fish,
     color: "bg-pink-100",
-    link: "/breeds/fish",
+    slug: "fish",
   },
 
   {
     title: "Rabbit",
     image: rabbit,
     color: "bg-green-100",
-    link: "/breeds/rabbit",
+    slug: "rabbit",
   },
 
   {
     title: "Hamster",
     image: hamster,
     color: "bg-red-100",
-    link: "/breeds/hamster",
+    slug: "hamster",
   },
 ]
 
 function Categories() {
+  const scrollRef = useRef(null)
+
+  const handleScroll = (direction) => {
+    if (!scrollRef.current) return
+
+    const scrollDelta = direction === "left" ? -280 : 280
+    scrollRef.current.scrollBy({
+      left: scrollDelta,
+      behavior: "smooth",
+    })
+  }
+
   return (
     <section className="px-6 md:px-10 py-20 bg-[#f9f9f9]">
 
       {/* HEADING */}
-      <h2 className="text-4xl md:text-5xl font-bold text-center mb-16">
-        Browse by Exclusive Category
-      </h2>
-
-      {/* CATEGORY GRID */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-
-        {categories.map((item, index) => (
-
-          <Link
-            to={item.link}
-            key={index}
-            className={`${item.color} rounded-[35px] p-8 flex flex-col items-center justify-center text-center hover:scale-105 duration-300 cursor-pointer shadow-sm hover:shadow-xl`}
-          >
-
-            {/* IMAGE CONTAINER */}
-            <div className="w-36 h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-white shadow-lg flex items-center justify-center">
-
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-full h-full object-cover object-center"
-              />
-
-            </div>
-
-            {/* TITLE */}
-            <h3 className="mt-6 font-bold text-xl md:text-2xl text-gray-900">
-              {item.title}
-            </h3>
-
-          </Link>
-
-        ))}
-
+      <div className="flex flex-col items-center justify-center gap-6">
+        <h2 className="text-4xl md:text-5xl font-bold text-center">
+          Browse by Exclusive Category
+        </h2>
+        <p className="text-gray-500 max-w-2xl text-center">
+          Scroll through all pet categories with navigation arrows for faster browsing.
+        </p>
       </div>
 
+      {/* HORIZONTAL CATEGORY SCROLLER */}
+      <div className="mt-16 relative">
+        <div
+          ref={scrollRef}
+          className="flex items-center gap-8 overflow-x-auto scroll-smooth py-4 px-2 md:px-6 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        >
+          {categories.map((item, index) => (
+            <Link
+              key={index}
+              to={`/breeds/${item.slug}`}
+              className={`${item.color} w-65 rounded-[35px] p-8 flex flex-col items-center justify-center text-center hover:scale-105 duration-300 cursor-pointer shadow-sm hover:shadow-xl snap-center shrink-0`}
+            >
+              <div className="w-36 h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-white shadow-lg flex items-center justify-center">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover object-center"
+                />
+              </div>
+
+              <h3 className="mt-6 font-bold text-xl md:text-2xl text-gray-900">
+                {item.title}
+              </h3>
+            </Link>
+          ))}
+        </div>
+
+        <div className="absolute inset-y-0 left-0 flex items-center sm:left-4">
+          <button
+            onClick={() => handleScroll("left")}
+            className="bg-white shadow-xl w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 duration-300"
+            aria-label="Scroll categories left"
+          >
+            <ChevronLeft size={22} />
+          </button>
+        </div>
+
+        <div className="absolute inset-y-0 right-0 flex items-center sm:right-4">
+          <button
+            onClick={() => handleScroll("right")}
+            className="bg-white shadow-xl w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 duration-300"
+            aria-label="Scroll categories right"
+          >
+            <ChevronRight size={22} />
+          </button>
+        </div>
+      </div>
     </section>
   )
 }

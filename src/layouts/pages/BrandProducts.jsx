@@ -11,18 +11,20 @@ const BrandProducts = () => {
 
   // Find the brand object that matches the slug
   const brandObj = brands.find(
-    (b) => b.logo.toLowerCase() === brandSlug.toLowerCase()
+    (b) => String(b.logo ?? '').toLowerCase() === String(brandSlug ?? '').toLowerCase()
   )
   // If not found, fallback to slugified brand name
-  const normalizedBrand = brandObj
-    ? brandObj.name
-    : brandSlug.replace(/-/g, ' ')
+  const normalizedBrand = String(
+    brandObj ? brandObj.name : brandSlug ?? ''
+  )
+    .trim()
+    .toLowerCase()
 
   // Filter products by matching brand name (case-insensitive)
-  const filteredProducts = products.filter(
-    (product) =>
-      product.brand.trim().toLowerCase() === normalizedBrand.trim().toLowerCase()
-  )
+  const filteredProducts = products.filter((product) => {
+    const productBrand = String(product.brand ?? '').trim().toLowerCase()
+    return productBrand === normalizedBrand
+  })
 
   return (
     <div className="bg-[#f8f8f8] min-h-screen">

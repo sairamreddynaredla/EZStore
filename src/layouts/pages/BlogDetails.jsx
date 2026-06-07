@@ -21,7 +21,7 @@ const BlogDetails = () => {
 
       {/* MAIN CONTAINER */}
 
-      <div className="max-w-[1000px] mx-auto px-4 py-10">
+      <div className="max-w-250 mx-auto px-4 py-10">
 
         {/* HERO SECTION */}
 
@@ -92,12 +92,12 @@ const BlogDetails = () => {
 
           {/* HERO IMAGE */}
 
-          <div className="mt-10 rounded-[24px] overflow-hidden">
+          <div className="mt-10 rounded-3xl overflow-hidden">
 
             <img
               src={blog.image}
               alt={blog.title}
-              className="w-full h-[520px] object-cover"
+              className="w-full h-130 object-cover"
             />
 
           </div>
@@ -139,14 +139,14 @@ const BlogDetails = () => {
 
         {/* FEATURED PRODUCT */}
 
-        <div className="my-16 bg-white rounded-[24px] border border-gray-100 overflow-hidden">
+        <div className="my-16 bg-white rounded-3xl border border-gray-100 overflow-hidden">
 
           <div className="grid md:grid-cols-2 gap-8 items-center">
 
             <img
               src={products[0]?.image}
               alt={products[0]?.name}
-              className="w-full h-[320px] object-cover"
+              className="w-full h-80 object-cover"
             />
 
             <div className="p-6 md:p-8">
@@ -247,7 +247,7 @@ const BlogDetails = () => {
                 <Link
                   to={`/blogs/${item.slug}`}
                   key={item.id}
-                  className="group bg-white rounded-[24px] overflow-hidden border border-gray-100 hover:shadow-xl transition duration-300"
+                  className="group bg-white rounded-3xl overflow-hidden border border-gray-100 hover:shadow-xl transition duration-300"
                 >
 
                   <div className="overflow-hidden">
@@ -255,7 +255,7 @@ const BlogDetails = () => {
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="w-full h-[260px] object-cover group-hover:scale-105 transition duration-500"
+                      className="w-full h-65 object-cover group-hover:scale-105 transition duration-500"
                     />
 
                   </div>

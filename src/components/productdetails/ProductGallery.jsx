@@ -1,15 +1,29 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  resolveProductGalleryImages,
+  resolveProductImageFallback,
+} from "../../utils/productImage";
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
 const ProductGallery = ({ product }) => {
-  const images = product.images && product.images.length > 0 ? product.images : [product.image];
+  const images = useMemo(() => resolveProductGalleryImages(product), [product]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [activeImage, setActiveImage] = useState(images[0]);
   const [zoomActive, setZoomActive] = useState(false);
   const [pointer, setPointer] = useState({ x: 0.5, y: 0.5 });
+
+  useEffect(() => {
+    setActiveImage(images[0]);
+    setActiveIndex(0);
+  }, [images]);
+
+  useEffect(() => {
+    setActiveImage(images[activeIndex] || images[0]);
+  }, [activeIndex, images]);
+
   const imageContainerRef = useRef(null);
 
-  const activeImage = images[activeIndex] || product.image;
   const zoomScale = 2.5;
 
   useEffect(() => {
@@ -90,10 +104,19 @@ const ProductGallery = ({ product }) => {
             onTouchEnd={deactivateZoom}
           >
             <img
-              src={activeImage || product.image}
+              src={activeImage}
               alt={product.name}
               style={zoomStyle}
               className="absolute inset-0 h-full w-full object-contain transition-transform duration-200"
+              onError={(e) => {
+                e.currentTarget.onerror = null;
+                const fallbackImage = resolveProductImageFallback(product);
+                if (activeImage !== fallbackImage) {
+                  setActiveImage(fallbackImage);
+                } else {
+                  e.currentTarget.src = "/assets/placeholder-product.svg";
+                }
+              }}
             />
 
             {zoomActive && (
@@ -145,7 +168,15 @@ const ProductGallery = ({ product }) => {
                 aria-label={`Preview image ${index + 1}`}
                 aria-pressed={activeIndex === index}
               >
-                <img src={img} alt={`Thumbnail ${index + 1}`} className="h-full w-full object-contain" />
+                <img
+                  src={img}
+                  alt={`Thumbnail ${index + 1}`}
+                  className="h-full w-full object-contain"
+                  onError={(e) => {
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = resolveProductImageFallback(product);
+                  }}
+                />
               </button>
             ))}
           </div>

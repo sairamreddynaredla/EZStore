@@ -1,4 +1,4 @@
-# EZStore Design System
+# EZ STORE - Premium Pet Food E-Commerce Design System
 ## Enterprise-Level Color Psychology & Brand Identity Guide
 
 ---
@@ -6,7 +6,7 @@
 ## 🎨 STRATEGIC COLOR PHILOSOPHY
 
 ### Market Position
-EZStore positions itself as a **premium, trustworthy, health-conscious pet nutrition brand** competing with luxury wellness brands like The Farmer's Dog, Nom Nom, and Purina Pro Plan.
+EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutrition brand** competing with luxury wellness brands like The Farmer's Dog, Nom Nom, and Purina Pro Plan.
 
 ### Color System Goals
 - ✅ Convey **health, nutrition, and organic quality**

@@ -1,0 +1,21 @@
+/* External styles for COLOR_REFERENCE.html to remove inline styles */
+.color-swatch.swatch-1f6b52 { background: #1F6B52; }
+.color-swatch.swatch-e8f5f0 { background: #E8F5F0; color: #1A1A1A; }
+.color-swatch.swatch-7bae7f { background: #7BAE7F; }
+.color-swatch.swatch-f59e0b { background: #F59E0B; }
+.color-swatch.swatch-d97706 { background: #D97706; }
+.color-swatch.swatch-fbbf24 { background: #FBBF24; color: #1A1A1A; }
+.color-swatch.swatch-16a34a { background: #16A34A; }
+.color-swatch.swatch-dc2626 { background: #DC2626; }
+.color-swatch.swatch-faf9f6 { background: #FAF9F6; color: #1A1A1A; }
+.color-swatch.swatch-ffffff { background: #FFFFFF; color: #1A1A1A; }
+.color-swatch.swatch-4b5563 { background: #4B5563; color: white; }
+.color-swatch.swatch-e5e7eb { background: #E5E7EB; color: #1A1A1A; }
+.color-swatch.swatch-6b7280 { background: #6B7280; color: white; }
+
+.panel-white { background: white; padding: 2rem; border-radius: 0.5rem; margin-bottom: 2rem; }
+
+/* Keep other base styles (optional overrides) */
+.copy-btn { /* keep same styles as inline copy button used in page */ }
+
+.footer-meta { margin-top: 1.5rem; font-size: 0.9rem; color: #7BAE7F; }

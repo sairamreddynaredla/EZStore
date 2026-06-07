@@ -9,7 +9,7 @@ const ProductGrid = ({
 }) => {
   if (!loading && products.length === 0) {
     return (
-      <div className="flex items-center justify-center min-h-[24rem] w-full rounded-[28px] border border-dashed border-slate-300 bg-white p-10">
+      <div className="flex items-center justify-center min-h-96 w-full rounded-[28px] border border-dashed border-slate-300 bg-white p-10">
         <p className="text-lg font-medium text-slate-500">{emptyMessage}</p>
       </div>
     );

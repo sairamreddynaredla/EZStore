@@ -1,4 +1,22 @@
+import { useState } from "react";
+
 const DeliveryBox = () => {
+  const [pincode, setPincode] = useState("");
+  const [error, setError] = useState("");
+  const [statusMessage, setStatusMessage] = useState("");
+
+  const handleCheckPincode = () => {
+    const isValid = /^\d{6}$/.test(pincode.trim())
+    if (!isValid) {
+      setError("Please enter a valid 6-digit pincode!")
+      setStatusMessage("")
+      return
+    }
+
+    setError("")
+    setStatusMessage("Delivery available for this pincode.")
+  }
+
   return (
 
     <div className="bg-[#f8f8f8] border border-gray-200 rounded-[28px] p-6">
@@ -21,6 +39,31 @@ const DeliveryBox = () => {
           Free Shipping
         </div>
 
+      </div>
+
+      <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-4">
+        <label className="text-sm font-semibold text-slate-700">Enter Pincode</label>
+        <div className="mt-3 flex flex-col gap-3 sm:flex-row">
+          <input
+            type="text"
+            value={pincode}
+            onChange={(e) => setPincode(e.target.value)}
+            placeholder="6-digit pincode"
+            className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-400"
+          />
+          <button
+            type="button"
+            onClick={handleCheckPincode}
+            className="rounded-2xl bg-slate-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+          >
+            Check
+          </button>
+        </div>
+        {error && <p className="mt-3 text-sm text-red-600">{error}</p>}
+        {statusMessage && <p className="mt-3 text-sm text-emerald-700">{statusMessage}</p>}
+        <p className="mt-3 text-sm italic text-slate-500">
+          The final delivery date will depend on the items in the cart.
+        </p>
       </div>
 
     </div>

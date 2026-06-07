@@ -5,6 +5,10 @@ import {
 } from "lucide-react"
 import AddToCartButton from '../products/AddToCartButton'
 import useCart from '../../hooks/usecart'
+import {
+  resolveProductImage,
+  resolveProductImageFallback,
+} from '../../utils/productImage'
 
 const hotPicks = [
 
@@ -119,7 +123,7 @@ const HotPickSection = () => {
 
             <div
               key={item.id}
-              className="group bg-[#f8f8f8] rounded-[32px] overflow-hidden hover:shadow-2xl transition duration-500"
+              className="group bg-[#f8f8f8] rounded-4xl overflow-hidden hover:shadow-2xl transition duration-500"
             >
 
               {/* IMAGE */}
@@ -244,14 +248,23 @@ const HotPickSection = () => {
                   {/* IMAGE */}
 
                   <img
-                    src={product.image}
+                    src={resolveProductImage(product)}
                     alt={product.name}
                     className="h-44 w-full object-contain mb-6"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null
+                      const fallback = resolveProductImageFallback(product)
+                      if (e.currentTarget.src !== fallback) {
+                        e.currentTarget.src = fallback
+                      } else {
+                        e.currentTarget.src = '/assets/placeholder-product.svg'
+                      }
+                    }}
                   />
 
                   {/* NAME */}
 
-                  <h3 className="text-lg font-bold text-gray-900 leading-snug mb-4 min-h-[60px]">
+                  <h3 className="text-lg font-bold text-gray-900 leading-snug mb-4 min-h-15">
 
                     {product.name}
 

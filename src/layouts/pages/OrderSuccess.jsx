@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 const OrderSuccess = () => {
   return (
     <div className="min-h-screen bg-[#f8f8f8] flex items-center justify-center px-4">
-      <div className="bg-white rounded-[40px] shadow-md p-10 w-full max-w-xl text-center">
+      <div className="bg-white rounded-[40px] shadow-md p-8 sm:p-10 w-full max-w-xl text-center">
 
         {/* Success Icon */}
         <div className="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-6">
@@ -11,7 +11,7 @@ const OrderSuccess = () => {
         </div>
 
         {/* Title */}
-        <h1 className="text-5xl font-bold text-[#071c3d] mb-4">
+        <h1 className="text-4xl sm:text-5xl font-bold text-[#071c3d] mb-4">
           Order Placed!
         </h1>
 
@@ -24,7 +24,7 @@ const OrderSuccess = () => {
 
         {/* Order Details */}
         <div className="border rounded-[30px] p-6 bg-[#fafafa] mb-10">
-          <div className="flex justify-between mb-5">
+          <div className="flex flex-col gap-4 sm:flex-row sm:justify-between mb-5">
             <span className="text-gray-400 font-medium">
               ORDER NUMBER
             </span>
@@ -34,7 +34,7 @@ const OrderSuccess = () => {
             </span>
           </div>
 
-          <div className="flex justify-between">
+          <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
             <span className="text-gray-400 font-medium">
               ESTIMATED DELIVERY
             </span>

@@ -6,7 +6,7 @@ import {
   PawPrint,
   ChevronRight,
 } from "lucide-react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 const trustFeatures = [
 
@@ -177,19 +177,20 @@ const TrustSection = () => {
 
             <div className="flex flex-col sm:flex-row gap-5">
 
-              <button onClick={() => navigate('/shop')} className="bg-red-500 hover:bg-red-600 text-white px-8 py-5 rounded-2xl font-semibold flex items-center justify-center gap-3 transition">
-
+                <button
+                type="button"
+                onClick={() => navigate('/shop')}
+                className="bg-red-500 hover:bg-red-600 text-white px-8 py-5 rounded-2xl font-semibold flex items-center justify-center gap-3 transition"
+              >
                 Explore Products
-
                 <ChevronRight size={20} />
-
               </button>
 
-              <button onClick={() => navigate('/')} className="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 text-white px-8 py-5 rounded-2xl font-semibold transition">
+              <Link to="/" className="bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 text-white px-8 py-5 rounded-2xl font-semibold transition">
 
                 Learn More
 
-              </button>
+              </Link>
 
             </div>
 

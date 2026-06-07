@@ -18,7 +18,7 @@ const BreedNutrition = ({ breed }) => {
             <img
               src={breed.nutrition.image}
               alt={breed.nutrition.title}
-              className="w-full rounded-[24px] object-cover"
+              className="w-full rounded-3xl object-cover"
             />
           </div>
 

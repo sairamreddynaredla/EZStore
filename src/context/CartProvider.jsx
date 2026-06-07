@@ -2,9 +2,9 @@ import {
   useEffect,
   useMemo,
   useState,
-} from "react"
+} from "react";
 
-import CartContext from "./cart-context"
+import { CartContext } from "./cart-context";
 
 const CartProvider = ({
   children,
@@ -12,25 +12,49 @@ const CartProvider = ({
 
   const [cartItems, setCartItems] =
     useState(() => {
-      const storedCart = localStorage.getItem("cart");
+
+      const storedCart =
+        localStorage.getItem("cart");
+
       if (storedCart) {
+
         try {
-          const parsed = JSON.parse(storedCart);
+
+          const parsed =
+            JSON.parse(storedCart);
+
           // Auto-heal any items missing selectedVariant
           return parsed.map((item) => {
-            if (item && !item.selectedVariant) {
-              const defaultVariant = item.variants?.[0] || { weight: "1kg", price: item.price || 0 };
+
+            if (
+              item &&
+              !item.selectedVariant
+            ) {
+
+              const defaultVariant =
+                item.variants?.[0] || {
+                  weight: "1kg",
+                  price: item.price || 0,
+                };
+
               return {
                 ...item,
-                selectedVariant: defaultVariant,
+                selectedVariant:
+                  defaultVariant,
               };
             }
+
             return item;
           });
-        } catch (e) {
+
+        } catch (error) {
+
+          console.log(error);
+
           return [];
         }
       }
+
       return [];
     });
 
@@ -41,45 +65,66 @@ const CartProvider = ({
     localStorage.setItem(
       "cart",
       JSON.stringify(cartItems)
-    )
+    );
 
-  }, [cartItems])
+  }, [cartItems]);
 
   // ADD TO CART
 
   const addToCart = (product) => {
+
     const selectedVariant =
       product.selectedVariant ||
-      product.variants?.[0] ||
-      { weight: "1kg", price: product.price || 0 };
+      product.variants?.[0] || {
+        weight: "1kg",
+        price: product.price || 0,
+      };
 
-    const selectedWeight = selectedVariant.weight || "1kg";
+    const selectedWeight =
+      selectedVariant.weight || "1kg";
 
-    const existingProduct = cartItems.find(
-      (item) =>
-        item.id === product.id &&
-        (item.selectedVariant?.weight || "1kg") === selectedWeight
-    );
+    const existingProduct =
+      cartItems.find(
+        (item) =>
+          item.id === product.id &&
+          (
+            item.selectedVariant?.weight ||
+            "1kg"
+          ) === selectedWeight
+      );
 
     if (existingProduct) {
+
       setCartItems(
         cartItems.map((item) =>
+
           item.id === product.id &&
-          (item.selectedVariant?.weight || "1kg") === selectedWeight
+          (
+            item.selectedVariant?.weight ||
+            "1kg"
+          ) === selectedWeight
+
             ? {
                 ...item,
-                quantity: item.quantity + (product.quantity || 1),
+                quantity:
+                  item.quantity +
+                  (product.quantity || 1),
               }
+
             : item
         )
       );
+
     } else {
+
       setCartItems([
         ...cartItems,
+
         {
           ...product,
           selectedVariant,
-          quantity: product.quantity || 1,
+          quantity:
+            product.quantity || 1,
         },
       ]);
     }
@@ -102,12 +147,14 @@ const CartProvider = ({
 
             item.id === id &&
 
-            (item.selectedVariant?.weight || "1kg") ===
-              (weight || "1kg")
+            (
+              item.selectedVariant?.weight ||
+              "1kg"
+            ) === (weight || "1kg")
           )
       )
-    )
-  }
+    );
+  };
 
   // INCREASE
 
@@ -122,21 +169,21 @@ const CartProvider = ({
 
         item.id === id &&
 
-        (item.selectedVariant?.weight || "1kg") ===
-          (weight || "1kg")
+        (
+          item.selectedVariant?.weight ||
+          "1kg"
+        ) === (weight || "1kg")
 
           ? {
-
               ...item,
-
               quantity:
                 item.quantity + 1,
             }
 
           : item
       )
-    )
-  }
+    );
+  };
 
   // DECREASE
 
@@ -151,26 +198,24 @@ const CartProvider = ({
 
         item.id === id &&
 
-        (item.selectedVariant?.weight || "1kg") ===
-          (weight || "1kg")
+        (
+          item.selectedVariant?.weight ||
+          "1kg"
+        ) === (weight || "1kg")
 
           ? {
-
               ...item,
 
               quantity:
-
                 item.quantity > 1
-
                   ? item.quantity - 1
-
                   : 1,
             }
 
           : item
       )
-    )
-  }
+    );
+  };
 
   // TOTAL ITEMS
 
@@ -183,21 +228,43 @@ const CartProvider = ({
         total + item.quantity,
 
       0
-    )
+    );
 
-  }, [cartItems])
+  }, [cartItems]);
 
   // TOTAL PRICE
 
-
   const totalPrice = useMemo(() => {
-    return cartItems.reduce((total, item) => {
-      if (!item || !item.selectedVariant || typeof item.selectedVariant.price !== 'number' || typeof item.quantity !== 'number') {
-        return total;
-      }
-      return total + item.selectedVariant.price * item.quantity;
-    }, 0);
+
+    return cartItems.reduce(
+      (total, item) => {
+
+        if (
+          !item ||
+          !item.selectedVariant ||
+          typeof item.selectedVariant.price !== "number" ||
+          typeof item.quantity !== "number"
+        ) {
+          return total;
+        }
+
+        return (
+          total +
+          item.selectedVariant.price *
+            item.quantity
+        );
+
+      },
+      0
+    );
+
   }, [cartItems]);
+
+  // CLEAR CART
+
+  const clearCart = () => {
+    setCartItems([]);
+  };
 
   return (
 
@@ -215,6 +282,8 @@ const CartProvider = ({
 
         decreaseQuantity,
 
+        clearCart,
+
         totalItems,
 
         totalPrice,
@@ -224,7 +293,7 @@ const CartProvider = ({
       {children}
 
     </CartContext.Provider>
-  )
-}
+  );
+};
 
-export default CartProvider
+export default CartProvider;

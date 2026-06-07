@@ -1,27 +1,25 @@
-import React from "react";
-
 // Luxury Persian Cat Breed Page Component
 const PersianCatLuxury = ({ breed }) => {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#fdf6ee] to-[#f7efe6] pb-24">
+    <div className="min-h-screen bg-linear-to-br from-[#fdf6ee] to-[#f7efe6] pb-24">
       {/* Hero Section */}
-      <section className="relative flex items-center justify-center min-h-[100vh] md:min-h-screen py-10 md:py-0 overflow-hidden">
+      <section className="relative flex items-center justify-center min-h-screen md:min-h-screen py-10 md:py-0 overflow-hidden">
         {/* Floating blobs */}
-        <div className="absolute top-[-80px] left-[-80px] w-[300px] h-[300px] bg-gradient-to-br from-[#fbe7c6] to-[#f6d365] rounded-full blur-3xl opacity-40 z-0"></div>
-        <div className="absolute bottom-[-100px] right-[-100px] w-[350px] h-[350px] bg-gradient-to-tr from-[#f6e7d8] to-[#f9e7b7] rounded-full blur-3xl opacity-30 z-0"></div>
+        <div className="absolute -top-20 -left-20 w-75 h-75 bg-linear-to-br from-[#fbe7c6] to-[#f6d365] rounded-full blur-3xl opacity-40 z-0"></div>
+        <div className="absolute -bottom-25 -right-25 w-87.5 h-87.5 bg-linear-to-tr from-[#f6e7d8] to-[#f9e7b7] rounded-full blur-3xl opacity-30 z-0"></div>
         {/* Main Card */}
         <div className="relative z-10 bg-white/60 backdrop-blur-xl rounded-[40px] shadow-2xl border border-[#f6e7d8] flex flex-col md:flex-row max-w-5xl mx-auto p-6 md:p-12 gap-6 md:gap-12 items-center md:items-stretch min-h-[70vh] md:min-h-[70vh] justify-center">
           <div className="flex-1 flex flex-col justify-center md:justify-center items-center md:items-start">
-            <span className="inline-block bg-gradient-to-r from-[#fbe7c6] to-[#f6d365] text-[#bfa76a] px-5 py-2 rounded-full font-semibold mb-4 shadow-md">Luxury Breed</span>
+            <span className="inline-block bg-linear-to-r from-[#fbe7c6] to-[#f6d365] text-[#bfa76a] px-5 py-2 rounded-full font-semibold mb-4 shadow-md">Luxury Breed</span>
             <h1 className="font-serif text-5xl md:text-7xl font-bold text-[#bfa76a] mb-6 drop-shadow-lg">{breed.name}</h1>
             <p className="text-xl text-[#7c6f57] mb-8 font-light max-w-lg">{breed.description}</p>
-            <button className="bg-gradient-to-r from-[#fbe7c6] to-[#f6d365] text-[#7c6f57] font-bold px-8 py-4 rounded-full shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300 text-lg">Meet Your Persian</button>
+            <button className="bg-linear-to-r from-[#fbe7c6] to-[#f6d365] text-[#7c6f57] font-bold px-8 py-4 rounded-full shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300 text-lg">Meet Your Persian</button>
           </div>
           <div className="flex-1 flex flex-col gap-4 md:gap-6 justify-center items-center md:items-end md:justify-center">
             <img
               src="/persian cat.png"
               alt="Persian Cat Hero"
-              className="rounded-[32px] shadow-xl w-[320px] h-[400px] object-cover border-4 border-[#fbe7c6] mb-4"
+              className="rounded-[2.5rem] shadow-xl w-80 h-100 object-cover border-4 border-[#fbe7c6] mb-4"
             />
           </div>
         </div>
@@ -40,7 +38,7 @@ const PersianCatLuxury = ({ breed }) => {
           { label: "Intelligence", value: breed.overview?.intelligence },
           { label: "Shedding", value: breed.overview?.sheddingLevel },
         ].map((stat, i) => (
-          <div key={i} className="bg-white/60 backdrop-blur-lg rounded-[24px] shadow-lg border border-[#fbe7c6] p-6 flex flex-col items-center hover:scale-105 hover:shadow-2xl transition-all duration-300">
+          <div key={i} className="bg-white/60 backdrop-blur-lg rounded-3xl shadow-lg border border-[#fbe7c6] p-6 flex flex-col items-center hover:scale-105 hover:shadow-2xl transition-all duration-300">
             <span className="font-serif text-lg text-[#bfa76a] mb-2">{stat.label}</span>
             <span className="font-bold text-2xl text-[#7c6f57]">{stat.value}</span>
           </div>
@@ -48,13 +46,13 @@ const PersianCatLuxury = ({ breed }) => {
       </section>
 
       {/* Signature Portrait & Essence Section */}
-      <section className="max-w-5xl mx-auto min-h-[100vh] flex items-center justify-center px-4">
-        <div className="flex flex-col md:flex-row items-center gap-10 bg-white/70 rounded-[32px] shadow-xl border border-[#fbe7c6] p-8 md:p-12 w-full">
-          <div className="flex-shrink-0 w-full md:w-[320px] flex flex-col items-center mb-6 md:mb-0">
+      <section className="max-w-5xl mx-auto min-h-screen flex items-center justify-center px-4">
+        <div className="flex flex-col md:flex-row items-center gap-10 bg-white/70 rounded-[2.5rem] shadow-xl border border-[#fbe7c6] p-8 md:p-12 w-full">
+          <div className="shrink-0 w-full md:w-[320px] flex flex-col items-center mb-6 md:mb-0">
             <img
-              src="/elegence.png"
+              src="/elegance.png"
               alt="Persian Cat Elegance"
-              className="rounded-[32px] shadow-lg w-[300px] h-[420px] object-cover border-4 border-[#bfa76a] bg-white mb-4"
+              className="rounded-[2.5rem] shadow-lg w-75 h-105 object-cover border-4 border-[#bfa76a] bg-white mb-4"
             />
           </div>
           <div className="flex-1 flex flex-col justify-center">
@@ -85,7 +83,7 @@ const PersianCatLuxury = ({ breed }) => {
             { title: "Seasonal Care", desc: breed.grooming?.seasonal },
             { title: "Pro Tips", desc: breed.grooming?.tips },
           ].map((item, i) => (
-            <div key={i} className="bg-white/60 backdrop-blur-lg rounded-[24px] shadow-lg border border-[#fbe7c6] p-6 flex flex-col justify-between hover:scale-105 hover:shadow-2xl transition-all duration-300">
+            <div key={i} className="bg-white/60 backdrop-blur-lg rounded-3xl shadow-lg border border-[#fbe7c6] p-6 flex flex-col justify-between hover:scale-105 hover:shadow-2xl transition-all duration-300">
               <h3 className="font-serif text-xl text-[#bfa76a] font-bold mb-2">{item.title}</h3>
               <p className="text-[#7c6f57] text-base">{item.desc}</p>
             </div>
@@ -95,12 +93,12 @@ const PersianCatLuxury = ({ breed }) => {
 
       {/* Health & Wellness Section */}
       <section className="max-w-5xl mx-auto mt-20 px-4">
-        <div className="flex flex-col md:flex-row items-center gap-10 bg-white/70 rounded-[32px] shadow-xl border border-[#fbe7c6] p-8 md:p-12">
-          <div className="flex-shrink-0 w-full md:w-[340px] flex flex-col items-center mb-6 md:mb-0">
+        <div className="flex flex-col md:flex-row items-center gap-10 bg-white/70 rounded-[2.5rem] shadow-xl border border-[#fbe7c6] p-8 md:p-12">
+          <div className="shrink-0 w-full md:w-85 flex flex-col items-center mb-6 md:mb-0">
             <img
               src="/persian 1.png"
               alt="Persian Cat Health"
-              className="rounded-[32px] shadow-2xl w-[300px] h-[420px] object-cover border-4 border-[#fbe7c6] bg-white"
+              className="rounded-[2.5rem] shadow-2xl w-75 h-105 object-cover border-4 border-[#fbe7c6] bg-white"
             />
             <div className="w-full px-4 py-3 mt-2 bg-black/60 rounded-b-[28px] text-center">
               <span className="text-white text-lg font-semibold drop-shadow">Persian Cat Health & Wellness</span>
@@ -129,7 +127,7 @@ const PersianCatLuxury = ({ breed }) => {
         {/* Add photo here later */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
           {Object.entries(breed.recommendations || {}).map(([cat, items], i) => (
-            <div key={i} className="bg-white/60 backdrop-blur-lg rounded-[24px] shadow-lg border border-[#fbe7c6] p-6 flex flex-col justify-between hover:scale-105 hover:shadow-2xl transition-all duration-300">
+            <div key={i} className="bg-white/60 backdrop-blur-lg rounded-3xl shadow-lg border border-[#fbe7c6] p-6 flex flex-col justify-between hover:scale-105 hover:shadow-2xl transition-all duration-300">
               <h3 className="font-serif text-xl text-[#bfa76a] font-bold mb-2 capitalize">{cat}</h3>
               <ul className="list-disc ml-5 text-[#7c6f57]">
                 {items.map((item, j) => <li key={j}>{item}</li>)}
@@ -142,7 +140,7 @@ const PersianCatLuxury = ({ breed }) => {
       {/* FAQ Accordion */}
       <section className="max-w-4xl mx-auto mt-20 px-4">
         <h2 className="font-serif text-4xl text-[#bfa76a] font-bold mb-8">Frequently Asked Questions</h2>
-        <div className="divide-y divide-[#fbe7c6] rounded-[24px] shadow-xl bg-white/70">
+        <div className="divide-y divide-[#fbe7c6] rounded-3xl shadow-xl bg-white/70">
           {(breed.faqs || []).map((faq, i) => (
             <details key={i} className="group p-6 cursor-pointer transition-all duration-300 hover:bg-[#fbe7c6]/20">
               <summary className="font-bold text-lg text-[#bfa76a] flex items-center justify-between">
@@ -157,7 +155,7 @@ const PersianCatLuxury = ({ breed }) => {
 
       {/* Adoption Section */}
       <section className="max-w-4xl mx-auto mt-20 px-4">
-        <div className="bg-gradient-to-br from-[#fbe7c6]/60 to-[#f6d365]/60 rounded-[32px] shadow-xl border border-[#fbe7c6] p-10 flex flex-col items-center">
+        <div className="bg-linear-to-br from-[#fbe7c6]/60 to-[#f6d365]/60 rounded-[2.5rem] shadow-xl border border-[#fbe7c6] p-10 flex flex-col items-center">
           <h2 className="font-serif text-4xl text-[#bfa76a] font-bold mb-4">Adoption & Buying Guide</h2>
           <ul className="list-disc ml-5 text-[#7c6f57] mb-6">
             {breed.adoption?.tips?.map((tip, i) => <li key={i}>{tip}</li>)}
@@ -166,13 +164,13 @@ const PersianCatLuxury = ({ breed }) => {
             {breed.adoption?.questions?.map((tip, i) => <li key={i}>{tip}</li>)}
             {breed.adoption?.checklist?.map((tip, i) => <li key={i}>{tip}</li>)}
           </ul>
-          <button className="bg-gradient-to-r from-[#fbe7c6] to-[#f6d365] text-[#7c6f57] font-bold px-8 py-4 rounded-full shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300 text-lg">Adopt Responsibly</button>
+          <button className="bg-linear-to-r from-[#fbe7c6] to-[#f6d365] text-[#7c6f57] font-bold px-8 py-4 rounded-full shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300 text-lg">Adopt Responsibly</button>
         </div>
       </section>
 
       {/* Emotional Closing Section */}
       <section className="max-w-3xl mx-auto mt-20 px-4">
-        <div className="bg-white/80 rounded-[32px] shadow-xl border border-[#fbe7c6] p-10 text-center">
+        <div className="bg-white/80 rounded-[2.5rem] shadow-xl border border-[#fbe7c6] p-10 text-center">
           <h2 className="font-serif text-3xl text-[#bfa76a] font-bold mb-4">A Lifetime of Luxury & Love</h2>
           <p className="text-[#7c6f57] text-lg">{breed.closing}</p>
         </div>

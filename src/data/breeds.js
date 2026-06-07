@@ -24,6 +24,13 @@ image:
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVc4VGG8ng6X3JMJXRc9qZOntMdfqOmrI58sluJTpHvA&s",
 
 traits: ["Intelligent", "Friendly", "Devoted"],
+
+  info: {
+    size: "Large",
+    lifespan: "10-12 years",
+    weight: "25-34kg",
+    grooming: "Moderate",
+  },
    overview: {
   image: "/breeds/golden-retriever.jpeg",
 },
@@ -192,6 +199,13 @@ traits: ["Intelligent", "Friendly", "Devoted"],
     image:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLej-le79-TsMKcXiuOObeYv3HjRFgFY3B1g&s",
     traits: ["Gentle", "Loyal", "Playful"],
+
+  info: {
+    size: "Large",
+    lifespan: "10-12 years",
+    weight: "25-36kg",
+    grooming: "Moderate",
+  },
     overview: {
       image: "/breeds/labrador-retriever.jpeg",
     },
@@ -360,6 +374,13 @@ traits: ["Intelligent", "Friendly", "Devoted"],
     image:
       "https://basepaws.com/_next/image?url=https%3A%2F%2Fimages.ctfassets.net%2Fqj2yxv39d6ig%2F5EZ4FPRFHVdzB8JO3RzjLb%2F577520c420c2c9973fdc689c10bb9437%2FOld_German_Shepherd_1000.jpg&w=1080&q=75",
     traits: ["Confident", "Courageous", "Smart"],
+
+  info: {
+    size: "Large",
+    lifespan: "9-13 years",
+    weight: "30-40kg",
+    grooming: "Moderate",
+  },
     overview: {
       image: "/breeds/german-shepherd.jpeg",
     },
@@ -534,6 +555,13 @@ traits: ["Intelligent", "Friendly", "Devoted"],
     image:
       "https://headsupfortails.com/cdn/shop/articles/Pomeranian_Dog_Guide_38876a16-d481-41d0-a5d8-4bf26afd2c8f.jpg?v=1754635331",
     traits: ["Cute", "Energetic", "Alert"],
+
+  info: {
+    size: "Small",
+    lifespan: "12-16 years",
+    weight: "1.5-3kg",
+    grooming: "High",
+  },
     overview: {
       image: "/breeds/pomeranian.jpeg",
     },
@@ -703,6 +731,13 @@ traits: ["Intelligent", "Friendly", "Devoted"],
     image:
       "https://a-us.storyblok.com/f/1016262/1104x676/e36872ce32/beagle.png",
     traits: ["Curious", "Friendly", "Energetic"],
+
+  info: {
+    size: "Medium",
+    lifespan: "12-15 years",
+    weight: "9-11kg",
+    grooming: "Low",
+  },
     overview: {
       image: "/breeds/beagle.jpeg",
     },
@@ -861,7 +896,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
 // ================= CATS =================
 
 {
-  id: 100,
+  id: 6,
   slug: "persian-cat",
   category: "cat",
   // HERO SECTION
@@ -871,7 +906,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   description:
     "Gentle, affectionate, and breathtakingly beautiful, Persian Cats are the royalty of the cat world. Their luxurious coats, soulful eyes, and calm personalities make them the perfect companions for those seeking a loving, low-key feline friend.",
   image:
-    "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=1200&auto=format&fit=crop",
+    "https://media.istockphoto.com/id/1263891642/photo/white-persian-cat.jpg?s=612x612&w=0&k=20&c=wM8ZU7KChEodwRlHU7Ijt7c1Pdx0YHwE2Uvgcu46EWA=",
   traits: ["Affectionate", "Calm", "Luxury breed", "Family-friendly", "Beginner-friendly"],
   overview: {
     image: "/breeds/persian-cat.jpeg",
@@ -1121,7 +1156,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
 },
 
 {
-  id: 6,
+  id: 7,
 
   slug: "shih-tzu",
 
@@ -1130,10 +1165,10 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Shih Tzu",
 
   image:
-    "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=1200&auto=format&fit=crop",
+    "https://askavet.com/cdn/shop/articles/Malshi_2025__Maltese_Shih_Tzu_Mix_Temperament_Care_Guide_c7811f87-f9d3-43d0-9c3a-d066b8827c81.png?v=1755177044&width=1200",
 
   heroImage:
-    "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=1600&auto=format&fit=crop",
+    "https://www.borrowmydoggy.com/_next/image?url=https%3A%2F%2Fcdn.sanity.io%2Fimages%2F4ij0poqn%2Fproduction%2Fffc7eaf6c412c44f419323a2963d69851e65c756-500x500.png%3Ffit%3Dmax%26auto%3Dformat&w=1080&q=75",
 
   traits: ["Affectionate", "Sweet", "Playful"],
 
@@ -1223,10 +1258,10 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Doberman",
 
   image:
-    "https://images.unsplash.com/photo-1583511655826-05700d52f4d9?q=80&w=1200&auto=format&fit=crop",
+    "https://miro.medium.com/v2/resize:fit:1400/0*nvB3-PQ7_8Ki1Orq",
 
   heroImage:
-    "https://images.unsplash.com/photo-1583511655826-05700d52f4d9?q=80&w=1600&auto=format&fit=crop",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkEznQwmpnfptg5amcjT96qR7OBEDDu0Riy49W4iWqXQ&s",
 
   traits: ["Strong", "Alert", "Loyal"],
 
@@ -1326,7 +1361,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Rottweiler",
 
   image:
-    "https://images.unsplash.com/photo-1568572933382-74d440642117?q=80&w=1200&auto=format&fit=crop",
+    "https://yumove.co.uk/cdn/shop/files/Rottweiler.jpg?v=1749660103",
 
   heroImage:
     "https://images.unsplash.com/photo-1568572933382-74d440642117?q=80&w=1600&auto=format&fit=crop",
@@ -1407,103 +1442,11 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   ],
 },
 
-// ================= POMERANIAN =================
-
-{
-  id: 9,
-
-  slug: "pomeranian",
-
-  category: "dog",
-
-  name: "Pomeranian",
-
-  image:
-    "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1200&auto=format&fit=crop",
-
-  heroImage:
-    "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1600&auto=format&fit=crop",
-
-  traits: ["Fluffy", "Active", "Cute"],
-
-  description:
-    "Pomeranians are tiny fluffy dogs full of energy and personality.",
-
-  info: {
-    size: "Small",
-    lifespan: "12-16 years",
-    temperament: "Playful",
-    coat: "Long Double Coat",
-    weight: "2-4kg",
-    shedding: "Moderate",
-  },
-
-  nutrition: {
-    title: "Nutritious meals for tiny companions",
-
-    description:
-      "Pomeranians need balanced diets with healthy proteins and vitamins.",
-
-    image:
-      "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=1200&auto=format&fit=crop",
-
-    tips: [
-      "Small portion meals",
-      "Healthy snacks",
-      "Hydration",
-    ],
-  },
-
-  grooming: {
-    title: "Fluffy coat requires care",
-
-    image:
-      "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop",
-
-    tips: [
-      "Frequent brushing",
-      "Regular trimming",
-    ],
-  },
-
-  training: {
-    title: "Smart and energetic learners",
-
-    image:
-      "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=1200&auto=format&fit=crop",
-
-    tips: [
-      "Positive rewards",
-      "Short training sessions",
-    ],
-  },
-
-  lifestyle: {
-    title: "Perfect apartment pet",
-
-    image:
-      "https://images.unsplash.com/photo-1507146426996-ef05306b995a?q=80&w=1200&auto=format&fit=crop",
-
-    tips: [
-      "Indoor play",
-      "Family bonding",
-    ],
-  },
-
-  faq: [
-    {
-      question: "Are Pomeranians good apartment dogs?",
-
-      answer:
-        "Yes. They are excellent pets for apartments and small homes.",
-    },
-  ],
-},
 
 // ================= SIBERIAN HUSKY =================
 
 {
-  id: 10,
+  id: 9,
 
   slug: "husky",
 
@@ -1512,7 +1455,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Siberian Husky",
 
   image:
-    "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop",
+    "https://www.dailypaws.com/thmb/B6yWhzGpQZsg3kxMzLn-hvGIF7M=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/siberian-husky-100800827-2000-9449ca147e0e4b819bce5189c2411188.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1600&auto=format&fit=crop",
@@ -1597,7 +1540,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   // ================= CHIHUAHUA =================
 
 {
-  id: 11,
+  id: 10,
 
   slug: "chihuahua",
 
@@ -1606,7 +1549,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Chihuahua",
 
   image:
-    "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1200&auto=format&fit=crop",
+    "https://wrapinfur.com/cdn/shop/articles/chihuahua_dog_2.png?v=1777983984&width=1100",
 
   heroImage:
     "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?q=80&w=1600&auto=format&fit=crop",
@@ -1690,7 +1633,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
 // ================= GREAT DANE =================
 
 {
-  id: 12,
+  id: 11,
 
   slug: "great-dane",
 
@@ -1699,7 +1642,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Great Dane",
 
   image:
-    "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop",
+    "https://ask.woodgreen.org.uk/media/pages/images/da2353ac62-1743751222/great-dane-900x900-crop.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1600&auto=format&fit=crop",
@@ -1792,7 +1735,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Boxer",
 
   image:
-    "https://images.unsplash.com/photo-1583511655826-05700d52f4d9?q=80&w=1200&auto=format&fit=crop",
+    "https://www.thesprucepets.com/thmb/YwjpUBfdG8mkz2L64CX4-mA8cko=/1539x0/filters:no_upscale():strip_icc()/boxer-dog-breed-1117944-hero-dfe9f67a59ce4ab19ebd274c06b28ad1.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1583511655826-05700d52f4d9?q=80&w=1600&auto=format&fit=crop",
@@ -1885,7 +1828,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Dachshund",
 
   image:
-    "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFy0AyBzodU5n2bv9SPhyuX1GHAS3IcJkyyxaYTomdVw&s",
 
   heroImage:
     "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1600&auto=format&fit=crop",
@@ -1978,7 +1921,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Border Collie",
 
   image:
-    "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=1200&auto=format&fit=crop",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUloTchY8Fn90R2xM3UVWHhJSHVuKroHayIg&s",
 
   heroImage:
     "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=1600&auto=format&fit=crop",
@@ -2071,7 +2014,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Cocker Spaniel",
 
   image:
-    "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=1200&auto=format&fit=crop",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsUUtSvVqpgb_P64YzvTg3uOLupRb8JIb5oA&s",
 
   heroImage:
     "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=1600&auto=format&fit=crop",
@@ -2165,7 +2108,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Pitbull",
 
   image:
-    "https://images.unsplash.com/photo-1583511655826-05700d52f4d9?q=80&w=1200&auto=format&fit=crop",
+    "https://cdn.shopify.com/s/files/1/1638/5471/files/when-do-pitbulls-stop-growing-03_480x480.jpg?v=1681374652",
 
   heroImage:
     "https://images.unsplash.com/photo-1583511655826-05700d52f4d9?q=80&w=1600&auto=format&fit=crop",
@@ -2258,7 +2201,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Saint Bernard",
 
   image:
-    "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop",
+    "https://cdn.britannica.com/68/235668-050-A8F37B6D/Saint-bernard-dog-st-bernard-standing-short-haired.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1600&auto=format&fit=crop",
@@ -2351,7 +2294,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Dalmatian",
 
   image:
-    "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=1200&auto=format&fit=crop",
+    "https://www.purina.co.uk/sites/default/files/styles/square_medium_440x440/public/2022-07/Dalmatian.jpg?itok=yjYglscr",
 
   heroImage:
     "https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?q=80&w=1600&auto=format&fit=crop",
@@ -2432,98 +2375,6 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   ],
 },
 
-// ================= INDIE =================
-
-{
-  id: 20,
-
-  slug: "indie",
-
-  category: "dog",
-
-  name: "Indie",
-
-  image:
-    "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop",
-
-  heroImage:
-    "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1600&auto=format&fit=crop",
-
-  traits: ["Indian", "Adaptable", "Loyal"],
-
-  description:
-    "Indie dogs are intelligent, adaptable Indian street dogs known for loyalty and resilience.",
-
-  info: {
-    size: "Medium",
-    lifespan: "13-16 years",
-    temperament: "Adaptable",
-    coat: "Short Coat",
-    weight: "15-30kg",
-    shedding: "Low",
-  },
-
-  nutrition: {
-    title: "Balanced Indian breed nutrition",
-
-    description:
-      "Indies thrive on balanced homemade and protein-rich diets.",
-
-    image:
-      "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=1200&auto=format&fit=crop",
-
-    tips: [
-      "Balanced meals",
-      "Fresh water",
-      "Healthy proteins",
-    ],
-  },
-
-  grooming: {
-    title: "Minimal grooming needs",
-
-    image:
-      "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop",
-
-    tips: [
-      "Weekly brushing",
-      "Regular cleaning",
-    ],
-  },
-
-  training: {
-    title: "Highly adaptable learners",
-
-    image:
-      "https://images.unsplash.com/photo-1518717758536-85ae29035b6d?q=80&w=1200&auto=format&fit=crop",
-
-    tips: [
-      "Positive reinforcement",
-      "Outdoor activities",
-    ],
-  },
-
-  lifestyle: {
-    title: "Perfect adaptable companion",
-
-    image:
-      "https://images.unsplash.com/photo-1507146426996-ef05306b995a?q=80&w=1200&auto=format&fit=crop",
-
-    tips: [
-      "Daily walks",
-      "Family bonding",
-    ],
-  },
-
-  faq: [
-    {
-      question: "Are Indie dogs healthy pets?",
-
-      answer:
-        "Yes. Indies are naturally healthy and adaptable dogs.",
-    },
-  ],
-},
 
 
 
@@ -2537,7 +2388,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Siamese Cat",
 
   image:
-    "https://images.unsplash.com/photo-1513245543132-31f507417b26?q=80&w=1200&auto=format&fit=crop",
+    "https://baileyscbd.com/cdn/shop/articles/Image_of_a_Siamese_Cat_2044x.png?v=1757697530",
 
   heroImage:
     "https://images.unsplash.com/photo-1513245543132-31f507417b26?q=80&w=1600&auto=format&fit=crop",
@@ -2639,7 +2490,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Maine Coon",
 
   image:
-    "https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=1200&auto=format&fit=crop",
+    "https://i.pinimg.com/474x/e8/a5/05/e8a505ee4bf1f54d29bed2c9c0af1533.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1574158622682-e40e69881006?q=80&w=1600&auto=format&fit=crop",
@@ -2741,7 +2592,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "British Shorthair",
 
   image:
-    "https://images.unsplash.com/photo-1511044568932-338cba0ad803?q=80&w=1200&auto=format&fit=crop",
+    "https://happypetproduction.s3.ap-south-1.amazonaws.com/images/20880/regal-british-shorthair-sit.webp",
 
   heroImage:
     "https://images.unsplash.com/photo-1511044568932-338cba0ad803?q=80&w=1600&auto=format&fit=crop",
@@ -2843,7 +2694,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Ragdoll",
 
   image:
-    "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?q=80&w=1200&auto=format&fit=crop",
+    "https://d3544la1u8djza.cloudfront.net/APHI/Blog/2023/resources/Ragdoll.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?q=80&w=1600&auto=format&fit=crop",
@@ -2945,7 +2796,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Bengal Cat",
 
   image:
-    "https://images.unsplash.com/photo-1503777119540-ce54b422baff?q=80&w=1200&auto=format&fit=crop",
+    "https://amarpet.com/_next/image?url=https%3A%2F%2Fapn081-amarpet-prod.sgp1.cdn.digitaloceanspaces.com%2Ffec8d47d412bcbeece3d9128ae855a7a%2Fz6wFlCLnHWgVIk2jz7XWCBEOL1emLw-metaQmVuZ2FsIGNhdCBDYXQgYnJlZWQgKDEpLnBuZw%3D%3D-.png&w=3840&q=75",
 
   heroImage:
     "https://images.unsplash.com/photo-1503777119540-ce54b422baff?q=80&w=1600&auto=format&fit=crop",
@@ -3047,7 +2898,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Russian Blue",
 
   image:
-    "https://images.unsplash.com/photo-1511044568932-338cba0ad803?q=80&w=1200&auto=format&fit=crop",
+    "https://cdn.mos.cms.futurecdn.net/v2/t:0,l:420,cw:1080,ch:1080,q:80,w:1080/KJfnj7HYdEbABNAPE7gM8h.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1511044568932-338cba0ad803?q=80&w=1600&auto=format&fit=crop",
@@ -3149,7 +3000,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Sphynx",
 
   image:
-    "https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?q=80&w=1200&auto=format&fit=crop",
+    "https://www.dailypaws.com/thmb/MIy8Zi-1K9e1rf3ljDtfe6YPonc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/sphynx-bed-sun-528925876-2000-2fff5a8158874c3db7154845e400430f.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1606214174585-fe31582dc6ee?q=80&w=1600&auto=format&fit=crop",
@@ -3253,7 +3104,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Parrot",
 
   image:
-    "https://images.unsplash.com/photo-1522926193341-e9ffd686c60f?q=80&w=1200&auto=format&fit=crop",
+    "https://cdn.shopify.com/s/files/1/0565/8021/0861/files/indian-ringneck-parrot.jpg?v=1747129469",
 
   heroImage:
     "https://images.unsplash.com/photo-1522926193341-e9ffd686c60f?q=80&w=1600&auto=format&fit=crop",
@@ -3355,7 +3206,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Macaw",
 
   image:
-    "https://images.unsplash.com/photo-1552728089-57bdde30beb3?q=80&w=1200&auto=format&fit=crop",
+    "https://lafeber.com/pet-birds/wp-content/uploads/2018/06/Hyacinth-Macaw.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1552728089-57bdde30beb3?q=80&w=1600&auto=format&fit=crop",
@@ -3457,7 +3308,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Cockatiel",
 
   image:
-    "https://images.unsplash.com/photo-1452570053594-1b985d6ea890?q=80&w=1200&auto=format&fit=crop",
+    "https://lafeber.com/pet-birds/wp-content/uploads/2018/06/Cockatiel-2.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1452570053594-1b985d6ea890?q=80&w=1600&auto=format&fit=crop",
@@ -3559,7 +3410,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Budgie",
 
   image:
-    "https://images.unsplash.com/photo-1522858547137-f1dcec554f55?q=80&w=1200&auto=format&fit=crop",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLSXA_AlwPBQyAVjL1INTmJbpapwd3EyaKhQ&s",
 
   heroImage:
     "https://images.unsplash.com/photo-1522858547137-f1dcec554f55?q=80&w=1600&auto=format&fit=crop",
@@ -3661,7 +3512,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Lovebird",
 
   image:
-    "https://images.unsplash.com/photo-1520808663317-647b476a81b9?q=80&w=1200&auto=format&fit=crop",
+    "https://www.petassure.com/petassure/custom-file-streams/page/3AbByWOQswDELrHr00N5A0loveable-lovebirds.jpg.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1520808663317-647b476a81b9?q=80&w=1600&auto=format&fit=crop",
@@ -3763,7 +3614,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Canary",
 
   image:
-    "https://images.unsplash.com/photo-1444464666168-49d633b86797?q=80&w=1200&auto=format&fit=crop",
+    "https://www.shutterstock.com/image-photo/canarie-canary-yellow-small-vibrant-600nw-2630767857.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1444464666168-49d633b86797?q=80&w=1600&auto=format&fit=crop",
@@ -3865,7 +3716,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Finch",
 
   image:
-    "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1200&auto=format&fit=crop",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwZD5FrcLY_Q1d9joLp1y8I1B3DvFy4PgdvQ&s",
 
   heroImage:
     "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1600&auto=format&fit=crop",
@@ -3967,7 +3818,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "African Grey Parrot",
 
   image:
-    "https://images.unsplash.com/photo-1522926193341-e9ffd686c60f?q=80&w=1200&auto=format&fit=crop",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQR1w0LIsqZoB7TQ5usvYDF30hbAPctHxAvig&s",
 
   heroImage:
     "https://images.unsplash.com/photo-1522926193341-e9ffd686c60f?q=80&w=1600&auto=format&fit=crop",
@@ -4069,7 +3920,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Sun Conure",
 
   image:
-    "https://images.unsplash.com/photo-1552728089-57bdde30beb3?q=80&w=1200&auto=format&fit=crop",
+    "https://pet-health-content-media.chewy.com/wp-content/uploads/2025/04/16194349/202503bec-202307sun-conure-1024x616.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1552728089-57bdde30beb3?q=80&w=1600&auto=format&fit=crop",
@@ -4171,7 +4022,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Cockatoo",
 
   image:
-    "https://images.unsplash.com/photo-1501706362039-c6e80948bb91?q=80&w=1200&auto=format&fit=crop",
+    "https://www.billabongsanctuary.com.au/wp-content/uploads/2023/07/Sulphur-Crested-Cockatoo-2-800x1200.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1501706362039-c6e80948bb91?q=80&w=1600&auto=format&fit=crop",
@@ -4273,7 +4124,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Owl",
 
   image:
-    "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?q=80&w=1200&auto=format&fit=crop",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8TKpogovs1VcAXE31T8hVIfB1s5ZlKYdyOQ&s",
 
   heroImage:
     "https://images.unsplash.com/photo-1518791841217-8f162f1e1131?q=80&w=1600&auto=format&fit=crop",
@@ -4377,7 +4228,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Holland Lop",
 
   image:
-    "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?q=80&w=1200&auto=format&fit=crop",
+    "https://img1.wsimg.com/isteam/ip/1e359bb4-cabe-4e03-bd77-8db8ba90a350/ols/Petland_Texas_Rabbit.jpg/:/rs=w:1200,h:1200",
 
   heroImage:
     "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?q=80&w=1600&auto=format&fit=crop",
@@ -4479,7 +4330,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Lionhead Rabbit",
 
   image:
-    "https://images.unsplash.com/photo-1583301286816-f4f05e1e8b25?q=80&w=1200&auto=format&fit=crop",
+    "https://a-z-animals.com/media/2022/01/1280px-Rabbit_-_Lionhead_breed.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1583301286816-f4f05e1e8b25?q=80&w=1600&auto=format&fit=crop",
@@ -4683,7 +4534,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Netherland Dwarf",
 
   image:
-    "https://images.unsplash.com/photo-1535241749838-299277b6305f?q=80&w=1200&auto=format&fit=crop",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTY7o8G8YrHy_wnlEPWDnorR3n9Q-mLrOFWkw&s",
 
   heroImage:
     "https://images.unsplash.com/photo-1535241749838-299277b6305f?q=80&w=1600&auto=format&fit=crop",
@@ -4785,7 +4636,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "English Angora",
 
   image:
-    "https://images.unsplash.com/photo-1583301286816-f4f05e1e8b25?q=80&w=1200&auto=format&fit=crop",
+    "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Joey_Giant_Angora_Buck.jpg/330px-Joey_Giant_Angora_Buck.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1583301286816-f4f05e1e8b25?q=80&w=1600&auto=format&fit=crop",
@@ -4990,7 +4841,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Betta Fish",
 
   image:
-    "https://images.unsplash.com/photo-1520301255226-bf5f144451c1?q=80&w=1200&auto=format&fit=crop",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuJSfpK2eKm2ooASXDrkRQzWbdE_jkrq0rGw&s",
 
   heroImage:
     "https://images.unsplash.com/photo-1520301255226-bf5f144451c1?q=80&w=1600&auto=format&fit=crop",
@@ -5092,7 +4943,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Guppy",
 
   image:
-    "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?q=80&w=1200&auto=format&fit=crop",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlvSthhWJIzLAtzim1SfkjvvpL3ScJEd7CkA&s",
 
   heroImage:
     "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?q=80&w=1600&auto=format&fit=crop",
@@ -5184,107 +5035,6 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   ],
 },
 
-{
-  id: 38,
-
-  slug: "angelfish",
-
-  category: "fish",
-
-  name: "Angelfish",
-
-  image:
-    "https://images.unsplash.com/photo-1517466787929-bc90951d0974?q=80&w=1200&auto=format&fit=crop",
-
-  heroImage:
-    "https://images.unsplash.com/photo-1517466787929-bc90951d0974?q=80&w=1600&auto=format&fit=crop",
-
-  traits: ["Elegant", "Graceful", "Peaceful"],
-
-  description:
-    "Angelfish are elegant tropical fish admired for their graceful swimming and unique shape.",
-
-  info: {
-    size: "Medium",
-    lifespan: "8-10 years",
-    temperament: "Semi-Peaceful",
-    coat: "Striped Fins",
-    weight: "0.1kg",
-    shedding: "None",
-  },
-
-  nutrition: {
-    title: "Balanced tropical fish meals",
-
-    description:
-      "Angelfish need high-quality flakes, frozen foods, and protein-rich diets.",
-
-    image:
-      "https://images.unsplash.com/photo-1524704654690-b56c05c78a00?q=80&w=1200&auto=format&fit=crop",
-
-    tips: [
-      "Protein flakes",
-      "Frozen shrimp",
-      "Fresh water",
-      "Healthy pellets",
-    ],
-  },
-
-  grooming: {
-    title: "Aquarium cleanliness care",
-
-    image:
-      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?q=80&w=1200&auto=format&fit=crop",
-
-    tips: [
-      "Tank filtration",
-      "Regular water changes",
-      "Monitor temperature",
-    ],
-  },
-
-  training: {
-    title: "Peaceful aquarium behavior",
-
-    image:
-      "https://images.unsplash.com/photo-1494438639946-1ebd1d20bf85?q=80&w=1200&auto=format&fit=crop",
-
-    tips: [
-      "Gentle feeding routines",
-      "Group compatibility",
-      "Avoid stress",
-    ],
-  },
-
-  lifestyle: {
-    title: "Thrives in planted tanks",
-
-    image:
-      "https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop",
-
-    tips: [
-      "Tall aquariums",
-      "Warm tropical water",
-      "Peaceful surroundings",
-    ],
-  },
-
-  faq: [
-    {
-      question: "Are Angelfish peaceful?",
-
-      answer:
-        "Yes. They are mostly peaceful community fish.",
-    },
-
-    {
-      question: "Do Angelfish need warm water?",
-
-      answer:
-        "Yes. Angelfish thrive in tropical aquariums.",
-    },
-  ],
-},
 
 {
   id: 39,
@@ -5296,7 +5046,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Koi Fish",
 
   image:
-    "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200&auto=format&fit=crop",
+    "https://a-z-animals.com/media/2021/09/Koi-header.jpg",
 
   heroImage:
     "https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1600&auto=format&fit=crop",
@@ -5604,7 +5354,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Roborovski Hamster",
 
   image:
-    "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1200&auto=format&fit=crop",
+    "https://supertails.com/cdn/shop/articles/360_f_997846502_dmcp4uwxes45ralz4f5uwmjdhty0tbhq_e21982a8-dd8d-4521-8608-03e910efc6f6.jpg?v=1747032058",
 
   heroImage:
     "https://images.unsplash.com/photo-1517849845537-4d257902454a?q=80&w=1600&auto=format&fit=crop",
@@ -5706,7 +5456,7 @@ traits: ["Intelligent", "Friendly", "Devoted"],
   name: "Chinese Hamster",
 
   image:
-    "https://images.unsplash.com/photo-1548767797-d8c844163c4c?q=80&w=1200&auto=format&fit=crop",
+    "https://media.licdn.com/dms/image/v2/D4E22AQGgtjuwqUPEkA/feedshare-shrink_800/feedshare-shrink_800/0/1697023318642?e=2147483647&v=beta&t=-lnQMjSbGAc_eHm5RirMDJtQqXIHOXzxHYImeTUsyKQ",
 
   heroImage:
     "https://images.unsplash.com/photo-1548767797-d8c844163c4c?q=80&w=1600&auto=format&fit=crop",

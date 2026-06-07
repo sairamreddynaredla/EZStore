@@ -13,256 +13,148 @@ const Cart = () => {
     decreaseQuantity,
   } = useCart();
 
+  const visibleItems = cartItems.filter(item => item && item.selectedVariant);
+  const shipping = 5;
+  const tax = 3;
+  const total = totalPrice + shipping + tax;
+
   return (
     <>
       <Navbar />
 
-      <div className='bg-[#f8f8f8] min-h-screen'>
+      <div className='bg-[#eef1f7] min-h-screen'>
+        <div className='max-w-7xl mx-auto px-4 md:px-8 pt-8 pb-12'>
 
-        <div className='max-w-7xl mx-auto px-5 md:px-10 pt-28 pb-16'>
+          <div className='flex flex-col gap-4 md:flex-row md:items-end md:justify-between'>
+            <div>
+              <p className='text-sm uppercase tracking-[0.3em] text-gray-500 mb-1'>Cart overview</p>
+              <h1 className='text-3xl md:text-4xl font-semibold text-[#0B2B6A]'>Shopping Cart</h1>
+            </div>
+            <div className='text-right'>
+              <p className='text-sm text-gray-500'>Quick glance</p>
+              <p className='text-lg md:text-xl font-semibold text-[#0B2B6A]'>{visibleItems.length} item{visibleItems.length === 1 ? '' : 's'}</p>
+            </div>
+          </div>
 
-          {/* TITLE */}
-          <h1 className="text-4xl font-bold mb-8">Shopping Cart</h1>
-
-          {/* EMPTY CART */}
-          {cartItems.length === 0 ? (
-
-            <div className='bg-white rounded-[35px] p-20 text-center shadow-sm'>
-
-              <h2 className='text-4xl font-bold mb-5'>
-
-                Your Cart Is Empty
-
-              </h2>
-
-              <p className='text-gray-500 text-lg mb-10'>
-
-                Add pet food products to continue shopping.
-
-              </p>
-
+          {visibleItems.length === 0 ? (
+            <div className='mt-10 bg-white rounded-[28px] p-12 text-center shadow-sm border border-gray-200'>
+              <h2 className='text-2xl font-semibold mb-3'>Your cart is empty</h2>
+              <p className='text-gray-500 mb-8'>Add pet food products and return here to complete your order.</p>
               <Link
                 to='/'
-                className='inline-block bg-orange-500 hover:bg-orange-600 transition text-white px-10 py-5 rounded-full text-lg font-semibold'
+                className='inline-block bg-orange-500 hover:bg-orange-600 transition text-white px-8 py-3 rounded-full text-sm font-semibold'
               >
-
                 Continue Shopping
-
               </Link>
-
             </div>
-
           ) : (
-
-            <div className='grid grid-cols-1 lg:grid-cols-3 gap-10'>
-
-              {/* LEFT SIDE */}
-              <div className='lg:col-span-2 space-y-6'>
-
-                {cartItems.filter(item => item && item.selectedVariant).map((item) => (
-                  <div
+            <div className='grid grid-cols-1 lg:grid-cols-[3fr_1fr] gap-6 mt-8'>
+              <div className='space-y-4'>
+                {visibleItems.map((item) => (
+                  <article
                     key={`${item.id}-${item.selectedVariant.weight}`}
-                    className='bg-white rounded-[35px] p-6 flex flex-col md:flex-row gap-6 shadow-sm'
+                    className='bg-white border border-gray-200 rounded-[28px] p-4 md:p-5 shadow-sm'
                   >
-
-                    {/* IMAGE */}
-                    <div className='bg-gray-100 rounded-[25px] p-5'>
-
-                      <img
-                        src={item.image}
-                        alt={item.name}
-                        className='w-40 h-40 object-contain'
-                      />
-
-                    </div>
-
-                    {/* CONTENT */}
-                    <div className='flex-1'>
-
-                      {/* BRAND */}
-                      <p className='text-gray-400 mb-2'>
-
-                        {item.brand}
-
-                      </p>
-
-                      {/* TITLE */}
-                      <h2 className='text-3xl font-bold mb-4'>
-
-                        {item.name}
-
-                      </h2>
-
-                      {/* DETAILS */}
-                      <div className='space-y-2 text-gray-500 mb-6'>
-
-                        <p>
-                          Weight:{' '}
-                          {item.selectedVariant?.weight ?? 'N/A'}
-                        </p>
-
-                        <p>
-
-                          Flavor:
-                          {' '}
-                          {item.flavor}
-
-                        </p>
-
+                    <div className='flex flex-col gap-4 md:flex-row md:items-start'>
+                      <div className='w-24 h-24 rounded-[22px] bg-gray-100 overflow-hidden flex items-center justify-center'>
+                        <img
+                          src={item.image}
+                          alt={item.name}
+                          className='w-full h-full object-contain'
+                        />
                       </div>
 
-                      {/* QUANTITY */}
-                      <div className='flex items-center gap-5 mb-6'>
+                      <div className='flex-1 min-w-0'>
+                        <p className='text-xs uppercase tracking-[0.25em] text-gray-400 mb-1 truncate'>{item.brand}</p>
+                        <h2 className='text-lg md:text-xl font-semibold mb-2 truncate'>{item.name}</h2>
+                        <div className='grid grid-cols-2 gap-3 text-sm text-gray-500 mb-4'>
+                          <span className='truncate'>Weight: {item.selectedVariant?.weight ?? 'N/A'}</span>
+                          <span className='truncate'>Flavor: {item.flavor || 'Standard'}</span>
+                        </div>
+                      </div>
 
+                      <div className='min-w-30 text-right'>
+                        <p className='text-lg md:text-xl font-semibold text-[#0B2B6A]'>${((item.selectedVariant?.price ?? 0) * item.quantity).toFixed(2)}</p>
+                        <p className='text-xs text-gray-500 mt-1'>Unit ${item.selectedVariant?.price?.toFixed(2) ?? '0.00'}</p>
+                      </div>
+                    </div>
+
+                    <div className='mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
+                      <div className='inline-flex items-center rounded-full border border-gray-200 overflow-hidden'>
                         <button
-                          onClick={() =>
-                            decreaseQuantity(
-                              item.id,
-                              item.selectedVariant?.weight
-                            )
-                          }
-                          className='w-12 h-12 rounded-full bg-gray-100 text-2xl hover:bg-gray-200 transition-all'
+                          onClick={() => decreaseQuantity(item.id, item.selectedVariant?.weight)}
+                          className='w-10 h-10 bg-white text-gray-600 hover:bg-gray-50 transition'
                         >
                           -
                         </button>
-
-                        <span className='text-2xl font-bold'>
-
-                          {item.quantity}
-
-                        </span>
-
+                        <span className='w-12 text-center text-sm font-semibold bg-gray-50'>{item.quantity}</span>
                         <button
-                          onClick={() =>
-                            increaseQuantity(
-                              item.id,
-                              item.selectedVariant?.weight
-                            )
-                          }
-                          className='w-12 h-12 rounded-full bg-gray-100 text-2xl hover:bg-gray-200 transition-all'
+                          onClick={() => increaseQuantity(item.id, item.selectedVariant?.weight)}
+                          className='w-10 h-10 bg-white text-gray-600 hover:bg-gray-50 transition'
                         >
                           +
                         </button>
-
                       </div>
 
-                      {/* REMOVE */}
                       <button
-                        onClick={() =>
-                          removeFromCart(
-                            item.id,
-                            item.selectedVariant?.weight
-                          )
-                        }
-                        className='text-red-500 hover:text-red-700 transition-all font-semibold'
+                        onClick={() => removeFromCart(item.id, item.selectedVariant?.weight)}
+                        className='text-sm font-semibold text-red-500 hover:text-red-700 transition'
                       >
-                        Remove Item
+                        Remove
                       </button>
-
                     </div>
-
-                    {/* PRICE */}
-                    <div className='text-4xl font-bold text-[#0B2B6A]'>
-                      $
-                      {(
-                        (item.selectedVariant?.price ?? 0) * item.quantity
-                      ).toFixed(2)}
-                    </div>
-
-                  </div>
-
+                  </article>
                 ))}
-
               </div>
 
-              {/* RIGHT SIDE */}
-              <div>
+              <aside className='lg:sticky lg:top-6'>
+                <div className='bg-white border border-gray-200 rounded-[28px] p-5 md:p-6 shadow-sm'>
+                  <p className='text-sm uppercase tracking-[0.3em] text-gray-500 mb-3'>Summary</p>
+                  <h2 className='text-2xl font-semibold mb-5'>Order summary</h2>
 
-                <div className='bg-white rounded-[35px] p-8 shadow-sm sticky top-24'>
-
-                  <h2 className='text-3xl font-bold mb-8'>
-
-                    Order Summary
-
-                  </h2>
-
-                  <div className='space-y-5 mb-8'>
-
-                    <div className='flex justify-between text-lg'>
-
+                  <div className='space-y-4 text-sm text-gray-600'>
+                    <div className='flex justify-between'>
                       <span>Items</span>
-
-                      <span>
-
-                        {cartItems.length}
-
-                      </span>
-
+                      <span>{visibleItems.length}</span>
                     </div>
-
-                    <div className='flex justify-between text-lg'>
-
+                    <div className='flex justify-between'>
+                      <span>Subtotal</span>
+                      <span>${totalPrice.toFixed(2)}</span>
+                    </div>
+                    <div className='flex justify-between'>
                       <span>Shipping</span>
-
-                      <span>
-
-                        $5
-
-                      </span>
-
+                      <span>${shipping.toFixed(2)}</span>
                     </div>
-
-                    <div className='flex justify-between text-lg'>
-
-                      <span>Tax</span>
-
-                      <span>
-
-                        $3
-
-                      </span>
-
+                    <div className='flex justify-between'>
+                      <span>Estimated tax</span>
+                      <span>${tax.toFixed(2)}</span>
                     </div>
-
                   </div>
 
-                  {/* TOTAL */}
-                  <div className='border-t pt-6 flex justify-between text-3xl font-bold'>
-
-                    <span>
-
-                      Total
-
-                    </span>
-
-                    <span className='text-orange-500'>
-
-                      ${(totalPrice + 5 + 3).toFixed(2)}
-
-                    </span>
-
+                  <div className='border-t border-gray-200 pt-5 mt-5 flex justify-between items-center text-xl font-semibold'>
+                    <span>Total</span>
+                    <span className='text-orange-500'>${total.toFixed(2)}</span>
                   </div>
 
-                  {/* CHECKOUT */}
-                  <Link
-                    to='/checkout'
-                    className='block text-center mt-10 bg-orange-500 hover:bg-orange-600 transition text-white py-5 rounded-full text-xl font-semibold'
-                  >
-
-                    Proceed To Checkout
-
-                  </Link>
-
+                  <div className='space-y-3 mt-6'>
+                    <Link
+                      to='/checkout'
+                      className='block text-center bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-full text-sm font-semibold transition'
+                    >
+                      Proceed to Checkout
+                    </Link>
+                    <Link
+                      to='/'
+                      className='block text-center border border-gray-300 hover:border-gray-400 text-gray-700 py-4 rounded-full text-sm font-semibold transition'
+                    >
+                      Continue Shopping
+                    </Link>
+                  </div>
                 </div>
-
-              </div>
-
+              </aside>
             </div>
-
           )}
-
         </div>
-
       </div>
     </>
   );
