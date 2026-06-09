@@ -12,7 +12,7 @@ import PetBrands from "../../components/home/PetBrands"
 
 import BestSellerSection from "../../components/home/BestSellerSection"
 
-import BlogSection from "../../components/home/BlogSection"
+
 
 import TrustSection from "../../components/home/TrustSection"
 
@@ -45,16 +45,15 @@ const Home = () => {
 
       {/* PREMIUM BRANDS */}
       <PetBrands />
-
-      {/* BEST SELLERS */}
       <BestSellerSection />
 
 
 
-      {/* BLOG SECTION */}
-      <BlogSection />
+      
+      
+  {/* BLOG SECTION removed */}
 
-      {/* TRUST SECTION */}
+  {/* TRUST SECTION */}
       <TrustSection />
 
       {/* NEWSLETTER */}

@@ -33,15 +33,15 @@ const CustomerQuestions = ({ questions = [] }) => {
       </div>
 
       <div className="mt-4">
-        <button onClick={() => setShowForm((s) => !s)} className="btn-secondary px-4 py-2">Ask a question</button>
+        <button onClick={() => setShowForm((s) => !s)} className="px-4 py-2 rounded border border-gray-300 text-slate-700 hover:bg-gray-50">Ask a question</button>
 
         {showForm && (
           <form className="mt-3 space-y-2">
             <input placeholder="Your name" className="w-full border rounded px-3 py-2" />
             <textarea placeholder="Your question" className="w-full border rounded px-3 py-2" rows={3} />
             <div className="flex gap-2">
-              <button className="btn-primary px-4 py-2">Submit</button>
-              <button type="button" onClick={() => setShowForm(false)} className="btn-secondary px-4 py-2">Cancel</button>
+              <button className="px-4 py-2 bg-amber-500 hover:bg-amber-600 text-white rounded">Submit</button>
+              <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 rounded border border-gray-300 text-slate-700 hover:bg-gray-50">Cancel</button>
             </div>
           </form>
         )}

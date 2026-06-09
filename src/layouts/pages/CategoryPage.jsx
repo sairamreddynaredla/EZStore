@@ -1633,7 +1633,7 @@ const CategoryPage = () => {
                               product
                             )
                           }
-                          className="w-full mt-5 bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-2xl font-semibold transition"
+                          className="w-full mt-5 py-3 rounded-2xl font-semibold transition bg-amber-400 hover:bg-amber-300 text-black"
                         >
 
                           Add To Cart

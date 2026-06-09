@@ -111,6 +111,40 @@ export const brands = [
     slug: 'kennel-kitchen',
     featured: true,
   },
+
+  {
+    id: 17,
+    name: 'Applod',
+    logo: 'applod',
+    slug: 'applod',
+    featured: true,
+  },
+  {
+    id: 18,
+    name: 'EZStore',
+    logo: 'ezstore',
+    slug: 'ezstore',
+    featured: true,
+  },
+  {
+    id: 19,
+    name: 'Applaws',
+    logo: 'applaws',
+    slug: 'applaws',
+    featured: true,
+  },
+  {
+    id: 20,
+    name: 'Temptations',
+    logo: 'temptations',
+    slug: 'temptations',
+  },
+  {
+    id: 21,
+    name: 'Blue Buffalo',
+    logo: 'blue-buffalo',
+    slug: 'blue-buffalo',
+  },
 ]
 
 // Get featured brands for carousel

@@ -305,7 +305,7 @@ const WishList = () => {
                     {/* ADD TO CART BUTTON */}
                     <button
                       onClick={() => handleAddToCart({ ...product, selectedVariant: activeVariant }, 1)}
-                      className='w-full py-3 mt-5 rounded-2xl bg-[#1F6B52] text-white font-semibold text-sm hover:bg-[#1A5844] transition-colors'
+                      className='w-full py-3 mt-5 rounded-2xl font-semibold text-sm bg-amber-400 hover:bg-amber-300 text-black transition-colors'
                     >
                       Add to Cart
                     </button>

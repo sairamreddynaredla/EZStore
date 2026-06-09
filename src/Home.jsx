@@ -9,10 +9,10 @@ import FoodCategorySection from "../../components/home/FoodCategorySection"
 import PetCategories from "../../components/home/PetCategories"
 
 import PetBrands from "../../components/home/PetBrands"
+import BrandBanners from "../../components/home/BrandBanners"
 
 import BestSellerSection from "../../components/home/BestSellerSection"
 
-import BlogSection from "../../components/home/BlogSection"
 
 import TrustSection from "../../components/home/TrustSection"
 
@@ -45,14 +45,13 @@ const Home = () => {
 
       {/* PREMIUM BRANDS */}
       <PetBrands />
-
-      {/* BEST SELLERS */}
+      <BrandBanners />
       <BestSellerSection />
 
 
 
-      {/* BLOG SECTION */}
-      <BlogSection />
+      
+      {/* BLOG SECTION removed */}
 
       {/* TRUST SECTION */}
       <TrustSection />

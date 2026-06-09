@@ -284,6 +284,19 @@
   color: var(--btn-secondary-text-hover);
 }
 
+/* Amazon-like Add to Cart button (golden yellow with dark text) */
+.btn-amazon {
+  background-color: #FF9900; /* Amazon yellow */
+  color: #111214; /* near-black text for contrast */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+.btn-amazon:hover {
+  background-color: #e68a00;
+}
+.btn-amazon:active {
+  background-color: #cc7a00;
+}
+
 /* Text Hierarchy */
 h1, .h1 {
   color: var(--neutral-heading);

@@ -14,9 +14,6 @@ import DeliveryDetails from "./layouts/pages/DeliveryDetails";
 import Cart from "./layouts/pages/Cart";
 import BestSellers from "./layouts/pages/BestSellers";
 import Shop from "./layouts/pages/Shop";
-import Brands from "./layouts/pages/Brands";
-import Blogs from "./layouts/pages/Blogs";
-import BlogDetails from "./layouts/pages/BlogDetails";
 import BreedDetails from "./layouts/pages/BreedDetails";
 import BreedCategory from "./layouts/pages/BreedCategory";
 import OrderSuccess from "./layouts/pages/OrderSuccess";
@@ -137,11 +134,10 @@ const App = () => {
             element={<Shop />}
           />
 
-          {/* BRANDS */}
-
+          {/* BRANDS: redirect to home (brands UI available in navbar dropdown) */}
           <Route
             path="/brands"
-            element={<Brands />}
+            element={<Navigate to="/" replace />}
           />
 
           {/* BRAND PRODUCTS */}
@@ -158,19 +154,7 @@ const App = () => {
             element={<BestSellers />}
           />
 
-          {/* BLOGS */}
-
-          <Route
-            path="/blogs"
-            element={<Blogs />}
-          />
-
-          {/* BLOG DETAILS */}
-
-          <Route
-            path="/blogs/:slug"
-            element={<BlogDetails />}
-          />
+          {/* BLOGS removed */}
 
           {/* BREED CATEGORY */}
 

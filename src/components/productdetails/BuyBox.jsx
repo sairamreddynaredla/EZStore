@@ -71,7 +71,7 @@ const BuyBox = ({ product, selectedVariant, setSelectedVariant, quantity, setQua
         <button
           type="button"
           onClick={() => addToCart({ ...product, selectedVariant, quantity })}
-          className="mt-3 w-full rounded-full bg-yellow-400 px-3 py-2 text-sm font-semibold text-slate-900 shadow-sm hover:bg-yellow-300"
+          className="mt-3 w-full rounded-full px-3 py-2 text-sm font-semibold shadow-sm bg-amber-400 hover:bg-amber-300 text-black"
         >
           Add to cart
         </button>

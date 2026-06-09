@@ -10,7 +10,7 @@
 /**
  * Step 1: Import CSS variables in your main app
  */
-import './styles/design-tokens.css'
+// design-tokens.css removed — using Tailwind utilities only
 
 /**
  * Step 2: Update tailwind.config.js
@@ -93,7 +93,7 @@ export const ProductCard = ({ product }) => {
         </div>
 
         {/* Add to Cart Button */}
-        <button className="btn-primary mt-4 w-full">
+        <button className="mt-4 w-full bg-amber-400 hover:bg-amber-300 text-black py-3 rounded-lg font-semibold">
           Add to Cart
         </button>
       </div>
@@ -201,7 +201,7 @@ export const PremiumForm = () => {
       </div>
 
       {/* Submit Button */}
-      <button className="btn-primary w-full">
+      <button className="w-full bg-amber-500 hover:bg-amber-600 text-white py-3 rounded-lg font-semibold">
         Sign In
       </button>
 
@@ -383,7 +383,7 @@ export const DarkModeComponent = () => {
         <p className="mb-4">
           All colors automatically adjust for dark mode using Tailwind's dark mode classes.
         </p>
-        <button className="btn-primary">
+        <button className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded">
           Learn More
         </button>
       </div>

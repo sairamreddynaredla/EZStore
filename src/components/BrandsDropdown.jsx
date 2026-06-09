@@ -1,5 +1,6 @@
 import { brands } from "../data/brands";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 // Brand images
 import royalCanin from "../assets/brands/royal-canin.jpeg";
@@ -20,8 +21,11 @@ import smartheart from "../assets/brands/smartheart.jpeg";
 import acana from "../assets/brands/acana.jpeg";
 import kennelKitchen from "../assets/brands/kennel-kitchen.jpeg";
 
-const BrandsDropdown = ({ onBrandSelect }) => {
+import banners from '../assets/brand-banners'
+
+const BrandsDropdown = ({ onBrandSelect, anchorRef }) => {
   const navigate = useNavigate();
+  const [position, setPosition] = useState({ left: 0, top: 0, width: 0 });
 
   // Featured brands
   const popularBrands = brands.filter((b) => b.featured);
@@ -48,7 +52,8 @@ const BrandsDropdown = ({ onBrandSelect }) => {
 
   // Get image
   const getBrandImage = (logo) => {
-    return brandImages[logo] || "";
+    if (!logo) return ""
+    return brandImages[logo] || banners[logo] || banners[String(logo).replace(/-/g, '')] || "";
   };
 
   // Navigate to brand page
@@ -63,34 +68,47 @@ const BrandsDropdown = ({ onBrandSelect }) => {
     }
   };
 
+  useEffect(() => {
+    const updatePosition = () => {
+      try {
+        const anchor = anchorRef && anchorRef.current;
+        const viewportPadding = 16;
+        const maxWidth = Math.min(1100, window.innerWidth - viewportPadding * 2);
+        if (anchor && typeof anchor.getBoundingClientRect === 'function') {
+          const rect = anchor.getBoundingClientRect();
+          const left = Math.max(viewportPadding, Math.round(rect.left + rect.width / 2 - maxWidth / 2));
+          const top = Math.round(rect.bottom + 8 + window.scrollY);
+          setPosition({ left, top, width: maxWidth });
+          return;
+        }
+        // fallback: center
+        const left = Math.max(viewportPadding, Math.round((window.innerWidth - maxWidth) / 2));
+        setPosition({ left, top: 80 + window.scrollY, width: maxWidth });
+      } catch (err) {
+        // ignore
+      }
+    };
+
+    updatePosition();
+    window.addEventListener('resize', updatePosition);
+    window.addEventListener('scroll', updatePosition);
+    return () => {
+      window.removeEventListener('resize', updatePosition);
+      window.removeEventListener('scroll', updatePosition);
+    };
+  }, [anchorRef]);
+
   return (
     <div
-      className="
-        fixed
-        left-1/2
-        top-20
-        mt-3
-        -translate-x-1/2
-        w-[95vw]
-        max-w-[1100px]
-        bg-white
-        shadow-2xl
-        rounded-2xl
-        z-[60]
-        p-6
-        md:p-8
-        border
-        border-gray-100
-        max-h-[85vh]
-        overflow-y-auto
-      "
-      role="dialog"
-      aria-modal="true"
+      className={
+        `fixed z-50 bg-white shadow-2xl rounded-2xl p-4 md:p-6 border border-gray-100 max-h-[70vh] overflow-y-auto`
+      }
+      style={{ left: position.left, top: position.top, width: position.width }}
     >
-      <div className="mb-8 text-center">
-        <h2 className="text-2xl font-bold mb-3">Popular Brands</h2>
+      <div className="mb-6 text-center">
+        <h2 className="text-xl font-bold mb-2">Popular Brands</h2>
         <p className="text-sm text-gray-500 max-w-2xl mx-auto">
-          Discover the top pet brands in a clean, card-style layout. Tap any brand to view products and offers.
+          Discover the top pet brands. Tap any brand to view products and offers.
         </p>
       </div>
 
@@ -143,7 +161,7 @@ const BrandsDropdown = ({ onBrandSelect }) => {
           onClick={() => navigate('/brands')}
           className="inline-flex items-center rounded-full bg-[#1F6B52] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#184f42]"
         >
-          View All Brands
+          View brands
         </button>
       </div>
     </div>

@@ -1,4 +1,5 @@
 import { getBrandLogo } from "../data/brands";
+import banners from "../assets/brand-banners";
 
 const brandImages = import.meta.glob("../assets/brands/*.{png,jpg,jpeg,webp,svg}", {
   eager: true,
@@ -22,14 +23,30 @@ const normalizeBrandName = (brandName) =>
 
 export const getBrandImage = (brandName) => {
   const logoKey = getBrandLogo(brandName) || normalizeBrandName(brandName);
-  return brandImageMap[logoKey] || null;
+  return (
+    brandImageMap[logoKey] || banners[logoKey] || banners[String(logoKey).replace(/-/g, '')] || null
+  );
 };
 
 export const resolveProductImage = (product) => {
   if (!product) return "/assets/placeholder-product.svg";
 
   const primaryImage = product.image || (product.images && product.images.length > 0 && product.images[0]);
-  if (primaryImage) return primaryImage;
+  // Avoid relying on certain third-party hosts that may 404 during local dev or be blocked.
+  if (primaryImage) {
+    try {
+      const url = new URL(primaryImage, window.location.href);
+      const hostname = String(url.hostname || '').toLowerCase();
+      if (hostname.includes('amazon.') || hostname.includes('images-na.ssl-images-amazon')) {
+        // prefer brand/local images instead of potentially unavailable Amazon CDN images
+        return getBrandImage(product.brand) || "/assets/placeholder-product.svg";
+      }
+    } catch (err) {
+      // not a valid absolute URL — still return it
+      return primaryImage;
+    }
+    return primaryImage;
+  }
 
   return getBrandImage(product.brand) || "/assets/placeholder-product.svg";
 };
@@ -39,7 +56,17 @@ export const resolveProductGalleryImages = (product) => {
 
   const images = product.images && product.images.length > 0 ? product.images : [product.image];
   if (images && images.length > 0 && images.some(Boolean)) {
-    return images.map((src) => src || getBrandImage(product.brand) || "/assets/placeholder-product.svg");
+    return images.map((src) => {
+      if (!src) return getBrandImage(product.brand) || "/assets/placeholder-product.svg";
+      try {
+        const url = new URL(src, window.location.href);
+        const hostname = String(url.hostname || '').toLowerCase();
+        if (hostname.includes('amazon.')) return getBrandImage(product.brand) || "/assets/placeholder-product.svg";
+      } catch (err) {
+        // not an absolute URL — return as-is
+      }
+      return src;
+    });
   }
 
   return [getBrandImage(product.brand) || "/assets/placeholder-product.svg"];

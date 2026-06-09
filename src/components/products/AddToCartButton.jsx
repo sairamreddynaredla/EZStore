@@ -69,18 +69,18 @@ const AddToCartButton = ({
     return (
       <div
         onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
-        className="w-full flex items-center justify-between bg-[#F59E0B] rounded-xl h-12 overflow-hidden"
+        className="w-full flex items-center justify-between bg-amber-500 rounded-xl h-12 overflow-hidden"
       >
         <button
           onClick={handleDecrease}
-          className="w-12 h-full flex items-center justify-center text-white hover:bg-[#D97706] transition-colors"
+          className="w-12 h-full flex items-center justify-center text-white hover:bg-amber-600 transition-colors"
         >
           <Minus size={16} strokeWidth={2.5} />
         </button>
         <span className="text-white font-bold text-[15px] select-none">{cartQty}</span>
         <button
           onClick={handleIncrease}
-          className="w-12 h-full flex items-center justify-center text-white hover:bg-[#D97706] transition-colors"
+          className="w-12 h-full flex items-center justify-center text-white hover:bg-amber-600 transition-colors"
         >
           <Plus size={16} strokeWidth={2.5} />
         </button>
@@ -88,15 +88,11 @@ const AddToCartButton = ({
     );
   }
 
-  // Default → Add to Cart (use secondary primary styling)
+  // Default → Add to Cart (Tailwind-only yellow button)
   return (
     <button
       onClick={handleAdd}
-      className={`w-full py-3 rounded-xl text-[13.5px] font-semibold transition-all duration-200 active:scale-95 ${
-        flash
-          ? "btn-primary"
-          : "btn-secondary"
-      }`}
+      className={`w-full py-3 rounded-xl text-[13.5px] font-semibold transition-all duration-200 active:scale-95 bg-amber-400 hover:bg-amber-300 text-black`}
     >
       {flash ? "Added!" : "Add to Cart"}
     </button>

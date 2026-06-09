@@ -138,12 +138,6 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
         {/* Brand + veg-icon row */}
         <div className="flex items-center justify-between mb-1">
           <span className="text-[12px] text-gray-500 font-medium">{product.brand}</span>
-          {/* red triangle icon matching Zigly */}
-          <span className="text-red-500">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <polygon points="7,1 13,13 1,13" fill="#ef4444" />
-            </svg>
-          </span>
         </div>
 
         {/* Product name */}

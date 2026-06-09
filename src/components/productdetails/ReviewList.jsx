@@ -38,9 +38,9 @@ const ReviewList = ({ reviews = [], pageSize = 5 }) => {
         <div className="text-sm text-slate-600">Showing {start + 1}–{Math.min(start + pageSize, total)} of {total} reviews</div>
 
         <div className="flex items-center gap-2">
-          <button onClick={() => setPage((p) => Math.max(1, p - 1))} className="btn-secondary px-3 py-1">Prev</button>
+          <button onClick={() => setPage((p) => Math.max(1, p - 1))} className="px-3 py-1 rounded border border-gray-300 text-slate-700 hover:bg-gray-50">Prev</button>
           <div className="px-3">{page} / {totalPages}</div>
-          <button onClick={() => setPage((p) => Math.min(totalPages, p + 1))} className="btn-secondary px-3 py-1">Next</button>
+          <button onClick={() => setPage((p) => Math.min(totalPages, p + 1))} className="px-3 py-1 rounded border border-gray-300 text-slate-700 hover:bg-gray-50">Next</button>
         </div>
       </div>
     </div>

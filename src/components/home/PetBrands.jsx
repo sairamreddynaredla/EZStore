@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { getFeaturedBrands } from '../../data/brands'
+import banners from '../../assets/brand-banners'
 
 // Import all brand logos
 import royalCaninLogo from '../../assets/brands/royal-canin.jpeg'
@@ -28,7 +29,8 @@ const logoMap = {
 }
 
 const BrandCard = ({ brand }) => {
-  const logoSrc = logoMap[brand.logo]
+  const key = brand.logo
+  const logoSrc = logoMap[key] || banners[key] || banners[String(key).replace(/-/g, '')]
 
   return (
     <div
@@ -65,7 +67,6 @@ const BrandCard = ({ brand }) => {
       ) : (
         <div className="text-center">
           <p className="text-lg font-bold text-gray-800">{brand.name}</p>
-          <p className="text-xs text-gray-500 mt-1">Premium Pet Brand</p>
         </div>
       )}
     </div>
