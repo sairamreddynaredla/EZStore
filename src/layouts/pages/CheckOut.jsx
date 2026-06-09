@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 const Checkout = () => {
   const navigate = useNavigate()
-  const { cartItems, totalPrice, clearCart } = useCart()
+  const { cartItems, totalPrice, clearCart, removeFromCart, increaseQuantity, decreaseQuantity } = useCart()
 
   // ─── STEP & NAVIGATION ───
   const [currentStep, setCurrentStep] = useState(1)
@@ -23,13 +23,13 @@ const Checkout = () => {
   // ─── USER & ADDRESS ───
   const [isGuest, setIsGuest] = useState(true)
   const [email, setEmail] = useState('john.doe@email.com')
-  const [phone, setPhone] = useState('+91 98765 43210')
+  const [phone, setPhone] = useState('+1 987-654-3210')
   const [fullName, setFullName] = useState('John Doe')
-  const [streetAddress, setStreetAddress] = useState('123 Green Park Street')
-  const [apartment, setApartment] = useState('Apt 4B, Green Park Residency')
-  const [city, setCity] = useState('Bengaluru')
-  const [state, setState] = useState('Karnataka')
-  const [pincode, setPincode] = useState('560001')
+  const [streetAddress, setStreetAddress] = useState('123 Oak Street')
+  const [apartment, setApartment] = useState('Apt 4B, Oak Terrace')
+  const [city, setCity] = useState('New York')
+  const [state, setState] = useState('New York')
+  const [pincode, setPincode] = useState('10001')
   
   // ─── BILLING ADDRESS ───
   const [sameAsShipping, setSameAsShipping] = useState(true)
@@ -41,7 +41,7 @@ const Checkout = () => {
 
   // ─── DELIVERY & PAYMENT ───
   const [selectedDelivery, setSelectedDelivery] = useState('standard')
-  const [selectedPayment, setSelectedPayment] = useState('upi')
+  const [selectedPayment, setSelectedPayment] = useState('card')
   const [selectedDeliveryInstruction, setSelectedDeliveryInstruction] = useState('ring-bell')
   const [expandDeliveryInstructions, setExpandDeliveryInstructions] = useState(false)
   
@@ -50,13 +50,15 @@ const Checkout = () => {
   const [appliedCoupon, setAppliedCoupon] = useState(null)
   const [couponError, setCouponError] = useState('')
   const coupons = {
-    'WELCOME10': { discount: 200, description: '10% off on your first order' },
-    'SAVE20': { discount: 300, description: '20% off on orders above $500' },
+    'WELCOME10': { discount: 5, description: '10% off on your first order' },
+    'SAVE20': { discount: 10, description: '20% off on orders above $500' },
     'FREESHIP': { discount: 99, description: 'Free shipping on any order' }
   }
 
+  // ─── MODALS ───
+  const [showTermsModal, setShowTermsModal] = useState(false)
+
   // ─── ORDER ITEMS & PRICING ───
-  const [cartQuantities, setCartQuantities] = useState(cartItems.reduce((acc, item, idx) => ({...acc, [idx]: item.quantity}), {}))
   const TAX_RATE = 0.1
   const discount = appliedCoupon ? coupons[appliedCoupon].discount : 0
   const shipping = selectedDelivery === 'express' ? 99 : 0
@@ -69,9 +71,6 @@ const Checkout = () => {
   const [newsletter, setNewsletter] = useState(false)
   const [smsUpdates, setSmsUpdates] = useState(true)
   const [agreeTerms, setAgreeTerms] = useState(false)
-
-  // ─── MODALS ───
-  const [showTermsModal, setShowTermsModal] = useState(false)
 
   // ─── VALIDATION ───
   const validateField = (field, value) => {
@@ -101,8 +100,8 @@ const Checkout = () => {
         else delete newErrors.city
         break
       case 'pincode':
-        if (!value || !/^\d{5,6}$/.test(value)) {
-          newErrors.pincode = 'Valid pincode is required'
+        if (!value || !/^\d{5}(-\d{4})?$/.test(value)) {
+          newErrors.pincode = 'Valid ZIP code is required'
         } else delete newErrors.pincode
         break
       case 'billingName':
@@ -119,8 +118,8 @@ const Checkout = () => {
         else delete newErrors.billingCity
         break
       case 'billingPincode':
-        if (!sameAsShipping && (!value || !/^\d{5,6}$/.test(value))) {
-          newErrors.billingPincode = 'Valid pincode is required'
+        if (!sameAsShipping && (!value || !/^\d{5}(-\d{4})?$/.test(value))) {
+          newErrors.billingPincode = 'Valid ZIP code is required'
         } else delete newErrors.billingPincode
         break
       default:
@@ -147,8 +146,12 @@ const Checkout = () => {
 
   // ─── QUANTITY HANDLER ───
   const handleQuantityChange = (idx, qty) => {
-    if (qty >= 1) {
-      setCartQuantities({...cartQuantities, [idx]: qty})
+    const item = cartItems[idx]
+    const currentQty = item.quantity
+    if (qty > currentQty) {
+      increaseQuantity(item.id, item.selectedVariant?.weight || '1kg')
+    } else if (qty < currentQty && qty >= 1) {
+      decreaseQuantity(item.id, item.selectedVariant?.weight || '1kg')
     }
   }
 
@@ -162,11 +165,11 @@ const Checkout = () => {
   }
 
   const paymentMethods = [
-    { id: 'upi', name: 'UPI', icon: '/assets/icons/upi.png', details: 'Transfer money instantly using UPI' },
     { id: 'card', name: 'Credit / Debit Card', icon: '/assets/icons/card.png', details: 'Visa, MasterCard, American Express' },
-    { id: 'phonepe', name: 'PhonePe', icon: '/assets/icons/phonepe.png', details: 'Pay using PhonePe wallet' },
-    { id: 'paytm', name: 'Paytm', icon: '/assets/icons/paytm.png', details: 'Pay using Paytm wallet' },
-    { id: 'netbanking', name: 'Net Banking', icon: '/assets/icons/net banking.png', details: 'Bank transfer via net banking' },
+    { id: 'gpay', name: 'Google Pay', icon: '/assets/icons/google-pay.png', details: 'Pay with Google Pay' },
+    { id: 'apple', name: 'Apple Pay', icon: '/assets/icons/apple-pay.png', details: 'Pay with Apple Pay' },
+    { id: 'paypal', name: 'PayPal', icon: '/assets/icons/paypal.png', details: 'Pay using your PayPal account' },
+    { id: 'bank', name: 'Bank Transfer', icon: '/assets/icons/net banking.png', details: 'Direct bank transfer' },
     { id: 'cod', name: 'Cash on Delivery', icon: '/assets/icons/cod.png', details: 'Pay when you receive your order' },
   ]
 
@@ -241,7 +244,7 @@ const Checkout = () => {
                         onChange={(e) => setPhone(e.target.value)}
                         onBlur={() => validateField('phone', phone)}
                         className={`w-full border rounded-lg p-3 text-sm mt-1 ${errors.phone ? 'border-red-500' : 'border-gray-300'}`}
-                        placeholder='+91 98765 43210'
+                        placeholder='+1 987-654-3210'
                       />
                       {errors.phone && <p className='text-xs text-red-500 mt-1'>{errors.phone}</p>}
                     </div>
@@ -270,7 +273,7 @@ const Checkout = () => {
                         onChange={(e) => setStreetAddress(e.target.value)}
                         onBlur={() => validateField('streetAddress', streetAddress)}
                         className={`w-full border rounded-lg p-3 text-sm mt-1 ${errors.streetAddress ? 'border-red-500' : 'border-gray-300'}`}
-                        placeholder='123 Green Park Street'
+                        placeholder='123 Oak Street'
                       />
                       {errors.streetAddress && <p className='text-xs text-red-500 mt-1'>{errors.streetAddress}</p>}
                     </div>
@@ -291,27 +294,27 @@ const Checkout = () => {
                           onChange={(e) => setCity(e.target.value)}
                           onBlur={() => validateField('city', city)}
                           className={`w-full border rounded-lg p-3 text-sm mt-1 ${errors.city ? 'border-red-500' : 'border-gray-300'}`}
-                          placeholder='Bengaluru'
+                          placeholder='New York'
                         />
                         {errors.city && <p className='text-xs text-red-500 mt-1'>{errors.city}</p>}
                       </div>
                       <div>
                         <label className='text-xs font-semibold text-gray-700'>State *</label>
                         <select value={state} onChange={(e) => setState(e.target.value)} className='w-full border border-gray-300 rounded-lg p-3 text-sm mt-1'>
-                          <option>Karnataka</option>
-                          <option>Delhi</option>
-                          <option>Mumbai</option>
-                          <option>Bangalore</option>
+                          <option>New York</option>
+                          <option>California</option>
+                          <option>Texas</option>
+                          <option>Florida</option>
                         </select>
                       </div>
                       <div>
-                        <label className='text-xs font-semibold text-gray-700'>Pincode *</label>
+                        <label className='text-xs font-semibold text-gray-700'>ZIP Code *</label>
                         <input 
                           value={pincode}
                           onChange={(e) => setPincode(e.target.value)}
                           onBlur={() => validateField('pincode', pincode)}
                           className={`w-full border rounded-lg p-3 text-sm mt-1 ${errors.pincode ? 'border-red-500' : 'border-gray-300'}`}
-                          placeholder='560001'
+                          placeholder='10001'
                         />
                         {errors.pincode && <p className='text-xs text-red-500 mt-1'>{errors.pincode}</p>}
                       </div>
@@ -649,14 +652,14 @@ const Checkout = () => {
                       <img src={item.image} alt={item.name} className='w-16 h-16 object-contain rounded' />
                       <div className='flex-1'>
                         <div className='font-semibold text-sm'>{item.name}</div>
-                        <div className='text-xs text-gray-500 mb-1'>Qty: {cartQuantities[idx] || item.quantity}</div>
+                        <div className='text-xs text-gray-500 mb-1'>Qty: {item.quantity}</div>
                         <div className='flex gap-1'>
-                          <button onClick={() => handleQuantityChange(idx, (cartQuantities[idx] || item.quantity) - 1)} className='px-2 py-1 bg-gray-200 text-xs rounded'>−</button>
-                          <button onClick={() => handleQuantityChange(idx, (cartQuantities[idx] || item.quantity) + 1)} className='px-2 py-1 bg-gray-200 text-xs rounded'>+</button>
-                          <button className='ml-auto text-xs text-red-600 hover:underline'>Remove</button>
+                          <button onClick={() => handleQuantityChange(idx, item.quantity - 1)} className='px-2 py-1 bg-gray-200 text-xs rounded'>−</button>
+                          <button onClick={() => handleQuantityChange(idx, item.quantity + 1)} className='px-2 py-1 bg-gray-200 text-xs rounded'>+</button>
+                          <button onClick={() => removeFromCart(item.id, item.selectedVariant?.weight || '1kg')} className='ml-auto text-xs text-red-600 hover:underline'>Remove</button>
                         </div>
                       </div>
-                      <div className='font-bold text-sm'>${((item.selectedVariant?.price ?? item.price ?? 0) * (cartQuantities[idx] || item.quantity)).toFixed(0)}</div>
+                      <div className='font-bold text-sm'>${((item.selectedVariant?.price ?? item.price ?? 0) * item.quantity).toFixed(0)}</div>
                     </div>
                   ))
                 ) : (

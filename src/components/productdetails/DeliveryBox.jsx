@@ -6,15 +6,15 @@ const DeliveryBox = () => {
   const [statusMessage, setStatusMessage] = useState("");
 
   const handleCheckPincode = () => {
-    const isValid = /^\d{6}$/.test(pincode.trim())
+    const isValid = /^\d{5}(-\d{4})?$/.test(pincode.trim())
     if (!isValid) {
-      setError("Please enter a valid 6-digit pincode!")
+      setError("Please enter a valid 5-digit ZIP code!")
       setStatusMessage("")
       return
     }
 
     setError("")
-    setStatusMessage("Delivery available for this pincode.")
+    setStatusMessage("Delivery available for this ZIP code.")
   }
 
   return (
@@ -42,13 +42,13 @@ const DeliveryBox = () => {
       </div>
 
       <div className="mt-6 rounded-3xl border border-slate-200 bg-white p-4">
-        <label className="text-sm font-semibold text-slate-700">Enter Pincode</label>
+        <label className="text-sm font-semibold text-slate-700">Enter ZIP Code</label>
         <div className="mt-3 flex flex-col gap-3 sm:flex-row">
           <input
             type="text"
             value={pincode}
             onChange={(e) => setPincode(e.target.value)}
-            placeholder="6-digit pincode"
+            placeholder="5-digit ZIP code"
             className="w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-slate-400"
           />
           <button
