@@ -103,28 +103,31 @@ export const products = [
   variants: [
     {
       weight: "2lb",
-
       price: 29.99,
-
       originalPrice: 39.99,
+      stock: 45,
+      bulkDiscount: { 3: 0.05, 5: 0.10, 10: 0.15 },
     },
-
     {
       weight: "6lb",
-
       price: 59.99,
-
       originalPrice: 75.99,
+      stock: 32,
+      bulkDiscount: { 3: 0.05, 5: 0.10, 10: 0.15 },
     },
-
     {
       weight: "15lb",
-
       price: 99.99,
-
       originalPrice: 129.99,
+      stock: 18,
+      bulkDiscount: { 3: 0.05, 5: 0.10, 10: 0.15 },
     },
   ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.10,
+
+  relatedProducts: [103, 105, 107],
 },
 
   {

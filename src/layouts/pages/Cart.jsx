@@ -1,8 +1,9 @@
 import Navbar from "../../components/Navbar";
 import { useNavigate } from "react-router-dom";
 import useCart from "../../hooks/usecart";
-import { useState } from "react";
-import { Trash2, Heart, ShoppingCart } from "lucide-react";
+import { useWishlist } from "../../context/usewishlist";
+import { useState, useEffect } from "react";
+import { Trash2, Heart, ShoppingCart, Truck, Gift, AlertCircle, Check, X, ChevronRight } from "lucide-react";
 import { COUPONS } from "../../data/checkoutData";
 
 const Cart = () => {
@@ -16,20 +17,93 @@ const Cart = () => {
     decreaseQuantity,
   } = useCart();
 
+  const { addToWishlist } = useWishlist();
   const visibleItems = cartItems.filter((item) => item && item.selectedVariant);
 
   // Coupon state
   const [coupon, setCoupon] = useState("");
   const [couponMessage, setCouponMessage] = useState("");
   const [couponValid, setCouponValid] = useState(false);
-  const [savedItems, setSavedItems] = useState([]);
+  
+  // New features state
+  const [selectedDelivery, setSelectedDelivery] = useState("standard");
+  const [cartNotes, setCartNotes] = useState("");
+  const [showRecentlyViewed, setShowRecentlyViewed] = useState(true);
+  const [recentlyViewed, setRecentlyViewed] = useState([]);
+  const [showBulkOffers, setShowBulkOffers] = useState(false);
+  const [deletedItems, setDeletedItems] = useState([]);
+  const [showTaxBreakdown, setShowTaxBreakdown] = useState(false);
+
+  // Calculate bulk discount
+  const getBulkDiscount = (item) => {
+    const quantity = item.quantity;
+    if (quantity >= 10) return 0.15; // 15% off
+    if (quantity >= 5) return 0.10;  // 10% off
+    if (quantity >= 3) return 0.05;  // 5% off
+    return 0;
+  };
+
+  // Calculate delivery cost
+  const getDeliveryCost = () => {
+    if (selectedDelivery === "standard") return 0;
+    if (selectedDelivery === "express") return 9.99;
+    return 0;
+  };
+
+  // TAX RATE
+  const TAX_RATE = 0.10; // 10% tax
+
+  // Get stock status
+  const getStockStatus = (item) => {
+    const stock = item.stock || 100;
+    if (stock <= 0) return { status: "Out of Stock", color: "text-red-600" };
+    if (stock <= 5) return { status: `Only ${stock} left!`, color: "text-orange-600" };
+    return { status: "In Stock", color: "text-green-600" };
+  };
+
+  // Get estimated delivery date
+  const getEstimatedDeliveryDate = () => {
+    const today = new Date();
+    let daysToAdd = 0;
+    
+    if (selectedDelivery === "standard") daysToAdd = 3;
+    else if (selectedDelivery === "express") daysToAdd = 1;
+    
+    const deliveryDate = new Date(today.getTime() + daysToAdd * 24 * 60 * 60 * 1000);
+    return deliveryDate.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+  };
+
+  // Delete with undo
+  const handleDeleteWithUndo = (item, weight) => {
+    const itemToDelete = { ...item, weight, timestamp: Date.now() };
+    setDeletedItems([...deletedItems, itemToDelete]);
+    removeFromCart(item.id, weight);
+  };
+
+  // Restore deleted item
+  const handleRestoreItem = (deletedItem) => {
+    setDeletedItems(deletedItems.filter(item => item.timestamp !== deletedItem.timestamp));
+  };
 
   // Calculate discount
   const appliedCoupon = COUPONS.find((c) => c.code === coupon);
-  const discount = couponValid && appliedCoupon ? appliedCoupon.discount : 0;
+  const couponDiscount = couponValid && appliedCoupon ? appliedCoupon.discount : 0;
+  
+  // Calculate bulk discounts
+  const bulkDiscounts = visibleItems.reduce((sum, item) => {
+    const itemTotal = (item.selectedVariant?.price ?? 0) * item.quantity;
+    return sum + (itemTotal * getBulkDiscount(item));
+  }, 0);
+  
+  const deliveryCost = getDeliveryCost();
+  
+  const subtotal = totalPrice;
+  const totalDiscount = couponDiscount + bulkDiscounts;
+  const total = Math.max(0, subtotal - totalDiscount + deliveryCost);
 
-  const shipping = 0;
-  const total = Math.max(0, totalPrice - discount + shipping);
+  // Calculate tax
+  const tax = Number(((subtotal - totalDiscount) * TAX_RATE).toFixed(2));
+  const finalTotal = Math.max(0, subtotal - totalDiscount + deliveryCost + tax);
 
   // Handle coupon apply
   const handleApplyCoupon = () => {
@@ -50,6 +124,14 @@ const Cart = () => {
     }
   };
 
+  // Load recently viewed from localStorage
+  useEffect(() => {
+    const saved = localStorage.getItem("recentlyViewed");
+    if (saved) {
+      setRecentlyViewed(JSON.parse(saved));
+    }
+  }, []);
+
   // Handle coupon removal
   const handleRemoveCoupon = () => {
     setCoupon("");
@@ -57,21 +139,13 @@ const Cart = () => {
     setCouponMessage("");
   };
 
-  // Save for later
+  // Save for later - adds to wishlist
   const handleSaveForLater = (id, weight) => {
     const item = visibleItems.find((i) => i.id === id && i.selectedVariant?.weight === weight);
     if (item) {
-      setSavedItems([...savedItems, item]);
+      addToWishlist(item);
       removeFromCart(id, weight);
     }
-  };
-
-  // Move from saved to cart
-  const handleMoveToCart = (item) => {
-    const { id, selectedVariant } = item;
-    setSavedItems(
-      savedItems.filter((si) => !(si.id === id && si.selectedVariant?.weight === selectedVariant?.weight))
-    );
   };
 
   return (
@@ -92,21 +166,42 @@ const Cart = () => {
               {/* Main Cart Items - LEFT (3 columns) */}
               <div className="lg:col-span-3 space-y-4">
                 {/* Items header */}
-                <div className="bg-gray-50 px-4 py-3 border border-gray-200 rounded">
+                <div className="bg-gray-50 px-4 py-3 border border-gray-200 rounded flex items-center justify-between">
                   <p className="text-sm text-gray-700">
                     <span className="font-semibold">{visibleItems.length} item{visibleItems.length !== 1 ? "s" : ""}</span> in your cart
                   </p>
+                  <button
+                    onClick={() => {
+                      if (window.confirm("Are you sure you want to clear your entire cart?")) {
+                        visibleItems.forEach(item => {
+                          handleDeleteWithUndo(item, item.selectedVariant?.weight);
+                        });
+                      }
+                    }}
+                    className="text-xs text-red-600 hover:text-red-800 font-semibold hover:underline"
+                  >
+                    Clear Cart
+                  </button>
                 </div>
 
                 {/* Cart Items */}
                 {visibleItems.map((item, idx) => {
-                  const itemTotal = (item.selectedVariant?.price ?? 0) * item.quantity;
+                  const bulkDiscount = getBulkDiscount(item);
+                  const itemPrice = item.selectedVariant?.price ?? 0;
+                  const itemSubtotal = itemPrice * item.quantity;
+                  const itemBulkDiscount = itemSubtotal * bulkDiscount;
+                  const itemTotal = itemSubtotal - itemBulkDiscount;
+                  
                   return (
                     <div key={idx} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
                       <div className="flex gap-4">
                         {/* Product Image */}
-                        <div className="w-32 h-32 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <div className="w-32 h-32 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 relative">
                           <img src={item.image} alt={item.name} className="w-full h-full object-contain p-2" />
+                          {/* Stock indicator badge */}
+                          <div className={`absolute top-2 right-2 ${getStockStatus(item).color} bg-white px-2 py-1 rounded-full text-xs font-semibold border`}>
+                            {getStockStatus(item).status}
+                          </div>
                         </div>
 
                         {/* Product Details */}
@@ -132,10 +227,21 @@ const Cart = () => {
                               </p>
                             )}
 
-                            {/* Price */}
+                            {/* Price with bulk discount */}
                             <div className="mb-4">
-                              <span className="text-2xl font-bold text-red-600">${(item.selectedVariant?.price ?? 0).toFixed(0)}</span>
-                              <span className="text-sm text-gray-500 ml-2">each</span>
+                              <div className="flex items-center gap-2">
+                                <span className="text-2xl font-bold text-red-600">${itemPrice.toFixed(0)}</span>
+                                {bulkDiscount > 0 && (
+                                  <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded">
+                                    {Math.round(bulkDiscount * 100)}% OFF
+                                  </span>
+                                )}
+                              </div>
+                              {item.quantity >= 3 && (
+                                <p className="text-xs text-green-600 mt-1">
+                                  💰 Buy {item.quantity}+ items & Save up to ${itemBulkDiscount.toFixed(0)}!
+                                </p>
+                              )}
                             </div>
 
                             {/* Quantity Selector */}
@@ -161,9 +267,9 @@ const Cart = () => {
                           </div>
 
                           {/* Action Buttons */}
-                          <div className="flex gap-6 pt-2 border-t border-gray-200">
+                          <div className="flex gap-6 pt-2 border-t border-gray-200 flex-wrap">
                             <button
-                              onClick={() => removeFromCart(item.id, item.selectedVariant?.weight)}
+                              onClick={() => handleDeleteWithUndo(item, item.selectedVariant?.weight)}
                               className="flex items-center gap-2 text-blue-600 hover:text-blue-800 hover:underline font-semibold text-sm"
                             >
                               <Trash2 size={16} />
@@ -180,136 +286,235 @@ const Cart = () => {
                         </div>
 
                         {/* Item Total */}
-                        <div className="text-right font-bold text-xl text-gray-900">${itemTotal.toFixed(0)}</div>
+                        <div className="text-right font-bold">
+                          <div className="text-xl text-gray-900">${itemTotal.toFixed(0)}</div>
+                          {itemBulkDiscount > 0 && (
+                            <p className="text-xs text-red-600 mt-1">-${itemBulkDiscount.toFixed(0)} bulk</p>
+                          )}
+                        </div>
                       </div>
                     </div>
                   );
                 })}
 
-                {/* Saved for later section */}
-                {savedItems.length > 0 && (
-                  <div className="mt-8 border-t-2 pt-6">
-                    <h2 className="text-lg font-bold mb-4">Saved for later ({savedItems.length})</h2>
-                    <div className="space-y-4">
-                      {savedItems.map((item, idx) => (
-                        <div key={idx} className="border border-gray-200 rounded-lg p-4 flex gap-4 items-center">
-                          <div className="w-24 h-24 bg-gray-100 rounded flex items-center justify-center flex-shrink-0">
-                            <img src={item.image} alt={item.name} className="w-full h-full object-contain p-1" />
-                          </div>
-                          <div className="flex-1">
-                            <h3 className="font-semibold text-gray-900 mb-1">{item.name}</h3>
-                            <p className="text-lg font-bold text-red-600">${(item.selectedVariant?.price ?? 0).toFixed(0)}</p>
-                          </div>
-                          <button
-                            onClick={() => handleMoveToCart(item)}
-                            className="px-6 py-2 bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold rounded"
-                          >
-                            Move to cart
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
+
               </div>
 
               {/* Price Summary - RIGHT (1 column) */}
-              <div className="lg:col-span-1">
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 sticky top-6">
-                  {/* Subtotal */}
-                  <div className="mb-4 pb-4 border-b border-gray-300">
-                    <div className="flex justify-between mb-3">
-                      <span className="text-gray-700">Subtotal:</span>
-                      <span className="text-gray-900 font-semibold">${totalPrice.toFixed(0)}</span>
-                    </div>
+              <div className="lg:col-span-1 space-y-4">
+                {/* Bulk Offers Dropdown */}
+                <div className="bg-amber-50 border-2 border-amber-300 rounded-lg overflow-hidden">
+                  <button
+                    onClick={() => setShowBulkOffers(!showBulkOffers)}
+                    className="w-full px-4 py-3 flex items-center justify-between hover:bg-amber-100 transition-colors"
+                  >
+                    <h3 className="font-bold text-gray-900 flex items-center gap-2">
+                      <span className="text-lg">🎁</span>
+                      Special Bulk Offers
+                    </h3>
+                    <ChevronRight
+                      size={20}
+                      className={`text-amber-700 transition-transform ${
+                        showBulkOffers ? "rotate-90" : ""
+                      }`}
+                    />
+                  </button>
 
-                    {/* Shipping */}
-                    <div className="flex justify-between mb-3">
-                      <span className="text-gray-700">Shipping:</span>
-                      <span className="text-green-600 font-semibold">FREE</span>
+                  {showBulkOffers && (
+                    <div className="px-4 pb-4 pt-2 border-t-2 border-amber-300 space-y-2">
+                      <div className="flex items-center gap-2 p-2 bg-white rounded border border-amber-200">
+                        <span className="text-sm font-bold text-amber-700">Buy 3+</span>
+                        <span className="text-xs text-gray-600 flex-1">Save 5% on each item</span>
+                      </div>
+                      <div className="flex items-center gap-2 p-2 bg-white rounded border border-amber-200">
+                        <span className="text-sm font-bold text-amber-700">Buy 5+</span>
+                        <span className="text-xs text-gray-600 flex-1">Save 10% on each item</span>
+                      </div>
+                      <div className="flex items-center gap-2 p-2 bg-white rounded border border-amber-200">
+                        <span className="text-sm font-bold text-amber-700">Buy 10+</span>
+                        <span className="text-xs text-gray-600 flex-1">Save 15% on each item</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Undo Delete Notifications */}
+                {deletedItems.length > 0 && (
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
+                    <p className="text-sm font-semibold text-gray-900">Recently Deleted Items</p>
+                    {deletedItems.slice(-3).map((deletedItem, idx) => (
+                      <div key={idx} className="flex items-center justify-between bg-white p-2 rounded border border-blue-100">
+                        <span className="text-sm text-gray-700">{deletedItem.name}</span>
+                        <button
+                          onClick={() => handleRestoreItem(deletedItem)}
+                          className="text-xs text-blue-600 hover:text-blue-800 font-semibold"
+                        >
+                          Undo
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Delivery Options */}
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                  <h3 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
+                    <Truck size={18} />
+                    Delivery Speed
+                  </h3>
+                  <div className="mb-3 p-2 bg-white rounded border border-gray-200">
+                    <p className="text-xs text-gray-600">📅 Estimated Delivery: <span className="font-semibold text-gray-900">{getEstimatedDeliveryDate()}</span></p>
+                  </div>
+                  <div className="space-y-2">
+                    {[
+                      { id: "standard", label: "Standard", time: "5-7 days", cost: 0, displayLabel: "Standard Delivery (3-5 Days)", dateRange: "Tue, 28 May – Thu, 30 May" },
+                      { id: "express", label: "Express", time: "2-3 days", cost: 9.99, displayLabel: "Express Delivery (1-2 Days)", dateRange: "Sat, 25 May – Mon, 27 May" }
+                    ].map((option) => (
+                      <label key={option.id} className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded cursor-pointer">
+                        <input
+                          type="radio"
+                          name="delivery"
+                          value={option.id}
+                          checked={selectedDelivery === option.id}
+                          onChange={(e) => setSelectedDelivery(e.target.value)}
+                          className="w-4 h-4"
+                        />
+                        <div className="flex-1">
+                          <p className="text-sm font-semibold text-gray-900">{option.label}</p>
+                          <p className="text-xs text-gray-600">{option.time}</p>
+                        </div>
+                        <span className="text-sm font-bold text-gray-900">
+                          {option.cost === 0 ? "FREE" : `$${option.cost.toFixed(0)}`}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Price Summary Sticky */}
+                <div className="bg-white border border-gray-300 rounded-lg p-5 sticky top-6 shadow-sm">
+                  
+                  {/* Main Price Breakdown */}
+                  <div className="space-y-3 mb-4">
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-700 text-sm">Subtotal:</span>
+                      <span className="text-gray-900 font-semibold">${subtotal.toFixed(2)}</span>
                     </div>
 
                     {/* Coupon discount */}
-                    {couponValid && appliedCoupon && (
-                      <div className="flex justify-between">
-                        <span className="text-gray-700">Discount:</span>
-                        <span className="text-green-600 font-semibold">-${appliedCoupon.discount}</span>
+                    {couponValid && (
+                      <div className="flex justify-between items-center text-green-600">
+                        <span className="text-sm">Coupon Discount:</span>
+                        <span className="font-semibold">-${couponDiscount.toFixed(2)}</span>
                       </div>
                     )}
+
+                    {/* Bulk discounts */}
+                    {bulkDiscounts > 0 && (
+                      <div className="flex justify-between items-center text-green-600">
+                        <span className="text-sm">Bulk Savings:</span>
+                        <span className="font-semibold">-${bulkDiscounts.toFixed(2)}</span>
+                      </div>
+                    )}
+
+                    {/* Shipping */}
+                    <div className="flex justify-between items-center">
+                      <span className="text-gray-700 text-sm">Delivery:</span>
+                      <span className={deliveryCost === 0 ? "text-green-600 font-semibold" : "text-gray-900 font-semibold"}>
+                        {deliveryCost === 0 ? "FREE" : `$${deliveryCost.toFixed(2)}`}
+                      </span>
+                    </div>
+
+                    {/* Tax */}
+                    <div className="flex justify-between items-center border-t border-gray-200 pt-3">
+                      <span className="text-gray-700 text-sm">Tax (10%):</span>
+                      <span className="text-gray-900 font-semibold">${tax.toFixed(2)}</span>
+                    </div>
                   </div>
 
-                  {/* Total */}
-                  <div className="mb-6">
+                  {/* Cost Breakdown Toggle */}
+                  <button
+                    onClick={() => setShowTaxBreakdown(!showTaxBreakdown)}
+                    className="w-full text-left text-xs text-blue-600 hover:text-blue-800 py-2 font-semibold border-b border-gray-200"
+                  >
+                    {showTaxBreakdown ? "Hide" : "Show"} price breakdown
+                  </button>
+
+                  {showTaxBreakdown && (
+                    <div className="bg-gray-50 rounded p-3 my-4 text-xs space-y-2 border border-gray-200">
+                      <div className="flex justify-between text-gray-700">
+                        <span>Subtotal:</span>
+                        <span className="font-semibold">${subtotal.toFixed(2)}</span>
+                      </div>
+                      {(couponDiscount > 0 || bulkDiscounts > 0) && (
+                        <div className="flex justify-between text-green-600">
+                          <span>Discounts:</span>
+                          <span className="font-semibold">-${totalDiscount.toFixed(2)}</span>
+                        </div>
+                      )}
+                      <div className="flex justify-between text-gray-700">
+                        <span>Delivery:</span>
+                        <span className={deliveryCost === 0 ? "text-green-600 font-semibold" : "font-semibold"}>{deliveryCost === 0 ? "FREE" : `$${deliveryCost.toFixed(2)}`}</span>
+                      </div>
+                      <div className="flex justify-between text-gray-700 border-t border-gray-300 pt-2">
+                        <span>Tax (10%):</span>
+                        <span className="font-semibold">${tax.toFixed(2)}</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Order Total */}
+                  <div className="bg-green-100 rounded p-3 mb-4 border border-green-300">
                     <div className="flex justify-between items-center">
-                      <span className="text-lg font-bold text-gray-900">Order Total:</span>
-                      <span className="text-2xl font-bold text-gray-900">${total.toFixed(0)}</span>
+                      <span className="text-gray-700 font-semibold text-sm">Order Total:</span>
+                      <span className="text-2xl font-bold text-green-700">${finalTotal.toFixed(2)}</span>
                     </div>
                   </div>
 
                   {/* Proceed to Checkout */}
                   <button
                     onClick={() => navigate("/checkout")}
-                    className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-4 rounded-lg mb-3 transition-colors"
+                    className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-4 rounded-lg mb-2 transition-colors"
                   >
                     Proceed to Checkout
                   </button>
 
                   <button
                     onClick={() => navigate("/shop")}
-                    className="w-full border border-gray-400 hover:border-gray-600 text-gray-900 font-semibold py-2 px-4 rounded-lg transition-colors"
+                    className="w-full border border-gray-300 hover:border-gray-500 text-gray-900 font-semibold py-2 px-4 rounded-lg transition-colors"
                   >
                     Continue Shopping
                   </button>
-
-                  {/* Coupon section */}
-                  <div className="mt-6 pt-6 border-t border-gray-300">
-                    <p className="text-sm text-gray-600 mb-3 font-semibold">Apply Coupon Code</p>
-                    <div className="flex gap-2 mb-2">
-                      <input
-                        type="text"
-                        value={coupon}
-                        onChange={(e) => {
-                          setCoupon(e.target.value);
-                          setCouponMessage("");
-                        }}
-                        onKeyPress={(e) => e.key === "Enter" && handleApplyCoupon()}
-                        placeholder="Enter code"
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded text-sm focus:border-blue-500 focus:outline-none"
-                      />
-                      <button
-                        onClick={handleApplyCoupon}
-                        disabled={couponValid}
-                        className="px-4 py-2 bg-gray-300 hover:bg-gray-400 disabled:bg-gray-200 text-gray-900 font-semibold rounded text-sm transition-colors"
-                      >
-                        {couponValid ? "Applied" : "Apply"}
-                      </button>
-                    </div>
-                    {couponMessage && (
-                      <p className={`text-xs mt-2 ${couponValid ? "text-green-600" : "text-red-600"}`}>{couponMessage}</p>
-                    )}
-                    {couponValid && (
-                      <button onClick={handleRemoveCoupon} className="text-xs text-red-600 hover:text-red-800 mt-2">
-                        Remove coupon
-                      </button>
-                    )}
-                  </div>
-
-                  {/* Security badges */}
-                  <div className="mt-6 pt-6 border-t border-gray-300 space-y-3 text-xs text-gray-700">
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">🔒</span>
-                      <span>Secure checkout</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">✓</span>
-                      <span>Genuine products</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-lg">🚚</span>
-                      <span>Fast delivery</span>
-                    </div>
-                  </div>
                 </div>
+
+                {/* Recently Viewed Items */}
+                {recentlyViewed.length > 0 && (
+                  <div className="mt-8 border-t-2 pt-6">
+                    <div className="flex items-center justify-between mb-4">
+                      <h2 className="text-lg font-bold">Recently Viewed</h2>
+                      <button 
+                        onClick={() => setShowRecentlyViewed(!showRecentlyViewed)}
+                        className="text-blue-600 text-sm"
+                      >
+                        {showRecentlyViewed ? "Hide" : "Show"}
+                      </button>
+                    </div>
+                    {showRecentlyViewed && (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                        {recentlyViewed.slice(0, 6).map((item, idx) => (
+                          <div key={idx} className="border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow cursor-pointer"
+                               onClick={() => navigate(`/product/${item.id}`)}>
+                            <div className="w-full aspect-square bg-gray-100 rounded mb-2 flex items-center justify-center">
+                              <img src={item.image} alt={item.name} className="w-full h-full object-contain p-2" />
+                            </div>
+                            <h4 className="text-xs font-semibold text-gray-900 line-clamp-2 mb-1">{item.name}</h4>
+                            <p className="text-sm font-bold text-red-600">${item.price}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           ) : (
