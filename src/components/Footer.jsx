@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import ezstoreLogo from "../assets/logo/ezstore-logo-optimized.png";
+import { brands } from "../data/brands";
 
 const socialLinks = [
   { href: "https://facebook.com", icon: "https://img.icons8.com/ios-filled/50/1877F2/facebook-new.png", label: "Facebook" },
@@ -8,37 +9,35 @@ const socialLinks = [
   { href: "https://youtube.com", icon: "https://img.icons8.com/ios-filled/50/FF0000/youtube-play.png", label: "YouTube" },
 ];
 
-const footerLinks = {
-  Pets: [
-    { label: "Dogs", to: "/category/dog-food" },
-    { label: "Cats", to: "/category/cat-food" },
-    { label: "Birds", to: "/category/bird-food" },
-    { label: "Fish", to: "/category/fish-food" },
-    { label: "Rabbits", to: "/category/rabbit-food" },
-    { label: "Hamsters", to: "/category/hamster-food" },
-  ],
-  "About EZStore": [
-    { label: "Our Story", to: "#" },
-    { label: "Careers", to: "#" },
-    { label: "News & Updates", to: "#" },
-    { label: "Store Locations", to: "#" },
-    { label: "EZStore Promise", to: "#" },
-  ],
-  "Popular Brands": [
-    { label: "Pedigree", to: "#" },
-    { label: "Royal Canin", to: "#" },
-    { label: "Whiskas", to: "#" },
-    { label: "Drools", to: "#" },
-    { label: "Farmina", to: "#" },
-    { label: "Orijen", to: "#" },
-  ],
-  "Help & Support": [
-    { label: "Help Center", to: "#" },
-    { label: "Returns & Refunds", to: "#" },
-    { label: "Track Your Order", to: "#" },
-    { label: "Contact Support", to: "#" },
-    { label: "Feedback", to: "#" },
-  ],
+const getFooterLinks = () => {
+  return {
+    Pets: [
+      { label: "Dogs", to: "/category/dog-food" },
+      { label: "Cats", to: "/category/cat-food" },
+      { label: "Birds", to: "/category/bird-food" },
+      { label: "Fish", to: "/category/fish-food" },
+      { label: "Rabbits", to: "/category/rabbit-food" },
+      { label: "Hamsters", to: "/category/hamster-food" },
+    ],
+    "About EZStore": [
+      { label: "Our Story", to: "#" },
+      { label: "Careers", to: "#" },
+      { label: "News & Updates", to: "#" },
+      { label: "Store Locations", to: "#" },
+      { label: "EZStore Promise", to: "#" },
+    ],
+    "Popular Brands": brands.slice(0, 6).map(brand => ({
+      label: brand.name,
+      to: `/brands/${brand.slug}`
+    })),
+    "Help & Support": [
+      { label: "Help Center", to: "#" },
+      { label: "Returns & Refunds", to: "#" },
+      { label: "Track Your Order", to: "#" },
+      { label: "Contact Support", to: "#" },
+      { label: "Feedback", to: "#" },
+    ],
+  };
 };
 
 const trustBadges = [
@@ -50,6 +49,7 @@ const trustBadges = [
 
 const Footer = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+  const footerLinks = getFooterLinks();
 
   return (
     <footer style={{ background: "var(--footer-bg)", color: "var(--footer-text)" }}>
@@ -157,6 +157,7 @@ const Footer = () => {
                   <li key={link.label}>
                     <Link
                       to={link.to}
+                      onClick={scrollToTop}
                       className="text-sm transition-all hover:translate-x-1 inline-block"
                       style={{ color: "var(--footer-text)", opacity: 0.75 }}
                       onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.color = "var(--footer-link)"; }}
