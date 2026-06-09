@@ -102,7 +102,7 @@ const ProductFilterSidebar = ({ filters, selectedFilters, onFilterChange, isMobi
           className="w-16 border rounded px-1"
         />
       </div>
-      <div className="text-xs text-gray-500 mt-1">Min: ₹{filters.price.min} Max: ₹{filters.price.max}</div>
+      <div className="text-xs text-gray-500 mt-1">Min: ${filters.price.min} Max: ${filters.price.max}</div>
     </CollapsibleSection>
     {/* Add more filter sections as needed */}
     </aside>

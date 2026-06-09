@@ -643,21 +643,25 @@ const Checkout = () => {
 
               {/* Items */}
               <div className='space-y-3 border-b border-gray-200 pb-4 max-h-96 overflow-y-auto'>
-                {cartItems.filter(i => i && i.selectedVariant).map((item, idx) => (
-                  <div key={idx} className='flex items-center gap-3'>
-                    <img src={item.image} alt={item.name} className='w-16 h-16 object-contain rounded' />
-                    <div className='flex-1'>
-                      <div className='font-semibold text-sm'>{item.name}</div>
-                      <div className='text-xs text-gray-500 mb-1'>Qty: {cartQuantities[idx]}</div>
-                      <div className='flex gap-1'>
-                        <button onClick={() => handleQuantityChange(idx, cartQuantities[idx] - 1)} className='px-2 py-1 bg-gray-200 text-xs rounded'>−</button>
-                        <button onClick={() => handleQuantityChange(idx, cartQuantities[idx] + 1)} className='px-2 py-1 bg-gray-200 text-xs rounded'>+</button>
-                        <button className='ml-auto text-xs text-red-600 hover:underline'>Remove</button>
+                {cartItems && cartItems.length > 0 ? (
+                  cartItems.map((item, idx) => (
+                    <div key={idx} className='flex items-center gap-3'>
+                      <img src={item.image} alt={item.name} className='w-16 h-16 object-contain rounded' />
+                      <div className='flex-1'>
+                        <div className='font-semibold text-sm'>{item.name}</div>
+                        <div className='text-xs text-gray-500 mb-1'>Qty: {cartQuantities[idx] || item.quantity}</div>
+                        <div className='flex gap-1'>
+                          <button onClick={() => handleQuantityChange(idx, (cartQuantities[idx] || item.quantity) - 1)} className='px-2 py-1 bg-gray-200 text-xs rounded'>−</button>
+                          <button onClick={() => handleQuantityChange(idx, (cartQuantities[idx] || item.quantity) + 1)} className='px-2 py-1 bg-gray-200 text-xs rounded'>+</button>
+                          <button className='ml-auto text-xs text-red-600 hover:underline'>Remove</button>
+                        </div>
                       </div>
+                      <div className='font-bold text-sm'>${((item.selectedVariant?.price ?? item.price ?? 0) * (cartQuantities[idx] || item.quantity)).toFixed(0)}</div>
                     </div>
-                    <div className='font-bold text-sm'>${((item.selectedVariant?.price ?? 0) * cartQuantities[idx]).toFixed(0)}</div>
-                  </div>
-                ))}
+                  ))
+                ) : (
+                  <div className='text-center text-gray-500 py-4'>No items in cart</div>
+                )}
               </div>
 
               {/* Pricing */}

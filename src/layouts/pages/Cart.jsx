@@ -41,7 +41,7 @@ const Cart = () => {
 
     const found = COUPONS.find((c) => c.code.toLowerCase() === coupon.toLowerCase());
     if (found) {
-      setCouponMessage(`✓ Coupon "${found.code}" applied! You saved ₹${found.discount}`);
+      setCouponMessage(`✓ Coupon "${found.code}" applied! You saved $${found.discount}`);
       setCouponValid(true);
       setCoupon(found.code);
     } else {
@@ -134,7 +134,7 @@ const Cart = () => {
 
                             {/* Price */}
                             <div className="mb-4">
-                              <span className="text-2xl font-bold text-red-600">₹{(item.selectedVariant?.price ?? 0).toFixed(0)}</span>
+                              <span className="text-2xl font-bold text-red-600">${(item.selectedVariant?.price ?? 0).toFixed(0)}</span>
                               <span className="text-sm text-gray-500 ml-2">each</span>
                             </div>
 
@@ -180,7 +180,7 @@ const Cart = () => {
                         </div>
 
                         {/* Item Total */}
-                        <div className="text-right font-bold text-xl text-gray-900">₹{itemTotal.toFixed(0)}</div>
+                        <div className="text-right font-bold text-xl text-gray-900">${itemTotal.toFixed(0)}</div>
                       </div>
                     </div>
                   );
@@ -198,7 +198,7 @@ const Cart = () => {
                           </div>
                           <div className="flex-1">
                             <h3 className="font-semibold text-gray-900 mb-1">{item.name}</h3>
-                            <p className="text-lg font-bold text-red-600">₹{(item.selectedVariant?.price ?? 0).toFixed(0)}</p>
+                            <p className="text-lg font-bold text-red-600">${(item.selectedVariant?.price ?? 0).toFixed(0)}</p>
                           </div>
                           <button
                             onClick={() => handleMoveToCart(item)}
@@ -220,7 +220,7 @@ const Cart = () => {
                   <div className="mb-4 pb-4 border-b border-gray-300">
                     <div className="flex justify-between mb-3">
                       <span className="text-gray-700">Subtotal:</span>
-                      <span className="text-gray-900 font-semibold">₹{totalPrice.toFixed(0)}</span>
+                      <span className="text-gray-900 font-semibold">${totalPrice.toFixed(0)}</span>
                     </div>
 
                     {/* Shipping */}
@@ -233,7 +233,7 @@ const Cart = () => {
                     {couponValid && appliedCoupon && (
                       <div className="flex justify-between">
                         <span className="text-gray-700">Discount:</span>
-                        <span className="text-green-600 font-semibold">-₹{appliedCoupon.discount}</span>
+                        <span className="text-green-600 font-semibold">-${appliedCoupon.discount}</span>
                       </div>
                     )}
                   </div>
@@ -242,7 +242,7 @@ const Cart = () => {
                   <div className="mb-6">
                     <div className="flex justify-between items-center">
                       <span className="text-lg font-bold text-gray-900">Order Total:</span>
-                      <span className="text-2xl font-bold text-gray-900">₹{total.toFixed(0)}</span>
+                      <span className="text-2xl font-bold text-gray-900">${total.toFixed(0)}</span>
                     </div>
                   </div>
 
