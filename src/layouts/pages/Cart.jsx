@@ -160,14 +160,14 @@ const Cart = () => {
           </div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 py-6">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4 py-4 sm:py-6">
           {visibleItems.length > 0 ? (
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 sm:gap-6">
               {/* Main Cart Items - LEFT (3 columns) */}
               <div className="lg:col-span-3 space-y-4">
                 {/* Items header */}
-                <div className="bg-gray-50 px-4 py-3 border border-gray-200 rounded flex items-center justify-between">
-                  <p className="text-sm text-gray-700">
+                <div className="bg-gray-50 px-3 sm:px-4 py-2 sm:py-3 border border-gray-200 rounded flex items-center justify-between gap-2">
+                  <p className="text-xs sm:text-sm text-gray-700">
                     <span className="font-semibold">{visibleItems.length} item{visibleItems.length !== 1 ? "s" : ""}</span> in your cart
                   </p>
                   <button
@@ -178,9 +178,9 @@ const Cart = () => {
                         });
                       }
                     }}
-                    className="text-xs text-red-600 hover:text-red-800 font-semibold hover:underline"
+                    className="text-xs text-red-600 hover:text-red-800 font-semibold hover:underline whitespace-nowrap"
                   >
-                    Clear Cart
+                    Clear
                   </button>
                 </div>
 
@@ -193,10 +193,10 @@ const Cart = () => {
                   const itemTotal = itemSubtotal - itemBulkDiscount;
                   
                   return (
-                    <div key={idx} className="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                      <div className="flex gap-4">
+                    <div key={idx} className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow">
+                      <div className="flex gap-2 sm:gap-4 flex-col sm:flex-row">
                         {/* Product Image */}
-                        <div className="w-32 h-32 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 relative">
+                        <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 relative mx-auto sm:mx-0">
                           <img src={item.image} alt={item.name} className="w-full h-full object-contain p-2" />
                           {/* Stock indicator badge */}
                           <div className={`absolute top-2 right-2 ${getStockStatus(item).color} bg-white px-2 py-1 rounded-full text-xs font-semibold border`}>
@@ -207,30 +207,30 @@ const Cart = () => {
                         {/* Product Details */}
                         <div className="flex-1 flex flex-col">
                           <div className="flex-1">
-                            <h3 className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{item.name}</h3>
+                            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{item.name}</h3>
 
                             {/* Rating */}
-                            <div className="flex items-center gap-2 mb-2">
-                              <div className="flex text-yellow-400">
+                            <div className="flex items-center gap-2 mb-2 hidden sm:flex">
+                              <div className="flex text-yellow-400 text-sm">
                                 {[...Array(4)].map((_, i) => (
                                   <span key={i}>★</span>
                                 ))}
                                 <span className="text-gray-400">☆</span>
                               </div>
-                              <span className="text-xs text-gray-600">(412 reviews)</span>
+                              <span className="text-xs text-gray-600">(412)</span>
                             </div>
 
                             {/* Variant info */}
                             {item.selectedVariant?.weight && (
-                              <p className="text-sm text-gray-600 mb-3">
+                              <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3">
                                 Weight: <span className="font-semibold">{item.selectedVariant.weight}</span>
                               </p>
                             )}
 
                             {/* Price with bulk discount */}
-                            <div className="mb-4">
-                              <div className="flex items-center gap-2">
-                                <span className="text-2xl font-bold text-red-600">${itemPrice.toFixed(0)}</span>
+                            <div className="mb-3 sm:mb-4">
+                              <div className="flex items-center gap-2 flex-wrap">
+                                <span className="text-xl sm:text-2xl font-bold text-red-600">${itemPrice.toFixed(0)}</span>
                                 {bulkDiscount > 0 && (
                                   <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded">
                                     {Math.round(bulkDiscount * 100)}% OFF
@@ -239,14 +239,14 @@ const Cart = () => {
                               </div>
                               {item.quantity >= 3 && (
                                 <p className="text-xs text-green-600 mt-1">
-                                  💰 Buy {item.quantity}+ items & Save up to ${itemBulkDiscount.toFixed(0)}!
+                                  💰 Save ${itemBulkDiscount.toFixed(0)}!
                                 </p>
                               )}
                             </div>
 
                             {/* Quantity Selector */}
-                            <div className="flex items-center gap-3 mb-4">
-                              <label className="text-sm text-gray-700 font-semibold">Qty:</label>
+                            <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
+                              <label className="text-xs sm:text-sm text-gray-700 font-semibold">Qty:</label>
                               <div className="flex items-center border border-gray-300 rounded">
                                 <button
                                   onClick={() => decreaseQuantity(item.id, item.selectedVariant?.weight)}
@@ -267,17 +267,17 @@ const Cart = () => {
                           </div>
 
                           {/* Action Buttons */}
-                          <div className="flex gap-6 pt-2 border-t border-gray-200 flex-wrap">
+                          <div className="flex gap-3 sm:gap-6 pt-2 border-t border-gray-200 flex-wrap text-xs sm:text-sm">
                             <button
                               onClick={() => handleDeleteWithUndo(item, item.selectedVariant?.weight)}
-                              className="flex items-center gap-2 text-blue-600 hover:text-blue-800 hover:underline font-semibold text-sm"
+                              className="flex items-center gap-1 sm:gap-2 text-blue-600 hover:text-blue-800 hover:underline font-semibold"
                             >
                               <Trash2 size={16} />
                               Delete
                             </button>
                             <button
                               onClick={() => handleSaveForLater(item.id, item.selectedVariant?.weight)}
-                              className="flex items-center gap-2 text-blue-600 hover:text-blue-800 hover:underline font-semibold text-sm"
+                              className="flex items-center gap-1 sm:gap-2 text-blue-600 hover:text-blue-800 hover:underline font-semibold"
                             >
                               <Heart size={16} />
                               Save for later
@@ -287,7 +287,7 @@ const Cart = () => {
 
                         {/* Item Total */}
                         <div className="text-right font-bold">
-                          <div className="text-xl text-gray-900">${itemTotal.toFixed(0)}</div>
+                          <div className="text-lg sm:text-xl text-gray-900">${itemTotal.toFixed(0)}</div>
                           {itemBulkDiscount > 0 && (
                             <p className="text-xs text-red-600 mt-1">-${itemBulkDiscount.toFixed(0)} bulk</p>
                           )}
@@ -306,11 +306,12 @@ const Cart = () => {
                 <div className="bg-amber-50 border-2 border-amber-300 rounded-lg overflow-hidden">
                   <button
                     onClick={() => setShowBulkOffers(!showBulkOffers)}
-                    className="w-full px-4 py-3 flex items-center justify-between hover:bg-amber-100 transition-colors"
+                    className="w-full px-3 sm:px-4 py-2 sm:py-3 flex items-center justify-between hover:bg-amber-100 transition-colors gap-2"
                   >
-                    <h3 className="font-bold text-gray-900 flex items-center gap-2">
-                      <span className="text-lg">🎁</span>
-                      Special Bulk Offers
+                    <h3 className="font-bold text-gray-900 flex items-center gap-2 text-sm sm:text-base">
+                      <span className="text-base sm:text-lg">🎁</span>
+                      <span className="hidden sm:inline">Special Bulk Offers</span>
+                      <span className="sm:hidden">Bulk Offers</span>
                     </h3>
                     <ChevronRight
                       size={20}
@@ -321,18 +322,18 @@ const Cart = () => {
                   </button>
 
                   {showBulkOffers && (
-                    <div className="px-4 pb-4 pt-2 border-t-2 border-amber-300 space-y-2">
-                      <div className="flex items-center gap-2 p-2 bg-white rounded border border-amber-200">
-                        <span className="text-sm font-bold text-amber-700">Buy 3+</span>
-                        <span className="text-xs text-gray-600 flex-1">Save 5% on each item</span>
+                    <div className="px-3 sm:px-4 pb-3 sm:pb-4 pt-2 border-t-2 border-amber-300 space-y-2">
+                      <div className="flex items-center gap-2 p-2 bg-white rounded border border-amber-200 text-xs sm:text-sm">
+                        <span className="font-bold text-amber-700 whitespace-nowrap">Buy 3+</span>
+                        <span className="text-gray-600 flex-1">Save 5%</span>
                       </div>
-                      <div className="flex items-center gap-2 p-2 bg-white rounded border border-amber-200">
-                        <span className="text-sm font-bold text-amber-700">Buy 5+</span>
-                        <span className="text-xs text-gray-600 flex-1">Save 10% on each item</span>
+                      <div className="flex items-center gap-2 p-2 bg-white rounded border border-amber-200 text-xs sm:text-sm">
+                        <span className="font-bold text-amber-700 whitespace-nowrap">Buy 5+</span>
+                        <span className="text-gray-600 flex-1">Save 10%</span>
                       </div>
-                      <div className="flex items-center gap-2 p-2 bg-white rounded border border-amber-200">
-                        <span className="text-sm font-bold text-amber-700">Buy 10+</span>
-                        <span className="text-xs text-gray-600 flex-1">Save 15% on each item</span>
+                      <div className="flex items-center gap-2 p-2 bg-white rounded border border-amber-200 text-xs sm:text-sm">
+                        <span className="font-bold text-amber-700 whitespace-nowrap">Buy 10+</span>
+                        <span className="text-gray-600 flex-1">Save 15%</span>
                       </div>
                     </div>
                   )}
@@ -340,14 +341,14 @@ const Cart = () => {
 
                 {/* Undo Delete Notifications */}
                 {deletedItems.length > 0 && (
-                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 space-y-2">
-                    <p className="text-sm font-semibold text-gray-900">Recently Deleted Items</p>
+                  <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4 space-y-2">
+                    <p className="text-xs sm:text-sm font-semibold text-gray-900">Recently Deleted</p>
                     {deletedItems.slice(-3).map((deletedItem, idx) => (
-                      <div key={idx} className="flex items-center justify-between bg-white p-2 rounded border border-blue-100">
-                        <span className="text-sm text-gray-700">{deletedItem.name}</span>
+                      <div key={idx} className="flex items-center justify-between bg-white p-2 rounded border border-blue-100 text-xs sm:text-sm gap-2">
+                        <span className="text-gray-700 line-clamp-1">{deletedItem.name}</span>
                         <button
                           onClick={() => handleRestoreItem(deletedItem)}
-                          className="text-xs text-blue-600 hover:text-blue-800 font-semibold"
+                          className="text-blue-600 hover:text-blue-800 font-semibold whitespace-nowrap"
                         >
                           Undo
                         </button>
@@ -357,33 +358,33 @@ const Cart = () => {
                 )}
 
                 {/* Delivery Options */}
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                  <h3 className="font-bold text-gray-900 mb-3 flex items-center gap-2">
-                    <Truck size={18} />
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 sm:p-4">
+                  <h3 className="font-bold text-gray-900 mb-3 flex items-center gap-2 text-sm sm:text-base">
+                    <Truck size={16} className="sm:w-5 sm:h-5" />
                     Delivery Speed
                   </h3>
                   <div className="mb-3 p-2 bg-white rounded border border-gray-200">
-                    <p className="text-xs text-gray-600">📅 Estimated Delivery: <span className="font-semibold text-gray-900">{getEstimatedDeliveryDate()}</span></p>
+                    <p className="text-xs text-gray-600">📅 <span className="hidden sm:inline">Estimated Delivery:</span><span className="sm:hidden">Est. Delivery:</span> <span className="font-semibold text-gray-900">{getEstimatedDeliveryDate()}</span></p>
                   </div>
                   <div className="space-y-2">
                     {[
                       { id: "standard", label: "Standard", time: "5-7 days", cost: 0, displayLabel: "Standard Delivery (3-5 Days)", dateRange: "Tue, 28 May – Thu, 30 May" },
                       { id: "express", label: "Express", time: "2-3 days", cost: 9.99, displayLabel: "Express Delivery (1-2 Days)", dateRange: "Sat, 25 May – Mon, 27 May" }
                     ].map((option) => (
-                      <label key={option.id} className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded cursor-pointer">
+                      <label key={option.id} className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded cursor-pointer text-xs sm:text-sm">
                         <input
                           type="radio"
                           name="delivery"
                           value={option.id}
                           checked={selectedDelivery === option.id}
                           onChange={(e) => setSelectedDelivery(e.target.value)}
-                          className="w-4 h-4"
+                          className="w-3 h-3 sm:w-4 sm:h-4"
                         />
                         <div className="flex-1">
-                          <p className="text-sm font-semibold text-gray-900">{option.label}</p>
+                          <p className="font-semibold text-gray-900">{option.label}</p>
                           <p className="text-xs text-gray-600">{option.time}</p>
                         </div>
-                        <span className="text-sm font-bold text-gray-900">
+                        <span className="font-bold text-gray-900 whitespace-nowrap">
                           {option.cost === 0 ? "FREE" : `$${option.cost.toFixed(0)}`}
                         </span>
                       </label>
@@ -392,19 +393,19 @@ const Cart = () => {
                 </div>
 
                 {/* Price Summary Sticky */}
-                <div className="bg-white border border-gray-300 rounded-lg p-5 sticky top-6 shadow-sm">
+                <div className="bg-white border border-gray-300 rounded-lg p-3 sm:p-5 sm:sticky sm:top-6 shadow-sm">
                   
                   {/* Main Price Breakdown */}
-                  <div className="space-y-3 mb-4">
+                  <div className="space-y-2 sm:space-y-3 mb-3 sm:mb-4 text-xs sm:text-sm">
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-700 text-sm">Subtotal:</span>
+                      <span className="text-gray-700">Subtotal:</span>
                       <span className="text-gray-900 font-semibold">${subtotal.toFixed(2)}</span>
                     </div>
 
                     {/* Coupon discount */}
                     {couponValid && (
                       <div className="flex justify-between items-center text-green-600">
-                        <span className="text-sm">Coupon Discount:</span>
+                        <span>Coupon:</span>
                         <span className="font-semibold">-${couponDiscount.toFixed(2)}</span>
                       </div>
                     )}
@@ -412,22 +413,22 @@ const Cart = () => {
                     {/* Bulk discounts */}
                     {bulkDiscounts > 0 && (
                       <div className="flex justify-between items-center text-green-600">
-                        <span className="text-sm">Bulk Savings:</span>
+                        <span>Bulk Savings:</span>
                         <span className="font-semibold">-${bulkDiscounts.toFixed(2)}</span>
                       </div>
                     )}
 
                     {/* Shipping */}
                     <div className="flex justify-between items-center">
-                      <span className="text-gray-700 text-sm">Delivery:</span>
+                      <span className="text-gray-700">Delivery:</span>
                       <span className={deliveryCost === 0 ? "text-green-600 font-semibold" : "text-gray-900 font-semibold"}>
                         {deliveryCost === 0 ? "FREE" : `$${deliveryCost.toFixed(2)}`}
                       </span>
                     </div>
 
                     {/* Tax */}
-                    <div className="flex justify-between items-center border-t border-gray-200 pt-3">
-                      <span className="text-gray-700 text-sm">Tax (10%):</span>
+                    <div className="flex justify-between items-center border-t border-gray-200 pt-2 sm:pt-3">
+                      <span className="text-gray-700">Tax (10%):</span>
                       <span className="text-gray-900 font-semibold">${tax.toFixed(2)}</span>
                     </div>
                   </div>
@@ -437,11 +438,11 @@ const Cart = () => {
                     onClick={() => setShowTaxBreakdown(!showTaxBreakdown)}
                     className="w-full text-left text-xs text-blue-600 hover:text-blue-800 py-2 font-semibold border-b border-gray-200"
                   >
-                    {showTaxBreakdown ? "Hide" : "Show"} price breakdown
+                    {showTaxBreakdown ? "Hide" : "Show"} breakdown
                   </button>
 
                   {showTaxBreakdown && (
-                    <div className="bg-gray-50 rounded p-3 my-4 text-xs space-y-2 border border-gray-200">
+                    <div className="bg-gray-50 rounded p-2 sm:p-3 my-2 sm:my-4 text-xs space-y-1 sm:space-y-2 border border-gray-200">
                       <div className="flex justify-between text-gray-700">
                         <span>Subtotal:</span>
                         <span className="font-semibold">${subtotal.toFixed(2)}</span>
@@ -456,7 +457,7 @@ const Cart = () => {
                         <span>Delivery:</span>
                         <span className={deliveryCost === 0 ? "text-green-600 font-semibold" : "font-semibold"}>{deliveryCost === 0 ? "FREE" : `$${deliveryCost.toFixed(2)}`}</span>
                       </div>
-                      <div className="flex justify-between text-gray-700 border-t border-gray-300 pt-2">
+                      <div className="flex justify-between text-gray-700 border-t border-gray-300 pt-1 sm:pt-2">
                         <span>Tax (10%):</span>
                         <span className="font-semibold">${tax.toFixed(2)}</span>
                       </div>
@@ -464,24 +465,24 @@ const Cart = () => {
                   )}
 
                   {/* Order Total */}
-                  <div className="bg-green-100 rounded p-3 mb-4 border border-green-300">
-                    <div className="flex justify-between items-center">
-                      <span className="text-gray-700 font-semibold text-sm">Order Total:</span>
-                      <span className="text-2xl font-bold text-green-700">${finalTotal.toFixed(2)}</span>
+                  <div className="bg-green-100 rounded p-2 sm:p-3 mb-3 sm:mb-4 border border-green-300">
+                    <div className="flex justify-between items-center gap-2">
+                      <span className="text-gray-700 font-semibold text-xs sm:text-sm">Order Total:</span>
+                      <span className="text-lg sm:text-2xl font-bold text-green-700 whitespace-nowrap">${finalTotal.toFixed(2)}</span>
                     </div>
                   </div>
 
                   {/* Proceed to Checkout */}
                   <button
                     onClick={() => navigate("/checkout")}
-                    className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-4 rounded-lg mb-2 transition-colors"
+                    className="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-2 sm:py-3 px-3 sm:px-4 rounded-lg mb-2 transition-colors text-xs sm:text-base"
                   >
-                    Proceed to Checkout
+                    Checkout
                   </button>
 
                   <button
                     onClick={() => navigate("/shop")}
-                    className="w-full border border-gray-300 hover:border-gray-500 text-gray-900 font-semibold py-2 px-4 rounded-lg transition-colors"
+                    className="w-full border border-gray-300 hover:border-gray-500 text-gray-900 font-semibold py-2 px-3 sm:px-4 rounded-lg transition-colors text-xs sm:text-base"
                   >
                     Continue Shopping
                   </button>
