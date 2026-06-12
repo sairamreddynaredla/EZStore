@@ -1,6 +1,6 @@
 // ...existing code...
 
-const CategoryHero = ({ title, subtitle, highlights, image, breadcrumbs }) => (
+const CategoryHero = ({ title, subtitle, highlights, image, breadcrumbs, imagePosition }) => (
   <section className="w-full rounded-4xl mb-8 overflow-hidden bg-white border border-gray-200">
     <div className="max-w-7xl mx-auto px-6 py-10 md:px-12 md:py-12">
       {breadcrumbs && (
@@ -28,9 +28,10 @@ const CategoryHero = ({ title, subtitle, highlights, image, breadcrumbs }) => (
     </div>
     {image && (
       <div className="w-full overflow-hidden">
-        <div className="relative w-full h-[240px] sm:h-[300px] md:h-[360px] lg:h-[420px] overflow-hidden">
-          <img src={image} alt={title} className="w-full h-full object-cover" />
-        </div>
+        <div
+          className="relative w-full h-[240px] sm:h-[300px] md:h-[360px] lg:h-[420px] bg-center bg-cover bg-no-repeat"
+          style={{ backgroundImage: `url(${image})`, backgroundPosition: imagePosition || "center center" }}
+        />
       </div>
     )}
   </section>

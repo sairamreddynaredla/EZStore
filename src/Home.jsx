@@ -10,6 +10,7 @@ import PetCategories from "../../components/home/PetCategories"
 
 import PetBrands from "../../components/home/PetBrands"
 import BrandBanners from "../../components/home/BrandBanners"
+import RabbitProducts from "../../components/home/RabbitProducts"
 
 import BestSellerSection from "../../components/home/BestSellerSection"
 
@@ -39,6 +40,9 @@ const Home = () => {
 
       {/* FOOD CATEGORIES - Wet / Dry / Puppy & Kitten / Prescription */}
       <FoodCategorySection />
+
+      {/* RABBIT PRODUCTS */}
+      <RabbitProducts />
 
       {/* PET TYPES */}
       <PetCategories />

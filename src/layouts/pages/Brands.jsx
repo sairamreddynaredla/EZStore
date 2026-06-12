@@ -21,6 +21,9 @@ import jerhighLogo from '../../assets/brands/jerhigh.jpeg'
 import himalayaLogo from '../../assets/brands/himalaya.jpeg'
 import banners from '../../assets/brand-banners'
 import spotlightData from '../../data/spotlight'
+import blueBuffaloLogo from '../../assets/brands/BlueBuffelopng.png'
+import temptationsLogo from '../../assets/brands/temptaions..jpeg'
+
 
 const logoMap = {
   'royal-canin': royalCaninLogo,
@@ -38,6 +41,8 @@ const logoMap = {
   smartheart: smartheartLogo,
   jerhigh: jerhighLogo,
   himalaya: himalayaLogo,
+  'blue-buffalo': blueBuffaloLogo,
+  temptations: temptationsLogo,
 }
 
 const BrandsPage = () => {

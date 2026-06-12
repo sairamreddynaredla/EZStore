@@ -114,6 +114,10 @@ const CategoryProducts = ({ petType }) => {
 
   // ── Cat fallback ───────────────────────────────────────────────────────
   const getRelatedCatProducts = (slugValue) => {
+    // If we explicitly want certain cat categories to show zero products,
+    // return an empty list and skip the fallback logic.
+    const disabledCatSlugs = [];
+    if (disabledCatSlugs.includes(slugValue)) return [];
     const catFallbackMap = {
       "meaty-treats":      { category: "cats-treats",   productTypeIncludes: ["Meaty", "Treats"] },
       "crunchy-treats":    { category: "cats-treats",   productTypeIncludes: ["Crunchy", "Treats"] },

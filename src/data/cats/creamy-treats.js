@@ -1,0 +1,419 @@
+// ==========================================
+// src/data/cats/treats/catCreamyTreats.js
+// ==========================================
+
+import inabaChuruImg from "../../assets/products/cats/creamy-treats/inaba-churu-tuna-creamy-cat-treat.jpg";
+import temptationsImg from "../../assets/products/cats/creamy-treats/temptations-creamy-puree-chicken-cat-treat.jpg";
+import shebaImg from "../../assets/products/cats/creamy-treats/sheba-creamy-snacks-tuna-cat-treat.jpg";
+import delectablesImg from "../../assets/products/cats/creamy-treats/delectables-squeeze-up-tuna-cat-treat.jpg";
+import meoImg from "../../assets/products/cats/creamy-treats/meo-creamy-treats-bonito-cat-treat.jpg";
+
+export const catCreamyTreats = [
+  {
+    id: 1201,
+    name: "INABA Churu Tuna Creamy Cat Treat",
+    brand: "INABA",
+    category: "cats-creamy-treats",
+    subCategory: "creamy-treats",
+    pet: "Cat",
+    petType: "Cat",
+    productCategory: "Cat Treats",
+    productType: "Creamy Treats",
+    flavor: "Tuna",
+    lifeStage: "Adult",
+    specialDiet: "Grain Free",
+    vegType: "Non-Veg",
+
+    rating: 4.9,
+    reviews: 218,
+    soldCount: 842,
+    stock: 36,
+
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
+
+    image: inabaChuruImg,
+
+    images: [
+      inabaChuruImg,
+      inabaChuruImg,
+      inabaChuruImg,
+      inabaChuruImg,
+    ],
+
+    description:
+      "Creamy tuna puree treat made with high-quality ingredients and loved by picky cats.",
+
+    ingredients: [
+      "Tuna",
+      "Water",
+      "Natural Flavors",
+      "Vitamin E",
+      "Green Tea Extract",
+    ],
+
+    features: [
+      "Creamy texture",
+      "High moisture",
+      "Grain free",
+      "Suitable as topper",
+    ],
+
+    nutrition: {
+      protein: "8%",
+      fat: "0.2%",
+      fiber: "0.1%",
+      moisture: "88%",
+    },
+
+    manufacturer: "INABA Foods",
+    country: "Japan",
+
+    weight: ["14g x 4", "14g x 20"],
+
+    variants: [
+      {
+        weight: "14g x 4",
+        price: 3.99,
+        originalPrice: 5.99,
+      },
+      {
+        weight: "14g x 20",
+        price: 15.99,
+        originalPrice: 19.99,
+      },
+    ],
+
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.1,
+
+    relatedProducts: [1202, 1203, 1204],
+  },
+
+  {
+    id: 1202,
+    name: "Temptations Creamy Puree Chicken Cat Treat",
+    brand: "Temptations",
+    category: "cats-creamy-treats",
+    subCategory: "creamy-treats",
+    pet: "Cat",
+    petType: "Cat",
+    productCategory: "Cat Treats",
+    productType: "Creamy Treats",
+    flavor: "Chicken",
+    lifeStage: "Adult",
+    specialDiet: "High Protein",
+    vegType: "Non-Veg",
+
+    rating: 4.8,
+    reviews: 186,
+    soldCount: 695,
+    stock: 41,
+
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
+
+    image: temptationsImg,
+
+    images: [
+      temptationsImg,
+      temptationsImg,
+      temptationsImg,
+      temptationsImg,
+    ],
+
+    description:
+      "Smooth chicken puree treat ideal for rewarding and bonding with cats.",
+
+    ingredients: [
+      "Chicken",
+      "Water",
+      "Chicken Liver",
+      "Natural Flavors",
+      "Vitamins",
+    ],
+
+    features: [
+      "Creamy puree",
+      "Easy feeding",
+      "High palatability",
+      "Supports hydration",
+    ],
+
+    nutrition: {
+      protein: "7%",
+      fat: "1%",
+      fiber: "0.5%",
+      moisture: "85%",
+    },
+
+    manufacturer: "Mars Petcare",
+    country: "USA",
+
+    weight: ["48g", "240g"],
+
+    variants: [
+      {
+        weight: "48g",
+        price: 4.49,
+        originalPrice: 5.99,
+      },
+      {
+        weight: "240g",
+        price: 16.99,
+        originalPrice: 21.99,
+      },
+    ],
+
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.1,
+
+    relatedProducts: [1201, 1203, 1205],
+  },
+
+  {
+    id: 1203,
+    name: "Sheba Creamy Snacks Tuna Cat Treat",
+    brand: "Sheba",
+    category: "cats-creamy-treats",
+    subCategory: "creamy-treats",
+    pet: "Cat",
+    petType: "Cat",
+    productCategory: "Cat Treats",
+    productType: "Creamy Treats",
+    flavor: "Tuna",
+    lifeStage: "Adult",
+    specialDiet: "Premium",
+    vegType: "Non-Veg",
+
+    rating: 4.8,
+    reviews: 164,
+    soldCount: 588,
+    stock: 28,
+
+    fastDelivery: true,
+    isNew: true,
+    deliveryDate: "Tomorrow",
+
+    image: shebaImg,
+
+    images: [
+      shebaImg,
+      shebaImg,
+      shebaImg,
+      shebaImg,
+    ],
+
+    description:
+      "Premium creamy tuna snack with rich flavor and smooth consistency.",
+
+    ingredients: [
+      "Tuna",
+      "Fish Broth",
+      "Natural Flavors",
+      "Vitamins",
+    ],
+
+    features: [
+      "Premium recipe",
+      "Rich tuna taste",
+      "Creamy texture",
+      "Ideal reward treat",
+    ],
+
+    nutrition: {
+      protein: "8%",
+      fat: "0.5%",
+      fiber: "0.2%",
+      moisture: "87%",
+    },
+
+    manufacturer: "Sheba",
+    country: "Thailand",
+
+    weight: ["48g", "96g"],
+
+    variants: [
+      {
+        weight: "48g",
+        price: 3.99,
+        originalPrice: 5.49,
+      },
+      {
+        weight: "96g",
+        price: 7.49,
+        originalPrice: 9.99,
+      },
+    ],
+
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.1,
+
+    relatedProducts: [1201, 1202, 1204],
+  },
+
+  {
+    id: 1204,
+    name: "Hartz Delectables Squeeze Up Tuna Cat Treat",
+    brand: "Hartz",
+    category: "cats-creamy-treats",
+    subCategory: "creamy-treats",
+    pet: "Cat",
+    petType: "Cat",
+    productCategory: "Cat Treats",
+    productType: "Creamy Treats",
+    flavor: "Tuna",
+    lifeStage: "Adult",
+    specialDiet: "Hydration Support",
+    vegType: "Non-Veg",
+
+    rating: 4.7,
+    reviews: 141,
+    soldCount: 432,
+    stock: 35,
+
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
+
+    image: delectablesImg,
+
+    images: [
+      delectablesImg,
+      delectablesImg,
+      delectablesImg,
+      delectablesImg,
+    ],
+
+    description:
+      "Lickable tuna puree treat that can be served directly or as a food topper.",
+
+    ingredients: [
+      "Tuna",
+      "Fish Broth",
+      "Natural Flavors",
+      "Vitamins",
+    ],
+
+    features: [
+      "Lickable format",
+      "Food topper option",
+      "Hydrating snack",
+      "Easy serving",
+    ],
+
+    nutrition: {
+      protein: "8%",
+      fat: "0.4%",
+      fiber: "0.1%",
+      moisture: "86%",
+    },
+
+    manufacturer: "Hartz",
+    country: "USA",
+
+    weight: ["56g", "112g"],
+
+    variants: [
+      {
+        weight: "56g",
+        price: 4.99,
+        originalPrice: 6.49,
+      },
+      {
+        weight: "112g",
+        price: 8.99,
+        originalPrice: 11.99,
+      },
+    ],
+
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.1,
+
+    relatedProducts: [1201, 1203, 1205],
+  },
+
+  {
+    id: 1205,
+    name: "Me-O Creamy Treats Bonito Flavor Cat Treat",
+    brand: "Me-O",
+    category: "cats-creamy-treats",
+    subCategory: "creamy-treats",
+    pet: "Cat",
+    petType: "Cat",
+    productCategory: "Cat Treats",
+    productType: "Creamy Treats",
+    flavor: "Bonito",
+    lifeStage: "Adult",
+    specialDiet: "Daily Treat",
+    vegType: "Non-Veg",
+
+    rating: 4.7,
+    reviews: 198,
+    soldCount: 764,
+    stock: 52,
+
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
+
+    image: meoImg,
+
+    images: [
+      meoImg,
+      meoImg,
+      meoImg,
+      meoImg,
+    ],
+
+    description:
+      "Popular bonito flavored creamy cat treat with taurine and essential nutrients.",
+
+    ingredients: [
+      "Bonito",
+      "Chicken",
+      "Taurine",
+      "Vitamins",
+      "Minerals",
+    ],
+
+    features: [
+      "Contains taurine",
+      "Creamy texture",
+      "Highly palatable",
+      "Daily reward snack",
+    ],
+
+    nutrition: {
+      protein: "7%",
+      fat: "1%",
+      fiber: "0.5%",
+      moisture: "85%",
+    },
+
+    manufacturer: "Me-O",
+    country: "Thailand",
+
+    weight: ["60g", "300g"],
+
+    variants: [
+      {
+        weight: "60g",
+        price: 2.99,
+        originalPrice: 4.49,
+      },
+      {
+        weight: "300g",
+        price: 11.99,
+        originalPrice: 15.99,
+      },
+    ],
+
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.1,
+
+    relatedProducts: [1201, 1202, 1204],
+  },
+];

@@ -1,0 +1,397 @@
+import pedigreeDentastixImg from "../../assets/products/dogs/dental-treats/pedigree-dentastix-daily-oral-care.jpg";
+import droolsDentalBoneImg from "../../assets/products/dogs/dental-treats/drools-dental-bone-dog-treat.jpg";
+import smartHeartDentalImg from "../../assets/products/dogs/dental-treats/smartheart-dental-stick-dog-treat.jpg";
+import jerhighDentalImg from "../../assets/products/dogs/dental-treats/jerhigh-dental-stick-chicken.jpg";
+import purepetDentalImg from "../../assets/products/dogs/dental-treats/purepet-dental-chew-stick.jpg";
+
+export const dogsDentalTreats = [
+{
+  id: 501,
+  name: "Pedigree Dentastix Daily Oral Care",
+  brand: "Pedigree",
+  category: "dogs-treats",
+  subCategory: "dental-treats",
+  pet: "Dog",
+  petType: "Dog",
+  productCategory: "Dog Treats",
+  productType: "Dental Treats",
+  breedSize: "All Breeds",
+  shopByBreed: "All",
+  flavor: "Chicken",
+  lifeStage: "Adult",
+  specialDiet: "Dental Care",
+  vegType: "Non-Veg",
+  size: "Medium",
+
+  rating: 4.9,
+  reviews: 642,
+  soldCount: 2150,
+  stock: 96,
+
+  fastDelivery: true,
+  isNew: false,
+  deliveryDate: "Tomorrow",
+
+  image: pedigreeDentastixImg,
+
+  images: [
+    pedigreeDentastixImg,
+    pedigreeDentastixImg,
+    pedigreeDentastixImg,
+    pedigreeDentastixImg,
+  ],
+
+  description:
+    "Scientifically designed X-shaped dental chew that helps reduce tartar buildup and supports healthy gums.",
+
+  ingredients: [
+    "Cereals",
+    "Chicken Meal",
+    "Minerals",
+    "Vegetable Oil",
+    "Natural Flavor",
+    "Vitamins",
+  ],
+
+  features: [
+    "Reduces tartar buildup",
+    "Supports gum health",
+    "Daily dental care",
+    "Highly palatable",
+  ],
+
+  nutrition: {
+    protein: "10%",
+    fat: "2%",
+    fiber: "1%",
+    moisture: "15%",
+  },
+
+  manufacturer: "Mars Petcare",
+  country: "India",
+
+  weight: ["180g", "270g"],
+
+  variants: [
+    { weight: "180g", price: 5.99, originalPrice: 6.99 },
+    { weight: "270g", price: 8.99, originalPrice: 10.49 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.05,
+
+  relatedProducts: [502, 503, 504],
+},
+
+{
+  id: 502,
+  name: "Drools Dental Bone Dog Treat",
+  brand: "Drools",
+  category: "dogs-treats",
+  subCategory: "dental-treats",
+  pet: "Dog",
+  petType: "Dog",
+  productCategory: "Dog Treats",
+  productType: "Dental Treats",
+  breedSize: "All Breeds",
+  shopByBreed: "All",
+  flavor: "Milk",
+  lifeStage: "Adult",
+  specialDiet: "Dental Care",
+  vegType: "Veg",
+  size: "Medium",
+
+  rating: 4.7,
+  reviews: 318,
+  soldCount: 1080,
+  stock: 74,
+
+  fastDelivery: true,
+  isNew: false,
+  deliveryDate: "Tomorrow",
+
+  image: droolsDentalBoneImg,
+
+  images: [
+    droolsDentalBoneImg,
+    droolsDentalBoneImg,
+    droolsDentalBoneImg,
+    droolsDentalBoneImg,
+  ],
+
+  description:
+    "Bone-shaped dental chew that promotes cleaner teeth and fresher breath.",
+
+  ingredients: [
+    "Cereals",
+    "Milk Solids",
+    "Minerals",
+    "Calcium",
+    "Vegetable Oil",
+    "Vitamins",
+  ],
+
+  features: [
+    "Freshens breath",
+    "Supports dental hygiene",
+    "Calcium enriched",
+    "Daily chew treat",
+  ],
+
+  nutrition: {
+    protein: "11%",
+    fat: "3%",
+    fiber: "2%",
+    moisture: "14%",
+  },
+
+  manufacturer: "Drools Pet Food Pvt Ltd",
+  country: "India",
+
+  weight: ["200g", "400g"],
+
+  variants: [
+    { weight: "200g", price: 4.99, originalPrice: 5.99 },
+    { weight: "400g", price: 8.49, originalPrice: 9.49 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.05,
+
+  relatedProducts: [501, 503, 505],
+},
+
+{
+ id: 503,
+  name: "SmartHeart Dental Stick Dog Treat",
+  brand: "SmartHeart",
+  category: "dogs-treats",
+  subCategory: "dental-treats",
+  pet: "Dog",
+  petType: "Dog",
+  productCategory: "Dog Treats",
+  productType: "Dental Treats",
+  breedSize: "All Breeds",
+  shopByBreed: "All",
+  flavor: "Mint",
+  lifeStage: "Adult",
+  specialDiet: "Dental Care",
+  vegType: "Veg",
+  size: "Medium",
+
+  rating: 4.6,
+  reviews: 241,
+  soldCount: 850,
+  stock: 63,
+
+  fastDelivery: true,
+  isNew: true,
+  deliveryDate: "Tomorrow",
+
+  image: smartHeartDentalImg,
+
+  images: [
+    smartHeartDentalImg,
+    smartHeartDentalImg,
+    smartHeartDentalImg,
+    smartHeartDentalImg,
+  ],
+
+  description:
+    "Mint-flavored dental sticks designed to reduce plaque and support oral health.",
+
+  ingredients: [
+    "Wheat Flour",
+    "Mint Flavor",
+    "Minerals",
+    "Vegetable Oil",
+    "Vitamins",
+    "Natural Preservatives",
+  ],
+
+  features: [
+    "Mint freshness",
+    "Supports oral care",
+    "Reduces plaque",
+    "Daily reward",
+  ],
+
+  nutrition: {
+    protein: "12%",
+    fat: "2%",
+    fiber: "2%",
+    moisture: "15%",
+  },
+
+  manufacturer: "Perfect Companion Group",
+  country: "Thailand",
+
+  weight: ["150g", "300g"],
+
+  variants: [
+    { weight: "150g", price: 4.49, originalPrice: 5.49 },
+    { weight: "300g", price: 7.99, originalPrice: 8.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.05,
+
+  relatedProducts: [501, 502, 504],
+},
+
+{
+  id: 504,
+  name: "JerHigh Dental Stick Chicken",
+  brand: "JerHigh",
+  category: "dogs-treats",
+  subCategory: "dental-treats",
+  pet: "Dog",
+  petType: "Dog",
+  productCategory: "Dog Treats",
+  productType: "Dental Treats",
+  breedSize: "All Breeds",
+  shopByBreed: "All",
+  flavor: "Chicken",
+  lifeStage: "Adult",
+  specialDiet: "Dental Care",
+  vegType: "Non-Veg",
+  size: "Medium",
+
+  rating: 4.8,
+  reviews: 412,
+  soldCount: 1370,
+  stock: 81,
+
+  fastDelivery: true,
+  isNew: false,
+  deliveryDate: "Tomorrow",
+
+  image: jerhighDentalImg,
+
+  images: [
+    jerhighDentalImg,
+    jerhighDentalImg,
+    jerhighDentalImg,
+    jerhighDentalImg,
+  ],
+
+  description:
+    "Chicken-flavored dental sticks that help clean teeth while satisfying chewing instincts.",
+
+  ingredients: [
+    "Chicken Meat",
+    "Vegetable Protein",
+    "Minerals",
+    "Natural Flavor",
+    "Vitamins",
+    "Glycerin",
+  ],
+
+  features: [
+    "Real chicken flavor",
+    "Supports oral health",
+    "Long chewing time",
+    "Freshens breath",
+  ],
+
+  nutrition: {
+    protein: "18%",
+    fat: "3%",
+    fiber: "1%",
+    moisture: "18%",
+  },
+
+  manufacturer: "Perfect Companion Group",
+  country: "Thailand",
+
+  weight: ["70g", "140g"],
+
+  variants: [
+    { weight: "70g", price: 4.99, originalPrice: 5.99 },
+    { weight: "140g", price: 7.99, originalPrice: 8.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.05,
+
+  relatedProducts: [501, 503, 505],
+},
+
+{
+  id: 505,
+  name: "Purepet Dental Chew Stick",
+  brand: "Purepet",
+  category: "dogs-treats",
+  subCategory: "dental-treats",
+  pet: "Dog",
+  petType: "Dog",
+  productCategory: "Dog Treats",
+  productType: "Dental Treats",
+  breedSize: "All Breeds",
+  shopByBreed: "All",
+  flavor: "Milk",
+  lifeStage: "Adult",
+  specialDiet: "Dental Care",
+  vegType: "Veg",
+  size: "Medium",
+
+  rating: 4.5,
+  reviews: 176,
+  soldCount: 620,
+  stock: 55,
+
+  fastDelivery: true,
+  isNew: false,
+  deliveryDate: "Tomorrow",
+
+  image: purepetDentalImg,
+
+  images: [
+    purepetDentalImg,
+    purepetDentalImg,
+    purepetDentalImg,
+    purepetDentalImg,
+  ],
+
+  description:
+    "Dental chew sticks formulated to promote cleaner teeth and fresher breath in dogs.",
+
+  ingredients: [
+    "Cereals",
+    "Milk Solids",
+    "Minerals",
+    "Vegetable Oil",
+    "Vitamins",
+    "Natural Flavor",
+  ],
+
+  features: [
+    "Supports oral hygiene",
+    "Easy to chew",
+    "Fresh breath support",
+    "Daily dental reward",
+  ],
+
+  nutrition: {
+    protein: "10%",
+    fat: "2%",
+    fiber: "2%",
+    moisture: "15%",
+  },
+
+  manufacturer: "Purepet",
+  country: "India",
+
+  weight: ["180g", "360g"],
+
+  variants: [
+    { weight: "180g", price: 4.49, originalPrice: 5.49 },
+    { weight: "360g", price: 7.99, originalPrice: 8.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.05,
+
+  relatedProducts: [501, 502, 504],
+},
+];

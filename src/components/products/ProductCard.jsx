@@ -106,6 +106,8 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
           <img
             src={imageSrc}
             alt={product.name}
+            loading="lazy"
+            decoding="async"
             className="absolute inset-0 w-full h-full object-contain transition-transform duration-500 group-hover:scale-105 p-2 cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();

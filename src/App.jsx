@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, lazy, Suspense } from 'react'
 import {
   BrowserRouter,
   Routes,
@@ -6,21 +6,22 @@ import {
   Navigate,
 } from "react-router-dom";
 
-import Home from "./layouts/pages/Home";
-import Login from "./layouts/pages/Login";
-import Register from "./layouts/pages/Register";
-import ProductDetails from "./layouts/pages/ProductDetails";
-import DeliveryDetails from "./layouts/pages/DeliveryDetails";
-import Cart from "./layouts/pages/Cart";
-import BestSellers from "./layouts/pages/BestSellers";
-import Shop from "./layouts/pages/Shop";
-import BreedDetails from "./layouts/pages/BreedDetails";
-import BreedCategory from "./layouts/pages/BreedCategory";
-import OrderSuccess from "./layouts/pages/OrderSuccess";
-import WishList from "./layouts/pages/WishList";
-import Checkout from "./layouts/pages/CheckOut";
-import BrandProducts from "./layouts/pages/BrandProducts";
-import CategoryProducts from "./layouts/pages/CategoryProducts";
+// Lazy-load route pages to reduce initial bundle size
+const Home = lazy(() => import('./layouts/pages/Home'))
+const Login = lazy(() => import('./layouts/pages/Login'))
+const Register = lazy(() => import('./layouts/pages/Register'))
+const ProductDetails = lazy(() => import('./layouts/pages/ProductDetails'))
+const DeliveryDetails = lazy(() => import('./layouts/pages/DeliveryDetails'))
+const Cart = lazy(() => import('./layouts/pages/Cart'))
+const BestSellers = lazy(() => import('./layouts/pages/BestSellers'))
+const Shop = lazy(() => import('./layouts/pages/Shop'))
+const BreedDetails = lazy(() => import('./layouts/pages/BreedDetails'))
+const BreedCategory = lazy(() => import('./layouts/pages/BreedCategory'))
+const OrderSuccess = lazy(() => import('./layouts/pages/OrderSuccess'))
+const WishList = lazy(() => import('./layouts/pages/WishList'))
+const Checkout = lazy(() => import('./layouts/pages/CheckOut'))
+const BrandProducts = lazy(() => import('./layouts/pages/BrandProducts'))
+const CategoryProducts = lazy(() => import('./layouts/pages/CategoryProducts'))
 
 // ✅ UPDATED IMPORT
 import CartProvider from "./context/CartProvider";
@@ -51,7 +52,9 @@ const App = () => {
 
       <BrowserRouter>
 
-        <Routes>
+        <Suspense fallback={<div className="p-8 text-center">Loading...</div>}>
+
+          <Routes>
 
           {/* HOME */}
 
@@ -186,7 +189,9 @@ const App = () => {
 
           <Route path="*" element={<Navigate to="/" replace />} />
 
-        </Routes>
+          </Routes>
+
+        </Suspense>
 
       </BrowserRouter>
 
