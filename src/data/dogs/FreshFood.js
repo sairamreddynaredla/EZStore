@@ -2,11 +2,11 @@
 // src/data/dogs/fresh-food/dogsFreshFood.js
 // ==========================================
 
-import freshpetImg from "../../assets/products/dogs/fresh-food/freshpet-select-roasted-chicken-recipe-dog-food.jpg";
-import nomNomImg from "../../assets/products/dogs/fresh-food/nom-nom-beef-mash-fresh-dog-food.jpg";
-import farmersDogImg from "../../assets/products/dogs/fresh-food/the-farmers-dog-turkey-recipe-fresh-dog-food.jpg";
-import ollieImg from "../../assets/products/dogs/fresh-food/ollie-chicken-dish-fresh-dog-food.jpg";
-import spotTangoImg from "../../assets/products/dogs/fresh-food/spot-tango-beef-millet-fresh-dog-food.jpg";
+import freshpetImg from "../../assets/products/dogs/Fresh-food/freshpet-select-roasted-chicken-recipe-dog-food.jpg";
+import nomNomImg from "../../assets/products/dogs/Fresh-food/nom-nom-beef-mash-fresh-dog-food.jpg";
+import farmersDogImg from "../../assets/products/dogs/Fresh-food/the-farmers-dog-turkey-recipe-fresh-dog-food.jpg";
+import ollieImg from "../../assets/products/dogs/Fresh-food/ollie-chicken-dish-fresh-dog-food.jpg";
+import spotTangoImg from "../../assets/products/dogs/Fresh-food/spot-tango-beef-millet-fresh-dog-food.jpg";
 
 export const dogsFreshFood = [
   {
