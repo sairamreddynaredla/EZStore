@@ -22,6 +22,7 @@ const WishList = lazy(() => import('./layouts/pages/WishList'))
 const Checkout = lazy(() => import('./layouts/pages/CheckOut'))
 const BrandProducts = lazy(() => import('./layouts/pages/BrandProducts'))
 const CategoryProducts = lazy(() => import('./layouts/pages/CategoryProducts'))
+const Brands = lazy(() => import('./layouts/pages/Brands'))
 
 // ✅ UPDATED IMPORT
 import CartProvider from "./context/CartProvider";
@@ -137,10 +138,10 @@ const App = () => {
             element={<Shop />}
           />
 
-          {/* BRANDS: redirect to home (brands UI available in navbar dropdown) */}
+          {/* BRANDS */}
           <Route
             path="/brands"
-            element={<Navigate to="/" replace />}
+            element={<Brands />}
           />
 
           {/* BRAND PRODUCTS */}
