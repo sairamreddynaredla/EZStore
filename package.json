@@ -7,6 +7,8 @@
     "dev": "vite",
     "ui-test": "node scripts/ui-test.js",
     "build": "vite build",
+    "optimize-images": "node scripts/optimize-images.js",
+    "build:optimized": "npm run optimize-images && npm run build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
@@ -30,8 +32,16 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.6.0",
+    "imagemin": "^9.0.1",
+    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-pngquant": "^10.0.0",
+    "imagemin-webp": "^8.0.0",
     "playwright": "^1.60.0",
+    "terser": "^5.48.0",
     "vercel": "^54.4.0",
-    "vite": "^8.0.12"
+    "vite": "^8.0.12",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-compression2": "^2.5.3",
+    "vite-plugin-imagemin": "^0.6.1"
   }
 }

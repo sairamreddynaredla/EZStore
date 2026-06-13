@@ -45,6 +45,7 @@ const ProductImageGallery = ({
           src={currentImage}
           alt={productName}
           onLoad={() => setImageLoaded(true)}
+          loading="lazy"
           className={`absolute inset-0 h-full w-full object-contain p-4 transition-transform duration-200 ease-out ${
             isHovered ? "scale-[1.02]" : "scale-100"
           } ${imageLoaded ? "opacity-100" : "opacity-0"}`}
@@ -56,6 +57,7 @@ const ProductImageGallery = ({
             className={`absolute inset-0 h-full w-full object-contain p-4 transition-opacity duration-200 ease-out ${
               isHovered ? "opacity-100" : "opacity-0"
             }`}
+            loading="lazy"
           />
         )}
       </div>
@@ -102,7 +104,7 @@ const ProductImageGallery = ({
               }`}
               aria-label={`View image ${idx + 1}`}
             >
-              <img src={img} alt={`Thumbnail ${idx + 1}`} className="h-full w-full object-cover" />
+              <img src={img} alt={`Thumbnail ${idx + 1}`} className="h-full w-full object-cover" loading="lazy" />
             </button>
           ))}
           {displayImages.length > 3 && (

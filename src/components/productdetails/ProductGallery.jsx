@@ -172,6 +172,7 @@ const ProductGallery = ({ product }) => {
                   src={img}
                   alt={`Thumbnail ${index + 1}`}
                   className="h-full w-full object-contain"
+                  loading="lazy"
                   onError={(e) => {
                     e.currentTarget.onerror = null;
                     e.currentTarget.src = resolveProductImageFallback(product);

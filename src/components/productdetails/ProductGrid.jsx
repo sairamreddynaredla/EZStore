@@ -42,6 +42,7 @@ const ProductGrid = ({ products }) => {
                     src={resolveProductImage(product)}
                     alt={product.name}
                     className='h-full w-full object-contain transition-transform duration-300 group-hover:scale-105'
+                    loading="lazy"
                     onError={(e) => {
                       e.currentTarget.onerror = null;
                       const fallbackImage = resolveProductImageFallback(product);

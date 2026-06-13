@@ -53,6 +53,7 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
               src={imageSrc}
               alt={product.name}
               className="max-h-96 object-contain"
+              loading="lazy"
               onError={(e) => {
                 e.currentTarget.onerror = null;
                 const fallbackImage = resolveProductImageFallback(product);

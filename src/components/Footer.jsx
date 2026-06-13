@@ -87,7 +87,7 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="md:col-span-2 flex flex-col gap-6">
             <div>
-              <img src={ezstoreLogo} alt="EZStore" className="h-12 mb-4" />
+              <img src={ezstoreLogo} alt="EZStore" className="h-12 mb-4" loading="lazy" />
               <p className="text-sm leading-relaxed opacity-80" style={{ color: "var(--footer-text)" }}>
                 Redefining pet shopping with premium food, accessories, and trusted brands — designed to improve your pet's life every day.
               </p>
@@ -109,7 +109,7 @@ const Footer = () => {
                     className="h-9 w-9 rounded-full flex items-center justify-center transition-all hover:scale-110"
                     style={{ background: "var(--footer-link)" }}
                   >
-                    <img src={link.icon} alt={link.label} className="h-4 w-4" />
+                    <img src={link.icon} alt={link.label} className="h-4 w-4" loading="lazy" />
                   </a>
                 ))}
               </div>
@@ -132,7 +132,7 @@ const Footer = () => {
                     key={p.alt}
                     className="h-8 w-12 bg-white rounded-md flex items-center justify-center shadow-sm p-1"
                   >
-                    <img src={p.src} alt={p.alt} className="h-full w-full object-contain" />
+                    <img src={p.src} alt={p.alt} className="h-full w-full object-contain" loading="lazy" />
                   </div>
                 ))}
               </div>

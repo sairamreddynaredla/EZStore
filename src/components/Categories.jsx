@@ -130,6 +130,7 @@ function Categories() {
                     src={item.image}
                     alt={item.title}
                     className="w-36 h-36 rounded-full object-cover border-[6px] border-white shadow-lg"
+                    loading="lazy"
                   />
                 </div>
                 {/* Title (only pet name) */}

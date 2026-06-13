@@ -148,7 +148,7 @@ const BrandsPage = () => {
                         to={`/brands/${brand.slug}`}
                         className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 hover:border-[#1F6B52] hover:bg-[#F5FBF6] transition"
                       >
-                        <img src={logoMap[brand.logo] || banners[brand.logo] || banners[String(brand.logo).replace(/-/g, '')] || royalCaninLogo} alt={brand.name} className="h-8 w-8 object-contain" />
+                        <img src={logoMap[brand.logo] || banners[brand.logo] || banners[String(brand.logo).replace(/-/g, '')] || royalCaninLogo} alt={brand.name} className="h-8 w-8 object-contain" loading="lazy" />
                         <span>{brand.name}</span>
                       </Link>
                     ))}
@@ -209,6 +209,7 @@ const BrandsPage = () => {
                             src={logoMap[brand.logo] || royalCaninLogo}
                             alt={brand.name}
                             className="max-h-20 max-w-full object-contain"
+                            loading="lazy"
                           />
                         </div>
                       </Link>
@@ -227,6 +228,7 @@ const BrandsPage = () => {
                           <img
                             src={logoMap[brand.logo] || royalCaninLogo}
                             alt={brand.name}
+                            loading="lazy"
                             className="max-h-20 max-w-full object-contain"
                           />
                         </div>

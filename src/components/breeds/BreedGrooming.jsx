@@ -22,6 +22,7 @@ const BreedGrooming = ({ breed }) => {
               src={breed?.grooming?.image}
               alt={breed?.name}
               className="w-full rounded-3xl object-cover"
+              loading="lazy"
             />
 
           </div>

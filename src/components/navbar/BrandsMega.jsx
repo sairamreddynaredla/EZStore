@@ -99,7 +99,7 @@ const BrandsMega = ({ isOpen, onOpen, onClose }) => {
                             className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 hover:border-[#1F6B52] hover:bg-[#F5FBF6] transition"
                             onClick={() => onClose && onClose()}
                           >
-                            <img src={logoMap[brand.logo] || banners[brand.logo] || royalCaninLogo} alt={brand.name} className="h-8 w-8 object-contain" />
+                            <img src={logoMap[brand.logo] || banners[brand.logo] || royalCaninLogo} alt={brand.name} className="h-8 w-8 object-contain" loading="lazy" />
                             <span>{brand.name}</span>
                           </Link>
                         ))}
@@ -128,7 +128,7 @@ const BrandsMega = ({ isOpen, onOpen, onClose }) => {
                     ).map((brand) => (
                       <Link key={brand.id || brand.slug} to={`/brands/${brand.slug}`} className="group block rounded-2xl bg-white border border-gray-100 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-transform duration-300 overflow-hidden flex items-center justify-center p-4" onClick={() => onClose && onClose()}>
                         <div className="w-full h-24 flex items-center justify-center bg-white">
-                          <img src={logoMap[brand.logo] || royalCaninLogo} alt={brand.name} className="max-h-20 max-w-full object-contain" />
+                          <img src={logoMap[brand.logo] || royalCaninLogo} alt={brand.name} className="max-h-20 max-w-full object-contain" loading="lazy" />
                         </div>
                       </Link>
                     ))}
@@ -142,7 +142,7 @@ const BrandsMega = ({ isOpen, onOpen, onClose }) => {
                   {spotlightImages.map((s, idx) => (
                     <Link key={idx} to={s.link} className="block rounded-xl overflow-hidden border border-gray-100 bg-white" onClick={() => onClose && onClose()}>
                       <div className="w-full h-24 flex items-center justify-center bg-white">
-                        <img src={s.image} alt="" className="max-w-full max-h-full object-contain" />
+                        <img src={s.image} alt="" className="max-w-full max-h-full object-contain" loading="lazy" />
                       </div>
                     </Link>
                   ))}

@@ -19,7 +19,7 @@ const CategoryHero = ({ title, subtitle, highlights, image, breadcrumbs, imagePo
         <div className="grid gap-4 sm:grid-cols-2">
           {highlights.map((h, i) => (
             <div key={i} className="flex items-center gap-3 rounded-3xl bg-slate-50 px-4 py-3 border border-slate-200">
-              {h.icon && <img src={h.icon} alt="" className="w-6 h-6 object-contain" />}
+              {h.icon && <img src={h.icon} alt="" className="w-6 h-6 object-contain" loading="lazy" />}
               <span className="text-sm font-semibold text-slate-800">{h.text}</span>
             </div>
           ))}

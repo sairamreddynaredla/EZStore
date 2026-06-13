@@ -16,7 +16,7 @@ const BrandBanners = () => {
               key={key}
               className="flex-shrink-0 w-64 h-32 bg-gray-50 rounded-xl border border-gray-100 flex items-center justify-center p-3"
             >
-              <img src={src} alt={key} className="max-w-full max-h-full object-contain" />
+              <img src={src} alt={key} className="max-w-full max-h-full object-contain" loading="lazy" />
             </div>
           ))}
         </div>

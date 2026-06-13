@@ -197,7 +197,7 @@ const Cart = () => {
                       <div className="flex gap-2 sm:gap-4 flex-col sm:flex-row">
                         {/* Product Image */}
                         <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 relative mx-auto sm:mx-0">
-                          <img src={item.image} alt={item.name} className="w-full h-full object-contain p-2" />
+                          <img src={item.image} alt={item.name} className="w-full h-full object-contain p-2" loading="lazy" />
                           {/* Stock indicator badge */}
                           <div className={`absolute top-2 right-2 ${getStockStatus(item).color} bg-white px-2 py-1 rounded-full text-xs font-semibold border`}>
                             {getStockStatus(item).status}
@@ -506,7 +506,7 @@ const Cart = () => {
                           <div key={idx} className="border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow cursor-pointer"
                                onClick={() => navigate(`/product/${item.id}`)}>
                             <div className="w-full aspect-square bg-gray-100 rounded mb-2 flex items-center justify-center">
-                              <img src={item.image} alt={item.name} className="w-full h-full object-contain p-2" />
+                              <img src={item.image} alt={item.name} className="w-full h-full object-contain p-2" loading="lazy" />
                             </div>
                             <h4 className="text-xs font-semibold text-gray-900 line-clamp-2 mb-1">{item.name}</h4>
                             <p className="text-sm font-bold text-red-600">${item.price}</p>

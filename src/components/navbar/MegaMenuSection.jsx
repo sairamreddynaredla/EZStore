@@ -55,7 +55,7 @@ const MegaMenuSection = ({ sections, banner: defaultBanner, showBanner = true, o
           <div className="hidden lg:block lg:col-span-1">
           <div className="w-full h-48 rounded-xl overflow-hidden border border-gray-100 shadow-sm bg-gray-50">
             {activeBanner.image ? (
-              <img src={activeBanner.image} alt={activeBanner.title || "banner"} className="w-full h-full object-cover" />
+              <img src={activeBanner.image} alt={activeBanner.title || "banner"} className="w-full h-full object-cover" loading="lazy" />
             ) : (
               <div className="w-full h-full flex items-center justify-center text-gray-400">No banner</div>
             )}

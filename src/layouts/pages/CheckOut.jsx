@@ -496,7 +496,7 @@ const Checkout = () => {
                           checked={selectedPayment === method.id} 
                           onChange={() => setSelectedPayment(method.id)}
                         />
-                        <img src={method.icon} alt={method.name} className='w-10 h-10 object-contain' />
+                        <img src={method.icon} alt={method.name} className='w-10 h-10 object-contain' loading="lazy" />
                         <div className='flex-1'>
                           <div className='font-semibold text-sm'>{method.name}</div>
                           <div className='text-xs text-gray-500'>{method.details}</div>
@@ -649,7 +649,7 @@ const Checkout = () => {
                 {cartItems && cartItems.length > 0 ? (
                   cartItems.map((item, idx) => (
                     <div key={idx} className='flex items-center gap-3'>
-                      <img src={item.image} alt={item.name} className='w-16 h-16 object-contain rounded' />
+                      <img src={item.image} alt={item.name} className='w-16 h-16 object-contain rounded' loading="lazy" />
                       <div className='flex-1'>
                         <div className='font-semibold text-sm'>{item.name}</div>
                         <div className='text-xs text-gray-500 mb-1'>Qty: {item.quantity}</div>
@@ -700,21 +700,21 @@ const Checkout = () => {
               {/* Trust Badges */}
               <div className='mt-6 space-y-3 pt-4 border-t border-gray-200'>
                 <div className='flex items-start gap-3 text-xs'>
-                  <img src='/assets/icons/secure-payment.png' alt='Secure' className='w-8 h-8 flex-shrink-0' />
+                  <img src='/assets/icons/secure-payment.png' alt='Secure' className='w-8 h-8 flex-shrink-0' loading="lazy" />
                   <div>
                     <div className='font-semibold'>100% Secure</div>
                     <div className='text-gray-500'>SSL Encrypted</div>
                   </div>
                 </div>
                 <div className='flex items-start gap-3 text-xs'>
-                  <img src='/assets/icons/easy-returns.png' alt='Returns' className='w-8 h-8 flex-shrink-0' />
+                  <img src='/assets/icons/easy-returns.png' alt='Returns' className='w-8 h-8 flex-shrink-0' loading="lazy" />
                   <div>
                     <div className='font-semibold'>Easy Returns</div>
                     <div className='text-gray-500'>7 days hassle-free</div>
                   </div>
                 </div>
                 <div className='flex items-start gap-3 text-xs'>
-                  <img src='/assets/icons/fast-delivery.png' alt='Delivery' className='w-8 h-8 flex-shrink-0' />
+                  <img src='/assets/icons/fast-delivery.png' alt='Delivery' className='w-8 h-8 flex-shrink-0' loading="lazy" />
                   <div>
                     <div className='font-semibold'>Fast Delivery</div>
                     <div className='text-gray-500'>On-time guaranteed</div>

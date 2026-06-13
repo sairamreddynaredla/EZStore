@@ -142,6 +142,7 @@ const BrandsDropdown = ({ onBrandSelect, anchorRef }) => {
                 src={getBrandImage(brand.logo)}
                 alt={brand.name}
                 className="max-h-full max-w-full object-contain"
+                loading="lazy"
                 onError={(e) => {
                   e.currentTarget.onerror = null;
                   e.currentTarget.src = '/assets/placeholder-product.svg';

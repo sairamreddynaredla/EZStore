@@ -57,6 +57,7 @@ const ProductRecommendations = ({ currentItemId, onAddToCart }) => {
                 src={product.image}
                 alt={product.name}
                 className="w-full h-full object-contain p-1"
+                loading="lazy"
               />
             </div>
 

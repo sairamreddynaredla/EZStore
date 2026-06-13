@@ -84,6 +84,7 @@ function CategoryCard({ category }) {
           src={category.image}
           alt={category.label}
           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+          loading="lazy"
           onError={(e) => {
             e.target.onerror = null
             e.target.src = "https://placehold.co/400x300/F5A623/ffffff?text=Pet+Food"

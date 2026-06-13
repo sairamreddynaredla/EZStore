@@ -404,6 +404,7 @@ const CategoryPage = () => {
               src={banner.image}
               alt={banner.title}
               className="w-full h-full object-cover"
+              loading="lazy"
             />
           </div>
         </div>
@@ -1564,6 +1565,7 @@ const CategoryPage = () => {
                           src={resolveProductImage(product)}
                           alt={product.name}
                           className="w-full h-55 object-contain hover:scale-105 transition duration-300"
+                          loading="lazy"
                           onError={(e) => {
                             e.currentTarget.onerror = null
                             const fallback = resolveProductImageFallback(product)

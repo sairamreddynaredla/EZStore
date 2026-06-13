@@ -117,6 +117,7 @@ const BreedDetailsLayout = () => {
             src={breed.banner.image}
             alt={breed.slug}
             className="w-full rounded-3xl object-cover"
+            loading="lazy"
           />
         </div>
 
@@ -161,6 +162,7 @@ const BreedDetailsLayout = () => {
       src={breed.overview.image}
       alt={breed.name}
       className="w-full object-cover"
+      loading="lazy"
     />
 
   </div>
@@ -183,6 +185,7 @@ const BreedDetailsLayout = () => {
               src={section.image}
               alt={section.title}
               className="w-full h-130 object-cover hover:scale-105 transition-all duration-500"
+              loading="lazy"
             />
           </div>
 
@@ -330,6 +333,7 @@ const BreedDetailsLayout = () => {
                   src={item.image}
                   alt={item.name}
                   className="w-full h-55 object-cover"
+                  loading="lazy"
                 />
 
                 <h4 className="p-5 text-lg font-semibold">

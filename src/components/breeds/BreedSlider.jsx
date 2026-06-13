@@ -74,6 +74,7 @@ const BreedSlider = ({ title, breeds }) => {
                   src={breed.banner?.image || breed.image}
                   alt={breed.banner?.title || breed.name}
                   className="w-36 h-36 rounded-full object-cover mx-auto border-4 border-orange-200 shadow-lg"
+                  loading="lazy"
                 />
 
                 <h3 className="mt-4 font-bold text-lg">

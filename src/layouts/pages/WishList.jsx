@@ -211,6 +211,7 @@ const WishList = () => {
                           transition-transform
                           duration-700
                         '
+                        loading="lazy"
                         onError={(e) => {
                           e.currentTarget.onerror = null
                           const fallback = resolveProductImageFallback(product)

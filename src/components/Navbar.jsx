@@ -37,7 +37,7 @@ function Navbar() {
       <header className="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-sm shadow-md border-b border-[#E5E7EB]">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-3 md:py-4 gap-6">
           <NavLink to="/" className="flex items-center gap-1 shrink-0 group hover:opacity-80 transition-opacity duration-300">
-            <img src={logo} alt="EZStore Logo" className="h-10 md:h-12 object-contain mix-blend-multiply" />
+            <img src={logo} alt="EZStore Logo" className="h-10 md:h-12 object-contain mix-blend-multiply" loading="lazy" />
           </NavLink>
 
           <nav className="hidden md:flex items-center gap-1">

@@ -51,6 +51,7 @@ const BreedHero = ({ breed }) => {
             src={breed.image}
             alt={breed.name}
             className="w-full h-full min-h-115 object-cover"
+            loading="lazy"
           />
         </div>
       </div>
