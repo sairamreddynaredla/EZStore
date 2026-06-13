@@ -6,6 +6,7 @@ import { brands } from '../../data/brands'
 
 import royalCaninLogo from '../../assets/brands/royal-canin.jpeg'
 import purinaLogo from '../../assets/brands/purina.jpeg'
+import pedigreeLogo from '../../assets/brands/pedigree.jpeg'
 import farminaLogo from '../../assets/brands/farmina.jpeg'
 import origenLogo from '../../assets/brands/orijen.jpeg'
 import droolsLogo from '../../assets/brands/drools.jpeg'
@@ -28,6 +29,7 @@ import temptationsLogo from '../../assets/brands/temptaions..jpeg'
 const logoMap = {
   'royal-canin': royalCaninLogo,
   purina: purinaLogo,
+  pedigree: pedigreeLogo,
   farmina: farminaLogo,
   orijen: origenLogo,
   drools: droolsLogo,

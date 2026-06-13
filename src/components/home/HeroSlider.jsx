@@ -1,9 +1,11 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
+import smallPetsBanner from "../../assets/banners/small-pets.jpeg";
+import catBanner from "../../assets/banners/cat-banner.jpeg";
 
 const heroBanners = [
   {
-    image: "/src/assets/banners/tiny-friends-banner.png", // New banner image
+    image: smallPetsBanner,
     title: "Tiny Friends, Big Love",
     offer: "",
     subtitle: "Everything your little companions need for a happy and healthy life.",
@@ -12,7 +14,7 @@ const heroBanners = [
     pet: "Small Pets"
   },
   {
-    image: "/src/assets/banners/cat-banner.jpeg",
+    image: catBanner,
     title: "Premium Cat Food",
     offer: "Flat 25% OFF",
     subtitle: "on Cat Food",

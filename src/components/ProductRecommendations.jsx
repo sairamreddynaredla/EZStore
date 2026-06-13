@@ -1,5 +1,6 @@
 import { ShoppingCart, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import placeholderImage from "../assets/products/placeholder.svg";
 
 /**
  * ProductRecommendations Component
@@ -15,21 +16,21 @@ const ProductRecommendations = ({ currentItemId, onAddToCart }) => {
       id: 101,
       name: "Premium Pet Grooming Brush",
       price: 24.99,
-      image: "/assets/products/grooming-brush.jpg",
+      image: placeholderImage,
       purchased_with: 89, // % of customers who bought this with similar items
     },
     {
       id: 102,
       name: "Pet Food Storage Container",
       price: 34.99,
-      image: "/assets/products/storage.jpg",
+      image: placeholderImage,
       purchased_with: 76,
     },
     {
       id: 103,
       name: "Dental Chew Treats",
       price: 14.99,
-      image: "/assets/products/dental-treats.jpg",
+      image: placeholderImage,
       purchased_with: 65,
     },
   ];

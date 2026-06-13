@@ -30,20 +30,7 @@ import CartProvider from "./context/CartProvider";
 const App = () => {
 
   useEffect(() => {
-    const handler = (e) => {
-      const t = e.target
-      if (t && t.tagName === 'IMG') {
-        const src = t.src || ''
-        const placeholder = '/assets/placeholder-product.svg'
-        if (src && !src.includes(placeholder)) {
-          t.onerror = null
-          t.src = placeholder
-        }
-      }
-    }
-
-    window.addEventListener('error', handler, true)
-    return () => window.removeEventListener('error', handler, true)
+    // Error handler removed - using component-level error handling instead
   }, [])
 
 

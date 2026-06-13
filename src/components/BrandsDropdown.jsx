@@ -143,10 +143,6 @@ const BrandsDropdown = ({ onBrandSelect, anchorRef }) => {
                 alt={brand.name}
                 className="max-h-full max-w-full object-contain"
                 loading="lazy"
-                onError={(e) => {
-                  e.currentTarget.onerror = null;
-                  e.currentTarget.src = '/assets/placeholder-product.svg';
-                }}
               />
             </div>
             <span className="mt-4 text-sm font-semibold text-slate-900">

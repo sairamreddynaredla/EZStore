@@ -5,6 +5,7 @@ import banners from '../../assets/brand-banners'
 // Import all brand logos
 import royalCaninLogo from '../../assets/brands/royal-canin.jpeg'
 import purinaLogo from '../../assets/brands/purina.jpeg'
+import pedigreeLogo from '../../assets/brands/pedigree.jpeg'
 import farminaLogo from '../../assets/brands/farmina.jpeg'
 import origenLogo from '../../assets/brands/orijen.jpeg'
 import droolsLogo from '../../assets/brands/drools.jpeg'
@@ -13,11 +14,19 @@ import kennelKitchenLogo from '../../assets/brands/kennel-kitchen.jpeg'
 import whiskasLogo from '../../assets/brands/whiskas.jpeg'
 import shebaLogo from '../../assets/brands/sheba.jpeg'
 import tasteWildLogo from '../../assets/brands/taste-of-the-wild.jpeg'
+import acanaLogo from '../../assets/brands/acana.jpeg'
+import goodiesLogo from '../../assets/brands/goodies.jpeg'
+import smartheartLogo from '../../assets/brands/smartheart.jpeg'
+import jerhighLogo from '../../assets/brands/jerhigh.jpeg'
+import himalayaLogo from '../../assets/brands/himalaya.jpeg'
+import blueBuffaloLogo from '../../assets/brands/BlueBuffelopng.png'
+import temptationsLogo from '../../assets/brands/temptaions..jpeg'
 
 // Map brand logo keys to imported images
 const logoMap = {
   'royal-canin': royalCaninLogo,
   purina: purinaLogo,
+  pedigree: pedigreeLogo,
   farmina: farminaLogo,
   orijen: origenLogo,
   drools: droolsLogo,
@@ -26,6 +35,13 @@ const logoMap = {
   whiskas: whiskasLogo,
   sheba: shebaLogo,
   'taste-of-the-wild': tasteWildLogo,
+  acana: acanaLogo,
+  goodies: goodiesLogo,
+  smartheart: smartheartLogo,
+  jerhigh: jerhighLogo,
+  himalaya: himalayaLogo,
+  'blue-buffalo': blueBuffaloLogo,
+  temptations: temptationsLogo,
 }
 
 const BrandCard = ({ brand }) => {

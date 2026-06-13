@@ -59,8 +59,6 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
                 const fallbackImage = resolveProductImageFallback(product);
                 if (imageSrc !== fallbackImage) {
                   setImageSrc(fallbackImage);
-                } else {
-                  e.currentTarget.src = "/assets/placeholder-product.svg";
                 }
               }}
             />

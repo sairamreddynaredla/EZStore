@@ -113,8 +113,6 @@ const ProductGallery = ({ product }) => {
                 const fallbackImage = resolveProductImageFallback(product);
                 if (activeImage !== fallbackImage) {
                   setActiveImage(fallbackImage);
-                } else {
-                  e.currentTarget.src = "/assets/placeholder-product.svg";
                 }
               }}
             />

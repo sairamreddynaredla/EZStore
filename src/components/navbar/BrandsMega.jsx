@@ -3,10 +3,42 @@ import { useState, useRef, useEffect } from 'react'
 import { brands } from '../../data/brands'
 import banners from '../../assets/brand-banners'
 import spotlightData from '../../data/spotlight'
-import royalCaninLogo from '../../assets/brands/royal-canin.jpeg'
+
+// Brand logos
+import royalCanin from '../../assets/brands/royal-canin.jpeg'
+import pedigree from '../../assets/brands/pedigree.jpeg'
+import drools from '../../assets/brands/drools.jpeg'
+import farmina from '../../assets/brands/farmina.jpeg'
+import whiskas from '../../assets/brands/whiskas.jpeg'
+import meo from '../../assets/brands/meo.jpeg'
+import sheba from '../../assets/brands/sheba.jpeg'
+import purina from '../../assets/brands/purina.jpeg'
+import orijen from '../../assets/brands/orijen.jpeg'
+import tasteWild from '../../assets/brands/taste-of-the-wild.jpeg'
+import jerhigh from '../../assets/brands/jerhigh.jpeg'
+import himalaya from '../../assets/brands/himalaya.jpeg'
+import goodies from '../../assets/brands/goodies.jpeg'
+import smartheart from '../../assets/brands/smartheart.jpeg'
+import acana from '../../assets/brands/acana.jpeg'
+import kennelKitchen from '../../assets/brands/kennel-kitchen.jpeg'
 
 const logoMap = {
-  'royal-canin': royalCaninLogo,
+  'royal-canin': royalCanin,
+  pedigree: pedigree,
+  drools: drools,
+  farmina: farmina,
+  whiskas: whiskas,
+  meo: meo,
+  sheba: sheba,
+  purina: purina,
+  orijen: orijen,
+  'taste-of-the-wild': tasteWild,
+  jerhigh: jerhigh,
+  himalaya: himalaya,
+  goodies: goodies,
+  smartheart: smartheart,
+  acana: acana,
+  'kennel-kitchen': kennelKitchen,
 }
 
 const BrandsMega = ({ isOpen, onOpen, onClose }) => {
@@ -99,7 +131,7 @@ const BrandsMega = ({ isOpen, onOpen, onClose }) => {
                             className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 hover:border-[#1F6B52] hover:bg-[#F5FBF6] transition"
                             onClick={() => onClose && onClose()}
                           >
-                            <img src={logoMap[brand.logo] || banners[brand.logo] || royalCaninLogo} alt={brand.name} className="h-8 w-8 object-contain" loading="lazy" />
+                            <img src={logoMap[brand.logo] || banners[brand.logo]} alt={brand.name} className="h-8 w-8 object-contain" loading="lazy" />
                             <span>{brand.name}</span>
                           </Link>
                         ))}
@@ -128,7 +160,7 @@ const BrandsMega = ({ isOpen, onOpen, onClose }) => {
                     ).map((brand) => (
                       <Link key={brand.id || brand.slug} to={`/brands/${brand.slug}`} className="group block rounded-2xl bg-white border border-gray-100 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-transform duration-300 overflow-hidden flex items-center justify-center p-4" onClick={() => onClose && onClose()}>
                         <div className="w-full h-24 flex items-center justify-center bg-white">
-                          <img src={logoMap[brand.logo] || royalCaninLogo} alt={brand.name} className="max-h-20 max-w-full object-contain" loading="lazy" />
+                          <img src={logoMap[brand.logo] || banners[brand.logo]} alt={brand.name} className="max-h-20 max-w-full object-contain" loading="lazy" />
                         </div>
                       </Link>
                     ))}

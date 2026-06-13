@@ -2,6 +2,15 @@ import Navbar from '../../components/Navbar'
 import useCart from "../../hooks/usecart"
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import secureBadge from '../../assets/logo/secure-payment.png'
+import easyReturnsBadge from '../../assets/logo/easy-returns.png'
+import fastDeliveryBadge from '../../assets/logo/fast-delivery.png'
+import cardIcon from '../../assets/payments/card.png'
+import gpayIcon from '../../assets/payments/google-pay.png'
+import appleIcon from '../../assets/payments/apple-pay.png'
+import paypalIcon from '../../assets/payments/paypal.png'
+import netBankingIcon from '../../assets/payments/net banking.png'
+import codIcon from '../../assets/payments/cod.png'
 
 const Checkout = () => {
   const navigate = useNavigate()
@@ -165,12 +174,12 @@ const Checkout = () => {
   }
 
   const paymentMethods = [
-    { id: 'card', name: 'Credit / Debit Card', icon: '/assets/icons/card.png', details: 'Visa, MasterCard, American Express' },
-    { id: 'gpay', name: 'Google Pay', icon: '/assets/icons/google-pay.png', details: 'Pay with Google Pay' },
-    { id: 'apple', name: 'Apple Pay', icon: '/assets/icons/apple-pay.png', details: 'Pay with Apple Pay' },
-    { id: 'paypal', name: 'PayPal', icon: '/assets/icons/paypal.png', details: 'Pay using your PayPal account' },
-    { id: 'bank', name: 'Bank Transfer', icon: '/assets/icons/net banking.png', details: 'Direct bank transfer' },
-    { id: 'cod', name: 'Cash on Delivery', icon: '/assets/icons/cod.png', details: 'Pay when you receive your order' },
+    { id: 'card', name: 'Credit / Debit Card', icon: cardIcon, details: 'Visa, MasterCard, American Express' },
+    { id: 'gpay', name: 'Google Pay', icon: gpayIcon, details: 'Pay with Google Pay' },
+    { id: 'apple', name: 'Apple Pay', icon: appleIcon, details: 'Pay with Apple Pay' },
+    { id: 'paypal', name: 'PayPal', icon: paypalIcon, details: 'Pay using your PayPal account' },
+    { id: 'bank', name: 'Bank Transfer', icon: netBankingIcon, details: 'Direct bank transfer' },
+    { id: 'cod', name: 'Cash on Delivery', icon: codIcon, details: 'Pay when you receive your order' },
   ]
 
   // ─── STEP VALIDATION ───
@@ -702,21 +711,21 @@ const Checkout = () => {
               {/* Trust Badges */}
               <div className='mt-6 space-y-3 pt-4 border-t border-gray-200'>
                 <div className='flex items-start gap-3 text-xs'>
-                  <img src='/assets/icons/secure-payment.png' alt='Secure' className='w-8 h-8 flex-shrink-0' loading="lazy" />
+                  <img src={secureBadge} alt='Secure' className='w-8 h-8 flex-shrink-0' loading="lazy" />
                   <div>
                     <div className='font-semibold'>100% Secure</div>
                     <div className='text-gray-500'>SSL Encrypted</div>
                   </div>
                 </div>
                 <div className='flex items-start gap-3 text-xs'>
-                  <img src='/assets/icons/easy-returns.png' alt='Returns' className='w-8 h-8 flex-shrink-0' loading="lazy" />
+                  <img src={easyReturnsBadge} alt='Returns' className='w-8 h-8 flex-shrink-0' loading="lazy" />
                   <div>
                     <div className='font-semibold'>Easy Returns</div>
                     <div className='text-gray-500'>7 days hassle-free</div>
                   </div>
                 </div>
                 <div className='flex items-start gap-3 text-xs'>
-                  <img src='/assets/icons/fast-delivery.png' alt='Delivery' className='w-8 h-8 flex-shrink-0' loading="lazy" />
+                  <img src={fastDeliveryBadge} alt='Delivery' className='w-8 h-8 flex-shrink-0' loading="lazy" />
                   <div>
                     <div className='font-semibold'>Fast Delivery</div>
                     <div className='text-gray-500'>On-time guaranteed</div>

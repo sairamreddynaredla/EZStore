@@ -48,8 +48,6 @@ const ProductGrid = ({ products }) => {
                       const fallbackImage = resolveProductImageFallback(product);
                       if (e.currentTarget.src !== fallbackImage) {
                         e.currentTarget.src = fallbackImage;
-                      } else {
-                        e.currentTarget.src = '/assets/placeholder-product.svg';
                       }
                     }}
                   />

@@ -126,7 +126,7 @@ export default function BrandsMegaContent({ onClose }){
                       >
                         <div className="w-full h-24 flex items-center justify-center bg-white">
                           <img
-                            src={banners[brand.logo] || banners[brand.slug] || (brand.logo && `/src/assets/brands/${brand.logo}.jpeg`) || '/assets/placeholder-product.svg'}
+                            src={banners[brand.logo] || banners[brand.slug]}
                             alt={brand.name}
                             className="max-h-20 max-w-full object-contain"
                           />
@@ -143,7 +143,7 @@ export default function BrandsMegaContent({ onClose }){
                     >
                       <div className="w-full h-28 flex items-center justify-center bg-white">
                         <img
-                          src={banners[brand.logo] || banners[brand.slug] || (brand.logo && `/src/assets/brands/${brand.logo}.jpeg`) || '/assets/placeholder-product.svg'}
+                          src={banners[brand.logo] || banners[brand.slug]}
                           alt={brand.name}
                           className="max-h-20 max-w-full object-contain"
                         />
@@ -176,7 +176,7 @@ export default function BrandsMegaContent({ onClose }){
                   {spotlightProducts.map(p=> (
                     <li key={p.id} className="flex items-center gap-3">
                       <Link to={`/product/${p.id}`} onClick={() => onClose && onClose()} className="flex items-center gap-3">
-                        <img src={p.image || (p.images && p.images[0]) || '/assets/placeholder-product.svg'} alt={p.name} className="h-12 w-12 object-contain rounded-md bg-white border" loading="lazy" />
+                        <img src={p.image || (p.images && p.images[0])} alt={p.name} className="h-12 w-12 object-contain rounded-md bg-white border" loading="lazy" />
                         <div className="text-sm">
                           <div className="font-medium text-gray-800">{p.name}</div>
                           <div className="text-xs text-gray-500">${(p.price || p.variants?.[0]?.price || '').toString()}</div>

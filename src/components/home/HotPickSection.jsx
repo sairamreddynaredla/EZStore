@@ -256,8 +256,6 @@ const HotPickSection = () => {
                       const fallback = resolveProductImageFallback(product)
                       if (e.currentTarget.src !== fallback) {
                         e.currentTarget.src = fallback
-                      } else {
-                        e.currentTarget.src = '/assets/placeholder-product.svg'
                       }
                     }}
                   />

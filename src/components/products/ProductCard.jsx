@@ -117,8 +117,6 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
               const fallbackImage = resolveProductImageFallback(product);
               if (imageSrc !== fallbackImage) {
                 setImageSrc(fallbackImage);
-              } else {
-                e.currentTarget.src = "/assets/placeholder-product.svg";
               }
             }}
           />
