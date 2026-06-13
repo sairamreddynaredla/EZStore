@@ -82,8 +82,8 @@ const ProductGallery = ({ product }) => {
 
   return (
     <div className="w-full">
-      <div className="grid gap-8">
-        <div className="relative overflow-hidden rounded-[28px] border border-gray-200 bg-white shadow-sm">
+      <div className="grid gap-6 sm:gap-8">
+        <div className="relative overflow-hidden rounded-lg sm:rounded-2xl lg:rounded-[28px] border border-gray-200 bg-white shadow-sm">
           <div
             ref={imageContainerRef}
             className="relative aspect-square w-full overflow-hidden bg-white"
@@ -136,7 +136,7 @@ const ProductGallery = ({ product }) => {
                   type="button"
                   onClick={goPrevious}
                   aria-label="Previous image"
-                  className="absolute left-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-slate-700 shadow-sm transition hover:bg-white"
+                  className="absolute left-2 sm:left-4 top-1/2 z-20 flex h-10 w-10 sm:h-12 sm:w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-slate-700 shadow-md hover:bg-white hover:shadow-lg transition-all font-bold text-xl"
                 >
                   ‹
                 </button>
@@ -144,7 +144,7 @@ const ProductGallery = ({ product }) => {
                   type="button"
                   onClick={goNext}
                   aria-label="Next image"
-                  className="absolute right-4 top-1/2 z-20 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/80 text-slate-700 shadow-sm transition hover:bg-white"
+                  className="absolute right-2 sm:right-4 top-1/2 z-20 flex h-10 w-10 sm:h-12 sm:w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-slate-700 shadow-md hover:bg-white hover:shadow-lg transition-all font-bold text-xl"
                 >
                   ›
                 </button>
@@ -152,7 +152,7 @@ const ProductGallery = ({ product }) => {
             )}
           </div>
 
-          <div className="mt-4 flex items-center gap-3 overflow-x-auto pb-2 hide-scrollbar px-4">
+          <div className="mt-3 sm:mt-4 flex items-center gap-2 sm:gap-3 overflow-x-auto pb-2 hide-scrollbar px-2 sm:px-4">
             {images.map((img, index) => (
               <button
                 key={index}
@@ -160,9 +160,9 @@ const ProductGallery = ({ product }) => {
                 onClick={() => setActiveIndex(index)}
                 onMouseEnter={() => handleThumbnailHover(index)}
                 onFocus={() => handleThumbnailHover(index)}
-                className={`h-16 w-16 shrink-0 overflow-hidden rounded-2xl border transition duration-150 focus:outline-none ${
+                className={`h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-lg sm:rounded-2xl border transition duration-150 focus:outline-none ${
                   activeIndex === index
-                    ? "border-gray-900 bg-slate-100"
+                    ? "border-gray-900 bg-slate-100 ring-2 ring-offset-1 ring-gray-400"
                     : "border-gray-300 hover:border-gray-700 bg-white"
                 }`}
                 aria-label={`Preview image ${index + 1}`}

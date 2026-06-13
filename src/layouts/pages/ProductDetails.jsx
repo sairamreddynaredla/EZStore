@@ -144,12 +144,12 @@ const ProductDetails = () => {
         </div>
 
         {/* PRODUCT SECTION */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr_0.75fr] gap-14 bg-white rounded-[40px] p-6 md:p-10 shadow-sm border border-gray-100">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr_0.75fr] gap-6 sm:gap-8 lg:gap-14 bg-white rounded-2xl sm:rounded-3xl lg:rounded-[40px] p-3 sm:p-6 md:p-10 shadow-sm border border-gray-100">
 
           {/* LEFT */}
           <div>
             <ProductGallery key={product.id} product={product} />
-            <div className="mt-8">
+            <div className="mt-6 sm:mt-8">
               <DeliveryBox />
             </div>
           </div>

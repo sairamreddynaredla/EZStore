@@ -349,34 +349,36 @@ const Checkout = () => {
                       <div>
                         <input 
                           placeholder='Billing Address' 
-                          className={`w-full border rounded-lg p-3 text-sm ${errors.billingAddress ? 'border-red-500' : 'border-gray-300'}`} 
+                          className={`w-full border rounded-lg p-4 sm:p-3 text-sm ${errors.billingAddress ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:border-green-500`} 
                           value={billingAddress} 
                           onChange={(e) => setBillingAddress(e.target.value)}
                           onBlur={() => validateField('billingAddress', billingAddress)}
                         />
-                        {errors.billingAddress && <p className='text-xs text-red-500 mt-1'>{errors.billingAddress}</p>}
+                        {errors.billingAddress && <p className='text-xs text-red-500 mt-2'>{errors.billingAddress}</p>}
                       </div>
-                      <div className='grid grid-cols-3 gap-3'>
+                      <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-3'>
                         <div>
                           <input 
                             placeholder='City' 
-                            className={`w-full border rounded-lg p-3 text-sm ${errors.billingCity ? 'border-red-500' : 'border-gray-300'}`} 
+                            className={`w-full border rounded-lg p-4 sm:p-3 text-sm ${errors.billingCity ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:border-green-500`} 
                             value={billingCity} 
                             onChange={(e) => setBillingCity(e.target.value)}
                             onBlur={() => validateField('billingCity', billingCity)}
                           />
-                          {errors.billingCity && <p className='text-xs text-red-500 mt-1'>{errors.billingCity}</p>}
+                          {errors.billingCity && <p className='text-xs text-red-500 mt-2'>{errors.billingCity}</p>}
                         </div>
-                        <input placeholder='State' className='w-full border border-gray-300 rounded-lg p-3 text-sm' value={billingState} onChange={(e) => setBillingState(e.target.value)} />
+                        <div>
+                          <input placeholder='State' className='w-full border border-gray-300 rounded-lg p-4 sm:p-3 text-sm focus:outline-none focus:border-green-500' value={billingState} onChange={(e) => setBillingState(e.target.value)} />
+                        </div>
                         <div>
                           <input 
                             placeholder='Pincode' 
-                            className={`w-full border rounded-lg p-3 text-sm ${errors.billingPincode ? 'border-red-500' : 'border-gray-300'}`} 
+                            className={`w-full border rounded-lg p-4 sm:p-3 text-sm ${errors.billingPincode ? 'border-red-500' : 'border-gray-300'} focus:outline-none focus:border-green-500`} 
                             value={billingPincode} 
                             onChange={(e) => setBillingPincode(e.target.value)}
                             onBlur={() => validateField('billingPincode', billingPincode)}
                           />
-                          {errors.billingPincode && <p className='text-xs text-red-500 mt-1'>{errors.billingPincode}</p>}
+                          {errors.billingPincode && <p className='text-xs text-red-500 mt-2'>{errors.billingPincode}</p>}
                         </div>
                       </div>
                     </div>

@@ -61,41 +61,43 @@ function Navbar() {
 
           <form
             onSubmit={handleSearch}
-            className="hidden lg:flex items-center bg-white border border-[#E5E7EB] rounded-full px-5 py-2.5 gap-3 flex-1 max-w-md shadow-sm hover:shadow-md hover:border-[#1F6B52] focus-within:shadow-md focus-within:border-[#1F6B52] transition-all duration-300"
+            className="hidden sm:flex items-center bg-white border border-[#E5E7EB] rounded-full px-3 sm:px-5 py-2 sm:py-2.5 gap-2 sm:gap-3 flex-1 max-w-xs sm:max-w-md shadow-sm hover:shadow-md hover:border-[#1F6B52] focus-within:shadow-md focus-within:border-[#1F6B52] transition-all duration-300"
           >
-            <FaSearch className="text-[#4B5563] text-sm" />
+            <FaSearch className="text-[#4B5563] text-sm flex-shrink-0" />
             <input
               type="text"
-              placeholder="Search pets, brands..."
+              inputMode="search"
+              enterKeyHint="search"
+              placeholder="Search..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="bg-transparent text-[#1A1A1A] placeholder-[#4B5563] text-sm outline-none w-full"
+              className="bg-transparent text-[#1A1A1A] placeholder-[#4B5563] text-xs sm:text-sm outline-none w-full"
             />
           </form>
 
-          <div className="hidden md:flex items-center gap-6 text-[#4B5563] text-lg shrink-0">
-            <Link to="/wishlist" className="p-2 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group">
-              <FaHeart className="group-hover:scale-110 transition-transform duration-300" />
-            </Link>
-            <Link to="/cart" className="relative p-2 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group">
-              <FaShoppingCart className="group-hover:scale-110 transition-transform duration-300" />
+          <div className="flex items-center gap-2 sm:gap-4 md:gap-6 text-[#4B5563] text-lg shrink-0">
+            <Link to="/cart" className="relative p-2.5 sm:p-3 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group">
+              <FaShoppingCart className="text-lg sm:text-xl group-hover:scale-110 transition-transform duration-300" />
               {totalItems > 0 && (
                 <span className="absolute top-0 right-0 bg-[#1F6B52] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold shadow-sm">
-                  {totalItems}
+                  {totalItems > 99 ? '99+' : totalItems}
                 </span>
               )}
             </Link>
-            <Link to="/login" className="p-2 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group">
-              <FaUser className="group-hover:scale-110 transition-transform duration-300" />
+            <Link to="/wishlist" className="hidden sm:block p-2.5 sm:p-3 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group">
+              <FaHeart className="text-lg sm:text-xl group-hover:scale-110 transition-transform duration-300" />
+            </Link>
+            <Link to="/login" className="hidden md:block p-2.5 sm:p-3 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group">
+              <FaUser className="text-lg sm:text-xl group-hover:scale-110 transition-transform duration-300" />
             </Link>
           </div>
 
           <button
-            className="md:hidden p-2 text-[#4B5563] hover:bg-[#F5F5F5] rounded-lg transition-all duration-300"
+            className="md:hidden p-2.5 h-12 w-12 flex items-center justify-center text-[#4B5563] hover:bg-[#F5F5F5] rounded-lg transition-all duration-300"
             onClick={() => setMobileMenu(!mobileMenu)}
             aria-label="Toggle Menu"
           >
-            {mobileMenu ? <FaTimes className="text-2xl" /> : <FaBars className="text-2xl" />}
+            {mobileMenu ? <FaTimes className="text-xl" /> : <FaBars className="text-xl" />}
           </button>
         </div>
 

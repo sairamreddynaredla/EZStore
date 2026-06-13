@@ -247,18 +247,18 @@ const Cart = () => {
                             {/* Quantity Selector */}
                             <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
                               <label className="text-xs sm:text-sm text-gray-700 font-semibold">Qty:</label>
-                              <div className="flex items-center border border-gray-300 rounded">
+                              <div className="flex items-center border border-gray-300 rounded-lg bg-white">
                                 <button
                                   onClick={() => decreaseQuantity(item.id, item.selectedVariant?.weight)}
                                   disabled={item.quantity <= 1}
-                                  className="px-3 py-1 hover:bg-gray-100 disabled:opacity-50"
+                                  className="h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 font-bold text-lg transition-colors"
                                 >
                                   −
                                 </button>
-                                <span className="px-4 py-1 font-semibold">{item.quantity}</span>
+                                <span className="px-4 sm:px-6 py-2 font-semibold text-center min-w-12">{item.quantity}</span>
                                 <button
                                   onClick={() => increaseQuantity(item.id, item.selectedVariant?.weight)}
-                                  className="px-3 py-1 hover:bg-gray-100"
+                                  className="h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center hover:bg-gray-100 font-bold text-lg transition-colors"
                                 >
                                   +
                                 </button>
@@ -267,17 +267,17 @@ const Cart = () => {
                           </div>
 
                           {/* Action Buttons */}
-                          <div className="flex gap-3 sm:gap-6 pt-2 border-t border-gray-200 flex-wrap text-xs sm:text-sm">
+                          <div className="flex gap-4 sm:gap-6 pt-3 sm:pt-4 border-t border-gray-200 flex-wrap text-xs sm:text-sm">
                             <button
                               onClick={() => handleDeleteWithUndo(item, item.selectedVariant?.weight)}
-                              className="flex items-center gap-1 sm:gap-2 text-blue-600 hover:text-blue-800 hover:underline font-semibold"
+                              className="flex items-center gap-1.5 sm:gap-2 text-blue-600 hover:text-blue-800 hover:underline font-semibold py-2 px-1 -ml-1"
                             >
                               <Trash2 size={16} />
                               Delete
                             </button>
                             <button
                               onClick={() => handleSaveForLater(item.id, item.selectedVariant?.weight)}
-                              className="flex items-center gap-1 sm:gap-2 text-blue-600 hover:text-blue-800 hover:underline font-semibold"
+                              className="flex items-center gap-1.5 sm:gap-2 text-blue-600 hover:text-blue-800 hover:underline font-semibold py-2 px-1"
                             >
                               <Heart size={16} />
                               Save for later

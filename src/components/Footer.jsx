@@ -98,7 +98,7 @@ const Footer = () => {
               <p className="text-xs font-semibold uppercase tracking-widest mb-3 opacity-60" style={{ color: "var(--footer-text)" }}>
                 Follow Us
               </p>
-              <div className="flex gap-2">
+              <div className="flex gap-3 sm:gap-4">
                 {socialLinks.map((link) => (
                   <a
                     key={link.label}
@@ -106,10 +106,10 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={link.label}
-                    className="h-9 w-9 rounded-full flex items-center justify-center transition-all hover:scale-110"
+                    className="h-11 w-11 sm:h-10 sm:w-10 rounded-full flex items-center justify-center transition-all hover:scale-110 shadow-sm hover:shadow-md"
                     style={{ background: "var(--footer-link)" }}
                   >
-                    <img src={link.icon} alt={link.label} className="h-4 w-4" loading="lazy" />
+                    <img src={link.icon} alt={link.label} className="h-5 w-5 sm:h-4 sm:w-4" loading="lazy" />
                   </a>
                 ))}
               </div>
@@ -117,10 +117,10 @@ const Footer = () => {
 
             {/* Payments */}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-3 opacity-60" style={{ color: "var(--footer-text)" }}>
+              <p className="text-xs font-semibold uppercase tracking-widest mb-4 opacity-60" style={{ color: "var(--footer-text)" }}>
                 Accepted Payments
               </p>
-              <div className="flex items-center gap-2 flex-wrap">
+              <div className="flex items-center gap-3 sm:gap-2 flex-wrap">
                 {[
                   { src: "https://img.icons8.com/color/48/stripe.png", alt: "Stripe" },
                   { src: "https://img.icons8.com/color/48/visa.png", alt: "Visa" },
@@ -130,7 +130,7 @@ const Footer = () => {
                 ].map((p) => (
                   <div
                     key={p.alt}
-                    className="h-8 w-12 bg-white rounded-md flex items-center justify-center shadow-sm p-1"
+                    className="h-9 w-14 sm:h-8 sm:w-12 bg-white rounded-md flex items-center justify-center shadow-sm p-1 hover:shadow-md transition-shadow"
                   >
                     <img src={p.src} alt={p.alt} className="h-full w-full object-contain" loading="lazy" />
                   </div>

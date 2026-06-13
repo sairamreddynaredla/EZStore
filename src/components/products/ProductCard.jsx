@@ -66,17 +66,16 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
         Enjoy offers on Checkout!
       </div>
 
-      {/* ── IMAGE AREA ── */}
       {/* ── IMAGE AREA — fixed 1:1 aspect ratio so all cards align ── */}
-      <div className="relative bg-white px-4 pt-4 pb-2">
+      <div className="relative bg-white px-2 sm:px-4 pt-2 sm:pt-4 pb-1 sm:pb-2">
         {/* Wishlist */}
         <button
           onClick={handleWishlist}
-          className="absolute top-3 right-3 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm hover:scale-110 transition-transform"
+          className="absolute top-2 sm:top-3 right-2 sm:right-3 z-10 w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center rounded-full bg-white/85 backdrop-blur-sm hover:scale-110 hover:bg-white shadow-md hover:shadow-lg transition-all"
           aria-label="Wishlist"
         >
           <Heart
-            size={18}
+            size={20}
             className={wishlisted ? "fill-red-500 text-red-500" : "text-gray-400 hover:text-red-400"}
           />
         </button>
@@ -135,21 +134,21 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
       </div>
 
       {/* ── CONTENT ── */}
-      <div className="flex flex-col flex-1 px-4 pb-4 pt-1">
+      <div className="flex flex-col flex-1 px-2 sm:px-4 pb-3 sm:pb-4 pt-1 sm:pt-2">
 
         {/* Brand + veg-icon row */}
         <div className="flex items-center justify-between mb-1">
-          <span className="text-[12px] text-gray-500 font-medium">{product.brand}</span>
+          <span className="text-[11px] sm:text-[12px] text-gray-500 font-medium truncate">{product.brand}</span>
         </div>
 
         {/* Product name */}
-        <h3 className="text-[13.5px] font-semibold text-gray-900 leading-snug line-clamp-2 min-h-10 mb-3">
+        <h3 className="text-sm sm:text-[13.5px] font-semibold text-gray-900 leading-snug line-clamp-2 min-h-10 mb-2 sm:mb-3">
           {product.name}
         </h3>
 
         {/* ── VARIANT SELECTOR ── */}
         {variants.length > 0 && (
-          <div className="flex flex-wrap gap-1.5 mb-3 relative">
+          <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-3 relative">
             {variants.slice(0, 4).map((v, idx) => {
               const vDiscount = v.originalPrice > v.price
                 ? Math.round(((v.originalPrice - v.price) / v.originalPrice) * 100)
@@ -159,7 +158,7 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
                 <button
                   key={idx}
                   onClick={(e) => handleVariantClick(e, idx)}
-                  className={`relative flex flex-col items-center px-2.5 py-1.5 rounded border text-[11px] font-semibold transition-all min-w-12 ${
+                  className={`relative flex flex-col items-center px-2 sm:px-2.5 py-1 sm:py-1.5 rounded border text-[10px] sm:text-[11px] font-semibold transition-all min-w-11 sm:min-w-12 ${
                     isActive
                       ? "border-[#1B3A6B] bg-[#1B3A6B] text-white"
                       : "border-gray-300 text-gray-700 bg-white hover:border-[#1B3A6B]"
@@ -168,7 +167,7 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
                   <span>{v.weight}</span>
                   {vDiscount > 0 && (
                     <span
-                      className={`text-[9px] font-bold ${
+                      className={`text-[8px] font-bold ${
                         isActive ? "text-orange-300" : "text-orange-500"
                       }`}
                     >
@@ -192,26 +191,26 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
 
         {/* ── DELIVERY DATE ── */}
         {product.deliveryDate && (
-          <div className="flex items-center gap-1.5 bg-blue-50 rounded-lg px-2.5 py-1.5 mb-3">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" className="text-blue-500 shrink-0">
+          <div className="flex items-center gap-1 sm:gap-1.5 bg-blue-50 rounded-lg px-2 sm:px-2.5 py-1 sm:py-1.5 mb-2 sm:mb-3">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-blue-500 shrink-0">
               <path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z" stroke="#3b82f6" strokeWidth="1.8" strokeLinejoin="round"/>
               <circle cx="5.5" cy="18.5" r="2.5" stroke="#3b82f6" strokeWidth="1.8"/>
               <circle cx="18.5" cy="18.5" r="2.5" stroke="#3b82f6" strokeWidth="1.8"/>
             </svg>
-            <span className="text-[11px] text-blue-700 font-medium">{product.deliveryDate}</span>
+            <span className="text-[10px] sm:text-[11px] text-blue-700 font-medium truncate">{product.deliveryDate}</span>
           </div>
         )}
 
         {/* ── PRICE ROW ── */}
-        <div className="flex items-center justify-between mb-3">
-          <div className="flex items-baseline gap-2">
+        <div className="flex items-center justify-between mb-2 sm:mb-3">
+          <div className="flex items-baseline gap-1 sm:gap-2">
             {originalPrice > currentPrice && (
-              <span className="text-[12px] text-gray-400 line-through">${originalPrice.toFixed(2)}</span>
+              <span className="text-[11px] sm:text-[12px] text-gray-400 line-through">${originalPrice.toFixed(2)}</span>
             )}
-            <span className="text-[20px] font-bold text-gray-900">${currentPrice.toFixed(2)}</span>
+            <span className="text-lg sm:text-xl font-bold text-gray-900">${currentPrice.toFixed(2)}</span>
           </div>
           {discount > 0 && (
-            <span className="bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded">
+            <span className="bg-red-500 text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded">
               {discount}% Off
             </span>
           )}
