@@ -1,96 +1,94 @@
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 
 // IMPORT YOUR LOCAL BANNERS
 import dogBanner from "../../assets/banners/dog-banner.jpeg";
 import catBanner from "../../assets/banners/cat-banner.jpeg";
 import trustBanner from "../../assets/banners/trust-banner.jpeg";
 import heroBanner from "../../assets/banners/hero-banner.jpeg";
-import smallPetsBanner from "../../assets/banners/small-pets.jpeg";
-import offerBanner from "../../assets/banners/offer-banner.jpeg";
+// removed two banners to keep only four hero slides
 
 const banners = [
   {
     id: 1,
     image: dogBanner,
     bg: "bg-[#f5e6d3]",
+    title: "Dog Essentials",
+    tagline: "Quality food & care for your dog",
+    ctaLabel: "Shop Dogs",
+    ctaLink: "/dogs",
   },
 
   {
     id: 2,
     image: catBanner,
     bg: "bg-[#eef3df]",
+    title: "Cat Care",
+    tagline: "Premium nutrition for happy cats",
+    ctaLabel: "Shop Cats",
+    ctaLink: "/cats",
   },
 
   {
     id: 3,
     image: trustBanner,
     bg: "bg-[#edf5dc]",
+    title: "Trusted Brands",
+    tagline: "Shop verified, vet-recommended brands",
+    ctaLabel: "Shop Brands",
+    ctaLink: "/brands",
   },
   {
     id: 4,
     image: heroBanner,
     bg: "bg-[#fffaf6]",
+    title: "New Arrivals",
+    tagline: "Discover latest products and offers",
+    ctaLabel: "Explore",
+    ctaLink: "/",
   },
-  {
-    id: 5,
-    image: smallPetsBanner,
-    bg: "bg-[#f7fdfa]",
-  },
-  {
-    id: 6,
-    image: offerBanner,
-    bg: "bg-[#f0f7ff]",
-  },
+  // only first 4 banners are kept for cleaner hero
 ];
 
 const HeroBanner = () => {
   return (
-    <div className="w-full pb-6">
+    <div className="w-full pb-6 overflow-visible">
+      <div className="relative left-1/2 right-1/2 -translate-x-1/2 w-screen">
       <Swiper
-        modules={[Navigation, Pagination, Autoplay]}
+        modules={[Autoplay]}
         slidesPerView={1}
-        spaceBetween={30}
-        navigation
-        pagination={{ clickable: true }}
+        spaceBetween={0}
         autoplay={{
           delay: 4000,
           disableOnInteraction: false,
         }}
         loop={true}
-        className="w-full"
+        className="w-full hero-swiper"
       >
         {banners.map((banner) => (
           <SwiperSlide key={banner.id}>
-            <div
-              className={`${banner.bg} overflow-hidden shadow-xl w-full`}
-            >
-              <div className="relative flex items-center justify-center min-h-[240px] sm:min-h-[320px] md:min-h-[380px] lg:min-h-[460px] bg-white">
-                
-                {/* Banner Image */}
+            <div className={`${banner.bg} w-full overflow-hidden`}>
+              <div
+                className="relative w-full flex items-center justify-center"
+                style={{ height: 'min(600px, calc(100vh - 80px))', maxHeight: 'min(600px, calc(100vh - 80px))' }}
+              >
                 <img
                   src={banner.image}
-                  alt="banner"
-                  className="w-full h-full object-contain"
+                  alt={banner.title || 'banner'}
+                  className="mx-auto h-full w-auto object-contain"
+                  style={{ objectPosition: 'center' }}
                   loading="lazy"
-                  decoding="async"
-                  width="1600"
-                  height="460"
-                  fetchPriority="low"
                 />
 
-                {/* Optional Dark Overlay */}
-                <div className="absolute inset-0 bg-black/10" />
-                
+                <div className="absolute inset-0 bg-black/6 pointer-events-none" />
               </div>
             </div>
           </SwiperSlide>
         ))}
       </Swiper>
+      </div>
     </div>
   );
 };

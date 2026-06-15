@@ -59,7 +59,7 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
     <Link
       to={`/product/${product.id}`}
       state={{ product }}
-      className="group relative flex flex-col bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300"
+      className="group relative flex flex-col h-full bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow duration-200"
     >
       {/* ── TOP BANNER ── */}
       <div className="bg-[#1B3A6B] text-white text-[11px] font-medium text-center py-2 px-3 tracking-wide">
@@ -67,7 +67,7 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
       </div>
 
       {/* ── IMAGE AREA — fixed 1:1 aspect ratio so all cards align ── */}
-      <div className="relative bg-white px-2 sm:px-4 pt-2 sm:pt-4 pb-1 sm:pb-2">
+      <div className="relative bg-white px-2 sm:px-3 pt-1 sm:pt-2 pb-1 sm:pb-1">
         {/* Wishlist */}
         <button
           onClick={handleWishlist}
@@ -100,14 +100,14 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
           )}
         </div>
 
-        {/* Fixed 1:1 aspect ratio container */}
-        <div className="relative w-full aspect-square overflow-hidden">
-          <img
+        {/* Image container: square on mobile, wider on larger screens */}
+        <div className="relative w-full aspect-square sm:aspect-[5/4] overflow-hidden">
+            <img
             src={imageSrc}
             alt={product.name}
             loading="lazy"
             decoding="async"
-            className="absolute inset-0 w-full h-full object-contain transition-transform duration-500 group-hover:scale-105 p-2 cursor-pointer"
+              className="absolute inset-0 w-full h-full object-contain transition-transform duration-300 group-hover:scale-105 p-1 sm:p-2 cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               navigate(`/product/${product.id}`, { state: { product } });
@@ -132,7 +132,7 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
       </div>
 
       {/* ── CONTENT ── */}
-      <div className="flex flex-col flex-1 px-2 sm:px-4 pb-3 sm:pb-4 pt-1 sm:pt-2">
+      <div className="flex flex-col flex-1 px-2 sm:px-3 pb-2 sm:pb-3 pt-1 sm:pt-1">
 
         {/* Brand + veg-icon row */}
         <div className="flex items-center justify-between mb-1">
@@ -140,13 +140,13 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
         </div>
 
         {/* Product name */}
-        <h3 className="text-sm sm:text-[13.5px] font-semibold text-gray-900 leading-snug line-clamp-2 min-h-10 mb-2 sm:mb-3">
+        <h3 className="text-sm sm:text-[12px] font-semibold text-gray-900 leading-snug line-clamp-2 min-h-10 mb-1 sm:mb-2">
           {product.name}
         </h3>
 
         {/* ── VARIANT SELECTOR ── */}
         {variants.length > 0 && (
-          <div className="flex flex-wrap gap-1 sm:gap-1.5 mb-2 sm:mb-3 relative">
+          <div className="flex flex-wrap gap-1 sm:gap-1 mb-1 sm:mb-2 relative">
             {variants.slice(0, 4).map((v, idx) => {
               const vDiscount = v.originalPrice > v.price
                 ? Math.round(((v.originalPrice - v.price) / v.originalPrice) * 100)
@@ -156,7 +156,7 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
                 <button
                   key={idx}
                   onClick={(e) => handleVariantClick(e, idx)}
-                  className={`relative flex flex-col items-center px-2 sm:px-2.5 py-1 sm:py-1.5 rounded border text-[10px] sm:text-[11px] font-semibold transition-all min-w-11 sm:min-w-12 ${
+                  className={`relative flex flex-col items-center px-1.5 sm:px-2 py-1 sm:py-1 rounded border text-[10px] sm:text-[10px] font-semibold transition-all min-w-10 sm:min-w-11 ${
                     isActive
                       ? "border-[#1B3A6B] bg-[#1B3A6B] text-white"
                       : "border-gray-300 text-gray-700 bg-white hover:border-[#1B3A6B]"
@@ -179,7 +179,7 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
             {variants.length > 4 && (
               <button
                 onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
-                className="flex items-center justify-center w-7 h-7 rounded border border-gray-300 text-gray-400 self-center text-xs"
+                className="flex items-center justify-center w-6 h-6 rounded border border-gray-300 text-gray-400 self-center text-xs"
               >
                 ›
               </button>

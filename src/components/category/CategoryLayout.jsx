@@ -156,7 +156,7 @@ const CategoryLayout = ({ petType: propPetType }) => {
   ];
 
   return (
-    <main className="max-w-7xl mx-auto px-4 md:px-8 py-8">
+    <main className="max-w-7xl mx-auto px-3 md:px-8 py-8">
       <CategoryHero
         title={banner?.title || category.name}
         subtitle={banner?.subtitle}

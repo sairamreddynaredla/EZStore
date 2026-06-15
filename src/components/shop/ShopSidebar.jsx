@@ -53,7 +53,7 @@ const ActivePill = ({ label, onRemove }) => (
 );
 
 /* ─── main component ─── */
-const ShopSidebar = ({ filters, onFilterChange, onClearFilters, products }) => {
+const ShopSidebar = ({ filters, onFilterChange, onClearFilters, products, sidebarTitle, sidebarCount }) => {
   const [showAllBrands, setShowAllBrands] = useState(false);
   const [showAllWeights, setShowAllWeights] = useState(false);
   const [showAllFlavors, setShowAllFlavors] = useState(false);
@@ -154,6 +154,16 @@ const ShopSidebar = ({ filters, onFilterChange, onClearFilters, products }) => {
           </button>
         )}
       </div>
+
+      {/* Optional sidebar title / count (e.g., "Dog Wet Food — 4 Products") */}
+      {(sidebarTitle || sidebarCount !== undefined) && (
+        <div className="px-5 pt-3 pb-4 border-b border-gray-100">
+          <div className="text-sm text-gray-600">{sidebarTitle}</div>
+          {typeof sidebarCount === 'number' && (
+            <div className="text-xs text-gray-400 mt-1">{sidebarCount} Products Available</div>
+          )}
+        </div>
+      )}
 
       {/* Active filter pills */}
       {activePills.length > 0 && (

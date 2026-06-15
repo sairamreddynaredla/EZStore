@@ -79,6 +79,36 @@ const ProductDetails = () => {
     }
   }
 
+  // Wrapper for SimilarProducts to accept either product object or id
+  const similarOnAddToCart = (productOrId, quantity = 1) => {
+    if (!productOrId) return;
+    if (typeof productOrId === 'number' || typeof productOrId === 'string') {
+      const prod = products.find((p) => p.id === Number(productOrId));
+      if (prod) addToCart({ ...prod, quantity });
+    } else if (typeof productOrId === 'object') {
+      const prod = productOrId.id ? products.find((p) => p.id === Number(productOrId.id)) : null;
+      // prefer using the passed object fully if it's complete
+      if (productOrId && productOrId.name) {
+        addToCart({ ...productOrId, quantity });
+      } else if (prod) {
+        addToCart({ ...prod, quantity });
+      }
+    }
+  };
+
+  const similarOnWishlistToggle = (productOrId, isAdding) => {
+    if (!productOrId) return;
+    let prodId = null;
+    if (typeof productOrId === 'object') prodId = productOrId.id;
+    else prodId = productOrId;
+
+    const productToUpdate = products.find((item) => item.id === Number(prodId))
+    if (!productToUpdate) return
+
+    if (isAdding) addToWishlist(productToUpdate)
+    else removeFromWishlist(prodId)
+  }
+
   // PRODUCT NOT FOUND
   if (!product) {
 
@@ -118,7 +148,7 @@ const ProductDetails = () => {
       <Navbar />
 
       {/* PAGE */}
-      <div className="max-w-362.5 mx-auto px-4 md:px-8 py-10">
+      <div className="max-w-362.5 mx-auto px-4 md:px-6 py-6">
 
         {/* BREADCRUMB */}
         <div className="flex flex-wrap items-center gap-3 text-sm text-gray-500 mb-8">
@@ -144,7 +174,7 @@ const ProductDetails = () => {
         </div>
 
         {/* PRODUCT SECTION */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.5fr_0.75fr] gap-6 sm:gap-8 lg:gap-14 bg-white rounded-2xl sm:rounded-3xl lg:rounded-[40px] p-3 sm:p-6 md:p-10 shadow-sm border border-gray-100">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr_0.7fr] gap-4 sm:gap-6 lg:gap-10 bg-white rounded-xl sm:rounded-2xl lg:rounded-[24px] p-3 sm:p-4 md:p-6 shadow-sm border border-gray-100">
 
           {/* LEFT */}
           <div>
@@ -211,9 +241,9 @@ const ProductDetails = () => {
           <div className="border-b border-gray-200">
 
             <button
-              onClick={() => toggleSection('details')}
-              className="w-full flex items-center justify-between px-8 py-6"
-            >
+                onClick={() => toggleSection('details')}
+                className="w-full flex items-center justify-between px-6 py-4"
+              >
 
               <span className="text-lg md:text-xl font-bold">
                 Product Details
@@ -229,7 +259,7 @@ const ProductDetails = () => {
 
             {openSection === 'details' && (
 
-              <div className="px-8 pb-8 text-gray-600 leading-8 text-[15px]">
+              <div className="px-6 pb-6 text-gray-600 leading-7 text-[15px]">
 
                 <p>
 
@@ -250,7 +280,7 @@ const ProductDetails = () => {
 
             <button
               onClick={() => toggleSection('ingredients')}
-              className="w-full flex items-center justify-between px-8 py-6"
+              className="w-full flex items-center justify-between px-6 py-4"
             >
 
               <span className="text-lg md:text-xl font-bold">
@@ -267,19 +297,24 @@ const ProductDetails = () => {
 
             {openSection === 'ingredients' && (
 
-              <div className="px-8 pb-8">
+              <div className="px-6 pb-6">
 
-                <ul className="space-y-4">
+                <ul className="space-y-3">
 
                   {product.ingredients?.map((item, index) => (
 
                     <li
+
                       key={index}
+
                       className="flex items-center gap-3 text-gray-700"
+
                     >
 
                       <span className="text-green-600 text-lg">
+
                         ✔
+
                       </span>
 
                       {item}
@@ -294,14 +329,9 @@ const ProductDetails = () => {
 
             )}
 
-          </div>
-
-          {/* FEATURES */}
-          <div className="border-b border-gray-200">
-
             <button
               onClick={() => toggleSection('features')}
-              className="w-full flex items-center justify-between px-8 py-6"
+              className="w-full flex items-center justify-between px-6 py-4"
             >
 
               <span className="text-lg md:text-xl font-bold">
@@ -318,9 +348,9 @@ const ProductDetails = () => {
 
             {openSection === 'features' && (
 
-              <div className="px-8 pb-8 text-gray-700">
+              <div className="px-6 pb-6 text-gray-700">
 
-                <ul className="space-y-4 list-disc pl-5">
+                <ul className="space-y-3 list-disc pl-5">
 
                   <li>High Protein Formula</li>
                   <li>Supports Healthy Digestion</li>
@@ -341,7 +371,7 @@ const ProductDetails = () => {
 
             <button
               onClick={() => toggleSection('more')}
-              className="w-full flex items-center justify-between px-8 py-6"
+              className="w-full flex items-center justify-between px-6 py-4"
             >
 
               <span className="text-lg md:text-xl font-bold">
@@ -358,39 +388,39 @@ const ProductDetails = () => {
 
             {openSection === 'more' && (
 
-              <div className="px-8 pb-8 text-gray-700">
+              <div className="px-6 pb-6 text-gray-700">
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 
-                  <div className="rounded-3xl bg-slate-50 px-4 py-4">
+                  <div className="rounded-3xl bg-slate-50 px-4 py-3">
                     <div className="flex items-center justify-between gap-4">
                       <span className="text-sm font-semibold text-slate-900">Brand:</span>
                       <span className="text-sm text-slate-600 text-right">{product.brand}</span>
                     </div>
                   </div>
 
-                  <div className="rounded-3xl bg-slate-50 px-4 py-4">
+                  <div className="rounded-3xl bg-slate-50 px-4 py-3">
                     <div className="flex items-center justify-between gap-4">
                       <span className="text-sm font-semibold text-slate-900">Pet Type:</span>
                       <span className="text-sm text-slate-600 text-right">{product.pet || 'Dog'}</span>
                     </div>
                   </div>
 
-                  <div className="rounded-3xl bg-slate-50 px-4 py-4">
+                  <div className="rounded-3xl bg-slate-50 px-4 py-3">
                     <div className="flex items-center justify-between gap-4">
                       <span className="text-sm font-semibold text-slate-900">Life Stage:</span>
                       <span className="text-sm text-slate-600 text-right">{product.lifeStage || 'Adult'}</span>
                     </div>
                   </div>
 
-                  <div className="rounded-3xl bg-slate-50 px-4 py-4">
+                  <div className="rounded-3xl bg-slate-50 px-4 py-3">
                     <div className="flex items-center justify-between gap-4">
                       <span className="text-sm font-semibold text-slate-900">Category:</span>
                       <span className="text-sm text-slate-600 text-right wrap-break-word">{productCategoryLabel}</span>
-                    </div>
+                    </div>                    
                   </div>
 
-                  <div className="rounded-3xl bg-slate-50 px-4 py-4">
+                  <div className="rounded-3xl bg-slate-50 px-4 py-3">
                     <div className="flex items-center justify-between gap-4">
                       <span className="text-sm font-semibold text-slate-900">Flavor:</span>
                       <span className="text-sm text-slate-600 text-right">{product.flavor || 'Chicken'}</span>
@@ -426,8 +456,8 @@ const ProductDetails = () => {
 
             <SimilarProducts
               products={similarProducts}
-              onAddToCart={handleAddToCart}
-              onWishlistToggle={handleWishlistToggle}
+              onAddToCart={similarOnAddToCart}
+              onWishlistToggle={similarOnWishlistToggle}
             />
 
           </div>

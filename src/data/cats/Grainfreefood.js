@@ -1,6 +1,5 @@
 import royalCaninGrainFreeImg from "../../assets/products/cats/grain-free-food/royal-canin-grain-free-adult-cat-food.jpg";
 import orijenImg from "../../assets/products/cats/grain-free-food/orijen-original-grain-free-cat-food.jpg";
-import acanaImg from "../../assets/products/cats/grain-free-food/acana-wild-prairie-grain-free-cat-food.jpg";
 import tasteWildImg from "../../assets/products/cats/grain-free-food/taste-of-the-wild-rocky-mountain-grain-free-cat-food.jpg";
 import farminaImg from "../../assets/products/cats/grain-free-food/farmina-nd-chicken-pomegranate-grain-free-cat-food.jpg";
 
@@ -78,7 +77,7 @@ export const grainFreeFood = [
   subscriptionEligible: true,
   subscriptionDiscount: 0.1,
 
-  relatedProducts: [1502, 1503, 1504],
+  relatedProducts: [1502, 1504],
 },
 
 {
@@ -153,82 +152,7 @@ export const grainFreeFood = [
   subscriptionEligible: true,
   subscriptionDiscount: 0.1,
 
-  relatedProducts: [1501, 1503, 1505],
-},
-
-{
-  id: 1503,
-  name: "Acana Wild Prairie Grain Free Cat Food",
-  brand: "Acana",
-  category: "cats-grain-free-food",
-  subCategory: "grain-free-food",
-  pet: "Cat",
-  petType: "Cat",
-  productCategory: "Cat Food",
-  productType: "Grain Free Food",
-  flavor: "Chicken",
-  lifeStage: "Adult",
-  specialDiet: "Grain Free",
-  vegType: "Non-Veg",
-
-  rating: 4.8,
-  reviews: 264,
-  soldCount: 928,
-  stock: 32,
-
-  fastDelivery: true,
-  isNew: false,
-  deliveryDate: "Tomorrow",
-
-  image: acanaImg,
-
-  images: [
-    acanaImg,
-    acanaImg,
-    acanaImg,
-    acanaImg,
-  ],
-
-  description:
-    "Protein-rich grain-free cat food inspired by natural feline diets.",
-
-  ingredients: [
-    "Chicken",
-    "Turkey",
-    "Fish",
-    "Pumpkin",
-    "Vitamins",
-    "Minerals",
-  ],
-
-  features: [
-    "High animal protein",
-    "Grain free",
-    "Supports immunity",
-    "Healthy digestion",
-  ],
-
-  nutrition: {
-    protein: "37%",
-    fat: "18%",
-    fiber: "4%",
-    moisture: "10%",
-  },
-
-  manufacturer: "Champion Petfoods",
-  country: "Canada",
-
-  weight: ["1.8kg", "4.5kg"],
-
-  variants: [
-    { weight: "1.8kg", price: 29.99, originalPrice: 36.99 },
-    { weight: "4.5kg", price: 72.99, originalPrice: 84.99 },
-  ],
-
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.1,
-
-  relatedProducts: [1501, 1502, 1504],
+  relatedProducts: [1501, 1505],
 },
 
 {

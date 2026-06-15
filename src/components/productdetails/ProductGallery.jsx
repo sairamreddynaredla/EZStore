@@ -150,7 +150,10 @@ const ProductGallery = ({ product }) => {
             )}
           </div>
 
-          <div className="mt-3 sm:mt-4 flex items-center gap-2 sm:gap-3 overflow-x-auto pb-2 hide-scrollbar px-2 sm:px-4">
+          <div
+            className="mt-3 sm:mt-4 flex items-center gap-2 sm:gap-3 overflow-x-auto pb-2 px-2 sm:px-4 [-ms-overflow-style:none] scrollbar-none [&::-webkit-scrollbar]:hidden"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
             {images.map((img, index) => (
               <button
                 key={index}
@@ -158,9 +161,9 @@ const ProductGallery = ({ product }) => {
                 onClick={() => setActiveIndex(index)}
                 onMouseEnter={() => handleThumbnailHover(index)}
                 onFocus={() => handleThumbnailHover(index)}
-                className={`h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-lg sm:rounded-2xl border transition duration-150 focus:outline-none ${
+                className={`h-14 w-14 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-lg sm:rounded-2xl border transition duration-150 transform will-change-transform focus:outline-none ${
                   activeIndex === index
-                    ? "border-gray-900 bg-slate-100 ring-2 ring-offset-1 ring-gray-400"
+                    ? "border-transparent bg-white shadow-lg scale-105 ring-2 ring-[#1F6B52] ring-inset"
                     : "border-gray-300 hover:border-gray-700 bg-white"
                 }`}
                 aria-label={`Preview image ${index + 1}`}
@@ -169,7 +172,7 @@ const ProductGallery = ({ product }) => {
                 <img
                   src={img}
                   alt={`Thumbnail ${index + 1}`}
-                  className="h-full w-full object-contain"
+                  className="h-full w-full object-cover object-center block"
                   loading="lazy"
                   onError={(e) => {
                     e.currentTarget.onerror = null;

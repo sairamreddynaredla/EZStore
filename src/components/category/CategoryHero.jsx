@@ -2,7 +2,7 @@
 
 const CategoryHero = ({ title, subtitle, highlights, image, breadcrumbs, imagePosition }) => (
   <section className="w-full rounded-4xl mb-8 overflow-hidden bg-white border border-gray-200">
-    <div className="max-w-7xl mx-auto px-6 py-10 md:px-12 md:py-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 md:px-12 md:py-12">
       {breadcrumbs && (
         <nav className="mb-4 text-xs text-gray-500 flex flex-wrap gap-2">
           {breadcrumbs.map((crumb, idx) => (

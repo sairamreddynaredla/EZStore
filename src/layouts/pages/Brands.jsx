@@ -15,16 +15,13 @@ import kennelKitchenLogo from '../../assets/brands/kennel-kitchen.jpeg'
 import whiskasLogo from '../../assets/brands/whiskas.jpeg'
 import shebaLogo from '../../assets/brands/sheba.jpeg'
 import tasteWildLogo from '../../assets/brands/taste-of-the-wild.jpeg'
-import acanaLogo from '../../assets/brands/acana.jpeg'
 import goodiesLogo from '../../assets/brands/goodies.jpeg'
-import smartheartLogo from '../../assets/brands/smartheart.jpeg'
 import jerhighLogo from '../../assets/brands/jerhigh.jpeg'
-import himalayaLogo from '../../assets/brands/himalaya.jpeg'
 import banners from '../../assets/brand-banners'
-import spotlightData from '../../data/spotlight'
-import blueBuffaloLogo from '../../assets/brands/BlueBuffelopng.png'
-import temptationsLogo from '../../assets/brands/temptaions..jpeg'
+import ezstoreLogo from '../../assets/logo/ezstore-logo-optimized.png'
 
+// acanaLogo removed
+// blueBuffaloLogo removed
 
 const logoMap = {
   'royal-canin': royalCaninLogo,
@@ -38,14 +35,19 @@ const logoMap = {
   whiskas: whiskasLogo,
   sheba: shebaLogo,
   'taste-of-the-wild': tasteWildLogo,
-  acana: acanaLogo,
+  
   goodies: goodiesLogo,
-  smartheart: smartheartLogo,
   jerhigh: jerhighLogo,
-  himalaya: himalayaLogo,
-  'blue-buffalo': blueBuffaloLogo,
-  temptations: temptationsLogo,
+  
+  // temptations intentionally hidden; fallback to banners if available
+  // fallback mappings for assets available as banners or in logo folder
+  applaws: banners['applaws'] || null,
+  ezstore: ezstoreLogo,
 }
+
+console.log('whiskasLogo =', whiskasLogo)
+console.log('pedigreeLogo =', pedigreeLogo)
+console.log('orijenLogo =', origenLogo)
 
 const BrandsPage = () => {
   const [search, setSearch] = useState('')
@@ -67,6 +69,7 @@ const BrandsPage = () => {
 
   const filteredBrandList = useMemo(() => {
     return allBrands.filter((brand) => {
+      if (brand.hidden) return false
       const matchesSearch = brand.name.toLowerCase().includes(search.toLowerCase())
       const matchesLetter =
         selectedLetter === 'All' || brand.name.startsWith(selectedLetter)
@@ -74,25 +77,14 @@ const BrandsPage = () => {
     })
   }, [allBrands, search, selectedLetter])
 
-  const spotlightImages = (spotlightData && spotlightData.length)
-    ? spotlightData
-    : Object.entries(banners)
-        .slice(0, 3)
-        .map(([key, image]) => ({
-          image,
-          title: String(key).replace(/-/g, ' '),
-          cta: '',
-          link: `/brands/${key}`,
-        }))
+  // Spotlight removed — no right-side promotional column on Brands page
 
   const popularOrder = [
     'whiskas',
     'pedigree',
-    'acana',
     'orijen',
     'applaws',
     'meo',
-    'temptations',
   ]
 
   return (
@@ -207,12 +199,17 @@ const BrandsPage = () => {
                         aria-label={brand.name}
                       >
                         <div className="w-full h-24 flex items-center justify-center bg-white">
-                          <img
-                            src={logoMap[brand.logo] || royalCaninLogo}
-                            alt={brand.name}
-                            className="max-h-20 max-w-full object-contain"
-                            loading="lazy"
-                          />
+                         <img
+  src={logoMap[brand.logo] || royalCaninLogo}
+  alt={brand.name}
+  className="max-h-20 max-w-full object-contain"
+  loading="lazy"
+  onError={(e) => {
+    console.log('FAILED:', brand.name)
+    console.log('LOGO:', brand.logo)
+    console.log('SRC:', e.currentTarget.src)
+  }}
+/>
                         </div>
                       </Link>
                     ))
@@ -239,36 +236,7 @@ const BrandsPage = () => {
             </div>
           </main>
 
-          <aside className="block">
-            <div className="sticky top-6 space-y-6">
-              <div className="rounded-4xl p-6 shadow-lg">
-                <h3 className="text-2xl font-bold mb-2">Brand Spotlight</h3>
-                <p className="text-sm text-gray-600 mb-4">
-                  Get the latest offers on premium brands and shop top-rated products curated for your pet.
-                </p>
-                <div className="space-y-4">
-                  {spotlightImages.map((s, idx) => (
-                    <div key={idx} className="rounded-2xl overflow-hidden border border-gray-100 bg-white">
-                      <Link to={s.link || '/brands'} className="block">
-                        <div className="w-full h-40 sm:h-44 md:h-44 lg:h-40 overflow-hidden bg-white flex items-center justify-center">
-                          <img src={s.image} alt={s.title} className="max-w-full max-h-full object-contain" loading="lazy" />
-                        </div>
-                      </Link>
-                      {s.cta && (
-                        <div className="p-4">
-                          <div className="inline-flex items-center justify-between w-full rounded-full border border-gray-200 px-4 py-3 bg-white">
-                            <span className="text-sm font-semibold">{s.cta}</span>
-                            <span className="ml-2 text-gray-500">→</span>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-              {/* "Why shop brands here?" section removed as requested */}
-            </div>
-          </aside>
+          {/* Right-side brand spotlight removed to keep layout focused on filters + products */}
         </div>
       </div>
 

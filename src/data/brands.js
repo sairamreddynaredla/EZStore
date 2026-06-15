@@ -40,6 +40,7 @@ export const brands = [
   name: 'Himalaya',
   logo: 'himalaya',
   slug: 'himalaya',
+  hidden: true,
 },
   {
     id: 7,
@@ -61,14 +62,9 @@ export const brands = [
   name: 'SmartHeart',
   logo: 'smartheart',
   slug: 'smartheart',
+  hidden: true,
 },
-
-{
-  id: 10,
-  name: 'Acana',
-  logo: 'acana',
-  slug: 'acana',
-}, 
+ 
   {
     id: 11,
     name: 'Whiskas',
@@ -111,14 +107,7 @@ export const brands = [
     slug: 'kennel-kitchen',
     featured: true,
   },
-
-  {
-    id: 17,
-    name: 'Applod',
-    logo: 'applod',
-    slug: 'applod',
-    featured: true,
-  },
+ 
   {
     id: 18,
     name: 'EZStore',
@@ -138,18 +127,37 @@ export const brands = [
     name: 'Temptations',
     logo: 'temptations',
     slug: 'temptations',
+    hidden: true,
   },
   {
     id: 21,
-    name: 'Blue Buffalo',
-    logo: 'blue-buffalo',
-    slug: 'blue-buffalo',
+    name: 'Catmos',
+    logo: 'catmos',
+    slug: 'catmos',
+  },
+  {
+    id: 22,
+    name: 'Imaginelles',
+    logo: 'imaginelles',
+    slug: 'imaginelles',
+  },
+  {
+    id: 23,
+    name: 'Applod',
+    logo: 'applod',
+    slug: 'applod',
+  },
+  {
+    id: 24,
+    name: 'Carniwel',
+    logo: 'carniwel',
+    slug: 'carniwel',
   },
 ]
 
 // Get featured brands for carousel
 export const getFeaturedBrands = () => {
-  return brands.filter(brand => brand.featured)
+  return brands.filter(brand => brand.featured && !brand.hidden)
 }
 
 // Get brand logo filename

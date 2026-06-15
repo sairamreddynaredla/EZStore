@@ -1,4 +1,3 @@
-
 import { useParams, useLocation } from "react-router-dom"
 import { useState, useMemo, useEffect, useRef } from "react"
 import Navbar from "../../components/Navbar"
@@ -10,8 +9,6 @@ import ProductCard from "../../components/products/ProductCard"
 import useCart from "../../hooks/usecart"
 import { useWishlist } from "../../context/WishListContext"
 import ShopSidebar from "../../components/shop/ShopSidebar"
-import BrandSidebar from "../../components/BrandSidebar"
-import BrandRelatedProducts from "../../components/BrandRelatedProducts"
 
 const DEFAULT_FILTERS = {
   brands: [],
@@ -31,7 +28,7 @@ const DEFAULT_FILTERS = {
   specialDiets: [],
 };
 
-const BrandProducts = () => {
+export default function BrandCollectionPage(){
   const { brandSlug } = useParams()
   const location = useLocation();
   const params = new URLSearchParams(location.search);
@@ -53,12 +50,6 @@ const BrandProducts = () => {
     return DEFAULT_FILTERS;
   })
   const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false)
-  // Ensure the sidebar filters include the current brand by default
-  useEffect(() => {
-    if (!brandObj) return;
-    const brandName = brandObj.name;
-    setFilters((prev) => ({ ...prev, brands: [brandName] }));
-  }, [brandObj]);
 
   const brandObj = brands.find(
     (b) => {
@@ -81,7 +72,6 @@ const BrandProducts = () => {
     return [...products, ...(ezstoreProducts || [])]
   }, [])
 
-  // If we don't have exact matches, try a fuzzy search on name/brand/tags to find related products
   const relatedFallback = useMemo(() => {
     const needle = normalizedBrand;
     if (!needle) return [];
@@ -97,7 +87,6 @@ const BrandProducts = () => {
 
   const sidebarProducts = displayBaseBrandProducts
 
-  // compute the top product category for the sidebar title (e.g., 'Dog Wet Food')
   const topCategory = useMemo(() => {
     const counts = {};
     displayBaseBrandProducts.forEach((p) => {
@@ -172,12 +161,15 @@ const BrandProducts = () => {
 
   const productsRef = useRef(null);
 
-  // Auto-scroll to products grid when products load, filters or sort change
+  useEffect(() => {
+    if (!brandObj) return;
+    setFilters((prev) => ({ ...prev, brands: [brandObj.name] }));
+  }, [brandObj]);
+
   useEffect(() => {
     if (!productsRef.current) return;
     try {
       productsRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-      // small offset for fixed header
       window.scrollBy(0, -20);
     } catch (e) {}
   }, [displayedProducts.length, sortBy, filters, brandSlug]);
@@ -195,7 +187,6 @@ const BrandProducts = () => {
     });
   };
 
-  // Simple SortDropdown component
   function SortDropdown({ value, onChange }) {
     const [open, setOpen] = useState(false);
     const options = [
@@ -224,6 +215,7 @@ const BrandProducts = () => {
       </div>
     );
   }
+
 
   return (
     <div className="bg-[#f8f8f8] min-h-screen">
@@ -296,7 +288,8 @@ const BrandProducts = () => {
               </div>
             )}
           </div>
-          {/* right sidebar removed: show only reusable ShopSidebar + product grid */}
+
+          {/* Right-hand brand spotlight removed per design */}
         </div>
       </div>
 
@@ -304,5 +297,3 @@ const BrandProducts = () => {
     </div>
   )
 }
-
-export default BrandProducts

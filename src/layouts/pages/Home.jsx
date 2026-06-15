@@ -8,8 +8,8 @@ import FoodCategorySection from "../../components/home/FoodCategorySection"
 
 import PetCategories from "../../components/home/PetCategories"
 
-import PetBrands from "../../components/home/PetBrands"
 
+import PetBrands from "../../components/home/PetBrands"
 import BestSellerSection from "../../components/home/BestSellerSection"
 
 
@@ -26,7 +26,7 @@ const Home = () => {
 
   return (
 
-    <div className="bg-[#f8f8f8] min-h-screen overflow-hidden">
+    <div className="bg-[#f8f8f8] min-h-screen">
 
       {/* NAVBAR */}
       <Navbar />

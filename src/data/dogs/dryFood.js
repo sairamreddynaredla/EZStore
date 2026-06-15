@@ -1,105 +1,13 @@
 // dogsDryFood.js
 
-import blueBuffaloImg from "../../assets/products/dogs/dry-food/blue-buffalo-wilderness-adult-grain-free-dry-dog-food.png.jpg";
+// blueBuffaloImg removed
 import royalCaninImg from "../../assets/products/dogs/dry-food/royal-canin-maxi-adult-dry-dog-food.png.jpg";
 import purinaImg from "../../assets/products/dogs/dry-food/purina-pro-plan-complete-essentials-adult-dry-dog-food.jpg";
 import farminaImg from "../../assets/products/dogs/dry-food/farmina-nd-chicken-pomegranate-adult-medium-maxi-dry-dog-food.jpg";
-import acanaImg from "../../assets/products/dogs/dry-food/acana-classics-red-meat-recipe-dry-dog-food.jpg";
+// acanaImg removed
 
 
 export const dogsDryFood = [
-  {
-    id: 101,
-    name: "Blue Buffalo Wilderness Adult Grain Free Dry Dog Food",
-    brand: "Blue Buffalo",
-    category: "dogs-dry-food",
-    subCategory: "dry-food",
-    pet: "Dog",
-    petType: "Dog",
-    productCategory: "Dog Food",
-    productType: "Dry Food",
-    breedSize: "Large",
-    shopByBreed: "Large",
-    flavor: "Chicken",
-    lifeStage: "Adult",
-    specialDiet: "Grain Free",
-    vegType: "Non-Veg",
-    size: "Large",
-
-    rating: 4.7,
-    reviews: 86,
-    soldCount: 210,
-    stock: 24,
-
-    fastDelivery: true,
-    isNew: false,
-    deliveryDate: "Tomorrow",
-
-    image: blueBuffaloImg,
-
-    images: [
-      blueBuffaloImg,
-      blueBuffaloImg,
-      blueBuffaloImg,
-      blueBuffaloImg,
-    ],
-
-    description:
-      "Blue Buffalo Wilderness Adult is a grain-free, high-protein dry dog food designed to support strong muscles and steady energy for adult dogs.",
-
-    ingredients: [
-      "Chicken",
-      "Pea Protein",
-      "Peas",
-      "Potatoes",
-      "Canola Oil",
-      "Vitamins",
-      "Minerals",
-    ],
-
-    features: [
-      "High protein from real chicken",
-      "Grain-free recipe",
-      "Supports healthy muscle development",
-      "Rich in antioxidants",
-    ],
-
-    nutrition: {
-      protein: "32%",
-      fat: "18%",
-      fiber: "5%",
-      moisture: "10%",
-    },
-
-    manufacturer: "Blue Buffalo",
-
-    country: "USA",
-
-    weight: ["4lb", "12lb", "24lb"],
-
-    variants: [
-      {
-        weight: "4lb",
-        price: 21.99,
-        originalPrice: 29.99,
-      },
-      {
-        weight: "12lb",
-        price: 54.99,
-        originalPrice: 69.99,
-      },
-      {
-        weight: "24lb",
-        price: 94.99,
-        originalPrice: 119.99,
-      },
-    ],
-
-    subscriptionEligible: true,
-    subscriptionDiscount: 0.10,
-
-    relatedProducts: [102, 103, 104],
-  },
 
   {
     id: 102,
@@ -191,7 +99,7 @@ export const dogsDryFood = [
     subscriptionEligible: true,
     subscriptionDiscount: 0.10,
 
-    relatedProducts: [103, 104, 105],
+    relatedProducts: [103, 104],
   },
 
   {
@@ -375,13 +283,14 @@ export const dogsDryFood = [
     subscriptionEligible: true,
     subscriptionDiscount: 0.10,
 
-    relatedProducts: [103, 104, 105],
+    relatedProducts: [103],
   },
 
-  { 
-    id: 105,
-    name: "Acana Classics Red Meat Recipe Dry Dog Food",
-    brand: "Acana",
+  // Sample product for Applod (emerging)
+  {
+    id: 106,
+    name: "Applod Chicken & Veg Adult Dry Dog Food",
+    brand: "Applod",
     category: "dogs-dry-food",
     subCategory: "dry-food",
     pet: "Dog",
@@ -389,84 +298,61 @@ export const dogsDryFood = [
     productCategory: "Dog Food",
     productType: "Dry Food",
     breedSize: "All",
-    shopByBreed: "All",
-    flavor: "Red Meat",
+    flavor: "Chicken & Veg",
     lifeStage: "Adult",
-    specialDiet: "High Protein",
-    vegType: "Non-Veg",
-    size: "Large",
 
-    rating: 4.8,
-    reviews: 94,
-    soldCount: 266,
+    rating: 4.4,
+    reviews: 34,
+    soldCount: 90,
     stock: 22,
 
     fastDelivery: true,
-    isNew: false,
+    isNew: true,
     deliveryDate: "Tomorrow",
 
-    image: acanaImg,
+    image: farminaImg,
+    images: [farminaImg],
 
-    images: [
-      acanaImg,
-      acanaImg,
-      acanaImg,
-      acanaImg,
-    ],
+    description: "Applod balanced nutrition for adult dogs with real chicken.",
 
-    description:
-      "Protein-rich recipe made with beef, pork and lamb to support lean muscle and overall health.",
+    variants: [{ weight: "2kg", price: 14.99, originalPrice: 18.99 }],
 
-    ingredients: [
-      "Beef",
-      "Pork",
-      "Lamb",
-      "Pumpkin",
-      "Lentils",
-      "Vitamins",
-    ],
+    subscriptionEligible: false,
+    relatedProducts: [102, 103],
+  },
 
-    features: [
-      "Protein rich formula",
-      "Supports lean muscles",
-      "Healthy digestion",
-      "Natural ingredients",
-    ],
+  // Sample product for Carniwel (emerging)
+  {
+    id: 107,
+    name: "Carniwel Puppy Growth Formula",
+    brand: "Carniwel",
+    category: "dogs-dry-food",
+    subCategory: "dry-food",
+    pet: "Dog",
+    petType: "Puppy",
+    productCategory: "Dog Food",
+    productType: "Dry Food",
+    breedSize: "Small",
+    flavor: "Chicken",
+    lifeStage: "Puppy",
 
-    nutrition: {
-      protein: "29%",
-      fat: "17%",
-      fiber: "5%",
-      moisture: "12%",
-    },
+    rating: 4.6,
+    reviews: 20,
+    soldCount: 50,
+    stock: 15,
 
-    manufacturer: "Acana",
+    fastDelivery: true,
+    isNew: true,
+    deliveryDate: "Tomorrow",
 
-    country: "Canada",
+    image: purinaImg,
+    images: [purinaImg],
 
-    weight: ["4lb", "14lb", "25lb"],
+    description: "Carniwel growth formula to support healthy puppy development.",
 
-    variants: [
-      {
-        weight: "4lb",
-        price: 26.99,
-        originalPrice: 34.99,
-      },
-      {
-        weight: "14lb",
-        price: 69.99,
-        originalPrice: 84.99,
-      },
-      {
-        weight: "25lb",
-        price: 109.99,
-        originalPrice: 129.99,
-      },
-    ],
+    variants: [{ weight: "1kg", price: 12.99, originalPrice: 15.99 }],
 
-    subscriptionEligible: true,
-    subscriptionDiscount: 0.10,
-
-    relatedProducts: [104, 105, 106],
+    subscriptionEligible: false,
+    relatedProducts: [102],
   },
 ];

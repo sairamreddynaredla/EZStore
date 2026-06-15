@@ -15,13 +15,6 @@ const spotlight = [
     link: '/brands/zigly-lifestyle',
   },
   {
-    key: 'applod',
-    image: getFile('Applod.webp'),
-    title: 'Applod — Up to 15% OFF',
-    cta: '',
-    link: '/brands/applod',
-  },
-  {
     key: 'furpro',
     image: getFile('Furpro.webp'),
     title: 'FurPro grooming — New arrivals',

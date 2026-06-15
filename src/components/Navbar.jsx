@@ -14,7 +14,7 @@ import logo from "../assets/logo/ezstore-logo-optimized.png";
 
 function Navbar() {
   const navigate = useNavigate();
-  const { totalItems } = useCart();
+  const { totalItems, flash, hideFlash } = useCart();
   const [mobileMenu, setMobileMenu] = useState(false);
   const [search, setSearch] = useState("");
 
@@ -35,7 +35,7 @@ function Navbar() {
   return (
     <>
       <header className="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-sm shadow-md border-b border-[#E5E7EB]">
-        <div className="max-w-7xl mx-auto flex items-center justify-between px-4 md:px-8 py-3 md:py-4 gap-6">
+        <div className="max-w-7xl mx-auto flex items-center justify-between px-3 md:px-8 py-3 md:py-4 gap-6">
           <NavLink to="/" className="flex items-center gap-1 shrink-0 group hover:opacity-80 transition-opacity duration-300">
             <img src={logo} alt="EZStore Logo" className="h-10 md:h-12 object-contain mix-blend-multiply" loading="lazy" />
           </NavLink>
@@ -213,6 +213,12 @@ function Navbar() {
           </div>
         )}
       </header>
+      {flash?.visible && (
+        <div className={`fixed top-4 right-4 z-50 flex items-center gap-3 px-3 py-2 text-xs font-medium shadow-lg text-white ${flash.type === 'success' ? 'bg-emerald-600' : 'bg-red-600'} rounded-md`}>
+          <span className="leading-4">{flash.message}</span>
+          <button onClick={() => hideFlash && hideFlash()} aria-label="Close" className="ml-1 text-white/80 hover:text-white text-sm leading-4">×</button>
+        </div>
+      )}
       <div className="h-20 md:h-17" aria-hidden="true" />
     </>
   );

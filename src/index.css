@@ -57,3 +57,13 @@ a {
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
+/* Hero Swiper styles moved into Tailwind components layer */
+@layer components {
+  /* Hide hero swiper navigation buttons and pagination */
+  .hero-swiper .swiper-button-prev,
+  .hero-swiper .swiper-button-next,
+  .hero-swiper .swiper-pagination {
+    display: none;
+  }
+}

@@ -47,15 +47,14 @@ const CategoryPage = () => {
       breedSizes: [],
       specialDiets: [],
       sizes: [],
-    });
-
-  const [includeOutOfStock, setIncludeOutOfStock] =
-    useState(false);
-
-  const [priceRange, setPriceRange] =
-    useState("");
-
-  const [openSections, setOpenSections] =
+                [
+                  "Royal Canin",
+                  "Pedigree",
+                  "Drools",
+                  "Farmina",
+                  "Taste Of The Wild",
+                  "Purina",
+                ].map((brand) => (
     useState({
       availability: true,
       price: true,
@@ -718,8 +717,6 @@ const CategoryPage = () => {
                   "Farmina",
                   "Taste Of The Wild",
                   "SmartHeart",
-                  "Acana",
-                  "Blue Buffalo",
                   "Purina",
                 ].map((brand) => (
 

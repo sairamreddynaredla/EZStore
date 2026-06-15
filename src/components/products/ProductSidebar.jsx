@@ -34,7 +34,6 @@ const filtersData = [
     options: [
       "Royal Canin",
       "Pedigree",
-      "Acana",
       "Farmina",
       "Drools",
     ],

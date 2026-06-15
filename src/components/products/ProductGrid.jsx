@@ -1,3 +1,4 @@
+import React from 'react'
 import ProductCard from "./ProductCard";
 
 const ProductGrid = ({
@@ -6,6 +7,7 @@ const ProductGrid = ({
   onWishlistToggle,
   loading = false,
   emptyMessage = "No products found",
+  onVisibleProductChange, // (product) => void
 }) => {
   if (!loading && products.length === 0) {
     return (
@@ -14,6 +16,35 @@ const ProductGrid = ({
       </div>
     );
   }
+
+  // Refs for observer
+  const itemRefs = React.useRef([]);
+
+  React.useEffect(() => {
+    itemRefs.current = itemRefs.current.slice(0, products.length);
+  }, [products.length]);
+
+  React.useEffect(() => {
+    if (!onVisibleProductChange || products.length === 0) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        // pick the entry with largest intersectionRatio
+        let best = null;
+        entries.forEach((e) => {
+          if (!best || e.intersectionRatio > best.intersectionRatio) best = e;
+        });
+        if (best && best.target && best.target.dataset && best.target.dataset.index) {
+          const idx = Number(best.target.dataset.index);
+          const prod = products[idx];
+          if (prod) onVisibleProductChange(prod);
+        }
+      },
+      { root: null, rootMargin: '0px', threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+
+    itemRefs.current.forEach((el) => el && obs.observe(el));
+    return () => obs.disconnect();
+  }, [onVisibleProductChange, products]);
 
   return (
     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
@@ -32,13 +63,18 @@ const ProductGrid = ({
               </div>
             </div>
           ))
-        : products.map((product) => (
-            <ProductCard
+        : products.map((product, idx) => (
+            <div
               key={product.id}
-              product={product}
-              onAddToCart={onAddToCart}
-              onWishlistToggle={onWishlistToggle}
-            />
+              data-index={idx}
+              ref={(el) => (itemRefs.current[idx] = el)}
+            >
+              <ProductCard
+                product={product}
+                onAddToCart={onAddToCart}
+                onWishlistToggle={onWishlistToggle}
+              />
+            </div>
           ))}
     </div>
   );

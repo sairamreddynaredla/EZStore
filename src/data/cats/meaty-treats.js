@@ -1,4 +1,4 @@
-import temptationsChickenImg from "../../assets/products/cats/meaty-treats/temptations-chicken-flavor-cat-treats.jpg";
+// temptationsChickenImg removed; Temptations brand being hidden
 import shebaChickenImg from "../../assets/products/cats/meaty-treats/sheba-chicken-meaty-cat-treats.jpg";
 import meoTunaImg from "../../assets/products/cats/meaty-treats/meo-tuna-meaty-cat-treats.jpg";
 import friskiesChickenImg from "../../assets/products/cats/meaty-treats/friskies-chicken-meaty-bites-cat-treats.jpg";
@@ -30,14 +30,7 @@ export const catMeatyTreats = [
   isNew: false,
   deliveryDate: "Tomorrow",
 
-  image: temptationsChickenImg,
-
-  images: [
-    temptationsChickenImg,
-    temptationsChickenImg,
-    temptationsChickenImg,
-    temptationsChickenImg,
-  ],
+  // images removed for Temptations (brand hidden)
 
   description:
     "Delicious chicken flavored meaty treats with irresistible taste.",

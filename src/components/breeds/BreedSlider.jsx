@@ -10,18 +10,13 @@ import {
 import "swiper/css";
 import "swiper/css/navigation";
 
-const BreedSlider = ({ title, breeds }) => {
+const BreedSlider = ({ breeds }) => {
   const swiperRef = useRef(null);
 
   return (
-
     <section className="mt-16 px-6">
-
       <div className="relative">
-        <h2 className="text-3xl font-bold mb-10 text-center">
-          {title || "Explore Breeds"}
-        </h2>
-
+        {/* title removed to avoid duplicate subtitle on category pages */}
         <button
           onClick={() => swiperRef.current?.slidePrev()}
           className="absolute left-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white shadow-xl w-12 h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
@@ -43,58 +38,31 @@ const BreedSlider = ({ title, breeds }) => {
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
         }}
-        spaceBetween={20}
+        spaceBetween={36}
         breakpoints={{
-
-          320: {
-            slidesPerView: 2,
-          },
-
-          640: {
-            slidesPerView: 3,
-          },
-
-          1024: {
-            slidesPerView: 5,
-          },
-
+          320: { slidesPerView: 2 },
+          640: { slidesPerView: 3 },
+          1024: { slidesPerView: 5 },
         }}
-        className="px-6"
+        className="py-8"
       >
-
         {breeds.map((breed) => (
-
-          <SwiperSlide key={breed.slug}>
-
-            <Link to={`/breed/${breed.slug}`}>
-
-              <div className="text-center cursor-pointer hover:scale-105 transition-all duration-300">
-
+          <SwiperSlide key={breed.slug} className="flex justify-center">
+            <Link to={`/breed/${breed.slug}`} className="flex flex-col items-center">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden border border-orange-200 shadow-sm flex items-center justify-center bg-white">
                 <img
                   src={breed.banner?.image || breed.image}
                   alt={breed.banner?.title || breed.name}
-                  className="w-36 h-36 rounded-full object-cover mx-auto border-4 border-orange-200 shadow-lg"
+                  className="w-full h-full object-cover object-center"
                   loading="lazy"
                 />
-
-                <h3 className="mt-4 font-bold text-lg">
-
-                  {breed.banner?.title || breed.name}
-
-                </h3>
-
               </div>
-
+              <h3 className="mt-2 font-medium text-sm sm:text-sm md:text-base text-center max-w-[140px] truncate">{breed.banner?.title || breed.name}</h3>
             </Link>
-
           </SwiperSlide>
-
         ))}
-
       </Swiper>
-
     </section>
-
   );
 };
 

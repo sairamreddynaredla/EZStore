@@ -2,7 +2,7 @@
 
 import purinaWetImg from "../../assets/products/dogs/wet-food/purina-pro-plan-savory-wet-dog-food.jpg";
 import royalCaninWetImg from "../../assets/products/dogs/wet-food/royal-canin-adult-wet-dog-food.jpg";
-import blueBuffaloWetImg from "../../assets/products/dogs/wet-food/blue-buffalo-homestyle-recipe-wet-dog-food.jpg";
+// blueBuffaloWetImg removed
 import pedigreeWetImg from "../../assets/products/dogs/wet-food/pedigree-chicken-wet-dog-food.jpg";
 import hillsWetImg from "../../assets/products/dogs/wet-food/hills-science-diet-adult-wet-dog-food.jpg";
 
@@ -80,7 +80,7 @@ export const dogsWetFood = [
       },
     ],
 
-    relatedProducts: [202, 203, 204],
+    relatedProducts: [202, 204],
   },
 
   {
@@ -155,83 +155,10 @@ export const dogsWetFood = [
       },
     ],
 
-    relatedProducts: [201, 203, 205],
+    relatedProducts: [201, 205],
   },
 
-  {
-    id: 203,
-    name: "Blue Buffalo Homestyle Recipe Wet Dog Food",
-    brand: "Blue Buffalo",
-    category: "dogs-wet-food",
-    subCategory: "wet-food",
-    pet: "Dog",
-    petType: "Dog",
-    productCategory: "Dog Food",
-    productType: "Wet Food",
-    breedSize: "All Breeds",
-    shopByBreed: "All Breeds",
-    flavor: "Chicken Dinner",
-    lifeStage: "Adult",
-    specialDiet: "Natural",
-    vegType: "Non-Veg",
-    size: "12.5oz",
-
-    rating: 4.7,
-    reviews: 210,
-    soldCount: 290,
-    stock: 26,
-
-    fastDelivery: true,
-    isNew: true,
-    deliveryDate: "Tomorrow",
-
-    image: blueBuffaloWetImg,
-
-    images: [
-      blueBuffaloWetImg,
-      blueBuffaloWetImg,
-    ],
-
-    description:
-      "Natural wet dog food made with real chicken and wholesome vegetables.",
-
-    ingredients: [
-      "Chicken",
-      "Chicken Broth",
-      "Carrots",
-      "Peas",
-      "Brown Rice",
-      "Vitamins",
-    ],
-
-    features: [
-      "Real chicken first ingredient",
-      "Natural recipe",
-      "No artificial preservatives",
-      "Rich taste",
-    ],
-
-    nutrition: {
-      protein: "9.5%",
-      fat: "7%",
-      fiber: "1.5%",
-      moisture: "78%",
-    },
-
-    manufacturer: "Blue Buffalo",
-
-    weight: ["12.5oz"],
-
-    variants: [
-      {
-        weight: "12.5oz",
-        price: 4.19,
-        originalPrice: 5.19,
-      },
-    ],
-
-    relatedProducts: [201, 202, 205],
-  },
+  
 
   {
     id: 204,

@@ -2,448 +2,230 @@ import royalCaninPuppyImg from "../../assets/products/dogs/puppyFood/royal-canin
 import pedigreePuppyImg from "../../assets/products/dogs/puppyFood/pedigree-puppy-chicken-milk-dry-food.jpg";
 import droolsPuppyImg from "../../assets/products/dogs/puppyFood/drools-puppy-chicken-egg-dry-food.jpg";
 import farminaPuppyImg from "../../assets/products/dogs/puppyFood/farmina-nd-puppy-medium-maxi-food.jpg";
-import acanaPuppyImg from "../../assets/products/dogs/puppyFood/acana-puppy-recipe-dry-dog-food.jpg";
 
 export const dogsPuppyFood = [
+  {
+    id: 601,
+    name: "Royal Canin Mini Puppy Dry Dog Food",
+    brand: "Royal Canin",
+    category: "dogs-puppy-food",
+    subCategory: "puppy-food",
+    pet: "Dog",
+    petType: "Dog",
+    productCategory: "Dog Food",
+    productType: "Puppy Food",
+    breedSize: "Small",
+    shopByBreed: "Small",
+    flavor: "Chicken",
+    lifeStage: "Puppy",
+    specialDiet: "Growth Support",
+    vegType: "Non-Veg",
+    size: "Small",
 
-{
-  id: 601,
-  name: "Royal Canin Mini Puppy Dry Dog Food",
-  brand: "Royal Canin",
-  category: "dogs-puppy-food",
-  subCategory: "puppy-food",
-  pet: "Dog",
-  petType: "Dog",
-  productCategory: "Dog Food",
-  productType: "Puppy Food",
-  breedSize: "Small",
-  shopByBreed: "Small",
-  flavor: "Chicken",
-  lifeStage: "Puppy",
-  specialDiet: "Growth Support",
-  vegType: "Non-Veg",
-  size: "Small",
+    rating: 4.9,
+    reviews: 152,
+    soldCount: 420,
+    stock: 35,
 
-  rating: 4.9,
-  reviews: 152,
-  soldCount: 420,
-  stock: 35,
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
 
-  fastDelivery: true,
-  isNew: false,
-  deliveryDate: "Tomorrow",
+    image: royalCaninPuppyImg,
 
-  image: royalCaninPuppyImg,
+    images: [
+      royalCaninPuppyImg,
+      royalCaninPuppyImg,
+      royalCaninPuppyImg,
+      royalCaninPuppyImg,
+    ],
 
-  images: [
-    royalCaninPuppyImg,
-    royalCaninPuppyImg,
-    royalCaninPuppyImg,
-    royalCaninPuppyImg,
-  ],
+    description:
+      "Royal Canin Mini Puppy Dry Dog Food is specially formulated to support healthy growth, immune system development, and digestive health in small breed puppies.",
 
-  description:
-    "Royal Canin Mini Puppy Dry Dog Food is specially formulated to support healthy growth, immune system development, and digestive health in small breed puppies.",
+    ingredients: ["Chicken Protein", "Rice", "Corn", "Animal Fat", "Fish Oil", "Vitamins", "Minerals"],
 
-  ingredients: [
-    "Chicken Protein",
-    "Rice",
-    "Corn",
-    "Animal Fat",
-    "Fish Oil",
-    "Vitamins",
-    "Minerals",
-  ],
+    features: ["Supports immune system", "Promotes healthy growth", "Highly digestible formula", "Ideal for small breed puppies"],
 
-  features: [
-    "Supports immune system",
-    "Promotes healthy growth",
-    "Highly digestible formula",
-    "Ideal for small breed puppies",
-  ],
+    nutrition: { protein: "31%", fat: "20%", fiber: "2.4%", moisture: "10%" },
 
-  nutrition: {
-    protein: "31%",
-    fat: "20%",
-    fiber: "2.4%",
-    moisture: "10%",
+    manufacturer: "Royal Canin",
+    country: "France",
+
+    weight: ["1kg", "4kg"],
+
+    variants: [
+      { weight: "1kg", price: 12.99, originalPrice: 15.99 },
+      { weight: "4kg", price: 44.99, originalPrice: 52.99 },
+    ],
+
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.10,
+
+    relatedProducts: [602, 603, 604],
   },
+  {
+    id: 602,
+    name: "Pedigree Puppy Chicken & Milk Dry Food",
+    brand: "Pedigree",
+    category: "dogs-puppy-food",
+    subCategory: "puppy-food",
+    pet: "Dog",
+    petType: "Dog",
+    productCategory: "Dog Food",
+    productType: "Puppy Food",
+    breedSize: "All Breeds",
+    shopByBreed: "All",
+    flavor: "Chicken & Milk",
+    lifeStage: "Puppy",
+    specialDiet: "Growth Support",
+    vegType: "Non-Veg",
+    size: "Medium",
 
-  manufacturer: "Royal Canin",
-  country: "France",
+    rating: 4.8,
+    reviews: 138,
+    soldCount: 385,
+    stock: 42,
 
-  weight: ["1kg", "4kg"],
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
 
-  variants: [
-    {
-      weight: "1kg",
-      price: 12.99,
-      originalPrice: 15.99,
-    },
-    {
-      weight: "4kg",
-      price: 44.99,
-      originalPrice: 52.99,
-    },
-  ],
+    image: pedigreePuppyImg,
 
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.10,
+    images: [pedigreePuppyImg, pedigreePuppyImg, pedigreePuppyImg, pedigreePuppyImg],
 
-  relatedProducts: [602, 603, 604],
-},
+    description: "Pedigree Puppy Food with chicken and milk provides complete nutrition for growing puppies with strong bones and healthy muscles.",
 
-{
-  id: 602,
-  name: "Pedigree Puppy Chicken & Milk Dry Food",
-  brand: "Pedigree",
-  category: "dogs-puppy-food",
-  subCategory: "puppy-food",
-  pet: "Dog",
-  petType: "Dog",
-  productCategory: "Dog Food",
-  productType: "Puppy Food",
-  breedSize: "All Breeds",
-  shopByBreed: "All",
-  flavor: "Chicken & Milk",
-  lifeStage: "Puppy",
-  specialDiet: "Growth Support",
-  vegType: "Non-Veg",
-  size: "Medium",
+    ingredients: ["Chicken", "Milk Solids", "Rice", "Corn", "Vegetable Oil", "Minerals"],
 
-  rating: 4.8,
-  reviews: 138,
-  soldCount: 385,
-  stock: 42,
+    features: ["Healthy bone growth", "Strong muscles", "Supports brain development", "Balanced puppy nutrition"],
 
-  fastDelivery: true,
-  isNew: false,
-  deliveryDate: "Tomorrow",
+    nutrition: { protein: "28%", fat: "14%", fiber: "5%", moisture: "10%" },
 
-  image: pedigreePuppyImg,
+    manufacturer: "Mars Petcare",
+    country: "India",
 
-  images: [
-    pedigreePuppyImg,
-    pedigreePuppyImg,
-    pedigreePuppyImg,
-    pedigreePuppyImg,
-  ],
+    weight: ["1.2kg", "3kg", "10kg"],
 
-  description:
-    "Pedigree Puppy Food with chicken and milk provides complete nutrition for growing puppies with strong bones and healthy muscles.",
+    variants: [
+      { weight: "1.2kg", price: 8.99, originalPrice: 10.99 },
+      { weight: "3kg", price: 19.99, originalPrice: 24.99 },
+      { weight: "10kg", price: 49.99, originalPrice: 59.99 },
+    ],
 
-  ingredients: [
-    "Chicken",
-    "Milk Solids",
-    "Rice",
-    "Corn",
-    "Vegetable Oil",
-    "Minerals",
-  ],
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.10,
 
-  features: [
-    "Healthy bone growth",
-    "Strong muscles",
-    "Supports brain development",
-    "Balanced puppy nutrition",
-  ],
-
-  nutrition: {
-    protein: "28%",
-    fat: "14%",
-    fiber: "5%",
-    moisture: "10%",
+    relatedProducts: [601, 603, 604],
   },
+  {
+    id: 603,
+    name: "Drools Puppy Chicken & Egg Dry Food",
+    brand: "Drools",
+    category: "dogs-puppy-food",
+    subCategory: "puppy-food",
+    pet: "Dog",
+    petType: "Dog",
+    productCategory: "Dog Food",
+    productType: "Puppy Food",
+    breedSize: "All Breeds",
+    shopByBreed: "All",
+    flavor: "Chicken & Egg",
+    lifeStage: "Puppy",
+    specialDiet: "Growth Support",
+    vegType: "Non-Veg",
+    size: "Medium",
 
-  manufacturer: "Mars Petcare",
-  country: "India",
+    rating: 4.7,
+    reviews: 122,
+    soldCount: 310,
+    stock: 39,
 
-  weight: ["1.2kg", "3kg", "10kg"],
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
 
-  variants: [
-    {
-      weight: "1.2kg",
-      price: 8.99,
-      originalPrice: 10.99,
-    },
-    {
-      weight: "3kg",
-      price: 19.99,
-      originalPrice: 24.99,
-    },
-    {
-      weight: "10kg",
-      price: 49.99,
-      originalPrice: 59.99,
-    },
-  ],
+    image: droolsPuppyImg,
 
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.10,
+    images: [droolsPuppyImg, droolsPuppyImg, droolsPuppyImg, droolsPuppyImg],
 
-  relatedProducts: [601, 603, 605],
-},
+    description: "Drools Puppy Food contains high-quality protein and essential nutrients to support healthy puppy growth and development.",
 
-{
-  id: 603,
-  name: "Drools Puppy Chicken & Egg Dry Food",
-  brand: "Drools",
-  category: "dogs-puppy-food",
-  subCategory: "puppy-food",
-  pet: "Dog",
-  petType: "Dog",
-  productCategory: "Dog Food",
-  productType: "Puppy Food",
-  breedSize: "All Breeds",
-  shopByBreed: "All",
-  flavor: "Chicken & Egg",
-  lifeStage: "Puppy",
-  specialDiet: "Growth Support",
-  vegType: "Non-Veg",
-  size: "Medium",
+    ingredients: ["Chicken", "Egg", "Rice", "Corn", "Fish Oil", "Minerals"],
 
-  rating: 4.7,
-  reviews: 122,
-  soldCount: 310,
-  stock: 39,
+    features: ["High protein formula", "Supports healthy growth", "Strong immunity", "Improves digestion"],
 
-  fastDelivery: true,
-  isNew: false,
-  deliveryDate: "Tomorrow",
+    nutrition: { protein: "30%", fat: "14%", fiber: "4%", moisture: "10%" },
 
-  image: droolsPuppyImg,
+    manufacturer: "Drools Pet Food Pvt Ltd",
+    country: "India",
 
-  images: [
-    droolsPuppyImg,
-    droolsPuppyImg,
-    droolsPuppyImg,
-    droolsPuppyImg,
-  ],
+    weight: ["1.2kg", "3kg", "10kg"],
 
-  description:
-    "Drools Puppy Food contains high-quality protein and essential nutrients to support healthy puppy growth and development.",
+    variants: [
+      { weight: "1.2kg", price: 7.99, originalPrice: 9.99 },
+      { weight: "3kg", price: 18.99, originalPrice: 22.99 },
+      { weight: "10kg", price: 45.99, originalPrice: 55.99 },
+    ],
 
-  ingredients: [
-    "Chicken",
-    "Egg",
-    "Rice",
-    "Corn",
-    "Fish Oil",
-    "Minerals",
-  ],
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.10,
 
-  features: [
-    "High protein formula",
-    "Supports healthy growth",
-    "Strong immunity",
-    "Improves digestion",
-  ],
-
-  nutrition: {
-    protein: "30%",
-    fat: "14%",
-    fiber: "4%",
-    moisture: "10%",
+    relatedProducts: [601, 602, 604],
   },
+  {
+    id: 604,
+    name: "Farmina N&D Puppy Medium Maxi Food",
+    brand: "Farmina",
+    category: "dogs-puppy-food",
+    subCategory: "puppy-food",
+    pet: "Dog",
+    petType: "Dog",
+    productCategory: "Dog Food",
+    productType: "Puppy Food",
+    breedSize: "Large",
+    shopByBreed: "Large",
+    flavor: "Chicken & Pomegranate",
+    lifeStage: "Puppy",
+    specialDiet: "Grain Free",
+    vegType: "Non-Veg",
+    size: "Large",
 
-  manufacturer: "Drools Pet Food Pvt Ltd",
-  country: "India",
+    rating: 4.9,
+    reviews: 94,
+    soldCount: 205,
+    stock: 18,
 
-  weight: ["1.2kg", "3kg", "10kg"],
+    fastDelivery: true,
+    isNew: true,
+    deliveryDate: "Tomorrow",
 
-  variants: [
-    {
-      weight: "1.2kg",
-      price: 7.99,
-      originalPrice: 9.99,
-    },
-    {
-      weight: "3kg",
-      price: 18.99,
-      originalPrice: 22.99,
-    },
-    {
-      weight: "10kg",
-      price: 45.99,
-      originalPrice: 55.99,
-    },
-  ],
+    image: farminaPuppyImg,
 
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.10,
+    images: [farminaPuppyImg, farminaPuppyImg, farminaPuppyImg, farminaPuppyImg],
 
-  relatedProducts: [601, 602, 604],
-},
+    description: "Farmina N&D Puppy Food is a premium grain-free recipe designed to support healthy growth and development in puppies.",
 
-{
-  id: 604,
-  name: "Farmina N&D Puppy Medium Maxi Food",
-  brand: "Farmina",
-  category: "dogs-puppy-food",
-  subCategory: "puppy-food",
-  pet: "Dog",
-  petType: "Dog",
-  productCategory: "Dog Food",
-  productType: "Puppy Food",
-  breedSize: "Large",
-  shopByBreed: "Large",
-  flavor: "Chicken & Pomegranate",
-  lifeStage: "Puppy",
-  specialDiet: "Grain Free",
-  vegType: "Non-Veg",
-  size: "Large",
+    ingredients: ["Chicken", "Pomegranate", "Sweet Potato", "Fish Oil", "Vitamins", "Minerals"],
 
-  rating: 4.9,
-  reviews: 94,
-  soldCount: 205,
-  stock: 18,
+    features: ["Grain-free recipe", "High animal protein", "Supports healthy growth", "Premium ingredients"],
 
-  fastDelivery: true,
-  isNew: true,
-  deliveryDate: "Tomorrow",
+    nutrition: { protein: "35%", fat: "20%", fiber: "2.9%", moisture: "9%" },
 
-  image: farminaPuppyImg,
+    manufacturer: "Farmina",
+    country: "Italy",
 
-  images: [
-    farminaPuppyImg,
-    farminaPuppyImg,
-    farminaPuppyImg,
-    farminaPuppyImg,
-  ],
+    weight: ["2.5kg", "12kg"],
 
-  description:
-    "Farmina N&D Puppy Food is a premium grain-free recipe designed to support healthy growth and development in puppies.",
+    variants: [
+      { weight: "2.5kg", price: 24.99, originalPrice: 29.99 },
+      { weight: "12kg", price: 84.99, originalPrice: 99.99 },
+    ],
 
-  ingredients: [
-    "Chicken",
-    "Pomegranate",
-    "Sweet Potato",
-    "Fish Oil",
-    "Vitamins",
-    "Minerals",
-  ],
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.10,
 
-  features: [
-    "Grain-free recipe",
-    "High animal protein",
-    "Supports healthy growth",
-    "Premium ingredients",
-  ],
-
-  nutrition: {
-    protein: "35%",
-    fat: "20%",
-    fiber: "2.9%",
-    moisture: "9%",
+    relatedProducts: [601, 603, 602],
   },
-
-  manufacturer: "Farmina",
-  country: "Italy",
-
-  weight: ["2.5kg", "12kg"],
-
-  variants: [
-    {
-      weight: "2.5kg",
-      price: 24.99,
-      originalPrice: 29.99,
-    },
-    {
-      weight: "12kg",
-      price: 84.99,
-      originalPrice: 99.99,
-    },
-  ],
-
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.10,
-
-  relatedProducts: [601, 603, 605],
-},
-
-{
-  id: 605,
-  name: "Acana Puppy Recipe Dry Dog Food",
-  brand: "Acana",
-  category: "dogs-puppy-food",
-  subCategory: "puppy-food",
-  pet: "Dog",
-  petType: "Dog",
-  productCategory: "Dog Food",
-  productType: "Puppy Food",
-  breedSize: "All Breeds",
-  shopByBreed: "All",
-  flavor: "Free Run Chicken",
-  lifeStage: "Puppy",
-  specialDiet: "High Protein",
-  vegType: "Non-Veg",
-  size: "Medium",
-
-  rating: 4.8,
-  reviews: 88,
-  soldCount: 190,
-  stock: 22,
-
-  fastDelivery: true,
-  isNew: false,
-  deliveryDate: "Tomorrow",
-
-  image: acanaPuppyImg,
-
-  images: [
-    acanaPuppyImg,
-    acanaPuppyImg,
-    acanaPuppyImg,
-    acanaPuppyImg,
-  ],
-
-  description:
-    "Acana Puppy Recipe is made with quality animal ingredients to support strong muscles, healthy skin, and overall puppy development.",
-
-  ingredients: [
-    "Chicken",
-    "Turkey",
-    "Eggs",
-    "Fish Oil",
-    "Pumpkin",
-    "Minerals",
-  ],
-
-  features: [
-    "High protein recipe",
-    "Supports muscle development",
-    "Healthy skin and coat",
-    "Premium ingredients",
-  ],
-
-  nutrition: {
-    protein: "33%",
-    fat: "20%",
-    fiber: "5%",
-    moisture: "12%",
-  },
-
-  manufacturer: "Champion Petfoods",
-  country: "Canada",
-
-  weight: ["2kg", "11.4kg"],
-
-  variants: [
-    {
-      weight: "2kg",
-      price: 21.99,
-      originalPrice: 25.99,
-    },
-    {
-      weight: "11.4kg",
-      price: 79.99,
-      originalPrice: 92.99,
-    },
-  ],
-
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.10,
-
-  relatedProducts: [602, 603, 604],
-},
 ];

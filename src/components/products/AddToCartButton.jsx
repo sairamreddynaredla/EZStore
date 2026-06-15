@@ -14,7 +14,7 @@ const AddToCartButton = ({
   isOutOfStock = false,
   onAddToCart,
 }) => {
-  const { cartItems, increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
+  const { cartItems, increaseQuantity, decreaseQuantity, removeFromCart, showFlash } = useCart();
   const [flash, setFlash] = useState(false);
 
   const selectedVariant = product?.selectedVariant || product?.variants?.[0];
@@ -35,6 +35,7 @@ const AddToCartButton = ({
     const payload = { ...product, selectedVariant };
     if (onAddToCart) onAddToCart(payload, 1);
     try { trackAddToCart(payload, 1); } catch (err) { /* ignore analytics errors */ }
+    try { showFlash && showFlash("Added to cart", "success"); } catch (err) {}
     setFlash(true);
     setTimeout(() => setFlash(false), 1200);
   };
@@ -48,7 +49,10 @@ const AddToCartButton = ({
   const handleDecrease = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (cartQty <= 1) removeFromCart(product.id, weight);
+    if (cartQty <= 1) {
+      removeFromCart(product.id, weight);
+      try { showFlash && showFlash("Removed from cart", "error"); } catch (err) {}
+    }
     else decreaseQuantity(product.id, weight);
   };
 

@@ -39,10 +39,7 @@ const BreedCategory = () => {
 
         </h1>
 
-        <BreedSlider
-          title={`Popular ${pet} Breeds`}
-          breeds={filteredBreeds}
-        />
+        <BreedSlider breeds={filteredBreeds} />
 
       </div>
 

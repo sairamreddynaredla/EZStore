@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom'
 import { useState, useRef, useEffect } from 'react'
 import { brands } from '../../data/brands'
 import banners from '../../assets/brand-banners'
-import spotlightData from '../../data/spotlight'
 
 // Brand logos
 import royalCanin from '../../assets/brands/royal-canin.jpeg'
@@ -16,10 +15,7 @@ import purina from '../../assets/brands/purina.jpeg'
 import orijen from '../../assets/brands/orijen.jpeg'
 import tasteWild from '../../assets/brands/taste-of-the-wild.jpeg'
 import jerhigh from '../../assets/brands/jerhigh.jpeg'
-import himalaya from '../../assets/brands/himalaya.jpeg'
 import goodies from '../../assets/brands/goodies.jpeg'
-import smartheart from '../../assets/brands/smartheart.jpeg'
-import acana from '../../assets/brands/acana.jpeg'
 import kennelKitchen from '../../assets/brands/kennel-kitchen.jpeg'
 
 const logoMap = {
@@ -34,10 +30,8 @@ const logoMap = {
   orijen: orijen,
   'taste-of-the-wild': tasteWild,
   jerhigh: jerhigh,
-  himalaya: himalaya,
+  // himalaya hidden; rely on banners or skip
   goodies: goodies,
-  smartheart: smartheart,
-  acana: acana,
   'kennel-kitchen': kennelKitchen,
 }
 
@@ -74,14 +68,15 @@ const BrandsMega = ({ isOpen, onOpen, onClose }) => {
   const [selectedTab, setSelectedTab] = useState('Popular')
 
   const filteredBrandList = allBrands.filter((brand) => {
+    if (brand.hidden) return false
     const matchesSearch = (brand.name || '').toLowerCase().includes(search.toLowerCase())
     const matchesLetter = selectedLetter === 'All' || (brand.name || '').startsWith(selectedLetter)
     return matchesSearch && matchesLetter
   })
 
-  const spotlightImages = Array.isArray(spotlightData) && spotlightData.length ? spotlightData : Object.entries(banners || {}).slice(0, 3).map(([k, v]) => ({ image: v, title: k, link: `/brands/${k}` }))
+  // Spotlight removed from mega menu — keep the menu focused on brand list and popular/emerging grid
 
-  const popularOrder = ['whiskas', 'pedigree', 'acana', 'orijen', 'applaws', 'meo', 'temptations']
+  const popularOrder = ['whiskas', 'pedigree', 'orijen', 'applaws', 'meo']
 
   return (
     <div ref={rootRef} className="relative">
@@ -168,18 +163,7 @@ const BrandsMega = ({ isOpen, onOpen, onClose }) => {
                 </div>
               </div>
 
-              <div className="col-span-2 pr-6">
-                <h4 className="font-bold mb-3">Brand Spotlight</h4>
-                <div className="space-y-3">
-                  {spotlightImages.map((s, idx) => (
-                    <Link key={idx} to={s.link} className="block rounded-xl overflow-hidden border border-gray-100 bg-white" onClick={() => onClose && onClose()}>
-                      <div className="w-full h-24 flex items-center justify-center bg-white">
-                        <img src={s.image} alt="" className="max-w-full max-h-full object-contain" loading="lazy" />
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
+              {/* Right spotlight column removed from Brands mega menu */}
             </div>
           </div>
         </div>

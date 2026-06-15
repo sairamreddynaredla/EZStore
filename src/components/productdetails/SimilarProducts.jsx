@@ -3,7 +3,7 @@ import ProductCard from "../products/ProductCard";
 const SimilarProducts = ({ products, onAddToCart, onWishlistToggle }) => {
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
+    <div className="grid gap-6" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))' }}>
       {products.map((product) => (
         <ProductCard
           key={product.id}

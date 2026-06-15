@@ -53,11 +53,11 @@ const ProductRecommendations = ({ currentItemId, onAddToCart }) => {
             className="flex gap-3 p-3 bg-white rounded-lg border border-blue-100 hover:border-blue-400 transition-colors"
           >
             {/* Product Image */}
-            <div className="w-16 h-16 bg-gray-100 rounded flex items-center justify-center flex-shrink-0">
+            <div className="w-16 h-16 bg-gray-100 rounded flex items-center justify-center flex-shrink-0 overflow-hidden">
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-full h-full object-contain p-1"
+                className="w-full h-full object-cover object-center"
                 loading="lazy"
               />
             </div>

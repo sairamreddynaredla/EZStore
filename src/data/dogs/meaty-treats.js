@@ -1,6 +1,6 @@
 import pedigreeRodeoImg from "../../assets/products/dogs/meaty-treats/pedigree-rodeo-chicken-treats.jpg";
 import jerhighChickenJerkyImg from "../../assets/products/dogs/meaty-treats/jerhigh-chicken-jerky-treats.jpg";
-import smartHeartStickImg from "../../assets/products/dogs/meaty-treats/smartheart-chicken-stick-treats.jpg";
+// smartHeartStickImg removed; SmartHeart brand being hidden
 import gnawlersMilkBoneImg from "../../assets/products/dogs/meaty-treats/gnawlers-calcium-milk-bone-treats.jpg";
 import droolsSausageImg from "../../assets/products/dogs/meaty-treats/drools-real-chicken-sausage-treats.jpg";
 
@@ -88,8 +88,7 @@ export const dogsMeatyTreats = [
 
   subscriptionEligible: true,
   subscriptionDiscount: 0.05,
-
-  relatedProducts: [302, 303, 304],
+  relatedProducts: [302, 304],
 },
 
 {
@@ -174,95 +173,9 @@ export const dogsMeatyTreats = [
 
   subscriptionEligible: true,
   subscriptionDiscount: 0.05,
-
-  relatedProducts: [301, 303, 304],
+  relatedProducts: [301, 304],
 },
 
-{
-  id: 303,
-  name: "SmartHeart Chicken Stick Dog Treats",
-  brand: "SmartHeart",
-  category: "dogs-treats",
-  subCategory: "meaty-treats",
-  pet: "Dog",
-  petType: "Dog",
-  productCategory: "Dog Treats",
-  productType: "Meaty Treat",
-  breedSize: "All Breeds",
-  shopByBreed: "All",
-  flavor: "Chicken",
-  lifeStage: "Adult",
-  specialDiet: "Regular",
-  vegType: "Non-Veg",
-  size: "Medium",
-
-  rating: 4.7,
-  reviews: 167,
-  soldCount: 440,
-  stock: 52,
-
-  fastDelivery: true,
-  isNew: false,
-  deliveryDate: "Tomorrow",
-
-  image: smartHeartStickImg,
-
-  images: [
-    smartHeartStickImg,
-    smartHeartStickImg,
-    smartHeartStickImg,
-    smartHeartStickImg,
-  ],
-
-  description:
-    "SmartHeart Chicken Sticks are soft and delicious meat treats designed to reward and bond with your dog.",
-
-  ingredients: [
-    "Chicken",
-    "Corn Starch",
-    "Vegetable Protein",
-    "Glycerin",
-    "Minerals",
-    "Vitamins",
-  ],
-
-  features: [
-    "Soft texture",
-    "Easy to chew",
-    "Great training reward",
-    "Rich chicken taste",
-  ],
-
-  nutrition: {
-    protein: "20%",
-    fat: "4%",
-    fiber: "2%",
-    moisture: "19%",
-  },
-
-  manufacturer: "Perfect Companion Group",
-  country: "Thailand",
-
-  weight: ["60g", "120g"],
-
-  variants: [
-    {
-      weight: "60g",
-      price: 2.79,
-      originalPrice: 3.49,
-    },
-    {
-      weight: "120g",
-      price: 4.99,
-      originalPrice: 5.99,
-    },
-  ],
-
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.05,
-
-  relatedProducts: [301, 302, 304],
-},
 
 {
   id: 304,
@@ -346,8 +259,7 @@ export const dogsMeatyTreats = [
 
   subscriptionEligible: true,
   subscriptionDiscount: 0.05,
-
-  relatedProducts: [301, 302, 303],
+  relatedProducts: [301, 302],
 },
 
 {
@@ -432,7 +344,6 @@ export const dogsMeatyTreats = [
 
   subscriptionEligible: true,
   subscriptionDiscount: 0.05,
-
-  relatedProducts: [302, 303, 304],
+  relatedProducts: [302, 304],
 },
 ];

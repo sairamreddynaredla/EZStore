@@ -232,43 +232,7 @@ const ProductInfo = ({ product, handleBuyNow, selectedVariant, setSelectedVarian
           </div>
         </div>
 
-        {/* Full details, ingredients, and specs */}
-        <div className="bg-white rounded-[20px] p-6 border border-gray-100 shadow-sm">
-          <h3 className="text-xl font-semibold mb-4">Product Details</h3>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-slate-700">
-            <div>
-              <p className="font-semibold mb-2">Ingredients</p>
-              <ul className="list-disc pl-5 space-y-1">
-                {product.ingredients?.length > 0 ? product.ingredients.map((ing, idx) => <li key={idx}>{ing}</li>) : <li>Not specified</li>}
-              </ul>
-            </div>
-
-            <div>
-              <p className="font-semibold mb-2">Technical Details</p>
-              <table className="w-full text-sm text-slate-700">
-                <tbody>
-                  <tr>
-                    <td className="py-2 font-medium">Brand</td>
-                    <td className="py-2">{product.brand}</td>
-                  </tr>
-                  <tr className="bg-slate-50">
-                    <td className="py-2 font-medium">Pet Type</td>
-                    <td className="py-2">{product.pet || 'Dog'}</td>
-                  </tr>
-                  <tr>
-                    <td className="py-2 font-medium">Life Stage</td>
-                    <td className="py-2">{product.lifeStage || 'Adult'}</td>
-                  </tr>
-                  <tr className="bg-slate-50">
-                    <td className="py-2 font-medium">Category</td>
-                    <td className="py-2 break-words">{productCategoryLabel}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+        {/* Removed duplicate compact Product Details here — full details live in the accordion below. */}
       </div>
 
       {/* Mobile sticky buy bar (visible on small screens) */}

@@ -341,6 +341,80 @@ export const dryFood = [
 
   relatedProducts: [1401, 1403, 1405],
 },
+    // Sample product for Catmos (emerging)
+    {
+      id: 1490,
+      name: "Catmos Ocean Salmon Adult Dry Cat Food",
+      brand: "Catmos",
+      category: "cats-dry-food",
+      subCategory: "dry-food",
+      pet: "Cat",
+      petType: "Cat",
+      productCategory: "Cat Food",
+      productType: "Dry Food",
+      flavor: "Salmon",
+      lifeStage: "Adult",
+      vegType: "Non-Veg",
+
+      rating: 4.5,
+      reviews: 42,
+      soldCount: 120,
+      stock: 25,
+
+      fastDelivery: true,
+      isNew: true,
+      deliveryDate: "Tomorrow",
+
+      image: meoImg,
+
+      images: [meoImg, meoImg],
+
+      description: "Catmos premium salmon dry food for adult cats.",
+
+      variants: [
+        { weight: "1kg", price: 9.99, originalPrice: 12.99 },
+        { weight: "2kg", price: 17.99, originalPrice: 22.99 },
+      ],
+
+      subscriptionEligible: true,
+      subscriptionDiscount: 0.05,
+
+      relatedProducts: [1401, 1402],
+    },
+
+    // Sample product for Imaginelles (emerging)
+    {
+      id: 1491,
+      name: "Imaginelles Tuna & Chicken Dry Cat Mix",
+      brand: "Imaginelles",
+      category: "cats-dry-food",
+      subCategory: "dry-food",
+      pet: "Cat",
+      petType: "Cat",
+      productCategory: "Cat Food",
+      productType: "Dry Food",
+      flavor: "Tuna & Chicken",
+      lifeStage: "Adult",
+
+      rating: 4.3,
+      reviews: 18,
+      soldCount: 60,
+      stock: 30,
+
+      fastDelivery: true,
+      isNew: true,
+      deliveryDate: "Tomorrow",
+
+      image: whiskasImg,
+      images: [whiskasImg],
+
+      description: "Imaginelles tasty dry mix to delight picky eaters.",
+
+      variants: [{ weight: "1kg", price: 8.49, originalPrice: 10.49 }],
+
+      subscriptionEligible: false,
+      relatedProducts: [1402, 1403],
+    },
 
 {
   id: 1405,

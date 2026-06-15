@@ -52,7 +52,7 @@ const TrustSection = () => {
 
     <section className="py-24 bg-[#f8f8f8] overflow-hidden">
 
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
 
         {/* TOP */}
 

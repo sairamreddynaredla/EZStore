@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 import { getFeaturedBrands } from '../../data/brands'
 import banners from '../../assets/brand-banners'
+import ezstoreLogo from '../../assets/logo/ezstore-logo-optimized.png'
 
 // Import all brand logos
 import royalCaninLogo from '../../assets/brands/royal-canin.jpeg'
@@ -14,13 +15,11 @@ import kennelKitchenLogo from '../../assets/brands/kennel-kitchen.jpeg'
 import whiskasLogo from '../../assets/brands/whiskas.jpeg'
 import shebaLogo from '../../assets/brands/sheba.jpeg'
 import tasteWildLogo from '../../assets/brands/taste-of-the-wild.jpeg'
-import acanaLogo from '../../assets/brands/acana.jpeg'
 import goodiesLogo from '../../assets/brands/goodies.jpeg'
-import smartheartLogo from '../../assets/brands/smartheart.jpeg'
 import jerhighLogo from '../../assets/brands/jerhigh.jpeg'
-import himalayaLogo from '../../assets/brands/himalaya.jpeg'
-import blueBuffaloLogo from '../../assets/brands/BlueBuffelopng.png'
-import temptationsLogo from '../../assets/brands/temptaions..jpeg'
+// acanaLogo removed
+// blueBuffaloLogo removed
+// temptations logo import removed; banner fallback used when needed
 
 // Map brand logo keys to imported images
 const logoMap = {
@@ -35,14 +34,14 @@ const logoMap = {
   whiskas: whiskasLogo,
   sheba: shebaLogo,
   'taste-of-the-wild': tasteWildLogo,
-  acana: acanaLogo,
+  
   goodies: goodiesLogo,
-  smartheart: smartheartLogo,
   jerhigh: jerhighLogo,
-  himalaya: himalayaLogo,
-  'blue-buffalo': blueBuffaloLogo,
-  temptations: temptationsLogo,
+  // smartheart, himalaya, temptations hidden
 }
+// fallback mappings
+logoMap.applaws = banners['applaws'] || null
+logoMap.ezstore = ezstoreLogo
 
 const BrandCard = ({ brand }) => {
   const key = brand.logo
@@ -90,7 +89,8 @@ const BrandCard = ({ brand }) => {
 }
 
 const BrandsSection = () => {
-  const featuredBrands = useMemo(() => getFeaturedBrands(), [])
+  // Exclude the internal `ezstore` brand from the public carousel
+  const featuredBrands = useMemo(() => getFeaturedBrands().filter(b => String(b.logo).toLowerCase() !== 'ezstore'), [])
 
   // Split brands into two rows
   const midpoint = Math.ceil(featuredBrands.length / 2)
@@ -99,7 +99,7 @@ const BrandsSection = () => {
 
   return (
     <section className="py-20 bg-[#f8fafc] overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4">
 
         {/* Heading */}
         <div className="text-center mb-16">

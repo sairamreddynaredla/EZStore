@@ -69,6 +69,18 @@ const CartProvider = ({
 
   }, [cartItems]);
 
+  // FLASH / TOAST MESSAGE
+  const [flash, setFlash] = useState({ visible: false, message: "", type: "success" });
+
+  const showFlash = (message, type = "success", timeout = 1400) => {
+    setFlash({ visible: true, message, type });
+    setTimeout(() => setFlash((s) => ({ ...s, visible: false })), timeout);
+  };
+
+  const hideFlash = () => {
+    setFlash((s) => ({ ...s, visible: false }));
+  };
+
   // ADD TO CART
 
   const addToCart = (product) => {
@@ -128,6 +140,8 @@ const CartProvider = ({
         },
       ]);
     }
+    // show flash
+    try { showFlash("Added to cart", "success"); } catch (e) {}
   };
 
   // REMOVE
@@ -154,6 +168,7 @@ const CartProvider = ({
           )
       )
     );
+     try { showFlash("Removed from cart", "error"); } catch (e) {}
   };
 
   // INCREASE
@@ -259,11 +274,11 @@ const CartProvider = ({
     );
 
   }, [cartItems]);
-
   // CLEAR CART
 
   const clearCart = () => {
     setCartItems([]);
+    try { showFlash("Cart cleared", "error"); } catch (e) {}
   };
 
   return (
@@ -287,6 +302,10 @@ const CartProvider = ({
         totalItems,
 
         totalPrice,
+        // flash helper & state
+        flash,
+        showFlash,
+        hideFlash,
       }}
     >
 

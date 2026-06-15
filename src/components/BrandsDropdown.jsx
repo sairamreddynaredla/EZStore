@@ -14,11 +14,8 @@ import purina from "../assets/brands/purina.jpeg";
 import orijen from "../assets/brands/orijen.jpeg";
 import tasteWild from "../assets/brands/taste-of-the-wild.jpeg";
 import jerhigh from "../assets/brands/jerhigh.jpeg";
-import himalaya from "../assets/brands/himalaya.jpeg";
 
 import goodies from "../assets/brands/goodies.jpeg";
-import smartheart from "../assets/brands/smartheart.jpeg";
-import acana from "../assets/brands/acana.jpeg";
 import kennelKitchen from "../assets/brands/kennel-kitchen.jpeg";
 
 import banners from '../assets/brand-banners'
@@ -27,8 +24,8 @@ const BrandsDropdown = ({ onBrandSelect, anchorRef }) => {
   const navigate = useNavigate();
   const [position, setPosition] = useState({ left: 0, top: 0, width: 0 });
 
-  // Featured brands
-  const popularBrands = brands.filter((b) => b.featured);
+  // Featured brands (exclude hidden)
+  const popularBrands = brands.filter((b) => b.featured && !b.hidden);
 
   // ALL brand images mapping
   const brandImages = {
@@ -43,10 +40,7 @@ const BrandsDropdown = ({ onBrandSelect, anchorRef }) => {
     orijen: orijen,
     "taste-of-the-wild": tasteWild,
     jerhigh: jerhigh,
-    himalaya: himalaya,
     goodies: goodies,
-    smartheart: smartheart,
-    acana: acana,
     "kennel-kitchen": kennelKitchen,
   };
 

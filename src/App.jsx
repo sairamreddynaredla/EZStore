@@ -21,6 +21,7 @@ const OrderSuccess = lazy(() => import('./layouts/pages/OrderSuccess'))
 const WishList = lazy(() => import('./layouts/pages/WishList'))
 const Checkout = lazy(() => import('./layouts/pages/CheckOut'))
 const BrandProducts = lazy(() => import('./layouts/pages/BrandProducts'))
+const BrandCollectionPage = lazy(() => import('./layouts/pages/BrandCollectionPage'))
 const CategoryProducts = lazy(() => import('./layouts/pages/CategoryProducts'))
 const Brands = lazy(() => import('./layouts/pages/Brands'))
 
@@ -135,7 +136,7 @@ const App = () => {
 
           <Route
             path="/brands/:brandSlug"
-            element={<BrandProducts />}
+            element={<BrandCollectionPage />}
           />
 
           {/* BEST SELLERS */}

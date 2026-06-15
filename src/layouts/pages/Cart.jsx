@@ -15,6 +15,7 @@ const Cart = () => {
     removeFromCart,
     increaseQuantity,
     decreaseQuantity,
+    clearCart,
   } = useCart();
 
   const { addToWishlist } = useWishlist();
@@ -32,6 +33,7 @@ const Cart = () => {
   const [recentlyViewed, setRecentlyViewed] = useState([]);
   const [showBulkOffers, setShowBulkOffers] = useState(false);
   const [deletedItems, setDeletedItems] = useState([]);
+  const [showClearModal, setShowClearModal] = useState(false);
   const [showTaxBreakdown, setShowTaxBreakdown] = useState(false);
 
   // Calculate bulk discount
@@ -148,6 +150,16 @@ const Cart = () => {
     }
   };
 
+  const handleConfirmClear = () => {
+    // Clear entire cart at once
+    clearCart();
+    setShowClearModal(false);
+  };
+
+  const handleCancelClear = () => {
+    setShowClearModal(false);
+  };
+
   return (
     <>
       <Navbar />
@@ -171,13 +183,7 @@ const Cart = () => {
                     <span className="font-semibold">{visibleItems.length} item{visibleItems.length !== 1 ? "s" : ""}</span> in your cart
                   </p>
                   <button
-                    onClick={() => {
-                      if (window.confirm("Are you sure you want to clear your entire cart?")) {
-                        visibleItems.forEach(item => {
-                          handleDeleteWithUndo(item, item.selectedVariant?.weight);
-                        });
-                      }
-                    }}
+                    onClick={() => setShowClearModal(true)}
                     className="text-xs text-red-600 hover:text-red-800 font-semibold hover:underline whitespace-nowrap"
                   >
                     Clear
@@ -534,6 +540,19 @@ const Cart = () => {
           )}
         </div>
       </div>
+      {showClearModal && (
+        <div className="fixed inset-0 flex items-center justify-center z-[9999]">
+          <div className="absolute inset-0 bg-black/40" onClick={handleCancelClear} />
+          <div role="dialog" aria-modal="true" className="relative bg-white rounded-lg shadow-lg max-w-md w-full mx-4 p-6 z-[10000]">
+            <h3 className="text-lg font-semibold mb-2">Clear Cart</h3>
+            <p className="text-sm text-gray-700 mb-4">Are you sure you want to clear your entire cart?</p>
+            <div className="flex justify-end gap-3">
+              <button onClick={handleCancelClear} className="px-4 py-2 rounded-lg border border-gray-300 bg-white text-sm">Cancel</button>
+              <button onClick={handleConfirmClear} className="px-4 py-2 rounded-lg bg-red-600 text-white text-sm">Clear</button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
