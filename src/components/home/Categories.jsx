@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { useRef } from "react"
 import dogExclusiveImage from "../../assets/Exclusive Category/dog exclusive.png"
@@ -59,7 +59,7 @@ const categories = [
   },
 ]
 
-function Categories() {
+function Categories({ selectedPet, setSelectedPet }) {
   const scrollRef = useRef(null)
 
   const handleScroll = (direction) => {
@@ -93,23 +93,7 @@ function Categories() {
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {categories.map((item, index) => (
-            <Link
-              key={index}
-              to={`/breeds/${item.slug}`}
-              className={`${item.color} w-65 rounded-[35px] p-8 flex flex-col items-center justify-center text-center hover:scale-105 duration-300 cursor-pointer shadow-sm hover:shadow-xl snap-center shrink-0`}
-            >
-              <div className="w-36 h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-white shadow-lg flex items-center justify-center">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover object-center"
-                />
-              </div>
-
-              <h3 className="mt-6 font-bold text-xl md:text-2xl text-gray-900">
-                {item.title}
-              </h3>
-            </Link>
+            <CategoryCard key={index} item={item} index={index} selectedPet={selectedPet} setSelectedPet={setSelectedPet} />
           ))}
         </div>
 
@@ -134,6 +118,40 @@ function Categories() {
         </div>
       </div>
     </section>
+  )
+}
+
+function CategoryCard({ item, selectedPet, setSelectedPet }) {
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    const pets = ["dog", "cat", "bird", "fish", "rabbit", "hamster"]
+    if (setSelectedPet && pets.includes(item.slug)) {
+      setSelectedPet(item.slug)
+      return
+    }
+
+    // fallback for other categories
+    navigate(`/category/${item.slug}`)
+  }
+
+  return (
+    <button
+      onClick={handleClick}
+      className={`${item.color} w-65 rounded-[35px] p-8 flex flex-col items-center justify-center text-center hover:scale-105 duration-300 cursor-pointer shadow-sm hover:shadow-xl snap-center shrink-0 ${selectedPet === item.slug ? 'ring-4 ring-orange-200' : ''}`}
+    >
+      <div className="w-36 h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-white shadow-lg flex items-center justify-center">
+        <img
+          src={item.image}
+          alt={item.title}
+          className="w-full h-full object-cover object-center"
+        />
+      </div>
+
+      <h3 className="mt-6 font-bold text-xl md:text-2xl text-gray-900">
+        {item.title}
+      </h3>
+    </button>
   )
 }
 

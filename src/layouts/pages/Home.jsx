@@ -1,8 +1,10 @@
 import Navbar from "../../components/Navbar"
 
+import { useState } from "react"
 import HeroBanner from "../../components/home/HeroBanner"
-
 import Categories from "../../components/home/Categories"
+import PetBreedsCarousel from "../../components/home/PetBreedsCarousel"
+import petData from "../../data/petData"
 
 import FoodCategorySection from "../../components/home/FoodCategorySection"
 
@@ -23,6 +25,7 @@ import TestimonialsSection from "../../components/home/TestimonialsSection"
 import Footer from "../../components/Footer"
 
 const Home = () => {
+  const [selectedPet, setSelectedPet] = useState("dog")
 
   return (
 
@@ -35,7 +38,13 @@ const Home = () => {
       <HeroBanner />
 
       {/* SHOP CATEGORIES */}
-      <Categories />
+      <Categories selectedPet={selectedPet} setSelectedPet={setSelectedPet} />
+
+      {/* PET BREEDS CAROUSEL (no hero banners) */}
+      <PetBreedsCarousel
+        breeds={petData[selectedPet]?.breeds}
+        title={`Popular ${selectedPet.charAt(0).toUpperCase() + selectedPet.slice(1)} Breeds`}
+      />
 
       {/* FOOD CATEGORIES - Wet / Dry / Puppy & Kitten / Prescription */}
       <FoodCategorySection />

@@ -148,12 +148,7 @@ const App = () => {
 
           {/* BLOGS removed */}
 
-          {/* BREED CATEGORY */}
-
-          <Route
-            path="/breeds/:pet"
-            element={<BreedCategory />}
-          />
+          {/* BREED CATEGORY route removed — categories handled on Home */}
 
           {/* BREED DETAILS */}
 
