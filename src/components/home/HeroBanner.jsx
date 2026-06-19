@@ -37,12 +37,12 @@ const HeroBanner = () => {
                   A Complete Dog Nutrition Range.
                 </p>
 
-                <div className="flex items-center gap-8 mb-10 flex-nowrap">
+                <div className="flex items-center gap-3 md:gap-6 lg:gap-8 mb-8 md:mb-10 flex-wrap md:flex-nowrap">
                   <div className="flex flex-col items-center text-center">
-                    <div className="w-[60px] h-[60px] rounded-full border border-[#8B4513] flex items-center justify-center mb-3">
-                      <Leaf size={30} className="text-[#8B4513]" />
+                    <div className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[60px] lg:h-[60px] rounded-full border border-[#8B4513] flex items-center justify-center mb-2 md:mb-3">
+                      <Leaf size={20} className="text-[#8B4513] md:w-[25px] lg:w-[30px]" />
                     </div>
-                    <div className="text-[15px] font-medium text-[#3F3F46]">
+                    <div className="text-[12px] md:text-[14px] lg:text-[15px] font-medium text-[#3F3F46]">
                       Real
                       <br />
                       Ingredients
@@ -50,10 +50,10 @@ const HeroBanner = () => {
                   </div>
 
                   <div className="flex flex-col items-center text-center">
-                    <div className="w-[60px] h-[60px] rounded-full border border-[#8B4513] flex items-center justify-center mb-3">
-                      <Ban size={30} className="text-[#8B4513]" />
+                    <div className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[60px] lg:h-[60px] rounded-full border border-[#8B4513] flex items-center justify-center mb-2 md:mb-3">
+                      <Ban size={20} className="text-[#8B4513] md:w-[25px] lg:w-[30px]" />
                     </div>
-                    <div className="text-[15px] font-medium text-[#3F3F46]">
+                    <div className="text-[12px] md:text-[14px] lg:text-[15px] font-medium text-[#3F3F46]">
                       No
                       <br />
                       Preservatives
@@ -61,10 +61,10 @@ const HeroBanner = () => {
                   </div>
 
                   <div className="flex flex-col items-center text-center">
-                    <div className="w-[60px] h-[60px] rounded-full border border-[#8B4513] flex items-center justify-center mb-3">
-                      <Dog size={30} className="text-[#8B4513]" />
+                    <div className="w-[40px] h-[40px] md:w-[50px] md:h-[50px] lg:w-[60px] lg:h-[60px] rounded-full border border-[#8B4513] flex items-center justify-center mb-2 md:mb-3">
+                      <Dog size={20} className="text-[#8B4513] md:w-[25px] lg:w-[30px]" />
                     </div>
-                    <div className="text-[15px] font-medium text-[#3F3F46]">
+                    <div className="text-[12px] md:text-[14px] lg:text-[15px] font-medium text-[#3F3F46]">
                       For All
                       <br />
                       Breeds
@@ -74,18 +74,10 @@ const HeroBanner = () => {
 
                 <a
                   href="/shop"
-                  className="inline-flex items-center justify-center gap-3 bg-[#F59E0B] text-white rounded-full transition-transform duration-150 hover:scale-105"
-                  style={{
-                    width: 220,
-                    height: 58,
-                    fontSize: 20,
-                    fontWeight: 700,
-                    paddingLeft: 32,
-                    paddingRight: 32,
-                  }}
+                  className="inline-flex items-center justify-center gap-2 md:gap-3 bg-[#F59E0B] text-white rounded-full transition-transform duration-150 hover:scale-105 px-4 md:px-8 py-2 md:py-3 text-sm md:text-base lg:text-lg font-bold w-full sm:w-auto max-w-xs"
                 >
                   <span>SHOP NOW</span>
-                  <ChevronRight size={20} className="text-white" />
+                  <ChevronRight size={16} className="text-white md:w-[20px] lg:w-[24px]" />
                 </a>
               </div>
             </div>

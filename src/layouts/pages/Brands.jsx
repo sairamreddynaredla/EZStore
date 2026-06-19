@@ -18,11 +18,11 @@ import shebaLogo from "../../assets/brands/sheba.webp";
 import tasteWildLogo from "../../assets/brands/taste-of-the-wild.webp";
 import goodiesLogo from "../../assets/brands/goodies.webp";
 import jerhighLogo from "../../assets/brands/jerhigh.webp";
+import himalayaLogo from "../../assets/brands/himalaya.webp";
+import smartheartLogo from "../../assets/brands/smartheart.webp";
+import temptationsLogo from "../../assets/brands/temptations.webp";
 import banners from "../../assets/brand-banners";
 import ezstoreLogo from "../../assets/logo/ezstore-logo-optimized.webp";
-
-// acanaLogo removed
-// blueBuffaloLogo removed
 
 const logoMap = {
   "royal-canin": royalCaninLogo,
@@ -36,24 +36,23 @@ const logoMap = {
   whiskas: whiskasLogo,
   sheba: shebaLogo,
   "taste-of-the-wild": tasteWildLogo,
-
   goodies: goodiesLogo,
   jerhigh: jerhighLogo,
-
-  // temptations intentionally hidden; fallback to banners if available
-  // fallback mappings for assets available as banners or in logo folder
+  himalaya: himalayaLogo,
+  smartheart: smartheartLogo,
+  temptations: temptationsLogo,
+  // Brands without physical logo files - fallback to banners
   applaws: banners["applaws"] || null,
+  catmos: banners["catmos"] || null,
+  imaginelles: banners["imaginelles"] || null,
+  applod: banners["applod"] || null,
+  carniwel: banners["carniwel"] || null,
   ezstore: ezstoreLogo,
 };
-
-console.log("whiskasLogo =", whiskasLogo);
-console.log("pedigreeLogo =", pedigreeLogo);
-console.log("orijenLogo =", origenLogo);
 
 const BrandsPage = () => {
   const [search, setSearch] = useState("");
   const [selectedLetter, setSelectedLetter] = useState("All");
-  const [selectedTab, setSelectedTab] = useState("Popular");
 
   const allBrands = useMemo(() => [...brands].sort((a, b) => a.name.localeCompare(b.name)), []);
 
@@ -76,15 +75,13 @@ const BrandsPage = () => {
 
   // Spotlight removed — no right-side promotional column on Brands page
 
-  const popularOrder = ["whiskas", "pedigree", "orijen", "applaws", "meo"];
-
   return (
     <div className="bg-[#F8F8F8] min-h-screen">
       <SEO title="Brands" description="Discover top pet brands and their products at EZStore." />
       <Navbar />
 
       <div className="max-w-8xl mx-auto px-8 md:px-16 lg:px-20 py-8">
-        <div className="grid grid-cols-1 xl:grid-cols-[240px_minmax(0,1fr)_240px] gap-8">
+        <div className="grid grid-cols-1 xl:grid-cols-[240px_minmax(0,1fr)] gap-8">
           <aside className="space-y-6">
             <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
               <div className="mb-4">
@@ -156,97 +153,32 @@ const BrandsPage = () => {
           </aside>
 
           <main className="space-y-8">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  onClick={() => setSelectedTab("Popular")}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-                    selectedTab === "Popular"
-                      ? "bg-[#1F6B52] text-white"
-                      : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-50"
-                  }`}
+            <h2 className="text-4xl font-bold text-gray-800 mb-8">Trusted Brands</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-6 items-stretch">
+              {filteredBrandList.map((brand) => (
+                <Link
+                  key={brand.id}
+                  to={`/brands/${brand.slug}`}
+                  className="group rounded-2xl bg-white border border-gray-100 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-transform duration-300 overflow-hidden flex items-center justify-center p-6"
+                  aria-label={brand.name}
                 >
-                  Popular
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setSelectedTab("Emerging")}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-                    selectedTab === "Emerging"
-                      ? "bg-[#1F6B52] text-white"
-                      : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-50"
-                  }`}
-                >
-                  Emerging
-                </button>
-              </div>
-
-              <p className="text-sm text-gray-500">
-                Showing{" "}
-                {
-                  filteredBrandList.filter((b) =>
-                    selectedTab === "Popular" ? b.featured : !b.featured
-                  ).length
-                }{" "}
-                brands
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-6 items-stretch">
-              {selectedTab === "Popular"
-                ? // render in explicit popularOrder, falling back to featured brands that match
-                  popularOrder
-                    .map((slug) =>
-                      filteredBrandList.find((b) => b.slug === slug || b.logo === slug)
-                    )
-                    .filter(Boolean)
-                    .map((brand) => (
-                      <Link
-                        key={brand.id}
-                        to={`/brands/${brand.slug}`}
-                        className="group rounded-2xl bg-white border border-gray-100 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-transform duration-300 overflow-hidden flex items-center justify-center p-4"
-                        aria-label={brand.name}
-                      >
-                        <div className="w-full h-24 flex items-center justify-center bg-white">
-                          <img
-                            src={logoMap[brand.logo] || royalCaninLogo}
-                            alt={brand.name}
-                            className="max-h-20 max-w-full object-contain"
-                            loading="lazy"
-                            onError={(e) => {
-                              console.log("FAILED:", brand.name);
-                              console.log("LOGO:", brand.logo);
-                              console.log("SRC:", e.currentTarget.src);
-                            }}
-                          />
-                        </div>
-                      </Link>
-                    ))
-                : // Emerging: show non-featured brands
-                  filteredBrandList
-                    .filter((b) => !b.featured)
-                    .map((brand) => (
-                      <Link
-                        key={brand.id}
-                        to={`/brands/${brand.slug}`}
-                        className="group rounded-2xl bg-white border border-gray-100 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-transform duration-300 overflow-hidden flex items-center justify-center p-4"
-                        aria-label={brand.name}
-                      >
-                        <div className="w-full h-28 flex items-center justify-center bg-white">
-                          <img
-                            src={logoMap[brand.logo] || royalCaninLogo}
-                            alt={brand.name}
-                            loading="lazy"
-                            className="max-h-20 max-w-full object-contain"
-                          />
-                        </div>
-                      </Link>
-                    ))}
+                  <div className="w-full h-40 flex items-center justify-center bg-white">
+                    <img
+                      src={logoMap[brand.logo] || banners[brand.logo] || null}
+                      alt={brand.name}
+                      className="max-h-32 max-w-full object-contain"
+                      loading="lazy"
+                      onError={(e) => {
+                        console.log("FAILED:", brand.name);
+                        console.log("LOGO:", brand.logo);
+                        console.log("SRC:", e.currentTarget.src);
+                      }}
+                    />
+                  </div>
+                </Link>
+              ))}
             </div>
           </main>
-
-          {/* Right-side brand spotlight removed to keep layout focused on filters + products */}
         </div>
       </div>
 

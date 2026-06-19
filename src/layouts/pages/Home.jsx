@@ -1,7 +1,7 @@
 import Navbar from "../../components/Navbar";
 
 import { useState } from "react";
-import HeroBanner from "../../components/home/HeroBanner";
+import HeroSlider from "../../components/home/HeroSlider";
 import Categories from "../../components/home/Categories";
 import PetBreedsCarousel from "../../components/home/PetBreedsCarousel";
 import petData from "../../data/petData";
@@ -29,8 +29,8 @@ const Home = () => {
       {/* NAVBAR */}
       <Navbar />
 
-      {/* HERO */}
-      <HeroBanner />
+      {/* HERO SLIDER - 4 Rotating Banners */}
+      <HeroSlider />
 
       {/* SHOP CATEGORIES */}
       <Categories selectedPet={selectedPet} setSelectedPet={setSelectedPet} />

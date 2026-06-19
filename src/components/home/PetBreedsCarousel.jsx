@@ -20,34 +20,34 @@ const PetBreedsCarousel = ({ breeds, title }) => {
       <div className="relative">
         <button
           onClick={() => swiperRef.current?.slidePrev()}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white shadow-xl w-12 h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
+          className="absolute left-0 md:left-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
           aria-label="Scroll breeds left"
         >
-          <ChevronLeft size={20} />
+          <ChevronLeft size={16} className="md:w-[20px]" />
         </button>
 
         <button
           onClick={() => swiperRef.current?.slideNext()}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white shadow-xl w-12 h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
+          className="absolute right-0 md:right-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
           aria-label="Scroll breeds right"
         >
-          <ChevronRight size={20} />
+          <ChevronRight size={16} className="md:w-[20px]" />
         </button>
 
         <Swiper
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}
-          spaceBetween={28}
+          spaceBetween={12}
           loop={false}
           observer={true}
           observeParents={true}
           breakpoints={{
             320: { slidesPerView: Math.min(2, breeds.length) },
-            640: { slidesPerView: Math.min(3, breeds.length) },
-            1024: { slidesPerView: Math.min(5, breeds.length) },
+            640: { slidesPerView: Math.min(3, breeds.length), spaceBetween: 16 },
+            1024: { slidesPerView: Math.min(5, breeds.length), spaceBetween: 20 },
           }}
-          className="py-6"
+          className="py-4 md:py-6 px-10 md:px-0"
         >
           {breeds.map((breed) => {
             const src =

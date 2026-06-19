@@ -4,6 +4,8 @@
 import royalCaninImg from "../../assets/products/dogs/dry-food/royal-canin-maxi-adult-dry-dog-food.png.webp";
 import purinaImg from "../../assets/products/dogs/dry-food/purina-pro-plan-complete-essentials-adult-dry-dog-food.webp";
 import farminaImg from "../../assets/products/dogs/dry-food/farmina-nd-chicken-pomegranate-adult-medium-maxi-dry-dog-food.webp";
+import applodImg from "../../assets/Applod Dry  Chicken & Veg.jpg";
+import carniwelImg from "../../assets/Carniwel_Chicken_Small_Breed_Dogs_Puppy_Food_.webp";
 // acanaImg removed
 
 export const dogsDryFood = [
@@ -278,8 +280,8 @@ export const dogsDryFood = [
     isNew: true,
     deliveryDate: "Tomorrow",
 
-    image: farminaImg,
-    images: [farminaImg],
+    image: applodImg,
+    images: [applodImg],
 
     description: "Applod balanced nutrition for adult dogs with real chicken.",
 
@@ -313,8 +315,8 @@ export const dogsDryFood = [
     isNew: true,
     deliveryDate: "Tomorrow",
 
-    image: purinaImg,
-    images: [purinaImg],
+    image: carniwelImg,
+    images: [carniwelImg],
 
     description: "Carniwel growth formula to support healthy puppy development.",
 

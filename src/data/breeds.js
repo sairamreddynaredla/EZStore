@@ -1,6 +1,10 @@
 // This file was cleaned by scripts/removeBreedFieldsAst.cjs
 // Backup created at: scripts\breeds.js.bak.1781594258104
 
+import labradorImg from "../assets/breeds/dogs/labrador.webp";
+import cockatiелImg from "../assets/breeds/birds/Cockatiel.webp";
+import macawImg from "../assets/breeds/birds/Macaw.webp";
+
 const breedData = [
   {
     id: 1,
@@ -33,7 +37,7 @@ const breedData = [
     subtitle: "The Beloved Family Companion!",
     description:
       "Friendly, outgoing, and always ready for adventure, the Labrador Retriever is the world's most popular dog breed. Labs are known for their loyalty, intelligence, and playful spirit—making them perfect for families, service work, and active lifestyles.",
-    image: "/breeds/labrador-retriever.jpeg",
+    image: labradorImg,
     traits: ["Gentle", "Loyal", "Playful"],
     info: {
       size: "Large",
@@ -42,7 +46,7 @@ const breedData = [
       grooming: "Moderate",
     },
     overview: {
-      image: "/breeds/labrador-retriever.jpeg",
+      image: labradorImg,
     },
   },
   {
@@ -914,7 +918,7 @@ const breedData = [
     slug: "macaw",
     category: "bird",
     name: "Macaw",
-    image: "https://lafeber.com/pet-birds/wp-content/uploads/2018/06/Hyacinth-Macaw.jpg",
+    image: macawImg,
     heroImage:
       "https://images.unsplash.com/photo-1552728089-57bdde30beb3?q=80&w=1600&auto=format&fit=crop",
     traits: ["Large", "Intelligent", "Bright"],
@@ -944,7 +948,7 @@ const breedData = [
     slug: "cockatiel",
     category: "bird",
     name: "Cockatiel",
-    image: "https://lafeber.com/pet-birds/wp-content/uploads/2018/06/Cockatiel-2.jpg",
+    image: cockatiелImg,
     heroImage:
       "https://images.unsplash.com/photo-1452570053594-1b985d6ea890?q=80&w=1600&auto=format&fit=crop",
     traits: ["Friendly", "Cute", "Social"],
