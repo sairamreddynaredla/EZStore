@@ -15,7 +15,7 @@ const HeroBanner = () => {
           sizes="(max-width: 768px) 100vw, 50vw"
           loading="eager"
           alt="Dog and pet products banner"
-          className="w-full object-cover object-center block md:h-[520px] h-[280px] lg:absolute lg:inset-0 lg:w-full lg:h-full"
+          className="w-full h-full object-cover object-center absolute inset-0"
           style={{ aspectRatio: "16/7" }}
         />
 

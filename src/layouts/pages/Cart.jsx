@@ -261,7 +261,7 @@ const Cart = () => {
                             {/* Price with bulk discount */}
                             <div className="mb-3 sm:mb-4">
                               <div className="flex items-center gap-2 flex-wrap">
-                                <span className="text-xl sm:text-2xl font-bold text-red-600">
+                                <span className="text-xl sm:text-2xl font-bold text-gray-900">
                                   ${itemPrice.toFixed(0)}
                                 </span>
                                 {bulkDiscount > 0 && (
@@ -308,21 +308,21 @@ const Cart = () => {
                           </div>
 
                           {/* Action Buttons */}
-                          <div className="flex gap-4 sm:gap-6 pt-3 sm:pt-4 border-t border-gray-200 flex-wrap text-xs sm:text-sm">
+                          <div className="flex gap-4 sm:gap-6 pt-3 sm:pt-4 border-t border-gray-200 flex-wrap">
                             <button
                               onClick={() =>
                                 handleDeleteWithUndo(item, item.selectedVariant?.weight)
                               }
-                              className="flex items-center gap-1.5 sm:gap-2 text-blue-600 hover:text-blue-800 hover:underline font-semibold py-2 px-1 -ml-1"
+                              className="flex items-center gap-1.5 sm:gap-2 bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-4 sm:px-6 rounded-lg transition-all duration-300 transform hover:scale-105 text-xs sm:text-sm"
                             >
                               <Trash2 size={16} />
-                              Delete
+                              Remove
                             </button>
                             <button
                               onClick={() =>
                                 handleSaveForLater(item.id, item.selectedVariant?.weight)
                               }
-                              className="flex items-center gap-1.5 sm:gap-2 text-blue-600 hover:text-blue-800 hover:underline font-semibold py-2 px-1"
+                              className="flex items-center gap-1.5 sm:gap-2 border border-gray-300 text-gray-700 hover:bg-gray-100 font-semibold py-2 px-4 sm:px-6 rounded-lg transition-all duration-300 text-xs sm:text-sm"
                             >
                               <Heart size={16} />
                               Save for later

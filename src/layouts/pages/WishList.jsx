@@ -194,7 +194,7 @@ const WishList = () => {
 
                     {/* PRICE */}
                     <div className="flex items-center gap-4 mt-6 flex-wrap">
-                      <h3 className="text-3xl font-bold text-green-600">${activeVariant.price}</h3>
+                      <h3 className="text-3xl font-bold text-gray-900">${activeVariant.price}</h3>
 
                       <span className="text-gray-400 line-through text-lg">
                         ${activeVariant.originalPrice}
