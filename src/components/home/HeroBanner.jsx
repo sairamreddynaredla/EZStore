@@ -5,8 +5,8 @@ const HeroBanner = () => {
   return (
     <section aria-label="Homepage hero" className="w-full">
       <div
-        className="max-w-[1440px] mx-auto relative min-h-[520px] lg:min-h-[650px]"
-        style={{ height: "clamp(520px, 60vh, 700px)" }}
+        className="max-w-[1440px] mx-auto relative min-h-[580px] lg:min-h-[1100px]"
+        style={{ height: "clamp(580px, 75vh, 1150px)" }}
       >
         {/* Image: use existing asset, cover, centered, provide aspect-ratio and eager loading to avoid CLS */}
         <img
@@ -21,10 +21,10 @@ const HeroBanner = () => {
 
         {/* Content block: stacked on mobile (below image), absolute-left on large screens */}
         <div className="relative z-10">
-          <div className="px-6 py-6 md:py-8 lg:py-0 lg:px-0">
+          <div className="px-6 py-8 md:py-10 lg:py-0 lg:px-0">
             <div className="mx-auto md:max-w-[720px] lg:max-w-none">
               {/* Left content wrapper - on lg screens absolute positioned */}
-              <div className="lg:absolute lg:left-[60px] lg:top-1/2 lg:-translate-y-1/2 lg:w-[480px] lg:z-10">
+              <div className="lg:absolute lg:left-[80px] lg:top-1/2 lg:-translate-y-1/2 lg:w-[520px] lg:z-10">
                 <h1
                   className="text-[#8B4513] font-extrabold leading-[0.95] tracking-[-0.04em] mb-6 text-[42px] md:text-[56px] lg:text-[72px]"
                   style={{ fontWeight: 800 }}

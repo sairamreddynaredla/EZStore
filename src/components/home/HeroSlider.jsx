@@ -62,7 +62,7 @@ const HeroSlider = () => {
   };
 
   return (
-    <section className="w-full relative" style={{ height: "clamp(300px, 60vh, 75vh)" }}>
+    <section className="w-full relative" style={{ height: "clamp(350px, 80vh, 105vh)" }}>
       <Swiper 
         modules={[Autoplay]} 
         autoplay={{ delay: 3500 }} 
@@ -82,9 +82,9 @@ const HeroSlider = () => {
             />
             
             {/* Text Overlay */}
-            <div className="absolute inset-0 flex flex-col justify-center md:justify-start items-start pt-8 md:pt-12 lg:pt-20">
+            <div className="absolute inset-0 flex flex-col justify-center items-start pb-16 lg:pb-24">
               <div className="w-full max-w-4xl px-4 sm:px-6 md:px-12 lg:px-20">
-                <div className="max-w-lg">
+                <div className="max-w-xl">
                   <h2 className={`font-bold text-[#8B4513] mb-2 md:mb-3 leading-tight ${banner.pet === "Offers" ? "text-xl sm:text-3xl md:text-4xl lg:text-5xl" : banner.pet === "Dog" ? "text-lg sm:text-2xl md:text-3xl lg:text-4xl" : "text-base sm:text-xl md:text-2xl lg:text-3xl"}`}>
                     {banner.title}
                   </h2>
