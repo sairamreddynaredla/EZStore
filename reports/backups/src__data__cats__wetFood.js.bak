@@ -1,0 +1,376 @@
+import royalCaninWetImg from "../../assets/products/cats/wet-food/royal-canin-instinctive-adult-wet-cat-food.jpg";
+import shebaWetImg from "../../assets/products/cats/wet-food/sheba-tuna-premium-wet-cat-food.jpg";
+import whiskasWetImg from "../../assets/products/cats/wet-food/whiskas-ocean-fish-wet-cat-food.jpg";
+import fancyFeastWetImg from "../../assets/products/cats/wet-food/fancy-feast-grilled-tuna-wet-cat-food.jpg";
+import purinaWetImg from "../../assets/products/cats/wet-food/purina-pro-plan-adult-wet-cat-food.jpg";
+
+
+export const catWetFood = [
+
+    {
+  id: 1901,
+  name: "Royal Canin Instinctive Adult Wet Cat Food",
+  brand: "Royal Canin",
+  category: "cats-wet-food",
+  subCategory: "wet-food",
+  pet: "Cat",
+  petType: "Cat",
+  productCategory: "Cat Food",
+  productType: "Wet Food",
+  flavor: "Chicken",
+  lifeStage: "Adult",
+  specialDiet: "Complete Nutrition",
+  vegType: "Non-Veg",
+
+  rating: 4.9,
+  reviews: 342,
+  soldCount: 1284,
+  stock: 46,
+
+  fastDelivery: true,
+  isNew: false,
+  deliveryDate: "Tomorrow",
+
+  image: royalCaninWetImg,
+
+  images: [
+    royalCaninWetImg,
+    royalCaninWetImg,
+    royalCaninWetImg,
+    royalCaninWetImg,
+  ],
+
+  description:
+    "Premium wet cat food formulated to match the nutritional profile preferred by adult cats.",
+
+  ingredients: [
+    "Chicken",
+    "Meat Derivatives",
+    "Fish Oil",
+    "Vitamins",
+    "Minerals",
+  ],
+
+  features: [
+    "High moisture content",
+    "Complete nutrition",
+    "Healthy digestion",
+    "Highly palatable",
+  ],
+
+  nutrition: {
+    protein: "12%",
+    fat: "4%",
+    fiber: "1.5%",
+    moisture: "82%",
+  },
+
+  manufacturer: "Royal Canin",
+  country: "France",
+
+  weight: ["0.2lb", "12 x 0.2lb"],
+
+  variants: [
+    { weight: "0.2lb", price: 1.99, originalPrice: 2.49 },
+    { weight: "12 x 0.2lb", price: 19.99, originalPrice: 24.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.1,
+
+  relatedProducts: [1902, 1903, 1904],
+},
+
+{
+  id: 1902,
+  name: "Sheba Tuna Premium Wet Cat Food",
+  brand: "Sheba",
+  category: "cats-wet-food",
+  subCategory: "wet-food",
+  pet: "Cat",
+  petType: "Cat",
+  productCategory: "Cat Food",
+  productType: "Wet Food",
+  flavor: "Tuna",
+  lifeStage: "Adult",
+  specialDiet: "Premium Recipe",
+  vegType: "Non-Veg",
+
+  rating: 4.8,
+  reviews: 298,
+  soldCount: 1142,
+  stock: 38,
+
+  fastDelivery: true,
+  isNew: true,
+  deliveryDate: "Tomorrow",
+
+  image: shebaWetImg,
+
+  images: [
+    shebaWetImg,
+    shebaWetImg,
+    shebaWetImg,
+    shebaWetImg,
+  ],
+
+  description:
+    "Delicate tuna recipe prepared in rich gravy for adult cats.",
+
+  ingredients: [
+    "Tuna",
+    "Fish Broth",
+    "Vitamins",
+    "Minerals",
+  ],
+
+  features: [
+    "Premium tuna recipe",
+    "Rich gravy",
+    "Soft texture",
+    "Highly palatable",
+  ],
+
+  nutrition: {
+    protein: "11%",
+    fat: "4%",
+    fiber: "1%",
+    moisture: "83%",
+  },
+
+  manufacturer: "Mars Petcare",
+  country: "Thailand",
+
+  weight: ["0.1lb", "12 x 0.1lb"],
+
+  variants: [
+    { weight: "0.1lb", price: 1.89, originalPrice: 2.49 },
+    { weight: "12 x 0.1lb", price: 18.99, originalPrice: 23.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.1,
+
+  relatedProducts: [1901, 1903, 1905],
+},
+
+{
+  id: 1903,
+  name: "Whiskas Ocean Fish Wet Cat Food",
+  brand: "Whiskas",
+  category: "cats-wet-food",
+  subCategory: "wet-food",
+  pet: "Cat",
+  petType: "Cat",
+  productCategory: "Cat Food",
+  productType: "Wet Food",
+  flavor: "Ocean Fish",
+  lifeStage: "Adult",
+  specialDiet: "Daily Nutrition",
+  vegType: "Non-Veg",
+
+  rating: 4.7,
+  reviews: 276,
+  soldCount: 1046,
+  stock: 52,
+
+  fastDelivery: true,
+  isNew: false,
+  deliveryDate: "Tomorrow",
+
+  image: whiskasWetImg,
+
+  images: [
+    whiskasWetImg,
+    whiskasWetImg,
+    whiskasWetImg,
+    whiskasWetImg,
+  ],
+
+  description:
+    "Ocean fish recipe in gravy providing balanced nutrition and hydration.",
+
+  ingredients: [
+    "Fish",
+    "Chicken",
+    "Vitamins",
+    "Minerals",
+  ],
+
+  features: [
+    "Rich fish flavor",
+    "Supports hydration",
+    "Balanced nutrition",
+    "Easy to digest",
+  ],
+
+  nutrition: {
+    protein: "10%",
+    fat: "4%",
+    fiber: "1%",
+    moisture: "84%",
+  },
+
+  manufacturer: "Mars Petcare",
+  country: "India",
+
+  weight: ["0.2lb", "12 x 0.2lb"],
+
+  variants: [
+    { weight: "0.2lb", price: 1.49, originalPrice: 1.99 },
+    { weight: "12 x 0.2lb", price: 15.99, originalPrice: 19.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.1,
+
+  relatedProducts: [1901, 1902, 1904],
+},
+
+{
+  id: 1904,
+  name: "Fancy Feast Grilled Tuna Wet Cat Food",
+  brand: "Fancy Feast",
+  category: "cats-wet-food",
+  subCategory: "wet-food",
+  pet: "Cat",
+  petType: "Cat",
+  productCategory: "Cat Food",
+  productType: "Wet Food",
+  flavor: "Grilled Tuna",
+  lifeStage: "Adult",
+  specialDiet: "Gourmet",
+  vegType: "Non-Veg",
+
+  rating: 4.9,
+  reviews: 314,
+  soldCount: 1188,
+  stock: 34,
+
+  fastDelivery: true,
+  isNew: true,
+  deliveryDate: "Tomorrow",
+
+  image: fancyFeastWetImg,
+
+  images: [
+    fancyFeastWetImg,
+    fancyFeastWetImg,
+    fancyFeastWetImg,
+    fancyFeastWetImg,
+  ],
+
+  description:
+    "Gourmet grilled tuna wet food crafted for adult cats.",
+
+  ingredients: [
+    "Tuna",
+    "Fish Broth",
+    "Vitamins",
+    "Minerals",
+  ],
+
+  features: [
+    "Gourmet recipe",
+    "Tender texture",
+    "Rich flavor",
+    "Premium nutrition",
+  ],
+
+  nutrition: {
+    protein: "13%",
+    fat: "4%",
+    fiber: "1%",
+    moisture: "78%",
+  },
+
+  manufacturer: "Purina",
+  country: "USA",
+
+  weight: ["0.2lb", "24 x 0.2lb"],
+
+  variants: [
+    { weight: "0.2lb", price: 2.29, originalPrice: 2.99 },
+    { weight: "24 x 0.2lb", price: 42.99, originalPrice: 49.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.1,
+
+  relatedProducts: [1901, 1903, 1905],
+},
+
+{
+  id: 1905,
+  name: "Purina Pro Plan Adult Wet Cat Food",
+  brand: "Purina Pro Plan",
+  category: "cats-wet-food",
+  subCategory: "wet-food",
+  pet: "Cat",
+  petType: "Cat",
+  productCategory: "Cat Food",
+  productType: "Wet Food",
+  flavor: "Chicken",
+  lifeStage: "Adult",
+  specialDiet: "Digestive Care",
+  vegType: "Non-Veg",
+
+  rating: 4.8,
+  reviews: 286,
+  soldCount: 992,
+  stock: 40,
+
+  fastDelivery: true,
+  isNew: false,
+  deliveryDate: "Tomorrow",
+
+  image: purinaWetImg,
+
+  images: [
+    purinaWetImg,
+    purinaWetImg,
+    purinaWetImg,
+    purinaWetImg,
+  ],
+
+  description:
+    "Complete wet cat food with high-quality protein and digestive support.",
+
+  ingredients: [
+    "Chicken",
+    "Liver",
+    "Fish Oil",
+    "Vitamins",
+    "Minerals",
+  ],
+
+  features: [
+    "High-quality protein",
+    "Digestive support",
+    "Complete nutrition",
+    "Rich taste",
+  ],
+
+  nutrition: {
+    protein: "12%",
+    fat: "5%",
+    fiber: "1%",
+    moisture: "80%",
+  },
+
+  manufacturer: "Purina",
+  country: "USA",
+
+  weight: ["0.2lb", "12 x 0.2lb"],
+
+  variants: [
+    { weight: "0.2lb", price: 2.19, originalPrice: 2.89 },
+    { weight: "12 x 0.2lb", price: 21.99, originalPrice: 27.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.1,
+
+  relatedProducts: [1902, 1903, 1904],
+},
+];

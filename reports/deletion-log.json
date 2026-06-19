@@ -1,0 +1,605 @@
+{
+  "deleted": [
+    {
+      "path": "src\\assets\\acana-classics-red-meat-recipe-dry-dog-food.webp",
+      "size": 7877
+    },
+    {
+      "path": "src\\assets\\acana-puppy-recipe-dry-dog-food.webp",
+      "size": 5579
+    },
+    {
+      "path": "src\\assets\\acana-wild-prairie-grain-free-cat-food.webp",
+      "size": 4780
+    },
+    {
+      "path": "src\\assets\\api-tropical-pellets-fish-food.webp",
+      "size": 4854
+    },
+    {
+      "path": "src\\assets\\bellotta.webp",
+      "size": 4874
+    },
+    {
+      "path": "src\\assets\\biscuits-cookies-dog-food-banner.webp",
+      "size": 39362
+    },
+    {
+      "path": "src\\assets\\blog-banner\\blogs-banner.webp",
+      "size": 121717
+    },
+    {
+      "path": "src\\assets\\blogs-banner.webp",
+      "size": 47056
+    },
+    {
+      "path": "src\\assets\\blue-buffalo-homestyle-recipe-wet-dog-food.webp",
+      "size": 5308
+    },
+    {
+      "path": "src\\assets\\BlueBuffelopng.webp",
+      "size": 4420
+    },
+    {
+      "path": "src\\assets\\brand-banners\\image.webp",
+      "size": 55048
+    },
+    {
+      "path": "src\\assets\\brands\\bellotta.webp",
+      "size": 8335
+    },
+    {
+      "path": "src\\assets\\brands\\blue-buffalo.webp",
+      "size": 5891
+    },
+    {
+      "path": "src\\assets\\brands\\canine-creek.webp",
+      "size": 14092
+    },
+    {
+      "path": "src\\assets\\brands\\drools.webp",
+      "size": 12781
+    },
+    {
+      "path": "src\\assets\\brands\\farmina.webp",
+      "size": 150812
+    },
+    {
+      "path": "src\\assets\\brands\\hikari.webp",
+      "size": 21517
+    },
+    {
+      "path": "src\\assets\\brands\\himalaya.webp",
+      "size": 200527
+    },
+    {
+      "path": "src\\assets\\brands\\imas.webp",
+      "size": 33992
+    },
+    {
+      "path": "src\\assets\\brands\\kaytee.webp",
+      "size": 338734
+    },
+    {
+      "path": "src\\assets\\brands\\kennel-kitchen.webp",
+      "size": 53872
+    },
+    {
+      "path": "src\\assets\\brands\\meo.webp",
+      "size": 10100
+    },
+    {
+      "path": "src\\assets\\brands\\n&d.webp",
+      "size": 13139
+    },
+    {
+      "path": "src\\assets\\brands\\orijen.webp",
+      "size": 152442
+    },
+    {
+      "path": "src\\assets\\brands\\pedigree.webp",
+      "size": 12189
+    },
+    {
+      "path": "src\\assets\\brands\\purina.webp",
+      "size": 55385
+    },
+    {
+      "path": "src\\assets\\brands\\purpet.webp",
+      "size": 21091
+    },
+    {
+      "path": "src\\assets\\brands\\rio.webp",
+      "size": 155410
+    },
+    {
+      "path": "src\\assets\\brands\\royal-canin.webp",
+      "size": 101529
+    },
+    {
+      "path": "src\\assets\\brands\\sheba.webp",
+      "size": 190092
+    },
+    {
+      "path": "src\\assets\\brands\\smartheart.webp",
+      "size": 76085
+    },
+    {
+      "path": "src\\assets\\brands\\sobo.webp",
+      "size": 20225
+    },
+    {
+      "path": "src\\assets\\brands\\taiyo.webp",
+      "size": 11582
+    },
+    {
+      "path": "src\\assets\\brands\\taste-of-the-wild.webp",
+      "size": 82164
+    },
+    {
+      "path": "src\\assets\\brands\\temptations.webp",
+      "size": 17332
+    },
+    {
+      "path": "src\\assets\\brands\\tetra.webp",
+      "size": 68092
+    },
+    {
+      "path": "src\\assets\\brands\\vitapol.webp",
+      "size": 24976
+    },
+    {
+      "path": "src\\assets\\brands\\whiskas.webp",
+      "size": 7247
+    },
+    {
+      "path": "src\\assets\\brands\\zupreem.webp",
+      "size": 71968
+    },
+    {
+      "path": "src\\assets\\canine-creek.webp",
+      "size": 8098
+    },
+    {
+      "path": "src\\assets\\cat-crunchy-treats.webp",
+      "size": 42043
+    },
+    {
+      "path": "src\\assets\\creamy-treats.webp",
+      "size": 40723
+    },
+    {
+      "path": "src\\assets\\delectables-squeeze-up-tuna-cat-treat.webp",
+      "size": 5974
+    },
+    {
+      "path": "src\\assets\\dog-banner.webp",
+      "size": 110699
+    },
+    {
+      "path": "src\\assets\\dreamies-cheese-crunchy-cat-treats.webp",
+      "size": 6866
+    },
+    {
+      "path": "src\\assets\\drools-absolute-calcium-bone-biscuits.webp",
+      "size": 12778
+    },
+    {
+      "path": "src\\assets\\drools-puppy-chicken-egg-dry-food.webp",
+      "size": 7885
+    },
+    {
+      "path": "src\\assets\\drools-vegetarian-adult-dog-food.webp",
+      "size": 7346
+    },
+    {
+      "path": "src\\assets\\drools.webp",
+      "size": 6848
+    },
+    {
+      "path": "src\\assets\\dry-food-banner1.webp",
+      "size": 37809
+    },
+    {
+      "path": "src\\assets\\dry-food-cats-banner.webp",
+      "size": 28798
+    },
+    {
+      "path": "src\\assets\\EZstore.webp",
+      "size": 413113
+    },
+    {
+      "path": "src\\assets\\fancy-feast-grilled-tuna-wet-cat-food.webp",
+      "size": 28462
+    },
+    {
+      "path": "src\\assets\\farmina-nd-kitten-chicken-pomegranate-cat-food.webp",
+      "size": 5559
+    },
+    {
+      "path": "src\\assets\\farmina-nd-puppy-medium-maxi-food.webp",
+      "size": 8990
+    },
+    {
+      "path": "src\\assets\\farmina-vet-life-renal-dog-food.webp",
+      "size": 5515
+    },
+    {
+      "path": "src\\assets\\farmina-vet-life-vegetarian-formula-dog-food.webp",
+      "size": 6288
+    },
+    {
+      "path": "src\\assets\\farmina.webp",
+      "size": 82643
+    },
+    {
+      "path": "src\\assets\\fluval-bug-bites-tropical-formula-fish-food.webp",
+      "size": 5090
+    },
+    {
+      "path": "src\\assets\\fresh-food-banner.webp",
+      "size": 39030
+    },
+    {
+      "path": "src\\assets\\friskies-chicken-meaty-bites-cat-treats.webp",
+      "size": 6009
+    },
+    {
+      "path": "src\\assets\\grain-free-food-banner.webp",
+      "size": 35806
+    },
+    {
+      "path": "src\\assets\\grain-free-food-cat-banner.webp",
+      "size": 31063
+    },
+    {
+      "path": "src\\assets\\hero.webp",
+      "size": 10948
+    },
+    {
+      "path": "src\\assets\\higgins-sunburst-gourmet-parrot-food.webp",
+      "size": 6734
+    },
+    {
+      "path": "src\\assets\\hikari-tropical-micro-pellets-fish-food.webp",
+      "size": 6303
+    },
+    {
+      "path": "src\\assets\\hikari.webp",
+      "size": 13225
+    },
+    {
+      "path": "src\\assets\\hills-science-diet-kitten-cat-food.webp",
+      "size": 4679
+    },
+    {
+      "path": "src\\assets\\himalaya.webp",
+      "size": 103173
+    },
+    {
+      "path": "src\\assets\\image.webp",
+      "size": 13223
+    },
+    {
+      "path": "src\\assets\\imas.webp",
+      "size": 15577
+    },
+    {
+      "path": "src\\assets\\inaba-churu-tuna-creamy-cat-treat.webp",
+      "size": 5691
+    },
+    {
+      "path": "src\\assets\\jerhigh-chicken-cookies.webp",
+      "size": 17324
+    },
+    {
+      "path": "src\\assets\\jerhigh-chicken-jerky-treats.webp",
+      "size": 21896
+    },
+    {
+      "path": "src\\assets\\jerhigh-dental-stick-chicken.webp",
+      "size": 9099
+    },
+    {
+      "path": "src\\assets\\kaytee-forti-diet-pro-health-parakeet-food.webp",
+      "size": 7634
+    },
+    {
+      "path": "src\\assets\\kaytee.webp",
+      "size": 83376
+    },
+    {
+      "path": "src\\assets\\kennel-kitchen.webp",
+      "size": 27068
+    },
+    {
+      "path": "src\\assets\\kitten-food-banner.webp",
+      "size": 31241
+    },
+    {
+      "path": "src\\assets\\meaty-cat-food.webp",
+      "size": 38794
+    },
+    {
+      "path": "src\\assets\\meaty-treats-banner.webp",
+      "size": 38586
+    },
+    {
+      "path": "src\\assets\\meo-adult-ocean-fish-dry-cat-food.webp",
+      "size": 4883
+    },
+    {
+      "path": "src\\assets\\meo-creamy-treats-bonito-cat-treat.webp",
+      "size": 5104
+    },
+    {
+      "path": "src\\assets\\meo-crunchy-cat-treats-seafood-flavor.webp",
+      "size": 3770
+    },
+    {
+      "path": "src\\assets\\meo.webp",
+      "size": 4941
+    },
+    {
+      "path": "src\\assets\\n&d.webp",
+      "size": 7779
+    },
+    {
+      "path": "src\\assets\\ollie-chicken-dish-fresh-dog-food.webp",
+      "size": 4719
+    },
+    {
+      "path": "src\\assets\\omega-one-super-color-flakes-fish-food.webp",
+      "size": 6012
+    },
+    {
+      "path": "src\\assets\\orijen-original-grain-free-cat-food.webp",
+      "size": 4781
+    },
+    {
+      "path": "src\\assets\\orijen.webp",
+      "size": 86870
+    },
+    {
+      "path": "src\\assets\\oxbow-essentials-hamster-food.webp",
+      "size": 19717
+    },
+    {
+      "path": "src\\assets\\pedigree-dentastix-daily-oral-care.webp",
+      "size": 5958
+    },
+    {
+      "path": "src\\assets\\pedigree-puppy-chicken-milk-dry-food.webp",
+      "size": 6055
+    },
+    {
+      "path": "src\\assets\\pedigree-vegetarian-adult-dry-dog-food.webp",
+      "size": 7652
+    },
+    {
+      "path": "src\\assets\\pedigree.webp",
+      "size": 6964
+    },
+    {
+      "path": "src\\assets\\prescription-cat-food-banner.webp",
+      "size": 31709
+    },
+    {
+      "path": "src\\assets\\products\\cats\\grain-free-food\\acana-wild-prairie-grain-free-cat-food.webp",
+      "size": 6632
+    },
+    {
+      "path": "src\\assets\\products\\dogs\\dry-food\\acana-classics-red-meat-recipe-dry-dog-food.webp",
+      "size": 13769
+    },
+    {
+      "path": "src\\assets\\products\\dogs\\meaty-treats\\smartheart-chicken-stick-treats.webp",
+      "size": 37216
+    },
+    {
+      "path": "src\\assets\\products\\dogs\\puppyFood\\acana-puppy-recipe-dry-dog-food.webp",
+      "size": 7712
+    },
+    {
+      "path": "src\\assets\\products\\dogs\\wet-food\\blue-buffalo-homestyle-recipe-wet-dog-food.webp",
+      "size": 9851
+    },
+    {
+      "path": "src\\assets\\puppy-food-banner.webp",
+      "size": 37262
+    },
+    {
+      "path": "src\\assets\\puppy-treats-banner.webp",
+      "size": 36520
+    },
+    {
+      "path": "src\\assets\\purepet-crunchy-cat-treats-ocean-fish-flavor.webp",
+      "size": 5064
+    },
+    {
+      "path": "src\\assets\\purepet-dental-chew-stick.webp",
+      "size": 5445
+    },
+    {
+      "path": "src\\assets\\purepet-vegetarian-adult-dog-food.webp",
+      "size": 4886
+    },
+    {
+      "path": "src\\assets\\purina-pro-plan-complete-essentials-adult-cat-food.webp",
+      "size": 12533
+    },
+    {
+      "path": "src\\assets\\purina-pro-plan-veterinary-ur-urinary-cat-food.webp",
+      "size": 39689
+    },
+    {
+      "path": "src\\assets\\purina.webp",
+      "size": 22223
+    },
+    {
+      "path": "src\\assets\\purpet.webp",
+      "size": 7430
+    },
+    {
+      "path": "src\\assets\\rio.webp",
+      "size": 98539
+    },
+    {
+      "path": "src\\assets\\royal-canin-adult-wet-dog-food.webp",
+      "size": 5912
+    },
+    {
+      "path": "src\\assets\\royal-canin-hypoallergenic-cat-food.webp",
+      "size": 9776
+    },
+    {
+      "path": "src\\assets\\royal-canin-hypoallergenic-dog-food.webp",
+      "size": 5807
+    },
+    {
+      "path": "src\\assets\\royal-canin-instinctive-adult-wet-cat-food.webp",
+      "size": 15250
+    },
+    {
+      "path": "src\\assets\\royal-canin-kitten-dry-cat-food.webp",
+      "size": 15223
+    },
+    {
+      "path": "src\\assets\\royal-canin-mini-puppy-dry-dog-food.webp",
+      "size": 4687
+    },
+    {
+      "path": "src\\assets\\royal-canin-vegetarian-adult-dry-dog-food.webp",
+      "size": 5820
+    },
+    {
+      "path": "src\\assets\\royal-canin.webp",
+      "size": 51786
+    },
+    {
+      "path": "src\\assets\\sera-vipan-nature-tropical-fish-food.webp",
+      "size": 4339
+    },
+    {
+      "path": "src\\assets\\sheba-chicken-meaty-cat-treats.webp",
+      "size": 6186
+    },
+    {
+      "path": "src\\assets\\sheba-creamy-snacks-tuna-cat-treat.webp",
+      "size": 4361
+    },
+    {
+      "path": "src\\assets\\sheba-tuna-premium-wet-cat-food.webp",
+      "size": 21400
+    },
+    {
+      "path": "src\\assets\\sheba.webp",
+      "size": 55835
+    },
+    {
+      "path": "src\\assets\\smartheart-chicken-stick-treats.webp",
+      "size": 25962
+    },
+    {
+      "path": "src\\assets\\smartheart-dental-stick-dog-treat.webp",
+      "size": 4591
+    },
+    {
+      "path": "src\\assets\\smartheart-dog-biscuits-milk.webp",
+      "size": 14810
+    },
+    {
+      "path": "src\\assets\\smartheart.webp",
+      "size": 51715
+    },
+    {
+      "path": "src\\assets\\sobo.webp",
+      "size": 8720
+    },
+    {
+      "path": "src\\assets\\spot-tango-beef-millet-fresh-dog-food.webp",
+      "size": 5000
+    },
+    {
+      "path": "src\\assets\\spotlight\\EZstore.webp",
+      "size": 2573135
+    },
+    {
+      "path": "src\\assets\\taiyo.webp",
+      "size": 5673
+    },
+    {
+      "path": "src\\assets\\taste-of-the-wild-rocky-mountain-grain-free-cat-food.webp",
+      "size": 6768
+    },
+    {
+      "path": "src\\assets\\taste-of-the-wild.webp",
+      "size": 38139
+    },
+    {
+      "path": "src\\assets\\temptaions..webp",
+      "size": 9982
+    },
+    {
+      "path": "src\\assets\\temptations-creamy-puree-chicken-cat-treat.webp",
+      "size": 6771
+    },
+    {
+      "path": "src\\assets\\temptations-mixups-backyard-cookout-cat-treats.webp",
+      "size": 3828
+    },
+    {
+      "path": "src\\assets\\tetra-tetramin-tropical-flakes-fish-food.webp",
+      "size": 5580
+    },
+    {
+      "path": "src\\assets\\tetra.webp",
+      "size": 38974
+    },
+    {
+      "path": "src\\assets\\the-farmers-dog-turkey-recipe-fresh-dog-food.webp",
+      "size": 3110
+    },
+    {
+      "path": "src\\assets\\vegetarian-food-banner.webp",
+      "size": 39901
+    },
+    {
+      "path": "src\\assets\\versele-laga-prestige-budgies-bird-food.webp",
+      "size": 5151
+    },
+    {
+      "path": "src\\assets\\vitapol-economy-parrot-food.webp",
+      "size": 6023
+    },
+    {
+      "path": "src\\assets\\vitapol.webp",
+      "size": 14566
+    },
+    {
+      "path": "src\\assets\\wet-dog-food-banner.webp",
+      "size": 35285
+    },
+    {
+      "path": "src\\assets\\wet-food-cat-banner.webp",
+      "size": 39721
+    },
+    {
+      "path": "src\\assets\\whiskas.webp",
+      "size": 4260
+    },
+    {
+      "path": "src\\assets\\wild-harvest-daily-blend-parakeet-food.webp",
+      "size": 5706
+    },
+    {
+      "path": "src\\assets\\zu-preem-fruitblend-small-bird-food.webp",
+      "size": 8638
+    },
+    {
+      "path": "src\\assets\\zupreem.webp",
+      "size": 41469
+    }
+  ],
+  "total": 7432027
+}

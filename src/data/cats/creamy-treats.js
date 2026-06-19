@@ -2,11 +2,11 @@
 // src/data/cats/treats/catCreamyTreats.js
 // ==========================================
 
-import inabaChuruImg from "../../assets/products/cats/creamy-treats/inaba-churu-tuna-creamy-cat-treat.jpg";
-import temptationsImg from "../../assets/products/cats/creamy-treats/temptations-creamy-puree-chicken-cat-treat.jpg";
-import shebaImg from "../../assets/products/cats/creamy-treats/sheba-creamy-snacks-tuna-cat-treat.jpg";
-import delectablesImg from "../../assets/products/cats/creamy-treats/delectables-squeeze-up-tuna-cat-treat.jpg";
-import meoImg from "../../assets/products/cats/creamy-treats/meo-creamy-treats-bonito-cat-treat.jpg";
+import inabaChuruImg from "../../assets/products/cats/creamy-treats/inaba-churu-tuna-creamy-cat-treat.webp";
+import temptationsImg from "../../assets/products/cats/creamy-treats/temptations-creamy-puree-chicken-cat-treat.webp";
+import shebaImg from "../../assets/products/cats/creamy-treats/sheba-creamy-snacks-tuna-cat-treat.webp";
+import delectablesImg from "../../assets/products/cats/creamy-treats/delectables-squeeze-up-tuna-cat-treat.webp";
+import meoImg from "../../assets/products/cats/creamy-treats/meo-creamy-treats-bonito-cat-treat.webp";
 
 export const catCreamyTreats = [
   {
@@ -35,30 +35,14 @@ export const catCreamyTreats = [
 
     image: inabaChuruImg,
 
-    images: [
-      inabaChuruImg,
-      inabaChuruImg,
-      inabaChuruImg,
-      inabaChuruImg,
-    ],
+    images: [inabaChuruImg, inabaChuruImg, inabaChuruImg, inabaChuruImg],
 
     description:
       "Creamy tuna puree treat made with high-quality ingredients and loved by picky cats.",
 
-    ingredients: [
-      "Tuna",
-      "Water",
-      "Natural Flavors",
-      "Vitamin E",
-      "Green Tea Extract",
-    ],
+    ingredients: ["Tuna", "Water", "Natural Flavors", "Vitamin E", "Green Tea Extract"],
 
-    features: [
-      "Creamy texture",
-      "High moisture",
-      "Grain free",
-      "Suitable as topper",
-    ],
+    features: ["Creamy texture", "High moisture", "Grain free", "Suitable as topper"],
 
     nutrition: {
       protein: "8%",
@@ -70,16 +54,16 @@ export const catCreamyTreats = [
     manufacturer: "INABA Foods",
     country: "Japan",
 
-    weight: ["14g x 4", "14g x 20"],
+    weight: ["0lb x 4", "0lb x 20"],
 
     variants: [
       {
-        weight: "14g x 4",
+        weight: "0lb x 4",
         price: 3.99,
         originalPrice: 5.99,
       },
       {
-        weight: "14g x 20",
+        weight: "0lb x 20",
         price: 15.99,
         originalPrice: 19.99,
       },
@@ -117,30 +101,13 @@ export const catCreamyTreats = [
 
     image: temptationsImg,
 
-    images: [
-      temptationsImg,
-      temptationsImg,
-      temptationsImg,
-      temptationsImg,
-    ],
+    images: [temptationsImg, temptationsImg, temptationsImg, temptationsImg],
 
-    description:
-      "Smooth chicken puree treat ideal for rewarding and bonding with cats.",
+    description: "Smooth chicken puree treat ideal for rewarding and bonding with cats.",
 
-    ingredients: [
-      "Chicken",
-      "Water",
-      "Chicken Liver",
-      "Natural Flavors",
-      "Vitamins",
-    ],
+    ingredients: ["Chicken", "Water", "Chicken Liver", "Natural Flavors", "Vitamins"],
 
-    features: [
-      "Creamy puree",
-      "Easy feeding",
-      "High palatability",
-      "Supports hydration",
-    ],
+    features: ["Creamy puree", "Easy feeding", "High palatability", "Supports hydration"],
 
     nutrition: {
       protein: "7%",
@@ -152,16 +119,16 @@ export const catCreamyTreats = [
     manufacturer: "Mars Petcare",
     country: "USA",
 
-    weight: ["48g", "240g"],
+    weight: ["0.1lb", "0.5lb"],
 
     variants: [
       {
-        weight: "48g",
+        weight: "0.1lb",
         price: 4.49,
         originalPrice: 5.99,
       },
       {
-        weight: "240g",
+        weight: "0.5lb",
         price: 16.99,
         originalPrice: 21.99,
       },
@@ -199,29 +166,13 @@ export const catCreamyTreats = [
 
     image: shebaImg,
 
-    images: [
-      shebaImg,
-      shebaImg,
-      shebaImg,
-      shebaImg,
-    ],
+    images: [shebaImg, shebaImg, shebaImg, shebaImg],
 
-    description:
-      "Premium creamy tuna snack with rich flavor and smooth consistency.",
+    description: "Premium creamy tuna snack with rich flavor and smooth consistency.",
 
-    ingredients: [
-      "Tuna",
-      "Fish Broth",
-      "Natural Flavors",
-      "Vitamins",
-    ],
+    ingredients: ["Tuna", "Fish Broth", "Natural Flavors", "Vitamins"],
 
-    features: [
-      "Premium recipe",
-      "Rich tuna taste",
-      "Creamy texture",
-      "Ideal reward treat",
-    ],
+    features: ["Premium recipe", "Rich tuna taste", "Creamy texture", "Ideal reward treat"],
 
     nutrition: {
       protein: "8%",
@@ -233,16 +184,16 @@ export const catCreamyTreats = [
     manufacturer: "Sheba",
     country: "Thailand",
 
-    weight: ["48g", "96g"],
+    weight: ["0.1lb", "0.2lb"],
 
     variants: [
       {
-        weight: "48g",
+        weight: "0.1lb",
         price: 3.99,
         originalPrice: 5.49,
       },
       {
-        weight: "96g",
+        weight: "0.2lb",
         price: 7.49,
         originalPrice: 9.99,
       },
@@ -280,29 +231,13 @@ export const catCreamyTreats = [
 
     image: delectablesImg,
 
-    images: [
-      delectablesImg,
-      delectablesImg,
-      delectablesImg,
-      delectablesImg,
-    ],
+    images: [delectablesImg, delectablesImg, delectablesImg, delectablesImg],
 
-    description:
-      "Lickable tuna puree treat that can be served directly or as a food topper.",
+    description: "Lickable tuna puree treat that can be served directly or as a food topper.",
 
-    ingredients: [
-      "Tuna",
-      "Fish Broth",
-      "Natural Flavors",
-      "Vitamins",
-    ],
+    ingredients: ["Tuna", "Fish Broth", "Natural Flavors", "Vitamins"],
 
-    features: [
-      "Lickable format",
-      "Food topper option",
-      "Hydrating snack",
-      "Easy serving",
-    ],
+    features: ["Lickable format", "Food topper option", "Hydrating snack", "Easy serving"],
 
     nutrition: {
       protein: "8%",
@@ -314,16 +249,16 @@ export const catCreamyTreats = [
     manufacturer: "Hartz",
     country: "USA",
 
-    weight: ["56g", "112g"],
+    weight: ["0.1lb", "0.2lb"],
 
     variants: [
       {
-        weight: "56g",
+        weight: "0.1lb",
         price: 4.99,
         originalPrice: 6.49,
       },
       {
-        weight: "112g",
+        weight: "0.2lb",
         price: 8.99,
         originalPrice: 11.99,
       },
@@ -361,30 +296,13 @@ export const catCreamyTreats = [
 
     image: meoImg,
 
-    images: [
-      meoImg,
-      meoImg,
-      meoImg,
-      meoImg,
-    ],
+    images: [meoImg, meoImg, meoImg, meoImg],
 
-    description:
-      "Popular bonito flavored creamy cat treat with taurine and essential nutrients.",
+    description: "Popular bonito flavored creamy cat treat with taurine and essential nutrients.",
 
-    ingredients: [
-      "Bonito",
-      "Chicken",
-      "Taurine",
-      "Vitamins",
-      "Minerals",
-    ],
+    ingredients: ["Bonito", "Chicken", "Taurine", "Vitamins", "Minerals"],
 
-    features: [
-      "Contains taurine",
-      "Creamy texture",
-      "Highly palatable",
-      "Daily reward snack",
-    ],
+    features: ["Contains taurine", "Creamy texture", "Highly palatable", "Daily reward snack"],
 
     nutrition: {
       protein: "7%",
@@ -396,16 +314,16 @@ export const catCreamyTreats = [
     manufacturer: "Me-O",
     country: "Thailand",
 
-    weight: ["60g", "300g"],
+    weight: ["0.1lb", "0.6lb"],
 
     variants: [
       {
-        weight: "60g",
+        weight: "0.1lb",
         price: 2.99,
         originalPrice: 4.49,
       },
       {
-        weight: "300g",
+        weight: "0.6lb",
         price: 11.99,
         originalPrice: 15.99,
       },

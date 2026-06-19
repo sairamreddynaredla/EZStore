@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import ProductCard from "./ProductCard";
 
 const ProductGrid = ({
@@ -39,7 +39,7 @@ const ProductGrid = ({
           if (prod) onVisibleProductChange(prod);
         }
       },
-      { root: null, rootMargin: '0px', threshold: [0, 0.25, 0.5, 0.75, 1] }
+      { root: null, rootMargin: "0px", threshold: [0, 0.25, 0.5, 0.75, 1] }
     );
 
     itemRefs.current.forEach((el) => el && obs.observe(el));
@@ -64,11 +64,7 @@ const ProductGrid = ({
             </div>
           ))
         : products.map((product, idx) => (
-            <div
-              key={product.id}
-              data-index={idx}
-              ref={(el) => (itemRefs.current[idx] = el)}
-            >
+            <div key={product.id} data-index={idx} ref={(el) => (itemRefs.current[idx] = el)}>
               <ProductCard
                 product={product}
                 onAddToCart={onAddToCart}

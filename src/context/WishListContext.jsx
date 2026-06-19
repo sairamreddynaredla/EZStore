@@ -1,21 +1,14 @@
 /* eslint-disable react-refresh/only-export-components */
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-} from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { WISHLIST_ACTIONS } from "./wishlistconstants";
-import { trackAddToWishlist, trackRemoveFromWishlist } from '../utils/analytics';
+import { trackAddToWishlist, trackRemoveFromWishlist } from "../utils/analytics";
 
 const WishlistContext = createContext();
 
 const wishlistReducer = (state, action) => {
   switch (action.type) {
     case WISHLIST_ACTIONS.ADD_TO_WISHLIST: {
-      const exists = state.items.find(
-        (item) => item.id === action.payload.id
-      );
+      const exists = state.items.find((item) => item.id === action.payload.id);
 
       if (exists) return state;
 
@@ -28,9 +21,7 @@ const wishlistReducer = (state, action) => {
     case WISHLIST_ACTIONS.REMOVE_FROM_WISHLIST:
       return {
         ...state,
-        items: state.items.filter(
-          (item) => item.id !== action.payload
-        ),
+        items: state.items.filter((item) => item.id !== action.payload),
       };
 
     case WISHLIST_ACTIONS.CLEAR_WISHLIST:
@@ -49,20 +40,16 @@ const initialState = {
 };
 
 export const WishlistProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(
-    wishlistReducer,
-    initialState
-  );
+  const [state, dispatch] = useReducer(wishlistReducer, initialState);
 
   useEffect(() => {
-    localStorage.setItem(
-      "wishlist",
-      JSON.stringify(state.items)
-    );
+    localStorage.setItem("wishlist", JSON.stringify(state.items));
   }, [state.items]);
 
   const addToWishlist = (product) => {
-    try { trackAddToWishlist(product); } catch (err) { }
+    try {
+      trackAddToWishlist(product);
+    } catch (err) {}
     dispatch({
       type: WISHLIST_ACTIONS.ADD_TO_WISHLIST,
       payload: product,
@@ -70,7 +57,9 @@ export const WishlistProvider = ({ children }) => {
   };
 
   const removeFromWishlist = (id) => {
-    try { trackRemoveFromWishlist(id); } catch (err) { }
+    try {
+      trackRemoveFromWishlist(id);
+    } catch (err) {}
     dispatch({
       type: WISHLIST_ACTIONS.REMOVE_FROM_WISHLIST,
       payload: id,
@@ -107,9 +96,7 @@ export const useWishlist = () => {
   const context = useContext(WishlistContext);
 
   if (!context) {
-    throw new Error(
-      "useWishlist must be used within WishlistProvider"
-    );
+    throw new Error("useWishlist must be used within WishlistProvider");
   }
 
   return context;

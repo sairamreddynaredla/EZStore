@@ -1,1 +1,1 @@
-export const ezstoreProducts = []
+export const ezstoreProducts = [];

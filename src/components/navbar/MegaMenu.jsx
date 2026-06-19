@@ -22,13 +22,13 @@ const groupBySection = (categories) => {
 
 const MegaMenu = ({ label = "", isOpen, onOpen, onClose }) => {
   const [open, setOpen] = useState(false);
-  const active = typeof isOpen === 'boolean' ? isOpen : open;
+  const active = typeof isOpen === "boolean" ? isOpen : open;
   const [dropdownTop, setDropdownTop] = useState(0);
   const [position, setPosition] = useState({ left: 0, top: 0, width: 0 });
   const menuRef = useRef(null);
   const dropdownRef = useRef(null);
 
-  const normalized = String(label ?? '').toLowerCase();
+  const normalized = String(label ?? "").toLowerCase();
   const isDog = normalized === "dogs";
   const isCat = normalized === "cats";
   const isBrand = normalized === "brands" || normalized === "brand";
@@ -68,7 +68,7 @@ const MegaMenu = ({ label = "", isOpen, onOpen, onClose }) => {
         !menuRef.current.contains(event.target) &&
         !dropdownRef.current.contains(event.target)
       ) {
-        if (typeof onClose === 'function') onClose();
+        if (typeof onClose === "function") onClose();
         else setOpen(false);
       }
     };
@@ -87,9 +87,12 @@ const MegaMenu = ({ label = "", isOpen, onOpen, onClose }) => {
         const anchor = menuRef.current;
         const viewportPadding = 16;
         const maxWidth = Math.min(1100, window.innerWidth - viewportPadding * 2);
-        if (anchor && typeof anchor.getBoundingClientRect === 'function') {
+        if (anchor && typeof anchor.getBoundingClientRect === "function") {
           const rect = anchor.getBoundingClientRect();
-          const left = Math.max(viewportPadding, Math.round(rect.left + rect.width / 2 - maxWidth / 2));
+          const left = Math.max(
+            viewportPadding,
+            Math.round(rect.left + rect.width / 2 - maxWidth / 2)
+          );
           const top = Math.round(rect.bottom + 8);
           setPosition({ left, top, width: maxWidth });
           return;
@@ -102,11 +105,11 @@ const MegaMenu = ({ label = "", isOpen, onOpen, onClose }) => {
     };
 
     updatePosition();
-    window.addEventListener('resize', updatePosition);
-    window.addEventListener('scroll', updatePosition);
+    window.addEventListener("resize", updatePosition);
+    window.addEventListener("scroll", updatePosition);
     return () => {
-      window.removeEventListener('resize', updatePosition);
-      window.removeEventListener('scroll', updatePosition);
+      window.removeEventListener("resize", updatePosition);
+      window.removeEventListener("scroll", updatePosition);
     };
   }, [menuRef, open]);
 
@@ -125,26 +128,53 @@ const MegaMenu = ({ label = "", isOpen, onOpen, onClose }) => {
       </button>
 
       {/* Dropdown anchored to the menu button - not full-width backdrop */}
-      {active && createPortal(
-        <div
-          ref={dropdownRef}
-          onMouseEnter={() => { if (typeof onOpen === 'function') onOpen(); else setOpen(true); }}
-          onMouseLeave={() => { if (typeof onClose === 'function') onClose(); else setOpen(false); }}
-          style={{ position: 'fixed', left: position.left, top: position.top, width: position.width }}
-          className={`z-50 transition-all duration-150`}
-        >
-          <div className={`bg-white rounded-2xl shadow-2xl py-4 md:py-6 w-full transition-transform ease-out duration-150 ${open ? "translate-y-0 opacity-100" : "-translate-y-1 opacity-0"}`}>
-            <div className="mx-auto px-4 md:px-6">
-              {isBrand ? (
-                <BrandsMegaContent onClose={() => { if (typeof onClose === 'function') onClose(); else setOpen(false); }} />
-              ) : (
-                <MegaMenuSection title={label} sections={sections} showBanner={showBanner} onClick={() => { if (typeof onClose === 'function') onClose(); else setOpen(false); }} />
-              )}
+      {active &&
+        createPortal(
+          <div
+            ref={dropdownRef}
+            onMouseEnter={() => {
+              if (typeof onOpen === "function") onOpen();
+              else setOpen(true);
+            }}
+            onMouseLeave={() => {
+              if (typeof onClose === "function") onClose();
+              else setOpen(false);
+            }}
+            style={{
+              position: "fixed",
+              left: position.left,
+              top: position.top,
+              width: position.width,
+            }}
+            className={`z-50 transition-all duration-150`}
+          >
+            <div
+              className={`bg-white rounded-2xl shadow-2xl py-4 md:py-6 w-full transition-transform ease-out duration-150 ${open ? "translate-y-0 opacity-100" : "-translate-y-1 opacity-0"}`}
+            >
+              <div className="mx-auto px-4 md:px-6">
+                {isBrand ? (
+                  <BrandsMegaContent
+                    onClose={() => {
+                      if (typeof onClose === "function") onClose();
+                      else setOpen(false);
+                    }}
+                  />
+                ) : (
+                  <MegaMenuSection
+                    title={label}
+                    sections={sections}
+                    showBanner={showBanner}
+                    onClick={() => {
+                      if (typeof onClose === "function") onClose();
+                      else setOpen(false);
+                    }}
+                  />
+                )}
+              </div>
             </div>
-          </div>
-        </div>,
-        document.body
-      )}
+          </div>,
+          document.body
+        )}
     </div>
   );
 };

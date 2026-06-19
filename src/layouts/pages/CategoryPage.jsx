@@ -2,6 +2,7 @@ import {
   useParams,
   Link,
 } from "react-router-dom";
+import SEO from "../../components/SEO";
 
 import {
   useState,
@@ -392,6 +393,10 @@ const CategoryPage = () => {
   return (
 
     <div className="w-full bg-[#f5f5f5] px-4 lg:px-6 py-6 min-h-screen">
+      <SEO
+        title={category ? `${category.replace(/[-_]/g, " ")} - Category` : "Category"}
+        description={`Shop ${category ? category.replace(/[-_]/g, " ") : "categories"} at EZStore. Browse top products in this category.`}
+      />
 
       {/* BANNER */}
 

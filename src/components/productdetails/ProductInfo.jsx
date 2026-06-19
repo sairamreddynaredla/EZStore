@@ -7,12 +7,23 @@ import { getBrandLogo } from "../../data/brands";
 import ReviewSummary from "./ReviewSummary";
 import OffersList from "./OffersList";
 
-const ProductInfo = ({ product, handleBuyNow, selectedVariant, setSelectedVariant, quantity, setQuantity }) => {
+const ProductInfo = ({
+  product,
+  handleBuyNow,
+  selectedVariant,
+  setSelectedVariant,
+  quantity,
+  setQuantity,
+}) => {
   const { addToCart } = useCart();
   const navigate = useNavigate();
   const [showRatingDropdown, setShowRatingDropdown] = useState(false);
 
-  const brandSlug = getBrandLogo(product.brand) || String(product.brand ?? "").toLowerCase().replace(/\s+/g, "-");
+  const brandSlug =
+    getBrandLogo(product.brand) ||
+    String(product.brand ?? "")
+      .toLowerCase()
+      .replace(/\s+/g, "-");
   const brandStoreLink = brandSlug ? `/brands/${brandSlug}` : "/brands";
 
   const handleVisitBrandStore = () => {
@@ -21,8 +32,8 @@ const ProductInfo = ({ product, handleBuyNow, selectedVariant, setSelectedVarian
 
   const discountPercentage = selectedVariant?.originalPrice
     ? Math.round(
-        ((selectedVariant.originalPrice - selectedVariant.price) /
-          selectedVariant.originalPrice) * 100
+        ((selectedVariant.originalPrice - selectedVariant.price) / selectedVariant.originalPrice) *
+          100
       )
     : 0;
 
@@ -40,9 +51,7 @@ const ProductInfo = ({ product, handleBuyNow, selectedVariant, setSelectedVarian
   const productTitleBottom = [
     product.lifeStage && `${product.lifeStage} ${product.petType || product.pet || "Dog"} Formula`,
     product.specialDiet || (product.flavor && `${product.flavor} Flavor`),
-    product.breedSize && !/all/i.test(product.breedSize)
-      ? `For ${product.breedSize} Breeds`
-      : null,
+    product.breedSize && !/all/i.test(product.breedSize) ? `For ${product.breedSize} Breeds` : null,
   ]
     .filter(Boolean)
     .join(" | ");
@@ -68,12 +77,12 @@ const ProductInfo = ({ product, handleBuyNow, selectedVariant, setSelectedVarian
 
   const productShareUrl = typeof window !== "undefined" ? window.location.href : "";
   const formatCategoryLabel = (category) => {
-    if (!category) return 'Unknown';
+    if (!category) return "Unknown";
     return category
-      .replace(/[-_]/g, ' ')
-      .split(' ')
+      .replace(/[-_]/g, " ")
+      .split(" ")
       .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
+      .join(" ");
   };
 
   const productCategoryLabel = product.productCategory || formatCategoryLabel(product.category);
@@ -121,7 +130,7 @@ const ProductInfo = ({ product, handleBuyNow, selectedVariant, setSelectedVarian
                 <h1
                   className="font-bold text-black font-sans text-left wrap-break-word leading-tight line-clamp-4"
                   style={{
-                    fontSize: '20px',
+                    fontSize: "20px",
                   }}
                 >
                   <span className="block text-[20px] sm:text-[24px] md:text-[28px] lg:text-[30px] font-bold font-sans">
@@ -139,12 +148,18 @@ const ProductInfo = ({ product, handleBuyNow, selectedVariant, setSelectedVarian
                             key={variant.weight}
                             type="button"
                             onClick={() => setSelectedVariant(variant)}
-                            className={`rounded-2xl border px-3 py-2 text-left transition ${isActive ? 'border-blue-600 bg-blue-50' : 'border-slate-200 bg-white hover:border-slate-300'}`}
+                            className={`rounded-2xl border px-3 py-2 text-left transition ${isActive ? "border-blue-600 bg-blue-50" : "border-slate-200 bg-white hover:border-slate-300"}`}
                           >
-                            <div className="text-sm font-semibold text-slate-900">{variant.weight}</div>
-                            <div className="mt-1 text-sm font-bold text-slate-900">${variant.price?.toFixed(2)}</div>
+                            <div className="text-sm font-semibold text-slate-900">
+                              {variant.weight}
+                            </div>
+                            <div className="mt-1 text-sm font-bold text-slate-900">
+                              ${variant.price?.toFixed(2)}
+                            </div>
                             {variant.originalPrice > variant.price && (
-                              <div className="text-[10px] text-slate-400 line-through">${variant.originalPrice?.toFixed(2)}</div>
+                              <div className="text-[10px] text-slate-400 line-through">
+                                ${variant.originalPrice?.toFixed(2)}
+                              </div>
                             )}
                           </button>
                         );
@@ -161,7 +176,15 @@ const ProductInfo = ({ product, handleBuyNow, selectedVariant, setSelectedVarian
               className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-slate-700 transition hover:border-slate-300 hover:bg-slate-100"
               aria-label={`Share ${productShareTitle}`}
             >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="h-5 w-5"
+              >
                 <path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7" />
                 <polyline points="16 6 12 2 8 6" />
                 <line x1="12" y1="2" x2="12" y2="16" />
@@ -186,7 +209,7 @@ const ProductInfo = ({ product, handleBuyNow, selectedVariant, setSelectedVarian
               <span className="text-yellow-500 text-lg">★</span>
               <span className="font-semibold text-slate-900">{product.rating}</span>
               <span className="text-slate-500">({product.reviews} reviews)</span>
-              <span className="text-slate-400">{showRatingDropdown ? '▲' : '▼'}</span>
+              <span className="text-slate-400">{showRatingDropdown ? "▲" : "▼"}</span>
             </button>
 
             {product.soldCount != null && (
@@ -196,7 +219,9 @@ const ProductInfo = ({ product, handleBuyNow, selectedVariant, setSelectedVarian
               </>
             )}
 
-            <span className="capitalize">{productCategoryLabel} • {product.brand}</span>
+            <span className="capitalize">
+              {productCategoryLabel} • {product.brand}
+            </span>
           </div>
 
           {discountPercentage > 0 && (
@@ -207,7 +232,11 @@ const ProductInfo = ({ product, handleBuyNow, selectedVariant, setSelectedVarian
 
           {showRatingDropdown && (
             <div className="mt-4 rounded-3xl border border-slate-200 bg-slate-50 p-5 shadow-sm">
-              <ReviewSummary rating={product.rating} reviews={product.reviews} breakdown={product.reviewsBreakdown} />
+              <ReviewSummary
+                rating={product.rating}
+                reviews={product.reviews}
+                breakdown={product.reviewsBreakdown}
+              />
             </div>
           )}
         </div>
@@ -240,33 +269,46 @@ const ProductInfo = ({ product, handleBuyNow, selectedVariant, setSelectedVarian
         <div className="max-w-362.5 mx-auto px-4">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <div className="text-lg font-bold text-green-600">{'$' + (selectedVariant?.price || product.price)}</div>
-              <div className="text-xs text-slate-600">{product.stock > 0 ? 'In stock' : 'Out of stock'}</div>
+              <div className="text-lg font-bold text-green-600">
+                {"$" + (selectedVariant?.price || product.price)}
+              </div>
+              <div className="text-xs text-slate-600">
+                {product.stock > 0 ? "In stock" : "Out of stock"}
+              </div>
             </div>
 
             <div className="flex items-center gap-2">
               <div className="flex items-center border rounded-lg overflow-hidden">
-                <button onClick={() => quantity > 1 && setQuantity(quantity - 1)} className="px-3 py-2">-</button>
+                <button
+                  onClick={() => quantity > 1 && setQuantity(quantity - 1)}
+                  className="px-3 py-2"
+                >
+                  -
+                </button>
                 <div className="px-3 py-2 font-medium">{quantity}</div>
-                <button onClick={() => setQuantity(quantity + 1)} className="px-3 py-2">+</button>
+                <button onClick={() => setQuantity(quantity + 1)} className="px-3 py-2">
+                  +
+                </button>
               </div>
 
               <div className="flex gap-2 items-center">
-                <div className="w-30"><AddToCartButton
-                  product={{ ...product, selectedVariant, quantity }}
-                  isOutOfStock={product.stock <= 0}
-                  onAddToCart={addToCart}
-                  quantity={quantity}
-                /></div>
+                <div className="w-30">
+                  <AddToCartButton
+                    product={{ ...product, selectedVariant, quantity }}
+                    isOutOfStock={product.stock <= 0}
+                    onAddToCart={addToCart}
+                    quantity={quantity}
+                  />
+                </div>
 
-                  <BuyNowButton
-                    onClick={handleBuyNow}
-                    disabled={product.stock === 0}
-                    className="w-24 py-2 text-sm"
-                    analyticsPayload={{ ...product, selectedVariant, quantity }}
-                  >
-                    Buy
-                  </BuyNowButton>
+                <BuyNowButton
+                  onClick={handleBuyNow}
+                  disabled={product.stock === 0}
+                  className="w-24 py-2 text-sm"
+                  analyticsPayload={{ ...product, selectedVariant, quantity }}
+                >
+                  Buy
+                </BuyNowButton>
               </div>
             </div>
           </div>

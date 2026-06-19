@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  ChevronDown,
-  SlidersHorizontal,
-} from "lucide-react";
+import { ChevronDown, SlidersHorizontal } from "lucide-react";
 
 const filtersData = [
   {
@@ -31,24 +28,13 @@ const filtersData = [
   {
     title: "Brands",
     type: "checkbox",
-    options: [
-      "Royal Canin",
-      "Pedigree",
-      "Farmina",
-      "Drools",
-    ],
+    options: ["Royal Canin", "Pedigree", "Farmina", "Drools"],
   },
 
   {
     title: "Breed Size",
     type: "checkbox",
-    options: [
-      "Extra Small",
-      "Small",
-      "Medium",
-      "Large",
-      "Giant",
-    ],
+    options: ["Extra Small", "Small", "Medium", "Large", "Giant"],
   },
 
   {
@@ -60,56 +46,31 @@ const filtersData = [
   {
     title: "Shop By Breed",
     type: "checkbox",
-    options: [
-      "Large",
-      "Small",
-      "Medium",
-      "Extra Small",
-    ],
+    options: ["Large", "Small", "Medium", "Extra Small"],
   },
 
   {
     title: "Flavor",
     type: "checkbox",
-    options: [
-      "Chicken",
-      "Fish",
-      "Lamb",
-      "Duck",
-      "Salmon",
-    ],
+    options: ["Chicken", "Fish", "Lamb", "Duck", "Salmon"],
   },
 
   {
     title: "Weight",
     type: "checkbox",
-    options: [
-      "1lb",
-      "5lb",
-      "10lb",
-      "15lb",
-    ],
+    options: ["1lb", "5lb", "10lb", "15lb"],
   },
 
   {
     title: "Pet Life Stages",
     type: "checkbox",
-    options: [
-      "Adult",
-      "Puppy",
-      "Senior",
-      "All Life Stages",
-    ],
+    options: ["Adult", "Puppy", "Senior", "All Life Stages"],
   },
 
   {
     title: "Special Diet",
     type: "checkbox",
-    options: [
-      "High Protein",
-      "Grain Free",
-      "Low Grain",
-    ],
+    options: ["High Protein", "Grain Free", "Low Grain"],
   },
 
   {
@@ -119,29 +80,25 @@ const filtersData = [
   },
 ];
 
-const ProductSidebar = ({
-  filters,
-  setFilters,
-}) => {
-  const [openSections, setOpenSections] =
-    useState({
-      Availability: true,
-      Price: true,
-      "Pet Type": true,
-      Brands: true,
-    });
+const ProductSidebar = ({ filters, setFilters }) => {
+  const [openSections, setOpenSections] = useState({
+    Availability: true,
+    Price: true,
+    "Pet Type": true,
+    Brands: true,
+  });
 
   // Local copy of filters so changes are applied when user clicks Apply
   const [localFilters, setLocalFilters] = useState(filters || {});
 
   const [localPrice, setLocalPrice] = useState(() => {
     const p = filters?.Price;
-    return typeof p === 'number' ? p : 500;
+    return typeof p === "number" ? p : 500;
   });
 
   useEffect(() => {
     setLocalFilters(filters || {});
-    setLocalPrice(typeof filters?.Price === 'number' ? filters.Price : 500);
+    setLocalPrice(typeof filters?.Price === "number" ? filters.Price : 500);
   }, [filters]);
 
   const toggleSection = (title) => {
@@ -164,9 +121,7 @@ const ProductSidebar = ({
     setFilters(localFilters);
   };
 
-  const hasChanges =
-    JSON.stringify(localFilters || {}) !==
-    JSON.stringify(filters || {});
+  const hasChanges = JSON.stringify(localFilters || {}) !== JSON.stringify(filters || {});
 
   return (
     <aside
@@ -189,12 +144,9 @@ const ProductSidebar = ({
       {/* HEADER */}
 
       <div className="flex items-center gap-3 mb-8">
-
         <SlidersHorizontal size={28} />
 
-        <h2 className="text-4xl font-bold">
-          Filter By
-        </h2>
+        <h2 className="text-4xl font-bold">Filter By</h2>
 
         <button
           onClick={() => {
@@ -206,7 +158,6 @@ const ProductSidebar = ({
         >
           Clear Filters
         </button>
-
       </div>
 
       {/* FILTERS */}
@@ -224,9 +175,7 @@ const ProductSidebar = ({
           {/* SECTION HEADER */}
 
           <button
-            onClick={() =>
-              toggleSection(filter.title)
-            }
+            onClick={() => toggleSection(filter.title)}
             className="
               w-full
               flex
@@ -249,13 +198,7 @@ const ProductSidebar = ({
               className={`
                 transition-transform
                 duration-300
-                ${
-                  openSections[
-                    filter.title
-                  ]
-                    ? "rotate-180"
-                    : ""
-                }
+                ${openSections[filter.title] ? "rotate-180" : ""}
               `}
             />
           </button>
@@ -264,10 +207,8 @@ const ProductSidebar = ({
 
           {openSections[filter.title] && (
             <div className="mt-5">
-
               {filter.type === "price" ? (
                 <div>
-
                   <input
                     type="range"
                     min="0"
@@ -322,75 +263,56 @@ const ProductSidebar = ({
                   >
                     {hasChanges ? "Apply Filters" : "No Changes"}
                   </button>
-
                 </div>
               ) : (
                 <div className="space-y-4">
-
-                  {filter.options.map(
-                    (option) => (
-                      <label
-                        key={option}
-                        className="
+                  {filter.options.map((option) => (
+                    <label
+                      key={option}
+                      className="
                           flex
                           items-center
                           justify-between
                           cursor-pointer
                           group
                         "
-                      >
-                        <div className="flex items-center gap-3">
-
-                          <input
-                            type="checkbox"
-                            checked={
-                              localFilters[
-                                filter.title
-                              ]?.includes(
-                                option
-                              ) || false
-                            }
-                            onChange={() =>
-                              handleCheckbox(
-                                filter.title,
-                                option
-                              )
-                            }
-                            className="
+                    >
+                      <div className="flex items-center gap-3">
+                        <input
+                          type="checkbox"
+                          checked={localFilters[filter.title]?.includes(option) || false}
+                          onChange={() => handleCheckbox(filter.title, option)}
+                          className="
                               w-4
                               h-4
                               rounded
                               border-gray-300
                             "
-                          />
+                        />
 
-                          <span
-                            className="
+                        <span
+                          className="
                               text-gray-700
                               group-hover:text-black
                               transition
                             "
-                          >
-                            {option}
-                          </span>
+                        >
+                          {option}
+                        </span>
+                      </div>
 
-                        </div>
-
-                        <span
-                          className="
+                      <span
+                        className="
                             text-xs
                             text-gray-400
                           "
-                        >
-                          (12)
-                        </span>
-                      </label>
-                    )
-                  )}
-
+                      >
+                        (12)
+                      </span>
+                    </label>
+                  ))}
                 </div>
               )}
-
             </div>
           )}
         </div>

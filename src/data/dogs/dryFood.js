@@ -1,14 +1,12 @@
 // dogsDryFood.js
 
 // blueBuffaloImg removed
-import royalCaninImg from "../../assets/products/dogs/dry-food/royal-canin-maxi-adult-dry-dog-food.png.jpg";
-import purinaImg from "../../assets/products/dogs/dry-food/purina-pro-plan-complete-essentials-adult-dry-dog-food.jpg";
-import farminaImg from "../../assets/products/dogs/dry-food/farmina-nd-chicken-pomegranate-adult-medium-maxi-dry-dog-food.jpg";
+import royalCaninImg from "../../assets/products/dogs/dry-food/royal-canin-maxi-adult-dry-dog-food.png.webp";
+import purinaImg from "../../assets/products/dogs/dry-food/purina-pro-plan-complete-essentials-adult-dry-dog-food.webp";
+import farminaImg from "../../assets/products/dogs/dry-food/farmina-nd-chicken-pomegranate-adult-medium-maxi-dry-dog-food.webp";
 // acanaImg removed
 
-
 export const dogsDryFood = [
-
   {
     id: 102,
     name: "Royal Canin Maxi Adult Dry Dog Food",
@@ -38,25 +36,11 @@ export const dogsDryFood = [
 
     image: royalCaninImg,
 
-    images: [
-      royalCaninImg,
-      royalCaninImg,
-      royalCaninImg,
-      royalCaninImg,
-    ],
+    images: [royalCaninImg, royalCaninImg, royalCaninImg, royalCaninImg],
 
-    description:
-      "Complete and balanced nutrition specially formulated for large breed adult dogs.",
+    description: "Complete and balanced nutrition specially formulated for large breed adult dogs.",
 
-    ingredients: [
-      "Chicken Meal",
-      "Rice",
-      "Corn",
-      "Animal Fat",
-      "Fish Oil",
-      "Vitamins",
-      "Minerals",
-    ],
+    ingredients: ["Chicken Meal", "Rice", "Corn", "Animal Fat", "Fish Oil", "Vitamins", "Minerals"],
 
     features: [
       "Supports healthy digestion",
@@ -97,7 +81,7 @@ export const dogsDryFood = [
     ],
 
     subscriptionEligible: true,
-    subscriptionDiscount: 0.10,
+    subscriptionDiscount: 0.1,
 
     relatedProducts: [103, 104],
   },
@@ -131,15 +115,9 @@ export const dogsDryFood = [
 
     image: purinaImg,
 
-    images: [
-      purinaImg,
-      purinaImg,
-      purinaImg,
-      purinaImg,
-    ],
+    images: [purinaImg, purinaImg, purinaImg, purinaImg],
 
-    description:
-      "Premium adult dry dog food with probiotics for digestive and immune health.",
+    description: "Premium adult dry dog food with probiotics for digestive and immune health.",
 
     ingredients: [
       "Chicken",
@@ -150,12 +128,7 @@ export const dogsDryFood = [
       "Minerals",
     ],
 
-    features: [
-      "Fortified probiotics",
-      "High-quality protein",
-      "Supports immunity",
-      "Healthy coat",
-    ],
+    features: ["Fortified probiotics", "High-quality protein", "Supports immunity", "Healthy coat"],
 
     nutrition: {
       protein: "27%",
@@ -189,7 +162,7 @@ export const dogsDryFood = [
     ],
 
     subscriptionEligible: true,
-    subscriptionDiscount: 0.10,
+    subscriptionDiscount: 0.1,
 
     relatedProducts: [101, 104, 106],
   },
@@ -223,12 +196,7 @@ export const dogsDryFood = [
 
     image: farminaImg,
 
-    images: [
-      farminaImg,
-      farminaImg,
-      farminaImg,
-      farminaImg,
-    ],
+    images: [farminaImg, farminaImg, farminaImg, farminaImg],
 
     description:
       "Natural low-grain nutrition with chicken and pomegranate for healthy growth and vitality.",
@@ -260,28 +228,28 @@ export const dogsDryFood = [
 
     country: "Italy",
 
-    weight: ["2.5kg", "7kg", "12kg"],
+    weight: ["5lb", "14lb", "24lb"],
 
     variants: [
       {
-        weight: "2.5kg",
+        weight: "5lb",
         price: 34.99,
         originalPrice: 42.99,
       },
       {
-        weight: "7kg",
+        weight: "14lb",
         price: 74.99,
         originalPrice: 89.99,
       },
       {
-        weight: "12kg",
+        weight: "24lb",
         price: 114.99,
         originalPrice: 129.99,
       },
     ],
 
     subscriptionEligible: true,
-    subscriptionDiscount: 0.10,
+    subscriptionDiscount: 0.1,
 
     relatedProducts: [103],
   },
@@ -315,7 +283,7 @@ export const dogsDryFood = [
 
     description: "Applod balanced nutrition for adult dogs with real chicken.",
 
-    variants: [{ weight: "2kg", price: 14.99, originalPrice: 18.99 }],
+    variants: [{ weight: "4lb", price: 14.99, originalPrice: 18.99 }],
 
     subscriptionEligible: false,
     relatedProducts: [102, 103],
@@ -350,7 +318,7 @@ export const dogsDryFood = [
 
     description: "Carniwel growth formula to support healthy puppy development.",
 
-    variants: [{ weight: "1kg", price: 12.99, originalPrice: 15.99 }],
+    variants: [{ weight: "2lb", price: 12.99, originalPrice: 15.99 }],
 
     subscriptionEligible: false,
     relatedProducts: [102],

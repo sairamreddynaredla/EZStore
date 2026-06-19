@@ -2,11 +2,11 @@
 // src/data/dogs/fresh-food/dogsFreshFood.js
 // ==========================================
 
-import freshpetImg from "../../assets/products/dogs/Fresh-food/freshpet-select-roasted-chicken-recipe-dog-food.jpg";
-import nomNomImg from "../../assets/products/dogs/Fresh-food/nom-nom-beef-mash-fresh-dog-food.jpg";
-import farmersDogImg from "../../assets/products/dogs/Fresh-food/the-farmers-dog-turkey-recipe-fresh-dog-food.jpg";
-import ollieImg from "../../assets/products/dogs/Fresh-food/ollie-chicken-dish-fresh-dog-food.jpg";
-import spotTangoImg from "../../assets/products/dogs/Fresh-food/spot-tango-beef-millet-fresh-dog-food.jpg";
+import freshpetImg from "../../assets/products/dogs/Fresh-food/freshpet-select-roasted-chicken-recipe-dog-food.webp";
+import nomNomImg from "../../assets/products/dogs/Fresh-food/nom-nom-beef-mash-fresh-dog-food.webp";
+import farmersDogImg from "../../assets/products/dogs/Fresh-food/the-farmers-dog-turkey-recipe-fresh-dog-food.webp";
+import ollieImg from "../../assets/products/dogs/Fresh-food/ollie-chicken-dish-fresh-dog-food.webp";
+import spotTangoImg from "../../assets/products/dogs/Fresh-food/spot-tango-beef-millet-fresh-dog-food.webp";
 
 export const dogsFreshFood = [
   {
@@ -38,25 +38,12 @@ export const dogsFreshFood = [
 
     image: freshpetImg,
 
-    images: [
-      freshpetImg,
-      freshpetImg,
-      freshpetImg,
-      freshpetImg,
-    ],
+    images: [freshpetImg, freshpetImg, freshpetImg, freshpetImg],
 
     description:
       "Fresh refrigerated dog food made with roasted chicken and garden vegetables for complete nutrition.",
 
-    ingredients: [
-      "Chicken",
-      "Carrots",
-      "Peas",
-      "Spinach",
-      "Egg",
-      "Vitamins",
-      "Minerals",
-    ],
+    ingredients: ["Chicken", "Carrots", "Peas", "Spinach", "Egg", "Vitamins", "Minerals"],
 
     features: [
       "Fresh refrigerated recipe",
@@ -75,16 +62,16 @@ export const dogsFreshFood = [
     manufacturer: "Freshpet",
     country: "USA",
 
-    weight: ["1kg", "2kg", "4kg"],
+    weight: ["2lb", "4lb", "8lb"],
 
     variants: [
-      { weight: "1kg", price: 14.99, originalPrice: 18.99 },
-      { weight: "2kg", price: 24.99, originalPrice: 29.99 },
-      { weight: "4kg", price: 44.99, originalPrice: 54.99 },
+      { weight: "2lb", price: 14.99, originalPrice: 18.99 },
+      { weight: "4lb", price: 24.99, originalPrice: 29.99 },
+      { weight: "8lb", price: 44.99, originalPrice: 54.99 },
     ],
 
     subscriptionEligible: true,
-    subscriptionDiscount: 0.10,
+    subscriptionDiscount: 0.1,
 
     relatedProducts: [802, 803, 804],
   },
@@ -118,24 +105,12 @@ export const dogsFreshFood = [
 
     image: nomNomImg,
 
-    images: [
-      nomNomImg,
-      nomNomImg,
-      nomNomImg,
-      nomNomImg,
-    ],
+    images: [nomNomImg, nomNomImg, nomNomImg, nomNomImg],
 
     description:
       "Fresh beef recipe prepared with vegetables and formulated by veterinary nutritionists.",
 
-    ingredients: [
-      "Beef",
-      "Potatoes",
-      "Carrots",
-      "Peas",
-      "Eggs",
-      "Fish Oil",
-    ],
+    ingredients: ["Beef", "Potatoes", "Carrots", "Peas", "Eggs", "Fish Oil"],
 
     features: [
       "Human-grade ingredients",
@@ -154,16 +129,16 @@ export const dogsFreshFood = [
     manufacturer: "Nom Nom",
     country: "USA",
 
-    weight: ["1kg", "2kg", "4kg"],
+    weight: ["2lb", "4lb", "8lb"],
 
     variants: [
-      { weight: "1kg", price: 16.99, originalPrice: 21.99 },
-      { weight: "2kg", price: 29.99, originalPrice: 36.99 },
-      { weight: "4kg", price: 52.99, originalPrice: 64.99 },
+      { weight: "2lb", price: 16.99, originalPrice: 21.99 },
+      { weight: "4lb", price: 29.99, originalPrice: 36.99 },
+      { weight: "8lb", price: 52.99, originalPrice: 64.99 },
     ],
 
     subscriptionEligible: true,
-    subscriptionDiscount: 0.10,
+    subscriptionDiscount: 0.1,
 
     relatedProducts: [801, 803, 805],
   },
@@ -197,24 +172,12 @@ export const dogsFreshFood = [
 
     image: farmersDogImg,
 
-    images: [
-      farmersDogImg,
-      farmersDogImg,
-      farmersDogImg,
-      farmersDogImg,
-    ],
+    images: [farmersDogImg, farmersDogImg, farmersDogImg, farmersDogImg],
 
     description:
       "Fresh turkey meal with vegetables designed to provide balanced nutrition for adult dogs.",
 
-    ingredients: [
-      "Turkey",
-      "Chickpeas",
-      "Carrots",
-      "Broccoli",
-      "Fish Oil",
-      "Vitamins",
-    ],
+    ingredients: ["Turkey", "Chickpeas", "Carrots", "Broccoli", "Fish Oil", "Vitamins"],
 
     features: [
       "Fresh cooked recipe",
@@ -233,16 +196,16 @@ export const dogsFreshFood = [
     manufacturer: "The Farmer's Dog",
     country: "USA",
 
-    weight: ["1kg", "2kg", "4kg"],
+    weight: ["2lb", "4lb", "8lb"],
 
     variants: [
-      { weight: "1kg", price: 15.99, originalPrice: 19.99 },
-      { weight: "2kg", price: 27.99, originalPrice: 34.99 },
-      { weight: "4kg", price: 49.99, originalPrice: 59.99 },
+      { weight: "2lb", price: 15.99, originalPrice: 19.99 },
+      { weight: "4lb", price: 27.99, originalPrice: 34.99 },
+      { weight: "8lb", price: 49.99, originalPrice: 59.99 },
     ],
 
     subscriptionEligible: true,
-    subscriptionDiscount: 0.10,
+    subscriptionDiscount: 0.1,
 
     relatedProducts: [801, 802, 804],
   },
@@ -276,24 +239,11 @@ export const dogsFreshFood = [
 
     image: ollieImg,
 
-    images: [
-      ollieImg,
-      ollieImg,
-      ollieImg,
-      ollieImg,
-    ],
+    images: [ollieImg, ollieImg, ollieImg, ollieImg],
 
-    description:
-      "Fresh chicken recipe with vegetables and healthy fats for everyday nutrition.",
+    description: "Fresh chicken recipe with vegetables and healthy fats for everyday nutrition.",
 
-    ingredients: [
-      "Chicken",
-      "Carrots",
-      "Peas",
-      "Rice",
-      "Fish Oil",
-      "Spinach",
-    ],
+    ingredients: ["Chicken", "Carrots", "Peas", "Rice", "Fish Oil", "Spinach"],
 
     features: [
       "Fresh ingredients",
@@ -312,16 +262,16 @@ export const dogsFreshFood = [
     manufacturer: "Ollie",
     country: "USA",
 
-    weight: ["1kg", "2kg", "4kg"],
+    weight: ["2lb", "4lb", "8lb"],
 
     variants: [
-      { weight: "1kg", price: 14.99, originalPrice: 18.99 },
-      { weight: "2kg", price: 26.99, originalPrice: 32.99 },
-      { weight: "4kg", price: 47.99, originalPrice: 58.99 },
+      { weight: "2lb", price: 14.99, originalPrice: 18.99 },
+      { weight: "4lb", price: 26.99, originalPrice: 32.99 },
+      { weight: "8lb", price: 47.99, originalPrice: 58.99 },
     ],
 
     subscriptionEligible: true,
-    subscriptionDiscount: 0.10,
+    subscriptionDiscount: 0.1,
 
     relatedProducts: [801, 803, 805],
   },
@@ -355,24 +305,11 @@ export const dogsFreshFood = [
 
     image: spotTangoImg,
 
-    images: [
-      spotTangoImg,
-      spotTangoImg,
-      spotTangoImg,
-      spotTangoImg,
-    ],
+    images: [spotTangoImg, spotTangoImg, spotTangoImg, spotTangoImg],
 
-    description:
-      "Fresh beef and millet recipe packed with protein and wholesome vegetables.",
+    description: "Fresh beef and millet recipe packed with protein and wholesome vegetables.",
 
-    ingredients: [
-      "Beef",
-      "Millet",
-      "Carrots",
-      "Spinach",
-      "Pumpkin",
-      "Fish Oil",
-    ],
+    ingredients: ["Beef", "Millet", "Carrots", "Spinach", "Pumpkin", "Fish Oil"],
 
     features: [
       "Fresh prepared meals",
@@ -391,16 +328,16 @@ export const dogsFreshFood = [
     manufacturer: "Spot & Tango",
     country: "USA",
 
-    weight: ["1kg", "2kg", "4kg"],
+    weight: ["2lb", "4lb", "8lb"],
 
     variants: [
-      { weight: "1kg", price: 15.99, originalPrice: 19.99 },
-      { weight: "2kg", price: 28.99, originalPrice: 34.99 },
-      { weight: "4kg", price: 50.99, originalPrice: 61.99 },
+      { weight: "2lb", price: 15.99, originalPrice: 19.99 },
+      { weight: "4lb", price: 28.99, originalPrice: 34.99 },
+      { weight: "8lb", price: 50.99, originalPrice: 61.99 },
     ],
 
     subscriptionEligible: true,
-    subscriptionDiscount: 0.10,
+    subscriptionDiscount: 0.1,
 
     relatedProducts: [802, 803, 804],
   },

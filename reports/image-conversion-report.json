@@ -1,0 +1,1806 @@
+{
+  "timestamp": "2026-06-19T06:24:17.090Z",
+  "totalImages": 225,
+  "results": [
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\public\\elegance.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\public\\elegance.webp",
+      "converted": true,
+      "hash": "ca5c0a65ed77590a1d47b4b5a8c49c9d",
+      "originalSize": 1945173,
+      "newSize": 44198
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\public\\persian cat.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\public\\persian cat.webp",
+      "converted": true,
+      "hash": "065e9867893c82e4b2450b54d34a5ff6",
+      "originalSize": 2104776,
+      "newSize": 65910
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\banners\\dog-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\banners\\dog-banner.webp",
+      "converted": true,
+      "hash": "23b4a56cd8b819f502b092a05a75b39b",
+      "originalSize": 51289,
+      "newSize": 23568
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\banners\\hero-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\banners\\hero-banner.webp",
+      "converted": true,
+      "hash": "e547464766ff6cac706047296cf4644c",
+      "originalSize": 317815,
+      "newSize": 21642
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\banners\\offer-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\banners\\offer-banner.webp",
+      "converted": true,
+      "hash": "8ebc0e203fe5268a1ae70b47e8f25928",
+      "originalSize": 41838,
+      "newSize": 20314
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\banners\\trust-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\banners\\trust-banner.webp",
+      "converted": true,
+      "hash": "02d949593169edea6369c69b5c4dd40e",
+      "originalSize": 55849,
+      "newSize": 27820
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\bird-exclusive.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\bird-exclusive.webp",
+      "converted": true,
+      "hash": "d2d0a58b546b182f0b7465564b15fb95",
+      "originalSize": 221674,
+      "newSize": 95042
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\bird.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\bird.webp",
+      "converted": true,
+      "hash": "97b7e1fd300f8d65bc2772d443a7516d",
+      "originalSize": 551900,
+      "newSize": 171578
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\blog-banner\\blogs-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\blog-banner\\blogs-banner.webp",
+      "converted": true,
+      "hash": "dd712bd8b67c0aeeaae5363f3ca17761",
+      "originalSize": 121717,
+      "newSize": 68842
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\BlueBuffelopng.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\BlueBuffelopng.webp",
+      "converted": true,
+      "hash": "3365c0a1f3fce82e385c207bb162d768",
+      "originalSize": 4420,
+      "newSize": 5834
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brand-banners\\image.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brand-banners\\image.webp",
+      "converted": true,
+      "hash": "423693da5531acad6e4fc526e78cd4a7",
+      "originalSize": 55048,
+      "newSize": 7870
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\acana.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\acana.webp",
+      "converted": true,
+      "hash": "54c4d0e155eee4770ba72fb39c0a1527",
+      "originalSize": 13572,
+      "newSize": 11148
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\bellotta.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\bellotta.webp",
+      "converted": true,
+      "hash": "a6815499ae2b5c7d791b0add4a6edee6",
+      "originalSize": 8335,
+      "newSize": 5548
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\blue-buffalo.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\blue-buffalo.webp",
+      "converted": true,
+      "hash": "ffc2042549b4dedbcbe8cd1637ae64c4",
+      "originalSize": 5891,
+      "newSize": 5796
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\canine-creek.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\canine-creek.webp",
+      "converted": true,
+      "hash": "b45fb62f35349d6c8c221a3ecbdc1c2e",
+      "originalSize": 14092,
+      "newSize": 7212
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\drools.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\drools.webp",
+      "converted": true,
+      "hash": "204aa1fa20a8231dc9de753f7be409df",
+      "originalSize": 12781,
+      "newSize": 6670
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\farmina.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\farmina.webp",
+      "converted": true,
+      "hash": "dc13921ef3086f63e52c2f4df21022e4",
+      "originalSize": 150812,
+      "newSize": 40814
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\goodies.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\goodies.webp",
+      "converted": true,
+      "hash": "e48792ac3378e8368ae95cf44f9c7ca4",
+      "originalSize": 12538,
+      "newSize": 11096
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\hikari.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\hikari.webp",
+      "converted": true,
+      "hash": "0626fdf217eedca18dd0b95e4ace7856",
+      "originalSize": 21517,
+      "newSize": 14222
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\himalaya.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\himalaya.webp",
+      "converted": true,
+      "hash": "d785b9183f14e793fe0b81dca9532a2e",
+      "originalSize": 200527,
+      "newSize": 105164
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\imas.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\imas.webp",
+      "converted": true,
+      "hash": "8c3d5a78108db5783722a754eecdca26",
+      "originalSize": 33992,
+      "newSize": 13936
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\jerhigh.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\jerhigh.webp",
+      "converted": true,
+      "hash": "c248b5bee460fe2f57ab7f8e4931a834",
+      "originalSize": 56636,
+      "newSize": 44602
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\kaytee.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\kaytee.webp",
+      "converted": true,
+      "hash": "74325ec70136995f503e9bbd6a72f4a1",
+      "originalSize": 338734,
+      "newSize": 145350
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\kennel-kitchen.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\kennel-kitchen.webp",
+      "converted": true,
+      "hash": "b05a323685fc68a6d91bc38377a015a7",
+      "originalSize": 53872,
+      "newSize": 28576
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\meo.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\meo.webp",
+      "converted": true,
+      "hash": "46aa114472632312063ea050e9f14951",
+      "originalSize": 10100,
+      "newSize": 4466
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\n&d.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\n&d.webp",
+      "converted": true,
+      "hash": "8e92622bd641e93dbfb1aca812c815c6",
+      "originalSize": 13139,
+      "newSize": 9964
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\orijen.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\orijen.webp",
+      "converted": true,
+      "hash": "017168a25ca5039bc0968ff600ec907b",
+      "originalSize": 152442,
+      "newSize": 49794
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\pedigree.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\pedigree.webp",
+      "converted": true,
+      "hash": "42d8f5d91e1727fdcc79fc62579aeca2",
+      "originalSize": 12189,
+      "newSize": 8058
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\purina.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\purina.webp",
+      "converted": true,
+      "hash": "483d0c0918ae814fedc1ca746edf34ec",
+      "originalSize": 55385,
+      "newSize": 18160
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\purpet.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\purpet.webp",
+      "converted": true,
+      "hash": "453f5725f90754df2be90268f5ae0d94",
+      "originalSize": 21091,
+      "newSize": 7222
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\rio.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\rio.webp",
+      "converted": true,
+      "hash": "c2674c04ad4f1d40ba3de317bc3c5d2b",
+      "originalSize": 155410,
+      "newSize": 157702
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\royal-canin.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\royal-canin.webp",
+      "converted": true,
+      "hash": "e0756b00948b5d8316d30520df650883",
+      "originalSize": 101529,
+      "newSize": 65408
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\sheba.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\sheba.webp",
+      "converted": true,
+      "hash": "4745f8906299c76d24bfd5019f4f7d46",
+      "originalSize": 190092,
+      "newSize": 82366
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\smartheart.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\smartheart.webp",
+      "converted": true,
+      "hash": "9501675b1e4fc4a7364c094dc34295f8",
+      "originalSize": 76085,
+      "newSize": 57722
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\sobo.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\sobo.webp",
+      "converted": true,
+      "hash": "fea69caa4ab9d7646e1af82b0fe7046e",
+      "originalSize": 20225,
+      "newSize": 7716
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\taiyo.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\taiyo.webp",
+      "converted": true,
+      "hash": "e10bae7952017604616aba1cba51b0db",
+      "originalSize": 11582,
+      "newSize": 4216
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\taste-of-the-wild.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\taste-of-the-wild.webp",
+      "converted": true,
+      "hash": "f5ba0f479842cf52b79550275d3431fb",
+      "originalSize": 82164,
+      "newSize": 40088
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\temptations.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\temptations.webp",
+      "converted": true,
+      "hash": "47d31d0d6ddb8519f775433c8ccbb2e1",
+      "originalSize": 17332,
+      "newSize": 13566
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\tetra.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\tetra.webp",
+      "converted": true,
+      "hash": "91b650c5dfe577b81ca8e6e54bbb26a3",
+      "originalSize": 68092,
+      "newSize": 41072
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\vitapol.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\vitapol.webp",
+      "converted": true,
+      "hash": "b07994b08d9c18c98eef82e79dddffd2",
+      "originalSize": 24976,
+      "newSize": 17330
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\whiskas.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\whiskas.webp",
+      "converted": true,
+      "hash": "e7953d5dfa4764ee197b53f7ae97a35b",
+      "originalSize": 7247,
+      "newSize": 4094
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\zupreem.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\brands\\zupreem.webp",
+      "converted": true,
+      "hash": "a512ca64c89cf24483b4801c0dc2a442",
+      "originalSize": 71968,
+      "newSize": 59860
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat crunch.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat crunch.webp",
+      "converted": true,
+      "hash": "153722133f83f06b26f8ef562b5636a0",
+      "originalSize": 450913,
+      "newSize": 174878
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-banner.webp",
+      "converted": true,
+      "hash": "d0287b0c5ab3ef3aa6ad4127197bf108",
+      "originalSize": 539054,
+      "newSize": 216816
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-dropdown-banner\\cat-crunchy-treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-dropdown-banner\\cat-crunchy-treats.webp",
+      "converted": true,
+      "hash": "8dd3ec3c49eb21643be6f2c2aacda3da",
+      "originalSize": 110481,
+      "newSize": 54960
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-dropdown-banner\\creamy-treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-dropdown-banner\\creamy-treats.webp",
+      "converted": true,
+      "hash": "14d70ce2430533fed1feb36080fda488",
+      "originalSize": 102789,
+      "newSize": 51408
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-dropdown-banner\\dry-food-cats-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-dropdown-banner\\dry-food-cats-banner.webp",
+      "converted": true,
+      "hash": "28cabf291cfb143f1d08309b8d634c75",
+      "originalSize": 78341,
+      "newSize": 36676
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-dropdown-banner\\grain-free-food-cat-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-dropdown-banner\\grain-free-food-cat-banner.webp",
+      "converted": true,
+      "hash": "4ff4a4a6b3ac3fa33ab4262615afc227",
+      "originalSize": 85079,
+      "newSize": 40084
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-dropdown-banner\\kitten-food-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-dropdown-banner\\kitten-food-banner.webp",
+      "converted": true,
+      "hash": "724188e09c354cf00b13f012d6a83a5f",
+      "originalSize": 84783,
+      "newSize": 39900
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-dropdown-banner\\meaty-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-dropdown-banner\\meaty-cat-food.webp",
+      "converted": true,
+      "hash": "b6c94b107705e0e65a559a11bfd3b1de",
+      "originalSize": 107895,
+      "newSize": 53646
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-dropdown-banner\\prescription-cat-food-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-dropdown-banner\\prescription-cat-food-banner.webp",
+      "converted": true,
+      "hash": "af336437be80026912a7220f14595e4e",
+      "originalSize": 84101,
+      "newSize": 39070
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-dropdown-banner\\wet-food-cat-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-dropdown-banner\\wet-food-cat-banner.webp",
+      "converted": true,
+      "hash": "d09599a7ee9cbdc7f6b760ec0be16ff7",
+      "originalSize": 105665,
+      "newSize": 53216
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-exclusive.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat-exclusive.webp",
+      "converted": true,
+      "hash": "13d4919ae8d5c46676e4cfca97efde03",
+      "originalSize": 332970,
+      "newSize": 101540
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\cat.webp",
+      "converted": true,
+      "hash": "3285dea0f5a078d63a19668db3c7d589",
+      "originalSize": 443372,
+      "newSize": 163986
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\categories\\bird.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\categories\\bird.webp",
+      "converted": true,
+      "hash": "e62acf3d594441ff8e831f062936ef48",
+      "originalSize": 2048696,
+      "newSize": 117750
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\categories\\cat.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\categories\\cat.webp",
+      "converted": true,
+      "hash": "28d3810e4c1b9367efe5b5f440e691ba",
+      "originalSize": 1842869,
+      "newSize": 92208
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\categories\\dog.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\categories\\dog.webp",
+      "converted": true,
+      "hash": "a0a2cd0a6610aa6c059490ce272115cf",
+      "originalSize": 1717103,
+      "newSize": 75440
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\categories\\fish.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\categories\\fish.webp",
+      "converted": true,
+      "hash": "57f1114511911f6b7fc6df57b3180195",
+      "originalSize": 2324160,
+      "newSize": 213040
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\categories\\hamster.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\categories\\hamster.webp",
+      "converted": true,
+      "hash": "a50a2c02d4beac46a0e548dd605b117d",
+      "originalSize": 1960065,
+      "newSize": 110940
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\categories\\rabbit.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\categories\\rabbit.webp",
+      "converted": true,
+      "hash": "5de534aa3407e7e32f03a6f1f3e55d13",
+      "originalSize": 2238217,
+      "newSize": 162920
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\creamy treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\creamy treats.webp",
+      "converted": true,
+      "hash": "c19d2b1804e28ef330d0be4a10941125",
+      "originalSize": 502950,
+      "newSize": 210068
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog dental treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog dental treats.webp",
+      "converted": true,
+      "hash": "b7a818bdaaaeabc625b9fdaf5f0c8ea9",
+      "originalSize": 486165,
+      "newSize": 182552
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog exclusive.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog exclusive.webp",
+      "converted": true,
+      "hash": "cc20d97b804682b39e32582d601c31aa",
+      "originalSize": 407505,
+      "newSize": 114018
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog meaty.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog meaty.webp",
+      "converted": true,
+      "hash": "de9110cc437e64c809269eaaa766cacc",
+      "originalSize": 523243,
+      "newSize": 210488
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\biscuits-cookies-dog-food-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\biscuits-cookies-dog-food-banner.webp",
+      "converted": true,
+      "hash": "71eb04e090de0c7e4e32355de61379ed",
+      "originalSize": 100406,
+      "newSize": 49320
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\dry-food-banner1.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\dry-food-banner1.webp",
+      "converted": true,
+      "hash": "c18061a4f1026b22785ec5809416c645",
+      "originalSize": 98588,
+      "newSize": 48392
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\fresh-food-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\fresh-food-banner.webp",
+      "converted": true,
+      "hash": "348264205db36b1a59df7bca7006dd45",
+      "originalSize": 97904,
+      "newSize": 46730
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\grain-free-food-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\grain-free-food-banner.webp",
+      "converted": true,
+      "hash": "e65c9e197aa67f96b878fa7d9dc0adfc",
+      "originalSize": 92345,
+      "newSize": 46118
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\meaty-treats-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\meaty-treats-banner.webp",
+      "converted": true,
+      "hash": "b8aa3357a513fff7e498a2763e9a7754",
+      "originalSize": 110549,
+      "newSize": 57272
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\prescription-dog-food-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\prescription-dog-food-banner.webp",
+      "converted": true,
+      "hash": "b2ddecedc6e08c58f1c16ed5acdd2404",
+      "originalSize": 2221657,
+      "newSize": 93752
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\puppy-food-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\puppy-food-banner.webp",
+      "converted": true,
+      "hash": "f17bb81a195b8a3214fda2f670f10975",
+      "originalSize": 95460,
+      "newSize": 45722
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\puppy-treats-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\puppy-treats-banner.webp",
+      "converted": true,
+      "hash": "d954505094d179db718e9af53865231d",
+      "originalSize": 101005,
+      "newSize": 52358
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\vegetarian-food-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\vegetarian-food-banner.webp",
+      "converted": true,
+      "hash": "7b4b9e2cd81364e03aa45bfb4e972dae",
+      "originalSize": 101826,
+      "newSize": 50708
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\wet-dog-food-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog-dropdown-banner\\wet-dog-food-banner.webp",
+      "converted": true,
+      "hash": "4d5b3b02bf31af33a590ce3e29b6063e",
+      "originalSize": 95185,
+      "newSize": 45632
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dog.webp",
+      "converted": true,
+      "hash": "43c501d94de51cfbaf67798fe5623633",
+      "originalSize": 416947,
+      "newSize": 122998
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dry-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\dry-dog-food.webp",
+      "converted": true,
+      "hash": "139924115a308f1dfaa18e028c366125",
+      "originalSize": 451779,
+      "newSize": 124504
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\Exclusive Category\\bird-exclusive.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\Exclusive Category\\bird-exclusive.webp",
+      "converted": true,
+      "hash": "6316e0b0800008f564e8d7fee59424a2",
+      "originalSize": 1930901,
+      "newSize": 72564
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\Exclusive Category\\cat-exclusive.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\Exclusive Category\\cat-exclusive.webp",
+      "converted": true,
+      "hash": "2790dc51e6724f17c8c538e0395e04e0",
+      "originalSize": 1902154,
+      "newSize": 73748
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\Exclusive Category\\dog exclusive.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\Exclusive Category\\dog exclusive.webp",
+      "converted": true,
+      "hash": "332e59460c453f95ef26bf3db2fdeb72",
+      "originalSize": 1791957,
+      "newSize": 89032
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\Exclusive Category\\fish-exclusive.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\Exclusive Category\\fish-exclusive.webp",
+      "converted": true,
+      "hash": "fe753d9ebfaeee28dc174d5e23208432",
+      "originalSize": 1753782,
+      "newSize": 57802
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\Exclusive Category\\hamster-exclusive.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\Exclusive Category\\hamster-exclusive.webp",
+      "converted": true,
+      "hash": "9ba2505f12cd2b7ab68ddd2db167060a",
+      "originalSize": 1675511,
+      "newSize": 72670
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\explore-pick-pamper\\cat crunch.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\explore-pick-pamper\\cat crunch.webp",
+      "converted": true,
+      "hash": "ef41b9a0c0b5c4f58acfc502c93314ad",
+      "originalSize": 2190232,
+      "newSize": 132372
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\explore-pick-pamper\\creamy treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\explore-pick-pamper\\creamy treats.webp",
+      "converted": true,
+      "hash": "2e42d692ed65b13463522fb272668149",
+      "originalSize": 2455368,
+      "newSize": 165356
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\explore-pick-pamper\\dog dental treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\explore-pick-pamper\\dog dental treats.webp",
+      "converted": true,
+      "hash": "c8a7249b6e2c105cd6dc15e94db03276",
+      "originalSize": 2209799,
+      "newSize": 140180
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\explore-pick-pamper\\dog meaty.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\explore-pick-pamper\\dog meaty.webp",
+      "converted": true,
+      "hash": "b54d57b38bbe4a73fe92ec7720e6a839",
+      "originalSize": 2247100,
+      "newSize": 164374
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\explore-pick-pamper\\dry-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\explore-pick-pamper\\dry-dog-food.webp",
+      "converted": true,
+      "hash": "242790dc171ae3de823a17abcec629fc",
+      "originalSize": 1917831,
+      "newSize": 97560
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\explore-pick-pamper\\prescription-diet.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\explore-pick-pamper\\prescription-diet.webp",
+      "converted": true,
+      "hash": "d2772badb52f918d11146e2dbf122953",
+      "originalSize": 1566162,
+      "newSize": 70100
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\explore-pick-pamper\\puppy-kitten-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\explore-pick-pamper\\puppy-kitten-food.webp",
+      "converted": true,
+      "hash": "8eb592799b308d85d0560d05f7d03cc5",
+      "originalSize": 1631699,
+      "newSize": 79514
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\explore-pick-pamper\\wet-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\explore-pick-pamper\\wet-dog-food.webp",
+      "converted": true,
+      "hash": "702ff1ed9a6b65aff4fedeea8c0ee686",
+      "originalSize": 1643865,
+      "newSize": 85370
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\ezstore-logo-optimized.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\ezstore-logo-optimized.webp",
+      "converted": true,
+      "hash": "c2a0eeac09f81f4270caa8a5c92610c5",
+      "originalSize": 83046,
+      "newSize": 72386
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\EZstore.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\EZstore.webp",
+      "converted": true,
+      "hash": "23b60d98c21710f398ffefdaabd853b4",
+      "originalSize": 413113,
+      "newSize": 163856
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\fish-exclusive.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\fish-exclusive.webp",
+      "converted": true,
+      "hash": "3deebb68df099970e33d39cad904279a",
+      "originalSize": 301664,
+      "newSize": 76462
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\fish.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\fish.webp",
+      "converted": true,
+      "hash": "06ebde4150fd4d46414f5d7b811ca4b7",
+      "originalSize": 688986,
+      "newSize": 279426
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\hamster-exclusive.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\hamster-exclusive.webp",
+      "converted": true,
+      "hash": "034ee142bc459867e2e373cada2b381a",
+      "originalSize": 242379,
+      "newSize": 102652
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\hamster.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\hamster.webp",
+      "converted": true,
+      "hash": "be8876de68ecc89f099987b434746802",
+      "originalSize": 452964,
+      "newSize": 163670
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\hero-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\hero-banner.webp",
+      "converted": true,
+      "hash": "b781077af28260ad4b701e42f418d2e1",
+      "originalSize": 620992,
+      "newSize": 230704
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\hero.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\hero.webp",
+      "converted": true,
+      "hash": "d316a7dd033c466473323d45d8a5c48f",
+      "originalSize": 10948,
+      "newSize": 14876
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\image.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\image.webp",
+      "converted": true,
+      "hash": "00df28c357ea36dae77356aa8f146f67",
+      "originalSize": 13223,
+      "newSize": 7730
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\logo\\easy-returns.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\logo\\easy-returns.webp",
+      "converted": true,
+      "hash": "9150852cee52384f1e18743e1a7e0231",
+      "originalSize": 6592,
+      "newSize": 2138
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\logo\\ezstore-logo-optimized.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\logo\\ezstore-logo-optimized.webp",
+      "converted": true,
+      "hash": "465d2eb9ae375b8aed6317a9934e484c",
+      "originalSize": 463597,
+      "newSize": 68992
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\logo\\fast-delivery.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\logo\\fast-delivery.webp",
+      "converted": true,
+      "hash": "956bfbdfb625cccba578d259c55cdd3a",
+      "originalSize": 23715,
+      "newSize": 3770
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\logo\\secure-payment.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\logo\\secure-payment.webp",
+      "converted": true,
+      "hash": "c2d3eba340ff36b273959d12fd7b023a",
+      "originalSize": 1313386,
+      "newSize": 23678
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\offer-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\offer-banner.webp",
+      "converted": true,
+      "hash": "8d5177de415de010c8cf0a00912888a9",
+      "originalSize": 502529,
+      "newSize": 187964
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\payments\\apple-pay.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\payments\\apple-pay.webp",
+      "converted": true,
+      "hash": "9bbcd924d269848cef4d4a76298694ee",
+      "originalSize": 5434,
+      "newSize": 1670
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\payments\\card.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\payments\\card.webp",
+      "converted": true,
+      "hash": "69b1a5d447bf90c7a4dfd92566541205",
+      "originalSize": 4966,
+      "newSize": 1662
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\payments\\cod.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\payments\\cod.webp",
+      "converted": true,
+      "hash": "178932d58c63f43f4d87a5bd82372f94",
+      "originalSize": 21504,
+      "newSize": 5490
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\payments\\google-pay.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\payments\\google-pay.webp",
+      "converted": true,
+      "hash": "58c00e4781be035e0d7ae1b7870d07eb",
+      "originalSize": 8672,
+      "newSize": 2564
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\payments\\net banking.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\payments\\net banking.webp",
+      "converted": true,
+      "hash": "0c78cb68d4d8c521a5e386abaef3ad66",
+      "originalSize": 2976,
+      "newSize": 916
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\payments\\paypal.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\payments\\paypal.webp",
+      "converted": true,
+      "hash": "ae86160d2eafeff0dec7810e5f2ce32c",
+      "originalSize": 19623,
+      "newSize": 4390
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\prescription-diet.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\prescription-diet.webp",
+      "converted": true,
+      "hash": "170b4062d04795632c4e74f78f6eb984",
+      "originalSize": 339239,
+      "newSize": 96358
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\prescription-dog-food-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\prescription-dog-food-banner.webp",
+      "converted": true,
+      "hash": "9863fccbb91194557237a5d90f115893",
+      "originalSize": 419090,
+      "newSize": 132198
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\birds\\higgins-sunburst-gourmet-parrot-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\birds\\higgins-sunburst-gourmet-parrot-food.webp",
+      "converted": true,
+      "hash": "ac1c55c4c537a2c16c75bd96be6b819f",
+      "originalSize": 12066,
+      "newSize": 9694
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\birds\\kaytee-forti-diet-pro-health-parakeet-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\birds\\kaytee-forti-diet-pro-health-parakeet-food.webp",
+      "converted": true,
+      "hash": "d37f53a05cf77977d0e4967e8da1c51f",
+      "originalSize": 13374,
+      "newSize": 10414
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\birds\\versele-laga-prestige-budgies-bird-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\birds\\versele-laga-prestige-budgies-bird-food.webp",
+      "converted": true,
+      "hash": "876d508d6d46f4e9ec237c5812bc5ab1",
+      "originalSize": 8883,
+      "newSize": 6596
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\birds\\vitapol-economy-parrot-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\birds\\vitapol-economy-parrot-food.webp",
+      "converted": true,
+      "hash": "a3cc66785768c5335cd96c87c95bb153",
+      "originalSize": 10551,
+      "newSize": 8422
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\birds\\wild-harvest-daily-blend-parakeet-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\birds\\wild-harvest-daily-blend-parakeet-food.webp",
+      "converted": true,
+      "hash": "a6eef8104a1b39adb493b26f03cc26e0",
+      "originalSize": 10672,
+      "newSize": 7942
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\birds\\zu-preem-fruitblend-small-bird-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\birds\\zu-preem-fruitblend-small-bird-food.webp",
+      "converted": true,
+      "hash": "3f61df345e50397039c353c221ff1134",
+      "originalSize": 15197,
+      "newSize": 12976
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\creamy-treats\\delectables-squeeze-up-tuna-cat-treat.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\creamy-treats\\delectables-squeeze-up-tuna-cat-treat.webp",
+      "converted": true,
+      "hash": "d6ede8af2e57a2e1d3f203c51af8f5ce",
+      "originalSize": 11445,
+      "newSize": 7990
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\creamy-treats\\inaba-churu-tuna-creamy-cat-treat.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\creamy-treats\\inaba-churu-tuna-creamy-cat-treat.webp",
+      "converted": true,
+      "hash": "eaf14c5a593a7bef02267b9c907b8efb",
+      "originalSize": 10305,
+      "newSize": 7940
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\creamy-treats\\meo-creamy-treats-bonito-cat-treat.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\creamy-treats\\meo-creamy-treats-bonito-cat-treat.webp",
+      "converted": true,
+      "hash": "a852eb5ee6c690fbae681c8f002bb523",
+      "originalSize": 8904,
+      "newSize": 6166
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\creamy-treats\\sheba-creamy-snacks-tuna-cat-treat.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\creamy-treats\\sheba-creamy-snacks-tuna-cat-treat.webp",
+      "converted": true,
+      "hash": "7f0175c79d1902af6258272ff226e838",
+      "originalSize": 6235,
+      "newSize": 5262
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\creamy-treats\\temptations-creamy-puree-chicken-cat-treat.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\creamy-treats\\temptations-creamy-puree-chicken-cat-treat.webp",
+      "converted": true,
+      "hash": "8592578ab0f05bc1370f280175c473b2",
+      "originalSize": 11889,
+      "newSize": 8652
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\crunchy-treats\\dreamies-cheese-crunchy-cat-treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\crunchy-treats\\dreamies-cheese-crunchy-cat-treats.webp",
+      "converted": true,
+      "hash": "5103e04f3db1144e2d62e7dc1556eea0",
+      "originalSize": 12266,
+      "newSize": 8744
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\crunchy-treats\\friskies-party-mix-original-crunch-cat-treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\crunchy-treats\\friskies-party-mix-original-crunch-cat-treats.webp",
+      "converted": true,
+      "hash": "abf8efa828023fb7722c344b10202138",
+      "originalSize": 22332,
+      "newSize": 21862
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\crunchy-treats\\meo-crunchy-cat-treats-seafood-flavor.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\crunchy-treats\\meo-crunchy-cat-treats-seafood-flavor.webp",
+      "converted": true,
+      "hash": "570359ecdfe6134d430d3079d62f6949",
+      "originalSize": 7010,
+      "newSize": 4056
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\crunchy-treats\\purepet-crunchy-cat-treats-ocean-fish-flavor.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\crunchy-treats\\purepet-crunchy-cat-treats-ocean-fish-flavor.webp",
+      "converted": true,
+      "hash": "e9c5f8976145b908c03aa89ed2ee8e9f",
+      "originalSize": 6920,
+      "newSize": 5674
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\crunchy-treats\\temptations-mixups-backyard-cookout-cat-treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\crunchy-treats\\temptations-mixups-backyard-cookout-cat-treats.webp",
+      "converted": true,
+      "hash": "a2e6a2649660c289c251153238f832b8",
+      "originalSize": 5498,
+      "newSize": 4956
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\dry-food\\hills-science-diet-adult-indoor-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\dry-food\\hills-science-diet-adult-indoor-cat-food.webp",
+      "converted": true,
+      "hash": "f1272ccfa4304a3765382167520906e0",
+      "originalSize": 9742,
+      "newSize": 11380
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\dry-food\\meo-adult-ocean-fish-dry-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\dry-food\\meo-adult-ocean-fish-dry-cat-food.webp",
+      "converted": true,
+      "hash": "cc6c4ae9cb8e2b6df65acdac51ac86b9",
+      "originalSize": 8898,
+      "newSize": 5944
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\dry-food\\purina-pro-plan-complete-essentials-adult-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\dry-food\\purina-pro-plan-complete-essentials-adult-cat-food.webp",
+      "converted": true,
+      "hash": "43befda5d42a9eaaea39bc92f92f7592",
+      "originalSize": 20043,
+      "newSize": 14958
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\dry-food\\royal-canin-indoor-adult-dry-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\dry-food\\royal-canin-indoor-adult-dry-cat-food.webp",
+      "converted": true,
+      "hash": "54575bf0cc91265fa589bf0ebfdab163",
+      "originalSize": 3630,
+      "newSize": 4162
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\dry-food\\whiskas-ocean-fish-adult-dry-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\dry-food\\whiskas-ocean-fish-adult-dry-cat-food.webp",
+      "converted": true,
+      "hash": "7296dac2d00cb13d140c0ae0f09ddb19",
+      "originalSize": 8412,
+      "newSize": 9606
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\grain-free-food\\acana-wild-prairie-grain-free-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\grain-free-food\\acana-wild-prairie-grain-free-cat-food.webp",
+      "converted": true,
+      "hash": "9de677b17926011829d28fd6cb391e52",
+      "originalSize": 6632,
+      "newSize": 6050
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\grain-free-food\\farmina-nd-chicken-pomegranate-grain-free-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\grain-free-food\\farmina-nd-chicken-pomegranate-grain-free-cat-food.webp",
+      "converted": true,
+      "hash": "afd1aa84d501bdc171355f00a5ef022b",
+      "originalSize": 9658,
+      "newSize": 10888
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\grain-free-food\\orijen-original-grain-free-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\grain-free-food\\orijen-original-grain-free-cat-food.webp",
+      "converted": true,
+      "hash": "1fd75b147d4cfb81d90f914aad8ca0ed",
+      "originalSize": 8801,
+      "newSize": 6284
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\grain-free-food\\royal-canin-grain-free-adult-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\grain-free-food\\royal-canin-grain-free-adult-cat-food.webp",
+      "converted": true,
+      "hash": "81a48e48aaaf96ea1652b7402174832e",
+      "originalSize": 16932,
+      "newSize": 14370
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\grain-free-food\\taste-of-the-wild-rocky-mountain-grain-free-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\grain-free-food\\taste-of-the-wild-rocky-mountain-grain-free-cat-food.webp",
+      "converted": true,
+      "hash": "1fe8dcb3e54753a49a30858d0b0ff0c6",
+      "originalSize": 9792,
+      "newSize": 10240
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\kitten-food\\farmina-nd-kitten-chicken-pomegranate-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\kitten-food\\farmina-nd-kitten-chicken-pomegranate-cat-food.webp",
+      "converted": true,
+      "hash": "8601c12dddbd80214811afba78ab523f",
+      "originalSize": 7433,
+      "newSize": 7132
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\kitten-food\\hills-science-diet-kitten-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\kitten-food\\hills-science-diet-kitten-cat-food.webp",
+      "converted": true,
+      "hash": "697a844b23f754c8802f715402773d6a",
+      "originalSize": 8104,
+      "newSize": 5710
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\kitten-food\\purina-pro-plan-kitten-chicken-rice-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\kitten-food\\purina-pro-plan-kitten-chicken-rice-cat-food.webp",
+      "converted": true,
+      "hash": "7b97ad5f3dae57e395b8197d966abad3",
+      "originalSize": 4622,
+      "newSize": 5338
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\kitten-food\\royal-canin-kitten-dry-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\kitten-food\\royal-canin-kitten-dry-cat-food.webp",
+      "converted": true,
+      "hash": "7dc2c542fd033460c63995eea8c7b23f",
+      "originalSize": 25089,
+      "newSize": 18426
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\kitten-food\\whiskas-kitten-ocean-fish-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\kitten-food\\whiskas-kitten-ocean-fish-cat-food.webp",
+      "converted": true,
+      "hash": "2ac5c5321e12e1a97893f14886356c87",
+      "originalSize": 18980,
+      "newSize": 17456
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\meaty-treats\\friskies-chicken-meaty-bites-cat-treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\meaty-treats\\friskies-chicken-meaty-bites-cat-treats.webp",
+      "converted": true,
+      "hash": "4de1a095c1480883d7b187e6fb539acd",
+      "originalSize": 8675,
+      "newSize": 8480
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\meaty-treats\\meo-tuna-meaty-cat-treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\meaty-treats\\meo-tuna-meaty-cat-treats.webp",
+      "converted": true,
+      "hash": "86fff2945882b4a33bdded0a21091eeb",
+      "originalSize": 6348,
+      "newSize": 7136
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\meaty-treats\\purepet-ocean-fish-meaty-cat-treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\meaty-treats\\purepet-ocean-fish-meaty-cat-treats.webp",
+      "converted": true,
+      "hash": "9cf2166c037d038aeafd9b6fa4c4e706",
+      "originalSize": 11018,
+      "newSize": 9188
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\meaty-treats\\sheba-chicken-meaty-cat-treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\meaty-treats\\sheba-chicken-meaty-cat-treats.webp",
+      "converted": true,
+      "hash": "62d6c6ae1fb0d0508e8a9724901542ae",
+      "originalSize": 9332,
+      "newSize": 8662
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\meaty-treats\\temptations-chicken-flavor-cat-treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\meaty-treats\\temptations-chicken-flavor-cat-treats.webp",
+      "converted": true,
+      "hash": "0cdedf4637ce10752e7f64d2eb75533b",
+      "originalSize": 18524,
+      "newSize": 17056
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\prescription-food\\farmina-vet-life-renal-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\prescription-food\\farmina-vet-life-renal-cat-food.webp",
+      "converted": true,
+      "hash": "d29bc483f8da3c118bbb98453eb1a045",
+      "originalSize": 5328,
+      "newSize": 6020
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\prescription-food\\hills-prescription-diet-cd-multicare-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\prescription-food\\hills-prescription-diet-cd-multicare-cat-food.webp",
+      "converted": true,
+      "hash": "c7072def61e67fc87168803acb658a43",
+      "originalSize": 5538,
+      "newSize": 6394
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\prescription-food\\purina-pro-plan-veterinary-ur-urinary-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\prescription-food\\purina-pro-plan-veterinary-ur-urinary-cat-food.webp",
+      "converted": true,
+      "hash": "eb5664531375c96e271b5ea90adc7e68",
+      "originalSize": 62263,
+      "newSize": 42956
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\prescription-food\\royal-canin-hypoallergenic-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\prescription-food\\royal-canin-hypoallergenic-cat-food.webp",
+      "converted": true,
+      "hash": "c4262c35bf6098c7526273518d549a90",
+      "originalSize": 15391,
+      "newSize": 11250
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\prescription-food\\royal-canin-urinary-so-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\prescription-food\\royal-canin-urinary-so-cat-food.webp",
+      "converted": true,
+      "hash": "4cb0df69a7e32f8a561ca7db51a757df",
+      "originalSize": 4330,
+      "newSize": 4994
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\wet-food\\fancy-feast-grilled-tuna-wet-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\wet-food\\fancy-feast-grilled-tuna-wet-cat-food.webp",
+      "converted": true,
+      "hash": "1b3ac5144674489b2cc2d44080324562",
+      "originalSize": 47977,
+      "newSize": 39718
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\wet-food\\purina-pro-plan-adult-wet-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\wet-food\\purina-pro-plan-adult-wet-cat-food.webp",
+      "converted": true,
+      "hash": "9685d608e18af1f32c5e7450f6c59659",
+      "originalSize": 7406,
+      "newSize": 8478
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\wet-food\\royal-canin-instinctive-adult-wet-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\wet-food\\royal-canin-instinctive-adult-wet-cat-food.webp",
+      "converted": true,
+      "hash": "d7aef7be25924663978897ce791523a9",
+      "originalSize": 24430,
+      "newSize": 20256
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\wet-food\\sheba-tuna-premium-wet-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\wet-food\\sheba-tuna-premium-wet-cat-food.webp",
+      "converted": true,
+      "hash": "4b705e4b182d2c7c83e251c67d264e23",
+      "originalSize": 34210,
+      "newSize": 28042
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\wet-food\\whiskas-ocean-fish-wet-cat-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\cats\\wet-food\\whiskas-ocean-fish-wet-cat-food.webp",
+      "converted": true,
+      "hash": "b9a73720b0df5d913e6a7d29e7e93fb8",
+      "originalSize": 12544,
+      "newSize": 14378
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\biscuits-cookies\\drools-absolute-calcium-bone-biscuits.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\biscuits-cookies\\drools-absolute-calcium-bone-biscuits.webp",
+      "converted": true,
+      "hash": "62e8c7a4e0eeecfc48c2650144b6b606",
+      "originalSize": 19866,
+      "newSize": 15076
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\biscuits-cookies\\goodies-energy-treat-biscuits.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\biscuits-cookies\\goodies-energy-treat-biscuits.webp",
+      "converted": true,
+      "hash": "5141af660f2cc0be604f2265e70072e9",
+      "originalSize": 10122,
+      "newSize": 11318
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\biscuits-cookies\\jerhigh-chicken-cookies.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\biscuits-cookies\\jerhigh-chicken-cookies.webp",
+      "converted": true,
+      "hash": "64c6b2475772d7e48fcf8975f944cf3e",
+      "originalSize": 27214,
+      "newSize": 21072
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\biscuits-cookies\\pedigree-biscrok-milk-biscuits.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\biscuits-cookies\\pedigree-biscrok-milk-biscuits.webp",
+      "converted": true,
+      "hash": "74991fdafac7bb1ec96aa1f221636775",
+      "originalSize": 7724,
+      "newSize": 8858
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\biscuits-cookies\\smartheart-dog-biscuits-milk.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\biscuits-cookies\\smartheart-dog-biscuits-milk.webp",
+      "converted": true,
+      "hash": "ae26554fbb087d4945c5b65d47bea1e7",
+      "originalSize": 22672,
+      "newSize": 17254
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dental-treats\\drools-dental-bone-dog-treat.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dental-treats\\drools-dental-bone-dog-treat.webp",
+      "converted": true,
+      "hash": "4a553077898bb7a0d0432ab5098e5a59",
+      "originalSize": 21276,
+      "newSize": 24496
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dental-treats\\jerhigh-dental-stick-chicken.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dental-treats\\jerhigh-dental-stick-chicken.webp",
+      "converted": true,
+      "hash": "abc806269c7c90aa43e5ce1b922deba8",
+      "originalSize": 15739,
+      "newSize": 13484
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dental-treats\\pedigree-dentastix-daily-oral-care.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dental-treats\\pedigree-dentastix-daily-oral-care.webp",
+      "converted": true,
+      "hash": "4f14443a56ac526f3e2b2a84fbb6ab1c",
+      "originalSize": 10718,
+      "newSize": 7538
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dental-treats\\purepet-dental-chew-stick.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dental-treats\\purepet-dental-chew-stick.webp",
+      "converted": true,
+      "hash": "f18b453dce786c89ef0389e07da39b09",
+      "originalSize": 7829,
+      "newSize": 6580
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dental-treats\\smartheart-dental-stick-dog-treat.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dental-treats\\smartheart-dental-stick-dog-treat.webp",
+      "converted": true,
+      "hash": "b81a31caa744e3cb31abc2d7396f1172",
+      "originalSize": 6082,
+      "newSize": 5506
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dry-food\\acana-classics-red-meat-recipe-dry-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dry-food\\acana-classics-red-meat-recipe-dry-dog-food.webp",
+      "converted": true,
+      "hash": "3757705853fc507366bc0841a804a513",
+      "originalSize": 13769,
+      "newSize": 10888
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dry-food\\blue-buffalo-wilderness-adult-grain-free-dry-dog-food.png.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dry-food\\blue-buffalo-wilderness-adult-grain-free-dry-dog-food.png.webp",
+      "converted": true,
+      "hash": "b3b99cbf7bb3174513132d863eb0bbad",
+      "originalSize": 18278,
+      "newSize": 17010
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dry-food\\farmina-nd-chicken-pomegranate-adult-medium-maxi-dry-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dry-food\\farmina-nd-chicken-pomegranate-adult-medium-maxi-dry-dog-food.webp",
+      "converted": true,
+      "hash": "f6b3e5993bd82f760bc4947c72487132",
+      "originalSize": 46166,
+      "newSize": 32448
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dry-food\\purina-pro-plan-complete-essentials-adult-dry-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dry-food\\purina-pro-plan-complete-essentials-adult-dry-dog-food.webp",
+      "converted": true,
+      "hash": "3597de7fc1adb67b9590b157ecec7dd5",
+      "originalSize": 30344,
+      "newSize": 22088
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dry-food\\royal-canin-maxi-adult-dry-dog-food.png.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\dry-food\\royal-canin-maxi-adult-dry-dog-food.png.webp",
+      "converted": true,
+      "hash": "9bc97ef4a69c66556a70bf895ef67fe5",
+      "originalSize": 24360,
+      "newSize": 17474
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\Fresh-food\\freshpet-select-roasted-chicken-recipe-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\Fresh-food\\freshpet-select-roasted-chicken-recipe-dog-food.webp",
+      "converted": true,
+      "hash": "e9840139e7ef88c87b20a9cdb8f58ab4",
+      "originalSize": 14158,
+      "newSize": 15942
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\Fresh-food\\nom-nom-beef-mash-fresh-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\Fresh-food\\nom-nom-beef-mash-fresh-dog-food.webp",
+      "converted": true,
+      "hash": "3fc8bf563797d3d56a9ef66ce71101c3",
+      "originalSize": 9924,
+      "newSize": 11504
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\Fresh-food\\ollie-chicken-dish-fresh-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\Fresh-food\\ollie-chicken-dish-fresh-dog-food.webp",
+      "converted": true,
+      "hash": "a3960ca457ca0e9a8128b3b845c5d784",
+      "originalSize": 6686,
+      "newSize": 6122
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\Fresh-food\\spot-tango-beef-millet-fresh-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\Fresh-food\\spot-tango-beef-millet-fresh-dog-food.webp",
+      "converted": true,
+      "hash": "92720e891d7571a2e341c7b65cb40cb3",
+      "originalSize": 6950,
+      "newSize": 6928
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\Fresh-food\\the-farmers-dog-turkey-recipe-fresh-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\Fresh-food\\the-farmers-dog-turkey-recipe-fresh-dog-food.webp",
+      "converted": true,
+      "hash": "0428b6428085215e5aafdc4e22d23f0d",
+      "originalSize": 4143,
+      "newSize": 3838
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\meaty-treats\\drools-real-chicken-sausage-treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\meaty-treats\\drools-real-chicken-sausage-treats.webp",
+      "converted": true,
+      "hash": "8fc6a27d49dc09db300ec98f667f28c4",
+      "originalSize": 14998,
+      "newSize": 13714
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\meaty-treats\\gnawlers-calcium-milk-bone-treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\meaty-treats\\gnawlers-calcium-milk-bone-treats.webp",
+      "converted": true,
+      "hash": "7ec1b49f76188c213ae5df185315e6ee",
+      "originalSize": 10944,
+      "newSize": 10034
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\meaty-treats\\jerhigh-chicken-jerky-treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\meaty-treats\\jerhigh-chicken-jerky-treats.webp",
+      "converted": true,
+      "hash": "311c56ba0e7ddfb951d0e4e5815695a7",
+      "originalSize": 35310,
+      "newSize": 29192
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\meaty-treats\\pedigree-rodeo-chicken-treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\meaty-treats\\pedigree-rodeo-chicken-treats.webp",
+      "converted": true,
+      "hash": "fe1738b414889275c970a89253d5a1e4",
+      "originalSize": 14030,
+      "newSize": 11302
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\meaty-treats\\smartheart-chicken-stick-treats.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\meaty-treats\\smartheart-chicken-stick-treats.webp",
+      "converted": true,
+      "hash": "cc88052715d4fd20a5ce58adb4223450",
+      "originalSize": 37216,
+      "newSize": 26284
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\prescription-food\\farmina-vet-life-renal-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\prescription-food\\farmina-vet-life-renal-dog-food.webp",
+      "converted": true,
+      "hash": "89f820487c4eb65b6f155ff5a306d159",
+      "originalSize": 8760,
+      "newSize": 7136
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\prescription-food\\hills-prescription-diet-i-d-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\prescription-food\\hills-prescription-diet-i-d-dog-food.webp",
+      "converted": true,
+      "hash": "fd80a0a2a6f2060425c37cf7ac039064",
+      "originalSize": 9962,
+      "newSize": 8732
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\prescription-food\\hills-prescription-diet-metabolic-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\prescription-food\\hills-prescription-diet-metabolic-dog-food.webp",
+      "converted": true,
+      "hash": "ec2cc39888f11615048d391d2b90fdbc",
+      "originalSize": 9636,
+      "newSize": 8118
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\prescription-food\\royal-canin-gastrointestinal-dry-dog-food1.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\prescription-food\\royal-canin-gastrointestinal-dry-dog-food1.webp",
+      "converted": true,
+      "hash": "0c46e1894e53e1c1290efaf102595372",
+      "originalSize": 7186,
+      "newSize": 5674
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\prescription-food\\royal-canin-hypoallergenic-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\prescription-food\\royal-canin-hypoallergenic-dog-food.webp",
+      "converted": true,
+      "hash": "8a4fac05ab7ad147e6c09cbc41b23aae",
+      "originalSize": 9715,
+      "newSize": 7248
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\puppyFood\\acana-puppy-recipe-dry-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\puppyFood\\acana-puppy-recipe-dry-dog-food.webp",
+      "converted": true,
+      "hash": "337d785466a49885ee0e90874e9244e4",
+      "originalSize": 7712,
+      "newSize": 7620
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\puppyFood\\drools-puppy-chicken-egg-dry-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\puppyFood\\drools-puppy-chicken-egg-dry-food.webp",
+      "converted": true,
+      "hash": "ea25ecaf8cdced2cdfe816f8bbc6b3d5",
+      "originalSize": 14057,
+      "newSize": 10834
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\puppyFood\\farmina-nd-puppy-medium-maxi-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\puppyFood\\farmina-nd-puppy-medium-maxi-food.webp",
+      "converted": true,
+      "hash": "9a68ac00f8ebc4be1d684d4b7e1a5056",
+      "originalSize": 12536,
+      "newSize": 13346
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\puppyFood\\pedigree-puppy-chicken-milk-dry-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\puppyFood\\pedigree-puppy-chicken-milk-dry-food.webp",
+      "converted": true,
+      "hash": "182f6b78257e38126fe1e90ce6e328c3",
+      "originalSize": 10851,
+      "newSize": 7206
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\puppyFood\\royal-canin-mini-puppy-dry-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\puppyFood\\royal-canin-mini-puppy-dry-dog-food.webp",
+      "converted": true,
+      "hash": "1a75b261e8ad141763b94976e444de81",
+      "originalSize": 8229,
+      "newSize": 6004
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\vegetarian-food\\drools-vegetarian-adult-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\vegetarian-food\\drools-vegetarian-adult-dog-food.webp",
+      "converted": true,
+      "hash": "c35311e35a869f8c0bb41b4bd310c4c2",
+      "originalSize": 13049,
+      "newSize": 10040
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\vegetarian-food\\farmina-vet-life-vegetarian-formula-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\vegetarian-food\\farmina-vet-life-vegetarian-formula-dog-food.webp",
+      "converted": true,
+      "hash": "38cae769ce8c7a6379049c812f3eea19",
+      "originalSize": 8339,
+      "newSize": 8472
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\vegetarian-food\\pedigree-vegetarian-adult-dry-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\vegetarian-food\\pedigree-vegetarian-adult-dry-dog-food.webp",
+      "converted": true,
+      "hash": "e73ebc59f87c94c02ea254431f33e052",
+      "originalSize": 13703,
+      "newSize": 9996
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\vegetarian-food\\purepet-vegetarian-adult-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\vegetarian-food\\purepet-vegetarian-adult-dog-food.webp",
+      "converted": true,
+      "hash": "402e62348a41949531c33c1a4ef2b651",
+      "originalSize": 7289,
+      "newSize": 5758
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\vegetarian-food\\royal-canin-vegetarian-adult-dry-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\vegetarian-food\\royal-canin-vegetarian-adult-dry-dog-food.webp",
+      "converted": true,
+      "hash": "95429978dc63e1e014389ca349d25d93",
+      "originalSize": 10008,
+      "newSize": 7294
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\wet-food\\blue-buffalo-homestyle-recipe-wet-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\wet-food\\blue-buffalo-homestyle-recipe-wet-dog-food.webp",
+      "converted": true,
+      "hash": "1e727c2bfa432dde32cf5e3060fc5543",
+      "originalSize": 9851,
+      "newSize": 7038
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\wet-food\\hills-science-diet-adult-wet-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\wet-food\\hills-science-diet-adult-wet-dog-food.webp",
+      "converted": true,
+      "hash": "fec13b2c1d97a3fee34a85ff5741b457",
+      "originalSize": 11896,
+      "newSize": 10346
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\wet-food\\pedigree-chicken-wet-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\wet-food\\pedigree-chicken-wet-dog-food.webp",
+      "converted": true,
+      "hash": "dcc5cefaf6cf21641be6d7945fcbe347",
+      "originalSize": 12294,
+      "newSize": 10994
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\wet-food\\purina-pro-plan-savory-wet-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\wet-food\\purina-pro-plan-savory-wet-dog-food.webp",
+      "converted": true,
+      "hash": "643cc4d4992045631980b2c2f286bb46",
+      "originalSize": 32304,
+      "newSize": 26902
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\wet-food\\royal-canin-adult-wet-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\dogs\\wet-food\\royal-canin-adult-wet-dog-food.webp",
+      "converted": true,
+      "hash": "33f3b4c8cf04c708c94e843440fcd92d",
+      "originalSize": 8511,
+      "newSize": 8490
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\fish\\api-tropical-pellets-fish-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\fish\\api-tropical-pellets-fish-food.webp",
+      "converted": true,
+      "hash": "875d74ee1866cbf3628cbe5b7c9cb6f7",
+      "originalSize": 8412,
+      "newSize": 6184
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\fish\\fluval-bug-bites-tropical-formula-fish-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\fish\\fluval-bug-bites-tropical-formula-fish-food.webp",
+      "converted": true,
+      "hash": "b49b831a97d9af9065695e853d534f1c",
+      "originalSize": 7038,
+      "newSize": 6774
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\fish\\hikari-tropical-micro-pellets-fish-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\fish\\hikari-tropical-micro-pellets-fish-food.webp",
+      "converted": true,
+      "hash": "d0f240a42b8a2f876050680f86f39b7e",
+      "originalSize": 11333,
+      "newSize": 8656
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\fish\\omega-one-super-color-flakes-fish-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\fish\\omega-one-super-color-flakes-fish-food.webp",
+      "converted": true,
+      "hash": "fa1a98e6c0892bb9d1146dde15cb9db7",
+      "originalSize": 11106,
+      "newSize": 7880
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\fish\\sera-vipan-nature-tropical-fish-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\fish\\sera-vipan-nature-tropical-fish-food.webp",
+      "converted": true,
+      "hash": "3a96e083b8ecd3befb1cc6a6af7daefe",
+      "originalSize": 5909,
+      "newSize": 5566
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\fish\\tetra-tetramin-tropical-flakes-fish-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\fish\\tetra-tetramin-tropical-flakes-fish-food.webp",
+      "converted": true,
+      "hash": "8431361dd52f8cb62392babc26063d22",
+      "originalSize": 10642,
+      "newSize": 7588
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\hamster\\higgins-sunburst-gourmet-hamster-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\hamster\\higgins-sunburst-gourmet-hamster-food.webp",
+      "converted": true,
+      "hash": "c4bbfd2a1bfb0b2fd866a1e9dc377410",
+      "originalSize": 10210,
+      "newSize": 11786
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\hamster\\kaytee-forti-diet-pro-health-hamster-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\hamster\\kaytee-forti-diet-pro-health-hamster-food.webp",
+      "converted": true,
+      "hash": "e9e48718ff1dadf6c8957b8f02002857",
+      "originalSize": 8210,
+      "newSize": 9458
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\hamster\\mazuri-hamster-rat-diet.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\hamster\\mazuri-hamster-rat-diet.webp",
+      "converted": true,
+      "hash": "74015659e33e09de771e9603783c4bb7",
+      "originalSize": 9862,
+      "newSize": 11110
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\hamster\\oxbow-essentials-hamster-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\hamster\\oxbow-essentials-hamster-food.webp",
+      "converted": true,
+      "hash": "3edb302860de1590549b16f9e686464f",
+      "originalSize": 33014,
+      "newSize": 28580
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\hamster\\vitakraft-vita-smart-hamster-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\hamster\\vitakraft-vita-smart-hamster-food.webp",
+      "converted": true,
+      "hash": "b0a74dc8b0bad36b7d4eb125685453ae",
+      "originalSize": 15250,
+      "newSize": 17114
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\rabbit\\burgess-excel-adult-rabbit-nuggets.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\rabbit\\burgess-excel-adult-rabbit-nuggets.webp",
+      "converted": true,
+      "hash": "5bdeef2047c1a68d33bf794efc5d500e",
+      "originalSize": 6518,
+      "newSize": 7580
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\rabbit\\kaytee-fortidiet-pro-health-rabbit-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\rabbit\\kaytee-fortidiet-pro-health-rabbit-food.webp",
+      "converted": true,
+      "hash": "188c5dc2bd3b9ee87878749d98bfd2dd",
+      "originalSize": 8420,
+      "newSize": 9764
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\rabbit\\mazuri-timothy-based-rabbit-diet.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\rabbit\\mazuri-timothy-based-rabbit-diet.webp",
+      "converted": true,
+      "hash": "3a264fbba3a2a7a4e72e995943d0210d",
+      "originalSize": 8704,
+      "newSize": 9780
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\rabbit\\oxbow-essentials-adult-rabbit-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\rabbit\\oxbow-essentials-adult-rabbit-food.webp",
+      "converted": true,
+      "hash": "cc29f975ae48ef6ccc8daf5a619b5aa7",
+      "originalSize": 7916,
+      "newSize": 9084
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\rabbit\\supreme-science-selective-rabbit-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\rabbit\\supreme-science-selective-rabbit-food.webp",
+      "converted": true,
+      "hash": "18c78c459e5156f1c01e88959859df64",
+      "originalSize": 6916,
+      "newSize": 8000
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\rabbit\\vitakraft-vita-smart-rabbit-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\products\\rabbit\\vitakraft-vita-smart-rabbit-food.webp",
+      "converted": true,
+      "hash": "f7f99565fe94ec7869f44b6ebb3fb6d1",
+      "originalSize": 8724,
+      "newSize": 9778
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\puppy-kitten-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\puppy-kitten-food.webp",
+      "converted": true,
+      "hash": "ac2f4159abc713c5f577e20f3e0c0565",
+      "originalSize": 356607,
+      "newSize": 101106
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\rabbit.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\rabbit.webp",
+      "converted": true,
+      "hash": "55091fc783e570cb7a91ef1dfff98d87",
+      "originalSize": 660504,
+      "newSize": 219194
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\small-pets.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\small-pets.webp",
+      "converted": true,
+      "hash": "601e321100ae02342528f74c0eb36fb8",
+      "originalSize": 512186,
+      "newSize": 174870
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\spotlight\\EZstore.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\spotlight\\EZstore.webp",
+      "converted": true,
+      "hash": "7ef29adff13c377e4a933fb90e2eb905",
+      "originalSize": 2573135,
+      "newSize": 138950
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\trust-banner.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\trust-banner.webp",
+      "converted": true,
+      "hash": "c17eb67b41f6e03ad9fcd3d2d48290c0",
+      "originalSize": 437937,
+      "newSize": 168006
+    },
+    {
+      "original": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\wet-dog-food.webp",
+      "webp": "C:\\Users\\shali\\Desktop\\EZStore - Copy\\EZStore - Copy\\src\\assets\\wet-dog-food.webp",
+      "converted": true,
+      "hash": "19d755a1a85ecd317b8a778d58d46354",
+      "originalSize": 387356,
+      "newSize": 113264
+    }
+  ]
+}

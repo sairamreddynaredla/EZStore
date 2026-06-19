@@ -3,10 +3,7 @@ import { useEffect, useState } from "react";
 import RatingStars from "./RatingStars";
 import PriceSection from "./PriceSection";
 import AddToCartButton from "./AddToCartButton";
-import {
-  resolveProductImage,
-  resolveProductImageFallback,
-} from "../../utils/productImage";
+import { resolveProductImage, resolveProductImageFallback } from "../../utils/productImage";
 
 const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
   const [selectedVariant, setSelectedVariant] = useState(0);
@@ -34,13 +31,8 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
       >
         {/* HEADER */}
         <div className="sticky top-0 bg-white border-b border-gray-200 p-4 md:p-6 flex justify-between items-center">
-          <h2 className="text-xl md:text-2xl font-bold text-gray-900">
-            Quick View
-          </h2>
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-gray-100 rounded-lg transition-all"
-          >
+          <h2 className="text-xl md:text-2xl font-bold text-gray-900">Quick View</h2>
+          <button onClick={onClose} className="p-2 hover:bg-gray-100 rounded-lg transition-all">
             <X size={24} />
           </button>
         </div>
@@ -68,21 +60,14 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
           <div className="flex flex-col gap-4">
             {/* BRAND */}
             <div>
-              <p className="text-sm text-gray-500 uppercase font-semibold">
-                {product.brand}
-              </p>
+              <p className="text-sm text-gray-500 uppercase font-semibold">{product.brand}</p>
             </div>
 
             {/* TITLE */}
-            <h3 className="text-xl md:text-2xl font-bold text-gray-900">
-              {product.name}
-            </h3>
+            <h3 className="text-xl md:text-2xl font-bold text-gray-900">{product.name}</h3>
 
             {/* RATING */}
-            <RatingStars
-              rating={product.rating || 0}
-              reviewCount={product.reviews || 0}
-            />
+            <RatingStars rating={product.rating || 0} reviewCount={product.reviews || 0} />
 
             {/* PRICE */}
             <PriceSection price={price} originalPrice={originalPrice} />
@@ -90,9 +75,7 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
             {/* VARIANTS */}
             {product.variants && product.variants.length > 1 && (
               <div className="flex flex-col gap-3">
-                <label className="text-sm font-semibold text-gray-900">
-                  Select Size/Weight
-                </label>
+                <label className="text-sm font-semibold text-gray-900">Select Size/Weight</label>
                 <div className="grid grid-cols-3 gap-2">
                   {product.variants.map((v, idx) => (
                     <button
@@ -113,9 +96,7 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
 
             {/* QUANTITY */}
             <div className="flex flex-col gap-3">
-              <label className="text-sm font-semibold text-gray-900">
-                Quantity
-              </label>
+              <label className="text-sm font-semibold text-gray-900">Quantity</label>
               <div className="flex items-center gap-3 border border-gray-300 rounded-lg w-fit">
                 <button
                   onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -123,9 +104,7 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
                 >
                   −
                 </button>
-                <span className="px-6 py-2 font-semibold text-gray-900">
-                  {quantity}
-                </span>
+                <span className="px-6 py-2 font-semibold text-gray-900">{quantity}</span>
                 <button
                   onClick={() => setQuantity(quantity + 1)}
                   className="px-4 py-2 text-lg font-bold text-gray-600 hover:bg-gray-100 transition-all"
@@ -163,15 +142,10 @@ const QuickViewModal = ({ product, isOpen, onClose, onAddToCart }) => {
             {/* FEATURES */}
             {product.features && product.features.length > 0 && (
               <div className="mt-4 pt-4 border-t border-gray-200">
-                <p className="text-sm font-semibold text-gray-900 mb-3">
-                  Key Features
-                </p>
+                <p className="text-sm font-semibold text-gray-900 mb-3">Key Features</p>
                 <ul className="space-y-2">
                   {product.features.slice(0, 3).map((feature, idx) => (
-                    <li
-                      key={idx}
-                      className="text-sm text-gray-600 flex items-start gap-2"
-                    >
+                    <li key={idx} className="text-sm text-gray-600 flex items-start gap-2">
                       <span className="text-orange-500 mt-1">✓</span>
                       {feature}
                     </li>

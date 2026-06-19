@@ -1,76 +1,53 @@
-import {
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { CartContext } from "./cart-context";
 
-const CartProvider = ({
-  children,
-}) => {
+const CartProvider = ({ children }) => {
+  const [cartItems, setCartItems] = useState(() => {
+    const storedCart = localStorage.getItem("cart");
 
-  const [cartItems, setCartItems] =
-    useState(() => {
+    if (storedCart) {
+      try {
+        const parsed = JSON.parse(storedCart);
 
-      const storedCart =
-        localStorage.getItem("cart");
+        // Auto-heal any items missing selectedVariant
+        return parsed.map((item) => {
+          if (item && !item.selectedVariant) {
+            const defaultVariant = item.variants?.[0] || {
+              weight: "1kg",
+              price: item.price || 0,
+            };
 
-      if (storedCart) {
+            return {
+              ...item,
+              selectedVariant: defaultVariant,
+            };
+          }
 
-        try {
+          return item;
+        });
+      } catch (error) {
+        console.log(error);
 
-          const parsed =
-            JSON.parse(storedCart);
-
-          // Auto-heal any items missing selectedVariant
-          return parsed.map((item) => {
-
-            if (
-              item &&
-              !item.selectedVariant
-            ) {
-
-              const defaultVariant =
-                item.variants?.[0] || {
-                  weight: "1kg",
-                  price: item.price || 0,
-                };
-
-              return {
-                ...item,
-                selectedVariant:
-                  defaultVariant,
-              };
-            }
-
-            return item;
-          });
-
-        } catch (error) {
-
-          console.log(error);
-
-          return [];
-        }
+        return [];
       }
+    }
 
-      return [];
-    });
+    return [];
+  });
 
   // SAVE CART
 
   useEffect(() => {
-
-    localStorage.setItem(
-      "cart",
-      JSON.stringify(cartItems)
-    );
-
+    localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
   // FLASH / TOAST MESSAGE
-  const [flash, setFlash] = useState({ visible: false, message: "", type: "success" });
+  const [flash, setFlash] = useState({
+    visible: false,
+    message: "",
+    type: "success",
+  });
 
   const showFlash = (message, type = "success", timeout = 1400) => {
     setFlash({ visible: true, message, type });
@@ -84,117 +61,69 @@ const CartProvider = ({
   // ADD TO CART
 
   const addToCart = (product) => {
-
-    const selectedVariant =
-      product.selectedVariant ||
+    const selectedVariant = product.selectedVariant ||
       product.variants?.[0] || {
         weight: "1kg",
         price: product.price || 0,
       };
 
-    const selectedWeight =
-      selectedVariant.weight || "1kg";
+    const selectedWeight = selectedVariant.weight || "1kg";
 
-    const existingProduct =
-      cartItems.find(
-        (item) =>
-          item.id === product.id &&
-          (
-            item.selectedVariant?.weight ||
-            "1kg"
-          ) === selectedWeight
-      );
+    const existingProduct = cartItems.find(
+      (item) => item.id === product.id && (item.selectedVariant?.weight || "1kg") === selectedWeight
+    );
 
     if (existingProduct) {
-
       setCartItems(
         cartItems.map((item) =>
-
-          item.id === product.id &&
-          (
-            item.selectedVariant?.weight ||
-            "1kg"
-          ) === selectedWeight
-
+          item.id === product.id && (item.selectedVariant?.weight || "1kg") === selectedWeight
             ? {
                 ...item,
-                quantity:
-                  item.quantity +
-                  (product.quantity || 1),
+                quantity: item.quantity + (product.quantity || 1),
               }
-
             : item
         )
       );
-
     } else {
-
       setCartItems([
         ...cartItems,
 
         {
           ...product,
           selectedVariant,
-          quantity:
-            product.quantity || 1,
+          quantity: product.quantity || 1,
         },
       ]);
     }
     // show flash
-    try { showFlash("Added to cart", "success"); } catch (e) {}
+    try {
+      showFlash("Added to cart", "success");
+    } catch (e) {}
   };
 
   // REMOVE
 
-  const removeFromCart = (
-    id,
-    weight
-  ) => {
-
+  const removeFromCart = (id, weight) => {
     setCartItems(
-
       cartItems.filter(
-
-        (item) =>
-
-          !(
-
-            item.id === id &&
-
-            (
-              item.selectedVariant?.weight ||
-              "1kg"
-            ) === (weight || "1kg")
-          )
+        (item) => !(item.id === id && (item.selectedVariant?.weight || "1kg") === (weight || "1kg"))
       )
     );
-     try { showFlash("Removed from cart", "error"); } catch (e) {}
+    try {
+      showFlash("Removed from cart", "error");
+    } catch (e) {}
   };
 
   // INCREASE
 
-  const increaseQuantity = (
-    id,
-    weight
-  ) => {
-
+  const increaseQuantity = (id, weight) => {
     setCartItems(
-
       cartItems.map((item) =>
-
-        item.id === id &&
-
-        (
-          item.selectedVariant?.weight ||
-          "1kg"
-        ) === (weight || "1kg")
-
+        item.id === id && (item.selectedVariant?.weight || "1kg") === (weight || "1kg")
           ? {
               ...item,
-              quantity:
-                item.quantity + 1,
+              quantity: item.quantity + 1,
             }
-
           : item
       )
     );
@@ -202,31 +131,15 @@ const CartProvider = ({
 
   // DECREASE
 
-  const decreaseQuantity = (
-    id,
-    weight
-  ) => {
-
+  const decreaseQuantity = (id, weight) => {
     setCartItems(
-
       cartItems.map((item) =>
-
-        item.id === id &&
-
-        (
-          item.selectedVariant?.weight ||
-          "1kg"
-        ) === (weight || "1kg")
-
+        item.id === id && (item.selectedVariant?.weight || "1kg") === (weight || "1kg")
           ? {
               ...item,
 
-              quantity:
-                item.quantity > 1
-                  ? item.quantity - 1
-                  : 1,
+              quantity: item.quantity > 1 ? item.quantity - 1 : 1,
             }
-
           : item
       )
     );
@@ -235,58 +148,41 @@ const CartProvider = ({
   // TOTAL ITEMS
 
   const totalItems = useMemo(() => {
-
     return cartItems.reduce(
-
-      (total, item) =>
-
-        total + item.quantity,
+      (total, item) => total + item.quantity,
 
       0
     );
-
   }, [cartItems]);
 
   // TOTAL PRICE
 
   const totalPrice = useMemo(() => {
+    return cartItems.reduce((total, item) => {
+      if (
+        !item ||
+        !item.selectedVariant ||
+        typeof item.selectedVariant.price !== "number" ||
+        typeof item.quantity !== "number"
+      ) {
+        return total;
+      }
 
-    return cartItems.reduce(
-      (total, item) => {
-
-        if (
-          !item ||
-          !item.selectedVariant ||
-          typeof item.selectedVariant.price !== "number" ||
-          typeof item.quantity !== "number"
-        ) {
-          return total;
-        }
-
-        return (
-          total +
-          item.selectedVariant.price *
-            item.quantity
-        );
-
-      },
-      0
-    );
-
+      return total + item.selectedVariant.price * item.quantity;
+    }, 0);
   }, [cartItems]);
   // CLEAR CART
 
   const clearCart = () => {
     setCartItems([]);
-    try { showFlash("Cart cleared", "error"); } catch (e) {}
+    try {
+      showFlash("Cart cleared", "error");
+    } catch (e) {}
   };
 
   return (
-
     <CartContext.Provider
-
       value={{
-
         cartItems,
 
         addToCart,
@@ -308,9 +204,7 @@ const CartProvider = ({
         hideFlash,
       }}
     >
-
       {children}
-
     </CartContext.Provider>
   );
 };

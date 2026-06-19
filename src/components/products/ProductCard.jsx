@@ -3,10 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Heart } from "lucide-react";
 import AddToCartButton from "./AddToCartButton";
 import { useWishlist } from "../../context/usewishlist";
-import {
-  resolveProductImage,
-  resolveProductImageFallback,
-} from "../../utils/productImage";
+import { resolveProductImage, resolveProductImageFallback } from "../../utils/productImage";
 
 const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
@@ -27,14 +24,15 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
   const variants = product.variants || [];
   const selectedVariant = variants[selectedVariantIdx] || variants[0] || {};
 
-  const currentPrice   = Number(selectedVariant.price ?? product.price ?? 0);
-  const originalPrice  = Number(selectedVariant.originalPrice ?? product.originalPrice ?? 0);
-  const discount       = originalPrice > currentPrice
-    ? Math.round(((originalPrice - currentPrice) / originalPrice) * 100)
-    : 0;
+  const currentPrice = Number(selectedVariant.price ?? product.price ?? 0);
+  const originalPrice = Number(selectedVariant.originalPrice ?? product.originalPrice ?? 0);
+  const discount =
+    originalPrice > currentPrice
+      ? Math.round(((originalPrice - currentPrice) / originalPrice) * 100)
+      : 0;
 
   const isOutOfStock = (product.stock ?? 1) <= 0;
-  const wishlisted   = isInWishlist(product.id);
+  const wishlisted = isInWishlist(product.id);
 
   const navigate = useNavigate();
 
@@ -76,7 +74,9 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
         >
           <Heart
             size={20}
-            className={wishlisted ? "fill-red-500 text-red-500" : "text-gray-400 hover:text-red-400"}
+            className={
+              wishlisted ? "fill-red-500 text-red-500" : "text-gray-400 hover:text-red-400"
+            }
           />
         </button>
 
@@ -102,12 +102,12 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
 
         {/* Image container: square on mobile, wider on larger screens */}
         <div className="relative w-full aspect-square sm:aspect-[5/4] overflow-hidden">
-            <img
+          <img
             src={imageSrc}
             alt={product.name}
             loading="lazy"
             decoding="async"
-              className="absolute inset-0 w-full h-full object-contain transition-transform duration-300 group-hover:scale-105 p-1 sm:p-2 cursor-pointer"
+            className="absolute inset-0 w-full h-full object-contain transition-transform duration-300 group-hover:scale-105 p-1 sm:p-2 cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               navigate(`/product/${product.id}`, { state: { product } });
@@ -124,7 +124,9 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
           {/* Rating badge — bottom-left over image */}
           {product.rating > 0 && (
             <div className="absolute bottom-2 left-2 flex items-center gap-1 bg-white rounded-full px-2 py-0.5 shadow-sm border border-gray-100 z-10">
-              <span className="text-[11px] font-bold text-gray-800">{product.rating.toFixed(2)}</span>
+              <span className="text-[11px] font-bold text-gray-800">
+                {product.rating.toFixed(2)}
+              </span>
               <span className="text-yellow-400 text-[11px]">★</span>
             </div>
           )}
@@ -133,10 +135,11 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
 
       {/* ── CONTENT ── */}
       <div className="flex flex-col flex-1 px-2 sm:px-3 pb-2 sm:pb-3 pt-1 sm:pt-1">
-
         {/* Brand + veg-icon row */}
         <div className="flex items-center justify-between mb-1">
-          <span className="text-[11px] sm:text-[12px] text-gray-500 font-medium truncate">{product.brand}</span>
+          <span className="text-[11px] sm:text-[12px] text-gray-500 font-medium truncate">
+            {product.brand}
+          </span>
         </div>
 
         {/* Product name */}
@@ -148,9 +151,10 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
         {variants.length > 0 && (
           <div className="flex flex-wrap gap-1 sm:gap-1 mb-1 sm:mb-2 relative">
             {variants.slice(0, 4).map((v, idx) => {
-              const vDiscount = v.originalPrice > v.price
-                ? Math.round(((v.originalPrice - v.price) / v.originalPrice) * 100)
-                : 0;
+              const vDiscount =
+                v.originalPrice > v.price
+                  ? Math.round(((v.originalPrice - v.price) / v.originalPrice) * 100)
+                  : 0;
               const isActive = idx === selectedVariantIdx;
               return (
                 <button
@@ -178,7 +182,10 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
             {/* scroll arrow if more variants */}
             {variants.length > 4 && (
               <button
-                onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                }}
                 className="flex items-center justify-center w-6 h-6 rounded border border-gray-300 text-gray-400 self-center text-xs"
               >
                 ›
@@ -190,12 +197,25 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
         {/* ── DELIVERY DATE ── */}
         {product.deliveryDate && (
           <div className="flex items-center gap-1 sm:gap-1.5 bg-blue-50 rounded-lg px-2 sm:px-2.5 py-1 sm:py-1.5 mb-2 sm:mb-3">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-blue-500 shrink-0">
-              <path d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z" stroke="#3b82f6" strokeWidth="1.8" strokeLinejoin="round"/>
-              <circle cx="5.5" cy="18.5" r="2.5" stroke="#3b82f6" strokeWidth="1.8"/>
-              <circle cx="18.5" cy="18.5" r="2.5" stroke="#3b82f6" strokeWidth="1.8"/>
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              className="text-blue-500 shrink-0"
+            >
+              <path
+                d="M1 3h15v13H1zM16 8h4l3 3v5h-7V8z"
+                stroke="#3b82f6"
+                strokeWidth="1.8"
+                strokeLinejoin="round"
+              />
+              <circle cx="5.5" cy="18.5" r="2.5" stroke="#3b82f6" strokeWidth="1.8" />
+              <circle cx="18.5" cy="18.5" r="2.5" stroke="#3b82f6" strokeWidth="1.8" />
             </svg>
-            <span className="text-[10px] sm:text-[11px] text-blue-700 font-medium truncate">{product.deliveryDate}</span>
+            <span className="text-[10px] sm:text-[11px] text-blue-700 font-medium truncate">
+              {product.deliveryDate}
+            </span>
           </div>
         )}
 
@@ -203,9 +223,13 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle }) => {
         <div className="flex items-center justify-between mb-2 sm:mb-3">
           <div className="flex items-baseline gap-1 sm:gap-2">
             {originalPrice > currentPrice && (
-              <span className="text-[11px] sm:text-[12px] text-gray-400 line-through">${originalPrice.toFixed(2)}</span>
+              <span className="text-[11px] sm:text-[12px] text-gray-400 line-through">
+                ${originalPrice.toFixed(2)}
+              </span>
             )}
-            <span className="text-lg sm:text-xl font-bold text-gray-900">${currentPrice.toFixed(2)}</span>
+            <span className="text-lg sm:text-xl font-bold text-gray-900">
+              ${currentPrice.toFixed(2)}
+            </span>
           </div>
           {discount > 0 && (
             <span className="bg-red-500 text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded">

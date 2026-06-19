@@ -31,14 +31,18 @@ const CheckRow = ({ label, count, checked, onChange }) => (
     >
       {checked && (
         <svg className="w-2.5 h-2.5 text-white" fill="none" viewBox="0 0 10 10">
-          <path d="M1.5 5l2.5 2.5 4.5-4.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          <path
+            d="M1.5 5l2.5 2.5 4.5-4.5"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       )}
     </span>
     <span className="flex-1 capitalize">{label}</span>
-    {count !== undefined && (
-      <span className="text-xs text-gray-400 ml-auto">({count})</span>
-    )}
+    {count !== undefined && <span className="text-xs text-gray-400 ml-auto">({count})</span>}
   </label>
 );
 
@@ -53,40 +57,59 @@ const ActivePill = ({ label, onRemove }) => (
 );
 
 /* ─── main component ─── */
-const ShopSidebar = ({ filters, onFilterChange, onClearFilters, products, sidebarTitle, sidebarCount }) => {
+const ShopSidebar = ({
+  filters,
+  onFilterChange,
+  onClearFilters,
+  products,
+  sidebarTitle,
+  sidebarCount,
+}) => {
   const [showAllBrands, setShowAllBrands] = useState(false);
   const [showAllWeights, setShowAllWeights] = useState(false);
   const [showAllFlavors, setShowAllFlavors] = useState(false);
   const [showAllSpecialDiets, setShowAllSpecialDiets] = useState(false);
 
   /* derive options from products */
-  const brands           = useMemo(() => getUnique(products, "brand"), [products]);
-  const petTypes         = useMemo(() => getUnique(products, "pet"), [products]);
-  const productCategories= useMemo(() => getUnique(products, "productCategory"), [products]);
-  const productTypes     = useMemo(() => getUnique(products, "subCategory"), [products]);
-  const flavors          = useMemo(() => getUnique(products, "flavor"), [products]);
-  const sizes            = useMemo(() => getUnique(products, "size"), [products]);
-  const breedSizes       = useMemo(() => getUnique(products, "breedSize"), [products]);
-  const lifeStages       = useMemo(() => getUnique(products, "lifeStage"), [products]);
-  const vegTypes         = useMemo(() => getUnique(products, "vegType"), [products]);
-  const specialDiets     = useMemo(() => getUnique(products, "specialDiet"), [products]);
+  const brands = useMemo(() => getUnique(products, "brand"), [products]);
+  const petTypes = useMemo(() => getUnique(products, "pet"), [products]);
+  const productCategories = useMemo(() => getUnique(products, "productCategory"), [products]);
+  const productTypes = useMemo(() => getUnique(products, "subCategory"), [products]);
+  const flavors = useMemo(() => getUnique(products, "flavor"), [products]);
+  const sizes = useMemo(() => getUnique(products, "size"), [products]);
+  const breedSizes = useMemo(() => getUnique(products, "breedSize"), [products]);
+  const lifeStages = useMemo(() => getUnique(products, "lifeStage"), [products]);
+  const vegTypes = useMemo(() => getUnique(products, "vegType"), [products]);
+  const specialDiets = useMemo(() => getUnique(products, "specialDiet"), [products]);
 
   /* counts */
-  const brandCounts        = useMemo(() => getCountMap(products.map((p) => p.brand)), [products]);
-  const petTypeCounts      = useMemo(() => getCountMap(products.map((p) => p.pet)), [products]);
-  const categoryCounts     = useMemo(() => getCountMap(products.map((p) => p.productCategory)), [products]);
-  const productTypeCounts  = useMemo(() => getCountMap(products.map((p) => p.subCategory)), [products]);
-  const flavorCounts       = useMemo(() => getCountMap(products.map((p) => p.flavor)), [products]);
-  const sizeCounts         = useMemo(() => getCountMap(products.map((p) => p.size)), [products]);
-  const vegCounts          = useMemo(() => getCountMap(products.map((p) => p.vegType)), [products]);
-  const breedSizeCounts    = useMemo(() => getCountMap(products.map((p) => p.breedSize)), [products]);
-  const lifeStageCounts    = useMemo(() => getCountMap(products.map((p) => p.lifeStage)), [products]);
-  const specialDietCounts  = useMemo(() => getCountMap(products.map((p) => p.specialDiet)), [products]);
-  const weightCounts       = useMemo(() => getWeightCounts(products), [products]);
-  const weights            = useMemo(() => Object.keys(weightCounts).sort(), [weightCounts]);
+  const brandCounts = useMemo(() => getCountMap(products.map((p) => p.brand)), [products]);
+  const petTypeCounts = useMemo(() => getCountMap(products.map((p) => p.pet)), [products]);
+  const categoryCounts = useMemo(
+    () => getCountMap(products.map((p) => p.productCategory)),
+    [products]
+  );
+  const productTypeCounts = useMemo(
+    () => getCountMap(products.map((p) => p.subCategory)),
+    [products]
+  );
+  const flavorCounts = useMemo(() => getCountMap(products.map((p) => p.flavor)), [products]);
+  const sizeCounts = useMemo(() => getCountMap(products.map((p) => p.size)), [products]);
+  const vegCounts = useMemo(() => getCountMap(products.map((p) => p.vegType)), [products]);
+  const breedSizeCounts = useMemo(() => getCountMap(products.map((p) => p.breedSize)), [products]);
+  const lifeStageCounts = useMemo(() => getCountMap(products.map((p) => p.lifeStage)), [products]);
+  const specialDietCounts = useMemo(
+    () => getCountMap(products.map((p) => p.specialDiet)),
+    [products]
+  );
+  const weightCounts = useMemo(() => getWeightCounts(products), [products]);
+  const weights = useMemo(() => Object.keys(weightCounts).sort(), [weightCounts]);
 
   const allPrices = useMemo(
-    () => products.flatMap((p) => (p.variants || []).map((v) => v.price).filter((x) => typeof x === "number")),
+    () =>
+      products.flatMap((p) =>
+        (p.variants || []).map((v) => v.price).filter((x) => typeof x === "number")
+      ),
     [products]
   );
   const minPrice = allPrices.length ? Math.min(...allPrices) : 0;
@@ -115,18 +138,44 @@ const ShopSidebar = ({ filters, onFilterChange, onClearFilters, products, sideba
   const activePills = [
     ...filters.brands.map((v) => ({ label: v, type: "brands", value: v })),
     ...filters.petTypes.map((v) => ({ label: v, type: "petTypes", value: v })),
-    ...filters.productCategories.map((v) => ({ label: v, type: "productCategories", value: v })),
-    ...filters.productTypes.map((v) => ({ label: v.replace(/-/g, " "), type: "productTypes", value: v })),
+    ...filters.productCategories.map((v) => ({
+      label: v,
+      type: "productCategories",
+      value: v,
+    })),
+    ...filters.productTypes.map((v) => ({
+      label: v.replace(/-/g, " "),
+      type: "productTypes",
+      value: v,
+    })),
     ...filters.flavors.map((v) => ({ label: v, type: "flavors", value: v })),
     ...filters.weights.map((v) => ({ label: v, type: "weights", value: v })),
-    ...filters.lifeStages.map((v) => ({ label: v, type: "lifeStages", value: v })),
-    ...filters.breedSizes.map((v) => ({ label: v, type: "breedSizes", value: v })),
+    ...filters.lifeStages.map((v) => ({
+      label: v,
+      type: "lifeStages",
+      value: v,
+    })),
+    ...filters.breedSizes.map((v) => ({
+      label: v,
+      type: "breedSizes",
+      value: v,
+    })),
     ...filters.sizes.map((v) => ({ label: v, type: "sizes", value: v })),
     ...filters.vegTypes.map((v) => ({ label: v, type: "vegTypes", value: v })),
-    ...filters.specialDiets.map((v) => ({ label: v, type: "specialDiets", value: v })),
-    ...filters.ratings.map((v) => ({ label: `${v}★ & up`, type: "ratings", value: v })),
+    ...filters.specialDiets.map((v) => ({
+      label: v,
+      type: "specialDiets",
+      value: v,
+    })),
+    ...filters.ratings.map((v) => ({
+      label: `${v}★ & up`,
+      type: "ratings",
+      value: v,
+    })),
     ...(filters.dealsOnly ? [{ label: "Deals Only", type: "dealsOnly", value: true }] : []),
-    ...(filters.includeOutOfStock ? [{ label: "Inc. Out of Stock", type: "includeOutOfStock", value: true }] : []),
+    ...(filters.includeOutOfStock
+      ? [{ label: "Inc. Out of Stock", type: "includeOutOfStock", value: true }]
+      : []),
   ];
 
   const SHOW_LIMIT = 5;
@@ -159,7 +208,7 @@ const ShopSidebar = ({ filters, onFilterChange, onClearFilters, products, sideba
       {(sidebarTitle || sidebarCount !== undefined) && (
         <div className="px-5 pt-3 pb-4 border-b border-gray-100">
           <div className="text-sm text-gray-600">{sidebarTitle}</div>
-          {typeof sidebarCount === 'number' && (
+          {typeof sidebarCount === "number" && (
             <div className="text-xs text-gray-400 mt-1">{sidebarCount} Products Available</div>
           )}
         </div>
@@ -174,7 +223,8 @@ const ShopSidebar = ({ filters, onFilterChange, onClearFilters, products, sideba
               label={pill.label}
               onRemove={() => {
                 if (pill.type === "dealsOnly") onFilterChange("dealsOnly", false);
-                else if (pill.type === "includeOutOfStock") onFilterChange("includeOutOfStock", false);
+                else if (pill.type === "includeOutOfStock")
+                  onFilterChange("includeOutOfStock", false);
                 else onFilterChange(pill.type, pill.value);
               }}
             />
@@ -200,7 +250,9 @@ const ShopSidebar = ({ filters, onFilterChange, onClearFilters, products, sideba
         {/* ── Price ── */}
         <FilterSection title="Price">
           {(() => {
-            const rawMax = Array.isArray(filters.price) ? Number(filters.price[1]) : Number(filters.price || maxPrice);
+            const rawMax = Array.isArray(filters.price)
+              ? Number(filters.price[1])
+              : Number(filters.price || maxPrice);
             const currentMax = Math.min(rawMax, maxPrice);
             return (
               <>
@@ -234,7 +286,9 @@ const ShopSidebar = ({ filters, onFilterChange, onClearFilters, products, sideba
               label={
                 <span className="flex items-center gap-1">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <span key={i} className={i < star ? "text-yellow-400" : "text-gray-200"}>★</span>
+                    <span key={i} className={i < star ? "text-yellow-400" : "text-gray-200"}>
+                      ★
+                    </span>
                   ))}
                   <span className="text-gray-500 ml-1">& up</span>
                 </span>
@@ -410,7 +464,9 @@ const ShopSidebar = ({ filters, onFilterChange, onClearFilters, products, sideba
                 className="text-xs text-orange-500 hover:text-orange-700 font-semibold text-left mt-1"
                 type="button"
               >
-                {showAllSpecialDiets ? "Show less ↑" : `+${specialDiets.length - SHOW_LIMIT} more diets`}
+                {showAllSpecialDiets
+                  ? "Show less ↑"
+                  : `+${specialDiets.length - SHOW_LIMIT} more diets`}
               </button>
             )}
           </FilterSection>

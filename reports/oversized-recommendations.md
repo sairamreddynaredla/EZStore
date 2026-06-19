@@ -1,0 +1,97 @@
+# Oversized Images Recommendations
+
+- dist/assets/bird-CgvxZJxx.webp — 1254x1254, recommended max width 1200
+- dist/assets/bird-CJKhPn0I.webp — 1254x1254, recommended max width 1200
+- dist/assets/bird-exclusive-Bi-\_vAih.webp — 1254x1254, recommended max width 1200
+- dist/assets/cat-banner-DtbW5I5D.webp — 1690x931, recommended max width 1600
+- dist/assets/cat-Cg0p6AeT.webp — 1254x1254, recommended max width 1200
+- dist/assets/cat-exclusive-Cwv3aMR5.webp — 1254x1254, recommended max width 1200
+- dist/assets/dog dental treats-Cvpgbpgl.webp — 1254x1254, recommended max width 1200
+- dist/assets/dog exclusive-D1pCpOPf.webp — 1254x1254, recommended max width 1200
+- dist/assets/dog meaty-BKYOezO7.webp — 1254x1254, recommended max width 1200
+- dist/assets/dog-CtgEPOYJ.webp — 1254x1254, recommended max width 1200
+- dist/assets/EZstore-Ci4vXyWs.webp — 1619x971, recommended max width 1200
+- dist/assets/ezstore-logo-optimized-CGfYmbE2.webp — 1600x533, recommended max width 300
+- dist/assets/farmina-C5qbDrdD.webp — 2000x1125, recommended max width 1200
+- dist/assets/fish-DtnGk4DA.webp — 1254x1254, recommended max width 1200
+- dist/assets/fish-exclusive-D4BI0CfZ.webp — 1254x1254, recommended max width 1200
+- dist/assets/fish-OsmfbCNV.webp — 1254x1254, recommended max width 1200
+- dist/assets/hamster-BieO62wh.webp — 1254x1254, recommended max width 1200
+- dist/assets/hamster-CMOBo1To.webp — 1254x1254, recommended max width 1200
+- dist/assets/hamster-exclusive-IfIxDjzR.webp — 1254x1254, recommended max width 1200
+- dist/assets/himalaya-CySrbjhd.webp — 1500x2082, recommended max width 1200
+- dist/assets/imas-krTjPzCp.webp — 1472x772, recommended max width 1200
+- dist/assets/kennel-kitchen-DlnMSpR\_.webp — 1599x899, recommended max width 1200
+- dist/assets/orijen-G7SlcopU.webp — 2000x1125, recommended max width 1200
+- dist/assets/prescription-dog-food-banner-Batuq4FL.webp — 1672x941, recommended max width 1600
+- dist/assets/purina-DxAbzFD0.webp — 1772x759, recommended max width 1200
+- dist/assets/rabbit-BXa2WHGK.webp — 1254x1254, recommended max width 1200
+- dist/assets/rabbit-DmLVCeAL.webp — 1254x1254, recommended max width 1200
+- dist/assets/royal-canin-Chekxmlh.webp — 1970x734, recommended max width 1200
+- dist/assets/secure-payment-CWJC4g_V.webp — 1254x1254, recommended max width 1200
+- dist/assets/sheba-Dubfp2Yg.webp — 1863x1240, recommended max width 1200
+- dist/assets/sobo-DoYxVpSo.webp — 1600x428, recommended max width 1200
+- dist/assets/taste-of-the-wild-Bp9LCE6y.webp — 1599x1599, recommended max width 1200
+- src/assets/bird-exclusive.webp — 1254x1254, recommended max width 1200
+- src/assets/bird.webp — 1254x1254, recommended max width 1200
+- src/assets/brands/bellotta.webp — 307x307, recommended max width 300
+- src/assets/brands/blue-buffalo.webp — 318x159, recommended max width 300
+- src/assets/brands/canine-creek.webp — 552x338, recommended max width 300
+- src/assets/brands/drools.webp — 500x500, recommended max width 300
+- src/assets/brands/farmina.webp — 2000x1125, recommended max width 300
+- src/assets/brands/hikari.webp — 500x301, recommended max width 300
+- src/assets/brands/himalaya.webp — 1500x2082, recommended max width 300
+- src/assets/brands/imas.webp — 1472x772, recommended max width 300
+- src/assets/brands/jerhigh.webp — 1000x1000, recommended max width 300
+- src/assets/brands/kaytee.webp — 1000x1000, recommended max width 300
+- src/assets/brands/kennel-kitchen.webp — 1599x899, recommended max width 300
+- src/assets/brands/meo.webp — 447x447, recommended max width 300
+- src/assets/brands/orijen.webp — 2000x1125, recommended max width 300
+- src/assets/brands/purina.webp — 1772x759, recommended max width 300
+- src/assets/brands/purpet.webp — 1080x1080, recommended max width 300
+- src/assets/brands/rio.webp — 1000x1000, recommended max width 300
+- src/assets/brands/royal-canin.webp — 1970x734, recommended max width 300
+- src/assets/brands/sheba.webp — 1863x1240, recommended max width 300
+- src/assets/brands/smartheart.webp — 647x1000, recommended max width 300
+- src/assets/brands/sobo.webp — 1600x428, recommended max width 300
+- src/assets/brands/taiyo.webp — 600x600, recommended max width 300
+- src/assets/brands/taste-of-the-wild.webp — 1599x1599, recommended max width 300
+- src/assets/brands/tetra.webp — 1080x1080, recommended max width 300
+- src/assets/brands/vitapol.webp — 520x468, recommended max width 300
+- src/assets/brands/zupreem.webp — 1001x667, recommended max width 300
+- src/assets/cat-banner.webp — 1690x931, recommended max width 1600
+- src/assets/cat-exclusive.webp — 1254x1254, recommended max width 1200
+- src/assets/cat.webp — 1254x1254, recommended max width 1200
+- src/assets/categories/bird.webp — 1254x1254, recommended max width 1200
+- src/assets/categories/cat.webp — 1254x1254, recommended max width 1200
+- src/assets/categories/dog.webp — 1254x1254, recommended max width 1200
+- src/assets/categories/fish.webp — 1254x1254, recommended max width 1200
+- src/assets/categories/hamster.webp — 1254x1254, recommended max width 1200
+- src/assets/categories/rabbit.webp — 1254x1254, recommended max width 1200
+- src/assets/dog dental treats.webp — 1254x1254, recommended max width 1200
+- src/assets/dog exclusive.webp — 1254x1254, recommended max width 1200
+- src/assets/dog meaty.webp — 1254x1254, recommended max width 1200
+- src/assets/dog-dropdown-banner/prescription-dog-food-banner.webp — 1672x941, recommended max width 1600
+- src/assets/dog.webp — 1254x1254, recommended max width 1200
+- src/assets/Exclusive Category/bird-exclusive.webp — 1254x1254, recommended max width 1200
+- src/assets/Exclusive Category/cat-exclusive.webp — 1254x1254, recommended max width 1200
+- src/assets/Exclusive Category/dog exclusive.webp — 1254x1254, recommended max width 1200
+- src/assets/Exclusive Category/fish-exclusive.webp — 1254x1254, recommended max width 1200
+- src/assets/Exclusive Category/hamster-exclusive.webp — 1254x1254, recommended max width 1200
+- src/assets/explore-pick-pamper/dog dental treats.webp — 1254x1254, recommended max width 1200
+- src/assets/explore-pick-pamper/dog meaty.webp — 1254x1254, recommended max width 1200
+- src/assets/ezstore-logo-optimized.webp — 1600x533, recommended max width 300
+- src/assets/EZstore.webp — 1619x971, recommended max width 1200
+- src/assets/fish-exclusive.webp — 1254x1254, recommended max width 1200
+- src/assets/fish.webp — 1254x1254, recommended max width 1200
+- src/assets/hamster-exclusive.webp — 1254x1254, recommended max width 1200
+- src/assets/hamster.webp — 1254x1254, recommended max width 1200
+- src/assets/hero-banner.webp — 1693x929, recommended max width 1600
+- src/assets/logo/ezstore-logo-optimized.webp — 1600x533, recommended max width 300
+- src/assets/logo/secure-payment.webp — 1254x1254, recommended max width 300
+- src/assets/offer-banner.webp — 1692x929, recommended max width 1600
+- src/assets/prescription-dog-food-banner.webp — 1672x941, recommended max width 1600
+- src/assets/rabbit.webp — 1254x1254, recommended max width 1200
+- src/assets/small-pets.webp — 1684x934, recommended max width 1200
+- src/assets/spotlight/EZstore.webp — 1619x971, recommended max width 1200
+- src/assets/trust-banner.webp — 1684x934, recommended max width 1600

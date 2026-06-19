@@ -1,16 +1,9 @@
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import NavbarDropdown from "./navbar/NavbarDropdown";
-import {
-  FaShoppingCart,
-  FaHeart,
-  FaUser,
-  FaBars,
-  FaTimes,
-  FaSearch,
-} from "react-icons/fa";
+import { FaShoppingCart, FaHeart, FaUser, FaBars, FaTimes, FaSearch } from "react-icons/fa";
 import { useCart } from "../hooks/usecart";
-import logo from "../assets/logo/ezstore-logo-optimized.png";
+import logo from "../assets/logo/ezstore-logo-optimized.webp";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -19,9 +12,7 @@ function Navbar() {
   const [search, setSearch] = useState("");
 
   // Remove Home and Pets, Brands handled separately
-  const navLinks = [
-    { to: "/best-sellers", label: "Best Sellers" },
-  ];
+  const navLinks = [{ to: "/best-sellers", label: "Best Sellers" }];
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -36,27 +27,35 @@ function Navbar() {
     <>
       <header className="fixed top-0 left-0 w-full z-50 bg-white/95 backdrop-blur-sm shadow-md border-b border-[#E5E7EB]">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-3 md:px-8 py-3 md:py-4 gap-6">
-          <NavLink to="/" className="flex items-center gap-1 shrink-0 group hover:opacity-80 transition-opacity duration-300">
-            <img src={logo} alt="EZStore Logo" className="h-10 md:h-12 object-contain mix-blend-multiply" loading="lazy" />
+          <NavLink
+            to="/"
+            className="flex items-center gap-1 shrink-0 group hover:opacity-80 transition-opacity duration-300"
+          >
+            <img
+              src={logo}
+              alt="EZStore Logo"
+              className="h-10 md:h-12 object-contain mix-blend-multiply"
+              loading="lazy"
+            />
           </NavLink>
 
           <nav className="hidden md:flex items-center gap-1">
-              <NavbarDropdown />
-              {navLinks.map((link) => (
-                <NavLink
-                  key={link.to}
-                  to={link.to}
-                  className={({ isActive }) =>
-                    `font-medium transition-all duration-300 px-4 py-2.5 rounded-full whitespace-nowrap ${
-                      isActive
-                        ? "text-[#1F6B52] bg-[#E8F5F0]"
-                        : "text-[#4B5563] hover:text-[#1F6B52] hover:bg-[#F5F5F5]"
-                    }`
-                  }
-                >
-                  {link.label}
-                </NavLink>
-              ))}
+            <NavbarDropdown />
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                className={({ isActive }) =>
+                  `font-medium transition-all duration-300 px-4 py-2.5 rounded-full whitespace-nowrap ${
+                    isActive
+                      ? "text-[#1F6B52] bg-[#E8F5F0]"
+                      : "text-[#4B5563] hover:text-[#1F6B52] hover:bg-[#F5F5F5]"
+                  }`
+                }
+              >
+                {link.label}
+              </NavLink>
+            ))}
           </nav>
 
           <form
@@ -76,18 +75,27 @@ function Navbar() {
           </form>
 
           <div className="flex items-center gap-2 sm:gap-4 md:gap-6 text-[#4B5563] text-lg shrink-0">
-            <Link to="/cart" className="relative p-2.5 sm:p-3 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group">
+            <Link
+              to="/cart"
+              className="relative p-2.5 sm:p-3 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group"
+            >
               <FaShoppingCart className="text-lg sm:text-xl group-hover:scale-110 transition-transform duration-300" />
               {totalItems > 0 && (
                 <span className="absolute top-0 right-0 bg-[#1F6B52] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold shadow-sm">
-                  {totalItems > 99 ? '99+' : totalItems}
+                  {totalItems > 99 ? "99+" : totalItems}
                 </span>
               )}
             </Link>
-            <Link to="/wishlist" className="hidden sm:block p-2.5 sm:p-3 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group">
+            <Link
+              to="/wishlist"
+              className="hidden sm:block p-2.5 sm:p-3 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group"
+            >
               <FaHeart className="text-lg sm:text-xl group-hover:scale-110 transition-transform duration-300" />
             </Link>
-            <Link to="/login" className="hidden md:block p-2.5 sm:p-3 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group">
+            <Link
+              to="/login"
+              className="hidden md:block p-2.5 sm:p-3 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group"
+            >
               <FaUser className="text-lg sm:text-xl group-hover:scale-110 transition-transform duration-300" />
             </Link>
           </div>
@@ -164,7 +172,10 @@ function Navbar() {
 
             <div className="h-px bg-[#E5E7EB] my-2"></div>
 
-            <form onSubmit={handleSearch} className="flex items-center bg-white border border-[#E5E7EB] rounded-lg px-4 py-3 gap-3 shadow-sm">
+            <form
+              onSubmit={handleSearch}
+              className="flex items-center bg-white border border-[#E5E7EB] rounded-lg px-4 py-3 gap-3 shadow-sm"
+            >
               <FaSearch className="text-[#4B5563] text-sm" />
               <input
                 type="text"
@@ -214,12 +225,20 @@ function Navbar() {
         )}
       </header>
       {flash?.visible && (
-        <div className={`fixed top-4 right-4 z-50 flex items-center gap-3 px-3 py-2 text-xs font-medium shadow-lg text-white ${flash.type === 'success' ? 'bg-emerald-600' : 'bg-red-600'} rounded-md`}>
+        <div
+          className={`fixed top-4 right-4 z-50 flex items-center gap-3 px-3 py-2 text-xs font-medium shadow-lg text-white ${flash.type === "success" ? "bg-emerald-600" : "bg-red-600"} rounded-md`}
+        >
           <span className="leading-4">{flash.message}</span>
-          <button onClick={() => hideFlash && hideFlash()} aria-label="Close" className="ml-1 text-white/80 hover:text-white text-sm leading-4">×</button>
+          <button
+            onClick={() => hideFlash && hideFlash()}
+            aria-label="Close"
+            className="ml-1 text-white/80 hover:text-white text-sm leading-4"
+          >
+            ×
+          </button>
         </div>
       )}
-      <div className="h-20 md:h-17" aria-hidden="true" />
+      <div className="h-20 md:h-20 lg:h-24" aria-hidden="true" />
     </>
   );
 }

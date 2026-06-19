@@ -29,7 +29,7 @@ const CategoryLayout = ({ petType: propPetType }) => {
     const effectiveSubCategory = categorySlug?.replace(/^(dogs|cats)-/, "");
     return products.filter(
       (p) =>
-        String(p.pet ?? '').toLowerCase() === String(petType.slice(0, -1) ?? '').toLowerCase() &&
+        String(p.pet ?? "").toLowerCase() === String(petType.slice(0, -1) ?? "").toLowerCase() &&
         p.subCategory === effectiveSubCategory
     );
   }, [petType, categorySlug]);
@@ -58,9 +58,15 @@ const CategoryLayout = ({ petType: propPetType }) => {
     categoryProducts.forEach((product) => {
       brandCounts.set(product.brand, (brandCounts.get(product.brand) || 0) + 1);
       breedSizeCounts.set(product.breedSize, (breedSizeCounts.get(product.breedSize) || 0) + 1);
-      productTypeCounts.set(product.productType, (productTypeCounts.get(product.productType) || 0) + 1);
+      productTypeCounts.set(
+        product.productType,
+        (productTypeCounts.get(product.productType) || 0) + 1
+      );
       lifeStageCounts.set(product.lifeStage, (lifeStageCounts.get(product.lifeStage) || 0) + 1);
-      specialDietCounts.set(product.specialDiet, (specialDietCounts.get(product.specialDiet) || 0) + 1);
+      specialDietCounts.set(
+        product.specialDiet,
+        (specialDietCounts.get(product.specialDiet) || 0) + 1
+      );
       vegTypeCounts.set(product.vegType, (vegTypeCounts.get(product.vegType) || 0) + 1);
       // Collect all variant prices (not just first variant) so the range reflects full distribution
       if (Array.isArray(product.variants) && product.variants.length > 0) {
@@ -97,23 +103,37 @@ const CategoryLayout = ({ petType: propPetType }) => {
       // For price filtering, consider the lowest variant price for the product (so it's included if any variant matches)
       let price = product.price || 0;
       if (Array.isArray(product.variants) && product.variants.length > 0) {
-        const variantPrices = product.variants.map((v) => Number(v.price || 0)).filter((n) => n > 0);
+        const variantPrices = product.variants
+          .map((v) => Number(v.price || 0))
+          .filter((n) => n > 0);
         if (variantPrices.length) price = Math.min(...variantPrices);
       }
 
       if (selectedFilters.brands.length && !selectedFilters.brands.includes(product.brand)) {
         return false;
       }
-      if (selectedFilters.breedSize.length && !selectedFilters.breedSize.includes(product.breedSize)) {
+      if (
+        selectedFilters.breedSize.length &&
+        !selectedFilters.breedSize.includes(product.breedSize)
+      ) {
         return false;
       }
-      if (selectedFilters.productType.length && !selectedFilters.productType.includes(product.productType)) {
+      if (
+        selectedFilters.productType.length &&
+        !selectedFilters.productType.includes(product.productType)
+      ) {
         return false;
       }
-      if (selectedFilters.lifeStages.length && !selectedFilters.lifeStages.includes(product.lifeStage)) {
+      if (
+        selectedFilters.lifeStages.length &&
+        !selectedFilters.lifeStages.includes(product.lifeStage)
+      ) {
         return false;
       }
-      if (selectedFilters.specialDiets.length && !selectedFilters.specialDiets.includes(product.specialDiet)) {
+      if (
+        selectedFilters.specialDiets.length &&
+        !selectedFilters.specialDiets.includes(product.specialDiet)
+      ) {
         return false;
       }
       if (selectedFilters.vegTypes.length && !selectedFilters.vegTypes.includes(product.vegType)) {
@@ -151,7 +171,10 @@ const CategoryLayout = ({ petType: propPetType }) => {
   // Breadcrumbs structure
   const crumbs = [
     { label: "Home", path: "/" },
-    { label: petType.charAt(0).toUpperCase() + petType.slice(1), path: `/${petType}` },
+    {
+      label: petType.charAt(0).toUpperCase() + petType.slice(1),
+      path: `/${petType}`,
+    },
     { label: category.name, path: category.path },
   ];
 

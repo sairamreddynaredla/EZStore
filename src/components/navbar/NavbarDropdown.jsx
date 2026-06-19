@@ -34,14 +34,29 @@ const NavbarDropdown = () => {
 
   return (
     <div className="hidden lg:flex items-center gap-2">
-      <div onMouseEnter={() => openMenu('Dogs')} onMouseLeave={() => closeMenu('Dogs')}>
-        <MegaMenu label="Dogs" isOpen={activeMenu === 'Dogs'} onOpen={() => openMenu('Dogs')} onClose={() => closeMenu('Dogs')} />
+      <div onMouseEnter={() => openMenu("Dogs")} onMouseLeave={() => closeMenu("Dogs")}>
+        <MegaMenu
+          label="Dogs"
+          isOpen={activeMenu === "Dogs"}
+          onOpen={() => openMenu("Dogs")}
+          onClose={() => closeMenu("Dogs")}
+        />
       </div>
-      <div onMouseEnter={() => openMenu('Cats')} onMouseLeave={() => closeMenu('Cats')}>
-        <MegaMenu label="Cats" isOpen={activeMenu === 'Cats'} onOpen={() => openMenu('Cats')} onClose={() => closeMenu('Cats')} />
+      <div onMouseEnter={() => openMenu("Cats")} onMouseLeave={() => closeMenu("Cats")}>
+        <MegaMenu
+          label="Cats"
+          isOpen={activeMenu === "Cats"}
+          onOpen={() => openMenu("Cats")}
+          onClose={() => closeMenu("Cats")}
+        />
       </div>
-      <div onMouseEnter={() => openMenu('Brands')} onMouseLeave={() => closeMenu('Brands')}>
-        <MegaMenu label="Brands" isOpen={activeMenu === 'Brands'} onOpen={() => openMenu('Brands')} onClose={() => closeMenu('Brands')} />
+      <div onMouseEnter={() => openMenu("Brands")} onMouseLeave={() => closeMenu("Brands")}>
+        <MegaMenu
+          label="Brands"
+          isOpen={activeMenu === "Brands"}
+          onOpen={() => openMenu("Brands")}
+          onClose={() => closeMenu("Brands")}
+        />
       </div>
     </div>
   );

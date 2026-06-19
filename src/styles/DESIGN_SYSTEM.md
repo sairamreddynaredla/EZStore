@@ -1,4 +1,5 @@
 # EZ STORE - Premium Pet Food E-Commerce Design System
+
 ## Enterprise-Level Color Psychology & Brand Identity Guide
 
 ---
@@ -6,9 +7,11 @@
 ## 🎨 STRATEGIC COLOR PHILOSOPHY
 
 ### Market Position
+
 EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutrition brand** competing with luxury wellness brands like The Farmer's Dog, Nom Nom, and Purina Pro Plan.
 
 ### Color System Goals
+
 - ✅ Convey **health, nutrition, and organic quality**
 - ✅ Build **trust and safety** for pet owners
 - ✅ Achieve **high conversion rates** through psychological triggers
@@ -20,7 +23,9 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 ## 📊 CORE COLOR PALETTE
 
 ### PRIMARY: Deep Emerald Green #1F6B52
+
 **Psychology & Purpose:**
+
 - **Trust Building**: Green is universally associated with nature, health, wellness, and safety
 - **Premium Positioning**: Deep emerald (vs. lime) signals luxury and sophistication
 - **Bio-Connection**: Pet owners unconsciously link green with organic, natural food
@@ -28,6 +33,7 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 - **Brand Authority**: Creates perception of established, reliable heritage brand
 
 **Where to Use:**
+
 - Primary CTA buttons (secondary priority)
 - Navigation active states
 - Primary icons and accents
@@ -36,6 +42,7 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 - Form focus states
 
 **Color Variations:**
+
 - Deep: #1F6B52 (text, dark backgrounds)
 - Standard: #1F6B52 (main brand)
 - Light tint: #E8F5F0 (backgrounds, hover states)
@@ -44,7 +51,9 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 ---
 
 ### SECONDARY: Sage Green #7BAE7F
+
 **Psychology & Purpose:**
+
 - **Calm & Confidence**: Softer than primary, creates approachable premium feeling
 - **Health Perception**: Mid-tone green suggests balance and wellbeing
 - **Luxury Accessibility**: Less corporate than deep green, more aspirational
@@ -52,6 +61,7 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 - **Conversion Path**: Creates visual rhythm that guides user attention
 
 **Where to Use:**
+
 - Secondary buttons and links
 - Supporting text and descriptions
 - Badge backgrounds (informational)
@@ -61,6 +71,7 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 - Testimonial highlight elements
 
 **Color Variations:**
+
 - Dark: #6B9B6F
 - Standard: #7BAE7F
 - Light: #C5E0CA
@@ -69,7 +80,9 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 ---
 
 ### ACCENT/CTA: Premium Amber #F59E0B
+
 **Psychology & Purpose:**
+
 - **Urgency & Action**: Warm amber triggers immediate attention and impulse
 - **Exclusivity**: Premium gold tone (not cheap yellow) signals special offer
 - **Energy & Motivation**: Stimulates buying action without aggression
@@ -78,6 +91,7 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 - **Conversion Science**: Amber CTAs tested at 30-40% higher conversion than red/orange
 
 **Where to Use:**
+
 - **PRIMARY action buttons** (Add to Cart, Buy Now, Checkout)
 - Sale/discount badges
 - Limited-time offer highlights
@@ -88,6 +102,7 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 - Promotional banners
 
 **Color Variations:**
+
 - Deep amber: #D97706 (hover states, dark text overlay)
 - Standard: #F59E0B (main CTA)
 - Light: #FBBF24 (backgrounds, light overlays)
@@ -96,7 +111,9 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 ---
 
 ### BACKGROUND: Soft Ivory #FAF9F6
+
 **Psychology & Purpose:**
+
 - **Premium Canvas**: Not clinical white, but refined off-white
 - **Natural Feel**: Slight warm undertone connects to organic/natural positioning
 - **Eye Comfort**: Reduces eye strain during extended browsing (encourages longer sessions)
@@ -105,19 +122,23 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 - **Approachability**: Warmer than pure white, more human and inviting
 
 **Where to Use:**
+
 - Primary page backgrounds
 - Section separations
 - Empty states
 - Loading state backgrounds
 
 **Contrast Notes:**
+
 - Text on #FAF9F6: Use #1A1A1A for 14:1 contrast ratio ✓ WCAG AAA
 - Subtle elements: Use #4B5563 for 8.5:1 ratio ✓ WCAG AA
 
 ---
 
 ### SURFACE: Pure White #FFFFFF
+
 **Psychology & Purpose:**
+
 - **Cleanliness & Purity**: Signals food safety and hygiene (critical for pet food)
 - **Product Spotlight**: Cards and containers use white to elevate product images
 - **Trust Amplification**: Combined with green, creates medical/nutritional authority
@@ -125,6 +146,7 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 - **Accessibility**: Highest contrast available for critical content
 
 **Where to Use:**
+
 - Product cards
 - Cart items
 - Form containers
@@ -135,13 +157,16 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 - Review sections
 
 **Shadow Strategy:**
+
 - Subtle shadows under white cards = depth without harshness
 - Green or amber accents on white = premium focal points
 
 ---
 
 ### HEADINGS: Rich Charcoal #1A1A1A
+
 **Psychology & Purpose:**
+
 - **Authority & Trust**: Deep charcoal (not pure black) = sophisticated professional
 - **Readability**: Perfect contrast on light backgrounds (21:1 ratio) ✓ WCAG AAA+
 - **Brand Sophistication**: Premium brands use deep charcoal for headings (not black)
@@ -149,6 +174,7 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 - **Copy Clarity**: Essential for product names and section titles
 
 **Where to Use:**
+
 - All H1, H2, H3, H4 headings
 - Product names and titles
 - Form labels
@@ -157,6 +183,7 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 - Important information
 
 **Hierarchy Guidance:**
+
 - H1: #1A1A1A at 32-48px (bold)
 - H2: #1A1A1A at 24-32px (semibold)
 - H3: #1A1A1A at 18-24px (semibold)
@@ -165,7 +192,9 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 ---
 
 ### BODY TEXT: Slate Gray #4B5563
+
 **Psychology & Purpose:**
+
 - **Reading Comfort**: Medium gray (not too dark, not too light) = optimal readability
 - **Approachability**: Less corporate than pure charcoal, more human
 - **Information Hierarchy**: Distinguishes body copy from headlines naturally
@@ -173,6 +202,7 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 - **Trust in Details**: Users trust detailed product information = conversion
 
 **Where to Use:**
+
 - Body paragraph text
 - Product descriptions
 - Feature lists
@@ -183,13 +213,16 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 - Secondary navigation labels
 
 **Contrast Rating:**
+
 - On #FAF9F6: 8.5:1 ratio ✓ WCAG AA
 - On #FFFFFF: 9:1 ratio ✓ WCAG AA+
 
 ---
 
 ### BORDERS: Light Gray #E5E7EB
+
 **Psychology & Purpose:**
+
 - **Subtle Structure**: Defines sections without visual aggression
 - **Content Separation**: Guides user eye through page naturally
 - **Clean Aesthetic**: Premium websites use minimal, light borders
@@ -197,6 +230,7 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 - **Accessibility**: Sufficient contrast (4.5:1) while remaining subtle
 
 **Where to Use:**
+
 - Card borders
 - Input field borders
 - Divider lines
@@ -206,6 +240,7 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 - Filter boundaries
 
 **Border Weight Recommendations:**
+
 - Cards: 1px border at #E5E7EB
 - Hover: 1.5px border at #1F6B52
 - Focus: 2px border at #1F6B52 + light shadow
@@ -216,8 +251,10 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 ## 🎯 SEMANTIC COLORS
 
 ### SUCCESS: #16A34A
+
 **Psychology:** Growth, completion, positive reinforcement
 **Use Cases:**
+
 - Order confirmation backgrounds
 - "In Stock" indicators
 - Successful form submissions
@@ -226,6 +263,7 @@ EZ Store positions itself as a **premium, trustworthy, health-conscious pet nutr
 - Certification badges (organic, premium)
 
 **Implementation:**
+
 ```
 Background: #DCFCE7 (light success)
 Text: #166534 (dark success - darker than primary for contrast)
@@ -235,8 +273,10 @@ Hover: #15803D
 ---
 
 ### WARNING: #D97706
+
 **Psychology:** Attention without alarm, opportunity/scarcity
 **Use Cases:**
+
 - "Only 3 left in stock" warnings
 - Sale/discount indicators
 - Limited time offers
@@ -244,6 +284,7 @@ Hover: #15803D
 - Attention-needed messages (but not critical)
 
 **Implementation:**
+
 ```
 Background: #FEF3C7 (light warning)
 Text: #92400E (dark warning)
@@ -253,8 +294,10 @@ Hover: #B45309
 ---
 
 ### ERROR: #DC2626
+
 **Psychology:** Stop, critical issue, needs immediate action
 **Use Cases:**
+
 - Form validation errors
 - Stock unavailable
 - Payment failures
@@ -262,6 +305,7 @@ Hover: #B45309
 - Remove/delete confirmations
 
 **Implementation:**
+
 ```
 Background: #FEE2E2 (light error)
 Text: #7F1D1D (dark error)
@@ -273,13 +317,14 @@ Hover: #B91C1C
 ## 🏗️ COMPONENT COLOR SPECIFICATIONS
 
 ### 1. NAVBAR
+
 ```
 Background: #FFFFFF (pure white - premium retail feel)
 Text: #4B5563 (slate gray - readable)
 Active Link: #1F6B52 text + #E8F5F0 background
 Hover Link: #1F6B52 text + #F0F9F6 background
 Border Bottom: 1px #E5E7EB
-Search Input: 
+Search Input:
   - Background: #FAF9F6
   - Border: #E5E7EB
   - Focus: #E5E7EB border + #1F6B52 inner glow
@@ -293,11 +338,12 @@ Shadow: Very subtle (0.5px gray shadow)
 ---
 
 ### 2. HERO SECTION
+
 ```
 Background: Linear gradient from #FAF9F6 → #F0F9F6 (subtle)
 Main Heading: #1A1A1A, bold
 Subheading: #4B5563
-Primary CTA: 
+Primary CTA:
   - Background: #F59E0B
   - Text: #FFFFFF
   - Hover: #D97706 with slight shadow
@@ -314,18 +360,19 @@ Trust Badges: #1F6B52 text + #E8F5F0 background
 ---
 
 ### 3. PRODUCT CARDS
+
 ```
 Card Background: #FFFFFF
 Card Border: 1px #E5E7EB
 Card Shadow: 0 4px 12px rgba(31, 107, 82, 0.08) [Green-tinted shadow - luxury effect]
-Card Hover: 
+Card Hover:
   - Shadow: 0 12px 28px rgba(31, 107, 82, 0.12)
   - Border: 1px #1F6B52
   - Transform: translateY(-2px)
 
 Product Name: #1A1A1A, semibold
 Brand: #4B5563, uppercase, small, tracked
-Price: 
+Price:
   - Current: #1F6B52, bold, large
   - Original: #4B5563, line-through, small
 Discount Badge:
@@ -354,6 +401,7 @@ Add to Cart Button:
 ---
 
 ### 4. CATEGORY CARDS
+
 ```
 Card Background: Linear gradient #FFFFFF → #F0F9F6
 Border: 1px #E5E7EB
@@ -371,6 +419,7 @@ CTA Text: #F59E0B
 ---
 
 ### 5. PRODUCT DETAILS PAGE
+
 ```
 Product Images:
   - Background: #FFFFFF
@@ -412,6 +461,7 @@ Trust Elements:
 ---
 
 ### 6. CART PAGE
+
 ```
 Cart Item Card:
   - Background: #FFFFFF
@@ -422,7 +472,7 @@ Cart Item Card:
 Remove Button:
   - Icon: #DC2626
   - Hover: #FEE2E2 background
-  
+
 Quantity Selector:
   - Border: 1px #E5E7EB
   - Button: #F59E0B background
@@ -451,6 +501,7 @@ Continue Shopping Link:
 ---
 
 ### 7. CHECKOUT PAGE
+
 ```
 Progress Indicator:
   - Inactive step: #E5E7EB background + #4B5563 text
@@ -483,6 +534,7 @@ Place Order Button:
 ---
 
 ### 8. TRUST & TESTIMONIAL SECTIONS
+
 ```
 Section Background: #FAF9F6 or #F0F9F6
 Heading: #1A1A1A
@@ -511,6 +563,7 @@ Certification Badge:
 ---
 
 ### 9. FOOTER
+
 ```
 Background: #1A1A1A (rich charcoal for contrast)
 Text: #FFFFFF (white on dark)
@@ -543,6 +596,7 @@ Copyright: #8992A4
 ---
 
 ### 10. SEARCH BAR & FILTERS
+
 ```
 Search Bar:
   - Background: #FFFFFF
@@ -574,6 +628,7 @@ Clear Button: #1F6B52 text
 ---
 
 ### 11. FORMS
+
 ```
 Label: #1A1A1A, semibold
 Input Background: #FFFFFF
@@ -606,6 +661,7 @@ Cancel/Secondary Button:
 ---
 
 ### 12. BADGES & LABELS
+
 ```
 New Product:
   - Background: #1F6B52
@@ -648,6 +704,7 @@ Out of Stock:
 ---
 
 ### 13. RATINGS & REVIEWS
+
 ```
 Star Rating:
   - Filled: #F59E0B
@@ -678,6 +735,7 @@ Review Score Breakdown:
 ---
 
 ### 14. EMPTY STATES
+
 ```
 Illustration/Icon: #1F6B52
 Primary Message: #1A1A1A, bold
@@ -691,6 +749,7 @@ Background: #F0F9F6 with subtle wave/shape at #E8F5F0
 ---
 
 ### 15. LOADING STATES
+
 ```
 Skeleton screens:
   - Card background: #FFFFFF
@@ -717,26 +776,31 @@ Progress Bar:
 ### Contrast Ratios (WCAG Standards)
 
 **Headings (#1A1A1A) on various backgrounds:**
+
 - On #FFFFFF: 21:1 ✅ WCAG AAA
 - On #FAF9F6: 19.5:1 ✅ WCAG AAA
 - On #F0F9F6: 18:1 ✅ WCAG AAA
 - On #1F6B52: 4.2:1 ⚠️ WCAG AA (use white instead)
 
 **Body text (#4B5563) on various backgrounds:**
+
 - On #FFFFFF: 9:1 ✅ WCAG AA+
 - On #FAF9F6: 8.5:1 ✅ WCAG AA
 - On #F0F9F6: 7.8:1 ✅ WCAG AA (acceptable for body)
 - On #E8F5F0: 6.2:1 ✅ WCAG AA
 
 **Amber (#F59E0B) text on #FFFFFF:**
+
 - Ratio: 5.5:1 ✅ WCAG AA (large text only)
 - **Recommendation:** Use #D97706 for small text on light backgrounds
 
 **Green (#1F6B52) on #FFFFFF:**
+
 - Ratio: 6.8:1 ✅ WCAG AA+
 - Safe for both large and small text
 
 **Sage Green (#7BAE7F) on #FFFFFF:**
+
 - Ratio: 3.8:1 ⚠️ Below WCAG AA
 - **Recommendation:** Use only for decorative or large elements, not body text
 
@@ -745,46 +809,47 @@ Progress Bar:
 ## 🎨 CSS VARIABLE SYSTEM
 
 **Root variables (light mode):**
+
 ```css
 :root {
   /* Primary Colors */
-  --color-primary: #1F6B52;
-  --color-primary-dark: #1A5844;
-  --color-primary-light: #7BAE7F;
-  --color-primary-pale: #E8F5F0;
-  --color-primary-very-pale: #F0F9F6;
-  
+  --color-primary: #1f6b52;
+  --color-primary-dark: #1a5844;
+  --color-primary-light: #7bae7f;
+  --color-primary-pale: #e8f5f0;
+  --color-primary-very-pale: #f0f9f6;
+
   /* CTA Colors */
-  --color-cta: #F59E0B;
-  --color-cta-hover: #D97706;
-  --color-cta-dark: #B45309;
-  --color-cta-light: #FBBF24;
-  --color-cta-pale: #FEF3C7;
-  
+  --color-cta: #f59e0b;
+  --color-cta-hover: #d97706;
+  --color-cta-dark: #b45309;
+  --color-cta-light: #fbbf24;
+  --color-cta-pale: #fef3c7;
+
   /* Semantic Colors */
-  --color-success: #16A34A;
-  --color-success-light: #DCFCE7;
-  --color-warning: #D97706;
-  --color-warning-light: #FEF3C7;
-  --color-error: #DC2626;
-  --color-error-light: #FEE2E2;
-  
+  --color-success: #16a34a;
+  --color-success-light: #dcfce7;
+  --color-warning: #d97706;
+  --color-warning-light: #fef3c7;
+  --color-error: #dc2626;
+  --color-error-light: #fee2e2;
+
   /* Neutrals */
-  --color-background: #FAF9F6;
-  --color-surface: #FFFFFF;
-  --color-surface-secondary: #F0F9F6;
-  --color-heading: #1A1A1A;
-  --color-text: #4B5563;
-  --color-text-secondary: #6B7280;
-  --color-border: #E5E7EB;
-  --color-border-light: #F0F9F6;
-  
+  --color-background: #faf9f6;
+  --color-surface: #ffffff;
+  --color-surface-secondary: #f0f9f6;
+  --color-heading: #1a1a1a;
+  --color-text: #4b5563;
+  --color-text-secondary: #6b7280;
+  --color-border: #e5e7eb;
+  --color-border-light: #f0f9f6;
+
   /* Text Colors */
   --text-heading: var(--color-heading);
   --text-body: var(--color-text);
   --text-secondary: var(--color-text-secondary);
-  --text-light: #A0AEC0;
-  
+  --text-light: #a0aec0;
+
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(31, 107, 82, 0.05);
   --shadow-md: 0 4px 12px rgba(31, 107, 82, 0.08);
@@ -798,21 +863,22 @@ Progress Bar:
 ## 🌙 DARK MODE PALETTE
 
 **Optional dark mode for future implementation:**
+
 ```css
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-background: #0F1419;
-    --color-surface: #1A1F28;
-    --color-surface-secondary: #242D37;
-    --color-heading: #FFFFFF;
-    --color-text: #E5E7EB;
-    --color-text-secondary: #A0AEC0;
-    --color-border: #2D3E4F;
-    
+    --color-background: #0f1419;
+    --color-surface: #1a1f28;
+    --color-surface-secondary: #242d37;
+    --color-heading: #ffffff;
+    --color-text: #e5e7eb;
+    --color-text-secondary: #a0aec0;
+    --color-border: #2d3e4f;
+
     /* Primary remains #1F6B52 for brand consistency */
-    --color-primary: #4EBF9C; /* Lighter for dark mode contrast */
-    --color-cta: #FBBF24; /* Slightly lighter amber for visibility */
-    
+    --color-primary: #4ebf9c; /* Lighter for dark mode contrast */
+    --color-cta: #fbbf24; /* Slightly lighter amber for visibility */
+
     /* Shadows become lighter */
     --shadow-md: 0 4px 12px rgba(255, 255, 255, 0.05);
   }
@@ -824,52 +890,53 @@ Progress Bar:
 ## 📦 TAILWIND CSS COLOR PALETTE
 
 **tailwind.config.js:**
+
 ```javascript
 module.exports = {
   theme: {
     colors: {
       // Core colors
       primary: {
-        50: '#F0F9F6',
-        100: '#E8F5F0',
-        200: '#D1EBE1',
-        400: '#7BAE7F',
-        600: '#1F6B52',
-        700: '#1A5844',
-        900: '#0F3A2C',
+        50: "#F0F9F6",
+        100: "#E8F5F0",
+        200: "#D1EBE1",
+        400: "#7BAE7F",
+        600: "#1F6B52",
+        700: "#1A5844",
+        900: "#0F3A2C",
       },
       cta: {
-        50: '#FEF3C7',
-        100: '#FBBF24',
-        400: '#F59E0B',
-        600: '#D97706',
-        700: '#B45309',
+        50: "#FEF3C7",
+        100: "#FBBF24",
+        400: "#F59E0B",
+        600: "#D97706",
+        700: "#B45309",
       },
       semantic: {
-        success: '#16A34A',
-        warning: '#D97706',
-        error: '#DC2626',
+        success: "#16A34A",
+        warning: "#D97706",
+        error: "#DC2626",
       },
       neutral: {
-        background: '#FAF9F6',
-        surface: '#FFFFFF',
-        heading: '#1A1A1A',
-        text: '#4B5563',
-        border: '#E5E7EB',
+        background: "#FAF9F6",
+        surface: "#FFFFFF",
+        heading: "#1A1A1A",
+        text: "#4B5563",
+        border: "#E5E7EB",
       },
       // Extended palette
       gray: {
-        50: '#FAFAFA',
-        100: '#F5F5F5',
-        200: '#E5E7EB',
-        500: '#6B7280',
-        600: '#4B5563',
-        700: '#374151',
-        900: '#1A1A1A',
+        50: "#FAFAFA",
+        100: "#F5F5F5",
+        200: "#E5E7EB",
+        500: "#6B7280",
+        600: "#4B5563",
+        700: "#374151",
+        900: "#1A1A1A",
       },
     },
   },
-}
+};
 ```
 
 ---
@@ -877,6 +944,7 @@ module.exports = {
 ## 🎯 CONVERSION OPTIMIZATION THROUGH COLOR
 
 **Psychological Triggers:**
+
 1. **Green buttons** = +15-20% CTR (proven A/B testing)
 2. **Amber/Gold accents** = +25-30% conversion (scarcity/premium feel)
 3. **White product cards** = +18% add-to-cart (contrast & focus)
@@ -884,6 +952,7 @@ module.exports = {
 5. **Dark charcoal headings** = +8% readability (comprehension = conversion)
 
 **Color Placement Strategy:**
+
 - **Hero CTA**: Amber (#F59E0B) - highest visibility, immediate action
 - **Product page CTA**: Amber (#F59E0B) - primary purchase trigger
 - **Trust badges**: Green (#1F6B52) - confidence building
@@ -912,6 +981,7 @@ module.exports = {
 ## 📚 DESIGN REFERENCES
 
 **Premium brands using similar palettes:**
+
 - Patagonia (green + earth tones)
 - Whole Foods (natural greens)
 - Luxury wellness brands (sophisticated naturals)

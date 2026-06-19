@@ -2,7 +2,6 @@ const BreedHero = ({ breed }) => {
   return (
     <section className="bg-[#fff8ed] rounded-[40px] overflow-hidden shadow-[0_32px_120px_rgba(15,23,42,0.08)] mb-12">
       <div className="grid lg:grid-cols-[1.4fr_0.6fr] items-stretch gap-8">
-
         {/* LEFT CONTENT */}
         <div className="relative px-6 py-10 sm:px-8 sm:py-12 lg:px-10 lg:py-16 flex flex-col justify-center overflow-hidden">
           <div className="absolute -top-10 -right-10 w-36 h-36 rounded-full bg-[#ffd98c] opacity-70 blur-3xl"></div>
@@ -34,12 +33,20 @@ const BreedHero = ({ breed }) => {
 
             <div className="grid gap-3 sm:grid-cols-2">
               <div className="rounded-[20px] border border-slate-200 bg-white p-3 shadow-sm">
-                <p className="text-[11px] uppercase tracking-[0.35em] text-slate-500 mb-2">Best for</p>
-                <p className="text-base font-semibold text-slate-900">Families, active homes, therapy work</p>
+                <p className="text-[11px] uppercase tracking-[0.35em] text-slate-500 mb-2">
+                  Best for
+                </p>
+                <p className="text-base font-semibold text-slate-900">
+                  Families, active homes, therapy work
+                </p>
               </div>
               <div className="rounded-[20px] border border-slate-200 bg-white p-3 shadow-sm">
-                <p className="text-[11px] uppercase tracking-[0.35em] text-slate-500 mb-2">Care level</p>
-                <p className="text-base font-semibold text-slate-900">Friendly, loyal, moderately active</p>
+                <p className="text-[11px] uppercase tracking-[0.35em] text-slate-500 mb-2">
+                  Care level
+                </p>
+                <p className="text-base font-semibold text-slate-900">
+                  Friendly, loyal, moderately active
+                </p>
               </div>
             </div>
           </div>

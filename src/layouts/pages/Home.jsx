@@ -1,36 +1,31 @@
-import Navbar from "../../components/Navbar"
+import Navbar from "../../components/Navbar";
 
-import { useState } from "react"
-import HeroBanner from "../../components/home/HeroBanner"
-import Categories from "../../components/home/Categories"
-import PetBreedsCarousel from "../../components/home/PetBreedsCarousel"
-import petData from "../../data/petData"
+import { useState } from "react";
+import HeroBanner from "../../components/home/HeroBanner";
+import Categories from "../../components/home/Categories";
+import PetBreedsCarousel from "../../components/home/PetBreedsCarousel";
+import petData from "../../data/petData";
 
-import FoodCategorySection from "../../components/home/FoodCategorySection"
+import FoodCategorySection from "../../components/home/FoodCategorySection";
 
-import PetCategories from "../../components/home/PetCategories"
+import PetCategories from "../../components/home/PetCategories";
 
+import PetBrands from "../../components/home/PetBrands";
+import BestSellerSection from "../../components/home/BestSellerSection";
 
-import PetBrands from "../../components/home/PetBrands"
-import BestSellerSection from "../../components/home/BestSellerSection"
+import TrustSection from "../../components/home/TrustSection";
 
+import NewsLetterSection from "../../components/home/NewsLetterSection";
 
+import TestimonialsSection from "../../components/home/TestimonialsSection";
 
-import TrustSection from "../../components/home/TrustSection"
-
-import NewsLetterSection from "../../components/home/NewsLetterSection"
-
-import TestimonialsSection from "../../components/home/TestimonialsSection"
-
-import Footer from "../../components/Footer"
+import Footer from "../../components/Footer";
 
 const Home = () => {
-  const [selectedPet, setSelectedPet] = useState("dog")
+  const [selectedPet, setSelectedPet] = useState("dog");
 
   return (
-
     <div className="bg-[#f8f8f8] min-h-screen">
-
       {/* NAVBAR */}
       <Navbar />
 
@@ -56,13 +51,9 @@ const Home = () => {
       <PetBrands />
       <BestSellerSection />
 
+      {/* BLOG SECTION removed */}
 
-
-      
-      
-  {/* BLOG SECTION removed */}
-
-  {/* TRUST SECTION */}
+      {/* TRUST SECTION */}
       <TrustSection />
 
       {/* NEWSLETTER */}
@@ -73,10 +64,8 @@ const Home = () => {
 
       {/* FOOTER */}
       <Footer />
-
     </div>
+  );
+};
 
-  )
-}
-
-export default Home
+export default Home;

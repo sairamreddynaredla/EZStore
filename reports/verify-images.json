@@ -1,0 +1,1257 @@
+{
+  "totalImages": 851,
+  "jpgCount": 172,
+  "jpegCount": 144,
+  "pngCount": 52,
+  "webpCount": 483,
+  "duplicates": [
+    ["dist/assets/acana-B6IWT83f.webp", "src/assets/acana.webp", "src/assets/brands/acana.webp"],
+    ["dist/assets/acana-KfaWfjQo.webp", "src/assets/brands/acana.webp"],
+    [
+      "dist/assets/api-tropical-pellets-fish-food-Bgq68_KV.webp",
+      "src/assets/products/fish/api-tropical-pellets-fish-food.webp"
+    ],
+    ["dist/assets/Applaws-xB2gx3yf.webp", "src/assets/brand-banners/Applaws.webp"],
+    ["dist/assets/Applod-BSH14wEM.webp", "src/assets/spotlight/Applod.webp"],
+    ["dist/assets/Applod-DaBmCCk9.webp", "src/assets/brand-banners/Applod.webp"],
+    ["dist/assets/bellotta-3IOJFEt7.webp", "src/assets/brands/bellotta.webp"],
+    ["dist/assets/Bellotta-B2zUsneF.webp", "src/assets/brand-banners/Bellotta.webp"],
+    ["dist/assets/bellotta-Bf1c4Qpx.webp", "src/assets/brands/bellotta.webp"],
+    ["dist/assets/bird-CgvxZJxx.webp", "src/assets/bird.webp"],
+    ["dist/assets/bird-CJKhPn0I.webp", "src/assets/categories/bird.webp"],
+    [
+      "dist/assets/bird-exclusive-Bi-_vAih.webp",
+      "src/assets/Exclusive Category/bird-exclusive.webp"
+    ],
+    [
+      "dist/assets/biscuits-cookies-dog-food-banner-CsYovVAq.webp",
+      "src/assets/dog-dropdown-banner/biscuits-cookies-dog-food-banner.webp"
+    ],
+    ["dist/assets/blue-buffalo-D3P5y1hq.webp", "src/assets/brands/blue-buffalo.webp"],
+    ["dist/assets/blue-buffalo-HML3Lz9u.webp", "src/assets/brands/blue-buffalo.webp"],
+    [
+      "dist/assets/burgess-excel-adult-rabbit-nuggets-ByxDgEfi.webp",
+      "src/assets/products/rabbit/burgess-excel-adult-rabbit-nuggets.webp"
+    ],
+    ["dist/assets/canine-creek-DDQjQzOz.webp", "src/assets/brands/canine-creek.webp"],
+    ["dist/assets/canine-creek-DfI8t0Il.webp", "src/assets/brands/canine-creek.webp"],
+    ["dist/assets/Carniwel_1 (1)-CS7c9dSC.webp", "src/assets/brand-banners/Carniwel_1 (1).webp"],
+    ["dist/assets/cat crunch-B7yjq-GV.webp", "src/assets/explore-pick-pamper/cat crunch.webp"],
+    ["dist/assets/cat-banner-DtbW5I5D.webp", "src/assets/cat-banner.webp"],
+    ["dist/assets/cat-Cg0p6AeT.webp", "src/assets/categories/cat.webp"],
+    [
+      "dist/assets/cat-crunchy-treats-lR2evDzs.webp",
+      "src/assets/cat-dropdown-banner/cat-crunchy-treats.webp"
+    ],
+    ["dist/assets/cat-exclusive-Cwv3aMR5.webp", "src/assets/Exclusive Category/cat-exclusive.webp"],
+    ["dist/assets/Catmos-TfMa7mnd.webp", "src/assets/brand-banners/Catmos.webp"],
+    ["dist/assets/cod-UpZuYX4O.webp", "src/assets/payments/cod.webp"],
+    [
+      "dist/assets/creamy treats-DZ6rIIiy.webp",
+      "src/assets/explore-pick-pamper/creamy treats.webp"
+    ],
+    [
+      "dist/assets/creamy-treats-DpYyqu1n.webp",
+      "src/assets/cat-dropdown-banner/creamy-treats.webp"
+    ],
+    [
+      "dist/assets/delectables-squeeze-up-tuna-cat-treat-DZMH96Pn.webp",
+      "src/assets/products/cats/creamy-treats/delectables-squeeze-up-tuna-cat-treat.webp"
+    ],
+    [
+      "dist/assets/dog dental treats-Cvpgbpgl.webp",
+      "src/assets/explore-pick-pamper/dog dental treats.webp"
+    ],
+    ["dist/assets/dog exclusive-D1pCpOPf.webp", "src/assets/Exclusive Category/dog exclusive.webp"],
+    ["dist/assets/dog meaty-BKYOezO7.webp", "src/assets/explore-pick-pamper/dog meaty.webp"],
+    ["dist/assets/dog-banner-CTyWRYR7.webp", "src/assets/banners/dog-banner.webp"],
+    ["dist/assets/dog-CtgEPOYJ.webp", "src/assets/categories/dog.webp"],
+    [
+      "dist/assets/dreamies-cheese-crunchy-cat-treats-BwWOu-PU.webp",
+      "src/assets/products/cats/crunchy-treats/dreamies-cheese-crunchy-cat-treats.webp"
+    ],
+    ["dist/assets/drools-0Hy3Yimz.webp", "src/assets/brands/drools.webp"],
+    [
+      "dist/assets/drools-absolute-calcium-bone-biscuits-ChUdlpy4.webp",
+      "src/assets/products/dogs/biscuits-cookies/drools-absolute-calcium-bone-biscuits.webp"
+    ],
+    ["dist/assets/drools-B7EVnsDQ.webp", "src/assets/brands/drools.webp"],
+    [
+      "dist/assets/drools-dental-bone-dog-treat-DwSJm8TR.webp",
+      "src/assets/products/dogs/dental-treats/drools-dental-bone-dog-treat.webp"
+    ],
+    [
+      "dist/assets/drools-puppy-chicken-egg-dry-food-Da6jke1R.webp",
+      "src/assets/products/dogs/puppyFood/drools-puppy-chicken-egg-dry-food.webp"
+    ],
+    [
+      "dist/assets/drools-real-chicken-sausage-treats-B1r6lkSx.webp",
+      "src/assets/products/dogs/meaty-treats/drools-real-chicken-sausage-treats.webp"
+    ],
+    [
+      "dist/assets/drools-vegetarian-adult-dog-food-BPumIGlv.webp",
+      "src/assets/products/dogs/vegetarian-food/drools-vegetarian-adult-dog-food.webp"
+    ],
+    ["dist/assets/dry-dog-food-iTfAqsMa.webp", "src/assets/explore-pick-pamper/dry-dog-food.webp"],
+    [
+      "dist/assets/dry-food-banner1-ChRDltj8.webp",
+      "src/assets/dog-dropdown-banner/dry-food-banner1.webp"
+    ],
+    [
+      "dist/assets/dry-food-cats-banner-BjbL1Fb4.webp",
+      "src/assets/cat-dropdown-banner/dry-food-cats-banner.webp"
+    ],
+    ["dist/assets/EZstore-B18sHRw8.webp", "src/assets/spotlight/EZstore.webp"],
+    ["dist/assets/EZstore-Ci4vXyWs.webp", "src/assets/spotlight/EZstore.webp"],
+    [
+      "dist/assets/ezstore-logo-optimized-CGfYmbE2.webp",
+      "src/assets/logo/ezstore-logo-optimized.webp"
+    ],
+    [
+      "dist/assets/fancy-feast-grilled-tuna-wet-cat-food-DWNpIsRB.webp",
+      "src/assets/products/cats/wet-food/fancy-feast-grilled-tuna-wet-cat-food.webp"
+    ],
+    ["dist/assets/farmina-C5qbDrdD.webp", "src/assets/brands/farmina.webp"],
+    ["dist/assets/farmina-CKYD2d1b.webp", "src/assets/brands/farmina.webp"],
+    [
+      "dist/assets/farmina-nd-chicken-pomegranate-adult-medium-maxi-dry-dog-food-lIzipA-z.webp",
+      "src/assets/products/dogs/dry-food/farmina-nd-chicken-pomegranate-adult-medium-maxi-dry-dog-food.webp"
+    ],
+    [
+      "dist/assets/farmina-nd-chicken-pomegranate-grain-free-cat-food-C3_Qiwp7.webp",
+      "src/assets/products/cats/grain-free-food/farmina-nd-chicken-pomegranate-grain-free-cat-food.webp"
+    ],
+    [
+      "dist/assets/farmina-nd-kitten-chicken-pomegranate-cat-food-uRV0MWLf.webp",
+      "src/assets/products/cats/kitten-food/farmina-nd-kitten-chicken-pomegranate-cat-food.webp"
+    ],
+    [
+      "dist/assets/farmina-nd-puppy-medium-maxi-food-CXGAX2vW.webp",
+      "src/assets/products/dogs/puppyFood/farmina-nd-puppy-medium-maxi-food.webp"
+    ],
+    [
+      "dist/assets/farmina-vet-life-renal-cat-food-B8bfcjRp.webp",
+      "src/assets/products/cats/prescription-food/farmina-vet-life-renal-cat-food.webp"
+    ],
+    [
+      "dist/assets/farmina-vet-life-renal-dog-food-DcOhSfJB.webp",
+      "src/assets/products/dogs/prescription-food/farmina-vet-life-renal-dog-food.webp"
+    ],
+    [
+      "dist/assets/farmina-vet-life-vegetarian-formula-dog-food-CTZuEDip.webp",
+      "src/assets/products/dogs/vegetarian-food/farmina-vet-life-vegetarian-formula-dog-food.webp"
+    ],
+    ["dist/assets/fish-DtnGk4DA.webp", "src/assets/categories/fish.webp"],
+    [
+      "dist/assets/fish-exclusive-D4BI0CfZ.webp",
+      "src/assets/Exclusive Category/fish-exclusive.webp"
+    ],
+    ["dist/assets/fish-OsmfbCNV.webp", "src/assets/fish.webp"],
+    [
+      "dist/assets/fluval-bug-bites-tropical-formula-fish-food-DSQRJv8y.webp",
+      "src/assets/products/fish/fluval-bug-bites-tropical-formula-fish-food.webp"
+    ],
+    [
+      "dist/assets/fresh-food-banner-BdK_7dIw.webp",
+      "src/assets/dog-dropdown-banner/fresh-food-banner.webp"
+    ],
+    [
+      "dist/assets/freshpet-select-roasted-chicken-recipe-dog-food-B74BBlV6.webp",
+      "src/assets/products/dogs/Fresh-food/freshpet-select-roasted-chicken-recipe-dog-food.webp"
+    ],
+    [
+      "dist/assets/friskies-chicken-meaty-bites-cat-treats-Be2ahP7a.webp",
+      "src/assets/products/cats/meaty-treats/friskies-chicken-meaty-bites-cat-treats.webp"
+    ],
+    [
+      "dist/assets/friskies-party-mix-original-crunch-cat-treats-DvaEJA5V.webp",
+      "src/assets/products/cats/crunchy-treats/friskies-party-mix-original-crunch-cat-treats.webp"
+    ],
+    ["dist/assets/Furpro-CYNEsqRu.webp", "src/assets/spotlight/Furpro.webp"],
+    [
+      "dist/assets/gnawlers-calcium-milk-bone-treats-lC3HPctj.webp",
+      "src/assets/products/dogs/meaty-treats/gnawlers-calcium-milk-bone-treats.webp"
+    ],
+    ["dist/assets/Goodies-BWzpTVBm.webp", "src/assets/brand-banners/Goodies.webp"],
+    [
+      "dist/assets/goodies-D5chj20R.webp",
+      "src/assets/brands/goodies.webp",
+      "src/assets/goodies.webp"
+    ],
+    [
+      "dist/assets/goodies-energy-treat-biscuits-B5YAdfSg.webp",
+      "src/assets/products/dogs/biscuits-cookies/goodies-energy-treat-biscuits.webp"
+    ],
+    ["dist/assets/goodies-i2zCHwyi.webp", "src/assets/brands/goodies.webp"],
+    [
+      "dist/assets/grain-free-food-banner-CLNHF4C9.webp",
+      "src/assets/dog-dropdown-banner/grain-free-food-banner.webp"
+    ],
+    [
+      "dist/assets/grain-free-food-cat-banner-auJIjQW8.webp",
+      "src/assets/cat-dropdown-banner/grain-free-food-cat-banner.webp"
+    ],
+    ["dist/assets/Hachi_Wilson-BbEIKtoh.webp", "src/assets/brand-banners/Hachi_Wilson.webp"],
+    ["dist/assets/hamster-BieO62wh.webp", "src/assets/hamster.webp"],
+    ["dist/assets/hamster-CMOBo1To.webp", "src/assets/categories/hamster.webp"],
+    [
+      "dist/assets/hamster-exclusive-IfIxDjzR.webp",
+      "src/assets/Exclusive Category/hamster-exclusive.webp"
+    ],
+    ["dist/assets/hero-banner-O9apsA-P.webp", "src/assets/banners/hero-banner.webp"],
+    [
+      "dist/assets/higgins-sunburst-gourmet-hamster-food-DJ8v42yT.webp",
+      "src/assets/products/hamster/higgins-sunburst-gourmet-hamster-food.webp"
+    ],
+    [
+      "dist/assets/higgins-sunburst-gourmet-parrot-food-DoEM0poN.webp",
+      "src/assets/products/birds/higgins-sunburst-gourmet-parrot-food.webp"
+    ],
+    ["dist/assets/hikari-5iBLyB0V.webp", "src/assets/brands/hikari.webp"],
+    ["dist/assets/hikari-DBMH7b2S.webp", "src/assets/brands/hikari.webp"],
+    [
+      "dist/assets/hikari-tropical-micro-pellets-fish-food-XQSt8vBO.webp",
+      "src/assets/products/fish/hikari-tropical-micro-pellets-fish-food.webp"
+    ],
+    [
+      "dist/assets/hills-prescription-diet-cd-multicare-cat-food-2lWqUOSw.webp",
+      "src/assets/products/cats/prescription-food/hills-prescription-diet-cd-multicare-cat-food.webp"
+    ],
+    [
+      "dist/assets/hills-prescription-diet-i-d-dog-food-BCrDI68p.webp",
+      "src/assets/products/dogs/prescription-food/hills-prescription-diet-i-d-dog-food.webp"
+    ],
+    [
+      "dist/assets/hills-prescription-diet-metabolic-dog-food-u9BH-sBL.webp",
+      "src/assets/products/dogs/prescription-food/hills-prescription-diet-metabolic-dog-food.webp"
+    ],
+    [
+      "dist/assets/hills-science-diet-adult-indoor-cat-food-BDzsPPiX.webp",
+      "src/assets/products/cats/dry-food/hills-science-diet-adult-indoor-cat-food.webp"
+    ],
+    [
+      "dist/assets/hills-science-diet-adult-wet-dog-food-UGUy7T7R.webp",
+      "src/assets/products/dogs/wet-food/hills-science-diet-adult-wet-dog-food.webp"
+    ],
+    [
+      "dist/assets/hills-science-diet-kitten-cat-food-DCjdQZp7.webp",
+      "src/assets/products/cats/kitten-food/hills-science-diet-kitten-cat-food.webp"
+    ],
+    ["dist/assets/himalaya-CySrbjhd.webp", "src/assets/brands/himalaya.webp"],
+    ["dist/assets/himalaya-IDXGpe1D.webp", "src/assets/brands/himalaya.webp"],
+    ["dist/assets/image-guqxxmaW.webp", "src/assets/brand-banners/image.webp"],
+    ["dist/assets/image-RhamXuDQ.webp", "src/assets/brand-banners/image.webp"],
+    ["dist/assets/Imaginelles-Dx621TIB.webp", "src/assets/brand-banners/Imaginelles.webp"],
+    ["dist/assets/imas-CWbT2h7t.webp", "src/assets/brands/imas.webp"],
+    ["dist/assets/imas-krTjPzCp.webp", "src/assets/brands/imas.webp"],
+    [
+      "dist/assets/inaba-churu-tuna-creamy-cat-treat-Ha5c7sPt.webp",
+      "src/assets/products/cats/creamy-treats/inaba-churu-tuna-creamy-cat-treat.webp"
+    ],
+    [
+      "dist/assets/jerhigh-BrEskJXe.webp",
+      "src/assets/brands/jerhigh.webp",
+      "src/assets/jerhigh.webp"
+    ],
+    [
+      "dist/assets/jerhigh-chicken-cookies-Bp7fZRvv.webp",
+      "src/assets/products/dogs/biscuits-cookies/jerhigh-chicken-cookies.webp"
+    ],
+    [
+      "dist/assets/jerhigh-chicken-jerky-treats-CAiW2gYt.webp",
+      "src/assets/products/dogs/meaty-treats/jerhigh-chicken-jerky-treats.webp"
+    ],
+    ["dist/assets/jerhigh-CJ2jdzQu.webp", "src/assets/brands/jerhigh.webp"],
+    ["dist/assets/jerhigh-CW_cX5dL.webp", "src/assets/brand-banners/jerhigh.webp"],
+    [
+      "dist/assets/jerhigh-dental-stick-chicken-CvqkH5L_.webp",
+      "src/assets/products/dogs/dental-treats/jerhigh-dental-stick-chicken.webp"
+    ],
+    ["dist/assets/kaytee-CEt11PGX.webp", "src/assets/brands/kaytee.webp"],
+    ["dist/assets/kaytee-Cr83gexK.webp", "src/assets/brands/kaytee.webp"],
+    [
+      "dist/assets/kaytee-forti-diet-pro-health-hamster-food-CkNr1H8P.webp",
+      "src/assets/products/hamster/kaytee-forti-diet-pro-health-hamster-food.webp"
+    ],
+    [
+      "dist/assets/kaytee-forti-diet-pro-health-parakeet-food-C1m6maaQ.webp",
+      "src/assets/products/birds/kaytee-forti-diet-pro-health-parakeet-food.webp"
+    ],
+    [
+      "dist/assets/kaytee-fortidiet-pro-health-rabbit-food-CEetK8sQ.webp",
+      "src/assets/products/rabbit/kaytee-fortidiet-pro-health-rabbit-food.webp"
+    ],
+    ["dist/assets/kennel-kitchen-DL8jE-KZ.webp", "src/assets/brands/kennel-kitchen.webp"],
+    ["dist/assets/kennel-kitchen-DlnMSpR_.webp", "src/assets/brands/kennel-kitchen.webp"],
+    [
+      "dist/assets/kitten-food-banner-KRyrp7Hh.webp",
+      "src/assets/cat-dropdown-banner/kitten-food-banner.webp"
+    ],
+    [
+      "dist/assets/mazuri-hamster-rat-diet-D8BPcjSS.webp",
+      "src/assets/products/hamster/mazuri-hamster-rat-diet.webp"
+    ],
+    [
+      "dist/assets/mazuri-timothy-based-rabbit-diet-CbKM5Nl2.webp",
+      "src/assets/products/rabbit/mazuri-timothy-based-rabbit-diet.webp"
+    ],
+    ["dist/assets/Me-O-BqRxF-2E.webp", "src/assets/brand-banners/Me-O.webp"],
+    [
+      "dist/assets/meaty-cat-food-C0FG9xHW.webp",
+      "src/assets/cat-dropdown-banner/meaty-cat-food.webp"
+    ],
+    [
+      "dist/assets/meaty-treats-banner-BrUvWSlH.webp",
+      "src/assets/dog-dropdown-banner/meaty-treats-banner.webp"
+    ],
+    [
+      "dist/assets/meo-adult-ocean-fish-dry-cat-food-7RwKhkyn.webp",
+      "src/assets/products/cats/dry-food/meo-adult-ocean-fish-dry-cat-food.webp"
+    ],
+    ["dist/assets/meo-BDHENfZ5.webp", "src/assets/brands/meo.webp"],
+    ["dist/assets/meo-Bovw8Lu2.webp", "src/assets/brands/meo.webp"],
+    [
+      "dist/assets/meo-creamy-treats-bonito-cat-treat-CAxLjXol.webp",
+      "src/assets/products/cats/creamy-treats/meo-creamy-treats-bonito-cat-treat.webp"
+    ],
+    [
+      "dist/assets/meo-tuna-meaty-cat-treats-MP0sbnnu.webp",
+      "src/assets/products/cats/meaty-treats/meo-tuna-meaty-cat-treats.webp"
+    ],
+    [
+      "dist/assets/nom-nom-beef-mash-fresh-dog-food-MKsqtAEJ.webp",
+      "src/assets/products/dogs/Fresh-food/nom-nom-beef-mash-fresh-dog-food.webp"
+    ],
+    ["dist/assets/n_d-C_RNcX7P.webp", "src/assets/brands/n&d.webp"],
+    ["dist/assets/n_d-L_WbCOMd.webp", "src/assets/brands/n&d.webp"],
+    ["dist/assets/offer-banner-CQEVO3or.webp", "src/assets/banners/offer-banner.webp"],
+    [
+      "dist/assets/ollie-chicken-dish-fresh-dog-food-BBigFGid.webp",
+      "src/assets/products/dogs/Fresh-food/ollie-chicken-dish-fresh-dog-food.webp"
+    ],
+    [
+      "dist/assets/omega-one-super-color-flakes-fish-food-DxDmoNBt.webp",
+      "src/assets/products/fish/omega-one-super-color-flakes-fish-food.webp"
+    ],
+    ["dist/assets/orijen-D1niQNGZ.webp", "src/assets/brand-banners/orijen.webp"],
+    ["dist/assets/orijen-D_5QLjfd.webp", "src/assets/brands/orijen.webp"],
+    ["dist/assets/orijen-G7SlcopU.webp", "src/assets/brands/orijen.webp"],
+    [
+      "dist/assets/orijen-original-grain-free-cat-food-BzC47DZV.webp",
+      "src/assets/products/cats/grain-free-food/orijen-original-grain-free-cat-food.webp"
+    ],
+    [
+      "dist/assets/oxbow-essentials-adult-rabbit-food-DC9IDVEO.webp",
+      "src/assets/products/rabbit/oxbow-essentials-adult-rabbit-food.webp"
+    ],
+    [
+      "dist/assets/oxbow-essentials-hamster-food-Bby9PTK-.webp",
+      "src/assets/products/hamster/oxbow-essentials-hamster-food.webp"
+    ],
+    ["dist/assets/paypal-Dr8Dxprt.webp", "src/assets/payments/paypal.webp"],
+    ["dist/assets/pedigree-6KPzeXiV.webp", "src/assets/brand-banners/pedigree.webp"],
+    [
+      "dist/assets/pedigree-biscrok-milk-biscuits-DNcyWAHz.webp",
+      "src/assets/products/dogs/biscuits-cookies/pedigree-biscrok-milk-biscuits.webp"
+    ],
+    ["dist/assets/pedigree-BWzJ1kjb.webp", "src/assets/brands/pedigree.webp"],
+    [
+      "dist/assets/pedigree-chicken-wet-dog-food-jUHIb1zD.webp",
+      "src/assets/products/dogs/wet-food/pedigree-chicken-wet-dog-food.webp"
+    ],
+    ["dist/assets/pedigree-CHk-iyPH.webp", "src/assets/brands/pedigree.webp"],
+    [
+      "dist/assets/pedigree-dentastix-daily-oral-care-4oCqx8He.webp",
+      "src/assets/products/dogs/dental-treats/pedigree-dentastix-daily-oral-care.webp"
+    ],
+    [
+      "dist/assets/pedigree-puppy-chicken-milk-dry-food-D_JjoUWS.webp",
+      "src/assets/products/dogs/puppyFood/pedigree-puppy-chicken-milk-dry-food.webp"
+    ],
+    [
+      "dist/assets/pedigree-rodeo-chicken-treats-CHrTm93O.webp",
+      "src/assets/products/dogs/meaty-treats/pedigree-rodeo-chicken-treats.webp"
+    ],
+    [
+      "dist/assets/pedigree-vegetarian-adult-dry-dog-food-hR66y2XC.webp",
+      "src/assets/products/dogs/vegetarian-food/pedigree-vegetarian-adult-dry-dog-food.webp"
+    ],
+    [
+      "dist/assets/prescription-cat-food-banner-Beonu9E1.webp",
+      "src/assets/cat-dropdown-banner/prescription-cat-food-banner.webp"
+    ],
+    [
+      "dist/assets/prescription-diet-CnLdrsPi.webp",
+      "src/assets/explore-pick-pamper/prescription-diet.webp"
+    ],
+    [
+      "dist/assets/prescription-dog-food-banner-Batuq4FL.webp",
+      "src/assets/dog-dropdown-banner/prescription-dog-food-banner.webp"
+    ],
+    [
+      "dist/assets/puppy-food-banner-DUXDO2eF.webp",
+      "src/assets/dog-dropdown-banner/puppy-food-banner.webp"
+    ],
+    [
+      "dist/assets/puppy-kitten-food-CmL6zx6d.webp",
+      "src/assets/explore-pick-pamper/puppy-kitten-food.webp"
+    ],
+    [
+      "dist/assets/puppy-treats-banner-Cb-J_Mv1.webp",
+      "src/assets/dog-dropdown-banner/puppy-treats-banner.webp"
+    ],
+    [
+      "dist/assets/purepet-crunchy-cat-treats-ocean-fish-flavor-BXv4qskv.webp",
+      "src/assets/products/cats/crunchy-treats/purepet-crunchy-cat-treats-ocean-fish-flavor.webp"
+    ],
+    [
+      "dist/assets/purepet-dental-chew-stick-CH4u5Vlq.webp",
+      "src/assets/products/dogs/dental-treats/purepet-dental-chew-stick.webp"
+    ],
+    [
+      "dist/assets/purepet-ocean-fish-meaty-cat-treats-Btb54E8T.webp",
+      "src/assets/products/cats/meaty-treats/purepet-ocean-fish-meaty-cat-treats.webp"
+    ],
+    [
+      "dist/assets/purepet-vegetarian-adult-dog-food-B5UvQtxg.webp",
+      "src/assets/products/dogs/vegetarian-food/purepet-vegetarian-adult-dog-food.webp"
+    ],
+    ["dist/assets/purina-BW6wx_VC.webp", "src/assets/brands/purina.webp"],
+    ["dist/assets/purina-DxAbzFD0.webp", "src/assets/brands/purina.webp"],
+    [
+      "dist/assets/purina-pro-plan-adult-wet-cat-food-i0A6WKXd.webp",
+      "src/assets/products/cats/wet-food/purina-pro-plan-adult-wet-cat-food.webp"
+    ],
+    [
+      "dist/assets/purina-pro-plan-complete-essentials-adult-cat-food-C1xA3dtM.webp",
+      "src/assets/products/cats/dry-food/purina-pro-plan-complete-essentials-adult-cat-food.webp"
+    ],
+    [
+      "dist/assets/purina-pro-plan-complete-essentials-adult-dry-dog-food-BgAbjqPE.webp",
+      "src/assets/products/dogs/dry-food/purina-pro-plan-complete-essentials-adult-dry-dog-food.webp"
+    ],
+    [
+      "dist/assets/purina-pro-plan-kitten-chicken-rice-cat-food-YFTSlE_f.webp",
+      "src/assets/products/cats/kitten-food/purina-pro-plan-kitten-chicken-rice-cat-food.webp"
+    ],
+    [
+      "dist/assets/purina-pro-plan-savory-wet-dog-food-I9tcM3MF.webp",
+      "src/assets/products/dogs/wet-food/purina-pro-plan-savory-wet-dog-food.webp"
+    ],
+    [
+      "dist/assets/purina-pro-plan-veterinary-ur-urinary-cat-food-BlDlNR1n.webp",
+      "src/assets/products/cats/prescription-food/purina-pro-plan-veterinary-ur-urinary-cat-food.webp"
+    ],
+    ["dist/assets/purpet-B7MRaame.webp", "src/assets/brands/purpet.webp"],
+    ["dist/assets/purpet-CTKIPj-h.webp", "src/assets/brands/purpet.webp"],
+    ["dist/assets/rabbit-BXa2WHGK.webp", "src/assets/rabbit.webp"],
+    ["dist/assets/rabbit-DmLVCeAL.webp", "src/assets/categories/rabbit.webp"],
+    ["dist/assets/rio-0TGNfXcP.webp", "src/assets/brands/rio.webp"],
+    ["dist/assets/rio-CCDNqQxL.webp", "src/assets/brands/rio.webp"],
+    [
+      "dist/assets/royal-canin-adult-wet-dog-food-CblXLTzP.webp",
+      "src/assets/products/dogs/wet-food/royal-canin-adult-wet-dog-food.webp"
+    ],
+    ["dist/assets/royal-canin-Chekxmlh.webp", "src/assets/brands/royal-canin.webp"],
+    [
+      "dist/assets/royal-canin-gastrointestinal-dry-dog-food1-BrsW6o0N.webp",
+      "src/assets/products/dogs/prescription-food/royal-canin-gastrointestinal-dry-dog-food1.webp"
+    ],
+    [
+      "dist/assets/royal-canin-grain-free-adult-cat-food-Cd14sfTg.webp",
+      "src/assets/products/cats/grain-free-food/royal-canin-grain-free-adult-cat-food.webp"
+    ],
+    [
+      "dist/assets/royal-canin-hypoallergenic-cat-food-Cu72mUL6.webp",
+      "src/assets/products/cats/prescription-food/royal-canin-hypoallergenic-cat-food.webp"
+    ],
+    [
+      "dist/assets/royal-canin-hypoallergenic-dog-food-CzxtYfT-.webp",
+      "src/assets/products/dogs/prescription-food/royal-canin-hypoallergenic-dog-food.webp"
+    ],
+    [
+      "dist/assets/royal-canin-indoor-adult-dry-cat-food-BgAf0izd.webp",
+      "src/assets/products/cats/dry-food/royal-canin-indoor-adult-dry-cat-food.webp"
+    ],
+    [
+      "dist/assets/royal-canin-instinctive-adult-wet-cat-food-DO0zYy3r.webp",
+      "src/assets/products/cats/wet-food/royal-canin-instinctive-adult-wet-cat-food.webp"
+    ],
+    [
+      "dist/assets/royal-canin-kitten-dry-cat-food-DxGBkP2D.webp",
+      "src/assets/products/cats/kitten-food/royal-canin-kitten-dry-cat-food.webp"
+    ],
+    [
+      "dist/assets/royal-canin-maxi-adult-dry-dog-food.png-BFNHeVe4.webp",
+      "src/assets/products/dogs/dry-food/royal-canin-maxi-adult-dry-dog-food.png.webp"
+    ],
+    [
+      "dist/assets/royal-canin-mini-puppy-dry-dog-food-BsQYvTti.webp",
+      "src/assets/products/dogs/puppyFood/royal-canin-mini-puppy-dry-dog-food.webp"
+    ],
+    [
+      "dist/assets/royal-canin-urinary-so-cat-food-lDb_yHn3.webp",
+      "src/assets/products/cats/prescription-food/royal-canin-urinary-so-cat-food.webp"
+    ],
+    [
+      "dist/assets/royal-canin-vegetarian-adult-dry-dog-food-BwXtfcwx.webp",
+      "src/assets/products/dogs/vegetarian-food/royal-canin-vegetarian-adult-dry-dog-food.webp"
+    ],
+    ["dist/assets/royal-canin-xEvfW3G5.webp", "src/assets/brands/royal-canin.webp"],
+    ["dist/assets/secure-payment-CWJC4g_V.webp", "src/assets/logo/secure-payment.webp"],
+    [
+      "dist/assets/sera-vipan-nature-tropical-fish-food-CU1y-K8n.webp",
+      "src/assets/products/fish/sera-vipan-nature-tropical-fish-food.webp"
+    ],
+    [
+      "dist/assets/sheba-chicken-meaty-cat-treats-Dp5a-RYh.webp",
+      "src/assets/products/cats/meaty-treats/sheba-chicken-meaty-cat-treats.webp"
+    ],
+    [
+      "dist/assets/sheba-creamy-snacks-tuna-cat-treat-BlM4zeYo.webp",
+      "src/assets/products/cats/creamy-treats/sheba-creamy-snacks-tuna-cat-treat.webp"
+    ],
+    ["dist/assets/sheba-D9b3CP6T.webp", "src/assets/brands/sheba.webp"],
+    ["dist/assets/sheba-Dubfp2Yg.webp", "src/assets/brands/sheba.webp"],
+    [
+      "dist/assets/sheba-tuna-premium-wet-cat-food-DuzTVXGH.webp",
+      "src/assets/products/cats/wet-food/sheba-tuna-premium-wet-cat-food.webp"
+    ],
+    ["dist/assets/smartheart-BCaFpyJ8.webp", "src/assets/brands/smartheart.webp"],
+    ["dist/assets/smartheart-ClbwDVTT.webp", "src/assets/brands/smartheart.webp"],
+    [
+      "dist/assets/smartheart-dental-stick-dog-treat-MYfmzwCP.webp",
+      "src/assets/products/dogs/dental-treats/smartheart-dental-stick-dog-treat.webp"
+    ],
+    [
+      "dist/assets/smartheart-dog-biscuits-milk-DFQR1l7Q.webp",
+      "src/assets/products/dogs/biscuits-cookies/smartheart-dog-biscuits-milk.webp"
+    ],
+    ["dist/assets/sobo-CDxeMcEP.webp", "src/assets/brands/sobo.webp"],
+    ["dist/assets/sobo-DoYxVpSo.webp", "src/assets/brands/sobo.webp"],
+    [
+      "dist/assets/spot-tango-beef-millet-fresh-dog-food-C153JyDS.webp",
+      "src/assets/products/dogs/Fresh-food/spot-tango-beef-millet-fresh-dog-food.webp"
+    ],
+    [
+      "dist/assets/supreme-science-selective-rabbit-food-Dn0dEpG2.webp",
+      "src/assets/products/rabbit/supreme-science-selective-rabbit-food.webp"
+    ],
+    ["dist/assets/taiyo-Db0uRI7u.webp", "src/assets/brands/taiyo.webp"],
+    ["dist/assets/taiyo-hMnQ0cYM.webp", "src/assets/brands/taiyo.webp"],
+    ["dist/assets/taste-of-the-wild-Bp9LCE6y.webp", "src/assets/brands/taste-of-the-wild.webp"],
+    ["dist/assets/taste-of-the-wild-C-1BPfqu.webp", "src/assets/brands/taste-of-the-wild.webp"],
+    [
+      "dist/assets/taste-of-the-wild-rocky-mountain-grain-free-cat-food-C2i4mbWa.webp",
+      "src/assets/products/cats/grain-free-food/taste-of-the-wild-rocky-mountain-grain-free-cat-food.webp"
+    ],
+    ["dist/assets/temptations-BHABfDuR.webp", "src/assets/brands/temptations.webp"],
+    [
+      "dist/assets/temptations-creamy-puree-chicken-cat-treat-Cho0D_QQ.webp",
+      "src/assets/products/cats/creamy-treats/temptations-creamy-puree-chicken-cat-treat.webp"
+    ],
+    ["dist/assets/temptations-D_AUE3a7.webp", "src/assets/brands/temptations.webp"],
+    [
+      "dist/assets/temptations-mixups-backyard-cookout-cat-treats-B-xwQash.webp",
+      "src/assets/products/cats/crunchy-treats/temptations-mixups-backyard-cookout-cat-treats.webp"
+    ],
+    ["dist/assets/tetra-BzBmNEaE.webp", "src/assets/brands/tetra.webp"],
+    ["dist/assets/tetra-q1YL_yu2.webp", "src/assets/brands/tetra.webp"],
+    [
+      "dist/assets/tetra-tetramin-tropical-flakes-fish-food-Bb34dIFA.webp",
+      "src/assets/products/fish/tetra-tetramin-tropical-flakes-fish-food.webp"
+    ],
+    ["dist/assets/trust-banner-B4hc9xGE.webp", "src/assets/banners/trust-banner.webp"],
+    [
+      "dist/assets/vegetarian-food-banner-C_Nt8Vq1.webp",
+      "src/assets/dog-dropdown-banner/vegetarian-food-banner.webp"
+    ],
+    [
+      "dist/assets/versele-laga-prestige-budgies-bird-food-M8i_LhYl.webp",
+      "src/assets/products/birds/versele-laga-prestige-budgies-bird-food.webp"
+    ],
+    [
+      "dist/assets/vitakraft-vita-smart-hamster-food-CBE4iwt_.webp",
+      "src/assets/products/hamster/vitakraft-vita-smart-hamster-food.webp"
+    ],
+    [
+      "dist/assets/vitakraft-vita-smart-rabbit-food-D6Lji9eP.webp",
+      "src/assets/products/rabbit/vitakraft-vita-smart-rabbit-food.webp"
+    ],
+    ["dist/assets/vitapol-BOAOsgg2.webp", "src/assets/brands/vitapol.webp"],
+    ["dist/assets/vitapol-DltOwG5I.webp", "src/assets/brands/vitapol.webp"],
+    [
+      "dist/assets/vitapol-economy-parrot-food-CXID1gKb.webp",
+      "src/assets/products/birds/vitapol-economy-parrot-food.webp"
+    ],
+    [
+      "dist/assets/wet-dog-food-banner-B02M_Zi5.webp",
+      "src/assets/dog-dropdown-banner/wet-dog-food-banner.webp"
+    ],
+    ["dist/assets/wet-dog-food-DKvtU0Ej.webp", "src/assets/explore-pick-pamper/wet-dog-food.webp"],
+    [
+      "dist/assets/wet-food-cat-banner-DuAoGK-F.webp",
+      "src/assets/cat-dropdown-banner/wet-food-cat-banner.webp"
+    ],
+    ["dist/assets/whiskas-Dii52u5W.webp", "src/assets/brands/whiskas.webp"],
+    [
+      "dist/assets/whiskas-kitten-ocean-fish-cat-food-uj40fjyD.webp",
+      "src/assets/products/cats/kitten-food/whiskas-kitten-ocean-fish-cat-food.webp"
+    ],
+    [
+      "dist/assets/whiskas-ocean-fish-adult-dry-cat-food-gKfC0RFA.webp",
+      "src/assets/products/cats/dry-food/whiskas-ocean-fish-adult-dry-cat-food.webp"
+    ],
+    [
+      "dist/assets/whiskas-ocean-fish-wet-cat-food-BIqLJabd.webp",
+      "src/assets/products/cats/wet-food/whiskas-ocean-fish-wet-cat-food.webp"
+    ],
+    ["dist/assets/whiskas-uxgQRNMg.webp", "src/assets/brand-banners/whiskas.webp"],
+    [
+      "dist/assets/wild-harvest-daily-blend-parakeet-food-CC0CPuM4.webp",
+      "src/assets/products/birds/wild-harvest-daily-blend-parakeet-food.webp"
+    ],
+    [
+      "dist/assets/zu-preem-fruitblend-small-bird-food-O_y-7MFa.webp",
+      "src/assets/products/birds/zu-preem-fruitblend-small-bird-food.webp"
+    ],
+    ["dist/assets/zupreem-BjBkm1ZB.webp", "src/assets/brands/zupreem.webp"],
+    ["dist/assets/zupreem-DVmI1P4y.webp", "src/assets/brands/zupreem.webp"],
+    [
+      "src/assets/blue-buffalo-wilderness-adult-grain-free-dry-dog-food.png.webp",
+      "src/assets/products/dogs/dry-food/blue-buffalo-wilderness-adult-grain-free-dry-dog-food.png.webp"
+    ],
+    [
+      "src/assets/burgess-excel-adult-rabbit-nuggets.webp",
+      "src/assets/products/rabbit/burgess-excel-adult-rabbit-nuggets.webp"
+    ],
+    [
+      "src/assets/drools-dental-bone-dog-treat.webp",
+      "src/assets/products/dogs/dental-treats/drools-dental-bone-dog-treat.webp"
+    ],
+    [
+      "src/assets/drools-real-chicken-sausage-treats.webp",
+      "src/assets/products/dogs/meaty-treats/drools-real-chicken-sausage-treats.webp"
+    ],
+    [
+      "src/assets/farmina-nd-chicken-pomegranate-adult-medium-maxi-dry-dog-food.webp",
+      "src/assets/products/dogs/dry-food/farmina-nd-chicken-pomegranate-adult-medium-maxi-dry-dog-food.webp"
+    ],
+    [
+      "src/assets/farmina-nd-chicken-pomegranate-grain-free-cat-food.webp",
+      "src/assets/products/cats/grain-free-food/farmina-nd-chicken-pomegranate-grain-free-cat-food.webp"
+    ],
+    [
+      "src/assets/farmina-vet-life-renal-cat-food.webp",
+      "src/assets/products/cats/prescription-food/farmina-vet-life-renal-cat-food.webp"
+    ],
+    [
+      "src/assets/freshpet-select-roasted-chicken-recipe-dog-food.webp",
+      "src/assets/products/dogs/Fresh-food/freshpet-select-roasted-chicken-recipe-dog-food.webp"
+    ],
+    [
+      "src/assets/friskies-party-mix-original-crunch-cat-treats.webp",
+      "src/assets/products/cats/crunchy-treats/friskies-party-mix-original-crunch-cat-treats.webp"
+    ],
+    [
+      "src/assets/gnawlers-calcium-milk-bone-treats.webp",
+      "src/assets/products/dogs/meaty-treats/gnawlers-calcium-milk-bone-treats.webp"
+    ],
+    [
+      "src/assets/goodies-energy-treat-biscuits.webp",
+      "src/assets/products/dogs/biscuits-cookies/goodies-energy-treat-biscuits.webp"
+    ],
+    [
+      "src/assets/higgins-sunburst-gourmet-hamster-food.webp",
+      "src/assets/products/hamster/higgins-sunburst-gourmet-hamster-food.webp"
+    ],
+    [
+      "src/assets/hills-prescription-diet-cd-multicare-cat-food.webp",
+      "src/assets/products/cats/prescription-food/hills-prescription-diet-cd-multicare-cat-food.webp"
+    ],
+    [
+      "src/assets/hills-prescription-diet-i-d-dog-food.webp",
+      "src/assets/products/dogs/prescription-food/hills-prescription-diet-i-d-dog-food.webp"
+    ],
+    [
+      "src/assets/hills-prescription-diet-metabolic-dog-food.webp",
+      "src/assets/products/dogs/prescription-food/hills-prescription-diet-metabolic-dog-food.webp"
+    ],
+    [
+      "src/assets/hills-science-diet-adult-indoor-cat-food.webp",
+      "src/assets/products/cats/dry-food/hills-science-diet-adult-indoor-cat-food.webp"
+    ],
+    [
+      "src/assets/hills-science-diet-adult-wet-dog-food.webp",
+      "src/assets/products/dogs/wet-food/hills-science-diet-adult-wet-dog-food.webp"
+    ],
+    [
+      "src/assets/kaytee-forti-diet-pro-health-hamster-food.webp",
+      "src/assets/products/hamster/kaytee-forti-diet-pro-health-hamster-food.webp"
+    ],
+    [
+      "src/assets/kaytee-fortidiet-pro-health-rabbit-food.webp",
+      "src/assets/products/rabbit/kaytee-fortidiet-pro-health-rabbit-food.webp"
+    ],
+    [
+      "src/assets/mazuri-hamster-rat-diet.webp",
+      "src/assets/products/hamster/mazuri-hamster-rat-diet.webp"
+    ],
+    [
+      "src/assets/mazuri-timothy-based-rabbit-diet.webp",
+      "src/assets/products/rabbit/mazuri-timothy-based-rabbit-diet.webp"
+    ],
+    [
+      "src/assets/meo-tuna-meaty-cat-treats.webp",
+      "src/assets/products/cats/meaty-treats/meo-tuna-meaty-cat-treats.webp"
+    ],
+    [
+      "src/assets/nom-nom-beef-mash-fresh-dog-food.webp",
+      "src/assets/products/dogs/Fresh-food/nom-nom-beef-mash-fresh-dog-food.webp"
+    ],
+    [
+      "src/assets/oxbow-essentials-adult-rabbit-food.webp",
+      "src/assets/products/rabbit/oxbow-essentials-adult-rabbit-food.webp"
+    ],
+    [
+      "src/assets/pedigree-biscrok-milk-biscuits.webp",
+      "src/assets/products/dogs/biscuits-cookies/pedigree-biscrok-milk-biscuits.webp"
+    ],
+    [
+      "src/assets/pedigree-chicken-wet-dog-food.webp",
+      "src/assets/products/dogs/wet-food/pedigree-chicken-wet-dog-food.webp"
+    ],
+    [
+      "src/assets/pedigree-rodeo-chicken-treats.webp",
+      "src/assets/products/dogs/meaty-treats/pedigree-rodeo-chicken-treats.webp"
+    ],
+    [
+      "src/assets/products/cats/dry-food/royal-canin-indoor-adult-dry-cat-food.webp",
+      "src/assets/royal-canin-indoor-adult-dry-cat-food.webp"
+    ],
+    [
+      "src/assets/products/cats/dry-food/whiskas-ocean-fish-adult-dry-cat-food.webp",
+      "src/assets/whiskas-ocean-fish-adult-dry-cat-food.webp"
+    ],
+    [
+      "src/assets/products/cats/grain-free-food/royal-canin-grain-free-adult-cat-food.webp",
+      "src/assets/royal-canin-grain-free-adult-cat-food.webp"
+    ],
+    [
+      "src/assets/products/cats/kitten-food/purina-pro-plan-kitten-chicken-rice-cat-food.webp",
+      "src/assets/purina-pro-plan-kitten-chicken-rice-cat-food.webp"
+    ],
+    [
+      "src/assets/products/cats/kitten-food/whiskas-kitten-ocean-fish-cat-food.webp",
+      "src/assets/whiskas-kitten-ocean-fish-cat-food.webp"
+    ],
+    [
+      "src/assets/products/cats/meaty-treats/purepet-ocean-fish-meaty-cat-treats.webp",
+      "src/assets/purepet-ocean-fish-meaty-cat-treats.webp"
+    ],
+    [
+      "src/assets/products/cats/meaty-treats/temptations-chicken-flavor-cat-treats.webp",
+      "src/assets/temptations-chicken-flavor-cat-treats.webp"
+    ],
+    [
+      "src/assets/products/cats/prescription-food/royal-canin-urinary-so-cat-food.webp",
+      "src/assets/royal-canin-urinary-so-cat-food.webp"
+    ],
+    [
+      "src/assets/products/cats/wet-food/purina-pro-plan-adult-wet-cat-food.webp",
+      "src/assets/purina-pro-plan-adult-wet-cat-food.webp"
+    ],
+    [
+      "src/assets/products/cats/wet-food/whiskas-ocean-fish-wet-cat-food.webp",
+      "src/assets/whiskas-ocean-fish-wet-cat-food.webp"
+    ],
+    [
+      "src/assets/products/dogs/dry-food/purina-pro-plan-complete-essentials-adult-dry-dog-food.webp",
+      "src/assets/purina-pro-plan-complete-essentials-adult-dry-dog-food.webp"
+    ],
+    [
+      "src/assets/products/dogs/dry-food/royal-canin-maxi-adult-dry-dog-food.png.webp",
+      "src/assets/royal-canin-maxi-adult-dry-dog-food.png.webp"
+    ],
+    [
+      "src/assets/products/dogs/prescription-food/royal-canin-gastrointestinal-dry-dog-food1.webp",
+      "src/assets/royal-canin-gastrointestinal-dry-dog-food1.webp"
+    ],
+    [
+      "src/assets/products/dogs/wet-food/purina-pro-plan-savory-wet-dog-food.webp",
+      "src/assets/purina-pro-plan-savory-wet-dog-food.webp"
+    ],
+    [
+      "src/assets/products/hamster/vitakraft-vita-smart-hamster-food.webp",
+      "src/assets/vitakraft-vita-smart-hamster-food.webp"
+    ],
+    [
+      "src/assets/products/rabbit/supreme-science-selective-rabbit-food.webp",
+      "src/assets/supreme-science-selective-rabbit-food.webp"
+    ],
+    [
+      "src/assets/products/rabbit/vitakraft-vita-smart-rabbit-food.webp",
+      "src/assets/vitakraft-vita-smart-rabbit-food.webp"
+    ]
+  ],
+  "changedFiles": [],
+  "safeToDelete": [
+    "public/elegance.webp",
+    "public/persian cat.webp",
+    "src/assets/banners/dog-banner.webp",
+    "src/assets/banners/hero-banner.webp",
+    "src/assets/banners/offer-banner.webp",
+    "src/assets/banners/trust-banner.webp",
+    "src/assets/bird-exclusive.webp",
+    "src/assets/bird.webp",
+    "src/assets/cat crunch.webp",
+    "src/assets/cat-banner.webp",
+    "src/assets/cat-dropdown-banner/cat-crunchy-treats.webp",
+    "src/assets/cat-dropdown-banner/creamy-treats.webp",
+    "src/assets/cat-dropdown-banner/dry-food-cats-banner.webp",
+    "src/assets/cat-dropdown-banner/grain-free-food-cat-banner.webp",
+    "src/assets/cat-dropdown-banner/kitten-food-banner.webp",
+    "src/assets/cat-dropdown-banner/meaty-cat-food.webp",
+    "src/assets/cat-dropdown-banner/prescription-cat-food-banner.webp",
+    "src/assets/cat-dropdown-banner/wet-food-cat-banner.webp",
+    "src/assets/cat-exclusive.webp",
+    "src/assets/cat.webp",
+    "src/assets/categories/bird.webp",
+    "src/assets/categories/cat.webp",
+    "src/assets/categories/dog.webp",
+    "src/assets/categories/fish.webp",
+    "src/assets/categories/hamster.webp",
+    "src/assets/categories/rabbit.webp",
+    "src/assets/creamy treats.webp",
+    "src/assets/dog dental treats.webp",
+    "src/assets/dog exclusive.webp",
+    "src/assets/dog meaty.webp",
+    "src/assets/dog-dropdown-banner/biscuits-cookies-dog-food-banner.webp",
+    "src/assets/dog-dropdown-banner/dry-food-banner1.webp",
+    "src/assets/dog-dropdown-banner/fresh-food-banner.webp",
+    "src/assets/dog-dropdown-banner/grain-free-food-banner.webp",
+    "src/assets/dog-dropdown-banner/meaty-treats-banner.webp",
+    "src/assets/dog-dropdown-banner/prescription-dog-food-banner.webp",
+    "src/assets/dog-dropdown-banner/puppy-food-banner.webp",
+    "src/assets/dog-dropdown-banner/puppy-treats-banner.webp",
+    "src/assets/dog-dropdown-banner/vegetarian-food-banner.webp",
+    "src/assets/dog-dropdown-banner/wet-dog-food-banner.webp",
+    "src/assets/dog.webp",
+    "src/assets/dry-dog-food.webp",
+    "src/assets/Exclusive Category/bird-exclusive.webp",
+    "src/assets/Exclusive Category/cat-exclusive.webp",
+    "src/assets/Exclusive Category/dog exclusive.webp",
+    "src/assets/Exclusive Category/fish-exclusive.webp",
+    "src/assets/Exclusive Category/hamster-exclusive.webp",
+    "src/assets/explore-pick-pamper/cat crunch.webp",
+    "src/assets/explore-pick-pamper/creamy treats.webp",
+    "src/assets/explore-pick-pamper/dog dental treats.webp",
+    "src/assets/explore-pick-pamper/dog meaty.webp",
+    "src/assets/explore-pick-pamper/dry-dog-food.webp",
+    "src/assets/explore-pick-pamper/prescription-diet.webp",
+    "src/assets/explore-pick-pamper/puppy-kitten-food.webp",
+    "src/assets/explore-pick-pamper/wet-dog-food.webp",
+    "src/assets/ezstore-logo-optimized.webp",
+    "src/assets/fish-exclusive.webp",
+    "src/assets/fish.webp",
+    "src/assets/hamster-exclusive.webp",
+    "src/assets/hamster.webp",
+    "src/assets/hero-banner.webp",
+    "src/assets/logo/easy-returns.webp",
+    "src/assets/logo/ezstore-logo-optimized.webp",
+    "src/assets/logo/fast-delivery.webp",
+    "src/assets/logo/secure-payment.webp",
+    "src/assets/offer-banner.webp",
+    "src/assets/payments/apple-pay.webp",
+    "src/assets/payments/card.webp",
+    "src/assets/payments/cod.webp",
+    "src/assets/payments/google-pay.webp",
+    "src/assets/payments/net banking.webp",
+    "src/assets/payments/paypal.webp",
+    "src/assets/prescription-diet.webp",
+    "src/assets/prescription-dog-food-banner.webp",
+    "src/assets/products/birds/higgins-sunburst-gourmet-parrot-food.webp",
+    "src/assets/products/birds/kaytee-forti-diet-pro-health-parakeet-food.webp",
+    "src/assets/products/birds/versele-laga-prestige-budgies-bird-food.webp",
+    "src/assets/products/birds/vitapol-economy-parrot-food.webp",
+    "src/assets/products/birds/wild-harvest-daily-blend-parakeet-food.webp",
+    "src/assets/products/birds/zu-preem-fruitblend-small-bird-food.webp",
+    "src/assets/products/cats/creamy-treats/delectables-squeeze-up-tuna-cat-treat.webp",
+    "src/assets/products/cats/creamy-treats/inaba-churu-tuna-creamy-cat-treat.webp",
+    "src/assets/products/cats/creamy-treats/meo-creamy-treats-bonito-cat-treat.webp",
+    "src/assets/products/cats/creamy-treats/sheba-creamy-snacks-tuna-cat-treat.webp",
+    "src/assets/products/cats/creamy-treats/temptations-creamy-puree-chicken-cat-treat.webp",
+    "src/assets/products/cats/crunchy-treats/dreamies-cheese-crunchy-cat-treats.webp",
+    "src/assets/products/cats/crunchy-treats/friskies-party-mix-original-crunch-cat-treats.webp",
+    "src/assets/products/cats/crunchy-treats/meo-crunchy-cat-treats-seafood-flavor.webp",
+    "src/assets/products/cats/crunchy-treats/purepet-crunchy-cat-treats-ocean-fish-flavor.webp",
+    "src/assets/products/cats/crunchy-treats/temptations-mixups-backyard-cookout-cat-treats.webp",
+    "src/assets/products/cats/dry-food/hills-science-diet-adult-indoor-cat-food.webp",
+    "src/assets/products/cats/dry-food/meo-adult-ocean-fish-dry-cat-food.webp",
+    "src/assets/products/cats/dry-food/purina-pro-plan-complete-essentials-adult-cat-food.webp",
+    "src/assets/products/cats/dry-food/royal-canin-indoor-adult-dry-cat-food.webp",
+    "src/assets/products/cats/dry-food/whiskas-ocean-fish-adult-dry-cat-food.webp",
+    "src/assets/products/cats/grain-free-food/farmina-nd-chicken-pomegranate-grain-free-cat-food.webp",
+    "src/assets/products/cats/grain-free-food/orijen-original-grain-free-cat-food.webp",
+    "src/assets/products/cats/grain-free-food/royal-canin-grain-free-adult-cat-food.webp",
+    "src/assets/products/cats/grain-free-food/taste-of-the-wild-rocky-mountain-grain-free-cat-food.webp",
+    "src/assets/products/cats/kitten-food/farmina-nd-kitten-chicken-pomegranate-cat-food.webp",
+    "src/assets/products/cats/kitten-food/hills-science-diet-kitten-cat-food.webp",
+    "src/assets/products/cats/kitten-food/purina-pro-plan-kitten-chicken-rice-cat-food.webp",
+    "src/assets/products/cats/kitten-food/royal-canin-kitten-dry-cat-food.webp",
+    "src/assets/products/cats/kitten-food/whiskas-kitten-ocean-fish-cat-food.webp",
+    "src/assets/products/cats/meaty-treats/friskies-chicken-meaty-bites-cat-treats.webp",
+    "src/assets/products/cats/meaty-treats/meo-tuna-meaty-cat-treats.webp",
+    "src/assets/products/cats/meaty-treats/purepet-ocean-fish-meaty-cat-treats.webp",
+    "src/assets/products/cats/meaty-treats/sheba-chicken-meaty-cat-treats.webp",
+    "src/assets/products/cats/prescription-food/farmina-vet-life-renal-cat-food.webp",
+    "src/assets/products/cats/prescription-food/hills-prescription-diet-cd-multicare-cat-food.webp",
+    "src/assets/products/cats/prescription-food/purina-pro-plan-veterinary-ur-urinary-cat-food.webp",
+    "src/assets/products/cats/prescription-food/royal-canin-hypoallergenic-cat-food.webp",
+    "src/assets/products/cats/prescription-food/royal-canin-urinary-so-cat-food.webp",
+    "src/assets/products/cats/wet-food/fancy-feast-grilled-tuna-wet-cat-food.webp",
+    "src/assets/products/cats/wet-food/purina-pro-plan-adult-wet-cat-food.webp",
+    "src/assets/products/cats/wet-food/royal-canin-instinctive-adult-wet-cat-food.webp",
+    "src/assets/products/cats/wet-food/sheba-tuna-premium-wet-cat-food.webp",
+    "src/assets/products/cats/wet-food/whiskas-ocean-fish-wet-cat-food.webp",
+    "src/assets/products/dogs/biscuits-cookies/drools-absolute-calcium-bone-biscuits.webp",
+    "src/assets/products/dogs/biscuits-cookies/goodies-energy-treat-biscuits.webp",
+    "src/assets/products/dogs/biscuits-cookies/jerhigh-chicken-cookies.webp",
+    "src/assets/products/dogs/biscuits-cookies/pedigree-biscrok-milk-biscuits.webp",
+    "src/assets/products/dogs/biscuits-cookies/smartheart-dog-biscuits-milk.webp",
+    "src/assets/products/dogs/dental-treats/drools-dental-bone-dog-treat.webp",
+    "src/assets/products/dogs/dental-treats/jerhigh-dental-stick-chicken.webp",
+    "src/assets/products/dogs/dental-treats/pedigree-dentastix-daily-oral-care.webp",
+    "src/assets/products/dogs/dental-treats/purepet-dental-chew-stick.webp",
+    "src/assets/products/dogs/dental-treats/smartheart-dental-stick-dog-treat.webp",
+    "src/assets/products/dogs/dry-food/farmina-nd-chicken-pomegranate-adult-medium-maxi-dry-dog-food.webp",
+    "src/assets/products/dogs/dry-food/purina-pro-plan-complete-essentials-adult-dry-dog-food.webp",
+    "src/assets/products/dogs/dry-food/royal-canin-maxi-adult-dry-dog-food.png.webp",
+    "src/assets/products/dogs/Fresh-food/freshpet-select-roasted-chicken-recipe-dog-food.webp",
+    "src/assets/products/dogs/Fresh-food/nom-nom-beef-mash-fresh-dog-food.webp",
+    "src/assets/products/dogs/Fresh-food/ollie-chicken-dish-fresh-dog-food.webp",
+    "src/assets/products/dogs/Fresh-food/spot-tango-beef-millet-fresh-dog-food.webp",
+    "src/assets/products/dogs/Fresh-food/the-farmers-dog-turkey-recipe-fresh-dog-food.webp",
+    "src/assets/products/dogs/meaty-treats/drools-real-chicken-sausage-treats.webp",
+    "src/assets/products/dogs/meaty-treats/gnawlers-calcium-milk-bone-treats.webp",
+    "src/assets/products/dogs/meaty-treats/jerhigh-chicken-jerky-treats.webp",
+    "src/assets/products/dogs/meaty-treats/pedigree-rodeo-chicken-treats.webp",
+    "src/assets/products/dogs/prescription-food/farmina-vet-life-renal-dog-food.webp",
+    "src/assets/products/dogs/prescription-food/hills-prescription-diet-i-d-dog-food.webp",
+    "src/assets/products/dogs/prescription-food/hills-prescription-diet-metabolic-dog-food.webp",
+    "src/assets/products/dogs/prescription-food/royal-canin-gastrointestinal-dry-dog-food1.webp",
+    "src/assets/products/dogs/prescription-food/royal-canin-hypoallergenic-dog-food.webp",
+    "src/assets/products/dogs/puppyFood/drools-puppy-chicken-egg-dry-food.webp",
+    "src/assets/products/dogs/puppyFood/farmina-nd-puppy-medium-maxi-food.webp",
+    "src/assets/products/dogs/puppyFood/pedigree-puppy-chicken-milk-dry-food.webp",
+    "src/assets/products/dogs/puppyFood/royal-canin-mini-puppy-dry-dog-food.webp",
+    "src/assets/products/dogs/vegetarian-food/drools-vegetarian-adult-dog-food.webp",
+    "src/assets/products/dogs/vegetarian-food/farmina-vet-life-vegetarian-formula-dog-food.webp",
+    "src/assets/products/dogs/vegetarian-food/pedigree-vegetarian-adult-dry-dog-food.webp",
+    "src/assets/products/dogs/vegetarian-food/purepet-vegetarian-adult-dog-food.webp",
+    "src/assets/products/dogs/vegetarian-food/royal-canin-vegetarian-adult-dry-dog-food.webp",
+    "src/assets/products/dogs/wet-food/hills-science-diet-adult-wet-dog-food.webp",
+    "src/assets/products/dogs/wet-food/pedigree-chicken-wet-dog-food.webp",
+    "src/assets/products/dogs/wet-food/purina-pro-plan-savory-wet-dog-food.webp",
+    "src/assets/products/dogs/wet-food/royal-canin-adult-wet-dog-food.webp",
+    "src/assets/products/fish/api-tropical-pellets-fish-food.webp",
+    "src/assets/products/fish/fluval-bug-bites-tropical-formula-fish-food.webp",
+    "src/assets/products/fish/hikari-tropical-micro-pellets-fish-food.webp",
+    "src/assets/products/fish/omega-one-super-color-flakes-fish-food.webp",
+    "src/assets/products/fish/sera-vipan-nature-tropical-fish-food.webp",
+    "src/assets/products/fish/tetra-tetramin-tropical-flakes-fish-food.webp",
+    "src/assets/products/hamster/higgins-sunburst-gourmet-hamster-food.webp",
+    "src/assets/products/hamster/kaytee-forti-diet-pro-health-hamster-food.webp",
+    "src/assets/products/hamster/mazuri-hamster-rat-diet.webp",
+    "src/assets/products/hamster/oxbow-essentials-hamster-food.webp",
+    "src/assets/products/hamster/vitakraft-vita-smart-hamster-food.webp",
+    "src/assets/products/rabbit/burgess-excel-adult-rabbit-nuggets.webp",
+    "src/assets/products/rabbit/kaytee-fortidiet-pro-health-rabbit-food.webp",
+    "src/assets/products/rabbit/mazuri-timothy-based-rabbit-diet.webp",
+    "src/assets/products/rabbit/oxbow-essentials-adult-rabbit-food.webp",
+    "src/assets/products/rabbit/supreme-science-selective-rabbit-food.webp",
+    "src/assets/products/rabbit/vitakraft-vita-smart-rabbit-food.webp",
+    "src/assets/puppy-kitten-food.webp",
+    "src/assets/rabbit.webp",
+    "src/assets/small-pets.webp",
+    "src/assets/trust-banner.webp",
+    "src/assets/wet-dog-food.webp"
+  ],
+  "unused": [
+    "public/elegance.webp",
+    "public/persian cat.webp",
+    "src/assets/acana-classics-red-meat-recipe-dry-dog-food.webp",
+    "src/assets/acana-puppy-recipe-dry-dog-food.webp",
+    "src/assets/acana-wild-prairie-grain-free-cat-food.webp",
+    "src/assets/api-tropical-pellets-fish-food.webp",
+    "src/assets/banners/dog-banner.webp",
+    "src/assets/banners/hero-banner.webp",
+    "src/assets/banners/offer-banner.webp",
+    "src/assets/banners/trust-banner.webp",
+    "src/assets/bird-exclusive.webp",
+    "src/assets/bird.webp",
+    "src/assets/biscuits-cookies-dog-food-banner.webp",
+    "src/assets/blog-banner/blogs-banner.webp",
+    "src/assets/blogs-banner.webp",
+    "src/assets/blue-buffalo-homestyle-recipe-wet-dog-food.webp",
+    "src/assets/BlueBuffelopng.webp",
+    "src/assets/cat crunch.webp",
+    "src/assets/cat-banner.webp",
+    "src/assets/cat-crunchy-treats.webp",
+    "src/assets/cat-dropdown-banner/cat-crunchy-treats.webp",
+    "src/assets/cat-dropdown-banner/creamy-treats.webp",
+    "src/assets/cat-dropdown-banner/dry-food-cats-banner.webp",
+    "src/assets/cat-dropdown-banner/grain-free-food-cat-banner.webp",
+    "src/assets/cat-dropdown-banner/kitten-food-banner.webp",
+    "src/assets/cat-dropdown-banner/meaty-cat-food.webp",
+    "src/assets/cat-dropdown-banner/prescription-cat-food-banner.webp",
+    "src/assets/cat-dropdown-banner/wet-food-cat-banner.webp",
+    "src/assets/cat-exclusive.webp",
+    "src/assets/cat.webp",
+    "src/assets/categories/bird.webp",
+    "src/assets/categories/cat.webp",
+    "src/assets/categories/dog.webp",
+    "src/assets/categories/fish.webp",
+    "src/assets/categories/hamster.webp",
+    "src/assets/categories/rabbit.webp",
+    "src/assets/creamy treats.webp",
+    "src/assets/creamy-treats.webp",
+    "src/assets/delectables-squeeze-up-tuna-cat-treat.webp",
+    "src/assets/dog dental treats.webp",
+    "src/assets/dog exclusive.webp",
+    "src/assets/dog meaty.webp",
+    "src/assets/dog-banner.webp",
+    "src/assets/dog-dropdown-banner/biscuits-cookies-dog-food-banner.webp",
+    "src/assets/dog-dropdown-banner/dry-food-banner1.webp",
+    "src/assets/dog-dropdown-banner/fresh-food-banner.webp",
+    "src/assets/dog-dropdown-banner/grain-free-food-banner.webp",
+    "src/assets/dog-dropdown-banner/meaty-treats-banner.webp",
+    "src/assets/dog-dropdown-banner/prescription-dog-food-banner.webp",
+    "src/assets/dog-dropdown-banner/puppy-food-banner.webp",
+    "src/assets/dog-dropdown-banner/puppy-treats-banner.webp",
+    "src/assets/dog-dropdown-banner/vegetarian-food-banner.webp",
+    "src/assets/dog-dropdown-banner/wet-dog-food-banner.webp",
+    "src/assets/dog.webp",
+    "src/assets/dreamies-cheese-crunchy-cat-treats.webp",
+    "src/assets/drools-absolute-calcium-bone-biscuits.webp",
+    "src/assets/drools-puppy-chicken-egg-dry-food.webp",
+    "src/assets/drools-vegetarian-adult-dog-food.webp",
+    "src/assets/dry-dog-food.webp",
+    "src/assets/dry-food-banner1.webp",
+    "src/assets/dry-food-cats-banner.webp",
+    "src/assets/Exclusive Category/bird-exclusive.webp",
+    "src/assets/Exclusive Category/cat-exclusive.webp",
+    "src/assets/Exclusive Category/dog exclusive.webp",
+    "src/assets/Exclusive Category/fish-exclusive.webp",
+    "src/assets/Exclusive Category/hamster-exclusive.webp",
+    "src/assets/explore-pick-pamper/cat crunch.webp",
+    "src/assets/explore-pick-pamper/creamy treats.webp",
+    "src/assets/explore-pick-pamper/dog dental treats.webp",
+    "src/assets/explore-pick-pamper/dog meaty.webp",
+    "src/assets/explore-pick-pamper/dry-dog-food.webp",
+    "src/assets/explore-pick-pamper/prescription-diet.webp",
+    "src/assets/explore-pick-pamper/puppy-kitten-food.webp",
+    "src/assets/explore-pick-pamper/wet-dog-food.webp",
+    "src/assets/ezstore-logo-optimized.webp",
+    "src/assets/fancy-feast-grilled-tuna-wet-cat-food.webp",
+    "src/assets/farmina-nd-kitten-chicken-pomegranate-cat-food.webp",
+    "src/assets/farmina-nd-puppy-medium-maxi-food.webp",
+    "src/assets/farmina-vet-life-renal-dog-food.webp",
+    "src/assets/farmina-vet-life-vegetarian-formula-dog-food.webp",
+    "src/assets/fish-exclusive.webp",
+    "src/assets/fish.webp",
+    "src/assets/fluval-bug-bites-tropical-formula-fish-food.webp",
+    "src/assets/fresh-food-banner.webp",
+    "src/assets/friskies-chicken-meaty-bites-cat-treats.webp",
+    "src/assets/grain-free-food-banner.webp",
+    "src/assets/grain-free-food-cat-banner.webp",
+    "src/assets/hamster-exclusive.webp",
+    "src/assets/hamster.webp",
+    "src/assets/hero-banner.webp",
+    "src/assets/hero.webp",
+    "src/assets/higgins-sunburst-gourmet-parrot-food.webp",
+    "src/assets/hikari-tropical-micro-pellets-fish-food.webp",
+    "src/assets/hills-science-diet-kitten-cat-food.webp",
+    "src/assets/inaba-churu-tuna-creamy-cat-treat.webp",
+    "src/assets/jerhigh-chicken-cookies.webp",
+    "src/assets/jerhigh-chicken-jerky-treats.webp",
+    "src/assets/jerhigh-dental-stick-chicken.webp",
+    "src/assets/kaytee-forti-diet-pro-health-parakeet-food.webp",
+    "src/assets/kitten-food-banner.webp",
+    "src/assets/logo/easy-returns.webp",
+    "src/assets/logo/ezstore-logo-optimized.webp",
+    "src/assets/logo/fast-delivery.webp",
+    "src/assets/logo/secure-payment.webp",
+    "src/assets/meaty-cat-food.webp",
+    "src/assets/meaty-treats-banner.webp",
+    "src/assets/meo-adult-ocean-fish-dry-cat-food.webp",
+    "src/assets/meo-creamy-treats-bonito-cat-treat.webp",
+    "src/assets/meo-crunchy-cat-treats-seafood-flavor.webp",
+    "src/assets/offer-banner.webp",
+    "src/assets/ollie-chicken-dish-fresh-dog-food.webp",
+    "src/assets/omega-one-super-color-flakes-fish-food.webp",
+    "src/assets/orijen-original-grain-free-cat-food.webp",
+    "src/assets/oxbow-essentials-hamster-food.webp",
+    "src/assets/payments/apple-pay.webp",
+    "src/assets/payments/card.webp",
+    "src/assets/payments/cod.webp",
+    "src/assets/payments/google-pay.webp",
+    "src/assets/payments/net banking.webp",
+    "src/assets/payments/paypal.webp",
+    "src/assets/pedigree-dentastix-daily-oral-care.webp",
+    "src/assets/pedigree-puppy-chicken-milk-dry-food.webp",
+    "src/assets/pedigree-vegetarian-adult-dry-dog-food.webp",
+    "src/assets/prescription-cat-food-banner.webp",
+    "src/assets/prescription-diet.webp",
+    "src/assets/prescription-dog-food-banner.webp",
+    "src/assets/products/birds/higgins-sunburst-gourmet-parrot-food.webp",
+    "src/assets/products/birds/kaytee-forti-diet-pro-health-parakeet-food.webp",
+    "src/assets/products/birds/versele-laga-prestige-budgies-bird-food.webp",
+    "src/assets/products/birds/vitapol-economy-parrot-food.webp",
+    "src/assets/products/birds/wild-harvest-daily-blend-parakeet-food.webp",
+    "src/assets/products/birds/zu-preem-fruitblend-small-bird-food.webp",
+    "src/assets/products/cats/creamy-treats/delectables-squeeze-up-tuna-cat-treat.webp",
+    "src/assets/products/cats/creamy-treats/inaba-churu-tuna-creamy-cat-treat.webp",
+    "src/assets/products/cats/creamy-treats/meo-creamy-treats-bonito-cat-treat.webp",
+    "src/assets/products/cats/creamy-treats/sheba-creamy-snacks-tuna-cat-treat.webp",
+    "src/assets/products/cats/creamy-treats/temptations-creamy-puree-chicken-cat-treat.webp",
+    "src/assets/products/cats/crunchy-treats/dreamies-cheese-crunchy-cat-treats.webp",
+    "src/assets/products/cats/crunchy-treats/friskies-party-mix-original-crunch-cat-treats.webp",
+    "src/assets/products/cats/crunchy-treats/meo-crunchy-cat-treats-seafood-flavor.webp",
+    "src/assets/products/cats/crunchy-treats/purepet-crunchy-cat-treats-ocean-fish-flavor.webp",
+    "src/assets/products/cats/crunchy-treats/temptations-mixups-backyard-cookout-cat-treats.webp",
+    "src/assets/products/cats/dry-food/hills-science-diet-adult-indoor-cat-food.webp",
+    "src/assets/products/cats/dry-food/meo-adult-ocean-fish-dry-cat-food.webp",
+    "src/assets/products/cats/dry-food/purina-pro-plan-complete-essentials-adult-cat-food.webp",
+    "src/assets/products/cats/dry-food/royal-canin-indoor-adult-dry-cat-food.webp",
+    "src/assets/products/cats/dry-food/whiskas-ocean-fish-adult-dry-cat-food.webp",
+    "src/assets/products/cats/grain-free-food/acana-wild-prairie-grain-free-cat-food.webp",
+    "src/assets/products/cats/grain-free-food/farmina-nd-chicken-pomegranate-grain-free-cat-food.webp",
+    "src/assets/products/cats/grain-free-food/orijen-original-grain-free-cat-food.webp",
+    "src/assets/products/cats/grain-free-food/royal-canin-grain-free-adult-cat-food.webp",
+    "src/assets/products/cats/grain-free-food/taste-of-the-wild-rocky-mountain-grain-free-cat-food.webp",
+    "src/assets/products/cats/kitten-food/farmina-nd-kitten-chicken-pomegranate-cat-food.webp",
+    "src/assets/products/cats/kitten-food/hills-science-diet-kitten-cat-food.webp",
+    "src/assets/products/cats/kitten-food/purina-pro-plan-kitten-chicken-rice-cat-food.webp",
+    "src/assets/products/cats/kitten-food/royal-canin-kitten-dry-cat-food.webp",
+    "src/assets/products/cats/kitten-food/whiskas-kitten-ocean-fish-cat-food.webp",
+    "src/assets/products/cats/meaty-treats/friskies-chicken-meaty-bites-cat-treats.webp",
+    "src/assets/products/cats/meaty-treats/meo-tuna-meaty-cat-treats.webp",
+    "src/assets/products/cats/meaty-treats/purepet-ocean-fish-meaty-cat-treats.webp",
+    "src/assets/products/cats/meaty-treats/sheba-chicken-meaty-cat-treats.webp",
+    "src/assets/products/cats/meaty-treats/temptations-chicken-flavor-cat-treats.webp",
+    "src/assets/products/cats/prescription-food/farmina-vet-life-renal-cat-food.webp",
+    "src/assets/products/cats/prescription-food/hills-prescription-diet-cd-multicare-cat-food.webp",
+    "src/assets/products/cats/prescription-food/purina-pro-plan-veterinary-ur-urinary-cat-food.webp",
+    "src/assets/products/cats/prescription-food/royal-canin-hypoallergenic-cat-food.webp",
+    "src/assets/products/cats/prescription-food/royal-canin-urinary-so-cat-food.webp",
+    "src/assets/products/cats/wet-food/fancy-feast-grilled-tuna-wet-cat-food.webp",
+    "src/assets/products/cats/wet-food/purina-pro-plan-adult-wet-cat-food.webp",
+    "src/assets/products/cats/wet-food/royal-canin-instinctive-adult-wet-cat-food.webp",
+    "src/assets/products/cats/wet-food/sheba-tuna-premium-wet-cat-food.webp",
+    "src/assets/products/cats/wet-food/whiskas-ocean-fish-wet-cat-food.webp",
+    "src/assets/products/dogs/biscuits-cookies/drools-absolute-calcium-bone-biscuits.webp",
+    "src/assets/products/dogs/biscuits-cookies/goodies-energy-treat-biscuits.webp",
+    "src/assets/products/dogs/biscuits-cookies/jerhigh-chicken-cookies.webp",
+    "src/assets/products/dogs/biscuits-cookies/pedigree-biscrok-milk-biscuits.webp",
+    "src/assets/products/dogs/biscuits-cookies/smartheart-dog-biscuits-milk.webp",
+    "src/assets/products/dogs/dental-treats/drools-dental-bone-dog-treat.webp",
+    "src/assets/products/dogs/dental-treats/jerhigh-dental-stick-chicken.webp",
+    "src/assets/products/dogs/dental-treats/pedigree-dentastix-daily-oral-care.webp",
+    "src/assets/products/dogs/dental-treats/purepet-dental-chew-stick.webp",
+    "src/assets/products/dogs/dental-treats/smartheart-dental-stick-dog-treat.webp",
+    "src/assets/products/dogs/dry-food/acana-classics-red-meat-recipe-dry-dog-food.webp",
+    "src/assets/products/dogs/dry-food/blue-buffalo-wilderness-adult-grain-free-dry-dog-food.png.webp",
+    "src/assets/products/dogs/dry-food/farmina-nd-chicken-pomegranate-adult-medium-maxi-dry-dog-food.webp",
+    "src/assets/products/dogs/dry-food/purina-pro-plan-complete-essentials-adult-dry-dog-food.webp",
+    "src/assets/products/dogs/dry-food/royal-canin-maxi-adult-dry-dog-food.png.webp",
+    "src/assets/products/dogs/Fresh-food/freshpet-select-roasted-chicken-recipe-dog-food.webp",
+    "src/assets/products/dogs/Fresh-food/nom-nom-beef-mash-fresh-dog-food.webp",
+    "src/assets/products/dogs/Fresh-food/ollie-chicken-dish-fresh-dog-food.webp",
+    "src/assets/products/dogs/Fresh-food/spot-tango-beef-millet-fresh-dog-food.webp",
+    "src/assets/products/dogs/Fresh-food/the-farmers-dog-turkey-recipe-fresh-dog-food.webp",
+    "src/assets/products/dogs/meaty-treats/drools-real-chicken-sausage-treats.webp",
+    "src/assets/products/dogs/meaty-treats/gnawlers-calcium-milk-bone-treats.webp",
+    "src/assets/products/dogs/meaty-treats/jerhigh-chicken-jerky-treats.webp",
+    "src/assets/products/dogs/meaty-treats/pedigree-rodeo-chicken-treats.webp",
+    "src/assets/products/dogs/meaty-treats/smartheart-chicken-stick-treats.webp",
+    "src/assets/products/dogs/prescription-food/farmina-vet-life-renal-dog-food.webp",
+    "src/assets/products/dogs/prescription-food/hills-prescription-diet-i-d-dog-food.webp",
+    "src/assets/products/dogs/prescription-food/hills-prescription-diet-metabolic-dog-food.webp",
+    "src/assets/products/dogs/prescription-food/royal-canin-gastrointestinal-dry-dog-food1.webp",
+    "src/assets/products/dogs/prescription-food/royal-canin-hypoallergenic-dog-food.webp",
+    "src/assets/products/dogs/puppyFood/acana-puppy-recipe-dry-dog-food.webp",
+    "src/assets/products/dogs/puppyFood/drools-puppy-chicken-egg-dry-food.webp",
+    "src/assets/products/dogs/puppyFood/farmina-nd-puppy-medium-maxi-food.webp",
+    "src/assets/products/dogs/puppyFood/pedigree-puppy-chicken-milk-dry-food.webp",
+    "src/assets/products/dogs/puppyFood/royal-canin-mini-puppy-dry-dog-food.webp",
+    "src/assets/products/dogs/vegetarian-food/drools-vegetarian-adult-dog-food.webp",
+    "src/assets/products/dogs/vegetarian-food/farmina-vet-life-vegetarian-formula-dog-food.webp",
+    "src/assets/products/dogs/vegetarian-food/pedigree-vegetarian-adult-dry-dog-food.webp",
+    "src/assets/products/dogs/vegetarian-food/purepet-vegetarian-adult-dog-food.webp",
+    "src/assets/products/dogs/vegetarian-food/royal-canin-vegetarian-adult-dry-dog-food.webp",
+    "src/assets/products/dogs/wet-food/blue-buffalo-homestyle-recipe-wet-dog-food.webp",
+    "src/assets/products/dogs/wet-food/hills-science-diet-adult-wet-dog-food.webp",
+    "src/assets/products/dogs/wet-food/pedigree-chicken-wet-dog-food.webp",
+    "src/assets/products/dogs/wet-food/purina-pro-plan-savory-wet-dog-food.webp",
+    "src/assets/products/dogs/wet-food/royal-canin-adult-wet-dog-food.webp",
+    "src/assets/products/fish/api-tropical-pellets-fish-food.webp",
+    "src/assets/products/fish/fluval-bug-bites-tropical-formula-fish-food.webp",
+    "src/assets/products/fish/hikari-tropical-micro-pellets-fish-food.webp",
+    "src/assets/products/fish/omega-one-super-color-flakes-fish-food.webp",
+    "src/assets/products/fish/sera-vipan-nature-tropical-fish-food.webp",
+    "src/assets/products/fish/tetra-tetramin-tropical-flakes-fish-food.webp",
+    "src/assets/products/hamster/higgins-sunburst-gourmet-hamster-food.webp",
+    "src/assets/products/hamster/kaytee-forti-diet-pro-health-hamster-food.webp",
+    "src/assets/products/hamster/mazuri-hamster-rat-diet.webp",
+    "src/assets/products/hamster/oxbow-essentials-hamster-food.webp",
+    "src/assets/products/hamster/vitakraft-vita-smart-hamster-food.webp",
+    "src/assets/products/rabbit/burgess-excel-adult-rabbit-nuggets.webp",
+    "src/assets/products/rabbit/kaytee-fortidiet-pro-health-rabbit-food.webp",
+    "src/assets/products/rabbit/mazuri-timothy-based-rabbit-diet.webp",
+    "src/assets/products/rabbit/oxbow-essentials-adult-rabbit-food.webp",
+    "src/assets/products/rabbit/supreme-science-selective-rabbit-food.webp",
+    "src/assets/products/rabbit/vitakraft-vita-smart-rabbit-food.webp",
+    "src/assets/puppy-food-banner.webp",
+    "src/assets/puppy-kitten-food.webp",
+    "src/assets/puppy-treats-banner.webp",
+    "src/assets/purepet-crunchy-cat-treats-ocean-fish-flavor.webp",
+    "src/assets/purepet-dental-chew-stick.webp",
+    "src/assets/purepet-vegetarian-adult-dog-food.webp",
+    "src/assets/purina-pro-plan-complete-essentials-adult-cat-food.webp",
+    "src/assets/purina-pro-plan-veterinary-ur-urinary-cat-food.webp",
+    "src/assets/rabbit.webp",
+    "src/assets/royal-canin-adult-wet-dog-food.webp",
+    "src/assets/royal-canin-hypoallergenic-cat-food.webp",
+    "src/assets/royal-canin-hypoallergenic-dog-food.webp",
+    "src/assets/royal-canin-instinctive-adult-wet-cat-food.webp",
+    "src/assets/royal-canin-kitten-dry-cat-food.webp",
+    "src/assets/royal-canin-mini-puppy-dry-dog-food.webp",
+    "src/assets/royal-canin-vegetarian-adult-dry-dog-food.webp",
+    "src/assets/sera-vipan-nature-tropical-fish-food.webp",
+    "src/assets/sheba-chicken-meaty-cat-treats.webp",
+    "src/assets/sheba-creamy-snacks-tuna-cat-treat.webp",
+    "src/assets/sheba-tuna-premium-wet-cat-food.webp",
+    "src/assets/small-pets.webp",
+    "src/assets/smartheart-chicken-stick-treats.webp",
+    "src/assets/smartheart-dental-stick-dog-treat.webp",
+    "src/assets/smartheart-dog-biscuits-milk.webp",
+    "src/assets/spot-tango-beef-millet-fresh-dog-food.webp",
+    "src/assets/taste-of-the-wild-rocky-mountain-grain-free-cat-food.webp",
+    "src/assets/temptaions..webp",
+    "src/assets/temptations-creamy-puree-chicken-cat-treat.webp",
+    "src/assets/temptations-mixups-backyard-cookout-cat-treats.webp",
+    "src/assets/tetra-tetramin-tropical-flakes-fish-food.webp",
+    "src/assets/the-farmers-dog-turkey-recipe-fresh-dog-food.webp",
+    "src/assets/trust-banner.webp",
+    "src/assets/vegetarian-food-banner.webp",
+    "src/assets/versele-laga-prestige-budgies-bird-food.webp",
+    "src/assets/vitapol-economy-parrot-food.webp",
+    "src/assets/wet-dog-food-banner.webp",
+    "src/assets/wet-dog-food.webp",
+    "src/assets/wet-food-cat-banner.webp",
+    "src/assets/wild-harvest-daily-blend-parakeet-food.webp",
+    "src/assets/zu-preem-fruitblend-small-bird-food.webp"
+  ],
+  "spaceSaved": 55256428
+}

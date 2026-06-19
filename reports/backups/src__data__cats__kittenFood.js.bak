@@ -1,0 +1,380 @@
+import royalCaninKittenImg from "../../assets/products/cats/kitten-food/royal-canin-kitten-dry-cat-food.jpg";
+import hillsKittenImg from "../../assets/products/cats/kitten-food/hills-science-diet-kitten-cat-food.jpg";
+import purinaKittenImg from "../../assets/products/cats/kitten-food/purina-pro-plan-kitten-chicken-rice-cat-food.jpg";
+import whiskasKittenImg from "../../assets/products/cats/kitten-food/whiskas-kitten-ocean-fish-cat-food.jpg";
+import farminaKittenImg from "../../assets/products/cats/kitten-food/farmina-nd-kitten-chicken-pomegranate-cat-food.jpg";
+
+export const kittenFood = [
+
+    {
+  id: 1601,
+  name: "Royal Canin Kitten Dry Cat Food",
+  brand: "Royal Canin",
+  category: "cats-kitten-food",
+  subCategory: "kitten-food",
+  pet: "Cat",
+  petType: "Cat",
+  productCategory: "Kitten Food",
+  productType: "Dry Food",
+  flavor: "Chicken",
+  lifeStage: "Kitten",
+  specialDiet: "Growth Support",
+  vegType: "Non-Veg",
+
+  rating: 4.9,
+  reviews: 328,
+  soldCount: 1180,
+  stock: 42,
+
+  fastDelivery: true,
+  isNew: false,
+  deliveryDate: "Tomorrow",
+
+  image: royalCaninKittenImg,
+
+  images: [
+    royalCaninKittenImg,
+    royalCaninKittenImg,
+    royalCaninKittenImg,
+    royalCaninKittenImg,
+  ],
+
+  description:
+    "Complete nutrition specially formulated for growing kittens up to 12 months.",
+
+  ingredients: [
+    "Chicken Meal",
+    "Rice",
+    "Corn",
+    "Fish Oil",
+    "Vitamins",
+    "Minerals",
+  ],
+
+  features: [
+    "Supports growth",
+    "Immune support",
+    "Healthy digestion",
+    "Strong bones",
+  ],
+
+  nutrition: {
+    protein: "34%",
+    fat: "20%",
+    fiber: "3%",
+    moisture: "10%",
+  },
+
+  manufacturer: "Royal Canin",
+  country: "France",
+
+  weight: ["4lb", "8lb"],
+
+  variants: [
+    { weight: "4lb", price: 29.99, originalPrice: 36.99 },
+    { weight: "8lb", price: 54.99, originalPrice: 64.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.1,
+
+  relatedProducts: [1602, 1603, 1604],
+},
+ {
+  id: 1602,
+  name: "Hill's Science Diet Kitten Cat Food",
+  brand: "Hill's",
+  category: "cats-kitten-food",
+  subCategory: "kitten-food",
+  pet: "Cat",
+  petType: "Cat",
+  productCategory: "Kitten Food",
+  productType: "Dry Food",
+  flavor: "Chicken",
+  lifeStage: "Kitten",
+  specialDiet: "Healthy Development",
+  vegType: "Non-Veg",
+
+  rating: 4.8,
+  reviews: 284,
+  soldCount: 946,
+  stock: 38,
+
+  fastDelivery: true,
+  isNew: false,
+  deliveryDate: "Tomorrow",
+
+  image: hillsKittenImg,
+
+  images: [
+    hillsKittenImg,
+    hillsKittenImg,
+    hillsKittenImg,
+    hillsKittenImg,
+  ],
+
+  description:
+    "Premium kitten food with DHA for brain and eye development.",
+
+  ingredients: [
+    "Chicken",
+    "Brown Rice",
+    "Barley",
+    "Fish Oil",
+    "DHA",
+    "Vitamins",
+  ],
+
+  features: [
+    "Brain development",
+    "Eye health",
+    "Strong immunity",
+    "Healthy growth",
+  ],
+
+  nutrition: {
+    protein: "33%",
+    fat: "19%",
+    fiber: "4%",
+    moisture: "10%",
+  },
+
+  manufacturer: "Hill's",
+  country: "USA",
+
+  weight: ["3lb", "6lb"],
+
+  variants: [
+    { weight: "3lb", price: 24.99, originalPrice: 31.99 },
+    { weight: "6lb", price: 44.99, originalPrice: 54.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.1,
+
+  relatedProducts: [1601, 1603, 1605],
+},
+
+{
+  id: 1603,
+  name: "Purina Pro Plan Kitten Chicken & Rice Cat Food",
+  brand: "Purina Pro Plan",
+  category: "cats-kitten-food",
+  subCategory: "kitten-food",
+  pet: "Cat",
+  petType: "Cat",
+  productCategory: "Kitten Food",
+  productType: "Dry Food",
+  flavor: "Chicken & Rice",
+  lifeStage: "Kitten",
+  specialDiet: "Digestive Care",
+  vegType: "Non-Veg",
+
+  rating: 4.8,
+  reviews: 352,
+  soldCount: 1292,
+  stock: 46,
+
+  fastDelivery: true,
+  isNew: false,
+  deliveryDate: "Tomorrow",
+
+  image: purinaKittenImg,
+
+  images: [
+    purinaKittenImg,
+    purinaKittenImg,
+    purinaKittenImg,
+    purinaKittenImg,
+  ],
+
+  description:
+    "High protein kitten food with probiotics and essential nutrients.",
+
+  ingredients: [
+    "Chicken",
+    "Rice",
+    "Fish Meal",
+    "Probiotics",
+    "Vitamins",
+    "Minerals",
+  ],
+
+  features: [
+    "Probiotic support",
+    "Strong immunity",
+    "Healthy digestion",
+    "Growth nutrition",
+  ],
+
+  nutrition: {
+    protein: "40%",
+    fat: "20%",
+    fiber: "3%",
+    moisture: "12%",
+  },
+
+  manufacturer: "Purina",
+  country: "USA",
+
+  weight: ["3lb", "6lb"],
+
+  variants: [
+    { weight: "3lb", price: 25.99, originalPrice: 32.99 },
+    { weight: "6lb", price: 47.99, originalPrice: 57.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.1,
+
+  relatedProducts: [1601, 1602, 1604],
+},
+  {
+  id: 1604,
+  name: "Whiskas Kitten Ocean Fish Cat Food",
+  brand: "Whiskas",
+  category: "cats-kitten-food",
+  subCategory: "kitten-food",
+  pet: "Cat",
+  petType: "Cat",
+  productCategory: "Kitten Food",
+  productType: "Dry Food",
+  flavor: "Ocean Fish",
+  lifeStage: "Kitten",
+  specialDiet: "Growth Formula",
+  vegType: "Non-Veg",
+
+  rating: 4.7,
+  reviews: 246,
+  soldCount: 874,
+  stock: 52,
+
+  fastDelivery: true,
+  isNew: true,
+  deliveryDate: "Tomorrow",
+
+  image: whiskasKittenImg,
+
+  images: [
+    whiskasKittenImg,
+    whiskasKittenImg,
+    whiskasKittenImg,
+    whiskasKittenImg,
+  ],
+
+  description:
+    "Balanced kitten nutrition with ocean fish flavor and essential nutrients.",
+
+  ingredients: [
+    "Fish",
+    "Chicken Meal",
+    "Cereals",
+    "Vitamins",
+    "Minerals",
+  ],
+
+  features: [
+    "Healthy growth",
+    "Strong bones",
+    "Healthy coat",
+    "Tasty kibble",
+  ],
+
+  nutrition: {
+    protein: "32%",
+    fat: "18%",
+    fiber: "4%",
+    moisture: "10%",
+  },
+
+  manufacturer: "Mars Petcare",
+  country: "India",
+
+  weight: ["2.4lb", "6lb"],
+
+  variants: [
+    { weight: "2.4lb", price: 12.99, originalPrice: 15.99 },
+    { weight: "6lb", price: 26.99, originalPrice: 31.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.1,
+
+  relatedProducts: [1601, 1603, 1605],
+},
+
+{
+  id: 1605,
+  name: "Farmina N&D Kitten Chicken & Pomegranate Cat Food",
+  brand: "Farmina",
+  category: "cats-kitten-food",
+  subCategory: "kitten-food",
+  pet: "Cat",
+  petType: "Cat",
+  productCategory: "Kitten Food",
+  productType: "Dry Food",
+  flavor: "Chicken",
+  lifeStage: "Kitten",
+  specialDiet: "Natural Growth",
+  vegType: "Non-Veg",
+
+  rating: 4.9,
+  reviews: 318,
+  soldCount: 1086,
+  stock: 34,
+
+  fastDelivery: true,
+  isNew: true,
+  deliveryDate: "Tomorrow",
+
+  image: farminaKittenImg,
+
+  images: [
+    farminaKittenImg,
+    farminaKittenImg,
+    farminaKittenImg,
+    farminaKittenImg,
+  ],
+
+  description:
+    "Premium natural kitten food with chicken and pomegranate for healthy development.",
+
+  ingredients: [
+    "Chicken",
+    "Pomegranate",
+    "Sweet Potato",
+    "Fish Oil",
+    "Vitamins",
+    "Minerals",
+  ],
+
+  features: [
+    "Natural ingredients",
+    "Supports growth",
+    "Rich antioxidants",
+    "Healthy digestion",
+  ],
+
+  nutrition: {
+    protein: "44%",
+    fat: "20%",
+    fiber: "2.5%",
+    moisture: "8%",
+  },
+
+  manufacturer: "Farmina",
+  country: "Italy",
+
+  weight: ["3lb", "10lb"],
+
+  variants: [
+    { weight: "3lb", price: 34.99, originalPrice: 41.99 },
+    { weight: "10lb", price: 82.99, originalPrice: 96.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.1,
+
+  relatedProducts: [1602, 1603, 1604],
+},
+];

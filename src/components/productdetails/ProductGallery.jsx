@@ -1,8 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import {
-  resolveProductGalleryImages,
-  resolveProductImageFallback,
-} from "../../utils/productImage";
+import { resolveProductGalleryImages, resolveProductImageFallback } from "../../utils/productImage";
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 

@@ -1,51 +1,51 @@
-import { useMemo } from 'react'
-import { getFeaturedBrands } from '../../data/brands'
-import banners from '../../assets/brand-banners'
-import ezstoreLogo from '../../assets/logo/ezstore-logo-optimized.png'
+import { useMemo } from "react";
+import { getFeaturedBrands } from "../../data/brands";
+import banners from "../../assets/brand-banners";
+import ezstoreLogo from "../../assets/logo/ezstore-logo-optimized.webp";
 
 // Import all brand logos
-import royalCaninLogo from '../../assets/brands/royal-canin.jpeg'
-import purinaLogo from '../../assets/brands/purina.jpeg'
-import pedigreeLogo from '../../assets/brands/pedigree.jpeg'
-import farminaLogo from '../../assets/brands/farmina.jpeg'
-import origenLogo from '../../assets/brands/orijen.jpeg'
-import droolsLogo from '../../assets/brands/drools.jpeg'
-import meoLogo from '../../assets/brands/meo.jpeg'
-import kennelKitchenLogo from '../../assets/brands/kennel-kitchen.jpeg'
-import whiskasLogo from '../../assets/brands/whiskas.jpeg'
-import shebaLogo from '../../assets/brands/sheba.jpeg'
-import tasteWildLogo from '../../assets/brands/taste-of-the-wild.jpeg'
-import goodiesLogo from '../../assets/brands/goodies.jpeg'
-import jerhighLogo from '../../assets/brands/jerhigh.jpeg'
+import royalCaninLogo from "../../assets/brands/royal-canin.webp";
+import purinaLogo from "../../assets/brands/purina.webp";
+import pedigreeLogo from "../../assets/brands/pedigree.webp";
+import farminaLogo from "../../assets/brands/farmina.webp";
+import origenLogo from "../../assets/brands/orijen.webp";
+import droolsLogo from "../../assets/brands/drools.webp";
+import meoLogo from "../../assets/brands/meo.webp";
+import kennelKitchenLogo from "../../assets/brands/kennel-kitchen.webp";
+import whiskasLogo from "../../assets/brands/whiskas.webp";
+import shebaLogo from "../../assets/brands/sheba.webp";
+import tasteWildLogo from "../../assets/brands/taste-of-the-wild.webp";
+import goodiesLogo from "../../assets/brands/goodies.webp";
+import jerhighLogo from "../../assets/brands/jerhigh.webp";
 // acanaLogo removed
 // blueBuffaloLogo removed
 // temptations logo import removed; banner fallback used when needed
 
 // Map brand logo keys to imported images
 const logoMap = {
-  'royal-canin': royalCaninLogo,
+  "royal-canin": royalCaninLogo,
   purina: purinaLogo,
   pedigree: pedigreeLogo,
   farmina: farminaLogo,
   orijen: origenLogo,
   drools: droolsLogo,
   meo: meoLogo,
-  'kennel-kitchen': kennelKitchenLogo,
+  "kennel-kitchen": kennelKitchenLogo,
   whiskas: whiskasLogo,
   sheba: shebaLogo,
-  'taste-of-the-wild': tasteWildLogo,
-  
+  "taste-of-the-wild": tasteWildLogo,
+
   goodies: goodiesLogo,
   jerhigh: jerhighLogo,
   // smartheart, himalaya, temptations hidden
-}
+};
 // fallback mappings
-logoMap.applaws = banners['applaws'] || null
-logoMap.ezstore = ezstoreLogo
+logoMap.applaws = banners["applaws"] || null;
+logoMap.ezstore = ezstoreLogo;
 
 const BrandCard = ({ brand }) => {
-  const key = brand.logo
-  const logoSrc = logoMap[key] || banners[key] || banners[String(key).replace(/-/g, '')]
+  const key = brand.logo;
+  const logoSrc = logoMap[key] || banners[key] || banners[String(key).replace(/-/g, "")];
 
   return (
     <div
@@ -85,27 +85,27 @@ const BrandCard = ({ brand }) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
 const BrandsSection = () => {
   // Exclude the internal `ezstore` brand from the public carousel
-  const featuredBrands = useMemo(() => getFeaturedBrands().filter(b => String(b.logo).toLowerCase() !== 'ezstore'), [])
+  const featuredBrands = useMemo(
+    () => getFeaturedBrands().filter((b) => String(b.logo).toLowerCase() !== "ezstore"),
+    []
+  );
 
   // Split brands into two rows
-  const midpoint = Math.ceil(featuredBrands.length / 2)
-  const topBrands = featuredBrands.slice(0, midpoint)
-  const bottomBrands = featuredBrands.slice(midpoint)
+  const midpoint = Math.ceil(featuredBrands.length / 2);
+  const topBrands = featuredBrands.slice(0, midpoint);
+  const bottomBrands = featuredBrands.slice(midpoint);
 
   return (
     <section className="py-20 bg-[#f8fafc] overflow-hidden">
       <div className="max-w-7xl mx-auto px-3 sm:px-4">
-
         {/* Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">
-            Trusted Pet Brands
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">Trusted Pet Brands</h2>
 
           <p className="text-gray-500 text-lg mt-4 max-w-2xl mx-auto">
             Premium food & care brands trusted by pet parents worldwide
@@ -171,7 +171,7 @@ const BrandsSection = () => {
         `}
       </style>
     </section>
-  )
-}
+  );
+};
 
-export default BrandsSection
+export default BrandsSection;

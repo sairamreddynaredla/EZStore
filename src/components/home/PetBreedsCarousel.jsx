@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { useRef } from "react"
+import { Link } from "react-router-dom";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef } from "react";
 
-import { Swiper, SwiperSlide } from "swiper/react"
-import "swiper/css"
-import "swiper/css/navigation"
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const PetBreedsCarousel = ({ breeds, title }) => {
-  const swiperRef = useRef(null)
+  const swiperRef = useRef(null);
 
-  if (!breeds || breeds.length === 0) return null
+  if (!breeds || breeds.length === 0) return null;
 
   return (
     <section className="mt-8 px-6 md:px-10">
@@ -36,7 +36,7 @@ const PetBreedsCarousel = ({ breeds, title }) => {
 
         <Swiper
           onSwiper={(swiper) => {
-            swiperRef.current = swiper
+            swiperRef.current = swiper;
           }}
           spaceBetween={28}
           loop={false}
@@ -50,8 +50,13 @@ const PetBreedsCarousel = ({ breeds, title }) => {
           className="py-6"
         >
           {breeds.map((breed) => {
-            const src = (breed.banner && breed.banner.image) || breed.image || breed.heroImage || (breed.overview && breed.overview.image) || ''
-            const title = (breed.banner && breed.banner.title) || breed.name
+            const src =
+              (breed.banner && breed.banner.image) ||
+              breed.image ||
+              breed.heroImage ||
+              (breed.overview && breed.overview.image) ||
+              "";
+            const title = (breed.banner && breed.banner.title) || breed.name;
             return (
               <SwiperSlide key={breed.slug} className="flex justify-center">
                 <Link to={`/breed/${breed.slug}`} className="flex flex-col items-center">
@@ -64,18 +69,22 @@ const PetBreedsCarousel = ({ breeds, title }) => {
                         loading="lazy"
                       />
                     ) : (
-                      <div className="w-full h-full bg-gray-100 flex items-center justify-center text-xs text-gray-400">No image</div>
+                      <div className="w-full h-full bg-gray-100 flex items-center justify-center text-xs text-gray-400">
+                        No image
+                      </div>
                     )}
                   </div>
-                  <h3 className="mt-2 font-medium text-sm sm:text-sm md:text-base text-center max-w-[140px] truncate">{title}</h3>
+                  <h3 className="mt-2 font-medium text-sm sm:text-sm md:text-base text-center max-w-[140px] truncate">
+                    {title}
+                  </h3>
                 </Link>
               </SwiperSlide>
-            )
+            );
           })}
         </Swiper>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default PetBreedsCarousel
+export default PetBreedsCarousel;

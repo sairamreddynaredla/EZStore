@@ -4,7 +4,9 @@ const BreedInfo = ({ breed }) => {
       <div className="bg-white rounded-[30px] p-8 md:p-10 shadow-sm border border-slate-200">
         <h2 className="text-3xl md:text-4xl font-bold text-slate-950 mb-4">At a glance</h2>
         <p className="text-slate-600 leading-7">
-          Golden Retrievers are affectionate and adaptable companions that suit active households, therapy work, and growing families. Their friendly temperament and eagerness to please make them easy to train and a joy to live with.
+          Golden Retrievers are affectionate and adaptable companions that suit active households,
+          therapy work, and growing families. Their friendly temperament and eagerness to please
+          make them easy to train and a joy to live with.
         </p>
       </div>
 

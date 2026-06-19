@@ -1,4 +1,11 @@
-const ProductBadges = ({ badges = [], isBestSeller = false, isNew = false, isTrending = false, stock = 0, soldCount = 0 }) => {
+const ProductBadges = ({
+  badges = [],
+  isBestSeller = false,
+  isNew = false,
+  isTrending = false,
+  stock = 0,
+  soldCount = 0,
+}) => {
   const allBadges = [];
 
   if (isBestSeller || soldCount > 200) {

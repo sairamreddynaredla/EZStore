@@ -1,10 +1,10 @@
-import banners from '../../assets/brand-banners'
+import banners from "../../assets/brand-banners";
 
 const BrandBanners = () => {
-  const entries = Object.entries(banners)
-  const visible = entries.slice(0, 4)
+  const entries = Object.entries(banners);
+  const visible = entries.slice(0, 4);
 
-  if (!entries || entries.length === 0) return null
+  if (!entries || entries.length === 0) return null;
 
   return (
     <section className="py-12 bg-white">
@@ -23,7 +23,7 @@ const BrandBanners = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default BrandBanners
+export default BrandBanners;

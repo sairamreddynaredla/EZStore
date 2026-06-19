@@ -1,16 +1,16 @@
 /* EZ Store Brand Theme Colors */
 :root {
   /* Primary Colors */
-  --primary: #1F6B52;
-  --secondary: #7BAE7F;
-  --cta: #F59E0B;
-  --background: #FAF9F6;
-  --cards: #FFFFFF;
-  --headings: #1A1A1A;
-  --text: #4B5563;
-  --border: #E5E7EB;
-  --success: #16A34A;
-  
+  --primary: #1f6b52;
+  --secondary: #7bae7f;
+  --cta: #f59e0b;
+  --background: #faf9f6;
+  --cards: #ffffff;
+  --headings: #1a1a1a;
+  --text: #4b5563;
+  --border: #e5e7eb;
+  --success: #16a34a;
+
   /* Footer Colors (Legacy) */
   --footer-bg: #f7c873; /* warm yellow */
   --footer-dark-bg: #f5b041; /* deeper gold */
@@ -64,8 +64,7 @@
     z-index: 1;
     top: 34px;
     height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
+    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg) scale(1.4);
   }
 
   .vite {
@@ -73,8 +72,7 @@
     top: 107px;
     height: 26px;
     width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
+    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg) scale(0.8);
   }
 }
 
@@ -189,7 +187,7 @@
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -4.5px;
     border: 5px solid transparent;

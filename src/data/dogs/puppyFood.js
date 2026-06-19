@@ -1,7 +1,7 @@
-import royalCaninPuppyImg from "../../assets/products/dogs/puppyFood/royal-canin-mini-puppy-dry-dog-food.jpg";
-import pedigreePuppyImg from "../../assets/products/dogs/puppyFood/pedigree-puppy-chicken-milk-dry-food.jpg";
-import droolsPuppyImg from "../../assets/products/dogs/puppyFood/drools-puppy-chicken-egg-dry-food.jpg";
-import farminaPuppyImg from "../../assets/products/dogs/puppyFood/farmina-nd-puppy-medium-maxi-food.jpg";
+import royalCaninPuppyImg from "../../assets/products/dogs/puppyFood/royal-canin-mini-puppy-dry-dog-food.webp";
+import pedigreePuppyImg from "../../assets/products/dogs/puppyFood/pedigree-puppy-chicken-milk-dry-food.webp";
+import droolsPuppyImg from "../../assets/products/dogs/puppyFood/drools-puppy-chicken-egg-dry-food.webp";
+import farminaPuppyImg from "../../assets/products/dogs/puppyFood/farmina-nd-puppy-medium-maxi-food.webp";
 
 export const dogsPuppyFood = [
   {
@@ -33,34 +33,42 @@ export const dogsPuppyFood = [
 
     image: royalCaninPuppyImg,
 
-    images: [
-      royalCaninPuppyImg,
-      royalCaninPuppyImg,
-      royalCaninPuppyImg,
-      royalCaninPuppyImg,
-    ],
+    images: [royalCaninPuppyImg, royalCaninPuppyImg, royalCaninPuppyImg, royalCaninPuppyImg],
 
     description:
       "Royal Canin Mini Puppy Dry Dog Food is specially formulated to support healthy growth, immune system development, and digestive health in small breed puppies.",
 
-    ingredients: ["Chicken Protein", "Rice", "Corn", "Animal Fat", "Fish Oil", "Vitamins", "Minerals"],
+    ingredients: [
+      "Chicken Protein",
+      "Rice",
+      "Corn",
+      "Animal Fat",
+      "Fish Oil",
+      "Vitamins",
+      "Minerals",
+    ],
 
-    features: ["Supports immune system", "Promotes healthy growth", "Highly digestible formula", "Ideal for small breed puppies"],
+    features: [
+      "Supports immune system",
+      "Promotes healthy growth",
+      "Highly digestible formula",
+      "Ideal for small breed puppies",
+    ],
 
     nutrition: { protein: "31%", fat: "20%", fiber: "2.4%", moisture: "10%" },
 
     manufacturer: "Royal Canin",
     country: "France",
 
-    weight: ["1kg", "4kg"],
+    weight: ["2lb", "8lb"],
 
     variants: [
-      { weight: "1kg", price: 12.99, originalPrice: 15.99 },
-      { weight: "4kg", price: 44.99, originalPrice: 52.99 },
+      { weight: "2lb", price: 12.99, originalPrice: 15.99 },
+      { weight: "8lb", price: 44.99, originalPrice: 52.99 },
     ],
 
     subscriptionEligible: true,
-    subscriptionDiscount: 0.10,
+    subscriptionDiscount: 0.1,
 
     relatedProducts: [602, 603, 604],
   },
@@ -95,27 +103,33 @@ export const dogsPuppyFood = [
 
     images: [pedigreePuppyImg, pedigreePuppyImg, pedigreePuppyImg, pedigreePuppyImg],
 
-    description: "Pedigree Puppy Food with chicken and milk provides complete nutrition for growing puppies with strong bones and healthy muscles.",
+    description:
+      "Pedigree Puppy Food with chicken and milk provides complete nutrition for growing puppies with strong bones and healthy muscles.",
 
     ingredients: ["Chicken", "Milk Solids", "Rice", "Corn", "Vegetable Oil", "Minerals"],
 
-    features: ["Healthy bone growth", "Strong muscles", "Supports brain development", "Balanced puppy nutrition"],
+    features: [
+      "Healthy bone growth",
+      "Strong muscles",
+      "Supports brain development",
+      "Balanced puppy nutrition",
+    ],
 
     nutrition: { protein: "28%", fat: "14%", fiber: "5%", moisture: "10%" },
 
     manufacturer: "Mars Petcare",
     country: "India",
 
-    weight: ["1.2kg", "3kg", "10kg"],
+    weight: ["2.4lb", "6lb", "20lb"],
 
     variants: [
-      { weight: "1.2kg", price: 8.99, originalPrice: 10.99 },
-      { weight: "3kg", price: 19.99, originalPrice: 24.99 },
-      { weight: "10kg", price: 49.99, originalPrice: 59.99 },
+      { weight: "2.4lb", price: 8.99, originalPrice: 10.99 },
+      { weight: "6lb", price: 19.99, originalPrice: 24.99 },
+      { weight: "20lb", price: 49.99, originalPrice: 59.99 },
     ],
 
     subscriptionEligible: true,
-    subscriptionDiscount: 0.10,
+    subscriptionDiscount: 0.1,
 
     relatedProducts: [601, 603, 604],
   },
@@ -150,27 +164,33 @@ export const dogsPuppyFood = [
 
     images: [droolsPuppyImg, droolsPuppyImg, droolsPuppyImg, droolsPuppyImg],
 
-    description: "Drools Puppy Food contains high-quality protein and essential nutrients to support healthy puppy growth and development.",
+    description:
+      "Drools Puppy Food contains high-quality protein and essential nutrients to support healthy puppy growth and development.",
 
     ingredients: ["Chicken", "Egg", "Rice", "Corn", "Fish Oil", "Minerals"],
 
-    features: ["High protein formula", "Supports healthy growth", "Strong immunity", "Improves digestion"],
+    features: [
+      "High protein formula",
+      "Supports healthy growth",
+      "Strong immunity",
+      "Improves digestion",
+    ],
 
     nutrition: { protein: "30%", fat: "14%", fiber: "4%", moisture: "10%" },
 
     manufacturer: "Drools Pet Food Pvt Ltd",
     country: "India",
 
-    weight: ["1.2kg", "3kg", "10kg"],
+    weight: ["2.4lb", "6lb", "20lb"],
 
     variants: [
-      { weight: "1.2kg", price: 7.99, originalPrice: 9.99 },
-      { weight: "3kg", price: 18.99, originalPrice: 22.99 },
-      { weight: "10kg", price: 45.99, originalPrice: 55.99 },
+      { weight: "2.4lb", price: 7.99, originalPrice: 9.99 },
+      { weight: "6lb", price: 18.99, originalPrice: 22.99 },
+      { weight: "20lb", price: 45.99, originalPrice: 55.99 },
     ],
 
     subscriptionEligible: true,
-    subscriptionDiscount: 0.10,
+    subscriptionDiscount: 0.1,
 
     relatedProducts: [601, 602, 604],
   },
@@ -205,26 +225,32 @@ export const dogsPuppyFood = [
 
     images: [farminaPuppyImg, farminaPuppyImg, farminaPuppyImg, farminaPuppyImg],
 
-    description: "Farmina N&D Puppy Food is a premium grain-free recipe designed to support healthy growth and development in puppies.",
+    description:
+      "Farmina N&D Puppy Food is a premium grain-free recipe designed to support healthy growth and development in puppies.",
 
     ingredients: ["Chicken", "Pomegranate", "Sweet Potato", "Fish Oil", "Vitamins", "Minerals"],
 
-    features: ["Grain-free recipe", "High animal protein", "Supports healthy growth", "Premium ingredients"],
+    features: [
+      "Grain-free recipe",
+      "High animal protein",
+      "Supports healthy growth",
+      "Premium ingredients",
+    ],
 
     nutrition: { protein: "35%", fat: "20%", fiber: "2.9%", moisture: "9%" },
 
     manufacturer: "Farmina",
     country: "Italy",
 
-    weight: ["2.5kg", "12kg"],
+    weight: ["5lb", "24lb"],
 
     variants: [
-      { weight: "2.5kg", price: 24.99, originalPrice: 29.99 },
-      { weight: "12kg", price: 84.99, originalPrice: 99.99 },
+      { weight: "5lb", price: 24.99, originalPrice: 29.99 },
+      { weight: "24lb", price: 84.99, originalPrice: 99.99 },
     ],
 
     subscriptionEligible: true,
-    subscriptionDiscount: 0.10,
+    subscriptionDiscount: 0.1,
 
     relatedProducts: [601, 603, 602],
   },

@@ -1,14 +1,18 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // Import images using URL for better asset handling
-const catCrunchImg = new URL("../assets/explore-pick-pamper/cat crunch.png", import.meta.url).href
-const creamyTreatsImg = new URL("../assets/explore-pick-pamper/creamy treats.png", import.meta.url).href
-const dogDentalImg = new URL("../assets/explore-pick-pamper/dog dental treats.png", import.meta.url).href
-const dogMeatyImg = new URL("../assets/explore-pick-pamper/dog meaty.png", import.meta.url).href
+const catCrunchImg = new URL("../assets/explore-pick-pamper/cat crunch.webp", import.meta.url).href;
+const creamyTreatsImg = new URL("../assets/explore-pick-pamper/creamy treats.webp", import.meta.url)
+  .href;
+const dogDentalImg = new URL(
+  "../assets/explore-pick-pamper/dog dental treats.webp",
+  import.meta.url
+).href;
+const dogMeatyImg = new URL("../assets/explore-pick-pamper/dog meaty.webp", import.meta.url).href;
 
 // Tab definitions
-const tabs = ["Food", "Treat"]
+const tabs = ["Food", "Treat"];
 
 // Food sub-categories matching the  design (image 1)
 const foodCategories = [
@@ -17,7 +21,8 @@ const foodCategories = [
     bgColor: "#F5A623",
     labelBg: "#A0522D",
     link: "/collections/wet-food",
-    image: "https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?w=600&auto=format&fit=crop&q=80",
+    image:
+      "https://images.unsplash.com/photo-1601758125946-6ec2ef64daf8?w=600&auto=format&fit=crop&q=80",
     pets: [
       "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=200&auto=format&fit=crop",
@@ -28,7 +33,8 @@ const foodCategories = [
     bgColor: "#F5A623",
     labelBg: "#C0392B",
     link: "/collections/dog-cat-dry-food",
-    image: "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=600&auto=format&fit=crop&q=80",
+    image:
+      "https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=600&auto=format&fit=crop&q=80",
     pets: [
       "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1548199973-03cce0bbc87b?w=200&auto=format&fit=crop",
@@ -39,7 +45,8 @@ const foodCategories = [
     bgColor: "#F5A623",
     labelBg: "#C0392B",
     link: "/collections/puppy-kitten-food",
-    image: "https://images.unsplash.com/photo-1601758174493-45d0a4d2e2d8?w=600&auto=format&fit=crop&q=80",
+    image:
+      "https://images.unsplash.com/photo-1601758174493-45d0a4d2e2d8?w=600&auto=format&fit=crop&q=80",
     pets: [
       "https://images.unsplash.com/photo-1568572933382-74d440642117?w=200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1561948955-570b270e7c36?w=200&auto=format&fit=crop",
@@ -50,26 +57,55 @@ const foodCategories = [
     bgColor: "#F5A623",
     labelBg: "#5B8DB8",
     link: "/collections/prescription-food",
-    image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600&auto=format&fit=crop&q=80",
+    image:
+      "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=600&auto=format&fit=crop&q=80",
     pets: [
       "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=200&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=200&auto=format&fit=crop",
     ],
   },
-]
+];
 
 // Placeholder content for other tabs (extend as needed)
 const treatCategories = [
-  { label: "Crunchy Treats", bgColor: "#F5A623", labelBg: "#C0392B", link: "/collections/crunchy-treats", image: catCrunchImg, pets: [] },
-  { label: "Creamy Treats", bgColor: "#F5A623", labelBg: "#A0522D", link: "/collections/creamy-treats", image: creamyTreatsImg, pets: [] },
-  { label: "Dental Treats", bgColor: "#F5A623", labelBg: "#5B8DB8", link: "/collections/dental-treats", image: dogDentalImg, pets: [] },
-  { label: "Meaty Treats", bgColor: "#F5A623", labelBg: "#1A5844", link: "/collections/meaty-treats", image: dogMeatyImg, pets: [] },
-]
+  {
+    label: "Crunchy Treats",
+    bgColor: "#F5A623",
+    labelBg: "#C0392B",
+    link: "/collections/crunchy-treats",
+    image: catCrunchImg,
+    pets: [],
+  },
+  {
+    label: "Creamy Treats",
+    bgColor: "#F5A623",
+    labelBg: "#A0522D",
+    link: "/collections/creamy-treats",
+    image: creamyTreatsImg,
+    pets: [],
+  },
+  {
+    label: "Dental Treats",
+    bgColor: "#F5A623",
+    labelBg: "#5B8DB8",
+    link: "/collections/dental-treats",
+    image: dogDentalImg,
+    pets: [],
+  },
+  {
+    label: "Meaty Treats",
+    bgColor: "#F5A623",
+    labelBg: "#1A5844",
+    link: "/collections/meaty-treats",
+    image: dogMeatyImg,
+    pets: [],
+  },
+];
 
 const tabData = {
   Food: foodCategories,
   Treat: treatCategories,
-}
+};
 
 function CategoryCard({ category }) {
   return (
@@ -86,8 +122,8 @@ function CategoryCard({ category }) {
           className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
           onError={(e) => {
-            e.target.onerror = null
-            e.target.src = "https://placehold.co/400x300/F5A623/ffffff?text=Pet+Food"
+            e.target.onerror = null;
+            e.target.src = "https://placehold.co/400x300/F5A623/ffffff?text=Pet+Food";
           }}
         />
         {/* Gradient overlay for depth */}
@@ -104,20 +140,18 @@ function CategoryCard({ category }) {
         </span>
       </div>
     </Link>
-  )
+  );
 }
 
 function FoodCategorySection() {
-  const [activeTab, setActiveTab] = useState("Food")
+  const [activeTab, setActiveTab] = useState("Food");
 
-  const currentCategories = tabData[activeTab] || []
+  const currentCategories = tabData[activeTab] || [];
 
   return (
     <section className="px-4 sm:px-6 md:px-10 py-16 bg-[#f9f9f9]">
-
       {/* Header row: title + tab filters */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-10">
-
         {/* Heading */}
         <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
           Explore. Pick. Pamper.
@@ -130,16 +164,16 @@ function FoodCategorySection() {
               key={tab}
               onClick={() => setActiveTab(tab)}
               className={`px-5 py-2 rounded-full font-semibold text-sm sm:text-base border-2 transition-all duration-200 cursor-pointer
-                ${activeTab === tab
-                  ? "bg-[#E63946] border-[#E63946] text-white shadow-md"
-                  : "bg-white border-gray-300 text-gray-700 hover:border-[#E63946] hover:text-[#E63946]"
+                ${
+                  activeTab === tab
+                    ? "bg-[#E63946] border-[#E63946] text-white shadow-md"
+                    : "bg-white border-gray-300 text-gray-700 hover:border-[#E63946] hover:text-[#E63946]"
                 }`}
             >
               {tab}
             </button>
           ))}
         </div>
-
       </div>
 
       {/* Category cards grid */}
@@ -164,9 +198,8 @@ function FoodCategorySection() {
           View All →
         </Link>
       </div>
-
     </section>
-  )
+  );
 }
 
-export default FoodCategorySection
+export default FoodCategorySection;

@@ -1,417 +1,342 @@
-import oxbowHamsterImg from "../../assets/products/hamster/oxbow-essentials-hamster-food.jpg";
-import kayteeHamsterImg from "../../assets/products/hamster/kaytee-forti-diet-pro-health-hamster-food.jpg";
-import vitakraftHamsterImg from "../../assets/products/hamster/vitakraft-vita-smart-hamster-food.jpg";
-import higginsHamsterImg from "../../assets/products/hamster/higgins-sunburst-gourmet-hamster-food.jpg";
-import mazuriHamsterImg from "../../assets/products/hamster/mazuri-hamster-rat-diet.jpg";
+import oxbowHamsterImg from "../../assets/products/hamster/oxbow-essentials-hamster-food.webp";
+import kayteeHamsterImg from "../../assets/products/hamster/kaytee-forti-diet-pro-health-hamster-food.webp";
+import vitakraftHamsterImg from "../../assets/products/hamster/vitakraft-vita-smart-hamster-food.webp";
+import higginsHamsterImg from "../../assets/products/hamster/higgins-sunburst-gourmet-hamster-food.webp";
+import mazuriHamsterImg from "../../assets/products/hamster/mazuri-hamster-rat-diet.webp";
 
 export const hamsterFood = [
-{
-  id: 2300,
-  name: "Oxbow Essentials Hamster Food",
-  brand: "Oxbow",
-  category: "hamster-food",
-  subCategory: "pellets",
-  pet: "Hamster",
-  petType: "Hamster",
-  productCategory: "Hamster Food",
-  productType: "Pellet Food",
-  flavor: "Garden Vegetables",
-  lifeStage: "All Life Stages",
-  specialDiet: "Complete Nutrition",
-  vegType: "Veg",
+  {
+    id: 2300,
+    name: "Oxbow Essentials Hamster Food",
+    brand: "Oxbow",
+    category: "hamster-food",
+    subCategory: "pellets",
+    pet: "Hamster",
+    petType: "Hamster",
+    productCategory: "Hamster Food",
+    productType: "Pellet Food",
+    flavor: "Garden Vegetables",
+    lifeStage: "All Life Stages",
+    specialDiet: "Complete Nutrition",
+    vegType: "Veg",
 
-  rating: 4.9,
-  reviews: 215,
-  soldCount: 890,
-  stock: 45,
+    rating: 4.9,
+    reviews: 215,
+    soldCount: 890,
+    stock: 45,
 
-  fastDelivery: true,
-  isNew: false,
-  deliveryDate: "Tomorrow",
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
 
-  image: oxbowHamsterImg,
+    image: oxbowHamsterImg,
 
-  images: [
-    oxbowHamsterImg,
-    oxbowHamsterImg,
-    oxbowHamsterImg,
-    oxbowHamsterImg,
-  ],
+    images: [oxbowHamsterImg, oxbowHamsterImg, oxbowHamsterImg, oxbowHamsterImg],
 
-  description:
-    "Balanced hamster food formulated with premium ingredients for daily nutrition.",
+    description: "Balanced hamster food formulated with premium ingredients for daily nutrition.",
 
-  ingredients: [
-    "Timothy Grass",
-    "Barley",
-    "Oats",
-    "Soybean Meal",
-    "Vitamins",
-  ],
+    ingredients: ["Timothy Grass", "Barley", "Oats", "Soybean Meal", "Vitamins"],
 
-  features: [
-    "Complete nutrition",
-    "High fiber",
-    "Supports digestion",
-    "No artificial colors",
-  ],
+    features: ["Complete nutrition", "High fiber", "Supports digestion", "No artificial colors"],
 
-  nutrition: {
-    protein: "15%",
-    fat: "4%",
-    fiber: "10%",
-    moisture: "10%",
+    nutrition: {
+      protein: "15%",
+      fat: "4%",
+      fiber: "10%",
+      moisture: "10%",
+    },
+
+    manufacturer: "Oxbow",
+    country: "USA",
+
+    weight: ["0.9lb", "2.7lb"],
+
+    variants: [
+      {
+        weight: "0.9lb",
+        price: 8.99,
+        originalPrice: 10.99,
+      },
+      {
+        weight: "2.7lb",
+        price: 19.99,
+        originalPrice: 24.99,
+      },
+    ],
+
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.1,
+
+    relatedProducts: [2301, 2302, 2303],
   },
 
-  manufacturer: "Oxbow",
-  country: "USA",
+  {
+    id: 2301,
+    name: "Kaytee Forti-Diet Pro Health Hamster Food",
+    brand: "Kaytee",
+    category: "hamster-food",
+    subCategory: "seed-mix",
+    pet: "Hamster",
+    petType: "Hamster",
+    productCategory: "Hamster Food",
+    productType: "Food Mix",
+    flavor: "Seed Blend",
+    lifeStage: "All Life Stages",
+    specialDiet: "Daily Nutrition",
+    vegType: "Veg",
 
-  weight: ["454g", "1.36kg"],
+    rating: 4.8,
+    reviews: 184,
+    soldCount: 742,
+    stock: 38,
 
-  variants: [
-    {
-      weight: "454g",
-      price: 8.99,
-      originalPrice: 10.99,
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
+
+    image: kayteeHamsterImg,
+
+    images: [kayteeHamsterImg, kayteeHamsterImg, kayteeHamsterImg, kayteeHamsterImg],
+
+    description: "Nutritious hamster food blend enriched with probiotics and grains.",
+
+    ingredients: ["Sunflower Seeds", "Corn", "Wheat", "Oats", "Vitamins"],
+
+    features: [
+      "Probiotic support",
+      "Healthy digestion",
+      "Rich seed blend",
+      "Daily feeding formula",
+    ],
+
+    nutrition: {
+      protein: "13%",
+      fat: "5%",
+      fiber: "8%",
+      moisture: "10%",
     },
-    {
-      weight: "1.36kg",
-      price: 19.99,
-      originalPrice: 24.99,
-    },
-  ],
 
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.1,
+    manufacturer: "Kaytee",
+    country: "USA",
 
-  relatedProducts: [2301, 2302, 2303],
-},
+    weight: ["1lb", "2lb"],
 
-{
-  id: 2301,
-  name: "Kaytee Forti-Diet Pro Health Hamster Food",
-  brand: "Kaytee",
-  category: "hamster-food",
-  subCategory: "seed-mix",
-  pet: "Hamster",
-  petType: "Hamster",
-  productCategory: "Hamster Food",
-  productType: "Food Mix",
-  flavor: "Seed Blend",
-  lifeStage: "All Life Stages",
-  specialDiet: "Daily Nutrition",
-  vegType: "Veg",
+    variants: [
+      {
+        weight: "1lb",
+        price: 7.99,
+        originalPrice: 9.99,
+      },
+      {
+        weight: "2lb",
+        price: 13.99,
+        originalPrice: 17.99,
+      },
+    ],
 
-  rating: 4.8,
-  reviews: 184,
-  soldCount: 742,
-  stock: 38,
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.1,
 
-  fastDelivery: true,
-  isNew: false,
-  deliveryDate: "Tomorrow",
-
-  image: kayteeHamsterImg,
-
-  images: [
-    kayteeHamsterImg,
-    kayteeHamsterImg,
-    kayteeHamsterImg,
-    kayteeHamsterImg,
-  ],
-
-  description:
-    "Nutritious hamster food blend enriched with probiotics and grains.",
-
-  ingredients: [
-    "Sunflower Seeds",
-    "Corn",
-    "Wheat",
-    "Oats",
-    "Vitamins",
-  ],
-
-  features: [
-    "Probiotic support",
-    "Healthy digestion",
-    "Rich seed blend",
-    "Daily feeding formula",
-  ],
-
-  nutrition: {
-    protein: "13%",
-    fat: "5%",
-    fiber: "8%",
-    moisture: "10%",
+    relatedProducts: [2300, 2302, 2304],
   },
 
-  manufacturer: "Kaytee",
-  country: "USA",
+  {
+    id: 2302,
+    name: "Vitakraft Vita Smart Hamster Food",
+    brand: "Vitakraft",
+    category: "hamster-food",
+    subCategory: "premium-mix",
+    pet: "Hamster",
+    petType: "Hamster",
+    productCategory: "Hamster Food",
+    productType: "Food Mix",
+    flavor: "Fruit & Grain Mix",
+    lifeStage: "All Life Stages",
+    specialDiet: "Natural Nutrition",
+    vegType: "Veg",
 
-  weight: ["500g", "1kg"],
+    rating: 4.8,
+    reviews: 196,
+    soldCount: 821,
+    stock: 42,
 
-  variants: [
-    {
-      weight: "500g",
-      price: 7.99,
-      originalPrice: 9.99,
+    fastDelivery: true,
+    isNew: true,
+    deliveryDate: "Tomorrow",
+
+    image: vitakraftHamsterImg,
+
+    images: [vitakraftHamsterImg, vitakraftHamsterImg, vitakraftHamsterImg, vitakraftHamsterImg],
+
+    description: "Premium hamster food blend with grains, fruits and vegetables.",
+
+    ingredients: ["Corn", "Peas", "Apple", "Sunflower Seeds", "Vitamins"],
+
+    features: [
+      "Natural ingredients",
+      "Fruit enriched",
+      "No artificial preservatives",
+      "Balanced nutrition",
+    ],
+
+    nutrition: {
+      protein: "14%",
+      fat: "4%",
+      fiber: "9%",
+      moisture: "10%",
     },
-    {
-      weight: "1kg",
-      price: 13.99,
-      originalPrice: 17.99,
-    },
-  ],
 
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.1,
+    manufacturer: "Vitakraft",
+    country: "Germany",
 
-  relatedProducts: [2300, 2302, 2304],
-},
+    weight: ["1.2lb", "2.4lb"],
 
-{
-  id: 2302,
-  name: "Vitakraft Vita Smart Hamster Food",
-  brand: "Vitakraft",
-  category: "hamster-food",
-  subCategory: "premium-mix",
-  pet: "Hamster",
-  petType: "Hamster",
-  productCategory: "Hamster Food",
-  productType: "Food Mix",
-  flavor: "Fruit & Grain Mix",
-  lifeStage: "All Life Stages",
-  specialDiet: "Natural Nutrition",
-  vegType: "Veg",
+    variants: [
+      {
+        weight: "1.2lb",
+        price: 9.99,
+        originalPrice: 12.99,
+      },
+      {
+        weight: "2.4lb",
+        price: 17.99,
+        originalPrice: 21.99,
+      },
+    ],
 
-  rating: 4.8,
-  reviews: 196,
-  soldCount: 821,
-  stock: 42,
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.1,
 
-  fastDelivery: true,
-  isNew: true,
-  deliveryDate: "Tomorrow",
-
-  image: vitakraftHamsterImg,
-
-  images: [
-    vitakraftHamsterImg,
-    vitakraftHamsterImg,
-    vitakraftHamsterImg,
-    vitakraftHamsterImg,
-  ],
-
-  description:
-    "Premium hamster food blend with grains, fruits and vegetables.",
-
-  ingredients: [
-    "Corn",
-    "Peas",
-    "Apple",
-    "Sunflower Seeds",
-    "Vitamins",
-  ],
-
-  features: [
-    "Natural ingredients",
-    "Fruit enriched",
-    "No artificial preservatives",
-    "Balanced nutrition",
-  ],
-
-  nutrition: {
-    protein: "14%",
-    fat: "4%",
-    fiber: "9%",
-    moisture: "10%",
+    relatedProducts: [2300, 2301, 2303],
   },
 
-  manufacturer: "Vitakraft",
-  country: "Germany",
+  {
+    id: 2303,
+    name: "Higgins Sunburst Gourmet Hamster Food",
+    brand: "Higgins",
+    category: "hamster-food",
+    subCategory: "gourmet-mix",
+    pet: "Hamster",
+    petType: "Hamster",
+    productCategory: "Hamster Food",
+    productType: "Gourmet Mix",
+    flavor: "Fruit & Vegetable Blend",
+    lifeStage: "All Life Stages",
+    specialDiet: "Premium Nutrition",
+    vegType: "Veg",
 
-  weight: ["600g", "1.2kg"],
+    rating: 4.9,
+    reviews: 248,
+    soldCount: 1042,
+    stock: 51,
 
-  variants: [
-    {
-      weight: "600g",
-      price: 9.99,
-      originalPrice: 12.99,
+    fastDelivery: true,
+    isNew: true,
+    deliveryDate: "Tomorrow",
+
+    image: higginsHamsterImg,
+
+    images: [higginsHamsterImg, higginsHamsterImg, higginsHamsterImg, higginsHamsterImg],
+
+    description: "Gourmet hamster food containing fruits, vegetables and wholesome grains.",
+
+    ingredients: ["Papaya", "Carrots", "Corn", "Oats", "Sunflower Seeds"],
+
+    features: ["Gourmet formula", "Fruit enriched", "Highly palatable", "Supports vitality"],
+
+    nutrition: {
+      protein: "15%",
+      fat: "5%",
+      fiber: "8%",
+      moisture: "10%",
     },
-    {
-      weight: "1.2kg",
-      price: 17.99,
-      originalPrice: 21.99,
-    },
-  ],
 
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.1,
+    manufacturer: "Higgins",
+    country: "USA",
 
-  relatedProducts: [2300, 2301, 2303],
-},
+    weight: ["1.4lb", "3lb"],
 
-{
-  id: 2303,
-  name: "Higgins Sunburst Gourmet Hamster Food",
-  brand: "Higgins",
-  category: "hamster-food",
-  subCategory: "gourmet-mix",
-  pet: "Hamster",
-  petType: "Hamster",
-  productCategory: "Hamster Food",
-  productType: "Gourmet Mix",
-  flavor: "Fruit & Vegetable Blend",
-  lifeStage: "All Life Stages",
-  specialDiet: "Premium Nutrition",
-  vegType: "Veg",
+    variants: [
+      {
+        weight: "1.4lb",
+        price: 10.99,
+        originalPrice: 13.99,
+      },
+      {
+        weight: "3lb",
+        price: 20.99,
+        originalPrice: 25.99,
+      },
+    ],
 
-  rating: 4.9,
-  reviews: 248,
-  soldCount: 1042,
-  stock: 51,
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.1,
 
-  fastDelivery: true,
-  isNew: true,
-  deliveryDate: "Tomorrow",
-
-  image: higginsHamsterImg,
-
-  images: [
-    higginsHamsterImg,
-    higginsHamsterImg,
-    higginsHamsterImg,
-    higginsHamsterImg,
-  ],
-
-  description:
-    "Gourmet hamster food containing fruits, vegetables and wholesome grains.",
-
-  ingredients: [
-    "Papaya",
-    "Carrots",
-    "Corn",
-    "Oats",
-    "Sunflower Seeds",
-  ],
-
-  features: [
-    "Gourmet formula",
-    "Fruit enriched",
-    "Highly palatable",
-    "Supports vitality",
-  ],
-
-  nutrition: {
-    protein: "15%",
-    fat: "5%",
-    fiber: "8%",
-    moisture: "10%",
+    relatedProducts: [2300, 2302, 2304],
   },
 
-  manufacturer: "Higgins",
-  country: "USA",
+  {
+    id: 2304,
+    name: "Mazuri Hamster Rat Diet",
+    brand: "Mazuri",
+    category: "hamster-food",
+    subCategory: "laboratory-diet",
+    pet: "Hamster",
+    petType: "Hamster",
+    productCategory: "Hamster Food",
+    productType: "Pellet Food",
+    flavor: "Natural Grain",
+    lifeStage: "All Life Stages",
+    specialDiet: "High Protein",
+    vegType: "Veg",
 
-  weight: ["700g", "1.5kg"],
+    rating: 4.8,
+    reviews: 173,
+    soldCount: 664,
+    stock: 34,
 
-  variants: [
-    {
-      weight: "700g",
-      price: 10.99,
-      originalPrice: 13.99,
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
+
+    image: mazuriHamsterImg,
+
+    images: [mazuriHamsterImg, mazuriHamsterImg, mazuriHamsterImg, mazuriHamsterImg],
+
+    description: "Scientifically formulated hamster diet with balanced protein and fiber.",
+
+    ingredients: ["Ground Corn", "Soybean Meal", "Wheat", "Oats", "Vitamins"],
+
+    features: ["High protein", "Complete nutrition", "Supports growth", "Balanced formula"],
+
+    nutrition: {
+      protein: "16%",
+      fat: "4%",
+      fiber: "7%",
+      moisture: "10%",
     },
-    {
-      weight: "1.5kg",
-      price: 20.99,
-      originalPrice: 25.99,
-    },
-  ],
 
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.1,
+    manufacturer: "Mazuri",
+    country: "USA",
 
-  relatedProducts: [2300, 2302, 2304],
-},
+    weight: ["1.1lb", "3.6lb"],
 
-{
-  id: 2304,
-  name: "Mazuri Hamster Rat Diet",
-  brand: "Mazuri",
-  category: "hamster-food",
-  subCategory: "laboratory-diet",
-  pet: "Hamster",
-  petType: "Hamster",
-  productCategory: "Hamster Food",
-  productType: "Pellet Food",
-  flavor: "Natural Grain",
-  lifeStage: "All Life Stages",
-  specialDiet: "High Protein",
-  vegType: "Veg",
+    variants: [
+      {
+        weight: "1.1lb",
+        price: 9.99,
+        originalPrice: 12.99,
+      },
+      {
+        weight: "3.6lb",
+        price: 21.99,
+        originalPrice: 27.99,
+      },
+    ],
 
-  rating: 4.8,
-  reviews: 173,
-  soldCount: 664,
-  stock: 34,
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.1,
 
-  fastDelivery: true,
-  isNew: false,
-  deliveryDate: "Tomorrow",
-
-  image: mazuriHamsterImg,
-
-  images: [
-    mazuriHamsterImg,
-    mazuriHamsterImg,
-    mazuriHamsterImg,
-    mazuriHamsterImg,
-  ],
-
-  description:
-    "Scientifically formulated hamster diet with balanced protein and fiber.",
-
-  ingredients: [
-    "Ground Corn",
-    "Soybean Meal",
-    "Wheat",
-    "Oats",
-    "Vitamins",
-  ],
-
-  features: [
-    "High protein",
-    "Complete nutrition",
-    "Supports growth",
-    "Balanced formula",
-  ],
-
-  nutrition: {
-    protein: "16%",
-    fat: "4%",
-    fiber: "7%",
-    moisture: "10%",
+    relatedProducts: [2301, 2302, 2303],
   },
-
-  manufacturer: "Mazuri",
-  country: "USA",
-
-  weight: ["566g", "1.8kg"],
-
-  variants: [
-    {
-      weight: "566g",
-      price: 9.99,
-      originalPrice: 12.99,
-    },
-    {
-      weight: "1.8kg",
-      price: 21.99,
-      originalPrice: 27.99,
-    },
-  ],
-
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.1,
-
-  relatedProducts: [2301, 2302, 2303],
-},
 ];

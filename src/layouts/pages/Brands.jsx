@@ -1,98 +1,89 @@
-import { Link } from 'react-router-dom'
-import { useMemo, useState } from 'react'
-import Navbar from '../../components/Navbar'
-import Footer from '../../components/Footer'
-import { brands } from '../../data/brands'
+import { Link } from "react-router-dom";
+import { useMemo, useState } from "react";
+import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
+import { brands } from "../../data/brands";
+import SEO from "../../components/SEO";
 
-import royalCaninLogo from '../../assets/brands/royal-canin.jpeg'
-import purinaLogo from '../../assets/brands/purina.jpeg'
-import pedigreeLogo from '../../assets/brands/pedigree.jpeg'
-import farminaLogo from '../../assets/brands/farmina.jpeg'
-import origenLogo from '../../assets/brands/orijen.jpeg'
-import droolsLogo from '../../assets/brands/drools.jpeg'
-import meoLogo from '../../assets/brands/meo.jpeg'
-import kennelKitchenLogo from '../../assets/brands/kennel-kitchen.jpeg'
-import whiskasLogo from '../../assets/brands/whiskas.jpeg'
-import shebaLogo from '../../assets/brands/sheba.jpeg'
-import tasteWildLogo from '../../assets/brands/taste-of-the-wild.jpeg'
-import goodiesLogo from '../../assets/brands/goodies.jpeg'
-import jerhighLogo from '../../assets/brands/jerhigh.jpeg'
-import banners from '../../assets/brand-banners'
-import ezstoreLogo from '../../assets/logo/ezstore-logo-optimized.png'
+import royalCaninLogo from "../../assets/brands/royal-canin.webp";
+import purinaLogo from "../../assets/brands/purina.webp";
+import pedigreeLogo from "../../assets/brands/pedigree.webp";
+import farminaLogo from "../../assets/brands/farmina.webp";
+import origenLogo from "../../assets/brands/orijen.webp";
+import droolsLogo from "../../assets/brands/drools.webp";
+import meoLogo from "../../assets/brands/meo.webp";
+import kennelKitchenLogo from "../../assets/brands/kennel-kitchen.webp";
+import whiskasLogo from "../../assets/brands/whiskas.webp";
+import shebaLogo from "../../assets/brands/sheba.webp";
+import tasteWildLogo from "../../assets/brands/taste-of-the-wild.webp";
+import goodiesLogo from "../../assets/brands/goodies.webp";
+import jerhighLogo from "../../assets/brands/jerhigh.webp";
+import banners from "../../assets/brand-banners";
+import ezstoreLogo from "../../assets/logo/ezstore-logo-optimized.webp";
 
 // acanaLogo removed
 // blueBuffaloLogo removed
 
 const logoMap = {
-  'royal-canin': royalCaninLogo,
+  "royal-canin": royalCaninLogo,
   purina: purinaLogo,
   pedigree: pedigreeLogo,
   farmina: farminaLogo,
   orijen: origenLogo,
   drools: droolsLogo,
   meo: meoLogo,
-  'kennel-kitchen': kennelKitchenLogo,
+  "kennel-kitchen": kennelKitchenLogo,
   whiskas: whiskasLogo,
   sheba: shebaLogo,
-  'taste-of-the-wild': tasteWildLogo,
-  
+  "taste-of-the-wild": tasteWildLogo,
+
   goodies: goodiesLogo,
   jerhigh: jerhighLogo,
-  
+
   // temptations intentionally hidden; fallback to banners if available
   // fallback mappings for assets available as banners or in logo folder
-  applaws: banners['applaws'] || null,
+  applaws: banners["applaws"] || null,
   ezstore: ezstoreLogo,
-}
+};
 
-console.log('whiskasLogo =', whiskasLogo)
-console.log('pedigreeLogo =', pedigreeLogo)
-console.log('orijenLogo =', origenLogo)
+console.log("whiskasLogo =", whiskasLogo);
+console.log("pedigreeLogo =", pedigreeLogo);
+console.log("orijenLogo =", origenLogo);
 
 const BrandsPage = () => {
-  const [search, setSearch] = useState('')
-  const [selectedLetter, setSelectedLetter] = useState('All')
-  const [selectedTab, setSelectedTab] = useState('Popular')
+  const [search, setSearch] = useState("");
+  const [selectedLetter, setSelectedLetter] = useState("All");
+  const [selectedTab, setSelectedTab] = useState("Popular");
 
-  const allBrands = useMemo(
-    () => [...brands].sort((a, b) => a.name.localeCompare(b.name)),
-    []
-  )
+  const allBrands = useMemo(() => [...brands].sort((a, b) => a.name.localeCompare(b.name)), []);
 
   const letters = useMemo(
     () => [
-      'All',
+      "All",
       ...Array.from(new Set(allBrands.map((brand) => brand.name.charAt(0).toUpperCase()))),
     ],
     [allBrands]
-  )
+  );
 
   const filteredBrandList = useMemo(() => {
     return allBrands.filter((brand) => {
-      if (brand.hidden) return false
-      const matchesSearch = brand.name.toLowerCase().includes(search.toLowerCase())
-      const matchesLetter =
-        selectedLetter === 'All' || brand.name.startsWith(selectedLetter)
-      return matchesSearch && matchesLetter
-    })
-  }, [allBrands, search, selectedLetter])
+      if (brand.hidden) return false;
+      const matchesSearch = brand.name.toLowerCase().includes(search.toLowerCase());
+      const matchesLetter = selectedLetter === "All" || brand.name.startsWith(selectedLetter);
+      return matchesSearch && matchesLetter;
+    });
+  }, [allBrands, search, selectedLetter]);
 
   // Spotlight removed — no right-side promotional column on Brands page
 
-  const popularOrder = [
-    'whiskas',
-    'pedigree',
-    'orijen',
-    'applaws',
-    'meo',
-  ]
+  const popularOrder = ["whiskas", "pedigree", "orijen", "applaws", "meo"];
 
   return (
     <div className="bg-[#F8F8F8] min-h-screen">
+      <SEO title="Brands" description="Discover top pet brands and their products at EZStore." />
       <Navbar />
 
       <div className="max-w-8xl mx-auto px-8 md:px-16 lg:px-20 py-8">
-
         <div className="grid grid-cols-1 xl:grid-cols-[240px_minmax(0,1fr)_240px] gap-8">
           <aside className="space-y-6">
             <div className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6">
@@ -109,7 +100,6 @@ const BrandsPage = () => {
                   className="w-full border border-gray-200 rounded-full px-4 py-3 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#1F6B52]"
                 />
               </div>
-              
 
               <div className="flex">
                 {/* Vertical letters column */}
@@ -122,8 +112,8 @@ const BrandsPage = () => {
                           onClick={() => setSelectedLetter(letter)}
                           className={`w-full text-left py-1 transition ${
                             selectedLetter === letter
-                              ? 'text-[#E53935] font-bold'
-                              : 'hover:text-[#1F6B52]'
+                              ? "text-[#E53935] font-bold"
+                              : "hover:text-[#1F6B52]"
                           }`}
                         >
                           {letter}
@@ -142,7 +132,17 @@ const BrandsPage = () => {
                         to={`/brands/${brand.slug}`}
                         className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 hover:border-[#1F6B52] hover:bg-[#F5FBF6] transition"
                       >
-                        <img src={logoMap[brand.logo] || banners[brand.logo] || banners[String(brand.logo).replace(/-/g, '')] || royalCaninLogo} alt={brand.name} className="h-8 w-8 object-contain" loading="lazy" />
+                        <img
+                          src={
+                            logoMap[brand.logo] ||
+                            banners[brand.logo] ||
+                            banners[String(brand.logo).replace(/-/g, "")] ||
+                            royalCaninLogo
+                          }
+                          alt={brand.name}
+                          className="h-8 w-8 object-contain"
+                          loading="lazy"
+                        />
                         <span>{brand.name}</span>
                       </Link>
                     ))}
@@ -160,36 +160,46 @@ const BrandsPage = () => {
               <div className="flex items-center gap-3">
                 <button
                   type="button"
-                  onClick={() => setSelectedTab('Popular')}
+                  onClick={() => setSelectedTab("Popular")}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-                    selectedTab === 'Popular'
-                      ? 'bg-[#1F6B52] text-white'
-                      : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+                    selectedTab === "Popular"
+                      ? "bg-[#1F6B52] text-white"
+                      : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-50"
                   }`}
                 >
                   Popular
                 </button>
                 <button
                   type="button"
-                  onClick={() => setSelectedTab('Emerging')}
+                  onClick={() => setSelectedTab("Emerging")}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-                    selectedTab === 'Emerging'
-                      ? 'bg-[#1F6B52] text-white'
-                      : 'bg-white text-gray-700 border border-gray-200 hover:bg-gray-50'
+                    selectedTab === "Emerging"
+                      ? "bg-[#1F6B52] text-white"
+                      : "bg-white text-gray-700 border border-gray-200 hover:bg-gray-50"
                   }`}
                 >
                   Emerging
                 </button>
               </div>
 
-              <p className="text-sm text-gray-500">Showing {filteredBrandList.filter((b) => (selectedTab === 'Popular' ? b.featured : !b.featured)).length} brands</p>
+              <p className="text-sm text-gray-500">
+                Showing{" "}
+                {
+                  filteredBrandList.filter((b) =>
+                    selectedTab === "Popular" ? b.featured : !b.featured
+                  ).length
+                }{" "}
+                brands
+              </p>
             </div>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-6 items-stretch">
-              {selectedTab === 'Popular'
+              {selectedTab === "Popular"
                 ? // render in explicit popularOrder, falling back to featured brands that match
                   popularOrder
-                    .map((slug) => filteredBrandList.find((b) => b.slug === slug || b.logo === slug))
+                    .map((slug) =>
+                      filteredBrandList.find((b) => b.slug === slug || b.logo === slug)
+                    )
                     .filter(Boolean)
                     .map((brand) => (
                       <Link
@@ -199,17 +209,17 @@ const BrandsPage = () => {
                         aria-label={brand.name}
                       >
                         <div className="w-full h-24 flex items-center justify-center bg-white">
-                         <img
-  src={logoMap[brand.logo] || royalCaninLogo}
-  alt={brand.name}
-  className="max-h-20 max-w-full object-contain"
-  loading="lazy"
-  onError={(e) => {
-    console.log('FAILED:', brand.name)
-    console.log('LOGO:', brand.logo)
-    console.log('SRC:', e.currentTarget.src)
-  }}
-/>
+                          <img
+                            src={logoMap[brand.logo] || royalCaninLogo}
+                            alt={brand.name}
+                            className="max-h-20 max-w-full object-contain"
+                            loading="lazy"
+                            onError={(e) => {
+                              console.log("FAILED:", brand.name);
+                              console.log("LOGO:", brand.logo);
+                              console.log("SRC:", e.currentTarget.src);
+                            }}
+                          />
                         </div>
                       </Link>
                     ))
@@ -242,7 +252,7 @@ const BrandsPage = () => {
 
       <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default BrandsPage
+export default BrandsPage;

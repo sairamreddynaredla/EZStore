@@ -2,11 +2,11 @@
 // src/data/dogs/prescription-food/dogPrescriptionFood.js
 // ==========================================
 
-import royalCaninGastroImg from "../../assets/products/dogs/prescription-food/royal-canin-gastrointestinal-dry-dog-food1.jpg";
-import hillsIDImg from "../../assets/products/dogs/prescription-food/hills-prescription-diet-i-d-dog-food.jpg";
-import farminaVetLifeRenalImg from "../../assets/products/dogs/prescription-food/farmina-vet-life-renal-dog-food.jpg";
-import royalCaninHypoallergenicImg from "../../assets/products/dogs/prescription-food/royal-canin-hypoallergenic-dog-food.jpg";
-import hillsMetabolicImg from "../../assets/products/dogs/prescription-food/hills-prescription-diet-metabolic-dog-food.jpg";
+import royalCaninGastroImg from "../../assets/products/dogs/prescription-food/royal-canin-gastrointestinal-dry-dog-food1.webp";
+import hillsIDImg from "../../assets/products/dogs/prescription-food/hills-prescription-diet-i-d-dog-food.webp";
+import farminaVetLifeRenalImg from "../../assets/products/dogs/prescription-food/farmina-vet-life-renal-dog-food.webp";
+import royalCaninHypoallergenicImg from "../../assets/products/dogs/prescription-food/royal-canin-hypoallergenic-dog-food.webp";
+import hillsMetabolicImg from "../../assets/products/dogs/prescription-food/hills-prescription-diet-metabolic-dog-food.webp";
 
 export const dogPrescriptionFood = [
   {
@@ -38,12 +38,7 @@ export const dogPrescriptionFood = [
 
     image: royalCaninGastroImg,
 
-    images: [
-      royalCaninGastroImg,
-      royalCaninGastroImg,
-      royalCaninGastroImg,
-      royalCaninGastroImg,
-    ],
+    images: [royalCaninGastroImg, royalCaninGastroImg, royalCaninGastroImg, royalCaninGastroImg],
 
     description:
       "Specially formulated veterinary diet to support dogs with digestive disorders and gastrointestinal sensitivities.",
@@ -75,16 +70,16 @@ export const dogPrescriptionFood = [
     manufacturer: "Royal Canin",
     country: "France",
 
-    weight: ["2kg", "7kg"],
+    weight: ["4lb", "14lb"],
 
     variants: [
       {
-        weight: "2kg",
+        weight: "4lb",
         price: 28.99,
         originalPrice: 34.99,
       },
       {
-        weight: "7kg",
+        weight: "14lb",
         price: 79.99,
         originalPrice: 92.99,
       },
@@ -125,24 +120,12 @@ export const dogPrescriptionFood = [
 
     image: hillsIDImg,
 
-    images: [
-      hillsIDImg,
-      hillsIDImg,
-      hillsIDImg,
-      hillsIDImg,
-    ],
+    images: [hillsIDImg, hillsIDImg, hillsIDImg, hillsIDImg],
 
     description:
       "Veterinary nutrition clinically proven to support digestive health and nutrient absorption.",
 
-    ingredients: [
-      "Chicken",
-      "Rice",
-      "Corn Gluten Meal",
-      "Animal Fat",
-      "Fish Oil",
-      "Vitamins",
-    ],
+    ingredients: ["Chicken", "Rice", "Corn Gluten Meal", "Animal Fat", "Fish Oil", "Vitamins"],
 
     features: [
       "Easy digestion",
@@ -161,16 +144,16 @@ export const dogPrescriptionFood = [
     manufacturer: "Hill's Pet Nutrition",
     country: "USA",
 
-    weight: ["1.5kg", "4kg"],
+    weight: ["3lb", "8lb"],
 
     variants: [
       {
-        weight: "1.5kg",
+        weight: "3lb",
         price: 25.99,
         originalPrice: 31.99,
       },
       {
-        weight: "4kg",
+        weight: "8lb",
         price: 62.99,
         originalPrice: 74.99,
       },
@@ -218,17 +201,9 @@ export const dogPrescriptionFood = [
       farminaVetLifeRenalImg,
     ],
 
-    description:
-      "Complete veterinary diet formulated to support dogs with chronic kidney disease.",
+    description: "Complete veterinary diet formulated to support dogs with chronic kidney disease.",
 
-    ingredients: [
-      "Chicken",
-      "Rice",
-      "Fish Oil",
-      "Egg Powder",
-      "Beet Pulp",
-      "Minerals",
-    ],
+    ingredients: ["Chicken", "Rice", "Fish Oil", "Egg Powder", "Beet Pulp", "Minerals"],
 
     features: [
       "Kidney support formula",
@@ -247,16 +222,16 @@ export const dogPrescriptionFood = [
     manufacturer: "Farmina",
     country: "Italy",
 
-    weight: ["2kg", "12kg"],
+    weight: ["4lb", "24lb"],
 
     variants: [
       {
-        weight: "2kg",
+        weight: "4lb",
         price: 32.99,
         originalPrice: 39.99,
       },
       {
-        weight: "12kg",
+        weight: "24lb",
         price: 109.99,
         originalPrice: 129.99,
       },
@@ -304,8 +279,7 @@ export const dogPrescriptionFood = [
       royalCaninHypoallergenicImg,
     ],
 
-    description:
-      "Veterinary diet formulated for dogs with food allergies and skin sensitivities.",
+    description: "Veterinary diet formulated for dogs with food allergies and skin sensitivities.",
 
     ingredients: [
       "Hydrolyzed Soy Protein",
@@ -333,16 +307,16 @@ export const dogPrescriptionFood = [
     manufacturer: "Royal Canin",
     country: "France",
 
-    weight: ["2kg", "7kg"],
+    weight: ["4lb", "14lb"],
 
     variants: [
       {
-        weight: "2kg",
+        weight: "4lb",
         price: 34.99,
         originalPrice: 41.99,
       },
       {
-        weight: "7kg",
+        weight: "14lb",
         price: 95.99,
         originalPrice: 114.99,
       },
@@ -383,12 +357,7 @@ export const dogPrescriptionFood = [
 
     image: hillsMetabolicImg,
 
-    images: [
-      hillsMetabolicImg,
-      hillsMetabolicImg,
-      hillsMetabolicImg,
-      hillsMetabolicImg,
-    ],
+    images: [hillsMetabolicImg, hillsMetabolicImg, hillsMetabolicImg, hillsMetabolicImg],
 
     description:
       "Clinically proven veterinary nutrition to help dogs lose weight and maintain healthy body condition.",
@@ -419,16 +388,16 @@ export const dogPrescriptionFood = [
     manufacturer: "Hill's Pet Nutrition",
     country: "USA",
 
-    weight: ["1.5kg", "4kg"],
+    weight: ["3lb", "8lb"],
 
     variants: [
       {
-        weight: "1.5kg",
+        weight: "3lb",
         price: 27.99,
         originalPrice: 34.99,
       },
       {
-        weight: "4kg",
+        weight: "8lb",
         price: 69.99,
         originalPrice: 82.99,
       },

@@ -1,310 +1,246 @@
-import royalCaninGrainFreeImg from "../../assets/products/cats/grain-free-food/royal-canin-grain-free-adult-cat-food.jpg";
-import orijenImg from "../../assets/products/cats/grain-free-food/orijen-original-grain-free-cat-food.jpg";
-import tasteWildImg from "../../assets/products/cats/grain-free-food/taste-of-the-wild-rocky-mountain-grain-free-cat-food.jpg";
-import farminaImg from "../../assets/products/cats/grain-free-food/farmina-nd-chicken-pomegranate-grain-free-cat-food.jpg";
+import royalCaninGrainFreeImg from "../../assets/products/cats/grain-free-food/royal-canin-grain-free-adult-cat-food.webp";
+import orijenImg from "../../assets/products/cats/grain-free-food/orijen-original-grain-free-cat-food.webp";
+import tasteWildImg from "../../assets/products/cats/grain-free-food/taste-of-the-wild-rocky-mountain-grain-free-cat-food.webp";
+import farminaImg from "../../assets/products/cats/grain-free-food/farmina-nd-chicken-pomegranate-grain-free-cat-food.webp";
 
 export const grainFreeFood = [
+  {
+    id: 1501,
+    name: "Royal Canin Grain Free Adult Cat Food",
+    brand: "Royal Canin",
+    category: "cats-grain-free-food",
+    subCategory: "grain-free-food",
+    pet: "Cat",
+    petType: "Cat",
+    productCategory: "Cat Food",
+    productType: "Grain Free Food",
+    flavor: "Chicken",
+    lifeStage: "Adult",
+    specialDiet: "Grain Free",
+    vegType: "Non-Veg",
 
-{
-  id: 1501,
-  name: "Royal Canin Grain Free Adult Cat Food",
-  brand: "Royal Canin",
-  category: "cats-grain-free-food",
-  subCategory: "grain-free-food",
-  pet: "Cat",
-  petType: "Cat",
-  productCategory: "Cat Food",
-  productType: "Grain Free Food",
-  flavor: "Chicken",
-  lifeStage: "Adult",
-  specialDiet: "Grain Free",
-  vegType: "Non-Veg",
+    rating: 4.8,
+    reviews: 245,
+    soldCount: 864,
+    stock: 36,
 
-  rating: 4.8,
-  reviews: 245,
-  soldCount: 864,
-  stock: 36,
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
 
-  fastDelivery: true,
-  isNew: false,
-  deliveryDate: "Tomorrow",
+    image: royalCaninGrainFreeImg,
 
-  image: royalCaninGrainFreeImg,
+    images: [
+      royalCaninGrainFreeImg,
+      royalCaninGrainFreeImg,
+      royalCaninGrainFreeImg,
+      royalCaninGrainFreeImg,
+    ],
 
-  images: [
-    royalCaninGrainFreeImg,
-    royalCaninGrainFreeImg,
-    royalCaninGrainFreeImg,
-    royalCaninGrainFreeImg,
-  ],
+    description: "High protein grain-free nutrition formulated for healthy adult cats.",
 
-  description:
-    "High protein grain-free nutrition formulated for healthy adult cats.",
+    ingredients: ["Chicken", "Peas", "Potatoes", "Fish Oil", "Vitamins", "Minerals"],
 
-  ingredients: [
-    "Chicken",
-    "Peas",
-    "Potatoes",
-    "Fish Oil",
-    "Vitamins",
-    "Minerals",
-  ],
+    features: ["Grain free recipe", "High protein", "Supports digestion", "Healthy skin and coat"],
 
-  features: [
-    "Grain free recipe",
-    "High protein",
-    "Supports digestion",
-    "Healthy skin and coat",
-  ],
+    nutrition: {
+      protein: "34%",
+      fat: "18%",
+      fiber: "4%",
+      moisture: "10%",
+    },
 
-  nutrition: {
-    protein: "34%",
-    fat: "18%",
-    fiber: "4%",
-    moisture: "10%",
+    manufacturer: "Royal Canin",
+    country: "France",
+
+    weight: ["4lb", "8lb"],
+
+    variants: [
+      { weight: "4lb", price: 28.99, originalPrice: 34.99 },
+      { weight: "8lb", price: 52.99, originalPrice: 62.99 },
+    ],
+
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.1,
+
+    relatedProducts: [1502, 1504],
   },
 
-  manufacturer: "Royal Canin",
-  country: "France",
+  {
+    id: 1502,
+    name: "Orijen Original Grain Free Cat Food",
+    brand: "Orijen",
+    category: "cats-grain-free-food",
+    subCategory: "grain-free-food",
+    pet: "Cat",
+    petType: "Cat",
+    productCategory: "Cat Food",
+    productType: "Grain Free Food",
+    flavor: "Chicken & Turkey",
+    lifeStage: "Adult",
+    specialDiet: "Grain Free",
+    vegType: "Non-Veg",
 
-  weight: ["2kg", "4kg"],
+    rating: 4.9,
+    reviews: 382,
+    soldCount: 1148,
+    stock: 28,
 
-  variants: [
-    { weight: "2kg", price: 28.99, originalPrice: 34.99 },
-    { weight: "4kg", price: 52.99, originalPrice: 62.99 },
-  ],
+    fastDelivery: true,
+    isNew: true,
+    deliveryDate: "Tomorrow",
 
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.1,
+    image: orijenImg,
 
-  relatedProducts: [1502, 1504],
-},
+    images: [orijenImg, orijenImg, orijenImg, orijenImg],
 
-{
-  id: 1502,
-  name: "Orijen Original Grain Free Cat Food",
-  brand: "Orijen",
-  category: "cats-grain-free-food",
-  subCategory: "grain-free-food",
-  pet: "Cat",
-  petType: "Cat",
-  productCategory: "Cat Food",
-  productType: "Grain Free Food",
-  flavor: "Chicken & Turkey",
-  lifeStage: "Adult",
-  specialDiet: "Grain Free",
-  vegType: "Non-Veg",
+    description: "Biologically appropriate grain-free food packed with animal protein.",
 
-  rating: 4.9,
-  reviews: 382,
-  soldCount: 1148,
-  stock: 28,
+    ingredients: ["Chicken", "Turkey", "Eggs", "Fish", "Vitamins", "Minerals"],
 
-  fastDelivery: true,
-  isNew: true,
-  deliveryDate: "Tomorrow",
+    features: [
+      "85% animal ingredients",
+      "Grain free",
+      "Rich protein source",
+      "Supports lean muscles",
+    ],
 
-  image: orijenImg,
+    nutrition: {
+      protein: "40%",
+      fat: "20%",
+      fiber: "3%",
+      moisture: "10%",
+    },
 
-  images: [
-    orijenImg,
-    orijenImg,
-    orijenImg,
-    orijenImg,
-  ],
+    manufacturer: "Champion Petfoods",
+    country: "Canada",
 
-  description:
-    "Biologically appropriate grain-free food packed with animal protein.",
+    weight: ["3.6lb", "10.8lb"],
 
-  ingredients: [
-    "Chicken",
-    "Turkey",
-    "Eggs",
-    "Fish",
-    "Vitamins",
-    "Minerals",
-  ],
+    variants: [
+      { weight: "3.6lb", price: 34.99, originalPrice: 42.99 },
+      { weight: "10.8lb", price: 84.99, originalPrice: 99.99 },
+    ],
 
-  features: [
-    "85% animal ingredients",
-    "Grain free",
-    "Rich protein source",
-    "Supports lean muscles",
-  ],
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.1,
 
-  nutrition: {
-    protein: "40%",
-    fat: "20%",
-    fiber: "3%",
-    moisture: "10%",
+    relatedProducts: [1501, 1505],
   },
 
-  manufacturer: "Champion Petfoods",
-  country: "Canada",
+  {
+    id: 1504,
+    name: "Taste of the Wild Rocky Mountain Grain Free Cat Food",
+    brand: "Taste of the Wild",
+    category: "cats-grain-free-food",
+    subCategory: "grain-free-food",
+    pet: "Cat",
+    petType: "Cat",
+    productCategory: "Cat Food",
+    productType: "Grain Free Food",
+    flavor: "Salmon & Venison",
+    lifeStage: "Adult",
+    specialDiet: "Grain Free",
+    vegType: "Non-Veg",
 
-  weight: ["1.8kg", "5.4kg"],
+    rating: 4.7,
+    reviews: 226,
+    soldCount: 792,
+    stock: 27,
 
-  variants: [
-    { weight: "1.8kg", price: 34.99, originalPrice: 42.99 },
-    { weight: "5.4kg", price: 84.99, originalPrice: 99.99 },
-  ],
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
 
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.1,
+    image: tasteWildImg,
 
-  relatedProducts: [1501, 1505],
-},
+    images: [tasteWildImg, tasteWildImg, tasteWildImg, tasteWildImg],
 
-{
-  id: 1504,
-  name: "Taste of the Wild Rocky Mountain Grain Free Cat Food",
-  brand: "Taste of the Wild",
-  category: "cats-grain-free-food",
-  subCategory: "grain-free-food",
-  pet: "Cat",
-  petType: "Cat",
-  productCategory: "Cat Food",
-  productType: "Grain Free Food",
-  flavor: "Salmon & Venison",
-  lifeStage: "Adult",
-  specialDiet: "Grain Free",
-  vegType: "Non-Veg",
+    description: "Grain-free formula with roasted venison and smoked salmon.",
 
-  rating: 4.7,
-  reviews: 226,
-  soldCount: 792,
-  stock: 27,
+    ingredients: ["Salmon", "Venison", "Peas", "Potatoes", "Vitamins", "Minerals"],
 
-  fastDelivery: true,
-  isNew: false,
-  deliveryDate: "Tomorrow",
+    features: ["Novel protein sources", "Grain free", "Supports muscles", "Rich antioxidants"],
 
-  image: tasteWildImg,
+    nutrition: {
+      protein: "42%",
+      fat: "18%",
+      fiber: "3%",
+      moisture: "10%",
+    },
 
-  images: [
-    tasteWildImg,
-    tasteWildImg,
-    tasteWildImg,
-    tasteWildImg,
-  ],
+    manufacturer: "Taste of the Wild",
+    country: "USA",
 
-  description:
-    "Grain-free formula with roasted venison and smoked salmon.",
+    weight: ["4lb", "13.2lb"],
 
-  ingredients: [
-    "Salmon",
-    "Venison",
-    "Peas",
-    "Potatoes",
-    "Vitamins",
-    "Minerals",
-  ],
+    variants: [
+      { weight: "4lb", price: 31.99, originalPrice: 38.99 },
+      { weight: "13.2lb", price: 89.99, originalPrice: 104.99 },
+    ],
 
-  features: [
-    "Novel protein sources",
-    "Grain free",
-    "Supports muscles",
-    "Rich antioxidants",
-  ],
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.1,
 
-  nutrition: {
-    protein: "42%",
-    fat: "18%",
-    fiber: "3%",
-    moisture: "10%",
+    relatedProducts: [1501, 1503, 1505],
   },
 
-  manufacturer: "Taste of the Wild",
-  country: "USA",
+  {
+    id: 1505,
+    name: "Farmina N&D Chicken & Pomegranate Grain Free Cat Food",
+    brand: "Farmina",
+    category: "cats-grain-free-food",
+    subCategory: "grain-free-food",
+    pet: "Cat",
+    petType: "Cat",
+    productCategory: "Cat Food",
+    productType: "Grain Free Food",
+    flavor: "Chicken",
+    lifeStage: "Adult",
+    specialDiet: "Grain Free",
+    vegType: "Non-Veg",
 
-  weight: ["2kg", "6.6kg"],
+    rating: 4.9,
+    reviews: 318,
+    soldCount: 1024,
+    stock: 34,
 
-  variants: [
-    { weight: "2kg", price: 31.99, originalPrice: 38.99 },
-    { weight: "6.6kg", price: 89.99, originalPrice: 104.99 },
-  ],
+    fastDelivery: true,
+    isNew: true,
+    deliveryDate: "Tomorrow",
 
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.1,
+    image: farminaImg,
 
-  relatedProducts: [1501, 1503, 1505],
-},
+    images: [farminaImg, farminaImg, farminaImg, farminaImg],
 
-{
-  id: 1505,
-  name: "Farmina N&D Chicken & Pomegranate Grain Free Cat Food",
-  brand: "Farmina",
-  category: "cats-grain-free-food",
-  subCategory: "grain-free-food",
-  pet: "Cat",
-  petType: "Cat",
-  productCategory: "Cat Food",
-  productType: "Grain Free Food",
-  flavor: "Chicken",
-  lifeStage: "Adult",
-  specialDiet: "Grain Free",
-  vegType: "Non-Veg",
+    description: "Premium grain-free cat food with chicken and pomegranate.",
 
-  rating: 4.9,
-  reviews: 318,
-  soldCount: 1024,
-  stock: 34,
+    ingredients: ["Chicken", "Pomegranate", "Sweet Potato", "Fish Oil", "Vitamins", "Minerals"],
 
-  fastDelivery: true,
-  isNew: true,
-  deliveryDate: "Tomorrow",
+    features: ["Natural ingredients", "Low glycemic recipe", "Grain free", "Rich antioxidants"],
 
-  image: farminaImg,
+    nutrition: {
+      protein: "44%",
+      fat: "20%",
+      fiber: "2.5%",
+      moisture: "8%",
+    },
 
-  images: [
-    farminaImg,
-    farminaImg,
-    farminaImg,
-    farminaImg,
-  ],
+    manufacturer: "Farmina",
+    country: "Italy",
 
-  description:
-    "Premium grain-free cat food with chicken and pomegranate.",
+    weight: ["3lb", "10lb"],
 
-  ingredients: [
-    "Chicken",
-    "Pomegranate",
-    "Sweet Potato",
-    "Fish Oil",
-    "Vitamins",
-    "Minerals",
-  ],
+    variants: [
+      { weight: "3lb", price: 32.99, originalPrice: 39.99 },
+      { weight: "10lb", price: 79.99, originalPrice: 94.99 },
+    ],
 
-  features: [
-    "Natural ingredients",
-    "Low glycemic recipe",
-    "Grain free",
-    "Rich antioxidants",
-  ],
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.1,
 
-  nutrition: {
-    protein: "44%",
-    fat: "20%",
-    fiber: "2.5%",
-    moisture: "8%",
+    relatedProducts: [1502, 1503, 1504],
   },
-
-  manufacturer: "Farmina",
-  country: "Italy",
-
-  weight: ["1.5kg", "5kg"],
-
-  variants: [
-    { weight: "1.5kg", price: 32.99, originalPrice: 39.99 },
-    { weight: "5kg", price: 79.99, originalPrice: 94.99 },
-  ],
-
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.1,
-
-  relatedProducts: [1502, 1503, 1504],
-},
-
 ];
 
 export default grainFreeFood;

@@ -1,141 +1,86 @@
-import Navbar from '../../components/Navbar'
+import Navbar from "../../components/Navbar";
 
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 
-import { FaHeart } from 'react-icons/fa'
-import {
-  resolveProductImage,
-  resolveProductImageFallback,
-} from '../../utils/productImage'
+import { FaHeart } from "react-icons/fa";
+import { resolveProductImage, resolveProductImageFallback } from "../../utils/productImage";
 
-import {
-  useWishlist,
-} from '../../context/WishListContext'
+import { useWishlist } from "../../context/WishListContext";
 
-import useCart from '../../hooks/usecart'
+import useCart from "../../hooks/usecart";
 
 const WishList = () => {
+  const { wishlist: wishlistItems, removeFromWishlist } = useWishlist();
 
-  const {
-    wishlist: wishlistItems,
-    removeFromWishlist,
-  } = useWishlist()
-
-  const { addToCart } = useCart()
+  const { addToCart } = useCart();
 
   const handleAddToCart = (product, quantity) => {
-    addToCart({ ...product, quantity })
-    removeFromWishlist(product.id)
-  }
+    addToCart({ ...product, quantity });
+    removeFromWishlist(product.id);
+  };
 
   return (
-
-    <div className='bg-[#f8f8f8] min-h-screen'>
-
+    <div className="bg-[#f8f8f8] min-h-screen">
       {/* NAVBAR */}
       <Navbar />
 
       {/* PAGE */}
-      <div className='max-w-360 mx-auto px-5 md:px-10 py-16'>
-
+      <div className="max-w-360 mx-auto px-5 md:px-10 py-16">
         {/* TITLE */}
-        <div className='flex items-center justify-between mb-12 flex-wrap gap-5'>
-
+        <div className="flex items-center justify-between mb-12 flex-wrap gap-5">
           <div>
+            <h1 className="text-5xl font-bold text-[#0D2B5C] mb-3">My Wishlist</h1>
 
-            <h1 className='text-5xl font-bold text-[#0D2B5C] mb-3'>
-
-              My Wishlist
-
-            </h1>
-
-            <p className='text-gray-500 text-lg'>
-
-              Save your favorite pet products for later.
-
-            </p>
-
+            <p className="text-gray-500 text-lg">Save your favorite pet products for later.</p>
           </div>
 
-          <div className='bg-white px-6 py-4 rounded-2xl shadow-sm'>
-
-            <span className='text-lg font-semibold text-[#0D2B5C]'>
-
-              {wishlistItems.length}
-              {' '}
-              Items
-
+          <div className="bg-white px-6 py-4 rounded-2xl shadow-sm">
+            <span className="text-lg font-semibold text-[#0D2B5C]">
+              {wishlistItems.length} Items
             </span>
-
           </div>
-
         </div>
 
         {/* EMPTY WISHLIST */}
         {wishlistItems.length === 0 ? (
-
-          <div className='bg-white rounded-[35px] p-20 text-center shadow-sm'>
-
-            <div className='flex justify-center mb-6'>
-
-              <div className='w-24 h-24 rounded-full bg-red-100 flex items-center justify-center'>
-
-                <FaHeart
-                  className='text-red-500'
-                  size={40}
-                />
-
+          <div className="bg-white rounded-[35px] p-20 text-center shadow-sm">
+            <div className="flex justify-center mb-6">
+              <div className="w-24 h-24 rounded-full bg-red-100 flex items-center justify-center">
+                <FaHeart className="text-red-500" size={40} />
               </div>
-
             </div>
 
-            <h2 className='text-4xl font-bold mb-5 text-[#0D2B5C]'>
+            <h2 className="text-4xl font-bold mb-5 text-[#0D2B5C]">Your Wishlist Is Empty</h2>
 
-              Your Wishlist Is Empty
-
-            </h2>
-
-            <p className='text-gray-500 text-lg mb-10 max-w-xl mx-auto'>
-
+            <p className="text-gray-500 text-lg mb-10 max-w-xl mx-auto">
               Save products you love and easily find them later.
-
             </p>
 
             <Link
-              to='/shop'
-              className='inline-block bg-orange-500 hover:bg-orange-600 transition-all text-white px-10 py-5 rounded-full text-lg font-semibold'
+              to="/shop"
+              className="inline-block bg-orange-500 hover:bg-orange-600 transition-all text-white px-10 py-5 rounded-full text-lg font-semibold"
             >
-
               Explore Products
-
             </Link>
-
           </div>
-
         ) : (
-
-          <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8'>
-
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
             {wishlistItems.map((product) => {
-
-              const activeVariant =
-                product?.variants?.[0]
+              const activeVariant = product?.variants?.[0];
 
               const discountPercentage =
                 activeVariant?.originalPrice > activeVariant?.price
                   ? Math.round(
-                      (
-                        (activeVariant.originalPrice - activeVariant.price) /
-                        activeVariant.originalPrice
-                      ) * 100
+                      ((activeVariant.originalPrice - activeVariant.price) /
+                        activeVariant.originalPrice) *
+                        100
                     )
-                  : 0
+                  : 0;
 
               return (
-
                 <div
                   key={product.id}
-                  className='
+                  className="
                     group
                     bg-white
                     rounded-4xl
@@ -148,29 +93,21 @@ const WishList = () => {
                     border-gray-100
                     flex
                     flex-col
-                  '
+                  "
                 >
-
                   {/* IMAGE */}
-                  <div className='relative bg-[#f8f8f8] h-80 overflow-hidden p-6'>
-
+                  <div className="relative bg-[#f8f8f8] h-80 overflow-hidden p-6">
                     {/* DISCOUNT */}
                     {discountPercentage > 0 && (
-                    <div className='absolute top-5 left-5 z-10 bg-[#F53B3B] text-white px-4 py-2 rounded-full text-xs font-bold tracking-wide'>
-
-                      {discountPercentage}% OFF
-
-                    </div>
+                      <div className="absolute top-5 left-5 z-10 bg-[#F53B3B] text-white px-4 py-2 rounded-full text-xs font-bold tracking-wide">
+                        {discountPercentage}% OFF
+                      </div>
                     )}
 
                     {/* REMOVE */}
                     <button
-                      onClick={() =>
-                        removeFromWishlist(
-                          product.id
-                        )
-                      }
-                      className='
+                      onClick={() => removeFromWishlist(product.id)}
+                      className="
                         absolute
                         top-5
                         right-5
@@ -187,61 +124,47 @@ const WishList = () => {
                         hover:text-white
                         transition-all
                         text-red-500
-                      '
+                      "
                     >
-
                       <FaHeart />
-
                     </button>
 
                     {/* PRODUCT IMAGE */}
-                    <Link
-                      to={`/product/${product.id}`}
-                      className='block w-full h-full'
-                    >
-
+                    <Link to={`/product/${product.id}`} className="block w-full h-full">
                       <img
                         src={resolveProductImage(product)}
                         alt={product.name}
-                        className='
+                        className="
                           w-full
                           h-full
                           object-contain
                           group-hover:scale-110
                           transition-transform
                           duration-700
-                        '
+                        "
                         loading="lazy"
                         onError={(e) => {
-                          e.currentTarget.onerror = null
-                          const fallback = resolveProductImageFallback(product)
+                          e.currentTarget.onerror = null;
+                          const fallback = resolveProductImageFallback(product);
                           if (e.currentTarget.src !== fallback) {
-                            e.currentTarget.src = fallback
+                            e.currentTarget.src = fallback;
                           }
                         }}
                       />
-
                     </Link>
-
                   </div>
 
                   {/* CONTENT */}
-                  <div className='flex flex-col flex-1 p-6'>
-
+                  <div className="flex flex-col flex-1 p-6">
                     {/* BRAND */}
-                    <p className='text-sm uppercase tracking-[2px] text-gray-400 mb-3 font-medium'>
-
+                    <p className="text-sm uppercase tracking-[2px] text-gray-400 mb-3 font-medium">
                       {product.brand}
-
                     </p>
 
                     {/* TITLE */}
-                    <Link
-                      to={`/product/${product.id}`}
-                    >
-
+                    <Link to={`/product/${product.id}`}>
                       <h2
-                        className='
+                        className="
                           text-[20px]
                           font-bold
                           text-[#0D2B5C]
@@ -250,81 +173,52 @@ const WishList = () => {
                           min-h-16
                           hover:text-[#F53B3B]
                           transition-all
-                        '
+                        "
                       >
-
                         {product.name}
-
                       </h2>
-
                     </Link>
 
                     {/* RATING */}
-                    <div className='flex items-center gap-3 mt-4'>
+                    <div className="flex items-center gap-3 mt-4">
+                      <div className="flex items-center gap-1">
+                        <span className="text-yellow-500">★</span>
 
-                      <div className='flex items-center gap-1'>
-
-                        <span className='text-yellow-500'>
-                          ★
-                        </span>
-
-                        <span className='font-semibold text-sm text-gray-800'>
-
+                        <span className="font-semibold text-sm text-gray-800">
                           {product.rating}
-
                         </span>
-
                       </div>
 
-                      <span className='text-gray-400 text-sm'>
-
-                        ({product.reviews})
-
-                      </span>
-
+                      <span className="text-gray-400 text-sm">({product.reviews})</span>
                     </div>
 
                     {/* PRICE */}
-                    <div className='flex items-center gap-4 mt-6 flex-wrap'>
+                    <div className="flex items-center gap-4 mt-6 flex-wrap">
+                      <h3 className="text-3xl font-bold text-green-600">${activeVariant.price}</h3>
 
-                      <h3 className='text-3xl font-bold text-green-600'>
-
-                        ${activeVariant.price}
-
-                      </h3>
-
-                      <span className='text-gray-400 line-through text-lg'>
-
+                      <span className="text-gray-400 line-through text-lg">
                         ${activeVariant.originalPrice}
-
                       </span>
-
                     </div>
 
                     {/* ADD TO CART BUTTON */}
                     <button
-                      onClick={() => handleAddToCart({ ...product, selectedVariant: activeVariant }, 1)}
-                      className='w-full py-3 mt-5 rounded-2xl font-semibold text-sm bg-amber-400 hover:bg-amber-300 text-black transition-colors'
+                      onClick={() =>
+                        handleAddToCart({ ...product, selectedVariant: activeVariant }, 1)
+                      }
+                      className="w-full py-3 mt-5 rounded-2xl font-semibold text-sm bg-amber-400 hover:bg-amber-300 text-black transition-colors"
                     >
                       Add to Cart
                     </button>
-
                   </div>
-
                 </div>
-
-              )
+              );
             })}
-
           </div>
-
         )}
-
       </div>
-
     </div>
+  );
+};
 
-  )
-}
-
-export default WishList
+export default WishList;

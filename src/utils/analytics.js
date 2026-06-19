@@ -1,11 +1,11 @@
 export function trackEvent(name, payload = {}) {
   try {
-    if (typeof window !== 'undefined' && window.dataLayer) {
+    if (typeof window !== "undefined" && window.dataLayer) {
       window.dataLayer.push({ event: name, ...payload });
       return;
     }
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', name, payload);
+    if (typeof window !== "undefined" && window.gtag) {
+      window.gtag("event", name, payload);
       return;
     }
   } catch (e) {
@@ -15,11 +15,11 @@ export function trackEvent(name, payload = {}) {
   // Keep shape consistent for analytics QA
   // Example: trackEvent('add_to_cart', { id: 2, sku: 'ped-1kg', quantity: 1 })
   // eslint-disable-next-line no-console
-  console.log('[analytics] trackEvent', name, payload);
+  console.log("[analytics] trackEvent", name, payload);
 }
 
 export function trackAddToCart(product = {}, quantity = 1) {
-  trackEvent('add_to_cart', {
+  trackEvent("add_to_cart", {
     product_id: product.id,
     sku: product.selectedVariant?.weight || product.variants?.[0]?.weight,
     name: product.name,
@@ -29,7 +29,7 @@ export function trackAddToCart(product = {}, quantity = 1) {
 }
 
 export function trackBuyNow(product = {}, quantity = 1) {
-  trackEvent('buy_now_click', {
+  trackEvent("buy_now_click", {
     product_id: product.id,
     sku: product.selectedVariant?.weight || product.variants?.[0]?.weight,
     name: product.name,
@@ -39,7 +39,7 @@ export function trackBuyNow(product = {}, quantity = 1) {
 }
 
 export function trackAddToWishlist(product = {}) {
-  trackEvent('add_to_wishlist', {
+  trackEvent("add_to_wishlist", {
     product_id: product.id,
     sku: product.selectedVariant?.weight || product.variants?.[0]?.weight,
     name: product.name,
@@ -47,7 +47,7 @@ export function trackAddToWishlist(product = {}) {
 }
 
 export function trackRemoveFromWishlist(product = {}) {
-  trackEvent('remove_from_wishlist', {
+  trackEvent("remove_from_wishlist", {
     product_id: product.id || product,
   });
 }

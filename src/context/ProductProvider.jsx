@@ -1,28 +1,28 @@
-import { useEffect, useState } from 'react'
-import { ProductContext } from './Productcontext'
-import api from '../services/api'
+import { useEffect, useState } from "react";
+import { ProductContext } from "./Productcontext";
+import api from "../services/api";
 
 const ProductProvider = ({ children }) => {
-  const [products, setProducts] = useState([])
-  const [loading, setLoading] = useState(false)
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const loadProducts = async () => {
       try {
-        setLoading(true)
+        setLoading(true);
 
-        const response = await api.get('/products')
+        const response = await api.get("/products");
 
-        setProducts(response.data)
+        setProducts(response.data);
       } catch (error) {
-        console.log(error)
+        console.log(error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    loadProducts()
-  }, [])
+    loadProducts();
+  }, []);
 
   return (
     <ProductContext.Provider
@@ -33,7 +33,7 @@ const ProductProvider = ({ children }) => {
     >
       {children}
     </ProductContext.Provider>
-  )
-}
+  );
+};
 
-export default ProductProvider
+export default ProductProvider;

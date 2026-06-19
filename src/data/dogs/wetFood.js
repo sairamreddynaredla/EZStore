@@ -1,10 +1,10 @@
 // dogsWetFood.js
 
-import purinaWetImg from "../../assets/products/dogs/wet-food/purina-pro-plan-savory-wet-dog-food.jpg";
-import royalCaninWetImg from "../../assets/products/dogs/wet-food/royal-canin-adult-wet-dog-food.jpg";
+import purinaWetImg from "../../assets/products/dogs/wet-food/purina-pro-plan-savory-wet-dog-food.webp";
+import royalCaninWetImg from "../../assets/products/dogs/wet-food/royal-canin-adult-wet-dog-food.webp";
 // blueBuffaloWetImg removed
-import pedigreeWetImg from "../../assets/products/dogs/wet-food/pedigree-chicken-wet-dog-food.jpg";
-import hillsWetImg from "../../assets/products/dogs/wet-food/hills-science-diet-adult-wet-dog-food.jpg";
+import pedigreeWetImg from "../../assets/products/dogs/wet-food/pedigree-chicken-wet-dog-food.webp";
+import hillsWetImg from "../../assets/products/dogs/wet-food/hills-science-diet-adult-wet-dog-food.webp";
 
 export const dogsWetFood = [
   {
@@ -23,7 +23,7 @@ export const dogsWetFood = [
     lifeStage: "Adult",
     specialDiet: "High Protein",
     vegType: "Non-Veg",
-    size: "12.5oz",
+    size: "0.78lb",
 
     rating: 4.7,
     reviews: 238,
@@ -36,23 +36,12 @@ export const dogsWetFood = [
 
     image: purinaWetImg,
 
-    images: [
-      purinaWetImg,
-      purinaWetImg,
-    ],
+    images: [purinaWetImg, purinaWetImg],
 
     description:
       "Purina Pro Plan wet dog food provides balanced nutrition with high-quality protein and wet texture that adult dogs love.",
 
-    ingredients: [
-      "Chicken",
-      "Broth",
-      "Rice",
-      "Peas",
-      "Carrots",
-      "Vitamins",
-      "Minerals",
-    ],
+    ingredients: ["Chicken", "Broth", "Rice", "Peas", "Carrots", "Vitamins", "Minerals"],
 
     features: [
       "High protein wet food",
@@ -70,11 +59,11 @@ export const dogsWetFood = [
 
     manufacturer: "Purina",
 
-    weight: ["12.5oz"],
+    weight: ["0.78lb"],
 
     variants: [
       {
-        weight: "12.5oz",
+        weight: "0.78lb",
         price: 3.99,
         originalPrice: 4.99,
       },
@@ -99,7 +88,7 @@ export const dogsWetFood = [
     lifeStage: "Adult",
     specialDiet: "Digestive Care",
     vegType: "Non-Veg",
-    size: "13oz",
+    size: "0.81lb",
 
     rating: 4.8,
     reviews: 185,
@@ -112,22 +101,12 @@ export const dogsWetFood = [
 
     image: royalCaninWetImg,
 
-    images: [
-      royalCaninWetImg,
-      royalCaninWetImg,
-    ],
+    images: [royalCaninWetImg, royalCaninWetImg],
 
     description:
       "Royal Canin Adult Wet Dog Food delivers balanced nutrition and supports digestive health.",
 
-    ingredients: [
-      "Chicken",
-      "Pork By Products",
-      "Broth",
-      "Rice",
-      "Vitamins",
-      "Minerals",
-    ],
+    ingredients: ["Chicken", "Pork By Products", "Broth", "Rice", "Vitamins", "Minerals"],
 
     features: [
       "Supports digestive health",
@@ -145,11 +124,11 @@ export const dogsWetFood = [
 
     manufacturer: "Royal Canin",
 
-    weight: ["13oz"],
+    weight: ["0.81lb"],
 
     variants: [
       {
-        weight: "13oz",
+        weight: "0.81lb",
         price: 4.29,
         originalPrice: 5.29,
       },
@@ -157,8 +136,6 @@ export const dogsWetFood = [
 
     relatedProducts: [201, 205],
   },
-
-  
 
   {
     id: 204,
@@ -176,7 +153,7 @@ export const dogsWetFood = [
     lifeStage: "Adult",
     specialDiet: "Balanced Nutrition",
     vegType: "Non-Veg",
-    size: "13.2oz",
+    size: "0.83lb",
 
     rating: 4.5,
     reviews: 198,
@@ -189,28 +166,13 @@ export const dogsWetFood = [
 
     image: pedigreeWetImg,
 
-    images: [
-      pedigreeWetImg,
-      pedigreeWetImg,
-    ],
+    images: [pedigreeWetImg, pedigreeWetImg],
 
-    description:
-      "Pedigree wet food offers complete nutrition with delicious chicken flavor.",
+    description: "Pedigree wet food offers complete nutrition with delicious chicken flavor.",
 
-    ingredients: [
-      "Chicken",
-      "Meat By Products",
-      "Broth",
-      "Rice",
-      "Minerals",
-    ],
+    ingredients: ["Chicken", "Meat By Products", "Broth", "Rice", "Minerals"],
 
-    features: [
-      "Complete nutrition",
-      "Soft texture",
-      "Delicious taste",
-      "Easy digestion",
-    ],
+    features: ["Complete nutrition", "Soft texture", "Delicious taste", "Easy digestion"],
 
     nutrition: {
       protein: "8%",
@@ -221,11 +183,11 @@ export const dogsWetFood = [
 
     manufacturer: "Pedigree",
 
-    weight: ["13.2oz"],
+    weight: ["0.83lb"],
 
     variants: [
       {
-        weight: "13.2oz",
+        weight: "0.83lb",
         price: 2.99,
         originalPrice: 3.99,
       },
@@ -250,7 +212,7 @@ export const dogsWetFood = [
     lifeStage: "Adult",
     specialDiet: "Digestive Care",
     vegType: "Non-Veg",
-    size: "13oz",
+    size: "0.81lb",
 
     rating: 4.8,
     reviews: 165,
@@ -263,22 +225,11 @@ export const dogsWetFood = [
 
     image: hillsWetImg,
 
-    images: [
-      hillsWetImg,
-      hillsWetImg,
-    ],
+    images: [hillsWetImg, hillsWetImg],
 
-    description:
-      "Premium wet dog food formulated for digestive health and overall wellness.",
+    description: "Premium wet dog food formulated for digestive health and overall wellness.",
 
-    ingredients: [
-      "Chicken",
-      "Pork Liver",
-      "Barley",
-      "Carrots",
-      "Vitamins",
-      "Minerals",
-    ],
+    ingredients: ["Chicken", "Pork Liver", "Barley", "Carrots", "Vitamins", "Minerals"],
 
     features: [
       "Supports digestion",
@@ -296,11 +247,11 @@ export const dogsWetFood = [
 
     manufacturer: "Hill's",
 
-    weight: ["13oz"],
+    weight: ["0.81lb"],
 
     variants: [
       {
-        weight: "13oz",
+        weight: "0.81lb",
         price: 4.49,
         originalPrice: 5.49,
       },

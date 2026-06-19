@@ -1,24 +1,24 @@
-import { Link } from "react-router-dom"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { useRef } from "react"
+import { Link } from "react-router-dom";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef } from "react";
 
 const dog =
-  "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=300&auto=format&fit=crop"
+  "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=300&auto=format&fit=crop";
 
 const cat =
-  "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=300&auto=format&fit=crop"
+  "https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=300&auto=format&fit=crop";
 
 const bird =
-  "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=300&auto=format&fit=crop"
+  "https://images.unsplash.com/photo-1444464666168-49d633b86797?w=300&auto=format&fit=crop";
 
 const fish =
-  "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=300&auto=format&fit=crop"
+  "https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?w=300&auto=format&fit=crop";
 
 const rabbit =
-  "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=300&auto=format&fit=crop"
+  "https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=300&auto=format&fit=crop";
 
 const hamster =
-  "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=300&auto=format&fit=crop"
+  "https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=300&auto=format&fit=crop";
 
 const categories = [
   {
@@ -57,25 +57,17 @@ const categories = [
     color: "bg-red-100",
     slug: "hamster-food",
   },
-]
-
+];
 
 function Categories() {
-  const scrollRef = useRef(null)
+  const scrollRef = useRef(null);
 
   return (
-
     <section className="py-20 bg-[#f8f8f8] overflow-hidden">
-
       {/* Heading */}
       <div className="text-center mb-16">
-
-        <h2 className="text-5xl md:text-6xl font-bold">
-          Browse by Exclusive Category
-        </h2>
-
+        <h2 className="text-5xl md:text-6xl font-bold">Browse by Exclusive Category</h2>
       </div>
-
 
       {/* Main Slider */}
       <div className="w-full flex flex-col items-center justify-center">
@@ -99,7 +91,7 @@ function Categories() {
               scrollbar-none
               justify-center
             "
-            style={{scrollbarWidth: 'none', msOverflowStyle: 'none'}}
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
             {categories.map((item, index) => (
               <Link
@@ -134,9 +126,7 @@ function Categories() {
                   />
                 </div>
                 {/* Title (only pet name) */}
-                <h3 className="mt-8 text-3xl font-bold text-gray-800">
-                  {item.title}
-                </h3>
+                <h3 className="mt-8 text-3xl font-bold text-gray-800">{item.title}</h3>
               </Link>
             ))}
           </div>
@@ -174,7 +164,7 @@ function Categories() {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default Categories
+export default Categories;

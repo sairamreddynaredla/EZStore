@@ -2,7 +2,12 @@
 export const COUPONS = [
   { code: "WELCOME10", discount: 5, description: "Welcome discount" },
   { code: "SAVE20", discount: 10, description: "Save 20% off" },
-  { code: "FREESHIP", discount: 0, shippingDiscount: true, description: "Free shipping" },
+  {
+    code: "FREESHIP",
+    discount: 0,
+    shippingDiscount: true,
+    description: "Free shipping",
+  },
   { code: "SUMMER30", discount: 15, description: "Summer special 30% off" },
 ];
 

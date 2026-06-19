@@ -1,12 +1,28 @@
 import { Link } from "react-router-dom";
-import ezstoreLogo from "../assets/logo/ezstore-logo-optimized.png";
+import ezstoreLogo from "../assets/logo/ezstore-logo-optimized.webp";
 import { brands } from "../data/brands";
 
 const socialLinks = [
-  { href: "https://facebook.com", icon: "https://img.icons8.com/ios-filled/50/1877F2/facebook-new.png", label: "Facebook" },
-  { href: "https://twitter.com", icon: "https://img.icons8.com/ios-filled/50/1DA1F2/twitter.png", label: "Twitter" },
-  { href: "https://instagram.com", icon: "https://img.icons8.com/ios-filled/50/E1306C/instagram-new.png", label: "Instagram" },
-  { href: "https://youtube.com", icon: "https://img.icons8.com/ios-filled/50/FF0000/youtube-play.png", label: "YouTube" },
+  {
+    href: "https://facebook.com",
+    icon: "https://img.icons8.com/ios-filled/50/1877F2/facebook-new.png",
+    label: "Facebook",
+  },
+  {
+    href: "https://twitter.com",
+    icon: "https://img.icons8.com/ios-filled/50/1DA1F2/twitter.png",
+    label: "Twitter",
+  },
+  {
+    href: "https://instagram.com",
+    icon: "https://img.icons8.com/ios-filled/50/E1306C/instagram-new.png",
+    label: "Instagram",
+  },
+  {
+    href: "https://youtube.com",
+    icon: "https://img.icons8.com/ios-filled/50/FF0000/youtube-play.png",
+    label: "YouTube",
+  },
 ];
 
 const getFooterLinks = () => {
@@ -26,9 +42,9 @@ const getFooterLinks = () => {
       { label: "Store Locations", to: "#" },
       { label: "EZStore Promise", to: "#" },
     ],
-    "Popular Brands": brands.slice(0, 6).map(brand => ({
+    "Popular Brands": brands.slice(0, 6).map((brand) => ({
       label: brand.name,
-      to: `/brands/${brand.slug}`
+      to: `/brands/${brand.slug}`,
     })),
     "Help & Support": [
       { label: "Help Center", to: "#" },
@@ -53,11 +69,13 @@ const Footer = () => {
 
   return (
     <footer style={{ background: "var(--footer-bg)", color: "var(--footer-text)" }}>
-
       {/* ── Trust Badges Bar ── */}
       <div
         className="border-b"
-        style={{ borderColor: "var(--footer-border)", background: "var(--footer-dark-bg)" }}
+        style={{
+          borderColor: "var(--footer-border)",
+          background: "var(--footer-dark-bg)",
+        }}
       >
         <div className="max-w-360 mx-auto px-6 md:px-10 py-5">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -65,10 +83,16 @@ const Footer = () => {
               <div key={badge.title} className="flex items-center gap-3">
                 <span className="text-2xl">{badge.icon}</span>
                 <div>
-                  <p className="text-sm font-bold leading-tight" style={{ color: "var(--footer-text)" }}>
+                  <p
+                    className="text-sm font-bold leading-tight"
+                    style={{ color: "var(--footer-text)" }}
+                  >
                     {badge.title}
                   </p>
-                  <p className="text-xs leading-tight opacity-75" style={{ color: "var(--footer-text)" }}>
+                  <p
+                    className="text-xs leading-tight opacity-75"
+                    style={{ color: "var(--footer-text)" }}
+                  >
                     {badge.subtitle}
                   </p>
                 </div>
@@ -78,24 +102,28 @@ const Footer = () => {
         </div>
       </div>
 
-      
-
       {/* ── Main Footer Grid ── */}
       <div className="max-w-360 mx-auto px-6 md:px-10 py-14">
         <div className="grid grid-cols-1 md:grid-cols-6 gap-10 lg:gap-14">
-
           {/* Brand Column */}
           <div className="md:col-span-2 flex flex-col gap-6">
             <div>
               <img src={ezstoreLogo} alt="EZStore" className="h-12 mb-4" loading="lazy" />
-              <p className="text-sm leading-relaxed opacity-80" style={{ color: "var(--footer-text)" }}>
-                Redefining pet shopping with premium food, accessories, and trusted brands — designed to improve your pet's life every day.
+              <p
+                className="text-sm leading-relaxed opacity-80"
+                style={{ color: "var(--footer-text)" }}
+              >
+                Redefining pet shopping with premium food, accessories, and trusted brands —
+                designed to improve your pet's life every day.
               </p>
             </div>
 
             {/* Social Icons */}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-3 opacity-60" style={{ color: "var(--footer-text)" }}>
+              <p
+                className="text-xs font-semibold uppercase tracking-widest mb-3 opacity-60"
+                style={{ color: "var(--footer-text)" }}
+              >
                 Follow Us
               </p>
               <div className="flex gap-3 sm:gap-4">
@@ -109,7 +137,12 @@ const Footer = () => {
                     className="h-11 w-11 sm:h-10 sm:w-10 rounded-full flex items-center justify-center transition-all hover:scale-110 shadow-sm hover:shadow-md"
                     style={{ background: "var(--footer-link)" }}
                   >
-                    <img src={link.icon} alt={link.label} className="h-5 w-5 sm:h-4 sm:w-4" loading="lazy" />
+                    <img
+                      src={link.icon}
+                      alt={link.label}
+                      className="h-5 w-5 sm:h-4 sm:w-4"
+                      loading="lazy"
+                    />
                   </a>
                 ))}
               </div>
@@ -117,22 +150,45 @@ const Footer = () => {
 
             {/* Payments */}
             <div>
-              <p className="text-xs font-semibold uppercase tracking-widest mb-4 opacity-60" style={{ color: "var(--footer-text)" }}>
+              <p
+                className="text-xs font-semibold uppercase tracking-widest mb-4 opacity-60"
+                style={{ color: "var(--footer-text)" }}
+              >
                 Accepted Payments
               </p>
               <div className="flex items-center gap-3 sm:gap-2 flex-wrap">
                 {[
-                  { src: "https://img.icons8.com/color/48/stripe.png", alt: "Stripe" },
-                  { src: "https://img.icons8.com/color/48/visa.png", alt: "Visa" },
-                  { src: "https://img.icons8.com/color/48/mastercard-logo.png", alt: "MasterCard" },
-                  { src: "https://img.icons8.com/color/48/google-pay-india.png", alt: "Google Pay" },
-                  { src: "https://img.icons8.com/ios-filled/50/mac-os.png", alt: "Apple Pay" },
+                  {
+                    src: "https://img.icons8.com/color/48/stripe.png",
+                    alt: "Stripe",
+                  },
+                  {
+                    src: "https://img.icons8.com/color/48/visa.png",
+                    alt: "Visa",
+                  },
+                  {
+                    src: "https://img.icons8.com/color/48/mastercard-logo.png",
+                    alt: "MasterCard",
+                  },
+                  {
+                    src: "https://img.icons8.com/color/48/google-pay-india.png",
+                    alt: "Google Pay",
+                  },
+                  {
+                    src: "https://img.icons8.com/ios-filled/50/mac-os.png",
+                    alt: "Apple Pay",
+                  },
                 ].map((p) => (
                   <div
                     key={p.alt}
                     className="h-9 w-14 sm:h-8 sm:w-12 bg-white rounded-md flex items-center justify-center shadow-sm p-1 hover:shadow-md transition-shadow"
                   >
-                    <img src={p.src} alt={p.alt} className="h-full w-full object-contain" loading="lazy" />
+                    <img
+                      src={p.src}
+                      alt={p.alt}
+                      className="h-full w-full object-contain"
+                      loading="lazy"
+                    />
                   </div>
                 ))}
               </div>
@@ -160,8 +216,14 @@ const Footer = () => {
                       onClick={scrollToTop}
                       className="text-sm transition-all hover:translate-x-1 inline-block"
                       style={{ color: "var(--footer-text)", opacity: 0.75 }}
-                      onMouseEnter={(e) => { e.currentTarget.style.opacity = 1; e.currentTarget.style.color = "var(--footer-link)"; }}
-                      onMouseLeave={(e) => { e.currentTarget.style.opacity = 0.75; e.currentTarget.style.color = "var(--footer-text)"; }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.opacity = 1;
+                        e.currentTarget.style.color = "var(--footer-link)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.opacity = 0.75;
+                        e.currentTarget.style.color = "var(--footer-text)";
+                      }}
                     >
                       {link.label}
                     </Link>
@@ -170,18 +232,22 @@ const Footer = () => {
               </ul>
             </div>
           ))}
-
         </div>
       </div>
 
       {/* ── Bottom Bar ── */}
       <div
         className="border-t"
-        style={{ background: "var(--footer-dark-bg)", borderColor: "var(--footer-border)" }}
+        style={{
+          background: "var(--footer-dark-bg)",
+          borderColor: "var(--footer-border)",
+        }}
       >
         <div className="max-w-360 mx-auto px-6 md:px-10 py-5">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-3 text-xs" style={{ color: "var(--footer-text)" }}>
-
+          <div
+            className="flex flex-col md:flex-row items-center justify-between gap-3 text-xs"
+            style={{ color: "var(--footer-text)" }}
+          >
             <span className="opacity-75">
               © {new Date().getFullYear()} EZStore. All rights reserved.
             </span>
@@ -211,7 +277,6 @@ const Footer = () => {
                 </a>
               ))}
             </div>
-
           </div>
         </div>
       </div>
@@ -224,7 +289,6 @@ const Footer = () => {
       >
         ↑ Back to Top
       </div>
-
     </footer>
   );
 };

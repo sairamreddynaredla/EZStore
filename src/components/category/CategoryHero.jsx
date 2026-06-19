@@ -18,8 +18,13 @@ const CategoryHero = ({ title, subtitle, highlights, image, breadcrumbs, imagePo
       {highlights && highlights.length > 0 && (
         <div className="grid gap-4 sm:grid-cols-2">
           {highlights.map((h, i) => (
-            <div key={i} className="flex items-center gap-3 rounded-3xl bg-slate-50 px-4 py-3 border border-slate-200">
-              {h.icon && <img src={h.icon} alt="" className="w-6 h-6 object-contain" loading="lazy" />}
+            <div
+              key={i}
+              className="flex items-center gap-3 rounded-3xl bg-slate-50 px-4 py-3 border border-slate-200"
+            >
+              {h.icon && (
+                <img src={h.icon} alt="" className="w-6 h-6 object-contain" loading="lazy" />
+              )}
               <span className="text-sm font-semibold text-slate-800">{h.text}</span>
             </div>
           ))}
@@ -30,7 +35,10 @@ const CategoryHero = ({ title, subtitle, highlights, image, breadcrumbs, imagePo
       <div className="w-full overflow-hidden">
         <div
           className="relative w-full h-[240px] sm:h-[300px] md:h-[360px] lg:h-[420px] bg-center bg-cover bg-no-repeat"
-          style={{ backgroundImage: `url(${image})`, backgroundPosition: imagePosition || "center center" }}
+          style={{
+            backgroundImage: `url(${image})`,
+            backgroundPosition: imagePosition || "center center",
+          }}
         />
       </div>
     )}

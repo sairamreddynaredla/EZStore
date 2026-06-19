@@ -1,397 +1,363 @@
-import pedigreeDentastixImg from "../../assets/products/dogs/dental-treats/pedigree-dentastix-daily-oral-care.jpg";
-import droolsDentalBoneImg from "../../assets/products/dogs/dental-treats/drools-dental-bone-dog-treat.jpg";
-import smartHeartDentalImg from "../../assets/products/dogs/dental-treats/smartheart-dental-stick-dog-treat.jpg";
-import jerhighDentalImg from "../../assets/products/dogs/dental-treats/jerhigh-dental-stick-chicken.jpg";
-import purepetDentalImg from "../../assets/products/dogs/dental-treats/purepet-dental-chew-stick.jpg";
+import pedigreeDentastixImg from "../../assets/products/dogs/dental-treats/pedigree-dentastix-daily-oral-care.webp";
+import droolsDentalBoneImg from "../../assets/products/dogs/dental-treats/drools-dental-bone-dog-treat.webp";
+import smartHeartDentalImg from "../../assets/products/dogs/dental-treats/smartheart-dental-stick-dog-treat.webp";
+import jerhighDentalImg from "../../assets/products/dogs/dental-treats/jerhigh-dental-stick-chicken.webp";
+import purepetDentalImg from "../../assets/products/dogs/dental-treats/purepet-dental-chew-stick.webp";
 
 export const dogsDentalTreats = [
-{
-  id: 501,
-  name: "Pedigree Dentastix Daily Oral Care",
-  brand: "Pedigree",
-  category: "dogs-treats",
-  subCategory: "dental-treats",
-  pet: "Dog",
-  petType: "Dog",
-  productCategory: "Dog Treats",
-  productType: "Dental Treats",
-  breedSize: "All Breeds",
-  shopByBreed: "All",
-  flavor: "Chicken",
-  lifeStage: "Adult",
-  specialDiet: "Dental Care",
-  vegType: "Non-Veg",
-  size: "Medium",
+  {
+    id: 501,
+    name: "Pedigree Dentastix Daily Oral Care",
+    brand: "Pedigree",
+    category: "dogs-treats",
+    subCategory: "dental-treats",
+    pet: "Dog",
+    petType: "Dog",
+    productCategory: "Dog Treats",
+    productType: "Dental Treats",
+    breedSize: "All Breeds",
+    shopByBreed: "All",
+    flavor: "Chicken",
+    lifeStage: "Adult",
+    specialDiet: "Dental Care",
+    vegType: "Non-Veg",
+    size: "Medium",
 
-  rating: 4.9,
-  reviews: 642,
-  soldCount: 2150,
-  stock: 96,
+    rating: 4.9,
+    reviews: 642,
+    soldCount: 2150,
+    stock: 96,
 
-  fastDelivery: true,
-  isNew: false,
-  deliveryDate: "Tomorrow",
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
 
-  image: pedigreeDentastixImg,
+    image: pedigreeDentastixImg,
 
-  images: [
-    pedigreeDentastixImg,
-    pedigreeDentastixImg,
-    pedigreeDentastixImg,
-    pedigreeDentastixImg,
-  ],
+    images: [
+      pedigreeDentastixImg,
+      pedigreeDentastixImg,
+      pedigreeDentastixImg,
+      pedigreeDentastixImg,
+    ],
 
-  description:
-    "Scientifically designed X-shaped dental chew that helps reduce tartar buildup and supports healthy gums.",
+    description:
+      "Scientifically designed X-shaped dental chew that helps reduce tartar buildup and supports healthy gums.",
 
-  ingredients: [
-    "Cereals",
-    "Chicken Meal",
-    "Minerals",
-    "Vegetable Oil",
-    "Natural Flavor",
-    "Vitamins",
-  ],
+    ingredients: [
+      "Cereals",
+      "Chicken Meal",
+      "Minerals",
+      "Vegetable Oil",
+      "Natural Flavor",
+      "Vitamins",
+    ],
 
-  features: [
-    "Reduces tartar buildup",
-    "Supports gum health",
-    "Daily dental care",
-    "Highly palatable",
-  ],
+    features: [
+      "Reduces tartar buildup",
+      "Supports gum health",
+      "Daily dental care",
+      "Highly palatable",
+    ],
 
-  nutrition: {
-    protein: "10%",
-    fat: "2%",
-    fiber: "1%",
-    moisture: "15%",
+    nutrition: {
+      protein: "10%",
+      fat: "2%",
+      fiber: "1%",
+      moisture: "15%",
+    },
+
+    manufacturer: "Mars Petcare",
+    country: "India",
+
+    weight: ["0.4lb", "0.5lb"],
+
+    variants: [
+      { weight: "0.4lb", price: 5.99, originalPrice: 6.99 },
+      { weight: "0.5lb", price: 8.99, originalPrice: 10.49 },
+    ],
+
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.05,
+
+    relatedProducts: [502, 503, 504],
   },
 
-  manufacturer: "Mars Petcare",
-  country: "India",
+  {
+    id: 502,
+    name: "Drools Dental Bone Dog Treat",
+    brand: "Drools",
+    category: "dogs-treats",
+    subCategory: "dental-treats",
+    pet: "Dog",
+    petType: "Dog",
+    productCategory: "Dog Treats",
+    productType: "Dental Treats",
+    breedSize: "All Breeds",
+    shopByBreed: "All",
+    flavor: "Milk",
+    lifeStage: "Adult",
+    specialDiet: "Dental Care",
+    vegType: "Veg",
+    size: "Medium",
 
-  weight: ["180g", "270g"],
+    rating: 4.7,
+    reviews: 318,
+    soldCount: 1080,
+    stock: 74,
 
-  variants: [
-    { weight: "180g", price: 5.99, originalPrice: 6.99 },
-    { weight: "270g", price: 8.99, originalPrice: 10.49 },
-  ],
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
 
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.05,
+    image: droolsDentalBoneImg,
 
-  relatedProducts: [502, 503, 504],
-},
+    images: [droolsDentalBoneImg, droolsDentalBoneImg, droolsDentalBoneImg, droolsDentalBoneImg],
 
-{
-  id: 502,
-  name: "Drools Dental Bone Dog Treat",
-  brand: "Drools",
-  category: "dogs-treats",
-  subCategory: "dental-treats",
-  pet: "Dog",
-  petType: "Dog",
-  productCategory: "Dog Treats",
-  productType: "Dental Treats",
-  breedSize: "All Breeds",
-  shopByBreed: "All",
-  flavor: "Milk",
-  lifeStage: "Adult",
-  specialDiet: "Dental Care",
-  vegType: "Veg",
-  size: "Medium",
+    description: "Bone-shaped dental chew that promotes cleaner teeth and fresher breath.",
 
-  rating: 4.7,
-  reviews: 318,
-  soldCount: 1080,
-  stock: 74,
+    ingredients: ["Cereals", "Milk Solids", "Minerals", "Calcium", "Vegetable Oil", "Vitamins"],
 
-  fastDelivery: true,
-  isNew: false,
-  deliveryDate: "Tomorrow",
+    features: [
+      "Freshens breath",
+      "Supports dental hygiene",
+      "Calcium enriched",
+      "Daily chew treat",
+    ],
 
-  image: droolsDentalBoneImg,
+    nutrition: {
+      protein: "11%",
+      fat: "3%",
+      fiber: "2%",
+      moisture: "14%",
+    },
 
-  images: [
-    droolsDentalBoneImg,
-    droolsDentalBoneImg,
-    droolsDentalBoneImg,
-    droolsDentalBoneImg,
-  ],
+    manufacturer: "Drools Pet Food Pvt Ltd",
+    country: "India",
 
-  description:
-    "Bone-shaped dental chew that promotes cleaner teeth and fresher breath.",
+    weight: ["0.4lb", "0.8lb"],
 
-  ingredients: [
-    "Cereals",
-    "Milk Solids",
-    "Minerals",
-    "Calcium",
-    "Vegetable Oil",
-    "Vitamins",
-  ],
+    variants: [
+      { weight: "0.4lb", price: 4.99, originalPrice: 5.99 },
+      { weight: "0.8lb", price: 8.49, originalPrice: 9.49 },
+    ],
 
-  features: [
-    "Freshens breath",
-    "Supports dental hygiene",
-    "Calcium enriched",
-    "Daily chew treat",
-  ],
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.05,
 
-  nutrition: {
-    protein: "11%",
-    fat: "3%",
-    fiber: "2%",
-    moisture: "14%",
+    relatedProducts: [501, 503, 505],
   },
 
-  manufacturer: "Drools Pet Food Pvt Ltd",
-  country: "India",
+  {
+    id: 503,
+    name: "SmartHeart Dental Stick Dog Treat",
+    brand: "SmartHeart",
+    category: "dogs-treats",
+    subCategory: "dental-treats",
+    pet: "Dog",
+    petType: "Dog",
+    productCategory: "Dog Treats",
+    productType: "Dental Treats",
+    breedSize: "All Breeds",
+    shopByBreed: "All",
+    flavor: "Mint",
+    lifeStage: "Adult",
+    specialDiet: "Dental Care",
+    vegType: "Veg",
+    size: "Medium",
 
-  weight: ["200g", "400g"],
+    rating: 4.6,
+    reviews: 241,
+    soldCount: 850,
+    stock: 63,
 
-  variants: [
-    { weight: "200g", price: 4.99, originalPrice: 5.99 },
-    { weight: "400g", price: 8.49, originalPrice: 9.49 },
-  ],
+    fastDelivery: true,
+    isNew: true,
+    deliveryDate: "Tomorrow",
 
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.05,
+    image: smartHeartDentalImg,
 
-  relatedProducts: [501, 503, 505],
-},
+    images: [smartHeartDentalImg, smartHeartDentalImg, smartHeartDentalImg, smartHeartDentalImg],
 
-{
- id: 503,
-  name: "SmartHeart Dental Stick Dog Treat",
-  brand: "SmartHeart",
-  category: "dogs-treats",
-  subCategory: "dental-treats",
-  pet: "Dog",
-  petType: "Dog",
-  productCategory: "Dog Treats",
-  productType: "Dental Treats",
-  breedSize: "All Breeds",
-  shopByBreed: "All",
-  flavor: "Mint",
-  lifeStage: "Adult",
-  specialDiet: "Dental Care",
-  vegType: "Veg",
-  size: "Medium",
+    description: "Mint-flavored dental sticks designed to reduce plaque and support oral health.",
 
-  rating: 4.6,
-  reviews: 241,
-  soldCount: 850,
-  stock: 63,
+    ingredients: [
+      "Wheat Flour",
+      "Mint Flavor",
+      "Minerals",
+      "Vegetable Oil",
+      "Vitamins",
+      "Natural Preservatives",
+    ],
 
-  fastDelivery: true,
-  isNew: true,
-  deliveryDate: "Tomorrow",
+    features: ["Mint freshness", "Supports oral care", "Reduces plaque", "Daily reward"],
 
-  image: smartHeartDentalImg,
+    nutrition: {
+      protein: "12%",
+      fat: "2%",
+      fiber: "2%",
+      moisture: "15%",
+    },
 
-  images: [
-    smartHeartDentalImg,
-    smartHeartDentalImg,
-    smartHeartDentalImg,
-    smartHeartDentalImg,
-  ],
+    manufacturer: "Perfect Companion Group",
+    country: "Thailand",
 
-  description:
-    "Mint-flavored dental sticks designed to reduce plaque and support oral health.",
+    weight: ["0.3lb", "0.6lb"],
 
-  ingredients: [
-    "Wheat Flour",
-    "Mint Flavor",
-    "Minerals",
-    "Vegetable Oil",
-    "Vitamins",
-    "Natural Preservatives",
-  ],
+    variants: [
+      { weight: "0.3lb", price: 4.49, originalPrice: 5.49 },
+      { weight: "0.6lb", price: 7.99, originalPrice: 8.99 },
+    ],
 
-  features: [
-    "Mint freshness",
-    "Supports oral care",
-    "Reduces plaque",
-    "Daily reward",
-  ],
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.05,
 
-  nutrition: {
-    protein: "12%",
-    fat: "2%",
-    fiber: "2%",
-    moisture: "15%",
+    relatedProducts: [501, 502, 504],
   },
 
-  manufacturer: "Perfect Companion Group",
-  country: "Thailand",
+  {
+    id: 504,
+    name: "JerHigh Dental Stick Chicken",
+    brand: "JerHigh",
+    category: "dogs-treats",
+    subCategory: "dental-treats",
+    pet: "Dog",
+    petType: "Dog",
+    productCategory: "Dog Treats",
+    productType: "Dental Treats",
+    breedSize: "All Breeds",
+    shopByBreed: "All",
+    flavor: "Chicken",
+    lifeStage: "Adult",
+    specialDiet: "Dental Care",
+    vegType: "Non-Veg",
+    size: "Medium",
 
-  weight: ["150g", "300g"],
+    rating: 4.8,
+    reviews: 412,
+    soldCount: 1370,
+    stock: 81,
 
-  variants: [
-    { weight: "150g", price: 4.49, originalPrice: 5.49 },
-    { weight: "300g", price: 7.99, originalPrice: 8.99 },
-  ],
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
 
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.05,
+    image: jerhighDentalImg,
 
-  relatedProducts: [501, 502, 504],
-},
+    images: [jerhighDentalImg, jerhighDentalImg, jerhighDentalImg, jerhighDentalImg],
 
-{
-  id: 504,
-  name: "JerHigh Dental Stick Chicken",
-  brand: "JerHigh",
-  category: "dogs-treats",
-  subCategory: "dental-treats",
-  pet: "Dog",
-  petType: "Dog",
-  productCategory: "Dog Treats",
-  productType: "Dental Treats",
-  breedSize: "All Breeds",
-  shopByBreed: "All",
-  flavor: "Chicken",
-  lifeStage: "Adult",
-  specialDiet: "Dental Care",
-  vegType: "Non-Veg",
-  size: "Medium",
+    description:
+      "Chicken-flavored dental sticks that help clean teeth while satisfying chewing instincts.",
 
-  rating: 4.8,
-  reviews: 412,
-  soldCount: 1370,
-  stock: 81,
+    ingredients: [
+      "Chicken Meat",
+      "Vegetable Protein",
+      "Minerals",
+      "Natural Flavor",
+      "Vitamins",
+      "Glycerin",
+    ],
 
-  fastDelivery: true,
-  isNew: false,
-  deliveryDate: "Tomorrow",
+    features: [
+      "Real chicken flavor",
+      "Supports oral health",
+      "Long chewing time",
+      "Freshens breath",
+    ],
 
-  image: jerhighDentalImg,
+    nutrition: {
+      protein: "18%",
+      fat: "3%",
+      fiber: "1%",
+      moisture: "18%",
+    },
 
-  images: [
-    jerhighDentalImg,
-    jerhighDentalImg,
-    jerhighDentalImg,
-    jerhighDentalImg,
-  ],
+    manufacturer: "Perfect Companion Group",
+    country: "Thailand",
 
-  description:
-    "Chicken-flavored dental sticks that help clean teeth while satisfying chewing instincts.",
+    weight: ["0.1lb", "0.3lb"],
 
-  ingredients: [
-    "Chicken Meat",
-    "Vegetable Protein",
-    "Minerals",
-    "Natural Flavor",
-    "Vitamins",
-    "Glycerin",
-  ],
+    variants: [
+      { weight: "0.1lb", price: 4.99, originalPrice: 5.99 },
+      { weight: "0.3lb", price: 7.99, originalPrice: 8.99 },
+    ],
 
-  features: [
-    "Real chicken flavor",
-    "Supports oral health",
-    "Long chewing time",
-    "Freshens breath",
-  ],
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.05,
 
-  nutrition: {
-    protein: "18%",
-    fat: "3%",
-    fiber: "1%",
-    moisture: "18%",
+    relatedProducts: [501, 503, 505],
   },
 
-  manufacturer: "Perfect Companion Group",
-  country: "Thailand",
+  {
+    id: 505,
+    name: "Purepet Dental Chew Stick",
+    brand: "Purepet",
+    category: "dogs-treats",
+    subCategory: "dental-treats",
+    pet: "Dog",
+    petType: "Dog",
+    productCategory: "Dog Treats",
+    productType: "Dental Treats",
+    breedSize: "All Breeds",
+    shopByBreed: "All",
+    flavor: "Milk",
+    lifeStage: "Adult",
+    specialDiet: "Dental Care",
+    vegType: "Veg",
+    size: "Medium",
 
-  weight: ["70g", "140g"],
+    rating: 4.5,
+    reviews: 176,
+    soldCount: 620,
+    stock: 55,
 
-  variants: [
-    { weight: "70g", price: 4.99, originalPrice: 5.99 },
-    { weight: "140g", price: 7.99, originalPrice: 8.99 },
-  ],
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
 
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.05,
+    image: purepetDentalImg,
 
-  relatedProducts: [501, 503, 505],
-},
+    images: [purepetDentalImg, purepetDentalImg, purepetDentalImg, purepetDentalImg],
 
-{
-  id: 505,
-  name: "Purepet Dental Chew Stick",
-  brand: "Purepet",
-  category: "dogs-treats",
-  subCategory: "dental-treats",
-  pet: "Dog",
-  petType: "Dog",
-  productCategory: "Dog Treats",
-  productType: "Dental Treats",
-  breedSize: "All Breeds",
-  shopByBreed: "All",
-  flavor: "Milk",
-  lifeStage: "Adult",
-  specialDiet: "Dental Care",
-  vegType: "Veg",
-  size: "Medium",
+    description:
+      "Dental chew sticks formulated to promote cleaner teeth and fresher breath in dogs.",
 
-  rating: 4.5,
-  reviews: 176,
-  soldCount: 620,
-  stock: 55,
+    ingredients: [
+      "Cereals",
+      "Milk Solids",
+      "Minerals",
+      "Vegetable Oil",
+      "Vitamins",
+      "Natural Flavor",
+    ],
 
-  fastDelivery: true,
-  isNew: false,
-  deliveryDate: "Tomorrow",
+    features: [
+      "Supports oral hygiene",
+      "Easy to chew",
+      "Fresh breath support",
+      "Daily dental reward",
+    ],
 
-  image: purepetDentalImg,
+    nutrition: {
+      protein: "10%",
+      fat: "2%",
+      fiber: "2%",
+      moisture: "15%",
+    },
 
-  images: [
-    purepetDentalImg,
-    purepetDentalImg,
-    purepetDentalImg,
-    purepetDentalImg,
-  ],
+    manufacturer: "Purepet",
+    country: "India",
 
-  description:
-    "Dental chew sticks formulated to promote cleaner teeth and fresher breath in dogs.",
+    weight: ["0.4lb", "0.7lb"],
 
-  ingredients: [
-    "Cereals",
-    "Milk Solids",
-    "Minerals",
-    "Vegetable Oil",
-    "Vitamins",
-    "Natural Flavor",
-  ],
+    variants: [
+      { weight: "0.4lb", price: 4.49, originalPrice: 5.49 },
+      { weight: "0.7lb", price: 7.99, originalPrice: 8.99 },
+    ],
 
-  features: [
-    "Supports oral hygiene",
-    "Easy to chew",
-    "Fresh breath support",
-    "Daily dental reward",
-  ],
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.05,
 
-  nutrition: {
-    protein: "10%",
-    fat: "2%",
-    fiber: "2%",
-    moisture: "15%",
+    relatedProducts: [501, 502, 504],
   },
-
-  manufacturer: "Purepet",
-  country: "India",
-
-  weight: ["180g", "360g"],
-
-  variants: [
-    { weight: "180g", price: 4.49, originalPrice: 5.49 },
-    { weight: "360g", price: 7.99, originalPrice: 8.99 },
-  ],
-
-  subscriptionEligible: true,
-  subscriptionDiscount: 0.05,
-
-  relatedProducts: [501, 502, 504],
-},
 ];

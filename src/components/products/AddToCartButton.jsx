@@ -9,11 +9,7 @@ import { trackAddToCart } from "../../utils/analytics";
  * - In cart: inline − qty + stepper with red bg
  * - Synced to cart state
  */
-const AddToCartButton = ({
-  product,
-  isOutOfStock = false,
-  onAddToCart,
-}) => {
+const AddToCartButton = ({ product, isOutOfStock = false, onAddToCart }) => {
   const { cartItems, increaseQuantity, decreaseQuantity, removeFromCart, showFlash } = useCart();
   const [flash, setFlash] = useState(false);
 
@@ -21,12 +17,10 @@ const AddToCartButton = ({
   const weight = selectedVariant?.weight || "1kg";
 
   const cartItem = cartItems.find(
-    (item) =>
-      item.id === product?.id &&
-      (item.selectedVariant?.weight || "1kg") === weight
+    (item) => item.id === product?.id && (item.selectedVariant?.weight || "1kg") === weight
   );
   const cartQty = cartItem?.quantity || 0;
-  const inCart  = cartQty > 0;
+  const inCart = cartQty > 0;
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -34,8 +28,14 @@ const AddToCartButton = ({
     if (isOutOfStock || !product) return;
     const payload = { ...product, selectedVariant };
     if (onAddToCart) onAddToCart(payload, 1);
-    try { trackAddToCart(payload, 1); } catch (err) { /* ignore analytics errors */ }
-    try { showFlash && showFlash("Added to cart", "success"); } catch (err) {}
+    try {
+      trackAddToCart(payload, 1);
+    } catch (err) {
+      /* ignore analytics errors */
+    }
+    try {
+      showFlash && showFlash("Added to cart", "success");
+    } catch (err) {}
     setFlash(true);
     setTimeout(() => setFlash(false), 1200);
   };
@@ -51,9 +51,10 @@ const AddToCartButton = ({
     e.stopPropagation();
     if (cartQty <= 1) {
       removeFromCart(product.id, weight);
-      try { showFlash && showFlash("Removed from cart", "error"); } catch (err) {}
-    }
-    else decreaseQuantity(product.id, weight);
+      try {
+        showFlash && showFlash("Removed from cart", "error");
+      } catch (err) {}
+    } else decreaseQuantity(product.id, weight);
   };
 
   // Out of stock
@@ -72,7 +73,10 @@ const AddToCartButton = ({
   if (inCart) {
     return (
       <div
-        onClick={(e) => { e.preventDefault(); e.stopPropagation(); }}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
         className="w-full flex items-center justify-between bg-amber-500 rounded-xl h-12 overflow-hidden"
       >
         <button

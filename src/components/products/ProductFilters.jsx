@@ -1,71 +1,47 @@
 import { useState, useEffect } from "react";
-import {
-  ChevronDown,
-  SlidersHorizontal,
-} from "lucide-react";
+import { ChevronDown, SlidersHorizontal } from "lucide-react";
 
 import { products } from "../../data/products";
 
-const ProductFilters = ({
-  filters = {},
-  setFilters = () => {},
-}) => {
-
-  const [openSections, setOpenSections] =
-    useState({
-      Availability: true,
-      Price: true,
-      "Pet Type": true,
-      Brands: true,
-    });
+const ProductFilters = ({ filters = {}, setFilters = () => {} }) => {
+  const [openSections, setOpenSections] = useState({
+    Availability: true,
+    Price: true,
+    "Pet Type": true,
+    Brands: true,
+  });
 
   // Local copy of filters so changes are applied only when user clicks Apply
   const [localFilters, setLocalFilters] = useState(filters || {});
   const [localPrice, setLocalPrice] = useState(() => {
     // use numeric price if provided, otherwise default to 500
     const p = filters?.Price;
-    return typeof p === 'number' ? p : 500;
+    return typeof p === "number" ? p : 500;
   });
 
   useEffect(() => {
     setLocalFilters(filters || {});
-    setLocalPrice(typeof filters?.Price === 'number' ? filters.Price : 500);
+    setLocalPrice(typeof filters?.Price === "number" ? filters.Price : 500);
   }, [filters]);
 
   // DYNAMIC FILTER VALUES
 
-  const brands = [
-    ...new Set(products.map((p) => p.brand)),
-  ];
+  const brands = [...new Set(products.map((p) => p.brand))];
 
-  const flavors = [
-    ...new Set(products.map((p) => p.flavor)),
-  ];
+  const flavors = [...new Set(products.map((p) => p.flavor))];
 
-  const lifeStages = [
-    ...new Set(products.map((p) => p.lifeStage)),
-  ];
+  const lifeStages = [...new Set(products.map((p) => p.lifeStage))];
 
-  const breedSizes = [
-    ...new Set(products.map((p) => p.breedSize)),
-  ];
+  const breedSizes = [...new Set(products.map((p) => p.breedSize))];
 
-  const categories = [
-    ...new Set(products.map((p) => p.category)),
-  ];
+  const categories = [...new Set(products.map((p) => p.category))];
 
-  const weights = [
-    ...new Set(
-      products.flatMap((p) => p.weight || [])
-    ),
-  ];
+  const weights = [...new Set(products.flatMap((p) => p.weight || []))];
 
   const filterSections = [
     {
       title: "Availability",
-      options: [
-        "Include Out Of Stock",
-      ],
+      options: ["Include Out Of Stock"],
     },
 
     {
@@ -128,9 +104,7 @@ const ProductFilters = ({
     setFilters(localFilters);
   };
 
-  const hasChanges =
-    JSON.stringify(localFilters || {}) !==
-    JSON.stringify(filters || {});
+  const hasChanges = JSON.stringify(localFilters || {}) !== JSON.stringify(filters || {});
 
   return (
     <aside
@@ -152,15 +126,9 @@ const ProductFilters = ({
       {/* HEADER */}
 
       <div className="flex items-center gap-3 mb-8">
+        <SlidersHorizontal size={28} className="text-black" />
 
-        <SlidersHorizontal
-          size={28}
-          className="text-black"
-        />
-
-        <h2 className="text-3xl font-bold text-black">
-          Filter By
-        </h2>
+        <h2 className="text-3xl font-bold text-black">Filter By</h2>
 
         <button
           onClick={() => {
@@ -173,7 +141,6 @@ const ProductFilters = ({
         >
           Clear Filters
         </button>
-
       </div>
 
       {/* PRICE FILTER */}
@@ -187,9 +154,7 @@ const ProductFilters = ({
         "
       >
         <button
-          onClick={() =>
-            toggleSection("Price")
-          }
+          onClick={() => toggleSection("Price")}
           className="
             w-full
             flex
@@ -197,37 +162,30 @@ const ProductFilters = ({
             justify-between
           "
         >
-          <h4 className="text-xl font-bold">
-            Price
-          </h4>
+          <h4 className="text-xl font-bold">Price</h4>
 
           <ChevronDown
             size={20}
-            className={`transition-transform ${
-              openSections["Price"]
-                ? "rotate-180"
-                : ""
-            }`}
+            className={`transition-transform ${openSections["Price"] ? "rotate-180" : ""}`}
           />
         </button>
 
         {openSections["Price"] && (
           <div className="mt-5">
-
             <input
-                      type="range"
-                      min="10"
-                      max="500"
-                      value={localPrice}
-                      onChange={(e) => {
-                        const v = Number(e.target.value);
-                        setLocalPrice(v);
-                        const updated = (prev) => ({ ...prev, Price: v });
-                        setLocalFilters(updated);
-                        // apply price live so results update as slider moves
-                        setFilters((prev) => ({ ...(prev || {}), Price: v }));
-                      }}
-                      className="
+              type="range"
+              min="10"
+              max="500"
+              value={localPrice}
+              onChange={(e) => {
+                const v = Number(e.target.value);
+                setLocalPrice(v);
+                const updated = (prev) => ({ ...prev, Price: v });
+                setLocalFilters(updated);
+                // apply price live so results update as slider moves
+                setFilters((prev) => ({ ...(prev || {}), Price: v }));
+              }}
+              className="
                         w-full
                         accent-black
                       "
@@ -258,7 +216,6 @@ const ProductFilters = ({
             >
               {hasChanges ? "Apply Filters" : "No Changes"}
             </button>
-
           </div>
         )}
       </div>
@@ -278,9 +235,7 @@ const ProductFilters = ({
           {/* TITLE */}
 
           <button
-            onClick={() =>
-              toggleSection(section.title)
-            }
+            onClick={() => toggleSection(section.title)}
             className="
               w-full
               flex
@@ -302,13 +257,7 @@ const ProductFilters = ({
               size={20}
               className={`
                 transition-transform
-                ${
-                  openSections[
-                    section.title
-                  ]
-                    ? "rotate-180"
-                    : ""
-                }
+                ${openSections[section.title] ? "rotate-180" : ""}
               `}
             />
           </button>
@@ -317,123 +266,68 @@ const ProductFilters = ({
 
           {openSections[section.title] && (
             <div className="mt-5 space-y-4">
-
-              {section.options.map(
-                (option) => (
-                  <label
-                    key={option}
-                    className="
+              {section.options.map((option) => (
+                <label
+                  key={option}
+                  className="
                       flex
                       items-center
                       justify-between
                       cursor-pointer
                       group
                     "
-                  >
-                    <div className="flex items-center gap-3">
-
-                      <input
-                        type="checkbox"
-                        checked={
-                          localFilters[
-                            section.title
-                          ]?.includes(
-                            option
-                          ) || false
-                        }
-                        onChange={() =>
-                          handleCheckbox(
-                            section.title,
-                            option
-                          )
-                        }
-                        className="
+                >
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="checkbox"
+                      checked={localFilters[section.title]?.includes(option) || false}
+                      onChange={() => handleCheckbox(section.title, option)}
+                      className="
                           w-4
                           h-4
                           rounded
                           border-gray-300
                           accent-black
                         "
-                      />
+                    />
 
-                      <span
-                        className="
+                    <span
+                      className="
                           text-gray-700
                           group-hover:text-black
                           transition
                         "
-                      >
-                        {option}
-                      </span>
+                    >
+                      {option}
+                    </span>
+                  </div>
 
-                    </div>
-
-                    <span
-                      className="
+                  <span
+                    className="
                         text-xs
                         text-gray-400
                       "
-                    >
-                      (
-                      {
-                        products.filter(
-                          (p) => {
+                  >
+                    (
+                    {
+                      products.filter((p) => {
+                        if (section.title === "Brands") return p.brand === option;
 
-                            if (
-                              section.title ===
-                              "Brands"
-                            )
-                              return (
-                                p.brand ===
-                                option
-                              );
+                        if (section.title === "Flavor") return p.flavor === option;
 
-                            if (
-                              section.title ===
-                              "Flavor"
-                            )
-                              return (
-                                p.flavor ===
-                                option
-                              );
+                        if (section.title === "Breed Size") return p.breedSize === option;
 
-                            if (
-                              section.title ===
-                              "Breed Size"
-                            )
-                              return (
-                                p.breedSize ===
-                                option
-                              );
+                        if (section.title === "Pet Life Stages") return p.lifeStage === option;
 
-                            if (
-                              section.title ===
-                              "Pet Life Stages"
-                            )
-                              return (
-                                p.lifeStage ===
-                                option
-                              );
+                        if (section.title === "Product Categories") return p.category === option;
 
-                            if (
-                              section.title ===
-                              "Product Categories"
-                            )
-                              return (
-                                p.category ===
-                                option
-                              );
-
-                            return true;
-                          }
-                        ).length
-                      }
-                      )
-                    </span>
-                  </label>
-                )
-              )}
-
+                        return true;
+                      }).length
+                    }
+                    )
+                  </span>
+                </label>
+              ))}
             </div>
           )}
         </div>

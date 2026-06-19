@@ -1,5 +1,3 @@
-
-
 const SidebarFilters = ({ filters, onChange }) => {
   // Example: filters = { availability: true, price: [0, 1000], ... }
   return (
@@ -11,7 +9,7 @@ const SidebarFilters = ({ filters, onChange }) => {
             <input
               type="checkbox"
               checked={filters.includeOutOfStock || false}
-              onChange={e => onChange({ ...filters, includeOutOfStock: e.target.checked })}
+              onChange={(e) => onChange({ ...filters, includeOutOfStock: e.target.checked })}
             />
             Include Out Of Stock
           </label>

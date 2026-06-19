@@ -1,7 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const OffersList = ({ offers = [] }) => {
-  if (!offers || offers.length === 0) return null
+  if (!offers || offers.length === 0) return null;
 
   return (
     <div className="bg-yellow-50 border border-yellow-100 rounded-lg p-3 text-sm text-slate-800">
@@ -12,7 +12,7 @@ const OffersList = ({ offers = [] }) => {
         ))}
       </ul>
     </div>
-  )
-}
+  );
+};
 
-export default OffersList
+export default OffersList;

@@ -2,11 +2,11 @@
 // src/data/cats/treats/catCrunchyTreats.js
 // ==========================================
 
-import temptationsMixupsImg from "../../assets/products/cats/crunchy-treats/temptations-mixups-backyard-cookout-cat-treats.jpg";
-import friskiesPartyMixImg from "../../assets/products/cats/crunchy-treats/friskies-party-mix-original-crunch-cat-treats.jpg";
-import dreamiesCheeseImg from "../../assets/products/cats/crunchy-treats/dreamies-cheese-crunchy-cat-treats.jpg";
-import meoCrunchyImg from "../../assets/products/cats/crunchy-treats/meo-crunchy-cat-treats-seafood-flavor.jpg";
-import purepetCrunchyImg from "../../assets/products/cats/crunchy-treats/purepet-crunchy-cat-treats-ocean-fish-flavor.jpg";
+import temptationsMixupsImg from "../../assets/products/cats/crunchy-treats/temptations-mixups-backyard-cookout-cat-treats.webp";
+import friskiesPartyMixImg from "../../assets/products/cats/crunchy-treats/friskies-party-mix-original-crunch-cat-treats.webp";
+import dreamiesCheeseImg from "../../assets/products/cats/crunchy-treats/dreamies-cheese-crunchy-cat-treats.webp";
+import meoCrunchyImg from "../../assets/products/cats/crunchy-treats/meo-crunchy-cat-treats-seafood-flavor.webp";
+import purepetCrunchyImg from "../../assets/products/cats/crunchy-treats/purepet-crunchy-cat-treats-ocean-fish-flavor.webp";
 
 export const catCrunchyTreats = [
   {
@@ -42,23 +42,11 @@ export const catCrunchyTreats = [
       temptationsMixupsImg,
     ],
 
-    description:
-      "Crunchy outside and soft inside cat treats with multiple savory flavors.",
+    description: "Crunchy outside and soft inside cat treats with multiple savory flavors.",
 
-    ingredients: [
-      "Chicken Meal",
-      "Beef Meal",
-      "Animal Fat",
-      "Vitamins",
-      "Minerals",
-    ],
+    ingredients: ["Chicken Meal", "Beef Meal", "Animal Fat", "Vitamins", "Minerals"],
 
-    features: [
-      "Crunchy texture",
-      "Soft center",
-      "Highly palatable",
-      "Great training reward",
-    ],
+    features: ["Crunchy texture", "Soft center", "Highly palatable", "Great training reward"],
 
     nutrition: {
       protein: "30%",
@@ -70,11 +58,11 @@ export const catCrunchyTreats = [
     manufacturer: "Mars Petcare",
     country: "USA",
 
-    weight: ["60g", "180g"],
+    weight: ["0.1lb", "0.4lb"],
 
     variants: [
-      { weight: "60g", price: 3.99, originalPrice: 5.49 },
-      { weight: "180g", price: 8.99, originalPrice: 11.99 },
+      { weight: "0.1lb", price: 3.99, originalPrice: 5.49 },
+      { weight: "0.4lb", price: 8.99, originalPrice: 11.99 },
     ],
 
     subscriptionEligible: true,
@@ -109,30 +97,13 @@ export const catCrunchyTreats = [
 
     image: friskiesPartyMixImg,
 
-    images: [
-      friskiesPartyMixImg,
-      friskiesPartyMixImg,
-      friskiesPartyMixImg,
-      friskiesPartyMixImg,
-    ],
+    images: [friskiesPartyMixImg, friskiesPartyMixImg, friskiesPartyMixImg, friskiesPartyMixImg],
 
-    description:
-      "Crunchy party mix cat treats packed with delicious chicken and turkey flavors.",
+    description: "Crunchy party mix cat treats packed with delicious chicken and turkey flavors.",
 
-    ingredients: [
-      "Chicken",
-      "Turkey",
-      "Corn",
-      "Animal Fat",
-      "Minerals",
-    ],
+    ingredients: ["Chicken", "Turkey", "Corn", "Animal Fat", "Minerals"],
 
-    features: [
-      "Crunchy bites",
-      "Irresistible flavor",
-      "Perfect reward",
-      "Supports active cats",
-    ],
+    features: ["Crunchy bites", "Irresistible flavor", "Perfect reward", "Supports active cats"],
 
     nutrition: {
       protein: "28%",
@@ -144,11 +115,11 @@ export const catCrunchyTreats = [
     manufacturer: "Purina",
     country: "USA",
 
-    weight: ["57g", "170g"],
+    weight: ["0.1lb", "0.3lb"],
 
     variants: [
-      { weight: "57g", price: 3.49, originalPrice: 4.99 },
-      { weight: "170g", price: 8.49, originalPrice: 10.99 },
+      { weight: "0.1lb", price: 3.49, originalPrice: 4.99 },
+      { weight: "0.3lb", price: 8.49, originalPrice: 10.99 },
     ],
 
     subscriptionEligible: true,
@@ -183,30 +154,13 @@ export const catCrunchyTreats = [
 
     image: dreamiesCheeseImg,
 
-    images: [
-      dreamiesCheeseImg,
-      dreamiesCheeseImg,
-      dreamiesCheeseImg,
-      dreamiesCheeseImg,
-    ],
+    images: [dreamiesCheeseImg, dreamiesCheeseImg, dreamiesCheeseImg, dreamiesCheeseImg],
 
-    description:
-      "Crunchy cheese flavored cat treats with a delicious soft center.",
+    description: "Crunchy cheese flavored cat treats with a delicious soft center.",
 
-    ingredients: [
-      "Cheese",
-      "Cereals",
-      "Oils",
-      "Minerals",
-      "Vitamins",
-    ],
+    ingredients: ["Cheese", "Cereals", "Oils", "Minerals", "Vitamins"],
 
-    features: [
-      "Crunchy outside",
-      "Soft inside",
-      "Cheese flavor",
-      "Everyday snack",
-    ],
+    features: ["Crunchy outside", "Soft inside", "Cheese flavor", "Everyday snack"],
 
     nutrition: {
       protein: "22%",
@@ -218,11 +172,11 @@ export const catCrunchyTreats = [
     manufacturer: "Mars Petcare",
     country: "UK",
 
-    weight: ["60g", "180g"],
+    weight: ["0.1lb", "0.4lb"],
 
     variants: [
-      { weight: "60g", price: 3.49, originalPrice: 4.99 },
-      { weight: "180g", price: 8.99, originalPrice: 10.99 },
+      { weight: "0.1lb", price: 3.49, originalPrice: 4.99 },
+      { weight: "0.4lb", price: 8.99, originalPrice: 10.99 },
     ],
 
     subscriptionEligible: true,
@@ -257,30 +211,13 @@ export const catCrunchyTreats = [
 
     image: meoCrunchyImg,
 
-    images: [
-      meoCrunchyImg,
-      meoCrunchyImg,
-      meoCrunchyImg,
-      meoCrunchyImg,
-    ],
+    images: [meoCrunchyImg, meoCrunchyImg, meoCrunchyImg, meoCrunchyImg],
 
-    description:
-      "Seafood flavored crunchy treats enriched with vitamins and taurine.",
+    description: "Seafood flavored crunchy treats enriched with vitamins and taurine.",
 
-    ingredients: [
-      "Fish Meal",
-      "Seafood Extract",
-      "Taurine",
-      "Minerals",
-      "Vitamins",
-    ],
+    ingredients: ["Fish Meal", "Seafood Extract", "Taurine", "Minerals", "Vitamins"],
 
-    features: [
-      "Contains taurine",
-      "Crunchy texture",
-      "Supports vision",
-      "Healthy reward",
-    ],
+    features: ["Contains taurine", "Crunchy texture", "Supports vision", "Healthy reward"],
 
     nutrition: {
       protein: "30%",
@@ -292,11 +229,11 @@ export const catCrunchyTreats = [
     manufacturer: "Perfect Companion",
     country: "Thailand",
 
-    weight: ["50g", "150g"],
+    weight: ["0.1lb", "0.3lb"],
 
     variants: [
-      { weight: "50g", price: 2.99, originalPrice: 4.49 },
-      { weight: "150g", price: 7.99, originalPrice: 9.99 },
+      { weight: "0.1lb", price: 2.99, originalPrice: 4.49 },
+      { weight: "0.3lb", price: 7.99, originalPrice: 9.99 },
     ],
 
     subscriptionEligible: true,
@@ -331,30 +268,13 @@ export const catCrunchyTreats = [
 
     image: purepetCrunchyImg,
 
-    images: [
-      purepetCrunchyImg,
-      purepetCrunchyImg,
-      purepetCrunchyImg,
-      purepetCrunchyImg,
-    ],
+    images: [purepetCrunchyImg, purepetCrunchyImg, purepetCrunchyImg, purepetCrunchyImg],
 
-    description:
-      "Crunchy ocean fish flavored treats designed for daily rewarding and snacking.",
+    description: "Crunchy ocean fish flavored treats designed for daily rewarding and snacking.",
 
-    ingredients: [
-      "Fish Meal",
-      "Chicken Meal",
-      "Animal Fat",
-      "Vitamins",
-      "Minerals",
-    ],
+    ingredients: ["Fish Meal", "Chicken Meal", "Animal Fat", "Vitamins", "Minerals"],
 
-    features: [
-      "Ocean fish flavor",
-      "Crunchy texture",
-      "Daily treat",
-      "Cat favorite",
-    ],
+    features: ["Ocean fish flavor", "Crunchy texture", "Daily treat", "Cat favorite"],
 
     nutrition: {
       protein: "29%",
@@ -366,11 +286,11 @@ export const catCrunchyTreats = [
     manufacturer: "Purepet",
     country: "India",
 
-    weight: ["35g", "140g"],
+    weight: ["0.1lb", "0.3lb"],
 
     variants: [
-      { weight: "35g", price: 1.99, originalPrice: 3.49 },
-      { weight: "140g", price: 6.99, originalPrice: 8.99 },
+      { weight: "0.1lb", price: 1.99, originalPrice: 3.49 },
+      { weight: "0.3lb", price: 6.99, originalPrice: 8.99 },
     ],
 
     subscriptionEligible: true,

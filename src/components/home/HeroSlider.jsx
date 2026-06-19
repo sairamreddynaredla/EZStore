@@ -1,7 +1,7 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import smallPetsBanner from "../../assets/banners/small-pets.jpeg";
-import catBanner from "../../assets/banners/cat-banner.jpeg";
+import smallPetsBanner from "../../assets/banners/small-pets.webp";
+import catBanner from "../../assets/banners/cat-banner.webp";
 
 const heroBanners = [
   {
@@ -11,7 +11,7 @@ const heroBanners = [
     subtitle: "Everything your little companions need for a happy and healthy life.",
     cta: "Explore Small Pets",
     bg: "#F7F0E3",
-    pet: "Small Pets"
+    pet: "Small Pets",
   },
   {
     image: catBanner,
@@ -20,7 +20,7 @@ const heroBanners = [
     subtitle: "on Cat Food",
     cta: "Shop Now",
     bg: "#F7F0E3",
-    pet: "Cat"
+    pet: "Cat",
   },
   // Add more banners for other pets as needed
 ];
@@ -29,12 +29,7 @@ const HeroSlider = () => {
   return (
     <section className="px-6 py-4 bg-[#F7F0E3]">
       <div className="rounded-4xl overflow-hidden relative min-h-80 flex items-center justify-center">
-        <Swiper
-          autoplay={{ delay: 3500 }}
-          loop
-          spaceBetween={0}
-          slidesPerView={1}
-        >
+        <Swiper autoplay={{ delay: 3500 }} loop spaceBetween={0} slidesPerView={1}>
           {heroBanners.map((banner, idx) => (
             <SwiperSlide key={idx}>
               <div
@@ -42,8 +37,12 @@ const HeroSlider = () => {
                 style={{ background: banner.bg }}
               >
                 <div className="flex-1 flex flex-col justify-center p-8 md:p-16">
-                  <h2 className="text-2xl md:text-4xl font-bold text-[#0D2B5C] mb-2">{banner.title}</h2>
-                  <div className="text-lg md:text-2xl font-semibold text-[#F53B3B] mb-2">{banner.offer}</div>
+                  <h2 className="text-2xl md:text-4xl font-bold text-[#0D2B5C] mb-2">
+                    {banner.title}
+                  </h2>
+                  <div className="text-lg md:text-2xl font-semibold text-[#F53B3B] mb-2">
+                    {banner.offer}
+                  </div>
                   <div className="text-base md:text-lg text-[#0D2B5C] mb-6">{banner.subtitle}</div>
                   <button className="bg-[#F53B3B] hover:bg-[#d32f2f] text-white rounded-xl px-8 py-3 font-bold text-lg shadow-lg transition-all">
                     {banner.cta}

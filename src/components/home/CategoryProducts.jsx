@@ -1,17 +1,16 @@
-
-import { useState, useMemo } from "react"
-import { useParams, useLocation } from "react-router-dom"
-import Navbar from "../../components/Navbar"
-import ProductCard from "../../components/products/ProductCard"
-import ShopSidebar from "../../components/shop/ShopSidebar"
-import CategoryHero from "../../components/category/CategoryHero"
-import { products } from "../../data/products"
-import { dogCategories } from "../../data/dogCategories"
-import { catCategories } from "../../data/catCategories"
-import { categoryBanners } from "../../data/categoryBanners"
-import { getCategoryBannerKey } from "../../utils/categoryBannerKey"
-import useCart from "../../hooks/usecart"
-import { useWishlist } from "../../context/usewishlist"
+import { useState, useMemo } from "react";
+import { useParams, useLocation } from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import ProductCard from "../../components/products/ProductCard";
+import ShopSidebar from "../../components/shop/ShopSidebar";
+import CategoryHero from "../../components/category/CategoryHero";
+import { products } from "../../data/products";
+import { dogCategories } from "../../data/dogCategories";
+import { catCategories } from "../../data/catCategories";
+import { categoryBanners } from "../../data/categoryBanners";
+import { getCategoryBannerKey } from "../../utils/categoryBannerKey";
+import useCart from "../../hooks/usecart";
+import { useWishlist } from "../../context/usewishlist";
 
 // Default (empty) filter state — single source of truth used for init + clear
 const DEFAULT_FILTERS = {
@@ -33,21 +32,20 @@ const DEFAULT_FILTERS = {
 };
 
 const CategoryProducts = ({ petType }) => {
-
-  const { addToCart } = useCart()
-  const { addToWishlist, removeFromWishlist } = useWishlist()
+  const { addToCart } = useCart();
+  const { addToWishlist, removeFromWishlist } = useWishlist();
 
   const handleAddToCart = (product, quantity = 1) => {
-    addToCart({ ...product, quantity })
-  }
+    addToCart({ ...product, quantity });
+  };
 
   const handleWishlistToggle = (product, isWishlisted) => {
     if (isWishlisted) {
-      addToWishlist(product)
+      addToWishlist(product);
     } else {
-      removeFromWishlist(product.id)
+      removeFromWishlist(product.id);
     }
-  }
+  };
 
   const params = useParams();
   const location = useLocation();
@@ -61,8 +59,8 @@ const CategoryProducts = ({ petType }) => {
     return null;
   };
 
-  const [sortBy, setSortBy] = useState("best-selling")
-  const [filters, setFilters] = useState(DEFAULT_FILTERS)
+  const [sortBy, setSortBy] = useState("best-selling");
+  const [filters, setFilters] = useState(DEFAULT_FILTERS);
 
   // ── Slug / pet resolution ──────────────────────────────────────────────
   const genericPetCategoryMap = {
@@ -83,8 +81,13 @@ const CategoryProducts = ({ petType }) => {
   };
 
   const effectivePet = petType || getPetFromSlug(slug) || getPetFromPath(location.pathname);
-  const isTopLevelPetCategory = slug && Object.prototype.hasOwnProperty.call(genericPetCategoryMap, slug.toLowerCase());
-  const normalizedSlug = isTopLevelPetCategory ? slug : effectivePet ? slug.replace(/^(dogs-|cats-)/, "") : slug;
+  const isTopLevelPetCategory =
+    slug && Object.prototype.hasOwnProperty.call(genericPetCategoryMap, slug.toLowerCase());
+  const normalizedSlug = isTopLevelPetCategory
+    ? slug
+    : effectivePet
+      ? slug.replace(/^(dogs-|cats-)/, "")
+      : slug;
 
   const getTopLevelProductCategory = (slugValue) => {
     if (!slugValue) return null;
@@ -102,10 +105,11 @@ const CategoryProducts = ({ petType }) => {
             item.productCategory?.toLowerCase().includes(targetCategory)
         );
       }
-      return products.filter((item) =>
-        item.pet === effectivePet &&
-        (item.subCategory === normalizedSlug ||
-          item.subCategory?.replace(/-/g, "") === normalizedSlug.replace(/-/g, ""))
+      return products.filter(
+        (item) =>
+          item.pet === effectivePet &&
+          (item.subCategory === normalizedSlug ||
+            item.subCategory?.replace(/-/g, "") === normalizedSlug.replace(/-/g, ""))
       );
     }
 
@@ -123,10 +127,22 @@ const CategoryProducts = ({ petType }) => {
   // ── Cat fallback ───────────────────────────────────────────────────────
   const getRelatedCatProducts = (slugValue) => {
     const catFallbackMap = {
-      "meaty-treats":      { category: "cats-treats",   productTypeIncludes: ["Meaty", "Treats"] },
-      "crunchy-treats":    { category: "cats-treats",   productTypeIncludes: ["Crunchy", "Treats"] },
-      "creamy-treats":     { category: "cats-treats",   productTypeIncludes: ["Creamy", "Treats"] },
-      "prescription-food": { category: "cats-dry-food", specialDietIncludes: ["Prescription", "Special"] },
+      "meaty-treats": {
+        category: "cats-treats",
+        productTypeIncludes: ["Meaty", "Treats"],
+      },
+      "crunchy-treats": {
+        category: "cats-treats",
+        productTypeIncludes: ["Crunchy", "Treats"],
+      },
+      "creamy-treats": {
+        category: "cats-treats",
+        productTypeIncludes: ["Creamy", "Treats"],
+      },
+      "prescription-food": {
+        category: "cats-dry-food",
+        specialDietIncludes: ["Prescription", "Special"],
+      },
     };
 
     const fillToLimit = (items, limit = 10) => {
@@ -198,7 +214,8 @@ const CategoryProducts = ({ petType }) => {
         // Flavor
         if (filters.flavors.length) {
           const itemFlavor = item.flavor || "";
-          if (!filters.flavors.some((f) => itemFlavor.toLowerCase().includes(f.toLowerCase()))) return false;
+          if (!filters.flavors.some((f) => itemFlavor.toLowerCase().includes(f.toLowerCase())))
+            return false;
         }
 
         // Weight (variant-level)
@@ -214,10 +231,15 @@ const CategoryProducts = ({ petType }) => {
         if (filters.breedSizes.length && !filters.breedSizes.includes(item.breedSize)) return false;
 
         // Product Type (subCategory)
-        if (filters.productTypes.length && !filters.productTypes.includes(item.subCategory)) return false;
+        if (filters.productTypes.length && !filters.productTypes.includes(item.subCategory))
+          return false;
 
         // Product Category
-        if (filters.productCategories.length && !filters.productCategories.includes(item.productCategory)) return false;
+        if (
+          filters.productCategories.length &&
+          !filters.productCategories.includes(item.productCategory)
+        )
+          return false;
 
         // Size
         if (filters.sizes.length && !filters.sizes.includes(item.size)) return false;
@@ -228,9 +250,8 @@ const CategoryProducts = ({ petType }) => {
         // Special Diet  ← now uses actual `specialDiet` field (not just subCategory)
         if (filters.specialDiets.length) {
           const itemDiet = (item.specialDiet || "").toLowerCase();
-          const match = filters.specialDiets.some((diet) =>
-            itemDiet === diet.toLowerCase() ||
-            itemDiet.includes(diet.toLowerCase())
+          const match = filters.specialDiets.some(
+            (diet) => itemDiet === diet.toLowerCase() || itemDiet.includes(diet.toLowerCase())
           );
           if (!match) return false;
         }
@@ -262,7 +283,7 @@ const CategoryProducts = ({ petType }) => {
       .sort((a, b) => {
         const aPrice = a.variants?.[0]?.price || 0;
         const bPrice = b.variants?.[0]?.price || 0;
-        if (sortBy === "low")  return aPrice - bPrice;
+        if (sortBy === "low") return aPrice - bPrice;
         if (sortBy === "high") return bPrice - aPrice;
         // Best selling — use soldCount (not "sales" which doesn't exist)
         return (b.soldCount || 0) - (a.soldCount || 0);
@@ -274,9 +295,9 @@ const CategoryProducts = ({ petType }) => {
   // ── Filter handler ─────────────────────────────────────────────────────
   const handleFilterChange = (type, value) => {
     setFilters((prev) => {
-      if (type === "price")            return { ...prev, price: value };
+      if (type === "price") return { ...prev, price: value };
       if (type === "includeOutOfStock") return { ...prev, includeOutOfStock: value };
-      if (type === "dealsOnly")        return { ...prev, dealsOnly: value };
+      if (type === "dealsOnly") return { ...prev, dealsOnly: value };
       // Toggle array values
       const arr = prev[type] || [];
       return {
@@ -311,20 +332,35 @@ const CategoryProducts = ({ petType }) => {
     return null;
   };
 
-  const categoryInfo  = getCategoryInfo();
-  const pageTitle     = categoryInfo?.name || normalizedSlug.replace(/-/g, " ");
-  const pageHeading   = isTopLevelPetCategory ? pageTitle : effectivePet ? `${effectivePet} ${pageTitle}` : pageTitle;
-  const bannerKey     = categoryBanners[slug]
+  const categoryInfo = getCategoryInfo();
+  const pageTitle = categoryInfo?.name || normalizedSlug.replace(/-/g, " ");
+  const pageHeading = isTopLevelPetCategory
+    ? pageTitle
+    : effectivePet
+      ? `${effectivePet} ${pageTitle}`
+      : pageTitle;
+  const bannerKey = categoryBanners[slug]
     ? slug
     : effectivePet
-    ? getCategoryBannerKey(effectivePet.toLowerCase() + "s", normalizedSlug)
-    : slug;
-  const banner        = categoryBanners[bannerKey] || { title: pageHeading, subtitle: "", image: undefined };
-  const crumbs        = [
+      ? getCategoryBannerKey(effectivePet.toLowerCase() + "s", normalizedSlug)
+      : slug;
+  const banner = categoryBanners[bannerKey] || {
+    title: pageHeading,
+    subtitle: "",
+    image: undefined,
+  };
+  const crumbs = [
     { label: "Home", path: "/" },
     {
-      label: effectivePet === "Dog" ? "Dogs" : effectivePet === "Cat" ? "Cats" : effectivePet ? `${effectivePet}s` : "Pets",
-      path:  effectivePet === "Dog" ? "/dogs" : effectivePet === "Cat" ? "/cats" : "/pets",
+      label:
+        effectivePet === "Dog"
+          ? "Dogs"
+          : effectivePet === "Cat"
+            ? "Cats"
+            : effectivePet
+              ? `${effectivePet}s`
+              : "Pets",
+      path: effectivePet === "Dog" ? "/dogs" : effectivePet === "Cat" ? "/cats" : "/pets",
     },
     { label: pageTitle },
   ];
@@ -344,12 +380,8 @@ const CategoryProducts = ({ petType }) => {
         {/* TOP SECTION */}
         <div className="flex items-center justify-between mb-10">
           <div>
-            <h1 className="text-4xl font-bold capitalize mt-20">
-              {pageHeading}
-            </h1>
-            <p className="text-gray-500 mt-2">
-              {gridProducts.length} Products Available
-            </p>
+            <h1 className="text-4xl font-bold capitalize mt-20">{pageHeading}</h1>
+            <p className="text-gray-500 mt-2">{gridProducts.length} Products Available</p>
             {!categoryProducts.length && relatedProducts.length > 0 && (
               <p className="text-sm text-gray-500 mt-1">
                 Showing related products for this category.
@@ -397,6 +429,6 @@ const CategoryProducts = ({ petType }) => {
       </div>
     </div>
   );
-}
+};
 
-export default CategoryProducts
+export default CategoryProducts;

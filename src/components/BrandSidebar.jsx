@@ -5,7 +5,7 @@ export default function BrandSidebar({ selectedBrand, onClose }) {
   const navigate = useNavigate();
   const handleClick = (logo) => {
     navigate(`/brands/${logo}`);
-    if (typeof onClose === 'function') onClose();
+    if (typeof onClose === "function") onClose();
   };
 
   return (

@@ -1,95 +1,98 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-
-import "swiper/css";
-
-// IMPORT YOUR LOCAL BANNERS
-import dogBanner from "../../assets/banners/dog-banner.jpeg";
-import catBanner from "../../assets/banners/cat-banner.jpeg";
-import trustBanner from "../../assets/banners/trust-banner.jpeg";
-import heroBanner from "../../assets/banners/hero-banner.jpeg";
-// removed two banners to keep only four hero slides
-
-const banners = [
-  {
-    id: 1,
-    image: dogBanner,
-    bg: "bg-[#f5e6d3]",
-    title: "Dog Essentials",
-    tagline: "Quality food & care for your dog",
-    ctaLabel: "Shop Dogs",
-    ctaLink: "/dogs",
-  },
-
-  {
-    id: 2,
-    image: catBanner,
-    bg: "bg-[#eef3df]",
-    title: "Cat Care",
-    tagline: "Premium nutrition for happy cats",
-    ctaLabel: "Shop Cats",
-    ctaLink: "/cats",
-  },
-
-  {
-    id: 3,
-    image: trustBanner,
-    bg: "bg-[#edf5dc]",
-    title: "Trusted Brands",
-    tagline: "Shop verified, vet-recommended brands",
-    ctaLabel: "Shop Brands",
-    ctaLink: "/brands",
-  },
-  {
-    id: 4,
-    image: heroBanner,
-    bg: "bg-[#fffaf6]",
-    title: "New Arrivals",
-    tagline: "Discover latest products and offers",
-    ctaLabel: "Explore",
-    ctaLink: "/",
-  },
-  // only first 4 banners are kept for cleaner hero
-];
+import { Leaf, Ban, Dog, ChevronRight } from "lucide-react";
+import dogBanner1 from "../../assets/banners/dog-banner.webp";
 
 const HeroBanner = () => {
   return (
-    <div className="w-full pb-6 overflow-visible">
-      <div className="relative left-1/2 right-1/2 -translate-x-1/2 w-screen">
-      <Swiper
-        modules={[Autoplay]}
-        slidesPerView={1}
-        spaceBetween={0}
-        autoplay={{
-          delay: 4000,
-          disableOnInteraction: false,
-        }}
-        loop={true}
-        className="w-full hero-swiper"
+    <section aria-label="Homepage hero" className="w-full">
+      <div
+        className="max-w-[1440px] mx-auto relative min-h-[520px] lg:min-h-[650px]"
+        style={{ height: "clamp(520px, 60vh, 700px)" }}
       >
-        {banners.map((banner) => (
-          <SwiperSlide key={banner.id}>
-            <div className={`${banner.bg} w-full overflow-hidden`}>
-              <div
-                className="relative w-full flex items-center justify-center"
-                style={{ height: 'min(600px, calc(100vh - 80px))', maxHeight: 'min(600px, calc(100vh - 80px))' }}
-              >
-                <img
-                  src={banner.image}
-                  alt={banner.title || 'banner'}
-                  className="mx-auto h-full w-auto object-contain"
-                  style={{ objectPosition: 'center' }}
-                  loading="lazy"
-                />
+        {/* Image: use existing asset, cover, centered, provide aspect-ratio and eager loading to avoid CLS */}
+        <img
+          src={dogBanner1}
+          srcSet={`${dogBanner1} 1200w, ${dogBanner1} 1800w`}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          loading="eager"
+          alt="Dog and pet products banner"
+          className="w-full object-cover object-center block md:h-[520px] h-[280px] lg:absolute lg:inset-0 lg:w-full lg:h-full"
+          style={{ aspectRatio: "16/7" }}
+        />
 
-                <div className="absolute inset-0 bg-black/6 pointer-events-none" />
+        {/* Content block: stacked on mobile (below image), absolute-left on large screens */}
+        <div className="relative z-10">
+          <div className="px-6 py-6 md:py-8 lg:py-0 lg:px-0">
+            <div className="mx-auto md:max-w-[720px] lg:max-w-none">
+              {/* Left content wrapper - on lg screens absolute positioned */}
+              <div className="lg:absolute lg:left-[60px] lg:top-1/2 lg:-translate-y-1/2 lg:w-[480px] lg:z-10">
+                <h1
+                  className="text-[#8B4513] font-extrabold leading-[0.95] tracking-[-0.04em] mb-6 text-[42px] md:text-[56px] lg:text-[72px]"
+                  style={{ fontWeight: 800 }}
+                >
+                  <span className="block">From Fresh Meals</span>
+                  <span className="block">to Happy Treats.</span>
+                </h1>
+
+                <p className="text-[18px] md:text-[20px] lg:text-[24px] text-[#222] mt-6 mb-10">
+                  A Complete Dog Nutrition Range.
+                </p>
+
+                <div className="flex items-center gap-8 mb-10 flex-nowrap">
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-[60px] h-[60px] rounded-full border border-[#8B4513] flex items-center justify-center mb-3">
+                      <Leaf size={30} className="text-[#8B4513]" />
+                    </div>
+                    <div className="text-[15px] font-medium text-[#3F3F46]">
+                      Real
+                      <br />
+                      Ingredients
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-[60px] h-[60px] rounded-full border border-[#8B4513] flex items-center justify-center mb-3">
+                      <Ban size={30} className="text-[#8B4513]" />
+                    </div>
+                    <div className="text-[15px] font-medium text-[#3F3F46]">
+                      No
+                      <br />
+                      Preservatives
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-[60px] h-[60px] rounded-full border border-[#8B4513] flex items-center justify-center mb-3">
+                      <Dog size={30} className="text-[#8B4513]" />
+                    </div>
+                    <div className="text-[15px] font-medium text-[#3F3F46]">
+                      For All
+                      <br />
+                      Breeds
+                    </div>
+                  </div>
+                </div>
+
+                <a
+                  href="/shop"
+                  className="inline-flex items-center justify-center gap-3 bg-[#F59E0B] text-white rounded-full transition-transform duration-150 hover:scale-105"
+                  style={{
+                    width: 220,
+                    height: 58,
+                    fontSize: 20,
+                    fontWeight: 700,
+                    paddingLeft: 32,
+                    paddingRight: 32,
+                  }}
+                >
+                  <span>SHOP NOW</span>
+                  <ChevronRight size={20} className="text-white" />
+                </a>
               </div>
             </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

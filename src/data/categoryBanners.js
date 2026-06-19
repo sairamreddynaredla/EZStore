@@ -1,23 +1,23 @@
-import catBanner from "../assets/banners/cat-banner.jpeg";
-import dogBanner from "../assets/banners/dog-banner.jpeg";
-import dogDryBannerImg from "../assets/dog-dropdown-banner/dry-food-banner1.jpeg";
-import dogBiscuitsImg from "../assets/dog-dropdown-banner/biscuits-cookies-dog-food-banner.jpeg";
-import dogFreshImg from "../assets/dog-dropdown-banner/fresh-food-banner.jpeg";
-import dogWetImg from "../assets/dog-dropdown-banner/wet-dog-food-banner.jpeg";
-import dogPuppyImg from "../assets/dog-dropdown-banner/puppy-food-banner.jpeg";
-import dogPrescriptionImg from "../assets/dog-dropdown-banner/prescription-dog-food-banner.jpeg";
-import dogVegetarianImg from "../assets/dog-dropdown-banner/vegetarian-food-banner.jpeg";
-import dogPuppyTreatsImg from "../assets/dog-dropdown-banner/puppy-treats-banner.jpeg";
-import grainFreeImg from "../assets/dog-dropdown-banner/grain-free-food-banner.jpeg";
-import meatyTreatsImg from "../assets/dog-dropdown-banner/meaty-treats-banner.jpeg";
-import catDryBannerImg from "../assets/cat-dropdown-banner/dry-food-cats-banner.jpeg";
-import catWetBannerImg from "../assets/cat-dropdown-banner/wet-food-cat-banner.jpeg";
-import catKittenBannerImg from "../assets/cat-dropdown-banner/kitten-food-banner.jpeg";
-import catMeatyTreatsBannerImg from "../assets/cat-dropdown-banner/meaty-cat-food.jpeg";
-import catPrescriptionBannerImg from "../assets/cat-dropdown-banner/prescription-cat-food-banner.jpeg";
-import catGrainFreeBannerImg from "../assets/cat-dropdown-banner/grain-free-food-cat-banner.jpeg";
-import catCrunchyTreatsBannerImg from "../assets/cat-dropdown-banner/cat-crunchy-treats.jpeg";
-import catCreamyTreatsBannerImg from "../assets/cat-dropdown-banner/creamy-treats.jpeg";
+import catBanner from "../assets/banners/offer-banner.webp";
+import dogBanner from "../assets/banners/dog-banner.webp";
+import dogDryBannerImg from "../assets/dog-dropdown-banner/dry-food-banner1.webp";
+import dogBiscuitsImg from "../assets/dog-dropdown-banner/biscuits-cookies-dog-food-banner.webp";
+import dogFreshImg from "../assets/dog-dropdown-banner/fresh-food-banner.webp";
+import dogWetImg from "../assets/dog-dropdown-banner/wet-dog-food-banner.webp";
+import dogPuppyImg from "../assets/dog-dropdown-banner/puppy-food-banner.webp";
+import dogPrescriptionImg from "../assets/dog-dropdown-banner/prescription-dog-food-banner.webp";
+import dogVegetarianImg from "../assets/dog-dropdown-banner/vegetarian-food-banner.webp";
+import dogPuppyTreatsImg from "../assets/dog-dropdown-banner/puppy-treats-banner.webp";
+import grainFreeImg from "../assets/dog-dropdown-banner/grain-free-food-banner.webp";
+import meatyTreatsImg from "../assets/dog-dropdown-banner/meaty-treats-banner.webp";
+import catDryBannerImg from "../assets/cat-dropdown-banner/dry-food-cats-banner.webp";
+import catWetBannerImg from "../assets/cat-dropdown-banner/wet-food-cat-banner.webp";
+import catKittenBannerImg from "../assets/cat-dropdown-banner/kitten-food-banner.webp";
+import catMeatyTreatsBannerImg from "../assets/cat-dropdown-banner/meaty-cat-food.webp";
+import catPrescriptionBannerImg from "../assets/cat-dropdown-banner/prescription-cat-food-banner.webp";
+import catGrainFreeBannerImg from "../assets/cat-dropdown-banner/grain-free-food-cat-banner.webp";
+import catCrunchyTreatsBannerImg from "../assets/cat-dropdown-banner/cat-crunchy-treats.webp";
+import catCreamyTreatsBannerImg from "../assets/cat-dropdown-banner/creamy-treats.webp";
 
 // Many category-specific banner files were not present in the repo.
 // Use existing banners as sensible fallbacks to avoid build/import errors.
@@ -42,7 +42,6 @@ const catCrunchyTreatsBanner = catCrunchyTreatsBannerImg || catBanner;
 const catCreamyTreatsBanner = catCreamyTreatsBannerImg || catBanner;
 
 export const categoryBanners = {
-
   // ================= DOG FOOD =================
 
   "dogs-dry-food": {

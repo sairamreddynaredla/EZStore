@@ -1,0 +1,231 @@
+# Image Conversion Report
+
+- public\elegance.png -> public\elegance.webp | original: 1945173 bytes | new: 44198 bytes | saved: 1900975 bytes
+- public\persian cat.png -> public\persian cat.webp | original: 2104776 bytes | new: 65910 bytes | saved: 2038866 bytes
+- src\assets\banners\dog-banner.jpeg -> src\assets\banners\dog-banner.webp | original: 51289 bytes | new: 23568 bytes | saved: 27721 bytes
+- src\assets\banners\hero-banner.png -> src\assets\banners\hero-banner.webp | original: 317815 bytes | new: 21642 bytes | saved: 296173 bytes
+- src\assets\banners\offer-banner.jpeg -> src\assets\banners\offer-banner.webp | original: 41838 bytes | new: 20314 bytes | saved: 21524 bytes
+- src\assets\banners\trust-banner.jpeg -> src\assets\banners\trust-banner.webp | original: 55849 bytes | new: 27820 bytes | saved: 28029 bytes
+- src\assets\bird-exclusive.png -> src\assets\bird-exclusive.webp | original: 221674 bytes | new: 95042 bytes | saved: 126632 bytes
+- src\assets\bird.png -> src\assets\bird.webp | original: 551900 bytes | new: 171578 bytes | saved: 380322 bytes
+- src\assets\blog-banner\blogs-banner.jpeg -> src\assets\blog-banner\blogs-banner.webp | original: 121717 bytes | new: 68842 bytes | saved: 52875 bytes
+- src\assets\BlueBuffelopng.png -> src\assets\BlueBuffelopng.webp | original: 4420 bytes | new: 5834 bytes | saved: -1414 bytes
+- src\assets\brand-banners\image.png -> src\assets\brand-banners\image.webp | original: 55048 bytes | new: 7870 bytes | saved: 47178 bytes
+- src\assets\brands\acana.jpeg -> src\assets\brands\acana.webp | original: 13572 bytes | new: 11148 bytes | saved: 2424 bytes
+- src\assets\brands\bellotta.jpeg -> src\assets\brands\bellotta.webp | original: 8335 bytes | new: 5548 bytes | saved: 2787 bytes
+- src\assets\brands\blue-buffalo.jpeg -> src\assets\brands\blue-buffalo.webp | original: 5891 bytes | new: 5796 bytes | saved: 95 bytes
+- src\assets\brands\canine-creek.jpeg -> src\assets\brands\canine-creek.webp | original: 14092 bytes | new: 7212 bytes | saved: 6880 bytes
+- src\assets\brands\drools.jpeg -> src\assets\brands\drools.webp | original: 12781 bytes | new: 6670 bytes | saved: 6111 bytes
+- src\assets\brands\farmina.jpeg -> src\assets\brands\farmina.webp | original: 150812 bytes | new: 40814 bytes | saved: 109998 bytes
+- src\assets\brands\goodies.jpeg -> src\assets\brands\goodies.webp | original: 12538 bytes | new: 11096 bytes | saved: 1442 bytes
+- src\assets\brands\hikari.jpeg -> src\assets\brands\hikari.webp | original: 21517 bytes | new: 14222 bytes | saved: 7295 bytes
+- src\assets\brands\himalaya.jpeg -> src\assets\brands\himalaya.webp | original: 200527 bytes | new: 105164 bytes | saved: 95363 bytes
+- src\assets\brands\imas.jpeg -> src\assets\brands\imas.webp | original: 33992 bytes | new: 13936 bytes | saved: 20056 bytes
+- src\assets\brands\jerhigh.jpeg -> src\assets\brands\jerhigh.webp | original: 56636 bytes | new: 44602 bytes | saved: 12034 bytes
+- src\assets\brands\kaytee.jpeg -> src\assets\brands\kaytee.webp | original: 338734 bytes | new: 145350 bytes | saved: 193384 bytes
+- src\assets\brands\kennel-kitchen.jpeg -> src\assets\brands\kennel-kitchen.webp | original: 53872 bytes | new: 28576 bytes | saved: 25296 bytes
+- src\assets\brands\meo.jpeg -> src\assets\brands\meo.webp | original: 10100 bytes | new: 4466 bytes | saved: 5634 bytes
+- src\assets\brands\n&d.jpeg -> src\assets\brands\n&d.webp | original: 13139 bytes | new: 9964 bytes | saved: 3175 bytes
+- src\assets\brands\orijen.jpeg -> src\assets\brands\orijen.webp | original: 152442 bytes | new: 49794 bytes | saved: 102648 bytes
+- src\assets\brands\pedigree.jpeg -> src\assets\brands\pedigree.webp | original: 12189 bytes | new: 8058 bytes | saved: 4131 bytes
+- src\assets\brands\purina.jpeg -> src\assets\brands\purina.webp | original: 55385 bytes | new: 18160 bytes | saved: 37225 bytes
+- src\assets\brands\purpet.jpeg -> src\assets\brands\purpet.webp | original: 21091 bytes | new: 7222 bytes | saved: 13869 bytes
+- src\assets\brands\rio.jpeg -> src\assets\brands\rio.webp | original: 155410 bytes | new: 157702 bytes | saved: -2292 bytes
+- src\assets\brands\royal-canin.jpeg -> src\assets\brands\royal-canin.webp | original: 101529 bytes | new: 65408 bytes | saved: 36121 bytes
+- src\assets\brands\sheba.jpeg -> src\assets\brands\sheba.webp | original: 190092 bytes | new: 82366 bytes | saved: 107726 bytes
+- src\assets\brands\smartheart.jpeg -> src\assets\brands\smartheart.webp | original: 76085 bytes | new: 57722 bytes | saved: 18363 bytes
+- src\assets\brands\sobo.jpeg -> src\assets\brands\sobo.webp | original: 20225 bytes | new: 7716 bytes | saved: 12509 bytes
+- src\assets\brands\taiyo.jpeg -> src\assets\brands\taiyo.webp | original: 11582 bytes | new: 4216 bytes | saved: 7366 bytes
+- src\assets\brands\taste-of-the-wild.jpeg -> src\assets\brands\taste-of-the-wild.webp | original: 82164 bytes | new: 40088 bytes | saved: 42076 bytes
+- src\assets\brands\temptations.jpeg -> src\assets\brands\temptations.webp | original: 17332 bytes | new: 13566 bytes | saved: 3766 bytes
+- src\assets\brands\tetra.jpeg -> src\assets\brands\tetra.webp | original: 68092 bytes | new: 41072 bytes | saved: 27020 bytes
+- src\assets\brands\vitapol.jpeg -> src\assets\brands\vitapol.webp | original: 24976 bytes | new: 17330 bytes | saved: 7646 bytes
+- src\assets\brands\whiskas.jpeg -> src\assets\brands\whiskas.webp | original: 7247 bytes | new: 4094 bytes | saved: 3153 bytes
+- src\assets\brands\zupreem.jpeg -> src\assets\brands\zupreem.webp | original: 71968 bytes | new: 59860 bytes | saved: 12108 bytes
+- src\assets\cat crunch.png -> src\assets\cat crunch.webp | original: 450913 bytes | new: 174878 bytes | saved: 276035 bytes
+- src\assets\cat-banner.jpeg -> src\assets\cat-banner.webp | original: 539054 bytes | new: 216816 bytes | saved: 322238 bytes
+- src\assets\cat-dropdown-banner\cat-crunchy-treats.jpeg -> src\assets\cat-dropdown-banner\cat-crunchy-treats.webp | original: 110481 bytes | new: 54960 bytes | saved: 55521 bytes
+- src\assets\cat-dropdown-banner\creamy-treats.jpeg -> src\assets\cat-dropdown-banner\creamy-treats.webp | original: 102789 bytes | new: 51408 bytes | saved: 51381 bytes
+- src\assets\cat-dropdown-banner\dry-food-cats-banner.jpeg -> src\assets\cat-dropdown-banner\dry-food-cats-banner.webp | original: 78341 bytes | new: 36676 bytes | saved: 41665 bytes
+- src\assets\cat-dropdown-banner\grain-free-food-cat-banner.jpeg -> src\assets\cat-dropdown-banner\grain-free-food-cat-banner.webp | original: 85079 bytes | new: 40084 bytes | saved: 44995 bytes
+- src\assets\cat-dropdown-banner\kitten-food-banner.jpeg -> src\assets\cat-dropdown-banner\kitten-food-banner.webp | original: 84783 bytes | new: 39900 bytes | saved: 44883 bytes
+- src\assets\cat-dropdown-banner\meaty-cat-food.jpeg -> src\assets\cat-dropdown-banner\meaty-cat-food.webp | original: 107895 bytes | new: 53646 bytes | saved: 54249 bytes
+- src\assets\cat-dropdown-banner\prescription-cat-food-banner.jpeg -> src\assets\cat-dropdown-banner\prescription-cat-food-banner.webp | original: 84101 bytes | new: 39070 bytes | saved: 45031 bytes
+- src\assets\cat-dropdown-banner\wet-food-cat-banner.jpeg -> src\assets\cat-dropdown-banner\wet-food-cat-banner.webp | original: 105665 bytes | new: 53216 bytes | saved: 52449 bytes
+- src\assets\cat-exclusive.png -> src\assets\cat-exclusive.webp | original: 332970 bytes | new: 101540 bytes | saved: 231430 bytes
+- src\assets\cat.png -> src\assets\cat.webp | original: 443372 bytes | new: 163986 bytes | saved: 279386 bytes
+- src\assets\categories\bird.png -> src\assets\categories\bird.webp | original: 2048696 bytes | new: 117750 bytes | saved: 1930946 bytes
+- src\assets\categories\cat.png -> src\assets\categories\cat.webp | original: 1842869 bytes | new: 92208 bytes | saved: 1750661 bytes
+- src\assets\categories\dog.png -> src\assets\categories\dog.webp | original: 1717103 bytes | new: 75440 bytes | saved: 1641663 bytes
+- src\assets\categories\fish.png -> src\assets\categories\fish.webp | original: 2324160 bytes | new: 213040 bytes | saved: 2111120 bytes
+- src\assets\categories\hamster.png -> src\assets\categories\hamster.webp | original: 1960065 bytes | new: 110940 bytes | saved: 1849125 bytes
+- src\assets\categories\rabbit.png -> src\assets\categories\rabbit.webp | original: 2238217 bytes | new: 162920 bytes | saved: 2075297 bytes
+- src\assets\creamy treats.png -> src\assets\creamy treats.webp | original: 502950 bytes | new: 210068 bytes | saved: 292882 bytes
+- src\assets\dog dental treats.png -> src\assets\dog dental treats.webp | original: 486165 bytes | new: 182552 bytes | saved: 303613 bytes
+- src\assets\dog exclusive.png -> src\assets\dog exclusive.webp | original: 407505 bytes | new: 114018 bytes | saved: 293487 bytes
+- src\assets\dog meaty.png -> src\assets\dog meaty.webp | original: 523243 bytes | new: 210488 bytes | saved: 312755 bytes
+- src\assets\dog-dropdown-banner\biscuits-cookies-dog-food-banner.jpeg -> src\assets\dog-dropdown-banner\biscuits-cookies-dog-food-banner.webp | original: 100406 bytes | new: 49320 bytes | saved: 51086 bytes
+- src\assets\dog-dropdown-banner\dry-food-banner1.jpeg -> src\assets\dog-dropdown-banner\dry-food-banner1.webp | original: 98588 bytes | new: 48392 bytes | saved: 50196 bytes
+- src\assets\dog-dropdown-banner\fresh-food-banner.jpeg -> src\assets\dog-dropdown-banner\fresh-food-banner.webp | original: 97904 bytes | new: 46730 bytes | saved: 51174 bytes
+- src\assets\dog-dropdown-banner\grain-free-food-banner.jpeg -> src\assets\dog-dropdown-banner\grain-free-food-banner.webp | original: 92345 bytes | new: 46118 bytes | saved: 46227 bytes
+- src\assets\dog-dropdown-banner\meaty-treats-banner.jpeg -> src\assets\dog-dropdown-banner\meaty-treats-banner.webp | original: 110549 bytes | new: 57272 bytes | saved: 53277 bytes
+- src\assets\dog-dropdown-banner\prescription-dog-food-banner.jpeg -> src\assets\dog-dropdown-banner\prescription-dog-food-banner.webp | original: 2221657 bytes | new: 93752 bytes | saved: 2127905 bytes
+- src\assets\dog-dropdown-banner\puppy-food-banner.jpeg -> src\assets\dog-dropdown-banner\puppy-food-banner.webp | original: 95460 bytes | new: 45722 bytes | saved: 49738 bytes
+- src\assets\dog-dropdown-banner\puppy-treats-banner.jpeg -> src\assets\dog-dropdown-banner\puppy-treats-banner.webp | original: 101005 bytes | new: 52358 bytes | saved: 48647 bytes
+- src\assets\dog-dropdown-banner\vegetarian-food-banner.jpeg -> src\assets\dog-dropdown-banner\vegetarian-food-banner.webp | original: 101826 bytes | new: 50708 bytes | saved: 51118 bytes
+- src\assets\dog-dropdown-banner\wet-dog-food-banner.jpeg -> src\assets\dog-dropdown-banner\wet-dog-food-banner.webp | original: 95185 bytes | new: 45632 bytes | saved: 49553 bytes
+- src\assets\dog.png -> src\assets\dog.webp | original: 416947 bytes | new: 122998 bytes | saved: 293949 bytes
+- src\assets\dry-dog-food.jpeg -> src\assets\dry-dog-food.webp | original: 451779 bytes | new: 124504 bytes | saved: 327275 bytes
+- src\assets\Exclusive Category\bird-exclusive.png -> src\assets\Exclusive Category\bird-exclusive.webp | original: 1930901 bytes | new: 72564 bytes | saved: 1858337 bytes
+- src\assets\Exclusive Category\cat-exclusive.png -> src\assets\Exclusive Category\cat-exclusive.webp | original: 1902154 bytes | new: 73748 bytes | saved: 1828406 bytes
+- src\assets\Exclusive Category\dog exclusive.png -> src\assets\Exclusive Category\dog exclusive.webp | original: 1791957 bytes | new: 89032 bytes | saved: 1702925 bytes
+- src\assets\Exclusive Category\fish-exclusive.png -> src\assets\Exclusive Category\fish-exclusive.webp | original: 1753782 bytes | new: 57802 bytes | saved: 1695980 bytes
+- src\assets\Exclusive Category\hamster-exclusive.png -> src\assets\Exclusive Category\hamster-exclusive.webp | original: 1675511 bytes | new: 72670 bytes | saved: 1602841 bytes
+- src\assets\explore-pick-pamper\cat crunch.png -> src\assets\explore-pick-pamper\cat crunch.webp | original: 2190232 bytes | new: 132372 bytes | saved: 2057860 bytes
+- src\assets\explore-pick-pamper\creamy treats.png -> src\assets\explore-pick-pamper\creamy treats.webp | original: 2455368 bytes | new: 165356 bytes | saved: 2290012 bytes
+- src\assets\explore-pick-pamper\dog dental treats.png -> src\assets\explore-pick-pamper\dog dental treats.webp | original: 2209799 bytes | new: 140180 bytes | saved: 2069619 bytes
+- src\assets\explore-pick-pamper\dog meaty.png -> src\assets\explore-pick-pamper\dog meaty.webp | original: 2247100 bytes | new: 164374 bytes | saved: 2082726 bytes
+- src\assets\explore-pick-pamper\dry-dog-food.jpeg -> src\assets\explore-pick-pamper\dry-dog-food.webp | original: 1917831 bytes | new: 97560 bytes | saved: 1820271 bytes
+- src\assets\explore-pick-pamper\prescription-diet.jpeg -> src\assets\explore-pick-pamper\prescription-diet.webp | original: 1566162 bytes | new: 70100 bytes | saved: 1496062 bytes
+- src\assets\explore-pick-pamper\puppy-kitten-food.jpeg -> src\assets\explore-pick-pamper\puppy-kitten-food.webp | original: 1631699 bytes | new: 79514 bytes | saved: 1552185 bytes
+- src\assets\explore-pick-pamper\wet-dog-food.jpeg -> src\assets\explore-pick-pamper\wet-dog-food.webp | original: 1643865 bytes | new: 85370 bytes | saved: 1558495 bytes
+- src\assets\ezstore-logo-optimized.png -> src\assets\ezstore-logo-optimized.webp | original: 83046 bytes | new: 72386 bytes | saved: 10660 bytes
+- src\assets\EZstore.png -> src\assets\EZstore.webp | original: 413113 bytes | new: 163856 bytes | saved: 249257 bytes
+- src\assets\fish-exclusive.png -> src\assets\fish-exclusive.webp | original: 301664 bytes | new: 76462 bytes | saved: 225202 bytes
+- src\assets\fish.png -> src\assets\fish.webp | original: 688986 bytes | new: 279426 bytes | saved: 409560 bytes
+- src\assets\hamster-exclusive.png -> src\assets\hamster-exclusive.webp | original: 242379 bytes | new: 102652 bytes | saved: 139727 bytes
+- src\assets\hamster.png -> src\assets\hamster.webp | original: 452964 bytes | new: 163670 bytes | saved: 289294 bytes
+- src\assets\hero-banner.jpeg -> src\assets\hero-banner.webp | original: 620992 bytes | new: 230704 bytes | saved: 390288 bytes
+- src\assets\hero.png -> src\assets\hero.webp | original: 10948 bytes | new: 14876 bytes | saved: -3928 bytes
+- src\assets\image.png -> src\assets\image.webp | original: 13223 bytes | new: 7730 bytes | saved: 5493 bytes
+- src\assets\logo\easy-returns.png -> src\assets\logo\easy-returns.webp | original: 6592 bytes | new: 2138 bytes | saved: 4454 bytes
+- src\assets\logo\ezstore-logo-optimized.png -> src\assets\logo\ezstore-logo-optimized.webp | original: 463597 bytes | new: 68992 bytes | saved: 394605 bytes
+- src\assets\logo\fast-delivery.png -> src\assets\logo\fast-delivery.webp | original: 23715 bytes | new: 3770 bytes | saved: 19945 bytes
+- src\assets\logo\secure-payment.png -> src\assets\logo\secure-payment.webp | original: 1313386 bytes | new: 23678 bytes | saved: 1289708 bytes
+- src\assets\offer-banner.jpeg -> src\assets\offer-banner.webp | original: 502529 bytes | new: 187964 bytes | saved: 314565 bytes
+- src\assets\payments\apple-pay.png -> src\assets\payments\apple-pay.webp | original: 5434 bytes | new: 1670 bytes | saved: 3764 bytes
+- src\assets\payments\card.png -> src\assets\payments\card.webp | original: 4966 bytes | new: 1662 bytes | saved: 3304 bytes
+- src\assets\payments\cod.png -> src\assets\payments\cod.webp | original: 21504 bytes | new: 5490 bytes | saved: 16014 bytes
+- src\assets\payments\google-pay.png -> src\assets\payments\google-pay.webp | original: 8672 bytes | new: 2564 bytes | saved: 6108 bytes
+- src\assets\payments\net banking.png -> src\assets\payments\net banking.webp | original: 2976 bytes | new: 916 bytes | saved: 2060 bytes
+- src\assets\payments\paypal.png -> src\assets\payments\paypal.webp | original: 19623 bytes | new: 4390 bytes | saved: 15233 bytes
+- src\assets\prescription-diet.jpeg -> src\assets\prescription-diet.webp | original: 339239 bytes | new: 96358 bytes | saved: 242881 bytes
+- src\assets\prescription-dog-food-banner.jpeg -> src\assets\prescription-dog-food-banner.webp | original: 419090 bytes | new: 132198 bytes | saved: 286892 bytes
+- src\assets\products\birds\higgins-sunburst-gourmet-parrot-food.jpg -> src\assets\products\birds\higgins-sunburst-gourmet-parrot-food.webp | original: 12066 bytes | new: 9694 bytes | saved: 2372 bytes
+- src\assets\products\birds\kaytee-forti-diet-pro-health-parakeet-food.jpg -> src\assets\products\birds\kaytee-forti-diet-pro-health-parakeet-food.webp | original: 13374 bytes | new: 10414 bytes | saved: 2960 bytes
+- src\assets\products\birds\versele-laga-prestige-budgies-bird-food.jpg -> src\assets\products\birds\versele-laga-prestige-budgies-bird-food.webp | original: 8883 bytes | new: 6596 bytes | saved: 2287 bytes
+- src\assets\products\birds\vitapol-economy-parrot-food.jpg -> src\assets\products\birds\vitapol-economy-parrot-food.webp | original: 10551 bytes | new: 8422 bytes | saved: 2129 bytes
+- src\assets\products\birds\wild-harvest-daily-blend-parakeet-food.jpg -> src\assets\products\birds\wild-harvest-daily-blend-parakeet-food.webp | original: 10672 bytes | new: 7942 bytes | saved: 2730 bytes
+- src\assets\products\birds\zu-preem-fruitblend-small-bird-food.jpg -> src\assets\products\birds\zu-preem-fruitblend-small-bird-food.webp | original: 15197 bytes | new: 12976 bytes | saved: 2221 bytes
+- src\assets\products\cats\creamy-treats\delectables-squeeze-up-tuna-cat-treat.jpg -> src\assets\products\cats\creamy-treats\delectables-squeeze-up-tuna-cat-treat.webp | original: 11445 bytes | new: 7990 bytes | saved: 3455 bytes
+- src\assets\products\cats\creamy-treats\inaba-churu-tuna-creamy-cat-treat.jpg -> src\assets\products\cats\creamy-treats\inaba-churu-tuna-creamy-cat-treat.webp | original: 10305 bytes | new: 7940 bytes | saved: 2365 bytes
+- src\assets\products\cats\creamy-treats\meo-creamy-treats-bonito-cat-treat.jpg -> src\assets\products\cats\creamy-treats\meo-creamy-treats-bonito-cat-treat.webp | original: 8904 bytes | new: 6166 bytes | saved: 2738 bytes
+- src\assets\products\cats\creamy-treats\sheba-creamy-snacks-tuna-cat-treat.jpg -> src\assets\products\cats\creamy-treats\sheba-creamy-snacks-tuna-cat-treat.webp | original: 6235 bytes | new: 5262 bytes | saved: 973 bytes
+- src\assets\products\cats\creamy-treats\temptations-creamy-puree-chicken-cat-treat.jpg -> src\assets\products\cats\creamy-treats\temptations-creamy-puree-chicken-cat-treat.webp | original: 11889 bytes | new: 8652 bytes | saved: 3237 bytes
+- src\assets\products\cats\crunchy-treats\dreamies-cheese-crunchy-cat-treats.jpg -> src\assets\products\cats\crunchy-treats\dreamies-cheese-crunchy-cat-treats.webp | original: 12266 bytes | new: 8744 bytes | saved: 3522 bytes
+- src\assets\products\cats\crunchy-treats\friskies-party-mix-original-crunch-cat-treats.jpg -> src\assets\products\cats\crunchy-treats\friskies-party-mix-original-crunch-cat-treats.webp | original: 22332 bytes | new: 21862 bytes | saved: 470 bytes
+- src\assets\products\cats\crunchy-treats\meo-crunchy-cat-treats-seafood-flavor.jpg -> src\assets\products\cats\crunchy-treats\meo-crunchy-cat-treats-seafood-flavor.webp | original: 7010 bytes | new: 4056 bytes | saved: 2954 bytes
+- src\assets\products\cats\crunchy-treats\purepet-crunchy-cat-treats-ocean-fish-flavor.jpg -> src\assets\products\cats\crunchy-treats\purepet-crunchy-cat-treats-ocean-fish-flavor.webp | original: 6920 bytes | new: 5674 bytes | saved: 1246 bytes
+- src\assets\products\cats\crunchy-treats\temptations-mixups-backyard-cookout-cat-treats.jpg -> src\assets\products\cats\crunchy-treats\temptations-mixups-backyard-cookout-cat-treats.webp | original: 5498 bytes | new: 4956 bytes | saved: 542 bytes
+- src\assets\products\cats\dry-food\hills-science-diet-adult-indoor-cat-food.jpg -> src\assets\products\cats\dry-food\hills-science-diet-adult-indoor-cat-food.webp | original: 9742 bytes | new: 11380 bytes | saved: -1638 bytes
+- src\assets\products\cats\dry-food\meo-adult-ocean-fish-dry-cat-food.jpg -> src\assets\products\cats\dry-food\meo-adult-ocean-fish-dry-cat-food.webp | original: 8898 bytes | new: 5944 bytes | saved: 2954 bytes
+- src\assets\products\cats\dry-food\purina-pro-plan-complete-essentials-adult-cat-food.jpg -> src\assets\products\cats\dry-food\purina-pro-plan-complete-essentials-adult-cat-food.webp | original: 20043 bytes | new: 14958 bytes | saved: 5085 bytes
+- src\assets\products\cats\dry-food\royal-canin-indoor-adult-dry-cat-food.jpg -> src\assets\products\cats\dry-food\royal-canin-indoor-adult-dry-cat-food.webp | original: 3630 bytes | new: 4162 bytes | saved: -532 bytes
+- src\assets\products\cats\dry-food\whiskas-ocean-fish-adult-dry-cat-food.jpg -> src\assets\products\cats\dry-food\whiskas-ocean-fish-adult-dry-cat-food.webp | original: 8412 bytes | new: 9606 bytes | saved: -1194 bytes
+- src\assets\products\cats\grain-free-food\acana-wild-prairie-grain-free-cat-food.jpg -> src\assets\products\cats\grain-free-food\acana-wild-prairie-grain-free-cat-food.webp | original: 6632 bytes | new: 6050 bytes | saved: 582 bytes
+- src\assets\products\cats\grain-free-food\farmina-nd-chicken-pomegranate-grain-free-cat-food.jpg -> src\assets\products\cats\grain-free-food\farmina-nd-chicken-pomegranate-grain-free-cat-food.webp | original: 9658 bytes | new: 10888 bytes | saved: -1230 bytes
+- src\assets\products\cats\grain-free-food\orijen-original-grain-free-cat-food.jpg -> src\assets\products\cats\grain-free-food\orijen-original-grain-free-cat-food.webp | original: 8801 bytes | new: 6284 bytes | saved: 2517 bytes
+- src\assets\products\cats\grain-free-food\royal-canin-grain-free-adult-cat-food.jpg -> src\assets\products\cats\grain-free-food\royal-canin-grain-free-adult-cat-food.webp | original: 16932 bytes | new: 14370 bytes | saved: 2562 bytes
+- src\assets\products\cats\grain-free-food\taste-of-the-wild-rocky-mountain-grain-free-cat-food.jpg -> src\assets\products\cats\grain-free-food\taste-of-the-wild-rocky-mountain-grain-free-cat-food.webp | original: 9792 bytes | new: 10240 bytes | saved: -448 bytes
+- src\assets\products\cats\kitten-food\farmina-nd-kitten-chicken-pomegranate-cat-food.jpg -> src\assets\products\cats\kitten-food\farmina-nd-kitten-chicken-pomegranate-cat-food.webp | original: 7433 bytes | new: 7132 bytes | saved: 301 bytes
+- src\assets\products\cats\kitten-food\hills-science-diet-kitten-cat-food.jpg -> src\assets\products\cats\kitten-food\hills-science-diet-kitten-cat-food.webp | original: 8104 bytes | new: 5710 bytes | saved: 2394 bytes
+- src\assets\products\cats\kitten-food\purina-pro-plan-kitten-chicken-rice-cat-food.jpg -> src\assets\products\cats\kitten-food\purina-pro-plan-kitten-chicken-rice-cat-food.webp | original: 4622 bytes | new: 5338 bytes | saved: -716 bytes
+- src\assets\products\cats\kitten-food\royal-canin-kitten-dry-cat-food.jpg -> src\assets\products\cats\kitten-food\royal-canin-kitten-dry-cat-food.webp | original: 25089 bytes | new: 18426 bytes | saved: 6663 bytes
+- src\assets\products\cats\kitten-food\whiskas-kitten-ocean-fish-cat-food.jpg -> src\assets\products\cats\kitten-food\whiskas-kitten-ocean-fish-cat-food.webp | original: 18980 bytes | new: 17456 bytes | saved: 1524 bytes
+- src\assets\products\cats\meaty-treats\friskies-chicken-meaty-bites-cat-treats.jpg -> src\assets\products\cats\meaty-treats\friskies-chicken-meaty-bites-cat-treats.webp | original: 8675 bytes | new: 8480 bytes | saved: 195 bytes
+- src\assets\products\cats\meaty-treats\meo-tuna-meaty-cat-treats.jpg -> src\assets\products\cats\meaty-treats\meo-tuna-meaty-cat-treats.webp | original: 6348 bytes | new: 7136 bytes | saved: -788 bytes
+- src\assets\products\cats\meaty-treats\purepet-ocean-fish-meaty-cat-treats.jpg -> src\assets\products\cats\meaty-treats\purepet-ocean-fish-meaty-cat-treats.webp | original: 11018 bytes | new: 9188 bytes | saved: 1830 bytes
+- src\assets\products\cats\meaty-treats\sheba-chicken-meaty-cat-treats.jpg -> src\assets\products\cats\meaty-treats\sheba-chicken-meaty-cat-treats.webp | original: 9332 bytes | new: 8662 bytes | saved: 670 bytes
+- src\assets\products\cats\meaty-treats\temptations-chicken-flavor-cat-treats.jpg -> src\assets\products\cats\meaty-treats\temptations-chicken-flavor-cat-treats.webp | original: 18524 bytes | new: 17056 bytes | saved: 1468 bytes
+- src\assets\products\cats\prescription-food\farmina-vet-life-renal-cat-food.jpg -> src\assets\products\cats\prescription-food\farmina-vet-life-renal-cat-food.webp | original: 5328 bytes | new: 6020 bytes | saved: -692 bytes
+- src\assets\products\cats\prescription-food\hills-prescription-diet-cd-multicare-cat-food.jpg -> src\assets\products\cats\prescription-food\hills-prescription-diet-cd-multicare-cat-food.webp | original: 5538 bytes | new: 6394 bytes | saved: -856 bytes
+- src\assets\products\cats\prescription-food\purina-pro-plan-veterinary-ur-urinary-cat-food.jpg -> src\assets\products\cats\prescription-food\purina-pro-plan-veterinary-ur-urinary-cat-food.webp | original: 62263 bytes | new: 42956 bytes | saved: 19307 bytes
+- src\assets\products\cats\prescription-food\royal-canin-hypoallergenic-cat-food.jpg -> src\assets\products\cats\prescription-food\royal-canin-hypoallergenic-cat-food.webp | original: 15391 bytes | new: 11250 bytes | saved: 4141 bytes
+- src\assets\products\cats\prescription-food\royal-canin-urinary-so-cat-food.jpg -> src\assets\products\cats\prescription-food\royal-canin-urinary-so-cat-food.webp | original: 4330 bytes | new: 4994 bytes | saved: -664 bytes
+- src\assets\products\cats\wet-food\fancy-feast-grilled-tuna-wet-cat-food.jpg -> src\assets\products\cats\wet-food\fancy-feast-grilled-tuna-wet-cat-food.webp | original: 47977 bytes | new: 39718 bytes | saved: 8259 bytes
+- src\assets\products\cats\wet-food\purina-pro-plan-adult-wet-cat-food.jpg -> src\assets\products\cats\wet-food\purina-pro-plan-adult-wet-cat-food.webp | original: 7406 bytes | new: 8478 bytes | saved: -1072 bytes
+- src\assets\products\cats\wet-food\royal-canin-instinctive-adult-wet-cat-food.jpg -> src\assets\products\cats\wet-food\royal-canin-instinctive-adult-wet-cat-food.webp | original: 24430 bytes | new: 20256 bytes | saved: 4174 bytes
+- src\assets\products\cats\wet-food\sheba-tuna-premium-wet-cat-food.jpg -> src\assets\products\cats\wet-food\sheba-tuna-premium-wet-cat-food.webp | original: 34210 bytes | new: 28042 bytes | saved: 6168 bytes
+- src\assets\products\cats\wet-food\whiskas-ocean-fish-wet-cat-food.jpg -> src\assets\products\cats\wet-food\whiskas-ocean-fish-wet-cat-food.webp | original: 12544 bytes | new: 14378 bytes | saved: -1834 bytes
+- src\assets\products\dogs\biscuits-cookies\drools-absolute-calcium-bone-biscuits.jpg -> src\assets\products\dogs\biscuits-cookies\drools-absolute-calcium-bone-biscuits.webp | original: 19866 bytes | new: 15076 bytes | saved: 4790 bytes
+- src\assets\products\dogs\biscuits-cookies\goodies-energy-treat-biscuits.jpg -> src\assets\products\dogs\biscuits-cookies\goodies-energy-treat-biscuits.webp | original: 10122 bytes | new: 11318 bytes | saved: -1196 bytes
+- src\assets\products\dogs\biscuits-cookies\jerhigh-chicken-cookies.jpg -> src\assets\products\dogs\biscuits-cookies\jerhigh-chicken-cookies.webp | original: 27214 bytes | new: 21072 bytes | saved: 6142 bytes
+- src\assets\products\dogs\biscuits-cookies\pedigree-biscrok-milk-biscuits.jpg -> src\assets\products\dogs\biscuits-cookies\pedigree-biscrok-milk-biscuits.webp | original: 7724 bytes | new: 8858 bytes | saved: -1134 bytes
+- src\assets\products\dogs\biscuits-cookies\smartheart-dog-biscuits-milk.jpg -> src\assets\products\dogs\biscuits-cookies\smartheart-dog-biscuits-milk.webp | original: 22672 bytes | new: 17254 bytes | saved: 5418 bytes
+- src\assets\products\dogs\dental-treats\drools-dental-bone-dog-treat.jpg -> src\assets\products\dogs\dental-treats\drools-dental-bone-dog-treat.webp | original: 21276 bytes | new: 24496 bytes | saved: -3220 bytes
+- src\assets\products\dogs\dental-treats\jerhigh-dental-stick-chicken.jpg -> src\assets\products\dogs\dental-treats\jerhigh-dental-stick-chicken.webp | original: 15739 bytes | new: 13484 bytes | saved: 2255 bytes
+- src\assets\products\dogs\dental-treats\pedigree-dentastix-daily-oral-care.jpg -> src\assets\products\dogs\dental-treats\pedigree-dentastix-daily-oral-care.webp | original: 10718 bytes | new: 7538 bytes | saved: 3180 bytes
+- src\assets\products\dogs\dental-treats\purepet-dental-chew-stick.jpg -> src\assets\products\dogs\dental-treats\purepet-dental-chew-stick.webp | original: 7829 bytes | new: 6580 bytes | saved: 1249 bytes
+- src\assets\products\dogs\dental-treats\smartheart-dental-stick-dog-treat.jpg -> src\assets\products\dogs\dental-treats\smartheart-dental-stick-dog-treat.webp | original: 6082 bytes | new: 5506 bytes | saved: 576 bytes
+- src\assets\products\dogs\dry-food\acana-classics-red-meat-recipe-dry-dog-food.jpg -> src\assets\products\dogs\dry-food\acana-classics-red-meat-recipe-dry-dog-food.webp | original: 13769 bytes | new: 10888 bytes | saved: 2881 bytes
+- src\assets\products\dogs\dry-food\blue-buffalo-wilderness-adult-grain-free-dry-dog-food.png.jpg -> src\assets\products\dogs\dry-food\blue-buffalo-wilderness-adult-grain-free-dry-dog-food.png.webp | original: 18278 bytes | new: 17010 bytes | saved: 1268 bytes
+- src\assets\products\dogs\dry-food\farmina-nd-chicken-pomegranate-adult-medium-maxi-dry-dog-food.jpg -> src\assets\products\dogs\dry-food\farmina-nd-chicken-pomegranate-adult-medium-maxi-dry-dog-food.webp | original: 46166 bytes | new: 32448 bytes | saved: 13718 bytes
+- src\assets\products\dogs\dry-food\purina-pro-plan-complete-essentials-adult-dry-dog-food.jpg -> src\assets\products\dogs\dry-food\purina-pro-plan-complete-essentials-adult-dry-dog-food.webp | original: 30344 bytes | new: 22088 bytes | saved: 8256 bytes
+- src\assets\products\dogs\dry-food\royal-canin-maxi-adult-dry-dog-food.png.jpg -> src\assets\products\dogs\dry-food\royal-canin-maxi-adult-dry-dog-food.png.webp | original: 24360 bytes | new: 17474 bytes | saved: 6886 bytes
+- src\assets\products\dogs\Fresh-food\freshpet-select-roasted-chicken-recipe-dog-food.jpg -> src\assets\products\dogs\Fresh-food\freshpet-select-roasted-chicken-recipe-dog-food.webp | original: 14158 bytes | new: 15942 bytes | saved: -1784 bytes
+- src\assets\products\dogs\Fresh-food\nom-nom-beef-mash-fresh-dog-food.jpg -> src\assets\products\dogs\Fresh-food\nom-nom-beef-mash-fresh-dog-food.webp | original: 9924 bytes | new: 11504 bytes | saved: -1580 bytes
+- src\assets\products\dogs\Fresh-food\ollie-chicken-dish-fresh-dog-food.jpg -> src\assets\products\dogs\Fresh-food\ollie-chicken-dish-fresh-dog-food.webp | original: 6686 bytes | new: 6122 bytes | saved: 564 bytes
+- src\assets\products\dogs\Fresh-food\spot-tango-beef-millet-fresh-dog-food.jpg -> src\assets\products\dogs\Fresh-food\spot-tango-beef-millet-fresh-dog-food.webp | original: 6950 bytes | new: 6928 bytes | saved: 22 bytes
+- src\assets\products\dogs\Fresh-food\the-farmers-dog-turkey-recipe-fresh-dog-food.jpg -> src\assets\products\dogs\Fresh-food\the-farmers-dog-turkey-recipe-fresh-dog-food.webp | original: 4143 bytes | new: 3838 bytes | saved: 305 bytes
+- src\assets\products\dogs\meaty-treats\drools-real-chicken-sausage-treats.jpg -> src\assets\products\dogs\meaty-treats\drools-real-chicken-sausage-treats.webp | original: 14998 bytes | new: 13714 bytes | saved: 1284 bytes
+- src\assets\products\dogs\meaty-treats\gnawlers-calcium-milk-bone-treats.jpg -> src\assets\products\dogs\meaty-treats\gnawlers-calcium-milk-bone-treats.webp | original: 10944 bytes | new: 10034 bytes | saved: 910 bytes
+- src\assets\products\dogs\meaty-treats\jerhigh-chicken-jerky-treats.jpg -> src\assets\products\dogs\meaty-treats\jerhigh-chicken-jerky-treats.webp | original: 35310 bytes | new: 29192 bytes | saved: 6118 bytes
+- src\assets\products\dogs\meaty-treats\pedigree-rodeo-chicken-treats.jpg -> src\assets\products\dogs\meaty-treats\pedigree-rodeo-chicken-treats.webp | original: 14030 bytes | new: 11302 bytes | saved: 2728 bytes
+- src\assets\products\dogs\meaty-treats\smartheart-chicken-stick-treats.jpg -> src\assets\products\dogs\meaty-treats\smartheart-chicken-stick-treats.webp | original: 37216 bytes | new: 26284 bytes | saved: 10932 bytes
+- src\assets\products\dogs\prescription-food\farmina-vet-life-renal-dog-food.jpg -> src\assets\products\dogs\prescription-food\farmina-vet-life-renal-dog-food.webp | original: 8760 bytes | new: 7136 bytes | saved: 1624 bytes
+- src\assets\products\dogs\prescription-food\hills-prescription-diet-i-d-dog-food.jpg -> src\assets\products\dogs\prescription-food\hills-prescription-diet-i-d-dog-food.webp | original: 9962 bytes | new: 8732 bytes | saved: 1230 bytes
+- src\assets\products\dogs\prescription-food\hills-prescription-diet-metabolic-dog-food.jpg -> src\assets\products\dogs\prescription-food\hills-prescription-diet-metabolic-dog-food.webp | original: 9636 bytes | new: 8118 bytes | saved: 1518 bytes
+- src\assets\products\dogs\prescription-food\royal-canin-gastrointestinal-dry-dog-food1.jpg -> src\assets\products\dogs\prescription-food\royal-canin-gastrointestinal-dry-dog-food1.webp | original: 7186 bytes | new: 5674 bytes | saved: 1512 bytes
+- src\assets\products\dogs\prescription-food\royal-canin-hypoallergenic-dog-food.jpg -> src\assets\products\dogs\prescription-food\royal-canin-hypoallergenic-dog-food.webp | original: 9715 bytes | new: 7248 bytes | saved: 2467 bytes
+- src\assets\products\dogs\puppyFood\acana-puppy-recipe-dry-dog-food.jpg -> src\assets\products\dogs\puppyFood\acana-puppy-recipe-dry-dog-food.webp | original: 7712 bytes | new: 7620 bytes | saved: 92 bytes
+- src\assets\products\dogs\puppyFood\drools-puppy-chicken-egg-dry-food.jpg -> src\assets\products\dogs\puppyFood\drools-puppy-chicken-egg-dry-food.webp | original: 14057 bytes | new: 10834 bytes | saved: 3223 bytes
+- src\assets\products\dogs\puppyFood\farmina-nd-puppy-medium-maxi-food.jpg -> src\assets\products\dogs\puppyFood\farmina-nd-puppy-medium-maxi-food.webp | original: 12536 bytes | new: 13346 bytes | saved: -810 bytes
+- src\assets\products\dogs\puppyFood\pedigree-puppy-chicken-milk-dry-food.jpg -> src\assets\products\dogs\puppyFood\pedigree-puppy-chicken-milk-dry-food.webp | original: 10851 bytes | new: 7206 bytes | saved: 3645 bytes
+- src\assets\products\dogs\puppyFood\royal-canin-mini-puppy-dry-dog-food.jpg -> src\assets\products\dogs\puppyFood\royal-canin-mini-puppy-dry-dog-food.webp | original: 8229 bytes | new: 6004 bytes | saved: 2225 bytes
+- src\assets\products\dogs\vegetarian-food\drools-vegetarian-adult-dog-food.jpg -> src\assets\products\dogs\vegetarian-food\drools-vegetarian-adult-dog-food.webp | original: 13049 bytes | new: 10040 bytes | saved: 3009 bytes
+- src\assets\products\dogs\vegetarian-food\farmina-vet-life-vegetarian-formula-dog-food.jpg -> src\assets\products\dogs\vegetarian-food\farmina-vet-life-vegetarian-formula-dog-food.webp | original: 8339 bytes | new: 8472 bytes | saved: -133 bytes
+- src\assets\products\dogs\vegetarian-food\pedigree-vegetarian-adult-dry-dog-food.jpg -> src\assets\products\dogs\vegetarian-food\pedigree-vegetarian-adult-dry-dog-food.webp | original: 13703 bytes | new: 9996 bytes | saved: 3707 bytes
+- src\assets\products\dogs\vegetarian-food\purepet-vegetarian-adult-dog-food.jpg -> src\assets\products\dogs\vegetarian-food\purepet-vegetarian-adult-dog-food.webp | original: 7289 bytes | new: 5758 bytes | saved: 1531 bytes
+- src\assets\products\dogs\vegetarian-food\royal-canin-vegetarian-adult-dry-dog-food.jpg -> src\assets\products\dogs\vegetarian-food\royal-canin-vegetarian-adult-dry-dog-food.webp | original: 10008 bytes | new: 7294 bytes | saved: 2714 bytes
+- src\assets\products\dogs\wet-food\blue-buffalo-homestyle-recipe-wet-dog-food.jpg -> src\assets\products\dogs\wet-food\blue-buffalo-homestyle-recipe-wet-dog-food.webp | original: 9851 bytes | new: 7038 bytes | saved: 2813 bytes
+- src\assets\products\dogs\wet-food\hills-science-diet-adult-wet-dog-food.jpg -> src\assets\products\dogs\wet-food\hills-science-diet-adult-wet-dog-food.webp | original: 11896 bytes | new: 10346 bytes | saved: 1550 bytes
+- src\assets\products\dogs\wet-food\pedigree-chicken-wet-dog-food.jpg -> src\assets\products\dogs\wet-food\pedigree-chicken-wet-dog-food.webp | original: 12294 bytes | new: 10994 bytes | saved: 1300 bytes
+- src\assets\products\dogs\wet-food\purina-pro-plan-savory-wet-dog-food.jpg -> src\assets\products\dogs\wet-food\purina-pro-plan-savory-wet-dog-food.webp | original: 32304 bytes | new: 26902 bytes | saved: 5402 bytes
+- src\assets\products\dogs\wet-food\royal-canin-adult-wet-dog-food.jpg -> src\assets\products\dogs\wet-food\royal-canin-adult-wet-dog-food.webp | original: 8511 bytes | new: 8490 bytes | saved: 21 bytes
+- src\assets\products\fish\api-tropical-pellets-fish-food.jpg -> src\assets\products\fish\api-tropical-pellets-fish-food.webp | original: 8412 bytes | new: 6184 bytes | saved: 2228 bytes
+- src\assets\products\fish\fluval-bug-bites-tropical-formula-fish-food.jpg -> src\assets\products\fish\fluval-bug-bites-tropical-formula-fish-food.webp | original: 7038 bytes | new: 6774 bytes | saved: 264 bytes
+- src\assets\products\fish\hikari-tropical-micro-pellets-fish-food.jpg -> src\assets\products\fish\hikari-tropical-micro-pellets-fish-food.webp | original: 11333 bytes | new: 8656 bytes | saved: 2677 bytes
+- src\assets\products\fish\omega-one-super-color-flakes-fish-food.jpg -> src\assets\products\fish\omega-one-super-color-flakes-fish-food.webp | original: 11106 bytes | new: 7880 bytes | saved: 3226 bytes
+- src\assets\products\fish\sera-vipan-nature-tropical-fish-food.jpg -> src\assets\products\fish\sera-vipan-nature-tropical-fish-food.webp | original: 5909 bytes | new: 5566 bytes | saved: 343 bytes
+- src\assets\products\fish\tetra-tetramin-tropical-flakes-fish-food.jpg -> src\assets\products\fish\tetra-tetramin-tropical-flakes-fish-food.webp | original: 10642 bytes | new: 7588 bytes | saved: 3054 bytes
+- src\assets\products\hamster\higgins-sunburst-gourmet-hamster-food.jpg -> src\assets\products\hamster\higgins-sunburst-gourmet-hamster-food.webp | original: 10210 bytes | new: 11786 bytes | saved: -1576 bytes
+- src\assets\products\hamster\kaytee-forti-diet-pro-health-hamster-food.jpg -> src\assets\products\hamster\kaytee-forti-diet-pro-health-hamster-food.webp | original: 8210 bytes | new: 9458 bytes | saved: -1248 bytes
+- src\assets\products\hamster\mazuri-hamster-rat-diet.jpg -> src\assets\products\hamster\mazuri-hamster-rat-diet.webp | original: 9862 bytes | new: 11110 bytes | saved: -1248 bytes
+- src\assets\products\hamster\oxbow-essentials-hamster-food.jpg -> src\assets\products\hamster\oxbow-essentials-hamster-food.webp | original: 33014 bytes | new: 28580 bytes | saved: 4434 bytes
+- src\assets\products\hamster\vitakraft-vita-smart-hamster-food.jpg -> src\assets\products\hamster\vitakraft-vita-smart-hamster-food.webp | original: 15250 bytes | new: 17114 bytes | saved: -1864 bytes
+- src\assets\products\rabbit\burgess-excel-adult-rabbit-nuggets.jpg -> src\assets\products\rabbit\burgess-excel-adult-rabbit-nuggets.webp | original: 6518 bytes | new: 7580 bytes | saved: -1062 bytes
+- src\assets\products\rabbit\kaytee-fortidiet-pro-health-rabbit-food.jpg -> src\assets\products\rabbit\kaytee-fortidiet-pro-health-rabbit-food.webp | original: 8420 bytes | new: 9764 bytes | saved: -1344 bytes
+- src\assets\products\rabbit\mazuri-timothy-based-rabbit-diet.jpg -> src\assets\products\rabbit\mazuri-timothy-based-rabbit-diet.webp | original: 8704 bytes | new: 9780 bytes | saved: -1076 bytes
+- src\assets\products\rabbit\oxbow-essentials-adult-rabbit-food.jpg -> src\assets\products\rabbit\oxbow-essentials-adult-rabbit-food.webp | original: 7916 bytes | new: 9084 bytes | saved: -1168 bytes
+- src\assets\products\rabbit\supreme-science-selective-rabbit-food.jpg -> src\assets\products\rabbit\supreme-science-selective-rabbit-food.webp | original: 6916 bytes | new: 8000 bytes | saved: -1084 bytes
+- src\assets\products\rabbit\vitakraft-vita-smart-rabbit-food.jpg -> src\assets\products\rabbit\vitakraft-vita-smart-rabbit-food.webp | original: 8724 bytes | new: 9778 bytes | saved: -1054 bytes
+- src\assets\puppy-kitten-food.jpeg -> src\assets\puppy-kitten-food.webp | original: 356607 bytes | new: 101106 bytes | saved: 255501 bytes
+- src\assets\rabbit.png -> src\assets\rabbit.webp | original: 660504 bytes | new: 219194 bytes | saved: 441310 bytes
+- src\assets\small-pets.jpeg -> src\assets\small-pets.webp | original: 512186 bytes | new: 174870 bytes | saved: 337316 bytes
+- src\assets\spotlight\EZstore.png -> src\assets\spotlight\EZstore.webp | original: 2573135 bytes | new: 138950 bytes | saved: 2434185 bytes
+- src\assets\trust-banner.jpeg -> src\assets\trust-banner.webp | original: 437937 bytes | new: 168006 bytes | saved: 269931 bytes
+- src\assets\wet-dog-food.jpeg -> src\assets\wet-dog-food.webp | original: 387356 bytes | new: 113264 bytes | saved: 274092 bytes
+
+**Total original size:** 65302856 bytes
+**Total new size:** 10046428 bytes
+**Total saved:** 55256428 bytes

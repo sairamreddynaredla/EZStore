@@ -1,0 +1,49 @@
+import breedData from "./breeds"
+
+import dogBanner from "../assets/dog-banner.jpeg"
+import catBanner from "../assets/cat-banner.jpeg"
+import birdBanner from "../assets/bird.png"
+import fishBanner from "../assets/fish.png"
+import rabbitBanner from "../assets/rabbit.png"
+import hamsterBanner from "../assets/hamster.png"
+
+const petData = {
+  dog: {
+    banner: dogBanner,
+    title: "Everything Your Dog Needs",
+    subtitle: "Food, toys, healthcare and grooming",
+    breeds: breedData.filter((b) => b.category === "dog").sort((a,b)=> a.name.localeCompare(b.name)),
+  },
+  cat: {
+    banner: catBanner,
+    title: "Everything Your Cat Needs",
+    subtitle: "Premium cat essentials",
+    breeds: breedData.filter((b) => b.category === "cat").sort((a,b)=> a.name.localeCompare(b.name)),
+  },
+  bird: {
+    banner: birdBanner,
+    title: "Everything Your Bird Needs",
+    subtitle: "Healthy food and accessories",
+    breeds: breedData.filter((b) => b.category === "bird").sort((a,b)=> a.name.localeCompare(b.name)),
+  },
+  fish: {
+    banner: fishBanner,
+    title: "Everything Your Fish Needs",
+    subtitle: "Aquarium care and nutrition",
+    breeds: breedData.filter((b) => b.category === "fish").sort((a,b)=> a.name.localeCompare(b.name)),
+  },
+  rabbit: {
+    banner: rabbitBanner,
+    title: "Everything Your Rabbit Needs",
+    subtitle: "Hay, bedding and cozy homes",
+    breeds: breedData.filter((b) => b.category === "rabbit").sort((a,b)=> a.name.localeCompare(b.name)),
+  },
+  hamster: {
+    banner: hamsterBanner,
+    title: "Everything Your Hamster Needs",
+    subtitle: "Small pet supplies and habitats",
+    breeds: breedData.filter((b) => b.category === "hamster").sort((a,b)=> a.name.localeCompare(b.name)),
+  },
+}
+
+export default petData

@@ -1,0 +1,407 @@
+// ==========================================
+// src/data/dogs/fresh-food/dogsFreshFood.js
+// ==========================================
+
+import freshpetImg from "../../assets/products/dogs/Fresh-food/freshpet-select-roasted-chicken-recipe-dog-food.jpg";
+import nomNomImg from "../../assets/products/dogs/Fresh-food/nom-nom-beef-mash-fresh-dog-food.jpg";
+import farmersDogImg from "../../assets/products/dogs/Fresh-food/the-farmers-dog-turkey-recipe-fresh-dog-food.jpg";
+import ollieImg from "../../assets/products/dogs/Fresh-food/ollie-chicken-dish-fresh-dog-food.jpg";
+import spotTangoImg from "../../assets/products/dogs/Fresh-food/spot-tango-beef-millet-fresh-dog-food.jpg";
+
+export const dogsFreshFood = [
+  {
+    id: 801,
+    name: "Freshpet Select Roasted Chicken Recipe Fresh Dog Food",
+    brand: "Freshpet",
+    category: "dogs-fresh-food",
+    subCategory: "fresh-food",
+    pet: "Dog",
+    petType: "Dog",
+    productCategory: "Dog Food",
+    productType: "Fresh Food",
+    breedSize: "All",
+    shopByBreed: "All",
+    flavor: "Chicken",
+    lifeStage: "Adult",
+    specialDiet: "Fresh",
+    vegType: "Non-Veg",
+    size: "Medium",
+
+    rating: 4.8,
+    reviews: 165,
+    soldCount: 520,
+    stock: 25,
+
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
+
+    image: freshpetImg,
+
+    images: [
+      freshpetImg,
+      freshpetImg,
+      freshpetImg,
+      freshpetImg,
+    ],
+
+    description:
+      "Fresh refrigerated dog food made with roasted chicken and garden vegetables for complete nutrition.",
+
+    ingredients: [
+      "Chicken",
+      "Carrots",
+      "Peas",
+      "Spinach",
+      "Egg",
+      "Vitamins",
+      "Minerals",
+    ],
+
+    features: [
+      "Fresh refrigerated recipe",
+      "Real chicken as first ingredient",
+      "No artificial preservatives",
+      "Supports healthy digestion",
+    ],
+
+    nutrition: {
+      protein: "13%",
+      fat: "8%",
+      fiber: "1.5%",
+      moisture: "72%",
+    },
+
+    manufacturer: "Freshpet",
+    country: "USA",
+
+    weight: ["2lb", "4lb", "8lb"],
+
+    variants: [
+      { weight: "2lb", price: 14.99, originalPrice: 18.99 },
+      { weight: "4lb", price: 24.99, originalPrice: 29.99 },
+      { weight: "8lb", price: 44.99, originalPrice: 54.99 },
+    ],
+
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.10,
+
+    relatedProducts: [802, 803, 804],
+  },
+
+  {
+    id: 802,
+    name: "Nom Nom Beef Mash Fresh Dog Food",
+    brand: "Nom Nom",
+    category: "dogs-fresh-food",
+    subCategory: "fresh-food",
+    pet: "Dog",
+    petType: "Dog",
+    productCategory: "Dog Food",
+    productType: "Fresh Food",
+    breedSize: "All",
+    shopByBreed: "All",
+    flavor: "Beef",
+    lifeStage: "Adult",
+    specialDiet: "Human Grade",
+    vegType: "Non-Veg",
+    size: "Medium",
+
+    rating: 4.9,
+    reviews: 220,
+    soldCount: 610,
+    stock: 18,
+
+    fastDelivery: true,
+    isNew: true,
+    deliveryDate: "Tomorrow",
+
+    image: nomNomImg,
+
+    images: [
+      nomNomImg,
+      nomNomImg,
+      nomNomImg,
+      nomNomImg,
+    ],
+
+    description:
+      "Fresh beef recipe prepared with vegetables and formulated by veterinary nutritionists.",
+
+    ingredients: [
+      "Beef",
+      "Potatoes",
+      "Carrots",
+      "Peas",
+      "Eggs",
+      "Fish Oil",
+    ],
+
+    features: [
+      "Human-grade ingredients",
+      "Freshly prepared",
+      "High digestibility",
+      "Supports muscle health",
+    ],
+
+    nutrition: {
+      protein: "12%",
+      fat: "7%",
+      fiber: "1%",
+      moisture: "74%",
+    },
+
+    manufacturer: "Nom Nom",
+    country: "USA",
+
+    weight: ["2lb", "4lb", "8lb"],
+
+    variants: [
+      { weight: "2lb", price: 16.99, originalPrice: 21.99 },
+      { weight: "4lb", price: 29.99, originalPrice: 36.99 },
+      { weight: "8lb", price: 52.99, originalPrice: 64.99 },
+    ],
+
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.10,
+
+    relatedProducts: [801, 803, 805],
+  },
+
+  {
+    id: 803,
+    name: "The Farmer's Dog Turkey Recipe Fresh Dog Food",
+    brand: "The Farmer's Dog",
+    category: "dogs-fresh-food",
+    subCategory: "fresh-food",
+    pet: "Dog",
+    petType: "Dog",
+    productCategory: "Dog Food",
+    productType: "Fresh Food",
+    breedSize: "All",
+    shopByBreed: "All",
+    flavor: "Turkey",
+    lifeStage: "Adult",
+    specialDiet: "Fresh",
+    vegType: "Non-Veg",
+    size: "Medium",
+
+    rating: 4.9,
+    reviews: 184,
+    soldCount: 470,
+    stock: 20,
+
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
+
+    image: farmersDogImg,
+
+    images: [
+      farmersDogImg,
+      farmersDogImg,
+      farmersDogImg,
+      farmersDogImg,
+    ],
+
+    description:
+      "Fresh turkey meal with vegetables designed to provide balanced nutrition for adult dogs.",
+
+    ingredients: [
+      "Turkey",
+      "Chickpeas",
+      "Carrots",
+      "Broccoli",
+      "Fish Oil",
+      "Vitamins",
+    ],
+
+    features: [
+      "Fresh cooked recipe",
+      "Rich in lean protein",
+      "Supports healthy weight",
+      "No preservatives",
+    ],
+
+    nutrition: {
+      protein: "12%",
+      fat: "7%",
+      fiber: "1.2%",
+      moisture: "73%",
+    },
+
+    manufacturer: "The Farmer's Dog",
+    country: "USA",
+
+    weight: ["2lb", "4lb", "8lb"],
+
+    variants: [
+      { weight: "2lb", price: 15.99, originalPrice: 19.99 },
+      { weight: "4lb", price: 27.99, originalPrice: 34.99 },
+      { weight: "8lb", price: 49.99, originalPrice: 59.99 },
+    ],
+
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.10,
+
+    relatedProducts: [801, 802, 804],
+  },
+
+  {
+    id: 804,
+    name: "Ollie Chicken Dish Fresh Dog Food",
+    brand: "Ollie",
+    category: "dogs-fresh-food",
+    subCategory: "fresh-food",
+    pet: "Dog",
+    petType: "Dog",
+    productCategory: "Dog Food",
+    productType: "Fresh Food",
+    breedSize: "All",
+    shopByBreed: "All",
+    flavor: "Chicken",
+    lifeStage: "Adult",
+    specialDiet: "Natural",
+    vegType: "Non-Veg",
+    size: "Medium",
+
+    rating: 4.8,
+    reviews: 151,
+    soldCount: 390,
+    stock: 15,
+
+    fastDelivery: true,
+    isNew: true,
+    deliveryDate: "Tomorrow",
+
+    image: ollieImg,
+
+    images: [
+      ollieImg,
+      ollieImg,
+      ollieImg,
+      ollieImg,
+    ],
+
+    description:
+      "Fresh chicken recipe with vegetables and healthy fats for everyday nutrition.",
+
+    ingredients: [
+      "Chicken",
+      "Carrots",
+      "Peas",
+      "Rice",
+      "Fish Oil",
+      "Spinach",
+    ],
+
+    features: [
+      "Fresh ingredients",
+      "Balanced nutrition",
+      "Supports skin and coat health",
+      "Easy to digest",
+    ],
+
+    nutrition: {
+      protein: "11%",
+      fat: "8%",
+      fiber: "1%",
+      moisture: "74%",
+    },
+
+    manufacturer: "Ollie",
+    country: "USA",
+
+    weight: ["2lb", "4lb", "8lb"],
+
+    variants: [
+      { weight: "2lb", price: 14.99, originalPrice: 18.99 },
+      { weight: "4lb", price: 26.99, originalPrice: 32.99 },
+      { weight: "8lb", price: 47.99, originalPrice: 58.99 },
+    ],
+
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.10,
+
+    relatedProducts: [801, 803, 805],
+  },
+
+  {
+    id: 805,
+    name: "Spot & Tango Beef & Millet Fresh Dog Food",
+    brand: "Spot & Tango",
+    category: "dogs-fresh-food",
+    subCategory: "fresh-food",
+    pet: "Dog",
+    petType: "Dog",
+    productCategory: "Dog Food",
+    productType: "Fresh Food",
+    breedSize: "All",
+    shopByBreed: "All",
+    flavor: "Beef",
+    lifeStage: "Adult",
+    specialDiet: "Fresh",
+    vegType: "Non-Veg",
+    size: "Medium",
+
+    rating: 4.8,
+    reviews: 139,
+    soldCount: 352,
+    stock: 21,
+
+    fastDelivery: true,
+    isNew: false,
+    deliveryDate: "Tomorrow",
+
+    image: spotTangoImg,
+
+    images: [
+      spotTangoImg,
+      spotTangoImg,
+      spotTangoImg,
+      spotTangoImg,
+    ],
+
+    description:
+      "Fresh beef and millet recipe packed with protein and wholesome vegetables.",
+
+    ingredients: [
+      "Beef",
+      "Millet",
+      "Carrots",
+      "Spinach",
+      "Pumpkin",
+      "Fish Oil",
+    ],
+
+    features: [
+      "Fresh prepared meals",
+      "High quality protein",
+      "Supports digestion",
+      "Natural ingredients",
+    ],
+
+    nutrition: {
+      protein: "12%",
+      fat: "8%",
+      fiber: "1.5%",
+      moisture: "73%",
+    },
+
+    manufacturer: "Spot & Tango",
+    country: "USA",
+
+    weight: ["2lb", "4lb", "8lb"],
+
+    variants: [
+      { weight: "2lb", price: 15.99, originalPrice: 19.99 },
+      { weight: "4lb", price: 28.99, originalPrice: 34.99 },
+      { weight: "8lb", price: 50.99, originalPrice: 61.99 },
+    ],
+
+    subscriptionEligible: true,
+    subscriptionDiscount: 0.10,
+
+    relatedProducts: [802, 803, 804],
+  },
+];

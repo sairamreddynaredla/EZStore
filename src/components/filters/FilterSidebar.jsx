@@ -19,9 +19,7 @@ const FilterSidebar = () => {
   // You can extend this to fetch filter config based on petType/category
   // and handle filter changes, API calls, etc.
 
-  return (
-    <SidebarFilters filters={filters} onChange={setFilters} />
-  );
+  return <SidebarFilters filters={filters} onChange={setFilters} />;
 };
 
 export default FilterSidebar;

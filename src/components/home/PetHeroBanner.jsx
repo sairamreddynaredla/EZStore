@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 const PetHeroBanner = ({ image, title, subtitle, pet }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <section className="px-6 md:px-10 mt-12">
@@ -11,7 +11,7 @@ const PetHeroBanner = ({ image, title, subtitle, pet }) => {
           <p className="mt-4 text-gray-600">{subtitle}</p>
           <div className="mt-6">
             <button
-              onClick={() => navigate('/shop')}
+              onClick={() => navigate("/shop")}
               className="bg-orange-500 text-white px-6 py-3 rounded-full shadow hover:opacity-95"
             >
               Shop for {pet}
@@ -24,7 +24,7 @@ const PetHeroBanner = ({ image, title, subtitle, pet }) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default PetHeroBanner
+export default PetHeroBanner;

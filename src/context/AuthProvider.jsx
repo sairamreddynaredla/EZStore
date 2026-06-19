@@ -1,22 +1,22 @@
-import { useState } from 'react'
-import { AuthContext } from './AuthContext'
+import { useState } from "react";
+import { AuthContext } from "./AuthContext";
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
 
   // Login User
   const login = (userData) => {
-    setUser(userData)
+    setUser(userData);
 
-    localStorage.setItem('user', JSON.stringify(userData))
-  }
+    localStorage.setItem("user", JSON.stringify(userData));
+  };
 
   // Logout User
   const logout = () => {
-    setUser(null)
+    setUser(null);
 
-    localStorage.removeItem('user')
-  }
+    localStorage.removeItem("user");
+  };
 
   return (
     <AuthContext.Provider
@@ -28,7 +28,7 @@ const AuthProvider = ({ children }) => {
     >
       {children}
     </AuthContext.Provider>
-  )
-}
+  );
+};
 
-export default AuthProvider
+export default AuthProvider;

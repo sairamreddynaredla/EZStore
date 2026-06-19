@@ -1,0 +1,369 @@
+// temptationsChickenImg removed; Temptations brand being hidden
+import shebaChickenImg from "../../assets/products/cats/meaty-treats/sheba-chicken-meaty-cat-treats.jpg";
+import meoTunaImg from "../../assets/products/cats/meaty-treats/meo-tuna-meaty-cat-treats.jpg";
+import friskiesChickenImg from "../../assets/products/cats/meaty-treats/friskies-chicken-meaty-bites-cat-treats.jpg";
+import purepetOceanFishImg from "../../assets/products/cats/meaty-treats/purepet-ocean-fish-meaty-cat-treats.jpg";
+
+export const catMeatyTreats = [
+
+{
+  id: 1701,
+  name: "Temptations Chicken Flavor Cat Treats",
+  brand: "Temptations",
+  category: "cats-meaty-treats",
+  subCategory: "meaty-treats",
+  pet: "Cat",
+  petType: "Cat",
+  productCategory: "Cat Treats",
+  productType: "Meaty Treats",
+  flavor: "Chicken",
+  lifeStage: "Adult",
+  specialDiet: "Daily Treat",
+  vegType: "Non-Veg",
+
+  rating: 4.9,
+  reviews: 324,
+  soldCount: 1184,
+  stock: 48,
+
+  fastDelivery: true,
+  isNew: false,
+  deliveryDate: "Tomorrow",
+
+  // images removed for Temptations (brand hidden)
+
+  description:
+    "Delicious chicken flavored meaty treats with irresistible taste.",
+
+  ingredients: [
+    "Chicken",
+    "Animal Protein",
+    "Vitamins",
+    "Minerals",
+  ],
+
+  features: [
+    "Rich chicken flavor",
+    "Soft texture",
+    "Perfect reward",
+    "High palatability",
+  ],
+
+  nutrition: {
+    protein: "30%",
+    fat: "18%",
+    fiber: "2%",
+    moisture: "12%",
+  },
+
+  manufacturer: "Mars Petcare",
+  country: "USA",
+
+  weight: ["0.1lb", "0.4lb"],
+
+  variants: [
+    { weight: "0.1lb", price: 3.99, originalPrice: 5.49 },
+    { weight: "0.4lb", price: 8.99, originalPrice: 11.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.1,
+
+  relatedProducts: [1702, 1703, 1704],
+},
+
+{
+  id: 1702,
+  name: "Sheba Chicken Meaty Cat Treats",
+  brand: "Sheba",
+  category: "cats-meaty-treats",
+  subCategory: "meaty-treats",
+  pet: "Cat",
+  petType: "Cat",
+  productCategory: "Cat Treats",
+  productType: "Meaty Treats",
+  flavor: "Chicken",
+  lifeStage: "Adult",
+  specialDiet: "Premium Treat",
+  vegType: "Non-Veg",
+
+  rating: 4.8,
+  reviews: 286,
+  soldCount: 942,
+  stock: 36,
+
+  fastDelivery: true,
+  isNew: true,
+  deliveryDate: "Tomorrow",
+
+  image: shebaChickenImg,
+
+  images: [
+    shebaChickenImg,
+    shebaChickenImg,
+    shebaChickenImg,
+    shebaChickenImg,
+  ],
+
+  description:
+    "Premium meaty chicken treats crafted for adult cats.",
+
+  ingredients: [
+    "Chicken",
+    "Chicken Liver",
+    "Vitamins",
+    "Minerals",
+  ],
+
+  features: [
+    "Premium recipe",
+    "Soft meaty texture",
+    "Rich protein",
+    "Highly digestible",
+  ],
+
+  nutrition: {
+    protein: "32%",
+    fat: "17%",
+    fiber: "2%",
+    moisture: "14%",
+  },
+
+  manufacturer: "Mars Petcare",
+  country: "Thailand",
+
+  weight: ["0.1lb", "0.3lb"],
+
+  variants: [
+    { weight: "0.1lb", price: 4.99, originalPrice: 6.49 },
+    { weight: "0.3lb", price: 10.99, originalPrice: 13.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.1,
+
+  relatedProducts: [1701, 1703, 1705],
+},
+
+{
+  id: 1703,
+  name: "Me-O Tuna Meaty Cat Treats",
+  brand: "Me-O",
+  category: "cats-meaty-treats",
+  subCategory: "meaty-treats",
+  pet: "Cat",
+  petType: "Cat",
+  productCategory: "Cat Treats",
+  productType: "Meaty Treats",
+  flavor: "Tuna",
+  lifeStage: "Adult",
+  specialDiet: "Protein Rich",
+  vegType: "Non-Veg",
+
+  rating: 4.8,
+  reviews: 258,
+  soldCount: 824,
+  stock: 44,
+
+  fastDelivery: true,
+  isNew: false,
+  deliveryDate: "Tomorrow",
+
+  image: meoTunaImg,
+
+  images: [
+    meoTunaImg,
+    meoTunaImg,
+    meoTunaImg,
+    meoTunaImg,
+  ],
+
+  description:
+    "Tuna flavored meaty cat treats enriched with taurine.",
+
+  ingredients: [
+    "Tuna",
+    "Fish Protein",
+    "Taurine",
+    "Vitamins",
+  ],
+
+  features: [
+    "Contains taurine",
+    "Rich tuna flavor",
+    "Soft chew texture",
+    "Healthy reward",
+  ],
+
+  nutrition: {
+    protein: "34%",
+    fat: "16%",
+    fiber: "2%",
+    moisture: "12%",
+  },
+
+  manufacturer: "Perfect Companion",
+  country: "Thailand",
+
+  weight: ["0.1lb", "0.3lb"],
+
+  variants: [
+    { weight: "0.1lb", price: 3.49, originalPrice: 4.99 },
+    { weight: "0.3lb", price: 8.49, originalPrice: 10.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.1,
+
+  relatedProducts: [1701, 1702, 1704],
+},
+
+{
+  id: 1704,
+  name: "Friskies Chicken Meaty Bites Cat Treats",
+  brand: "Friskies",
+  category: "cats-meaty-treats",
+  subCategory: "meaty-treats",
+  pet: "Cat",
+  petType: "Cat",
+  productCategory: "Cat Treats",
+  productType: "Meaty Treats",
+  flavor: "Chicken",
+  lifeStage: "Adult",
+  specialDiet: "Daily Treat",
+  vegType: "Non-Veg",
+
+  rating: 4.7,
+  reviews: 224,
+  soldCount: 742,
+  stock: 38,
+
+  fastDelivery: true,
+  isNew: false,
+  deliveryDate: "Tomorrow",
+
+  image: friskiesChickenImg,
+
+  images: [
+    friskiesChickenImg,
+    friskiesChickenImg,
+    friskiesChickenImg,
+    friskiesChickenImg,
+  ],
+
+  description:
+    "Soft meaty chicken bites made for everyday rewarding.",
+
+  ingredients: [
+    "Chicken",
+    "Animal Fat",
+    "Vitamins",
+    "Minerals",
+  ],
+
+  features: [
+    "Soft bites",
+    "Chicken flavor",
+    "Daily reward",
+    "Easy to chew",
+  ],
+
+  nutrition: {
+    protein: "31%",
+    fat: "17%",
+    fiber: "3%",
+    moisture: "13%",
+  },
+
+  manufacturer: "Purina",
+  country: "USA",
+
+  weight: ["0.1lb", "0.3lb"],
+
+  variants: [
+    { weight: "0.1lb", price: 3.99, originalPrice: 5.49 },
+    { weight: "0.3lb", price: 8.99, originalPrice: 11.49 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.1,
+
+  relatedProducts: [1701, 1703, 1705],
+},
+
+{
+  id: 1705,
+  name: "Purepet Ocean Fish Meaty Cat Treats",
+  brand: "Purepet",
+  category: "cats-meaty-treats",
+  subCategory: "meaty-treats",
+  pet: "Cat",
+  petType: "Cat",
+  productCategory: "Cat Treats",
+  productType: "Meaty Treats",
+  flavor: "Ocean Fish",
+  lifeStage: "Adult",
+  specialDiet: "Daily Treat",
+  vegType: "Non-Veg",
+
+  rating: 4.6,
+  reviews: 192,
+  soldCount: 648,
+  stock: 52,
+
+  fastDelivery: true,
+  isNew: false,
+  deliveryDate: "Tomorrow",
+
+  image: purepetOceanFishImg,
+
+  images: [
+    purepetOceanFishImg,
+    purepetOceanFishImg,
+    purepetOceanFishImg,
+    purepetOceanFishImg,
+  ],
+
+  description:
+    "Ocean fish flavored meaty treats packed with protein and taste.",
+
+  ingredients: [
+    "Fish Protein",
+    "Chicken Meal",
+    "Vitamins",
+    "Minerals",
+  ],
+
+  features: [
+    "Ocean fish flavor",
+    "Protein rich",
+    "Soft texture",
+    "Ideal reward snack",
+  ],
+
+  nutrition: {
+    protein: "33%",
+    fat: "16%",
+    fiber: "2%",
+    moisture: "14%",
+  },
+
+  manufacturer: "Purepet",
+  country: "India",
+
+  weight: ["0.1lb", "0.2lb"],
+
+  variants: [
+    { weight: "0.1lb", price: 2.99, originalPrice: 4.49 },
+    { weight: "0.2lb", price: 7.49, originalPrice: 9.99 },
+  ],
+
+  subscriptionEligible: true,
+  subscriptionDiscount: 0.1,
+
+  relatedProducts: [1702, 1703, 1704],
+},
+
+];
+
+export default catMeatyTreats;

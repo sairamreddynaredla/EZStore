@@ -2,12 +2,12 @@
 // src/data/birds/food/birdsFood.js
 // ==========================================
 
-import verseleLagaImg from "../../assets/products/birds/versele-laga-prestige-budgies-bird-food.jpg";
-import kayteeImg from "../../assets/products/birds/kaytee-forti-diet-pro-health-parakeet-food.jpg";
-import zupreemImg from "../../assets/products/birds/zu-preem-fruitblend-small-bird-food.jpg";
-import vitapolImg from "../../assets/products/birds/vitapol-economy-parrot-food.jpg";
-import wildHarvestImg from "../../assets/products/birds/wild-harvest-daily-blend-parakeet-food.jpg";
-import higginsImg from "../../assets/products/birds/higgins-sunburst-gourmet-parrot-food.jpg";
+import verseleLagaImg from "../../assets/products/birds/versele-laga-prestige-budgies-bird-food.webp";
+import kayteeImg from "../../assets/products/birds/kaytee-forti-diet-pro-health-parakeet-food.webp";
+import zupreemImg from "../../assets/products/birds/zu-preem-fruitblend-small-bird-food.webp";
+import vitapolImg from "../../assets/products/birds/vitapol-economy-parrot-food.webp";
+import wildHarvestImg from "../../assets/products/birds/wild-harvest-daily-blend-parakeet-food.webp";
+import higginsImg from "../../assets/products/birds/higgins-sunburst-gourmet-parrot-food.webp";
 
 export const birdsFood = [
   {
@@ -36,23 +36,12 @@ export const birdsFood = [
 
     image: verseleLagaImg,
 
-    images: [
-      verseleLagaImg,
-      verseleLagaImg,
-      verseleLagaImg,
-      verseleLagaImg,
-    ],
+    images: [verseleLagaImg, verseleLagaImg, verseleLagaImg, verseleLagaImg],
 
     description:
       "Premium seed blend specially formulated for budgies with essential nutrients and vitamins.",
 
-    ingredients: [
-      "Canary Seed",
-      "Millet",
-      "Oats",
-      "Flaxseed",
-      "Vitamins",
-    ],
+    ingredients: ["Canary Seed", "Millet", "Oats", "Flaxseed", "Vitamins"],
 
     features: [
       "Balanced nutrition",
@@ -71,16 +60,16 @@ export const birdsFood = [
     manufacturer: "Versele-Laga",
     country: "Belgium",
 
-    weight: ["1kg", "4kg"],
+    weight: ["2lb", "8lb"],
 
     variants: [
       {
-        weight: "1kg",
+        weight: "2lb",
         price: 8.99,
         originalPrice: 10.99,
       },
       {
-        weight: "4kg",
+        weight: "8lb",
         price: 29.99,
         originalPrice: 35.99,
       },
@@ -120,23 +109,11 @@ export const birdsFood = [
 
     images: [kayteeImg, kayteeImg, kayteeImg, kayteeImg],
 
-    description:
-      "Fortified daily nutrition food for parakeets with probiotics and natural grains.",
+    description: "Fortified daily nutrition food for parakeets with probiotics and natural grains.",
 
-    ingredients: [
-      "Millet",
-      "Canary Seed",
-      "Corn",
-      "Oat Groats",
-      "Probiotics",
-    ],
+    ingredients: ["Millet", "Canary Seed", "Corn", "Oat Groats", "Probiotics"],
 
-    features: [
-      "Supports digestion",
-      "Fortified formula",
-      "Natural ingredients",
-      "Daily feeding",
-    ],
+    features: ["Supports digestion", "Fortified formula", "Natural ingredients", "Daily feeding"],
 
     nutrition: {
       protein: "14%",
@@ -148,16 +125,16 @@ export const birdsFood = [
     manufacturer: "Kaytee",
     country: "USA",
 
-    weight: ["907g", "2.27kg"],
+    weight: ["1.8lb", "4.5lb"],
 
     variants: [
       {
-        weight: "907g",
+        weight: "1.8lb",
         price: 7.99,
         originalPrice: 9.99,
       },
       {
-        weight: "2.27kg",
+        weight: "4.5lb",
         price: 18.99,
         originalPrice: 23.99,
       },
@@ -197,23 +174,11 @@ export const birdsFood = [
 
     images: [zupreemImg, zupreemImg, zupreemImg, zupreemImg],
 
-    description:
-      "Colorful fruit-flavored pellets providing complete nutrition for small birds.",
+    description: "Colorful fruit-flavored pellets providing complete nutrition for small birds.",
 
-    ingredients: [
-      "Ground Corn",
-      "Soybean Meal",
-      "Fruit Flavor",
-      "Vitamins",
-      "Minerals",
-    ],
+    ingredients: ["Ground Corn", "Soybean Meal", "Fruit Flavor", "Vitamins", "Minerals"],
 
-    features: [
-      "Complete nutrition",
-      "Fruit flavored",
-      "No seed picking",
-      "Supports immunity",
-    ],
+    features: ["Complete nutrition", "Fruit flavored", "No seed picking", "Supports immunity"],
 
     nutrition: {
       protein: "14%",
@@ -274,23 +239,11 @@ export const birdsFood = [
 
     images: [vitapolImg, vitapolImg, vitapolImg, vitapolImg],
 
-    description:
-      "Nutritious parrot food blend containing grains, seeds and dried fruits.",
+    description: "Nutritious parrot food blend containing grains, seeds and dried fruits.",
 
-    ingredients: [
-      "Sunflower Seeds",
-      "Millet",
-      "Corn",
-      "Dried Fruits",
-      "Grains",
-    ],
+    ingredients: ["Sunflower Seeds", "Millet", "Corn", "Dried Fruits", "Grains"],
 
-    features: [
-      "Rich seed blend",
-      "For parrots",
-      "Healthy feathers",
-      "Energy support",
-    ],
+    features: ["Rich seed blend", "For parrots", "Healthy feathers", "Energy support"],
 
     nutrition: {
       protein: "12%",
@@ -302,16 +255,16 @@ export const birdsFood = [
     manufacturer: "Vitapol",
     country: "Poland",
 
-    weight: ["500g", "1kg"],
+    weight: ["1lb", "2lb"],
 
     variants: [
       {
-        weight: "500g",
+        weight: "1lb",
         price: 5.99,
         originalPrice: 7.99,
       },
       {
-        weight: "1kg",
+        weight: "2lb",
         price: 10.99,
         originalPrice: 13.99,
       },
@@ -351,23 +304,11 @@ export const birdsFood = [
 
     images: [wildHarvestImg, wildHarvestImg, wildHarvestImg, wildHarvestImg],
 
-    description:
-      "Wholesome daily blend of seeds and grains designed for parakeets.",
+    description: "Wholesome daily blend of seeds and grains designed for parakeets.",
 
-    ingredients: [
-      "Millet",
-      "Canary Seed",
-      "Corn",
-      "Oats",
-      "Wheat",
-    ],
+    ingredients: ["Millet", "Canary Seed", "Corn", "Oats", "Wheat"],
 
-    features: [
-      "Natural ingredients",
-      "Daily nutrition",
-      "Supports activity",
-      "Healthy digestion",
-    ],
+    features: ["Natural ingredients", "Daily nutrition", "Supports activity", "Healthy digestion"],
 
     nutrition: {
       protein: "13%",
@@ -379,16 +320,16 @@ export const birdsFood = [
     manufacturer: "Wild Harvest",
     country: "USA",
 
-    weight: ["908g", "1.8kg"],
+    weight: ["1.8lb", "3.6lb"],
 
     variants: [
       {
-        weight: "908g",
+        weight: "1.8lb",
         price: 6.99,
         originalPrice: 8.99,
       },
       {
-        weight: "1.8kg",
+        weight: "3.6lb",
         price: 12.99,
         originalPrice: 16.99,
       },
@@ -428,23 +369,11 @@ export const birdsFood = [
 
     images: [higginsImg, higginsImg, higginsImg, higginsImg],
 
-    description:
-      "Premium gourmet blend with fruits, vegetables, nuts and seeds for parrots.",
+    description: "Premium gourmet blend with fruits, vegetables, nuts and seeds for parrots.",
 
-    ingredients: [
-      "Sunflower Seeds",
-      "Papaya",
-      "Pineapple",
-      "Peanuts",
-      "Vegetables",
-    ],
+    ingredients: ["Sunflower Seeds", "Papaya", "Pineapple", "Peanuts", "Vegetables"],
 
-    features: [
-      "Gourmet recipe",
-      "Fruit enriched",
-      "Premium nutrition",
-      "Supports vitality",
-    ],
+    features: ["Gourmet recipe", "Fruit enriched", "Premium nutrition", "Supports vitality"],
 
     nutrition: {
       protein: "14%",

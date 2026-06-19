@@ -1,19 +1,19 @@
-import { Link, useNavigate } from "react-router-dom"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { useRef } from "react"
-import dogExclusiveImage from "../../assets/Exclusive Category/dog exclusive.png"
-import catExclusiveImage from "../../assets/Exclusive Category/cat-exclusive.png"
-import birdExclusiveImage from "../../assets/Exclusive Category/bird-exclusive.png"
-import fishExclusiveImage from "../../assets/Exclusive Category/fish-exclusive.png"
-import hamsterExclusiveImage from "../../assets/Exclusive Category/hamster-exclusive.png"
-import rabbitImage from "../../assets/categories/rabbit.png"
+import { Link, useNavigate } from "react-router-dom";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef } from "react";
+import dogExclusiveImage from "../../assets/Exclusive Category/dog exclusive.webp";
+import catExclusiveImage from "../../assets/Exclusive Category/cat-exclusive.webp";
+import birdExclusiveImage from "../../assets/Exclusive Category/bird-exclusive.webp";
+import fishExclusiveImage from "../../assets/Exclusive Category/fish-exclusive.webp";
+import hamsterExclusiveImage from "../../assets/Exclusive Category/hamster-exclusive.webp";
+import rabbitImage from "../../assets/categories/rabbit.webp";
 
-const dog = dogExclusiveImage
-const cat = catExclusiveImage
-const bird = birdExclusiveImage
-const fish = fishExclusiveImage
-const rabbit = rabbitImage
-const hamster = hamsterExclusiveImage
+const dog = dogExclusiveImage;
+const cat = catExclusiveImage;
+const bird = birdExclusiveImage;
+const fish = fishExclusiveImage;
+const rabbit = rabbitImage;
+const hamster = hamsterExclusiveImage;
 
 const categories = [
   {
@@ -57,43 +57,46 @@ const categories = [
     color: "bg-red-100",
     slug: "hamster",
   },
-]
+];
 
 function Categories({ selectedPet, setSelectedPet }) {
-  const scrollRef = useRef(null)
+  const scrollRef = useRef(null);
 
   const handleScroll = (direction) => {
-    if (!scrollRef.current) return
+    if (!scrollRef.current) return;
 
-    const scrollDelta = direction === "left" ? -280 : 280
+    const scrollDelta = direction === "left" ? -280 : 280;
     scrollRef.current.scrollBy({
       left: scrollDelta,
       behavior: "smooth",
-    })
-  }
+    });
+  };
 
   return (
-    <section className="px-6 md:px-10 py-20 bg-[#f9f9f9]">
-
+    <section className="px-4 md:px-10 py-12 bg-[#f9f9f9]">
       {/* HEADING */}
       <div className="flex flex-col items-center justify-center gap-6">
-        <h2 className="text-4xl md:text-5xl font-bold text-center">
-          Browse by Exclusive Category
-        </h2>
+        <h2 className="text-4xl md:text-5xl font-bold text-center">Browse by Exclusive Category</h2>
         <p className="text-gray-500 max-w-2xl text-center">
           Scroll through all pet categories with navigation arrows for faster browsing.
         </p>
       </div>
 
       {/* HORIZONTAL CATEGORY SCROLLER */}
-      <div className="mt-16 relative">
+      <div className="mt-12 relative">
         <div
           ref={scrollRef}
-          className="flex items-center gap-8 overflow-x-auto scroll-smooth py-4 px-2 md:px-6 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none"
+          className="flex items-center gap-4 sm:gap-6 overflow-x-auto scroll-smooth py-4 px-2 md:px-6 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {categories.map((item, index) => (
-            <CategoryCard key={index} item={item} index={index} selectedPet={selectedPet} setSelectedPet={setSelectedPet} />
+            <CategoryCard
+              key={index}
+              item={item}
+              index={index}
+              selectedPet={selectedPet}
+              setSelectedPet={setSelectedPet}
+            />
           ))}
         </div>
 
@@ -118,29 +121,29 @@ function Categories({ selectedPet, setSelectedPet }) {
         </div>
       </div>
     </section>
-  )
+  );
 }
 
 function CategoryCard({ item, selectedPet, setSelectedPet }) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    const pets = ["dog", "cat", "bird", "fish", "rabbit", "hamster"]
+    const pets = ["dog", "cat", "bird", "fish", "rabbit", "hamster"];
     if (setSelectedPet && pets.includes(item.slug)) {
-      setSelectedPet(item.slug)
-      return
+      setSelectedPet(item.slug);
+      return;
     }
 
     // fallback for other categories
-    navigate(`/category/${item.slug}`)
-  }
+    navigate(`/category/${item.slug}`);
+  };
 
   return (
     <button
       onClick={handleClick}
-      className={`${item.color} w-65 rounded-[35px] p-8 flex flex-col items-center justify-center text-center hover:scale-105 duration-300 cursor-pointer shadow-sm hover:shadow-xl snap-center shrink-0 ${selectedPet === item.slug ? 'ring-4 ring-orange-200' : ''}`}
+      className={`${item.color} rounded-[26px] p-4 sm:p-6 flex flex-col items-center justify-center text-center hover:scale-105 duration-300 cursor-pointer shadow-sm hover:shadow-xl snap-center shrink-0 w-[140px] sm:w-[180px] md:w-[240px] ${selectedPet === item.slug ? "ring-4 ring-orange-200" : ""}`}
     >
-      <div className="w-36 h-32 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-white shadow-lg flex items-center justify-center">
+      <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-white shadow-lg flex items-center justify-center">
         <img
           src={item.image}
           alt={item.title}
@@ -148,11 +151,11 @@ function CategoryCard({ item, selectedPet, setSelectedPet }) {
         />
       </div>
 
-      <h3 className="mt-6 font-bold text-xl md:text-2xl text-gray-900">
+      <h3 className="mt-3 sm:mt-4 font-bold text-lg sm:text-xl md:text-2xl text-gray-900">
         {item.title}
       </h3>
     </button>
-  )
+  );
 }
 
-export default Categories
+export default Categories;

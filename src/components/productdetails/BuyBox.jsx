@@ -1,34 +1,46 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import AddToCartButton from '../products/AddToCartButton'
-import BuyNowButton from '../BuyNowButton'
+import React from "react";
+import { Link } from "react-router-dom";
+import AddToCartButton from "../products/AddToCartButton";
+import BuyNowButton from "../BuyNowButton";
 
-const BuyBox = ({ product, selectedVariant, setSelectedVariant, quantity, setQuantity, addToCart, handleBuyNow }) => {
-  const discountPercentage =
-    selectedVariant?.originalPrice
-      ? Math.round(
-          ((selectedVariant.originalPrice - selectedVariant.price) / selectedVariant.originalPrice) * 100
-        )
-      : 0
+const BuyBox = ({
+  product,
+  selectedVariant,
+  setSelectedVariant,
+  quantity,
+  setQuantity,
+  addToCart,
+  handleBuyNow,
+}) => {
+  const discountPercentage = selectedVariant?.originalPrice
+    ? Math.round(
+        ((selectedVariant.originalPrice - selectedVariant.price) / selectedVariant.originalPrice) *
+          100
+      )
+    : 0;
 
   // Prefer explicit product.shipFrom, then company, then brand; avoid hardcoding 'Amazon'
-  const shipFrom = product.shipFrom || product.company || product.brand || "ETrade Online"
+  const shipFrom = product.shipFrom || product.company || product.brand || "ETrade Online";
   // Prefer explicit soldBy or seller, fallback to brand when available
-  const soldBy = product.soldBy || product.seller || product.brand || "ETrade Online"
-  const deliveryDate = product.deliveryDate || 'Tuesday, 2 June'
-  const fastestDelivery = product.fastestDelivery || 'Tomorrow, 1 June'
+  const soldBy = product.soldBy || product.seller || product.brand || "ETrade Online";
+  const deliveryDate = product.deliveryDate || "Tuesday, 2 June";
+  const fastestDelivery = product.fastestDelivery || "Tomorrow, 1 June";
 
   return (
     <aside className="w-full lg:w-80 card-premium lg:p-4 p-3 lg:sticky lg:top-28 self-start">
       <div className="space-y-3 sm:space-y-4 rounded-2xl sm:rounded-[20px] border border-slate-200 bg-white p-4 sm:p-5 shadow-sm">
         <div className="flex items-center justify-between gap-2 pb-3 border-b border-slate-200">
-          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-700">Standard purchase</div>
+          <div className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-700">
+            Standard purchase
+          </div>
           <span className="h-3 w-3 rounded-full border-2 border-slate-700 bg-white" />
         </div>
 
         <div className="mt-3">
-          <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900">${(selectedVariant?.price || product.price).toFixed(2)}</div>
-          <div className="mt-1 text-xs text-slate-500">($14.99 /100 g)</div>
+          <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900">
+            ${(selectedVariant?.price || product.price).toFixed(2)}
+          </div>
+          <div className="mt-1 text-xs text-slate-500">($14.99 /0.2lb)</div>
         </div>
 
         <div className="mt-5 sm:mt-6 space-y-3 text-xs sm:text-sm text-slate-700">
@@ -111,7 +123,7 @@ const BuyBox = ({ product, selectedVariant, setSelectedVariant, quantity, setQua
         </div>
       </div>
     </aside>
-  )
-}
+  );
+};
 
-export default BuyBox
+export default BuyBox;

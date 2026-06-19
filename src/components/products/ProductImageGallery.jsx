@@ -1,33 +1,27 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const ProductImageGallery = ({
-  images = [],
-  productName = "Product",
-}) => {
+const ProductImageGallery = ({ images = [], productName = "Product" }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const displayImages = images && images.length > 0 ? images : [""];
   const currentImage = displayImages[currentImageIndex];
-  const hoverImage = displayImages.length > 1 ? displayImages[(currentImageIndex + 1) % displayImages.length] : null;
+  const hoverImage =
+    displayImages.length > 1 ? displayImages[(currentImageIndex + 1) % displayImages.length] : null;
   const hasMultipleImages = displayImages.length > 1;
 
   const handlePrevImage = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setCurrentImageIndex((prev) =>
-      prev === 0 ? displayImages.length - 1 : prev - 1
-    );
+    setCurrentImageIndex((prev) => (prev === 0 ? displayImages.length - 1 : prev - 1));
   };
 
   const handleNextImage = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setCurrentImageIndex((prev) =>
-      prev === displayImages.length - 1 ? 0 : prev + 1
-    );
+    setCurrentImageIndex((prev) => (prev === displayImages.length - 1 ? 0 : prev + 1));
   };
 
   return (
@@ -36,9 +30,7 @@ const ProductImageGallery = ({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {!imageLoaded && (
-        <div className="absolute inset-0 bg-slate-200 animate-pulse" />
-      )}
+      {!imageLoaded && <div className="absolute inset-0 bg-slate-200 animate-pulse" />}
 
       <div className="relative h-full w-full">
         <img
@@ -104,7 +96,12 @@ const ProductImageGallery = ({
               }`}
               aria-label={`View image ${idx + 1}`}
             >
-              <img src={img} alt={`Thumbnail ${idx + 1}`} className="h-full w-full object-cover" loading="lazy" />
+              <img
+                src={img}
+                alt={`Thumbnail ${idx + 1}`}
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
             </button>
           ))}
           {displayImages.length > 3 && (

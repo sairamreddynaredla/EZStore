@@ -3,22 +3,22 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 // Brand images
-import royalCanin from "../assets/brands/royal-canin.jpeg";
-import pedigree from "../assets/brands/pedigree.jpeg";
-import drools from "../assets/brands/drools.jpeg";
-import farmina from "../assets/brands/farmina.jpeg";
-import whiskas from "../assets/brands/whiskas.jpeg";
-import meo from "../assets/brands/meo.jpeg";
-import sheba from "../assets/brands/sheba.jpeg";
-import purina from "../assets/brands/purina.jpeg";
-import orijen from "../assets/brands/orijen.jpeg";
-import tasteWild from "../assets/brands/taste-of-the-wild.jpeg";
-import jerhigh from "../assets/brands/jerhigh.jpeg";
+import royalCanin from "../assets/brands/royal-canin.webp";
+import pedigree from "../assets/brands/pedigree.webp";
+import drools from "../assets/brands/drools.webp";
+import farmina from "../assets/brands/farmina.webp";
+import whiskas from "../assets/brands/whiskas.webp";
+import meo from "../assets/brands/meo.webp";
+import sheba from "../assets/brands/sheba.webp";
+import purina from "../assets/brands/purina.webp";
+import orijen from "../assets/brands/orijen.webp";
+import tasteWild from "../assets/brands/taste-of-the-wild.webp";
+import jerhigh from "../assets/brands/jerhigh.webp";
 
-import goodies from "../assets/brands/goodies.jpeg";
-import kennelKitchen from "../assets/brands/kennel-kitchen.jpeg";
+import goodies from "../assets/brands/goodies.webp";
+import kennelKitchen from "../assets/brands/kennel-kitchen.webp";
 
-import banners from '../assets/brand-banners'
+import banners from "../assets/brand-banners";
 
 const BrandsDropdown = ({ onBrandSelect, anchorRef }) => {
   const navigate = useNavigate();
@@ -46,15 +46,17 @@ const BrandsDropdown = ({ onBrandSelect, anchorRef }) => {
 
   // Get image
   const getBrandImage = (logo) => {
-    if (!logo) return ""
-    return brandImages[logo] || banners[logo] || banners[String(logo).replace(/-/g, '')] || "";
+    if (!logo) return "";
+    return brandImages[logo] || banners[logo] || banners[String(logo).replace(/-/g, "")] || "";
   };
 
   // Navigate to brand page
   const handleBrandClick = (brand) => {
     const slug =
       brand.slug ||
-      String(brand.name ?? '').toLowerCase().replace(/\s+/g, "-");
+      String(brand.name ?? "")
+        .toLowerCase()
+        .replace(/\s+/g, "-");
 
     navigate(`/brands/${slug}`);
     if (typeof onBrandSelect === "function") {
@@ -68,9 +70,12 @@ const BrandsDropdown = ({ onBrandSelect, anchorRef }) => {
         const anchor = anchorRef && anchorRef.current;
         const viewportPadding = 16;
         const maxWidth = Math.min(1100, window.innerWidth - viewportPadding * 2);
-        if (anchor && typeof anchor.getBoundingClientRect === 'function') {
+        if (anchor && typeof anchor.getBoundingClientRect === "function") {
           const rect = anchor.getBoundingClientRect();
-          const left = Math.max(viewportPadding, Math.round(rect.left + rect.width / 2 - maxWidth / 2));
+          const left = Math.max(
+            viewportPadding,
+            Math.round(rect.left + rect.width / 2 - maxWidth / 2)
+          );
           const top = Math.round(rect.bottom + 8 + window.scrollY);
           setPosition({ left, top, width: maxWidth });
           return;
@@ -84,19 +89,17 @@ const BrandsDropdown = ({ onBrandSelect, anchorRef }) => {
     };
 
     updatePosition();
-    window.addEventListener('resize', updatePosition);
-    window.addEventListener('scroll', updatePosition);
+    window.addEventListener("resize", updatePosition);
+    window.addEventListener("scroll", updatePosition);
     return () => {
-      window.removeEventListener('resize', updatePosition);
-      window.removeEventListener('scroll', updatePosition);
+      window.removeEventListener("resize", updatePosition);
+      window.removeEventListener("scroll", updatePosition);
     };
   }, [anchorRef]);
 
   return (
     <div
-      className={
-        `fixed z-50 bg-white shadow-2xl rounded-2xl p-4 md:p-6 border border-gray-100 max-h-[70vh] overflow-y-auto`
-      }
+      className={`fixed z-50 bg-white shadow-2xl rounded-2xl p-4 md:p-6 border border-gray-100 max-h-[70vh] overflow-y-auto`}
       style={{ left: position.left, top: position.top, width: position.width }}
     >
       <div className="mb-6 text-center">
@@ -139,9 +142,7 @@ const BrandsDropdown = ({ onBrandSelect, anchorRef }) => {
                 loading="lazy"
               />
             </div>
-            <span className="mt-4 text-sm font-semibold text-slate-900">
-              {brand.name}
-            </span>
+            <span className="mt-4 text-sm font-semibold text-slate-900">{brand.name}</span>
           </button>
         ))}
       </div>
@@ -149,7 +150,7 @@ const BrandsDropdown = ({ onBrandSelect, anchorRef }) => {
       <div className="mt-8 flex justify-center">
         <button
           type="button"
-          onClick={() => navigate('/brands')}
+          onClick={() => navigate("/brands")}
           className="inline-flex items-center rounded-full bg-[#1F6B52] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-[#184f42]"
         >
           View brands

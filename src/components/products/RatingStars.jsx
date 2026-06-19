@@ -15,26 +15,19 @@ const RatingStars = ({ rating = 0, reviewCount = 0, size = "md" }) => {
     for (let i = 0; i < 5; i++) {
       if (i < fullStars) {
         stars.push(
-          <Star
-            key={i}
-            className={`${sizeClasses[size]} fill-amber-400 text-amber-400`}
-          />
+          <Star key={i} className={`${sizeClasses[size]} fill-amber-400 text-amber-400`} />
         );
       } else if (i === fullStars && hasHalfStar) {
         stars.push(
           <div key={i} className="relative">
             <Star className={`${sizeClasses[size]} text-gray-300`} />
             <div className="absolute top-0 left-0 overflow-hidden w-1/2">
-              <Star
-                className={`${sizeClasses[size]} fill-amber-400 text-amber-400`}
-              />
+              <Star className={`${sizeClasses[size]} fill-amber-400 text-amber-400`} />
             </div>
           </div>
         );
       } else {
-        stars.push(
-          <Star key={i} className={`${sizeClasses[size]} text-gray-300`} />
-        );
+        stars.push(<Star key={i} className={`${sizeClasses[size]} text-gray-300`} />);
       }
     }
 
@@ -45,9 +38,7 @@ const RatingStars = ({ rating = 0, reviewCount = 0, size = "md" }) => {
     <div className="flex items-center gap-2">
       <div className="flex gap-0.5">{renderStars()}</div>
       {reviewCount > 0 && (
-        <span className="text-xs text-gray-500 font-medium">
-          ({reviewCount.toLocaleString()})
-        </span>
+        <span className="text-xs text-gray-500 font-medium">({reviewCount.toLocaleString()})</span>
       )}
     </div>
   );

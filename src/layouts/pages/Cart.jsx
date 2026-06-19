@@ -3,20 +3,24 @@ import { useNavigate } from "react-router-dom";
 import useCart from "../../hooks/usecart";
 import { useWishlist } from "../../context/usewishlist";
 import { useState, useEffect } from "react";
-import { Trash2, Heart, ShoppingCart, Truck, Gift, AlertCircle, Check, X, ChevronRight } from "lucide-react";
+import {
+  Trash2,
+  Heart,
+  ShoppingCart,
+  Truck,
+  Gift,
+  AlertCircle,
+  Check,
+  X,
+  ChevronRight,
+} from "lucide-react";
 import { COUPONS } from "../../data/checkoutData";
 
 const Cart = () => {
   const navigate = useNavigate();
 
-  const {
-    cartItems,
-    totalPrice,
-    removeFromCart,
-    increaseQuantity,
-    decreaseQuantity,
-    clearCart,
-  } = useCart();
+  const { cartItems, totalPrice, removeFromCart, increaseQuantity, decreaseQuantity, clearCart } =
+    useCart();
 
   const { addToWishlist } = useWishlist();
   const visibleItems = cartItems.filter((item) => item && item.selectedVariant);
@@ -25,7 +29,7 @@ const Cart = () => {
   const [coupon, setCoupon] = useState("");
   const [couponMessage, setCouponMessage] = useState("");
   const [couponValid, setCouponValid] = useState(false);
-  
+
   // New features state
   const [selectedDelivery, setSelectedDelivery] = useState("standard");
   const [cartNotes, setCartNotes] = useState("");
@@ -40,8 +44,8 @@ const Cart = () => {
   const getBulkDiscount = (item) => {
     const quantity = item.quantity;
     if (quantity >= 10) return 0.15; // 15% off
-    if (quantity >= 5) return 0.10;  // 10% off
-    if (quantity >= 3) return 0.05;  // 5% off
+    if (quantity >= 5) return 0.1; // 10% off
+    if (quantity >= 3) return 0.05; // 5% off
     return 0;
   };
 
@@ -53,7 +57,7 @@ const Cart = () => {
   };
 
   // TAX RATE
-  const TAX_RATE = 0.10; // 10% tax
+  const TAX_RATE = 0.1; // 10% tax
 
   // Get stock status
   const getStockStatus = (item) => {
@@ -67,12 +71,16 @@ const Cart = () => {
   const getEstimatedDeliveryDate = () => {
     const today = new Date();
     let daysToAdd = 0;
-    
+
     if (selectedDelivery === "standard") daysToAdd = 3;
     else if (selectedDelivery === "express") daysToAdd = 1;
-    
+
     const deliveryDate = new Date(today.getTime() + daysToAdd * 24 * 60 * 60 * 1000);
-    return deliveryDate.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
+    return deliveryDate.toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "short",
+      day: "numeric",
+    });
   };
 
   // Delete with undo
@@ -84,21 +92,21 @@ const Cart = () => {
 
   // Restore deleted item
   const handleRestoreItem = (deletedItem) => {
-    setDeletedItems(deletedItems.filter(item => item.timestamp !== deletedItem.timestamp));
+    setDeletedItems(deletedItems.filter((item) => item.timestamp !== deletedItem.timestamp));
   };
 
   // Calculate discount
   const appliedCoupon = COUPONS.find((c) => c.code === coupon);
   const couponDiscount = couponValid && appliedCoupon ? appliedCoupon.discount : 0;
-  
+
   // Calculate bulk discounts
   const bulkDiscounts = visibleItems.reduce((sum, item) => {
     const itemTotal = (item.selectedVariant?.price ?? 0) * item.quantity;
-    return sum + (itemTotal * getBulkDiscount(item));
+    return sum + itemTotal * getBulkDiscount(item);
   }, 0);
-  
+
   const deliveryCost = getDeliveryCost();
-  
+
   const subtotal = totalPrice;
   const totalDiscount = couponDiscount + bulkDiscounts;
   const total = Math.max(0, subtotal - totalDiscount + deliveryCost);
@@ -180,7 +188,11 @@ const Cart = () => {
                 {/* Items header */}
                 <div className="bg-gray-50 px-3 sm:px-4 py-2 sm:py-3 border border-gray-200 rounded flex items-center justify-between gap-2">
                   <p className="text-xs sm:text-sm text-gray-700">
-                    <span className="font-semibold">{visibleItems.length} item{visibleItems.length !== 1 ? "s" : ""}</span> in your cart
+                    <span className="font-semibold">
+                      {visibleItems.length} item
+                      {visibleItems.length !== 1 ? "s" : ""}
+                    </span>{" "}
+                    in your cart
                   </p>
                   <button
                     onClick={() => setShowClearModal(true)}
@@ -197,15 +209,25 @@ const Cart = () => {
                   const itemSubtotal = itemPrice * item.quantity;
                   const itemBulkDiscount = itemSubtotal * bulkDiscount;
                   const itemTotal = itemSubtotal - itemBulkDiscount;
-                  
+
                   return (
-                    <div key={idx} className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow">
+                    <div
+                      key={idx}
+                      className="border border-gray-200 rounded-lg p-3 sm:p-4 hover:shadow-md transition-shadow"
+                    >
                       <div className="flex gap-2 sm:gap-4 flex-col sm:flex-row">
                         {/* Product Image */}
                         <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 relative mx-auto sm:mx-0">
-                          <img src={item.image} alt={item.name} className="w-full h-full object-contain p-2" loading="lazy" />
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-full h-full object-contain p-2"
+                            loading="lazy"
+                          />
                           {/* Stock indicator badge */}
-                          <div className={`absolute top-2 right-2 ${getStockStatus(item).color} bg-white px-2 py-1 rounded-full text-xs font-semibold border`}>
+                          <div
+                            className={`absolute top-2 right-2 ${getStockStatus(item).color} bg-white px-2 py-1 rounded-full text-xs font-semibold border`}
+                          >
                             {getStockStatus(item).status}
                           </div>
                         </div>
@@ -213,7 +235,9 @@ const Cart = () => {
                         {/* Product Details */}
                         <div className="flex-1 flex flex-col">
                           <div className="flex-1">
-                            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 line-clamp-2">{item.name}</h3>
+                            <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
+                              {item.name}
+                            </h3>
 
                             {/* Rating */}
                             <div className="flex items-center gap-2 mb-2 hidden sm:flex">
@@ -229,14 +253,17 @@ const Cart = () => {
                             {/* Variant info */}
                             {item.selectedVariant?.weight && (
                               <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3">
-                                Weight: <span className="font-semibold">{item.selectedVariant.weight}</span>
+                                Weight:{" "}
+                                <span className="font-semibold">{item.selectedVariant.weight}</span>
                               </p>
                             )}
 
                             {/* Price with bulk discount */}
                             <div className="mb-3 sm:mb-4">
                               <div className="flex items-center gap-2 flex-wrap">
-                                <span className="text-xl sm:text-2xl font-bold text-red-600">${itemPrice.toFixed(0)}</span>
+                                <span className="text-xl sm:text-2xl font-bold text-red-600">
+                                  ${itemPrice.toFixed(0)}
+                                </span>
                                 {bulkDiscount > 0 && (
                                   <span className="bg-red-100 text-red-700 text-xs font-bold px-2 py-1 rounded">
                                     {Math.round(bulkDiscount * 100)}% OFF
@@ -252,18 +279,26 @@ const Cart = () => {
 
                             {/* Quantity Selector */}
                             <div className="flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-                              <label className="text-xs sm:text-sm text-gray-700 font-semibold">Qty:</label>
+                              <label className="text-xs sm:text-sm text-gray-700 font-semibold">
+                                Qty:
+                              </label>
                               <div className="flex items-center border border-gray-300 rounded-lg bg-white">
                                 <button
-                                  onClick={() => decreaseQuantity(item.id, item.selectedVariant?.weight)}
+                                  onClick={() =>
+                                    decreaseQuantity(item.id, item.selectedVariant?.weight)
+                                  }
                                   disabled={item.quantity <= 1}
                                   className="h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center hover:bg-gray-100 disabled:opacity-50 font-bold text-lg transition-colors"
                                 >
                                   −
                                 </button>
-                                <span className="px-4 sm:px-6 py-2 font-semibold text-center min-w-12">{item.quantity}</span>
+                                <span className="px-4 sm:px-6 py-2 font-semibold text-center min-w-12">
+                                  {item.quantity}
+                                </span>
                                 <button
-                                  onClick={() => increaseQuantity(item.id, item.selectedVariant?.weight)}
+                                  onClick={() =>
+                                    increaseQuantity(item.id, item.selectedVariant?.weight)
+                                  }
                                   className="h-10 w-10 sm:h-12 sm:w-12 flex items-center justify-center hover:bg-gray-100 font-bold text-lg transition-colors"
                                 >
                                   +
@@ -275,14 +310,18 @@ const Cart = () => {
                           {/* Action Buttons */}
                           <div className="flex gap-4 sm:gap-6 pt-3 sm:pt-4 border-t border-gray-200 flex-wrap text-xs sm:text-sm">
                             <button
-                              onClick={() => handleDeleteWithUndo(item, item.selectedVariant?.weight)}
+                              onClick={() =>
+                                handleDeleteWithUndo(item, item.selectedVariant?.weight)
+                              }
                               className="flex items-center gap-1.5 sm:gap-2 text-blue-600 hover:text-blue-800 hover:underline font-semibold py-2 px-1 -ml-1"
                             >
                               <Trash2 size={16} />
                               Delete
                             </button>
                             <button
-                              onClick={() => handleSaveForLater(item.id, item.selectedVariant?.weight)}
+                              onClick={() =>
+                                handleSaveForLater(item.id, item.selectedVariant?.weight)
+                              }
                               className="flex items-center gap-1.5 sm:gap-2 text-blue-600 hover:text-blue-800 hover:underline font-semibold py-2 px-1"
                             >
                               <Heart size={16} />
@@ -293,17 +332,19 @@ const Cart = () => {
 
                         {/* Item Total */}
                         <div className="text-right font-bold">
-                          <div className="text-lg sm:text-xl text-gray-900">${itemTotal.toFixed(0)}</div>
+                          <div className="text-lg sm:text-xl text-gray-900">
+                            ${itemTotal.toFixed(0)}
+                          </div>
                           {itemBulkDiscount > 0 && (
-                            <p className="text-xs text-red-600 mt-1">-${itemBulkDiscount.toFixed(0)} bulk</p>
+                            <p className="text-xs text-red-600 mt-1">
+                              -${itemBulkDiscount.toFixed(0)} bulk
+                            </p>
                           )}
                         </div>
                       </div>
                     </div>
                   );
                 })}
-
-
               </div>
 
               {/* Price Summary - RIGHT (1 column) */}
@@ -348,9 +389,14 @@ const Cart = () => {
                 {/* Undo Delete Notifications */}
                 {deletedItems.length > 0 && (
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 sm:p-4 space-y-2">
-                    <p className="text-xs sm:text-sm font-semibold text-gray-900">Recently Deleted</p>
+                    <p className="text-xs sm:text-sm font-semibold text-gray-900">
+                      Recently Deleted
+                    </p>
                     {deletedItems.slice(-3).map((deletedItem, idx) => (
-                      <div key={idx} className="flex items-center justify-between bg-white p-2 rounded border border-blue-100 text-xs sm:text-sm gap-2">
+                      <div
+                        key={idx}
+                        className="flex items-center justify-between bg-white p-2 rounded border border-blue-100 text-xs sm:text-sm gap-2"
+                      >
                         <span className="text-gray-700 line-clamp-1">{deletedItem.name}</span>
                         <button
                           onClick={() => handleRestoreItem(deletedItem)}
@@ -370,14 +416,37 @@ const Cart = () => {
                     Delivery Speed
                   </h3>
                   <div className="mb-3 p-2 bg-white rounded border border-gray-200">
-                    <p className="text-xs text-gray-600">📅 <span className="hidden sm:inline">Estimated Delivery:</span><span className="sm:hidden">Est. Delivery:</span> <span className="font-semibold text-gray-900">{getEstimatedDeliveryDate()}</span></p>
+                    <p className="text-xs text-gray-600">
+                      📅 <span className="hidden sm:inline">Estimated Delivery:</span>
+                      <span className="sm:hidden">Est. Delivery:</span>{" "}
+                      <span className="font-semibold text-gray-900">
+                        {getEstimatedDeliveryDate()}
+                      </span>
+                    </p>
                   </div>
                   <div className="space-y-2">
                     {[
-                      { id: "standard", label: "Standard", time: "5-7 days", cost: 0, displayLabel: "Standard Delivery (3-5 Days)", dateRange: "Tue, 28 May – Thu, 30 May" },
-                      { id: "express", label: "Express", time: "2-3 days", cost: 9.99, displayLabel: "Express Delivery (1-2 Days)", dateRange: "Sat, 25 May – Mon, 27 May" }
+                      {
+                        id: "standard",
+                        label: "Standard",
+                        time: "5-7 days",
+                        cost: 0,
+                        displayLabel: "Standard Delivery (3-5 Days)",
+                        dateRange: "Tue, 28 May – Thu, 30 May",
+                      },
+                      {
+                        id: "express",
+                        label: "Express",
+                        time: "2-3 days",
+                        cost: 9.99,
+                        displayLabel: "Express Delivery (1-2 Days)",
+                        dateRange: "Sat, 25 May – Mon, 27 May",
+                      },
                     ].map((option) => (
-                      <label key={option.id} className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded cursor-pointer text-xs sm:text-sm">
+                      <label
+                        key={option.id}
+                        className="flex items-center gap-2 p-2 hover:bg-gray-100 rounded cursor-pointer text-xs sm:text-sm"
+                      >
                         <input
                           type="radio"
                           name="delivery"
@@ -400,7 +469,6 @@ const Cart = () => {
 
                 {/* Price Summary Sticky */}
                 <div className="bg-white border border-gray-300 rounded-lg p-3 sm:p-5 sm:sticky sm:top-6 shadow-sm">
-                  
                   {/* Main Price Breakdown */}
                   <div className="space-y-2 sm:space-y-3 mb-3 sm:mb-4 text-xs sm:text-sm">
                     <div className="flex justify-between items-center">
@@ -427,7 +495,13 @@ const Cart = () => {
                     {/* Shipping */}
                     <div className="flex justify-between items-center">
                       <span className="text-gray-700">Delivery:</span>
-                      <span className={deliveryCost === 0 ? "text-green-600 font-semibold" : "text-gray-900 font-semibold"}>
+                      <span
+                        className={
+                          deliveryCost === 0
+                            ? "text-green-600 font-semibold"
+                            : "text-gray-900 font-semibold"
+                        }
+                      >
                         {deliveryCost === 0 ? "FREE" : `$${deliveryCost.toFixed(2)}`}
                       </span>
                     </div>
@@ -461,7 +535,13 @@ const Cart = () => {
                       )}
                       <div className="flex justify-between text-gray-700">
                         <span>Delivery:</span>
-                        <span className={deliveryCost === 0 ? "text-green-600 font-semibold" : "font-semibold"}>{deliveryCost === 0 ? "FREE" : `$${deliveryCost.toFixed(2)}`}</span>
+                        <span
+                          className={
+                            deliveryCost === 0 ? "text-green-600 font-semibold" : "font-semibold"
+                          }
+                        >
+                          {deliveryCost === 0 ? "FREE" : `$${deliveryCost.toFixed(2)}`}
+                        </span>
                       </div>
                       <div className="flex justify-between text-gray-700 border-t border-gray-300 pt-1 sm:pt-2">
                         <span>Tax (10%):</span>
@@ -473,8 +553,12 @@ const Cart = () => {
                   {/* Order Total */}
                   <div className="bg-green-100 rounded p-2 sm:p-3 mb-3 sm:mb-4 border border-green-300">
                     <div className="flex justify-between items-center gap-2">
-                      <span className="text-gray-700 font-semibold text-xs sm:text-sm">Order Total:</span>
-                      <span className="text-lg sm:text-2xl font-bold text-green-700 whitespace-nowrap">${finalTotal.toFixed(2)}</span>
+                      <span className="text-gray-700 font-semibold text-xs sm:text-sm">
+                        Order Total:
+                      </span>
+                      <span className="text-lg sm:text-2xl font-bold text-green-700 whitespace-nowrap">
+                        ${finalTotal.toFixed(2)}
+                      </span>
                     </div>
                   </div>
 
@@ -499,7 +583,7 @@ const Cart = () => {
                   <div className="mt-8 border-t-2 pt-6">
                     <div className="flex items-center justify-between mb-4">
                       <h2 className="text-lg font-bold">Recently Viewed</h2>
-                      <button 
+                      <button
                         onClick={() => setShowRecentlyViewed(!showRecentlyViewed)}
                         className="text-blue-600 text-sm"
                       >
@@ -509,12 +593,22 @@ const Cart = () => {
                     {showRecentlyViewed && (
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                         {recentlyViewed.slice(0, 6).map((item, idx) => (
-                          <div key={idx} className="border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow cursor-pointer"
-                               onClick={() => navigate(`/product/${item.id}`)}>
+                          <div
+                            key={idx}
+                            className="border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow cursor-pointer"
+                            onClick={() => navigate(`/product/${item.id}`)}
+                          >
                             <div className="w-full aspect-square bg-gray-100 rounded mb-2 flex items-center justify-center">
-                              <img src={item.image} alt={item.name} className="w-full h-full object-contain p-2" loading="lazy" />
+                              <img
+                                src={item.image}
+                                alt={item.name}
+                                className="w-full h-full object-contain p-2"
+                                loading="lazy"
+                              />
                             </div>
-                            <h4 className="text-xs font-semibold text-gray-900 line-clamp-2 mb-1">{item.name}</h4>
+                            <h4 className="text-xs font-semibold text-gray-900 line-clamp-2 mb-1">
+                              {item.name}
+                            </h4>
                             <p className="text-sm font-bold text-red-600">${item.price}</p>
                           </div>
                         ))}
@@ -543,12 +637,28 @@ const Cart = () => {
       {showClearModal && (
         <div className="fixed inset-0 flex items-center justify-center z-[9999]">
           <div className="absolute inset-0 bg-black/40" onClick={handleCancelClear} />
-          <div role="dialog" aria-modal="true" className="relative bg-white rounded-lg shadow-lg max-w-md w-full mx-4 p-6 z-[10000]">
+          <div
+            role="dialog"
+            aria-modal="true"
+            className="relative bg-white rounded-lg shadow-lg max-w-md w-full mx-4 p-6 z-[10000]"
+          >
             <h3 className="text-lg font-semibold mb-2">Clear Cart</h3>
-            <p className="text-sm text-gray-700 mb-4">Are you sure you want to clear your entire cart?</p>
+            <p className="text-sm text-gray-700 mb-4">
+              Are you sure you want to clear your entire cart?
+            </p>
             <div className="flex justify-end gap-3">
-              <button onClick={handleCancelClear} className="px-4 py-2 rounded-lg border border-gray-300 bg-white text-sm">Cancel</button>
-              <button onClick={handleConfirmClear} className="px-4 py-2 rounded-lg bg-red-600 text-white text-sm">Clear</button>
+              <button
+                onClick={handleCancelClear}
+                className="px-4 py-2 rounded-lg border border-gray-300 bg-white text-sm"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleConfirmClear}
+                className="px-4 py-2 rounded-lg bg-red-600 text-white text-sm"
+              >
+                Clear
+              </button>
             </div>
           </div>
         </div>
@@ -558,4 +668,3 @@ const Cart = () => {
 };
 
 export default Cart;
-
