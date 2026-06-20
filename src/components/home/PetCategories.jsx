@@ -55,7 +55,7 @@ const PetCategories = () => {
   return (
     <section className="px-6 md:px-10 py-16 bg-[#f8f6f2]">
       <div className="mb-10">
-        <h2 className="text-4xl font-bold">Shop By Pet Food</h2>
+        <h2 className="text-xl sm:text-4xl font-bold whitespace-nowrap">Shop By Pet Food</h2>
 
         <p className="text-gray-500 mt-3">Find food collections for every pet</p>
       </div>

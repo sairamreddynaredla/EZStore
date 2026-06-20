@@ -32,7 +32,7 @@ const BestSellers = () => {
             <p className="text-orange-500 uppercase tracking-[3px] font-semibold text-sm">
               Trending Products
             </p>
-            <h1 className="text-5xl font-black mt-2">Best Sellers</h1>
+            <h1 className="text-2xl sm:text-5xl font-black mt-2 whitespace-nowrap">Best Sellers</h1>
             <p className="text-gray-500 mt-3">
               Explore all bestselling products loved by pet parents.
             </p>

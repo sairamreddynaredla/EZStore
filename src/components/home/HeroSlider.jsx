@@ -62,7 +62,7 @@ const HeroSlider = () => {
   };
 
   return (
-    <section className="w-full relative" style={{ height: "clamp(350px, 80vh, 105vh)" }}>
+    <section className="w-full h-56 sm:h-96 md:h-[500px] lg:h-[600px] m-0 -mt-12 mb-4">
       <Swiper 
         modules={[Autoplay]} 
         autoplay={{ delay: 3500 }} 
@@ -78,29 +78,33 @@ const HeroSlider = () => {
             <img
               src={banner.image}
               alt={banner.pet + " banner"}
-              className="w-full h-full object-cover object-center absolute inset-0"
+              className="absolute inset-0 w-full h-full object-contain"
             />
             
-            {/* Text Overlay */}
-            <div className="absolute inset-0 flex flex-col justify-center items-start pb-16 lg:pb-24">
-              <div className="w-full max-w-4xl px-4 sm:px-6 md:px-12 lg:px-20">
-                <div className="max-w-xl">
-                  <h2 className={`font-bold text-[#8B4513] mb-2 md:mb-3 leading-tight ${banner.pet === "Offers" ? "text-xl sm:text-3xl md:text-4xl lg:text-5xl" : banner.pet === "Dog" ? "text-lg sm:text-2xl md:text-3xl lg:text-4xl" : "text-base sm:text-xl md:text-2xl lg:text-3xl"}`}>
+            {/* Split Layout: Text on Left (50%), Image on Right (50%) */}
+            <div className="absolute inset-0 flex flex-row z-10">
+              {/* Left Side: Text Content */}
+              <div className="w-1/2 flex flex-col justify-center items-start p-2 sm:p-4 md:p-12">
+                <div className="max-w-xs sm:max-w-sm md:max-w-md">
+                  <h2 className={`font-bold text-[#8B4513] mb-0.5 sm:mb-2 md:mb-3 leading-tight truncate ${banner.pet === "Offers" ? "text-sm sm:text-lg md:text-4xl lg:text-5xl" : banner.pet === "Dog" ? "text-xs sm:text-sm md:text-3xl lg:text-4xl" : banner.pet === "Trust" ? "text-xs sm:text-sm md:text-2xl lg:text-3xl" : banner.pet === "Hero" ? "text-xs sm:text-sm md:text-2xl lg:text-3xl" : "text-sm sm:text-sm md:text-2xl lg:text-3xl"}`}>
                     {banner.title}
                   </h2>
-                  <div className={`font-semibold text-[#F5A623] mb-1 md:mb-2 ${banner.pet === "Offers" ? "text-base sm:text-xl md:text-2xl lg:text-3xl" : banner.pet === "Dog" ? "text-sm md:text-base lg:text-lg" : "text-xs md:text-base lg:text-lg"}`}>
+                  <div className={`font-semibold text-[#F5A623] mb-0.5 md:mb-2 ${banner.pet === "Offers" ? "text-xs sm:text-base md:text-2xl lg:text-3xl" : banner.pet === "Dog" ? "text-xs md:text-sm lg:text-lg" : banner.pet === "Trust" ? "text-xs sm:text-xs md:text-lg lg:text-2xl" : "text-xs md:text-xs lg:text-lg"}`}>
                     {banner.offer}
                   </div>
-                  <div className={`text-[#333333] mb-3 md:mb-4 max-w-sm ${banner.pet === "Offers" ? "text-xs sm:text-base md:text-lg lg:text-xl" : "text-xs sm:text-sm md:text-base"}`}>
+                  <div className={`text-[#333333] mb-1 sm:mb-2 md:mb-4 max-w-sm ${banner.pet === "Trust" ? "text-[0.625rem] sm:text-[0.625rem] md:text-sm lg:text-sm" : "text-[0.625rem] sm:text-xs md:text-base"}`}>
                     {banner.subtitle}
                   </div>
                   <button 
                     onClick={() => handleCtaClick(banner.pet)}
-                    className={`bg-[#F5A623] hover:bg-[#E59C0D] text-white rounded-lg px-4 sm:px-6 py-2 md:py-3 font-bold shadow-lg transition-all duration-300 transform hover:scale-105 w-full sm:w-auto ${banner.pet === "Offers" ? "text-xs sm:text-base md:text-lg lg:text-xl" : "text-xs sm:text-sm md:text-base"}`}>
+                    className={`bg-[#F5A623] hover:bg-[#E59C0D] text-white rounded-lg px-2 sm:px-3 md:px-5 py-1 sm:py-1.5 md:py-2 font-bold shadow-lg transition-all duration-300 transform hover:scale-105 w-fit ${banner.pet === "Offers" ? "text-xs sm:text-xs md:text-lg lg:text-xl" : banner.pet === "Trust" ? "text-xs sm:text-xs md:text-base" : "text-xs sm:text-xs md:text-base"}`}>
                     {banner.cta}
                   </button>
                 </div>
               </div>
+
+              {/* Right Side: Image Space (visible on larger screens) */}
+              <div className="hidden sm:flex w-1/2" />
             </div>
           </SwiperSlide>
         ))}

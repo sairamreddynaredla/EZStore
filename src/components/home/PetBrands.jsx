@@ -105,7 +105,7 @@ const BrandsSection = () => {
       <div className="max-w-7xl mx-auto px-3 sm:px-4">
         {/* Heading */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900">Trusted Pet Brands</h2>
+          <h2 className="text-xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 whitespace-nowrap md:whitespace-normal">Trusted Pet Brands</h2>
 
           <p className="text-gray-500 text-lg mt-4 max-w-2xl mx-auto">
             Premium food & care brands trusted by pet parents worldwide

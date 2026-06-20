@@ -77,35 +77,35 @@ const BreedDetailsLayout = () => {
       </div>
 
       {/* HERO */}
-      <section className="w-[88%] mx-auto mt-14 bg-[#f5e7d7] rounded-2xl p-12 flex flex-col lg:flex-row gap-16 items-center">
-        <div className="flex-1">
+      <section className="w-[88%] mx-auto mt-6 sm:mt-10 md:mt-14 bg-[#f5e7d7] rounded-xl sm:rounded-2xl p-3 sm:p-6 md:p-12 flex flex-row gap-4 sm:gap-8 md:gap-16 items-center">
+        <div className="flex-1 shrink-0">
           <img
             src={breed.banner.image}
             alt={breed.slug}
-            className="w-full rounded-3xl object-cover"
+            className="w-full sm:w-48 md:w-full rounded-lg sm:rounded-2xl md:rounded-3xl object-cover h-32 sm:h-40 md:h-auto"
             loading="lazy"
           />
         </div>
 
         <div className="flex-1">
-          <h1 className="text-5xl lg:text-6xl font-bold leading-tight text-[#1d1d1d]">
+          <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight text-[#1d1d1d]">
             {breed.banner.title}
           </h1>
 
-          <h3 className="text-2xl text-orange-500 mt-5 font-semibold">{breed.banner.subtitle}</h3>
+          <h3 className="text-base sm:text-lg md:text-2xl text-orange-500 mt-2 sm:mt-3 md:mt-5 font-semibold">{breed.banner.subtitle}</h3>
 
-          <div className="flex flex-wrap gap-4 mt-8">
+          <div className="flex flex-wrap gap-2 sm:gap-3 md:gap-4 mt-3 sm:mt-5 md:mt-8">
             {breed.banner.traits.map((trait, index) => (
               <span
                 key={index}
-                className="px-5 py-2 rounded-full border border-gray-300 bg-white text-sm font-semibold"
+                className="px-2 sm:px-4 md:px-5 py-1 sm:py-2 rounded-full border border-gray-300 bg-white text-xs sm:text-sm font-semibold"
               >
                 {trait}
               </span>
             ))}
           </div>
 
-          <p className="mt-8 text-[17px] leading-9 text-gray-700">{breed.banner.description}</p>
+          <p className="mt-3 sm:mt-5 md:mt-8 text-xs sm:text-sm md:text-[17px] leading-6 sm:leading-7 md:leading-9 text-gray-700 hidden sm:block">{breed.banner.description}</p>
         </div>
       </section>
 

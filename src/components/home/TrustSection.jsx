@@ -58,11 +58,11 @@ const TrustSection = () => {
             Why Pet Parents Trust Us
           </p>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight max-w-3xl mx-auto">
             Trusted Pet Care, Delivered With Love
           </h2>
 
-          <p className="text-gray-600 text-lg leading-relaxed max-w-3xl mx-auto">
+          <p className="text-gray-600 text-base sm:text-lg leading-relaxed max-w-md sm:max-w-3xl mx-auto">
             eZSTORE brings together premium pet nutrition, trusted care essentials, and a modern
             shopping experience designed for pet parents.
           </p>

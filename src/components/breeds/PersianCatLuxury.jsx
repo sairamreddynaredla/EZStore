@@ -3,29 +3,29 @@ const PersianCatLuxury = ({ breed }) => {
   return (
     <div className="min-h-screen bg-linear-to-br from-[#fdf6ee] to-[#f7efe6] pb-24">
       {/* Hero Section */}
-      <section className="relative flex items-center justify-center min-h-screen md:min-h-screen py-10 md:py-0 overflow-hidden">
+      <section className="relative flex items-center justify-center min-h-auto md:min-h-screen py-6 md:py-0 overflow-hidden">
         {/* Floating blobs */}
-        <div className="absolute -top-20 -left-20 w-75 h-75 bg-linear-to-br from-[#fbe7c6] to-[#f6d365] rounded-full blur-3xl opacity-40 z-0"></div>
-        <div className="absolute -bottom-25 -right-25 w-87.5 h-87.5 bg-linear-to-tr from-[#f6e7d8] to-[#f9e7b7] rounded-full blur-3xl opacity-30 z-0"></div>
+        <div className="absolute -top-20 -left-20 w-75 h-75 bg-linear-to-br from-[#fbe7c6] to-[#f6d365] rounded-full blur-3xl opacity-40 z-0 hidden md:block"></div>
+        <div className="absolute -bottom-25 -right-25 w-87.5 h-87.5 bg-linear-to-tr from-[#f6e7d8] to-[#f9e7b7] rounded-full blur-3xl opacity-30 z-0 hidden md:block"></div>
         {/* Main Card */}
-        <div className="relative z-10 bg-white/60 backdrop-blur-xl rounded-[40px] shadow-2xl border border-[#f6e7d8] flex flex-col md:flex-row max-w-5xl mx-auto p-6 md:p-12 gap-6 md:gap-12 items-center md:items-stretch min-h-[70vh] md:min-h-[70vh] justify-center">
+        <div className="relative z-10 bg-white/60 backdrop-blur-xl rounded-2xl md:rounded-[40px] shadow-2xl border border-[#f6e7d8] flex flex-row max-w-5xl mx-auto p-3 sm:p-6 md:p-12 gap-3 sm:gap-6 md:gap-12 items-center md:items-stretch min-h-auto md:min-h-[70vh] justify-center">
           <div className="flex-1 flex flex-col justify-center md:justify-center items-center md:items-start">
-            <span className="inline-block bg-linear-to-r from-[#fbe7c6] to-[#f6d365] text-[#bfa76a] px-5 py-2 rounded-full font-semibold mb-4 shadow-md">
+            <span className="inline-block bg-linear-to-r from-[#fbe7c6] to-[#f6d365] text-[#bfa76a] px-3 sm:px-5 py-1 sm:py-2 rounded-full font-semibold mb-2 sm:mb-4 shadow-md text-xs sm:text-base">
               Luxury Breed
             </span>
-            <h1 className="font-serif text-5xl md:text-7xl font-bold text-[#bfa76a] mb-6 drop-shadow-lg">
+            <h1 className="font-serif text-2xl sm:text-4xl md:text-7xl font-bold text-[#bfa76a] mb-2 sm:mb-4 md:mb-6 drop-shadow-lg">
               {breed.name}
             </h1>
-            <p className="text-xl text-[#7c6f57] mb-8 font-light max-w-lg">{breed.description}</p>
-            <button className="bg-linear-to-r from-[#fbe7c6] to-[#f6d365] text-[#7c6f57] font-bold px-8 py-4 rounded-full shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300 text-lg">
+            <p className="text-xs sm:text-base md:text-xl text-[#7c6f57] mb-3 sm:mb-6 md:mb-8 font-light max-w-lg">{breed.description}</p>
+            <button className="bg-linear-to-r from-[#fbe7c6] to-[#f6d365] text-[#7c6f57] font-bold px-4 sm:px-8 py-2 sm:py-4 rounded-full shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300 text-xs sm:text-base md:text-lg">
               Meet Your Persian
             </button>
           </div>
-          <div className="flex-1 flex flex-col gap-4 md:gap-6 justify-center items-center md:items-end md:justify-center">
+          <div className="flex-1 flex flex-col gap-2 sm:gap-4 md:gap-6 justify-center items-center md:items-end md:justify-center">
             <img
               src="/persian cat.webp"
               alt="Persian Cat Hero"
-              className="rounded-[2.5rem] shadow-xl w-80 h-100 object-cover border-4 border-[#fbe7c6] mb-4"
+              className="rounded-xl sm:rounded-[2.5rem] shadow-xl w-32 sm:w-56 md:w-80 h-40 sm:h-72 md:h-100 object-cover border-2 sm:border-4 border-[#fbe7c6]"
             />
           </div>
         </div>
@@ -59,8 +59,8 @@ const PersianCatLuxury = ({ breed }) => {
 
       {/* Signature Portrait & Essence Section */}
       <section className="max-w-5xl mx-auto min-h-screen flex items-center justify-center px-4">
-        <div className="flex flex-col md:flex-row items-center gap-10 bg-white/70 rounded-[2.5rem] shadow-xl border border-[#fbe7c6] p-8 md:p-12 w-full">
-          <div className="shrink-0 w-full md:w-[320px] flex flex-col items-center mb-6 md:mb-0">
+        <div className="flex flex-row items-center gap-10 bg-white/70 rounded-[2.5rem] shadow-xl border border-[#fbe7c6] p-8 md:p-12 w-full">
+          <div className="shrink-0 w-full md:w-[320px] flex flex-col items-center mb-0">
             <img
               src="/elegance.webp"
               alt="Persian Cat Elegance"
@@ -112,7 +112,7 @@ const PersianCatLuxury = ({ breed }) => {
 
       {/* Health & Wellness Section */}
       <section className="max-w-5xl mx-auto mt-20 px-4">
-        <div className="flex flex-col md:flex-row items-center gap-10 bg-white/70 rounded-[2.5rem] shadow-xl border border-[#fbe7c6] p-8 md:p-12">
+        <div className="flex flex-row items-center gap-10 bg-white/70 rounded-[2.5rem] shadow-xl border border-[#fbe7c6] p-8 md:p-12">
           <div className="shrink-0 w-full md:w-85 flex flex-col items-center mb-6 md:mb-0">
             <img
               src="/persian 1.webp"

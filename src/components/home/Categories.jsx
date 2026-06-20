@@ -73,11 +73,11 @@ function Categories({ selectedPet, setSelectedPet }) {
   };
 
   return (
-    <section className="px-4 md:px-10 py-12 bg-[#f9f9f9]">
+    <section className="px-4 md:px-10 pt-4 md:pt-12 pb-10 bg-[#f9f9f9]">
       {/* HEADING */}
-      <div className="flex flex-col items-center justify-center gap-6">
-        <h2 className="text-4xl md:text-5xl font-bold text-center">Browse by Exclusive Category</h2>
-        <p className="text-gray-500 max-w-2xl text-center">
+      <div className="flex flex-col items-center justify-center gap-4">
+        <h2 className="text-lg sm:text-4xl md:text-5xl font-bold text-center whitespace-nowrap sm:whitespace-normal">Browse by Exclusive Category</h2>
+        <p className="text-gray-500 max-w-2xl text-center mt-1">
           Scroll through all pet categories with navigation arrows for faster browsing.
         </p>
       </div>

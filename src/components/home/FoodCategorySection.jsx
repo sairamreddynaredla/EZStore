@@ -144,7 +144,7 @@ function FoodCategorySection() {
       {/* Header row: title + tab filters */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-10">
         {/* Heading */}
-        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 tracking-tight">
+        <h2 className="text-xl sm:text-3xl md:text-4xl font-bold text-gray-900 tracking-tight truncate sm:whitespace-normal sm:overflow-visible">
           Explore. Pick. Pamper.
         </h2>
 

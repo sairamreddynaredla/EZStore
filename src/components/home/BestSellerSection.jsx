@@ -33,7 +33,7 @@ const BestSellerSection = () => {
               Trending Products
             </p>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-black mb-2 md:mb-3">Best Sellers</h2>
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-black mb-2 md:mb-3 whitespace-nowrap">Best Sellers</h2>
 
             <p className="text-gray-500 text-sm md:text-base">Explore our most loved products</p>
           </div>
