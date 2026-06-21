@@ -75,6 +75,8 @@ a {
   display: none; /* Chrome, Safari, Opera */
 }
 
+
+
 /* Hero Swiper styles moved into Tailwind components layer */
 @layer components {
   /* Hide hero swiper navigation buttons and pagination */

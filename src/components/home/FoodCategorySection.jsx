@@ -105,7 +105,7 @@ function CategoryCard({ category }) {
   return (
     <Link
       to={category.link}
-      className="group relative rounded-2xl overflow-hidden flex flex-col cursor-pointer shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 border border-gray-200 bg-white"
+      className="group relative rounded-2xl overflow-hidden flex flex-col cursor-pointer shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 border border-gray-200 bg-white min-w-[240px] flex-shrink-0 sm:min-w-0"
       style={{ backgroundColor: category.bgColor }}
     >
       {/* Image area */}
@@ -169,7 +169,7 @@ function FoodCategorySection() {
 
       {/* Category cards grid */}
       {currentCategories.length > 0 ? (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="flex gap-6 overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 hide-scrollbar">
           {currentCategories.map((cat, idx) => (
             <CategoryCard key={idx} category={cat} />
           ))}
@@ -180,15 +180,7 @@ function FoodCategorySection() {
         </div>
       )}
 
-      {/* View All link */}
-      <div className="text-center mt-10">
-        <Link
-          to="/pets"
-          className="inline-block text-[#E63946] font-semibold text-base hover:underline underline-offset-4 transition-all"
-        >
-          View All →
-        </Link>
-      </div>
+      {/* View All link removed as requested */}
     </section>
   );
 }

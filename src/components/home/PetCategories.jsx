@@ -60,12 +60,12 @@ const PetCategories = () => {
         <p className="text-gray-500 mt-3">Find food collections for every pet</p>
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+      <div className="flex gap-6 overflow-x-auto pb-4 -mx-6 px-6 md:mx-0 md:px-0 md:grid md:grid-cols-3 lg:grid-cols-6 hide-scrollbar">
         {categories.map((item) => (
           <Link
             key={item.id}
             to={`/category/${item.slug}`}
-            className="group bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
+            className="group bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 min-w-[180px] flex-shrink-0 md:min-w-0"
           >
             {/* IMAGE */}
             <div className="h-[220px] overflow-hidden bg-[#f7c66b]">

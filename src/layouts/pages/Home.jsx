@@ -2,6 +2,7 @@ import Navbar from "../../components/Navbar";
 
 import { useState } from "react";
 import HeroSlider from "../../components/home/HeroSlider";
+import SearchBelowHero from "../../components/home/SearchBelowHero";
 import Categories from "../../components/home/Categories";
 import PetBreedsCarousel from "../../components/home/PetBreedsCarousel";
 import petData from "../../data/petData";
@@ -28,6 +29,9 @@ const Home = () => {
     <div className="bg-[#f8f8f8] min-h-screen">
       {/* NAVBAR */}
       <Navbar />
+
+      {/* Mobile-only search above hero banners */}
+      <SearchBelowHero />
 
       {/* HERO SLIDER - 4 Rotating Banners */}
       <HeroSlider />
