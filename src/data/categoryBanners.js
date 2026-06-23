@@ -11,7 +11,7 @@ import dogPuppyTreatsImg from "../assets/dog-dropdown-banner/puppy-treats-banner
 import grainFreeImg from "../assets/dog-dropdown-banner/grain-free-food-banner.webp";
 import meatyTreatsImg from "../assets/dog-dropdown-banner/meaty-treats-banner.webp";
 import catDryBannerImg from "../assets/cat-dropdown-banner/dry-food-cats-banner.webp";
-import catWetBannerImg from "../assets/cat-dropdown-banner/wet-food-cat-banner.webp";
+import catWetBannerImg from "../assets/cat-dropdown-banner/cat-wet-food-banner.webp";
 import catKittenBannerImg from "../assets/cat-dropdown-banner/kitten-food-banner.webp";
 import catMeatyTreatsBannerImg from "../assets/cat-dropdown-banner/meaty-cat-food.webp";
 import catPrescriptionBannerImg from "../assets/cat-dropdown-banner/prescription-cat-food-banner.webp";
