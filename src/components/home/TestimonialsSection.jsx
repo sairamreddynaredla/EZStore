@@ -46,6 +46,7 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   const [startIndex, setStartIndex] = useState(0);
+  const [activeArrow, setActiveArrow] = useState("next");
   const mobileScrollerRef = useRef(null);
 
   const visibleTestimonials = testimonials.slice(startIndex, startIndex + 3);
@@ -124,15 +125,29 @@ const TestimonialsSection = () => {
           {/* ARROWS (desktop only) */}
           <div className="hidden md:flex items-center gap-4 mt-8 md:mt-0">
             <button
-              onClick={prevSlide}
-              className="w-14 h-14 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:shadow-xl transition"
+              onClick={() => {
+                setActiveArrow("prev");
+                prevSlide();
+              }}
+              className={`w-14 h-14 rounded-full flex items-center justify-center hover:shadow-xl transition ${
+                activeArrow === "prev"
+                  ? "bg-[#16325B] text-white"
+                  : "bg-white border border-gray-200"
+              }`}
             >
               <ChevronLeft size={24} />
             </button>
 
             <button
-              onClick={nextSlide}
-              className="w-14 h-14 rounded-full bg-[#16325B] text-white flex items-center justify-center hover:bg-[#0d2240] transition"
+              onClick={() => {
+                setActiveArrow("next");
+                nextSlide();
+              }}
+              className={`w-14 h-14 rounded-full flex items-center justify-center hover:bg-[#0d2240] transition ${
+                activeArrow === "next"
+                  ? "bg-[#16325B] text-white"
+                  : "bg-white border border-gray-200"
+              }`}
             >
               <ChevronRight size={24} />
             </button>

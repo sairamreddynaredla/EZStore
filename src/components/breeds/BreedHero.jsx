@@ -13,7 +13,7 @@ const BreedHero = ({ breed }) => {
             </p>
 
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-950 mb-4 max-w-2xl">
-              {breed.title || breed.name}
+              {breed.name}
             </h1>
 
             <p className="text-sm sm:text-base leading-6 text-slate-700 mb-6 max-w-2xl">

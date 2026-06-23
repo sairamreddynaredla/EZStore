@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import wetDogFoodImage from "../../assets/explore-pick-pamper/wet-dog-food.webp";
 import dryDogFoodImage from "../../assets/explore-pick-pamper/dry-dog-food.webp";
@@ -102,11 +102,24 @@ const tabData = {
 };
 
 function CategoryCard({ category }) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // detect mobile breakpoint (tailwind's md is 768px)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  const cardBg = isMobile ? category.labelBg : category.bgColor;
+
   return (
     <Link
       to={category.link}
       className="group relative rounded-2xl overflow-hidden flex flex-col cursor-pointer shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 border border-gray-200 bg-white"
-      style={{ backgroundColor: category.bgColor }}
+      style={{ backgroundColor: cardBg }}
     >
       {/* Image area */}
       <div className="relative overflow-hidden h-56 sm:h-64 md:h-72 bg-white">

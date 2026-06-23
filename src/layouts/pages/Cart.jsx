@@ -218,12 +218,29 @@ const Cart = () => {
                       <div className="flex gap-2 sm:gap-4 flex-col sm:flex-row">
                         {/* Product Image */}
                         <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 relative mx-auto sm:mx-0">
-                          <img
-                            src={item.image}
-                            alt={item.name}
-                            className="w-full h-full object-contain p-2"
-                            loading="lazy"
-                          />
+                          {(() => {
+                            const placeholder = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='100%' height='100%' fill='%23f3f4f6'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-size='14'>No image</text></svg>";
+
+                            const resolveImage = (img) => {
+                              if (!img) return placeholder;
+                              if (typeof img === "string") return img;
+                              if (typeof img === "object") {
+                                return img.default || img.src || img[0] || placeholder;
+                              }
+                              return placeholder;
+                            };
+
+                            const imgSrc = resolveImage(item.image) || resolveImage(item.images?.[0]);
+
+                            return (
+                              <img
+                                src={imgSrc}
+                                alt={item.name}
+                                className="w-full h-full object-contain p-2"
+                                loading="lazy"
+                              />
+                            );
+                          })()}
                           {/* Stock indicator badge */}
                           <div
                             className={`absolute top-2 right-2 ${getStockStatus(item).color} bg-white px-2 py-1 rounded-full text-xs font-semibold border`}

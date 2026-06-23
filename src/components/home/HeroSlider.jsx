@@ -62,7 +62,7 @@ const HeroSlider = () => {
   };
 
   return (
-    <section className="w-full h-56 sm:h-96 md:h-[500px] lg:h-[600px] m-0 -mt-12 mb-4">
+    <section className="w-full h-56 sm:h-96 md:h-[500px] lg:h-[600px] m-0 mt-0 md:-mt-20 lg:-mt-24 mb-4">
       <Swiper 
         modules={[Autoplay]} 
         autoplay={{ delay: 3500 }} 

@@ -56,7 +56,8 @@ const PetBreedsCarousel = ({ breeds, title }) => {
               breed.heroImage ||
               (breed.overview && breed.overview.image) ||
               "";
-            const title = (breed.banner && breed.banner.title) || breed.name;
+            const rawTitle = (breed.banner && breed.banner.title) || breed.name;
+            const title = rawTitle.replace(/^meet the\s+/i, "");
             return (
               <SwiperSlide key={breed.slug} className="flex justify-center">
                 <Link to={`/breed/${breed.slug}`} className="flex flex-col items-center">

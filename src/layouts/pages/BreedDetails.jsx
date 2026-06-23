@@ -21,6 +21,11 @@ const BreedDetails = () => {
     lifespan: breed.info?.lifespan || breed.overview?.lifespan || "—",
     weight: breed.info?.weight || breed.overview?.weight || "—",
     grooming: breed.info?.grooming || breed.overview?.shedding || breed.info?.shedding || "—",
+    summary:
+      breed.description ||
+      (breed.category
+        ? `Learn about the ${breed.name} — a ${breed.category} breed. Find care tips, temperament, and essential product recommendations.`
+        : `Learn about the ${breed.name} breed, care, size and recommended products.`),
   };
 
   return (

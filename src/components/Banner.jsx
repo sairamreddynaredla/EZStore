@@ -9,7 +9,7 @@ const Banner = ({ image, title, tagline, bg = "#E8F5F0" }) => {
         <img
           src={image}
           alt={title}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-contain md:object-cover object-center"
           loading="lazy"
         />
       )}

@@ -33,12 +33,12 @@ const CategoryHero = ({ title, subtitle, highlights, image, breadcrumbs, imagePo
     </div>
     {image && (
       <div className="w-full overflow-hidden">
-        <div
-          className="relative w-full h-[240px] sm:h-[300px] md:h-[360px] lg:h-[420px] bg-center bg-cover bg-no-repeat"
-          style={{
-            backgroundImage: `url(${image})`,
-            backgroundPosition: imagePosition || "center center",
-          }}
+        <img
+          src={image}
+          alt={title || "banner"}
+          className={`w-full h-[240px] sm:h-[300px] md:h-[360px] lg:h-[420px] object-contain md:object-cover object-center`}
+          style={{ objectPosition: imagePosition || "center center" }}
+          loading="lazy"
         />
       </div>
     )}
