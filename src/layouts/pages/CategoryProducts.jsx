@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar";
 import ProductCard from "../../components/products/ProductCard";
 import ShopSidebar from "../../components/shop/ShopSidebar";
 import CategoryHero from "../../components/category/CategoryHero";
+import Footer from "../../components/Footer";
 import { products } from "../../data/products";
 import { dogCategories } from "../../data/dogCategories";
 import { catCategories } from "../../data/catCategories";
@@ -448,6 +449,8 @@ const CategoryProducts = ({ petType }) => {
           </div>
         </div>
       </div>
+      {/* FOOTER */}
+      <Footer />
     </div>
   );
 };

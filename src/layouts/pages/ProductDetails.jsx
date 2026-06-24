@@ -1,4 +1,5 @@
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import { useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { products } from "../../data/products";
@@ -368,6 +369,8 @@ const ProductDetails = () => {
           </div>
         )}
       </div>
+      {/* FOOTER */}
+      <Footer />
     </div>
   );
 };

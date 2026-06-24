@@ -8,6 +8,7 @@ import ShopSidebar from "../../components/shop/ShopSidebar";
 import ProductGrid from "../../components/products/ProductGrid";
 import ProductSort from "../../components/products/ProductSort";
 import ProductSearch from "../../components/products/ProductSearch";
+import Footer from "../../components/Footer";
 
 import { products } from "../../data/products";
 import useCart from "../../hooks/usecart";
@@ -294,6 +295,8 @@ const Shop = () => {
           </div>
         </div>
       </div>
+      {/* FOOTER */}
+      <Footer />
     </div>
   );
 };

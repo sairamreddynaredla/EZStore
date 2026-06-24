@@ -1,4 +1,5 @@
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import useCart from "../../hooks/usecart";
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -996,6 +997,8 @@ const Checkout = () => {
           </div>
         </div>
       )}
+      {/* FOOTER */}
+      <Footer />
     </div>
   );
 };

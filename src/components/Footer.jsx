@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ezstoreLogo from "../assets/logo/ezstore-logo-optimized.webp";
 import FooterBanner from "./FooterBanner";
 import { brands } from "../data/brands";
@@ -60,8 +60,15 @@ const getFooterLinks = () => {
 // trust badges removed per request
 
 const Footer = () => {
+  const location = useLocation();
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
   const footerLinks = getFooterLinks();
+
+  // Check if a link is active by comparing its path with the current location
+  const isLinkActive = (linkPath) => {
+    if (linkPath === "#") return false;
+    return location.pathname === linkPath || location.pathname.startsWith(linkPath);
+  };
 
   return (
     <footer style={{ background: "var(--footer-bg)", color: "var(--footer-text)" }}>
@@ -179,8 +186,11 @@ const Footer = () => {
                     <Link
                       to={link.to}
                       onClick={scrollToTop}
-                      className="text-sm transition-all hover:translate-x-1 inline-block footer-link"
-                      style={{ color: "var(--footer-text)", opacity: 0.75 }}
+                      className="text-sm transition-colors hover:translate-x-1 inline-block footer-link"
+                      style={{
+                        color: isLinkActive(link.to) ? "#22c55e" : "var(--footer-text)",
+                        opacity: isLinkActive(link.to) ? 1 : 0.75,
+                      }}
                     >
                       {link.label}
                     </Link>

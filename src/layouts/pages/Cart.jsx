@@ -1,4 +1,5 @@
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";
 import useCart from "../../hooks/usecart";
 import { useWishlist } from "../../context/usewishlist";
@@ -682,6 +683,8 @@ const Cart = () => {
           </div>
         </div>
       )}
+      {/* FOOTER */}
+      <Footer />
     </>
   );
 };

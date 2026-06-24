@@ -1,6 +1,7 @@
 import { products } from "../../data/products";
 import ProductGrid from "../../components/products/ProductGrid";
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 import useCart from "../../hooks/usecart";
 import { useWishlist } from "../../context/WishListContext";
 
@@ -45,6 +46,8 @@ const BestSellers = () => {
           />
         </div>
       </section>
+      {/* FOOTER */}
+      <Footer />
     </div>
   );
 };
