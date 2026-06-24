@@ -14,6 +14,7 @@ const AddToCartButton = ({ product, isOutOfStock = false, onAddToCart }) => {
   const { cartItems, increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
   const toast = useOptionalToast();
   const [flash, setFlash] = useState(false);
+  const [locked, setLocked] = useState(false);
 
   const selectedVariant = product?.selectedVariant || product?.variants?.[0];
   const weight = selectedVariant?.weight || "1kg";
@@ -27,6 +28,9 @@ const AddToCartButton = ({ product, isOutOfStock = false, onAddToCart }) => {
   const handleAdd = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    if (locked) return;
+    setLocked(true);
+    setTimeout(() => setLocked(false), 300);
     if (isOutOfStock || !product) return;
     const payload = { ...product, selectedVariant };
     if (onAddToCart) onAddToCart(payload, 1);
@@ -45,12 +49,18 @@ const AddToCartButton = ({ product, isOutOfStock = false, onAddToCart }) => {
   const handleIncrease = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    if (locked) return;
+    setLocked(true);
+    setTimeout(() => setLocked(false), 300);
     increaseQuantity(product.id, weight);
   };
 
   const handleDecrease = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    if (locked) return;
+    setLocked(true);
+    setTimeout(() => setLocked(false), 300);
     if (cartQty <= 1) {
       removeFromCart(product.id, weight);
       if (toast) {
@@ -83,6 +93,7 @@ const AddToCartButton = ({ product, isOutOfStock = false, onAddToCart }) => {
       >
         <button
           onClick={handleDecrease}
+          disabled={locked}
           className="w-12 h-full flex items-center justify-center text-white hover:bg-amber-600 transition-colors"
         >
           <Minus size={16} strokeWidth={2.5} />
@@ -90,6 +101,7 @@ const AddToCartButton = ({ product, isOutOfStock = false, onAddToCart }) => {
         <span className="text-white font-bold text-[15px] select-none">{cartQty}</span>
         <button
           onClick={handleIncrease}
+          disabled={locked}
           className="w-12 h-full flex items-center justify-center text-white hover:bg-amber-600 transition-colors"
         >
           <Plus size={16} strokeWidth={2.5} />
@@ -102,6 +114,7 @@ const AddToCartButton = ({ product, isOutOfStock = false, onAddToCart }) => {
   return (
     <button
       onClick={handleAdd}
+      disabled={locked}
       className={`w-full py-3 rounded-xl text-[13.5px] font-semibold transition-all duration-200 bg-amber-400 hover:bg-amber-300 text-black`}
     >
       {flash ? "Added!" : "Add to Cart"}

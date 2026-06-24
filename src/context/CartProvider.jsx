@@ -96,7 +96,8 @@ const CartProvider = ({ children }) => {
   // ADD TO CART
 
   const addToCart = (product) => {
-    const selectedVariant = product.selectedVariant ||
+    const selectedVariant =
+      product.selectedVariant ||
       product.variants?.[0] || {
         weight: "1kg",
         price: product.price || 0,
@@ -104,40 +105,36 @@ const CartProvider = ({ children }) => {
 
     const selectedWeight = selectedVariant.weight || "1kg";
 
-    const existingProduct = cartItems.find(
-      (item) => item.id === product.id && (item.selectedVariant?.weight || "1kg") === selectedWeight
-    );
-
-    if (existingProduct) {
-      setCartItems(
-        cartItems.map((item) =>
-          item.id === product.id && (item.selectedVariant?.weight || "1kg") === selectedWeight
-            ? {
-                ...item,
-                quantity: item.quantity + (product.quantity || 1),
-              }
-            : item
-        )
+    setCartItems((prev) => {
+      const existingIndex = prev.findIndex(
+        (item) => item.id === product.id && (item.selectedVariant?.weight || "1kg") === selectedWeight
       );
-    } else {
-      setCartItems([
-        ...cartItems,
 
+      if (existingIndex !== -1) {
+        return prev.map((item, idx) =>
+          idx === existingIndex
+            ? { ...item, quantity: item.quantity + (product.quantity || 1) }
+            : item
+        );
+      }
+
+      return [
+        ...prev,
         {
           ...product,
           selectedVariant,
           quantity: product.quantity || 1,
         },
-      ]);
-    }
+      ];
+    });
 
   };
 
   // REMOVE
 
   const removeFromCart = (id, weight) => {
-    setCartItems(
-      cartItems.filter(
+    setCartItems((prev) =>
+      prev.filter(
         (item) => !(item.id === id && (item.selectedVariant?.weight || "1kg") === (weight || "1kg"))
       )
     );
@@ -146,13 +143,10 @@ const CartProvider = ({ children }) => {
   // INCREASE
 
   const increaseQuantity = (id, weight) => {
-    setCartItems(
-      cartItems.map((item) =>
+    setCartItems((prev) =>
+      prev.map((item) =>
         item.id === id && (item.selectedVariant?.weight || "1kg") === (weight || "1kg")
-          ? {
-              ...item,
-              quantity: item.quantity + 1,
-            }
+          ? { ...item, quantity: item.quantity + 1 }
           : item
       )
     );
@@ -161,17 +155,15 @@ const CartProvider = ({ children }) => {
   // DECREASE
 
   const decreaseQuantity = (id, weight) => {
-    setCartItems(
-      cartItems.map((item) =>
-        item.id === id && (item.selectedVariant?.weight || "1kg") === (weight || "1kg")
-          ? {
-              ...item,
-
-              quantity: item.quantity > 1 ? item.quantity - 1 : 1,
-            }
-          : item
-      )
-    );
+    setCartItems((prev) => {
+      return prev
+        .map((item) =>
+          item.id === id && (item.selectedVariant?.weight || "1kg") === (weight || "1kg")
+            ? { ...item, quantity: Math.max(0, (item.quantity || 0) - 1) }
+            : item
+        )
+        .filter((item) => (item.quantity || 0) > 0);
+    });
   };
 
   // TOTAL ITEMS
