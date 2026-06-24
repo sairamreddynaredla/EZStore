@@ -86,13 +86,12 @@ const BuyBox = ({
             </button>
           </div>
         </div>
-        <button
-          type="button"
-          onClick={() => addToCart({ ...product, selectedVariant, quantity })}
-          className="mt-4 w-full rounded-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base font-bold shadow-sm bg-[#FFB900] hover:bg-[#FFC300] text-black transition-colors"
-        >
-          Add to cart
-        </button>
+        <AddToCartButton
+          product={{ ...product, selectedVariant, quantity }}
+          isOutOfStock={product.stock <= 0}
+          onAddToCart={(prod, qty) => addToCart(prod)}
+          quantity={quantity}
+        />
 
         <BuyNowButton
           onClick={handleBuyNow}

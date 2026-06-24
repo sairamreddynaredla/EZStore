@@ -9,6 +9,7 @@ import { resolveProductImage, resolveProductImageFallback } from "../../utils/pr
 import { useWishlist } from "../../context/WishListContext";
 
 import useCart from "../../hooks/usecart";
+import AddToCartButton from "../../components/products/AddToCartButton";
 
 const WishList = () => {
   const { wishlist: wishlistItems, removeFromWishlist } = useWishlist();
@@ -203,14 +204,15 @@ const WishList = () => {
                     </div>
 
                     {/* ADD TO CART BUTTON */}
-                    <button
-                      onClick={() =>
-                        handleAddToCart({ ...product, selectedVariant: activeVariant }, 1)
-                      }
-                      className="w-full py-3 mt-5 rounded-2xl font-semibold text-sm bg-amber-400 hover:bg-amber-300 text-black transition-colors"
-                    >
-                      Add to Cart
-                    </button>
+                    <AddToCartButton
+                      product={{ ...product, selectedVariant: activeVariant }}
+                      isOutOfStock={product.stock <= 0}
+                      onAddToCart={(prod, quantity) => {
+                        handleAddToCart(prod, quantity);
+                        removeFromWishlist(product.id);
+                      }}
+                      quantity={1}
+                    />
                   </div>
                 </div>
               );
