@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { useState } from "react";
 import ezstoreLogo from "../assets/logo/ezstore-logo-optimized.webp";
 import FooterBanner from "./FooterBanner";
 import { brands } from "../data/brands";
@@ -61,6 +62,7 @@ const getFooterLinks = () => {
 
 const Footer = () => {
   const location = useLocation();
+  const [hoveredLink, setHoveredLink] = useState(null);
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
   const footerLinks = getFooterLinks();
 
@@ -186,9 +188,11 @@ const Footer = () => {
                     <Link
                       to={link.to}
                       onClick={scrollToTop}
+                      onMouseEnter={() => setHoveredLink(link.label)}
+                      onMouseLeave={() => setHoveredLink(null)}
                       className="text-sm transition-colors hover:translate-x-1 inline-block footer-link"
                       style={{
-                        color: isLinkActive(link.to) ? "#22c55e" : "var(--footer-text)",
+                        color: hoveredLink === link.label || isLinkActive(link.to) ? "#22c55e" : "var(--footer-text)",
                         opacity: isLinkActive(link.to) ? 1 : 0.75,
                       }}
                     >
