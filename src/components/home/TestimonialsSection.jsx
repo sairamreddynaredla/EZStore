@@ -1,4 +1,4 @@
-import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, Quote, ArrowLeft, ArrowRight } from "lucide-react";
 
 import { useState, useRef, useEffect } from "react";
 
@@ -129,11 +129,11 @@ const TestimonialsSection = () => {
               disabled={startIndex === 0}
               className={`w-18 h-18 rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-200 ease-in-out ${
                 startIndex === 0
-                  ? "opacity-50 cursor-not-allowed bg-gray-200 text-gray-400"
+                  ? "opacity-50 cursor-not-allowed bg-gray-300 text-gray-500"
                   : "bg-[#0B2A5B] text-white hover:scale-105"
               }`}
             >
-              <ChevronLeft size={28} />
+              <ArrowLeft size={28} />
             </button>
 
             <button
@@ -142,11 +142,11 @@ const TestimonialsSection = () => {
               disabled={startIndex + 3 >= testimonials.length}
               className={`w-18 h-18 rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-200 ease-in-out ${
                 startIndex + 3 >= testimonials.length
-                  ? "opacity-50 cursor-not-allowed bg-gray-100 text-gray-400 border border-gray-200"
-                  : "bg-white text-black border border-gray-200 hover:scale-105"
+                  ? "opacity-50 cursor-not-allowed bg-gray-200 text-gray-400 border border-gray-300"
+                  : "bg-white text-gray-800 border-2 border-gray-300 hover:scale-105"
               }`}
             >
-              <ChevronRight size={28} />
+              <ArrowRight size={28} />
             </button>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 import useCart from "../../hooks/usecart";
+import { useOptionalToast } from "../../context/ToastProvider";
 import { trackAddToCart } from "../../utils/analytics";
 
 /**
@@ -10,7 +11,8 @@ import { trackAddToCart } from "../../utils/analytics";
  * - Synced to cart state
  */
 const AddToCartButton = ({ product, isOutOfStock = false, onAddToCart }) => {
-  const { cartItems, increaseQuantity, decreaseQuantity, removeFromCart, showFlash } = useCart();
+  const { cartItems, increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
+  const toast = useOptionalToast();
   const [flash, setFlash] = useState(false);
 
   const selectedVariant = product?.selectedVariant || product?.variants?.[0];
@@ -33,9 +35,9 @@ const AddToCartButton = ({ product, isOutOfStock = false, onAddToCart }) => {
     } catch (err) {
       /* ignore analytics errors */
     }
-    try {
-      showFlash && showFlash("Added to cart", "success");
-    } catch (err) {}
+    if (toast) {
+      toast.success("Added to cart");
+    }
     setFlash(true);
     setTimeout(() => setFlash(false), 1200);
   };
@@ -51,9 +53,9 @@ const AddToCartButton = ({ product, isOutOfStock = false, onAddToCart }) => {
     e.stopPropagation();
     if (cartQty <= 1) {
       removeFromCart(product.id, weight);
-      try {
-        showFlash && showFlash("Removed from cart", "error");
-      } catch (err) {}
+      if (toast) {
+        toast.error("Removed from cart");
+      }
     } else decreaseQuantity(product.id, weight);
   };
 

@@ -23,6 +23,7 @@ const Brands = lazy(() => import("./layouts/pages/Brands"));
 
 // ✅ UPDATED IMPORT
 import CartProvider from "./context/CartProvider";
+import { ToastProvider } from "./context/ToastProvider";
 
 const App = () => {
   useEffect(() => {
@@ -30,9 +31,10 @@ const App = () => {
   }, []);
 
   return (
-    <CartProvider>
-      <BrowserRouter>
-        <Suspense fallback={<PageLoader />}>
+    <ToastProvider>
+      <CartProvider>
+        <BrowserRouter>
+          <Suspense fallback={<PageLoader />}>
           <Routes>
             {/* HOME */}
 
@@ -110,7 +112,8 @@ const App = () => {
           </Routes>
         </Suspense>
       </BrowserRouter>
-    </CartProvider>
+      </CartProvider>
+    </ToastProvider>
   );
 };
 

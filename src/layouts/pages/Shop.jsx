@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useLocation } from "react-router-dom";
 
@@ -43,6 +43,11 @@ const Shop = () => {
 
   // SEARCH
   const [search, setSearch] = useState(() => searchParam || "");
+
+  // Keep `search` state in sync when the URL query changes (e.g., from Navbar navigate)
+  useEffect(() => {
+    setSearch(searchParam || "");
+  }, [searchParam]);
 
   const DEFAULT_FILTERS = {
     brands: [],

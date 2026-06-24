@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import NavbarDropdown from "./navbar/NavbarDropdown";
 import { FaShoppingCart, FaHeart, FaUser, FaBars, FaTimes, FaSearch } from "react-icons/fa";
@@ -7,21 +7,138 @@ import logo from "../assets/logo/ezstore-logo-optimized.webp";
 
 function Navbar() {
   const navigate = useNavigate();
-  const { totalItems, flash, hideFlash } = useCart();
+  const { totalItems } = useCart();
   const [mobileMenu, setMobileMenu] = useState(false);
   const [search, setSearch] = useState("");
+  const [searchHistory, setSearchHistory] = useState(() => {
+    const saved = localStorage.getItem("searchHistory");
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const searchInputRef = useRef(null);
+  const suggestionsRef = useRef(null);
 
   // Remove Home and Pets, Brands handled separately
   const navLinks = [{ to: "/best-sellers", label: "Best Sellers" }];
 
-  const handleSearch = (e) => {
-    e.preventDefault();
-    if (search.trim()) {
-      navigate(`/pets?search=${search.trim()}`);
-      setSearch("");
-      setMobileMenu(false);
+  // (Category selector removed) 
+
+  // Popular search suggestions
+  const popularSearches = [
+    "Dog Food",
+    "Cat Food",
+    "Treats",
+    "Toys",
+    "Grooming",
+    "Supplements",
+  ];
+
+  // Debounced query for typeahead
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+  useEffect(() => {
+    const id = setTimeout(() => setDebouncedQuery(search.trim()), 200);
+    return () => clearTimeout(id);
+  }, [search]);
+
+  const filteredSuggestions = debouncedQuery
+    ? popularSearches.filter((s) => s.toLowerCase().includes(debouncedQuery.toLowerCase()))
+    : [];
+
+  const suggestions = debouncedQuery ? filteredSuggestions : searchHistory.slice(0, 5);
+
+  // Keyboard nav for suggestions (declared after handleSearch)
+  const [activeIndex, setActiveIndex] = useState(-1);
+
+  // Close suggestions when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (
+        suggestionsRef.current &&
+        !suggestionsRef.current.contains(e.target) &&
+        searchInputRef.current &&
+        !searchInputRef.current.contains(e.target)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleSearch = (e, term = null) => {
+    e?.preventDefault();
+    const searchTerm = (term || search).trim();
+    if (!searchTerm) {
+      return;
     }
+
+    // Add to search history (dedupe case-insensitively, preserve original casing)
+    const normalized = searchTerm.toLowerCase();
+    const updated = [
+      searchTerm,
+      ...searchHistory.filter((s) => s.toLowerCase() !== normalized),
+    ].slice(0, 10);
+    setSearchHistory(updated);
+    localStorage.setItem("searchHistory", JSON.stringify(updated));
+
+    navigate(`/pets?search=${encodeURIComponent(searchTerm)}`);
+    setSearch("");
+    setShowSuggestions(false);
+    setMobileMenu(false);
   };
+
+  const onKeyDown = useCallback(
+    (e) => {
+      if (!showSuggestions) return;
+      if (e.key === "ArrowDown") {
+        e.preventDefault();
+        setActiveIndex((i) => Math.min(i + 1, suggestions.length - 1));
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        setActiveIndex((i) => Math.max(i - 1, 0));
+      } else if (e.key === "Enter") {
+        if (activeIndex >= 0 && suggestions[activeIndex]) {
+          e.preventDefault();
+          handleSearch(e, suggestions[activeIndex]);
+        }
+      } else if (e.key === "Escape") {
+        setShowSuggestions(false);
+        setActiveIndex(-1);
+      }
+    },
+    [showSuggestions, suggestions, activeIndex, handleSearch],
+  );
+
+  const clearSearch = () => {
+    setSearch("");
+    searchInputRef.current?.focus();
+  };
+
+  const clearHistory = () => {
+    setSearchHistory([]);
+    localStorage.removeItem("searchHistory");
+    setShowSuggestions(false);
+  };
+
+  // Global keyboard shortcut: press '/' to focus the search input
+  useEffect(() => {
+    const onGlobalKey = (e) => {
+      if (e.key === "/" && !e.metaKey && !e.ctrlKey && !e.altKey) {
+        const active = document.activeElement;
+        const tag = active?.tagName?.toLowerCase();
+        if (tag !== "input" && tag !== "textarea" && !active?.isContentEditable) {
+          e.preventDefault();
+          searchInputRef.current?.focus();
+          setShowSuggestions(true);
+          setActiveIndex(-1);
+        }
+      }
+    };
+
+    document.addEventListener("keydown", onGlobalKey);
+    return () => document.removeEventListener("keydown", onGlobalKey);
+  }, []);
 
   return (
     <>
@@ -60,18 +177,105 @@ function Navbar() {
 
           <form
             onSubmit={handleSearch}
-            className="hidden sm:flex items-center bg-white border border-[#E5E7EB] rounded-full px-3 sm:px-5 py-2 sm:py-2.5 gap-2 sm:gap-3 flex-1 max-w-xs sm:max-w-md shadow-sm hover:shadow-md hover:border-[#1F6B52] focus-within:shadow-md focus-within:border-[#1F6B52] transition-all duration-300"
+            className="hidden sm:flex items-center bg-gradient-to-r from-white to-gray-50 border-2 border-[#E5E7EB] rounded-full px-2 sm:px-4 py-2 sm:py-2.5 gap-2 sm:gap-3 flex-1 max-w-xs sm:max-w-2xl shadow-sm hover:shadow-lg hover:border-[#1F6B52] focus-within:shadow-lg focus-within:border-[#1F6B52] focus-within:from-[#F0F9F7] transition-all duration-300 relative"
           >
-            <FaSearch className="text-[#4B5563] text-sm flex-shrink-0" />
+            {/* Category selector removed */}
+
+            <FaSearch className="text-[#1F6B52] text-sm flex-shrink-0" />
             <input
+              ref={searchInputRef}
+              role="combobox"
+              aria-expanded={showSuggestions}
+              aria-controls="search-suggestions"
+              aria-autocomplete="list"
               type="text"
               inputMode="search"
               enterKeyHint="search"
-              placeholder="Search..."
+              placeholder="Search products..."
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="bg-transparent text-[#1A1A1A] placeholder-[#4B5563] text-xs sm:text-sm outline-none w-full"
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setShowSuggestions(true);
+                setActiveIndex(-1);
+              }}
+              onFocus={() => setShowSuggestions(true)}
+              onKeyDown={onKeyDown}
+              className="bg-transparent text-[#1A1A1A] placeholder-[#8B92A9] text-xs sm:text-sm outline-none w-full font-medium"
             />
+            {search && (
+              <button
+                type="button"
+                onClick={clearSearch}
+                className="text-[#8B92A9] hover:text-[#1F6B52] flex-shrink-0 transition-colors duration-200"
+                aria-label="Clear search"
+              >
+                <FaTimes className="text-sm" />
+              </button>
+            )}
+
+            {/* Search Suggestions Dropdown */}
+            {showSuggestions && suggestions.length > 0 && (
+              <div
+                id="search-suggestions"
+                role="listbox"
+                ref={suggestionsRef}
+                className="absolute top-full left-0 right-0 mt-2 bg-white border-2 border-[#E5E7EB] rounded-2xl shadow-xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-2 duration-200"
+              >
+                <div className="max-h-72 overflow-y-auto">
+                  {suggestions.map((suggestion, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      role="option"
+                      aria-selected={activeIndex === idx}
+                      onMouseEnter={() => setActiveIndex(idx)}
+                      onMouseLeave={() => setActiveIndex(-1)}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleSearch(e, suggestion);
+                      }}
+                      className={`w-full px-5 py-3 text-left hover:bg-[#F0F9F7] text-[#4B5563] hover:text-[#1F6B52] transition-all duration-200 flex items-center gap-2 group border-b border-[#F0F0F0] last:border-b-0 ${
+                        activeIndex === idx ? "bg-[#F0F9F7]" : ""
+                      }`}
+                    >
+                      <FaSearch className="text-[#8B92A9] group-hover:text-[#1F6B52] text-xs" />
+                      <span className="flex-1 text-sm font-medium">
+                        {/** highlight match */}
+                        {(() => {
+                          const q = debouncedQuery.toLowerCase();
+                          const s = suggestion;
+                          if (!q) return s;
+                          const i = s.toLowerCase().indexOf(q);
+                          if (i === -1) return s;
+                          return (
+                            <>
+                              {s.substring(0, i)}
+                              <span className="font-semibold text-[#1F6B52]">{s.substring(i, i + q.length)}</span>
+                              {s.substring(i + q.length)}
+                            </>
+                          );
+                        })()}
+                      </span>
+                      {!search.trim() && (
+                        <span className="text-[10px] text-[#8B92A9]">Recent</span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+
+                {searchHistory.length > 0 && !search.trim() && (
+                  <div className="px-5 py-2 bg-gray-50 border-t border-[#E5E7EB] text-center">
+                    <button
+                      type="button"
+                      onClick={clearHistory}
+                      className="text-[10px] text-[#8B92A9] hover:text-red-500 font-medium transition-colors duration-200"
+                    >
+                      Clear History
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
           </form>
 
           <div className="hidden md:flex items-center gap-2 sm:gap-4 md:gap-6 text-[#4B5563] text-lg shrink-0">
@@ -174,16 +378,33 @@ function Navbar() {
 
             <form
               onSubmit={handleSearch}
-              className="flex items-center bg-white border border-[#E5E7EB] rounded-lg px-4 py-3 gap-3 shadow-sm"
+              className="flex items-center bg-gradient-to-r from-white to-gray-50 border-2 border-[#E5E7EB] rounded-xl px-4 py-3 gap-3 shadow-md focus-within:shadow-lg focus-within:border-[#1F6B52] focus-within:from-[#F0F9F7] transition-all duration-300 relative"
             >
-              <FaSearch className="text-[#4B5563] text-sm" />
+              <FaSearch className="text-[#1F6B52] text-sm" />
               <input
+                ref={searchInputRef}
                 type="text"
-                placeholder="Search..."
+                inputMode="search"
+                enterKeyHint="search"
+                placeholder="Search products..."
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="bg-transparent text-[#1A1A1A] placeholder-[#4B5563] text-sm outline-none w-full"
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setShowSuggestions(true);
+                }}
+                onFocus={() => setShowSuggestions(true)}
+                className="bg-transparent text-[#1A1A1A] placeholder-[#8B92A9] text-sm outline-none w-full font-medium"
               />
+              {search && (
+                <button
+                  type="button"
+                  onClick={clearSearch}
+                  className="text-[#8B92A9] hover:text-[#1F6B52] transition-colors duration-200"
+                  aria-label="Clear search"
+                >
+                  <FaClose className="text-sm" />
+                </button>
+              )}
             </form>
 
             <div className="h-px bg-[#E5E7EB] my-2"></div>
@@ -224,20 +445,6 @@ function Navbar() {
           </div>
         )}
       </header>
-      {flash?.visible && (
-        <div
-          className={`fixed top-4 right-4 z-50 flex items-center gap-3 px-3 py-2 text-xs font-medium shadow-lg text-white ${flash.type === "success" ? "bg-emerald-600" : "bg-red-600"} rounded-md`}
-        >
-          <span className="leading-4">{flash.message}</span>
-          <button
-            onClick={() => hideFlash && hideFlash()}
-            aria-label="Close"
-            className="ml-1 text-white/80 hover:text-white text-sm leading-4"
-          >
-            ×
-          </button>
-        </div>
-      )}
       <div className="h-12 md:h-20 lg:h-24" aria-hidden="true" />
     </>
   );

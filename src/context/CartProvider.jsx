@@ -93,22 +93,6 @@ const CartProvider = ({ children }) => {
     };
   }, []);
 
-  // FLASH / TOAST MESSAGE
-  const [flash, setFlash] = useState({
-    visible: false,
-    message: "",
-    type: "success",
-  });
-
-  const showFlash = (message, type = "success", timeout = 1400) => {
-    setFlash({ visible: true, message, type });
-    setTimeout(() => setFlash((s) => ({ ...s, visible: false })), timeout);
-  };
-
-  const hideFlash = () => {
-    setFlash((s) => ({ ...s, visible: false }));
-  };
-
   // ADD TO CART
 
   const addToCart = (product) => {
@@ -146,10 +130,7 @@ const CartProvider = ({ children }) => {
         },
       ]);
     }
-    // show flash
-    try {
-      showFlash("Added to cart", "success");
-    } catch (e) {}
+
   };
 
   // REMOVE
@@ -160,9 +141,6 @@ const CartProvider = ({ children }) => {
         (item) => !(item.id === id && (item.selectedVariant?.weight || "1kg") === (weight || "1kg"))
       )
     );
-    try {
-      showFlash("Removed from cart", "error");
-    } catch (e) {}
   };
 
   // INCREASE
@@ -226,9 +204,6 @@ const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCartItems([]);
-    try {
-      showFlash("Cart cleared", "error");
-    } catch (e) {}
   };
 
   // REPLACE CART WITH A SINGLE ITEM (atomic, avoids race conditions)
@@ -248,10 +223,6 @@ const CartProvider = ({ children }) => {
     };
 
     setCartItems([item]);
-
-    try {
-      showFlash("Proceeding to checkout", "success");
-    } catch (e) {}
   };
 
   return (
@@ -274,10 +245,6 @@ const CartProvider = ({ children }) => {
         totalItems,
 
         totalPrice,
-        // flash helper & state
-        flash,
-        showFlash,
-        hideFlash,
       }}
     >
       {children}
