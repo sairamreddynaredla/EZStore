@@ -17,10 +17,10 @@ const PetBreedsCarousel = ({ breeds, title }) => {
         <h3 className="text-2xl font-semibold">{title}</h3>
       </div>
 
-      <div className="relative">
+      <div className="relative overflow-visible">
         <button
           onClick={() => swiperRef.current?.slidePrev()}
-          className="absolute left-0 md:left-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
+          className="absolute left-[-28px] md:left-[-40px] top-1/2 -translate-y-1/2 z-50 rounded-full bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
           aria-label="Scroll breeds left"
         >
           <ChevronLeft size={16} className="md:w-[20px]" />
@@ -28,7 +28,7 @@ const PetBreedsCarousel = ({ breeds, title }) => {
 
         <button
           onClick={() => swiperRef.current?.slideNext()}
-          className="absolute right-0 md:right-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
+          className="absolute right-[-28px] md:right-[-40px] top-1/2 -translate-y-1/2 z-50 rounded-full bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
           aria-label="Scroll breeds right"
         >
           <ChevronRight size={16} className="md:w-[20px]" />
@@ -38,12 +38,13 @@ const PetBreedsCarousel = ({ breeds, title }) => {
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}
-          spaceBetween={12}
+          slidesPerView={Math.min(5, breeds.length)}
+          spaceBetween={20}
           loop={false}
           observer={true}
           observeParents={true}
           breakpoints={{
-            320: { slidesPerView: Math.min(2, breeds.length) },
+            320: { slidesPerView: Math.min(2, breeds.length), spaceBetween: 12 },
             640: { slidesPerView: Math.min(3, breeds.length), spaceBetween: 16 },
             1024: { slidesPerView: Math.min(5, breeds.length), spaceBetween: 20 },
           }}

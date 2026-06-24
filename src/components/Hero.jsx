@@ -5,7 +5,7 @@ const heroDog =
 
 function Hero() {
   return (
-    <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-10 mt-10">
+    <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 px-10 mt-0 sm:mt-10">
       <div className="bg-black rounded-[40px] overflow-hidden relative min-h-[420px]">
         <img
           src={heroCat}

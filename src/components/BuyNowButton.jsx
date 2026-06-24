@@ -29,7 +29,8 @@ const BuyNowButton = ({
     <button
       onClick={handleClick}
       disabled={disabled}
-      className={`w-full min-w-45 rounded-lg font-semibold flex items-center justify-center gap-2 transition-all duration-300 transform active:scale-95 bg-amber-500 hover:bg-amber-600 text-white ${disabled ? "opacity-60 cursor-not-allowed" : ""} ${className}`}
+      className={`w-full py-2 rounded-full text-sm font-semibold flex items-center justify-center gap-2 transition-all duration-300 btn btn-primary ${disabled ? "opacity-60 cursor-not-allowed" : ""} ${className}`}
+      // remove shrink-on-click by not using active scale transforms
     >
       {children}
     </button>

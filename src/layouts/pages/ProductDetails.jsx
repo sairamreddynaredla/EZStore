@@ -34,7 +34,7 @@ const ProductDetails = () => {
   const [selectedVariant, setSelectedVariant] = useState(product?.variants?.[0] || {});
   const [quantity, setQuantity] = useState(1);
 
-  const { addToCart } = useCart();
+  const { addToCart, clearCart, replaceCartWithItem } = useCart();
   const { addToWishlist, removeFromWishlist } = useWishlist();
 
   const formatCategoryLabel = (category) => {
@@ -55,10 +55,13 @@ const ProductDetails = () => {
     }
   };
 
-  // BUY NOW HANDLER
+  // BUY NOW HANDLER — clear existing cart and proceed to checkout with this item only
   const handleBuyNow = async () => {
-    await handleAddToCart(product.id, 1);
-    navigate("/checkout");
+    // Atomically replace cart contents with only this product to avoid duplicates
+    replaceCartWithItem({ ...product, selectedVariant, quantity });
+
+    // navigate to checkout and indicate this was a Buy Now (single-item) action
+    navigate("/checkout", { state: { buyNow: true } });
   };
 
   const handleWishlistToggle = (productId, isAdding) => {

@@ -194,7 +194,7 @@ function FoodCategorySection() {
       )}
 
       {/* View All link */}
-      <div className="text-center mt-10">
+      <div className="text-center mt-0 sm:mt-10">
         <Link
           to="/pets"
           className="inline-block text-[#E63946] font-semibold text-base hover:underline underline-offset-4 transition-all"

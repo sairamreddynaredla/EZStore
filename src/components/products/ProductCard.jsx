@@ -45,7 +45,7 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle, compact = false }
 
   const baseClass = compact
     ? "group relative flex flex-col h-full bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow duration-200"
-    : "group relative flex flex-col bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow duration-200 w-full sm:w-[200px] sm:min-w-[200px] sm:h-[480px]";
+    : "group relative flex flex-col bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-md transition-shadow duration-200 w-full";
 
   return (
     <Link to={`/product/${product.id}`} state={{ product }} className={baseClass}>

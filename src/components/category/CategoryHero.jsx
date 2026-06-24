@@ -32,7 +32,7 @@ const CategoryHero = ({ title, subtitle, highlights, image, breadcrumbs, imagePo
       )}
     </div>
     {image && (
-      <div className="w-full overflow-hidden">
+      <div className="relative w-full overflow-hidden">
         <img
           src={image}
           alt={title || "banner"}
@@ -40,6 +40,8 @@ const CategoryHero = ({ title, subtitle, highlights, image, breadcrumbs, imagePo
           style={{ objectPosition: imagePosition || "center center" }}
           loading="lazy"
         />
+
+        {/* arrows removed */}
       </div>
     )}
   </section>

@@ -12,11 +12,11 @@ const BreedSlider = ({ breeds }) => {
 
   return (
     <section className="mt-16 px-6">
-      <div className="relative">
+      <div className="relative overflow-visible">
         {/* title removed to avoid duplicate subtitle on category pages */}
         <button
           onClick={() => swiperRef.current?.slidePrev()}
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white shadow-xl w-12 h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
+          className="absolute left-[-56px] top-1/2 -translate-y-1/2 z-50 rounded-full bg-white shadow-xl w-12 h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
           aria-label="Scroll breeds left"
         >
           <ChevronLeft size={20} />
@@ -24,7 +24,7 @@ const BreedSlider = ({ breeds }) => {
 
         <button
           onClick={() => swiperRef.current?.slideNext()}
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white shadow-xl w-12 h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
+          className="absolute right-[-56px] top-1/2 -translate-y-1/2 z-50 rounded-full bg-white shadow-xl w-12 h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
           aria-label="Scroll breeds right"
         >
           <ChevronRight size={20} />

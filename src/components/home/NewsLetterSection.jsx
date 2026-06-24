@@ -199,7 +199,7 @@ const NewsLetterSection = () => {
                   <button
                     type="submit"
                     disabled={status === "loading" || status === "success"}
-                    className="w-full h-12 bg-linear-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all duration-200 transform hover:scale-105 disabled:scale-100 active:scale-95"
+                    className="w-full h-12 bg-linear-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all duration-200 hover:scale-105"
                   >
                     {status === "loading" ? (
                       <>

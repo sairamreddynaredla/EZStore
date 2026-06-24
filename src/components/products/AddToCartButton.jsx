@@ -100,7 +100,7 @@ const AddToCartButton = ({ product, isOutOfStock = false, onAddToCart }) => {
   return (
     <button
       onClick={handleAdd}
-      className={`w-full py-3 rounded-xl text-[13.5px] font-semibold transition-all duration-200 active:scale-95 bg-amber-400 hover:bg-amber-300 text-black`}
+      className={`w-full py-3 rounded-xl text-[13.5px] font-semibold transition-all duration-200 bg-amber-400 hover:bg-amber-300 text-black`}
     >
       {flash ? "Added!" : "Add to Cart"}
     </button>

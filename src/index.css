@@ -77,10 +77,177 @@ a {
 
 /* Hero Swiper styles moved into Tailwind components layer */
 @layer components {
-  /* Hide hero swiper navigation buttons and pagination */
+  /* Expose a CSS variable to tune pagination vertical offset per hero instance */
+  .homepage-hero {
+    --hero-pagination-bottom: 1.25rem; /* place bullets/arrows at banner bottom */
+    --hero-arrow-right: 3rem; /* horizontal inset for arrow controls; adjust if needed */
+    position: relative; /* ensure absolutely-positioned pagination is anchored to the hero */
+    overflow: hidden; /* keep arrows/pagination inside the banner */
+  }
+  /* Ensure Swiper uses brown as its theme color for any defaults */
+  .hero-swiper {
+    --swiper-theme-color: #8B4513;
+  }
+  /* Keep nav buttons hidden on small screens but show pagination overlay */
   .hero-swiper .swiper-button-prev,
-  .hero-swiper .swiper-button-next,
-  .hero-swiper .swiper-pagination {
+  .hero-swiper .swiper-button-next {
     display: none;
+  }
+
+  /* Position pagination bullets centered over the hero image (bottom center) */
+  .hero-swiper .swiper-pagination {
+    display: flex !important;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: auto;
+    /* place near bottom of hero; adjust per viewport in media queries */
+    bottom: 2.5rem;
+    z-index: 40;
+    gap: 0.75rem;
+    pointer-events: auto;
+    align-items: center;
+  }
+
+  /* Default: hide pagination on larger viewports (desktop/tablet) so
+     indicators only appear on mobile as requested. We'll reveal them
+     explicitly in the mobile media query below. */
+  @media (min-width: 640px) {
+    .hero-swiper .swiper-pagination,
+    .homepage-hero .swiper-pagination {
+      display: none !important;
+    }
+  }
+
+  /* Ensure any pagination inside the homepage hero section is centered and styled similarly.
+     Targets elements rendered outside the hero-swiper node. */
+  .homepage-hero .swiper-pagination {
+    display: flex !important;
+    position: absolute !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    top: auto !important;
+    bottom: var(--hero-pagination-bottom, 1.25rem) !important;
+    z-index: 40 !important;
+    gap: 0.75rem !important;
+    pointer-events: auto !important;
+    align-items: center !important;
+  }
+
+  /* Inactive bullets: subtle white ring over image; active bullet: filled orange with white ring */
+  .hero-swiper .swiper-pagination-bullet {
+    width: 0.6rem !important;
+    height: 0.6rem !important;
+    background: transparent !important;
+    border-radius: 9999px !important;
+    opacity: 1 !important;
+    transition: transform 150ms ease, background-color 150ms ease, box-shadow 150ms ease !important;
+    box-shadow: none !important;
+    border: 2px solid rgba(255,255,255,0.75) !important;
+    cursor: pointer !important;
+  }
+
+  .hero-swiper .swiper-pagination-bullet-active {
+    background: #F5A623 !important; /* orange */
+    transform: scale(1.35) !important;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12) !important;
+    border: 2px solid #ffffff !important;
+  }
+
+  /* Larger bullets on bigger screens */
+  @media (min-width: 640px) {
+    .hero-swiper .swiper-pagination {
+      bottom: calc(var(--hero-pagination-bottom, 3.5rem)) !important;
+      gap: 0.8rem !important;
+      transform: translateX(-50%) !important;
+    }
+    .hero-swiper .swiper-pagination-bullet {
+      width: 0.7rem !important;
+      height: 0.7rem !important;
+    }
+  }
+
+  /* On very large screens nudge the dots slightly right to align with image center */
+  @media (min-width: 1024px) {
+    .homepage-hero .swiper-pagination {
+      bottom: calc(var(--hero-pagination-bottom, 4rem)) !important;
+      gap: 1rem !important;
+    }
+  }
+
+  /* Remove default focus/hover blue and enforce brown */
+  .hero-swiper .swiper-pagination-bullet:hover,
+  .hero-swiper .swiper-pagination-bullet:focus {
+    background: #8B4513;
+    outline: none;
+    box-shadow: none;
+  }
+
+  .hero-swiper .swiper-pagination-bullet:focus {
+    transform: scale(1.05);
+  }
+
+  /* Mobile-specific: compact circular arrow controls and tighter pagination */
+  @media (max-width: 639px) {
+    /* Mobile insets: place pagination and arrows near the banner bottom (match desktop) */
+    .homepage-hero {
+      --hero-pagination-bottom: 2.5rem; /* match desktop bottom offset */
+      --hero-arrow-right: 1rem;
+    }
+    /* Ensure pagination is visible on small screens and aligns with arrow controls */
+    /* Place pagination and arrows at the lower end of the banner (mobile) */
+    .hero-swiper .swiper-pagination,
+    .homepage-hero .swiper-pagination {
+      display: flex !important;
+      position: absolute !important;
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      bottom: var(--hero-pagination-bottom, 12px) !important;
+      z-index: 60 !important;
+      gap: 0.5rem !important;
+      pointer-events: auto !important;
+      align-items: center !important;
+    }
+
+    .homepage-hero .hero-arrow-controls {
+      /* place arrows at the same bottom level as pagination */
+      bottom: var(--hero-pagination-bottom, 12px) !important;
+      right: var(--hero-arrow-right, 12px) !important;
+      transform: none !important;
+      gap: 0.5rem !important;
+      z-index: 60 !important;
+      max-width: calc(100% - var(--hero-arrow-right, 12px)) !important;
+    }
+
+    .homepage-hero .hero-arrow-controls button {
+      width: 40px !important;
+      height: 40px !important;
+      border-radius: 9999px !important;
+      background: #ffffff !important;
+      border: 2px solid #E5E7EB !important; /* neutral light border, remove orange */
+      box-shadow: 0 6px 14px rgba(15,23,42,0.08) !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 0 !important;
+      color: #1A1A1A !important;
+      transition: transform 180ms ease-in-out !important;
+    }
+
+    .homepage-hero .hero-arrow-controls button:hover {
+      transform: scale(1.05) !important;
+    }
+
+    .homepage-hero .hero-arrow-controls button svg {
+      width: 16px !important;
+      height: 16px !important;
+    }
+
+    .homepage-hero .swiper-pagination {
+      /* ensure dots sit on top of the image */
+      bottom: var(--hero-pagination-bottom, 1.25rem) !important;
+      gap: 0.5rem !important;
+      z-index: 55 !important;
+    }
   }
 }

@@ -40,7 +40,58 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
+
+    // Broadcast changes to other tabs/windows for real-time sync
+    try {
+      if (typeof BroadcastChannel !== "undefined") {
+        const bc = new BroadcastChannel("ezstore_cart");
+        bc.postMessage({ type: "cart:update", cart: cartItems });
+        bc.close();
+      }
+    } catch (e) {
+      // ignore if BroadcastChannel unsupported
+    }
   }, [cartItems]);
+
+  // Listen for storage events (fallback / other tabs)
+  useEffect(() => {
+    const onStorage = (e) => {
+      if (e.key === "cart") {
+        try {
+          const newCart = JSON.parse(e.newValue || "[]");
+          setCartItems(newCart);
+        } catch (err) {
+          // ignore parse errors
+        }
+      }
+    };
+
+    window.addEventListener("storage", onStorage);
+
+    // Also listen for BroadcastChannel messages
+    let bc;
+    try {
+      if (typeof BroadcastChannel !== "undefined") {
+        bc = new BroadcastChannel("ezstore_cart");
+        bc.onmessage = (msg) => {
+          try {
+            if (msg?.data?.type === "cart:update") {
+              setCartItems(msg.data.cart || []);
+            }
+          } catch (err) {}
+        };
+      }
+    } catch (err) {
+      // ignore
+    }
+
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      try {
+        if (bc) bc.close();
+      } catch (err) {}
+    };
+  }, []);
 
   // FLASH / TOAST MESSAGE
   const [flash, setFlash] = useState({
@@ -180,6 +231,29 @@ const CartProvider = ({ children }) => {
     } catch (e) {}
   };
 
+  // REPLACE CART WITH A SINGLE ITEM (atomic, avoids race conditions)
+  const replaceCartWithItem = (product) => {
+    const selectedVariant =
+      product.selectedVariant ||
+      product.variants?.[0] ||
+      {
+        weight: "1kg",
+        price: product.price || 0,
+      };
+
+    const item = {
+      ...product,
+      selectedVariant,
+      quantity: product.quantity || 1,
+    };
+
+    setCartItems([item]);
+
+    try {
+      showFlash("Proceeding to checkout", "success");
+    } catch (e) {}
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -194,6 +268,8 @@ const CartProvider = ({ children }) => {
         decreaseQuantity,
 
         clearCart,
+
+        replaceCartWithItem,
 
         totalItems,
 

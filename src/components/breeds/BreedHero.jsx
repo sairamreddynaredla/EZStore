@@ -60,6 +60,8 @@ const BreedHero = ({ breed }) => {
             className="w-full h-full sm:min-h-[240px] md:min-h-[320px] lg:min-h-[420px] object-cover object-center"
             loading="lazy"
           />
+
+          {/* arrows removed */}
         </div>
       </div>
     </section>

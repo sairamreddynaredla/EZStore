@@ -46,7 +46,7 @@ function Navbar() {
                 key={link.to}
                 to={link.to}
                 className={({ isActive }) =>
-                  `font-medium transition-all duration-300 px-4 py-2.5 rounded-full whitespace-nowrap ${
+                  `font-medium transition-all duration-300 px-4 py-2.5 rounded-full whitespace-nowrap nav-link ${
                     isActive
                       ? "text-[#1F6B52] bg-[#E8F5F0]"
                       : "text-[#4B5563] hover:text-[#1F6B52] hover:bg-[#F5F5F5]"
@@ -74,7 +74,7 @@ function Navbar() {
             />
           </form>
 
-          <div className="flex items-center gap-2 sm:gap-4 md:gap-6 text-[#4B5563] text-lg shrink-0">
+          <div className="hidden md:flex items-center gap-2 sm:gap-4 md:gap-6 text-[#4B5563] text-lg shrink-0">
             <Link
               to="/cart"
               className="relative p-2.5 sm:p-3 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group"
@@ -158,7 +158,7 @@ function Navbar() {
                   to={link.to}
                   onClick={() => setMobileMenu(false)}
                   className={({ isActive }) =>
-                    `block text-base font-medium transition-all duration-300 px-4 py-3 rounded-lg w-full text-left ${
+                    `block text-base font-medium transition-all duration-300 px-4 py-3 rounded-lg w-full text-left nav-link ${
                       isActive
                         ? "text-[#1F6B52] bg-[#E8F5F0]"
                         : "text-[#4B5563] hover:text-[#1F6B52] hover:bg-[#F5F5F5]"
@@ -238,7 +238,7 @@ function Navbar() {
           </button>
         </div>
       )}
-      <div className="h-20 md:h-20 lg:h-24" aria-hidden="true" />
+      <div className="h-12 md:h-20 lg:h-24" aria-hidden="true" />
     </>
   );
 }

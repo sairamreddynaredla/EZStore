@@ -62,7 +62,7 @@ export default function BrandsMegaContent({ onClose }) {
             <h3 className="mt-4 text-lg font-bold">All Brands</h3>
             <div className="flex mt-4">
               <div className="w-10 pr-3">
-                <ul className="space-y-2 text-sm text-gray-500 sticky top-4">
+                <ul className="space-y-2 text-sm text-gray-500 sticky top-4 max-h-[50vh] overflow-y-auto hide-scrollbar">
                   {letters.map((letter) => (
                     <li key={letter}>
                       <button

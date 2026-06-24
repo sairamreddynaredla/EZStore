@@ -195,8 +195,10 @@ const Cart = () => {
                     in your cart
                   </p>
                   <button
+                    type="button"
                     onClick={() => setShowClearModal(true)}
-                    className="text-xs text-red-600 hover:text-red-800 font-semibold hover:underline whitespace-nowrap"
+                    aria-label="Clear cart"
+                    className="inline-flex items-center px-3 py-1.5 border border-red-600 text-red-600 rounded hover:bg-red-50 hover:text-red-800 font-semibold focus:outline-none focus:ring-2 focus:ring-red-200 text-xs whitespace-nowrap"
                   >
                     Clear
                   </button>

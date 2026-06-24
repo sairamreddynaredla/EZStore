@@ -8,6 +8,7 @@ const MegaMenuSection = ({ sections, banner: defaultBanner, showBanner = true, o
     title: "",
     subtitle: "",
   });
+  const [isCatBanner, setIsCatBanner] = useState(false);
 
   const handleHover = (slug) => {
     if (!showBanner) return;
@@ -25,8 +26,11 @@ const MegaMenuSection = ({ sections, banner: defaultBanner, showBanner = true, o
         title: data.title || "",
         subtitle: data.subtitle || "",
       });
+      // mark as cat banner when the slug is a cats category (e.g. "cats-...")
+      setIsCatBanner(Boolean(slug && String(slug).startsWith("cats")));
     } else {
       setActiveBanner({ image: defaultBanner, title: "", subtitle: "" });
+      setIsCatBanner(false);
     }
   };
 
@@ -61,20 +65,28 @@ const MegaMenuSection = ({ sections, banner: defaultBanner, showBanner = true, o
 
         {showBanner && (
           <div className="hidden lg:block lg:col-span-1">
-            <div className="w-full h-48 rounded-xl overflow-hidden border border-gray-100 shadow-sm bg-gray-50">
-              {activeBanner.image ? (
-                <img
-                  src={activeBanner.image}
-                  alt={activeBanner.title || "banner"}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              ) : (
-                <div className="w-full h-full flex items-center justify-center text-gray-400">
-                  No banner
+            {/* Make cat banners slightly shorter and use object-contain so full image is visible */}
+            {(() => {
+              const containerHeight = isCatBanner ? "h-36" : "h-48";
+              const imgObjectFit = isCatBanner ? "object-contain" : "object-cover";
+
+              return (
+                <div className={`w-full ${containerHeight} rounded-xl overflow-hidden border border-gray-100 shadow-sm bg-gray-50`}>
+                  {activeBanner.image ? (
+                    <img
+                      src={activeBanner.image}
+                      alt={activeBanner.title || "banner"}
+                      className={`w-full h-full ${imgObjectFit}`}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-400">
+                      No banner
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              );
+            })()}
 
             {(activeBanner.title || activeBanner.subtitle) && (
               <div className="mt-3">

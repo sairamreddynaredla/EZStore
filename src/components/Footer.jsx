@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import ezstoreLogo from "../assets/logo/ezstore-logo-optimized.webp";
+import FooterBanner from "./FooterBanner";
 import { brands } from "../data/brands";
 
 const socialLinks = [
@@ -56,12 +57,7 @@ const getFooterLinks = () => {
   };
 };
 
-const trustBadges = [
-  { icon: "🚚", title: "Free Delivery", subtitle: "On orders above $499" },
-  { icon: "🔄", title: "Easy Returns", subtitle: "30-day return policy" },
-  { icon: "🔒", title: "Secure Payments", subtitle: "100% safe & encrypted" },
-  { icon: "🏆", title: "Trusted Brands", subtitle: "100+ premium brands" },
-];
+// trust badges removed per request
 
 const Footer = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
@@ -69,38 +65,8 @@ const Footer = () => {
 
   return (
     <footer style={{ background: "var(--footer-bg)", color: "var(--footer-text)" }}>
-      {/* ── Trust Badges Bar ── */}
-      <div
-        className="border-b"
-        style={{
-          borderColor: "var(--footer-border)",
-          background: "var(--footer-dark-bg)",
-        }}
-      >
-        <div className="max-w-360 mx-auto px-6 md:px-10 py-5">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {trustBadges.map((badge) => (
-              <div key={badge.title} className="flex items-center gap-3">
-                <span className="text-2xl">{badge.icon}</span>
-                <div>
-                  <p
-                    className="text-sm font-bold leading-tight"
-                    style={{ color: "var(--footer-text)" }}
-                  >
-                    {badge.title}
-                  </p>
-                  <p
-                    className="text-xs leading-tight opacity-75"
-                    style={{ color: "var(--footer-text)" }}
-                  >
-                    {badge.subtitle}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
+      {/* Insert single full-width footer banner */}
+      <FooterBanner />
 
       {/* ── Main Footer Grid ── */}
       <div className="max-w-360 mx-auto px-6 md:px-10 py-14">
@@ -113,8 +79,7 @@ const Footer = () => {
                 className="text-sm leading-relaxed opacity-80"
                 style={{ color: "var(--footer-text)" }}
               >
-                Redefining pet shopping with premium food, accessories, and trusted brands —
-                designed to improve your pet's life every day.
+                Redefining pet shopping with premium food, accessories, and trusted brands. Designed to improve your pet's life every day.
               </p>
             </div>
 
@@ -134,7 +99,7 @@ const Footer = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={link.label}
-                    className="h-11 w-11 sm:h-10 sm:w-10 rounded-full flex items-center justify-center transition-all hover:scale-110 shadow-sm hover:shadow-md"
+                    className="h-11 w-11 sm:h-10 sm:w-10 rounded-full flex items-center justify-center transition-all hover:scale-110 shadow-sm hover:shadow-md footer-social"
                     style={{ background: "var(--footer-link)" }}
                   >
                     <img
@@ -214,16 +179,8 @@ const Footer = () => {
                     <Link
                       to={link.to}
                       onClick={scrollToTop}
-                      className="text-sm transition-all hover:translate-x-1 inline-block"
+                      className="text-sm transition-all hover:translate-x-1 inline-block footer-link"
                       style={{ color: "var(--footer-text)", opacity: 0.75 }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.opacity = 1;
-                        e.currentTarget.style.color = "var(--footer-link)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.opacity = 0.75;
-                        e.currentTarget.style.color = "var(--footer-text)";
-                      }}
                     >
                       {link.label}
                     </Link>
@@ -252,25 +209,25 @@ const Footer = () => {
               © {new Date().getFullYear()} EZStore. All rights reserved.
             </span>
 
-            <span className="opacity-75 text-center">
+                <span className="opacity-75 text-center">
               Designed & Developed by{" "}
               <a
                 href="https://www.virtutechsolutions.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-semibold hover:underline"
-                style={{ color: "var(--footer-link)" }}
+                style={{ color: "var(--primary)" }}
               >
                 Virtu Tech Solutions
               </a>
             </span>
 
             <div className="flex items-center gap-5">
-              {["Terms of Service", "Privacy Policy", "Cookie Policy"].map((item) => (
+              {["Terms of Service", "Privacy Policy"].map((item) => (
                 <a
                   key={item}
                   href="#"
-                  className="opacity-75 hover:opacity-100 hover:underline transition-opacity"
+                  className="opacity-75 hover:opacity-100 hover:underline transition-opacity footer-link"
                   style={{ color: "var(--footer-text)" }}
                 >
                   {item}

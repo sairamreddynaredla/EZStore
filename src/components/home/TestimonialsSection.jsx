@@ -46,7 +46,6 @@ const testimonials = [
 
 const TestimonialsSection = () => {
   const [startIndex, setStartIndex] = useState(0);
-  const [activeArrow, setActiveArrow] = useState("next");
   const mobileScrollerRef = useRef(null);
 
   const visibleTestimonials = testimonials.slice(startIndex, startIndex + 3);
@@ -106,7 +105,7 @@ const TestimonialsSection = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* TOP */}
 
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-16">
+        <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between mb-16">
           <div className="text-center md:text-left">
             <p className="text-red-500 uppercase tracking-[4px] font-semibold mb-4">
               Trusted By Pet Parents
@@ -122,34 +121,32 @@ const TestimonialsSection = () => {
             </p>
           </div>
 
-          {/* ARROWS (desktop only) */}
-          <div className="hidden md:flex items-center gap-4 mt-8 md:mt-0">
+          {/* ARROWS (always visible on md+, positioned right) */}
+          <div className="hidden md:flex absolute right-12 top-12 items-center z-30 gap-4">
             <button
-              onClick={() => {
-                setActiveArrow("prev");
-                prevSlide();
-              }}
-              className={`w-14 h-14 rounded-full flex items-center justify-center hover:shadow-xl transition ${
-                activeArrow === "prev"
-                  ? "bg-[#16325B] text-white"
-                  : "bg-white border border-gray-200"
+              onClick={prevSlide}
+              aria-label="Previous testimonials"
+              disabled={startIndex === 0}
+              className={`w-18 h-18 rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-200 ease-in-out ${
+                startIndex === 0
+                  ? "opacity-50 cursor-not-allowed bg-gray-200 text-gray-400"
+                  : "bg-[#0B2A5B] text-white hover:scale-105"
               }`}
             >
-              <ChevronLeft size={24} />
+              <ChevronLeft size={28} />
             </button>
 
             <button
-              onClick={() => {
-                setActiveArrow("next");
-                nextSlide();
-              }}
-              className={`w-14 h-14 rounded-full flex items-center justify-center hover:bg-[#0d2240] transition ${
-                activeArrow === "next"
-                  ? "bg-[#16325B] text-white"
-                  : "bg-white border border-gray-200"
+              onClick={nextSlide}
+              aria-label="Next testimonials"
+              disabled={startIndex + 3 >= testimonials.length}
+              className={`w-18 h-18 rounded-full flex items-center justify-center shadow-lg transform transition-transform duration-200 ease-in-out ${
+                startIndex + 3 >= testimonials.length
+                  ? "opacity-50 cursor-not-allowed bg-gray-100 text-gray-400 border border-gray-200"
+                  : "bg-white text-black border border-gray-200 hover:scale-105"
               }`}
             >
-              <ChevronRight size={24} />
+              <ChevronRight size={28} />
             </button>
           </div>
         </div>
@@ -162,7 +159,7 @@ const TestimonialsSection = () => {
             {testimonials.map((item) => (
               <div
                 key={item.id}
-                className="min-w-[320px] min-h-[360px] flex-shrink-0 bg-[#f8f8f8] rounded-[36px] p-10 hover:shadow-2xl transition duration-500 relative overflow-hidden flex flex-col justify-start"
+                className="min-w-[320px] min-h-90 shrink-0 bg-[#f8f8f8] rounded-[36px] p-10 hover:shadow-2xl transition duration-500 relative overflow-hidden flex flex-col justify-start"
               >
                 <div className="absolute top-0 right-0 w-36 h-36 bg-red-500/5 rounded-full blur-2xl"></div>
 
@@ -193,7 +190,7 @@ const TestimonialsSection = () => {
                     ))}
                   </div>
 
-                  <p className="text-gray-600 text-base leading-relaxed max-w-[260px] sm:max-w-full whitespace-normal break-words">"{item.review}"</p>
+                  <p className="text-gray-600 text-base leading-relaxed max-w-65 sm:max-w-full whitespace-normal wrap-break-word">"{item.review}"</p>
                 </div>
               </div>
             ))}
