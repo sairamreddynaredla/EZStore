@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import products from "../../data/products";
 import ProductCard from "../products/ProductCard";
 import useCart from "../../hooks/usecart";
@@ -25,25 +25,6 @@ const BestSellerSection = () => {
   const displayProducts = products.slice(0, 4);
 
   const containerRef = useRef(null);
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const onScroll = () => {
-      const scrollLeft = el.scrollLeft;
-      const total = el.scrollWidth - el.clientWidth;
-      if (total <= 0) return setActiveIndex(0);
-      const progress = scrollLeft / total;
-      const idx = Math.round(progress * (displayProducts.length - 1));
-      setActiveIndex(idx);
-    };
-
-    el.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-    return () => el.removeEventListener("scroll", onScroll);
-  }, [displayProducts.length]);
 
   return (
     <section className="py-10 md:py-16 bg-[#f7f3ee]">
@@ -70,10 +51,10 @@ const BestSellerSection = () => {
 
         {/* Mobile: Horizontal scroll carousel (mobile-only) */}
         <div className="sm:hidden">
-          <div ref={containerRef} className="overflow-x-auto hide-scrollbar snap-x snap-mandatory -mx-4 px-4">
+          <div ref={containerRef} className="overflow-x-auto hide-scrollbar snap-x snap-mandatory px-4">
             <div className="flex gap-4 py-2">
               {displayProducts.map((product) => (
-                <div key={product.id} className="flex-shrink-0 w-[82%] sm:w-[40%] snap-center">
+                <div key={product.id} className="shrink-0 min-w-[calc(100vw-2rem)] max-w-[calc(100vw-2rem)] snap-center">
                   <ProductCard
                     compact
                     product={product}
@@ -93,7 +74,7 @@ const BestSellerSection = () => {
           <div ref={containerRef} className="overflow-x-auto hide-scrollbar">
             <div className="flex gap-3 sm:gap-4 md:gap-6 pb-2 min-w-min px-2">
               {displayProducts.map((product) => (
-                <div key={product.id} className="flex-shrink-0 w-[35%] sm:w-[28%] md:w-[28%]">
+                <div key={product.id} className="shrink-0 w-[42%] sm:w-[35%] md:w-[28%]">
                   <ProductCard
                     compact
                     product={product}

@@ -18,6 +18,43 @@ function Navbar() {
   const searchInputRef = useRef(null);
   const suggestionRef = useRef(null);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    document.body.classList.toggle("mobile-menu-open", mobileMenu);
+
+    // Also directly hide any swiper pagination/arrow controls that may be
+    // rendered outside the hero node so they cannot appear under the mobile menu.
+    const els = document.querySelectorAll('.swiper-pagination, .hero-arrow-controls, [class*="swiper-pagination-bullet"]');
+    els.forEach((el) => {
+      if (mobileMenu) {
+        el.dataset._prevDisplay = el.style.display || "";
+        el.dataset._prevVisibility = el.style.visibility || "";
+        el.style.display = "none";
+        el.style.visibility = "hidden";
+        el.style.pointerEvents = "none";
+      } else {
+        if (el.dataset._prevDisplay !== undefined) el.style.display = el.dataset._prevDisplay;
+        if (el.dataset._prevVisibility !== undefined) el.style.visibility = el.dataset._prevVisibility;
+        el.style.pointerEvents = "";
+        delete el.dataset._prevDisplay;
+        delete el.dataset._prevVisibility;
+      }
+    });
+
+    return () => {
+      document.body.classList.remove("mobile-menu-open");
+      // restore any inline styles we changed
+      const restore = document.querySelectorAll('[data-_prev-display], [data-_prev-visibility]');
+      restore.forEach((el) => {
+        if (el.dataset._prevDisplay !== undefined) el.style.display = el.dataset._prevDisplay;
+        if (el.dataset._prevVisibility !== undefined) el.style.visibility = el.dataset._prevVisibility;
+        el.style.pointerEvents = "";
+        delete el.dataset._prevDisplay;
+        delete el.dataset._prevVisibility;
+      });
+    };
+  }, [mobileMenu]);
+
   const SEARCH_HISTORY_KEY = "ezstore_search_history";
 
   useEffect(() => {
@@ -464,7 +501,7 @@ function Navbar() {
         </div>
 
         {mobileMenu && (
-          <div className="md:hidden bg-white border-t border-[#E5E7EB] px-5 py-4 flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-300 shadow-sm">
+          <div className="md:hidden mobile-menu-panel bg-white border-t border-[#E5E7EB] px-5 py-4 flex flex-col gap-3 animate-in fade-in slide-in-from-top-2 duration-300 shadow-sm">
             <div className="space-y-2">
               {/* Mobile: Dogs and Cats dropdowns as links */}
                 <NavLink
@@ -629,7 +666,6 @@ function Navbar() {
                 {totalItems > 0 && (
                   <span className="absolute top-1 right-1 bg-[#1F6B52] text-white text-[9px] w-5 h-5 rounded-full flex items-center justify-center font-bold shadow-sm">
                     {totalItems}
-                  Shop By Lifestage
                   </span>
                 )}
               </Link>

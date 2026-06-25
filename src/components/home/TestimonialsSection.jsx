@@ -143,11 +143,11 @@ const TestimonialsSection = () => {
 
         {/* Mobile: horizontal side-by-side scroller */}
         <div className="md:hidden mb-8">
-          <div ref={mobileScrollerRef} className="flex gap-4 overflow-x-auto pb-6 px-4 hide-scrollbar">
+          <div ref={mobileScrollerRef} className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-6 px-4 hide-scrollbar">
             {testimonials.map((item) => (
               <div
                 key={item.id}
-                className="min-w-[320px] min-h-[360px] flex-shrink-0 bg-[#f8f8f8] rounded-[36px] p-10 hover:shadow-2xl transition duration-500 relative overflow-hidden flex flex-col justify-start"
+                className="shrink-0 min-w-[calc(100vw-2rem)] max-w-[calc(100vw-2rem)] snap-center min-h-[360px] bg-[#f8f8f8] rounded-[36px] p-10 hover:shadow-2xl transition duration-500 relative overflow-hidden flex flex-col justify-start"
               >
                 <div className="absolute top-0 right-0 w-36 h-36 bg-red-500/5 rounded-full blur-2xl"></div>
 

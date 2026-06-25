@@ -60,27 +60,28 @@ const PetCategories = () => {
         <p className="text-gray-500 mt-3">Browse by Exclusive Category</p>
       </div>
 
-      <div className="flex gap-6 overflow-x-auto pb-4 -mx-6 px-6 md:mx-0 md:px-0 md:grid md:grid-cols-3 lg:grid-cols-6 hide-scrollbar">
+      <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 md:grid md:grid-cols-3 lg:grid-cols-6 hide-scrollbar">
         {categories.map((item) => (
-          <Link
-            key={item.id}
-            to={`/category/${item.slug}`}
-            className="group bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 min-w-[300px] w-[300px] flex-shrink-0 md:w-auto md:min-w-0"
-          >
-            {/* IMAGE */}
-            <div className="h-[300px] overflow-hidden bg-[#f7c66b]">
-              <img
-                src={item.image}
-                alt={item.name}
-                className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
-              />
-            </div>
+          <div key={item.id} className="shrink-0 min-w-[calc(50vw-1rem)] max-w-[calc(50vw-1rem)] snap-start sm:min-w-60 sm:max-w-none md:min-w-0 md:w-auto">
+            <Link
+              to={`/category/${item.slug}`}
+              className="group bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 w-full"
+            >
+              {/* IMAGE */}
+              <div className="h-75 overflow-hidden bg-[#f7c66b]">
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+                />
+              </div>
 
-            {/* TEXT */}
-            <div className="py-6 text-center">
-              <h3 className="text-lg font-semibold">{item.name}</h3>
-            </div>
-          </Link>
+              {/* TEXT */}
+              <div className="py-6 text-center">
+                <h3 className="text-lg font-semibold">{item.name}</h3>
+              </div>
+            </Link>
+          </div>
         ))}
       </div>
     </section>

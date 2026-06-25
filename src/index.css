@@ -17,6 +17,35 @@ body {
   background: #fdfdfd;
 }
 
+/* When mobile menu (sidebar) is open, hide hero pagination and arrow controls
+   so they don't appear under the overlay. This only toggles visibility; the
+   controls remain available when the menu is closed. */
+body.mobile-menu-open .homepage-hero .swiper-pagination,
+body.mobile-menu-open .homepage-hero .hero-arrow-controls,
+body.mobile-menu-open .hero-swiper .swiper-pagination,
+/* Also hide any swiper pagination or hero arrow controls globally while the mobile menu is open */
+body.mobile-menu-open .swiper-pagination,
+body.mobile-menu-open .hero-arrow-controls {
+  display: none !important;
+}
+
+/* Hide any swiper pagination rendered inside the mobile menu panel specifically */
+.mobile-menu-panel .swiper-pagination,
+.mobile-menu-panel .hero-arrow-controls {
+  display: none !important;
+}
+
+/* Extra catch-all selectors: hide any elements whose class name contains swiper-pagination
+   or swiper-pagination-bullet while mobile menu is open. This covers cases where
+   pagination is rendered outside the hero node or with slightly different classes. */
+body.mobile-menu-open [class*="swiper-pagination"],
+body.mobile-menu-open [class*="swiper-pagination-bullet"],
+body.mobile-menu-open [class*="hero-arrow"] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
 a {
   text-decoration: none;
 }

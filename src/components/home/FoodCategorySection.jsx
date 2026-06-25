@@ -105,7 +105,7 @@ function CategoryCard({ category }) {
   return (
     <Link
       to={category.link}
-      className="group relative rounded-2xl overflow-hidden flex flex-col cursor-pointer shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 border border-gray-200 bg-white min-w-[280px] w-[280px] flex-shrink-0 sm:w-auto sm:min-w-0"
+      className="group relative rounded-2xl overflow-hidden flex flex-col cursor-pointer shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 border border-gray-200 bg-white w-full shrink-0 sm:w-auto sm:min-w-0"
       style={{ backgroundColor: category.bgColor }}
     >
       {/* Image area */}
@@ -169,9 +169,11 @@ function FoodCategorySection() {
 
       {/* Category cards */}
       {currentCategories.length > 0 ? (
-        <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 hide-scrollbar">
+        <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 hide-scrollbar">
           {currentCategories.map((cat, idx) => (
-            <CategoryCard key={idx} category={cat} />
+            <div key={idx} className="shrink-0 min-w-[calc(50vw-1rem)] max-w-[calc(50vw-1rem)] snap-start sm:min-w-0 sm:max-w-none sm:w-auto">
+              <CategoryCard category={cat} />
+            </div>
           ))}
         </div>
       ) : (
