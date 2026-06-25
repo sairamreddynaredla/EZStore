@@ -62,7 +62,7 @@ const BuyBox = ({
           </div>
           <div className="mt-2 flex items-center gap-2 text-xs sm:text-sm text-slate-600">
             <span className="text-lg">📍</span>
-            <span className="font-medium text-slate-900">Deliver to Vijayawada 520010</span>
+            <span className="font-medium text-slate-900">Deliver to New York, USA</span>
           </div>
         </div>
 

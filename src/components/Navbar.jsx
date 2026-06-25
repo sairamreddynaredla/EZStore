@@ -162,6 +162,24 @@ function Navbar() {
 
   const hasSuggestions = suggestions.length > 0;
 
+  const clearSearch = () => {
+    setSearch("");
+    setActiveSuggestionIndex(-1);
+    setShowSuggestions(false);
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  };
+
+  const clearSearchHistory = () => {
+    setSearchHistory([]);
+    try {
+      window.localStorage.removeItem(SEARCH_HISTORY_KEY);
+    } catch (error) {
+      console.warn("Failed to clear search history", error);
+    }
+  };
+
   const selectSuggestion = (item) => {
     if (item.type === "product" || item.type === "breed") {
       navigate(item.path);
@@ -270,7 +288,7 @@ function Navbar() {
           <div className="relative flex-1 max-w-xs sm:max-w-md">
             <form
               onSubmit={handleSearch}
-              className="flex items-center bg-white border border-[#E5E7EB] rounded-full px-3 sm:px-5 py-2 sm:py-2.5 gap-2 sm:gap-3 shadow-sm hover:shadow-md hover:border-[#1F6B52] focus-within:shadow-md focus-within:border-[#1F6B52] transition-all duration-300"
+              className="relative flex items-center bg-white border border-[#E5E7EB] rounded-full px-3 sm:px-5 py-2 sm:py-2.5 gap-2 sm:gap-3 shadow-sm hover:shadow-md hover:border-[#1F6B52] focus-within:shadow-md focus-within:border-[#1F6B52] transition-all duration-300"
               ref={searchInputRef}
             >
               <FaSearch className="text-[#4B5563] text-sm flex-shrink-0" />
@@ -289,6 +307,16 @@ function Navbar() {
                 onKeyDown={handleSearchKeyDown}
                 className="bg-transparent text-[#1A1A1A] placeholder-[#4B5563] text-xs sm:text-sm outline-none w-full"
               />
+              {search && (
+                <button
+                  type="button"
+                  onClick={clearSearch}
+                  className="text-[#6B7280] hover:text-[#111827] transition-colors focus:outline-none"
+                  aria-label="Clear search"
+                >
+                  ×
+                </button>
+              )}
             </form>
 
             {showSuggestions && hasSuggestions && (
@@ -299,7 +327,16 @@ function Navbar() {
                 <div className="px-4 py-3">
                   {recentSuggestions.length > 0 && (
                     <div className="mb-3">
-                      <div className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-2">Recent searches</div>
+                      <div className="flex items-center justify-between text-xs uppercase tracking-[0.2em] text-slate-500 mb-2">
+                        <span>Recent searches</span>
+                        <button
+                          type="button"
+                          onClick={clearSearchHistory}
+                          className="text-[#4B5563] hover:text-[#1F6B52] font-semibold"
+                        >
+                          Clear
+                        </button>
+                      </div>
                       <div className="grid gap-2">
                         {recentSuggestions.slice(0, 5).map((item) => (
                           <button
