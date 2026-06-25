@@ -62,7 +62,7 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle, compact = false }
             <img src={imageSrc} alt={product.name} className="max-w-[66%] sm:max-w-[86%] max-h-[66%] sm:max-h-[86%] object-contain transform transition-transform duration-300 group-hover:scale-105 group-hover:-translate-y-1 group-hover:shadow-lg p-0 sm:p-1" />
           </div>
           <div className="p-3 bg-[#f7f3ee] sm:bg-white">
-            <div className="text-sm font-semibold line-clamp-2 mb-2 bg-[#f7f3ee] sm:bg-transparent px-2 py-1 rounded-sm sm:rounded-none">{product.name}</div>
+            <div className="text-sm font-semibold line-clamp-2 whitespace-normal break-words mb-2 bg-[#f7f3ee] sm:bg-transparent px-2 py-1 rounded-sm sm:rounded-none">{product.name}</div>
             <div className="mb-3">
               {originalPrice > currentPrice ? (
                 <div className="flex items-baseline gap-2">
@@ -106,14 +106,7 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle, compact = false }
             <div className="flex items-center justify-between mb-1">
               <span className="text-sm sm:text-[12px] text-gray-500 font-medium truncate">{product.brand}</span>
             </div>
-            <h3
-              className="text-sm sm:text-[12px] font-semibold text-gray-900 leading-snug min-h-[3rem] mb-1 sm:mb-2 overflow-hidden"
-              style={{
-                display: "-webkit-box",
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: "vertical",
-              }}
-            >
+            <h3 className="text-sm sm:text-[12px] font-semibold text-gray-900 leading-snug min-h-[3.5rem] mb-1 sm:mb-2 line-clamp-2 whitespace-normal break-words">
               {product.name}
             </h3>
 

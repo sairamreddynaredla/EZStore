@@ -253,26 +253,22 @@ const Checkout = () => {
       <Navbar />
 
       {/* ─── PROGRESS STEPPER ─── */}
-      <div className="bg-gray-50 border-b border-gray-200 sticky top-20 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
+      <div className="bg-gray-50 border-b border-gray-200 sticky top-16 z-40">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
+          <div className="grid grid-cols-4 gap-2 py-1 sm:flex sm:gap-3">
             {steps.map((s, idx) => (
-              <div key={s.step} className="flex items-center flex-1">
+              <div key={s.step} className="flex flex-col items-center sm:flex-row sm:items-center sm:flex-1">
                 <div
                   onClick={() => currentStep > s.step && setCurrentStep(s.step)}
-                  className={`w-10 h-10 rounded-full flex items-center justify-center font-bold cursor-pointer transition-all ${
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold cursor-pointer transition-all ${
                     currentStep >= s.step ? "bg-green-500 text-white" : "bg-gray-300 text-gray-600"
                   }`}
                 >
                   {currentStep > s.step ? "✓" : s.step}
                 </div>
-                <div className="ml-3">
-                  <div className="text-xs font-semibold">{s.label}</div>
-                </div>
+                <div className="mt-1 text-[11px] sm:mt-0 sm:ml-3 font-semibold text-center sm:text-left leading-tight">{s.label}</div>
                 {idx < steps.length - 1 && (
-                  <div
-                    className={`flex-1 h-1 ml-3 ${currentStep > s.step ? "bg-green-500" : "bg-gray-300"}`}
-                  ></div>
+                  <div className={`hidden sm:block flex-1 h-1 sm:ml-3 ${currentStep > s.step ? "bg-green-500" : "bg-gray-300"}`}></div>
                 )}
               </div>
             ))}
@@ -812,7 +808,7 @@ const Checkout = () => {
 
           {/* ─── RIGHT: ORDER SUMMARY ─── */}
           <aside className="w-full lg:w-96 h-fit">
-            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 sticky top-48">
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 lg:sticky lg:top-48">
               <h2 className="text-lg font-bold text-gray-800 mb-4">Order Summary</h2>
 
               {/* Items */}
