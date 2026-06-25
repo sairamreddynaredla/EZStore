@@ -17,10 +17,10 @@ const PetBreedsCarousel = ({ breeds, title }) => {
         <h3 className="text-2xl font-semibold">{title}</h3>
       </div>
 
-      <div className="relative overflow-visible">
+      <div className="relative">
         <button
           onClick={() => swiperRef.current?.slidePrev()}
-          className="absolute left-[-28px] md:left-[-40px] top-1/2 -translate-y-1/2 z-50 rounded-full bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
+          className="absolute -left-4 md:-left-10 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
           aria-label="Scroll breeds left"
         >
           <ChevronLeft size={16} className="md:w-[20px]" />
@@ -28,7 +28,7 @@ const PetBreedsCarousel = ({ breeds, title }) => {
 
         <button
           onClick={() => swiperRef.current?.slideNext()}
-          className="absolute right-[-28px] md:right-[-40px] top-1/2 -translate-y-1/2 z-50 rounded-full bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
+          className="absolute -right-4 md:-right-10 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
           aria-label="Scroll breeds right"
         >
           <ChevronRight size={16} className="md:w-[20px]" />
@@ -38,13 +38,12 @@ const PetBreedsCarousel = ({ breeds, title }) => {
           onSwiper={(swiper) => {
             swiperRef.current = swiper;
           }}
-          slidesPerView={Math.min(5, breeds.length)}
-          spaceBetween={20}
+          spaceBetween={12}
           loop={false}
           observer={true}
           observeParents={true}
           breakpoints={{
-            320: { slidesPerView: Math.min(2, breeds.length), spaceBetween: 12 },
+            320: { slidesPerView: Math.min(2, breeds.length) },
             640: { slidesPerView: Math.min(3, breeds.length), spaceBetween: 16 },
             1024: { slidesPerView: Math.min(5, breeds.length), spaceBetween: 20 },
           }}
@@ -57,8 +56,7 @@ const PetBreedsCarousel = ({ breeds, title }) => {
               breed.heroImage ||
               (breed.overview && breed.overview.image) ||
               "";
-            const rawTitle = (breed.banner && breed.banner.title) || breed.name;
-            const title = rawTitle.replace(/^meet the\s+/i, "");
+            const title = (breed.banner && breed.banner.title) || breed.name;
             return (
               <SwiperSlide key={breed.slug} className="flex justify-center">
                 <Link to={`/breed/${breed.slug}`} className="flex flex-col items-center">

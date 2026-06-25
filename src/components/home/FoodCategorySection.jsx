@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import wetDogFoodImage from "../../assets/explore-pick-pamper/wet-dog-food.webp";
 import dryDogFoodImage from "../../assets/explore-pick-pamper/dry-dog-food.webp";
@@ -102,27 +102,14 @@ const tabData = {
 };
 
 function CategoryCard({ category }) {
-  const [isMobile, setIsMobile] = useState(false);
-
-  // detect mobile breakpoint (tailwind's md is 768px)
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
-
-  const cardBg = isMobile ? category.labelBg : category.bgColor;
-
   return (
     <Link
       to={category.link}
-      className="group relative rounded-2xl overflow-hidden flex flex-col cursor-pointer shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 border border-gray-200 bg-white"
-      style={{ backgroundColor: cardBg }}
+      className="group relative rounded-2xl overflow-hidden flex flex-col cursor-pointer shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 border border-gray-200 bg-white min-w-[280px] w-[280px] flex-shrink-0 sm:w-auto sm:min-w-0"
+      style={{ backgroundColor: category.bgColor }}
     >
       {/* Image area */}
-      <div className="relative overflow-hidden h-56 sm:h-64 md:h-72 bg-white">
+      <div className="relative overflow-hidden h-64 sm:h-72 md:h-80 bg-white">
         <img
           src={category.image}
           alt={category.label}
@@ -153,7 +140,7 @@ function FoodCategorySection() {
   const currentCategories = tabData[activeTab] || [];
 
   return (
-    <section className="px-4 sm:px-6 md:px-10 py-16 bg-[#f9f9f9]">
+    <section className="px-4 sm:px-6 md:px-10 py-20 bg-[#f9f9f9]">
       {/* Header row: title + tab filters */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-10">
         {/* Heading */}
@@ -180,9 +167,9 @@ function FoodCategorySection() {
         </div>
       </div>
 
-      {/* Category cards grid */}
+      {/* Category cards */}
       {currentCategories.length > 0 ? (
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="flex gap-4 overflow-x-auto pb-4 -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:gap-6 hide-scrollbar">
           {currentCategories.map((cat, idx) => (
             <CategoryCard key={idx} category={cat} />
           ))}
@@ -193,15 +180,7 @@ function FoodCategorySection() {
         </div>
       )}
 
-      {/* View All link */}
-      <div className="text-center mt-0 sm:mt-10">
-        <Link
-          to="/pets"
-          className="inline-block text-[#E63946] font-semibold text-base hover:underline underline-offset-4 transition-all"
-        >
-          View All →
-        </Link>
-      </div>
+      {/* View All link removed as requested */}
     </section>
   );
 }

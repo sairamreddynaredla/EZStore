@@ -18,7 +18,7 @@ const DeliveryBox = () => {
   };
 
   return (
-    <div className="bg-[#f8f8f8] border border-gray-200 rounded-[28px] p-6">
+    <div className="hidden sm:block bg-[#f8f8f8] border border-gray-200 rounded-[28px] p-6">
       <div className="flex items-center justify-between">
         <div>
           <h3 className="text-xl font-bold text-gray-900">Fast Delivery Available 🚚</h3>

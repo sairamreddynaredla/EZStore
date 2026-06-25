@@ -21,9 +21,9 @@ const BrandCollectionPage = lazy(() => import("./layouts/pages/BrandCollectionPa
 const CategoryProducts = lazy(() => import("./layouts/pages/CategoryProducts"));
 const Brands = lazy(() => import("./layouts/pages/Brands"));
 
-// ✅ UPDATED IMPORT
+import { ToastProvider } from "./context/toast-context";
+import Toast from "./components/common/Toast";
 import CartProvider from "./context/CartProvider";
-import { ToastProvider } from "./context/ToastProvider";
 
 const App = () => {
   useEffect(() => {
@@ -35,86 +35,87 @@ const App = () => {
       <CartProvider>
         <BrowserRouter>
           <Suspense fallback={<PageLoader />}>
-          <Routes>
-            {/* HOME */}
+            <Routes>
+              {/* HOME */}
 
-            <Route path="/" element={<Home />} />
+              <Route path="/" element={<Home />} />
 
-            {/* LOGIN */}
+              {/* LOGIN */}
 
-            <Route path="/login" element={<Login />} />
+              <Route path="/login" element={<Login />} />
 
-            {/* REGISTER */}
+              {/* REGISTER */}
 
-            <Route path="/register" element={<Register />} />
+              <Route path="/register" element={<Register />} />
 
-            {/* CATEGORY PAGE */}
+              {/* CATEGORY PAGE */}
 
-            <Route path="/category/:category" element={<CategoryProducts />} />
+              <Route path="/category/:category" element={<CategoryProducts />} />
 
-            {/* DOG CATEGORY PAGE */}
-            <Route path="/dogs/:categorySlug" element={<CategoryProducts petType="Dog" />} />
+              {/* DOG CATEGORY PAGE */}
+              <Route path="/dogs/:categorySlug" element={<CategoryProducts petType="Dog" />} />
 
-            {/* CAT CATEGORY PAGE */}
-            <Route path="/cats/:categorySlug" element={<CategoryProducts petType="Cat" />} />
+              {/* CAT CATEGORY PAGE */}
+              <Route path="/cats/:categorySlug" element={<CategoryProducts petType="Cat" />} />
 
-            {/* PRODUCT DETAILS */}
+              {/* PRODUCT DETAILS */}
 
-            <Route path="/product/:id" element={<ProductDetails />} />
+              <Route path="/product/:id" element={<ProductDetails />} />
 
-            {/* DELIVERY DETAILS PLACEHOLDER */}
-            <Route path="/delivery-details" element={<DeliveryDetails />} />
+              {/* DELIVERY DETAILS PLACEHOLDER */}
+              <Route path="/delivery-details" element={<DeliveryDetails />} />
 
-            {/* CART */}
+              {/* CART */}
 
-            <Route path="/cart" element={<Cart />} />
+              <Route path="/cart" element={<Cart />} />
 
-            {/* WISHLIST */}
+              {/* WISHLIST */}
 
-            <Route path="/wishlist" element={<WishList />} />
+              <Route path="/wishlist" element={<WishList />} />
 
-            {/* SHOP */}
+              {/* SHOP */}
 
-            <Route path="/shop" element={<Shop />} />
+              <Route path="/shop" element={<Shop />} />
 
-            {/* PETS */}
+              {/* PETS */}
 
-            <Route path="/pets" element={<Shop />} />
+              <Route path="/pets" element={<Shop />} />
 
-            {/* BRANDS */}
-            <Route path="/brands" element={<Brands />} />
+              {/* BRANDS */}
+              <Route path="/brands" element={<Brands />} />
 
-            {/* BRAND PRODUCTS */}
+              {/* BRAND PRODUCTS */}
 
-            <Route path="/brands/:brandSlug" element={<BrandCollectionPage />} />
+              <Route path="/brands/:brandSlug" element={<BrandCollectionPage />} />
 
-            {/* BEST SELLERS */}
+              {/* BEST SELLERS */}
 
-            <Route path="/best-sellers" element={<BestSellers />} />
+              <Route path="/best-sellers" element={<BestSellers />} />
 
-            {/* BLOGS removed */}
+              {/* BLOGS removed */}
 
-            {/* BREED CATEGORY route removed — categories handled on Home */}
+              {/* BREED CATEGORY route removed — categories handled on Home */}
 
-            {/* BREED DETAILS */}
+              {/* BREED DETAILS */}
 
-            <Route path="/breed/:slug" element={<BreedDetails />} />
+              <Route path="/breed/:slug" element={<BreedDetails />} />
 
-            {/* ORDER SUCCESS */}
+              {/* ORDER SUCCESS */}
 
-            <Route path="/order-success" element={<OrderSuccess />} />
+              <Route path="/order-success" element={<OrderSuccess />} />
 
-            {/* CHECKOUT */}
+              {/* CHECKOUT */}
 
-            <Route path="/checkout" element={<Checkout />} />
+              <Route path="/checkout" element={<Checkout />} />
 
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+        <Toast />
       </CartProvider>
     </ToastProvider>
   );
-};
+}
 
 export default App;

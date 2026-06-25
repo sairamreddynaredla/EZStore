@@ -75,6 +75,8 @@ a {
   display: none; /* Chrome, Safari, Opera */
 }
 
+
+
 /* Hero Swiper styles moved into Tailwind components layer */
 @layer components {
   /* Expose a CSS variable to tune pagination vertical offset per hero instance */

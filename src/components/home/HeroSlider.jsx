@@ -133,19 +133,15 @@ const HeroSlider = () => {
 
         {/* Right-side arrow controls hooked to Swiper (placed over image at same bottom as pagination) */}
         <div
-          className="absolute flex items-center gap-3 z-40 hero-arrow-controls"
-          style={{
-            bottom: 'var(--hero-pagination-bottom, 2.5rem)',
-            right: 'var(--hero-arrow-right, 6rem)'
-          }}
+          className="absolute bottom-2 sm:bottom-4 right-6 sm:right-[6rem] flex items-center gap-3 z-40 hero-arrow-controls"
         >
           <button
             type="button"
             aria-label="Previous banner"
             onClick={() => swiperRef.current?.slidePrev()}
-            className="w-10 h-10 rounded-full bg-white border border-[#8B4513] flex items-center justify-center text-[#8B4513] shadow-lg"
+            className="w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-white border border-[#8B4513] flex items-center justify-center text-[#8B4513] shadow-lg"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 rotate-180" viewBox="0 0 20 20" fill="#8B4513">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-2.5 h-2.5 sm:w-4 sm:h-4 rotate-180" viewBox="0 0 20 20" fill="#8B4513">
               <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 111.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
             </svg>
           </button>
@@ -153,9 +149,9 @@ const HeroSlider = () => {
             type="button"
             aria-label="Next banner"
             onClick={() => swiperRef.current?.slideNext()}
-            className="w-10 h-10 rounded-full bg-white border border-[#8B4513] flex items-center justify-center text-[#8B4513] shadow-lg"
+            className="w-7 h-7 sm:w-10 sm:h-10 rounded-full bg-white border border-[#8B4513] flex items-center justify-center text-[#8B4513] shadow-lg"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 20 20" fill="#8B4513">
+            <svg xmlns="http://www.w3.org/2000/svg" className="w-2.5 h-2.5 sm:w-4 sm:h-4" viewBox="0 0 20 20" fill="#8B4513">
               <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 111.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
             </svg>
           </button>

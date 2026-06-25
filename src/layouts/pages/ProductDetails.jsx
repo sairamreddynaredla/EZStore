@@ -1,5 +1,4 @@
 import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
 import { useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { products } from "../../data/products";
@@ -35,7 +34,7 @@ const ProductDetails = () => {
   const [selectedVariant, setSelectedVariant] = useState(product?.variants?.[0] || {});
   const [quantity, setQuantity] = useState(1);
 
-  const { addToCart, clearCart, replaceCartWithItem } = useCart();
+  const { addToCart } = useCart();
   const { addToWishlist, removeFromWishlist } = useWishlist();
 
   const formatCategoryLabel = (category) => {
@@ -49,20 +48,24 @@ const ProductDetails = () => {
 
   const productCategoryLabel = product?.productCategory || formatCategoryLabel(product?.category);
 
-  const handleAddToCart = async (productId, quantity = 1) => {
+  const handleAddToCart = async (productId, quantity = 1, showToast = true) => {
     const productToAdd = products.find((item) => item.id === Number(productId));
     if (productToAdd) {
-      addToCart({ ...productToAdd, quantity });
+      addToCart({ ...productToAdd, quantity, showToast });
     }
   };
 
-  // BUY NOW HANDLER — clear existing cart and proceed to checkout with this item only
-  const handleBuyNow = async () => {
-    // Atomically replace cart contents with only this product to avoid duplicates
-    replaceCartWithItem({ ...product, selectedVariant, quantity });
-
-    // navigate to checkout and indicate this was a Buy Now (single-item) action
-    navigate("/checkout", { state: { buyNow: true } });
+  // BUY NOW HANDLER
+  const handleBuyNow = () => {
+    navigate("/checkout", {
+      state: {
+        checkoutItem: {
+          ...product,
+          selectedVariant,
+          quantity,
+        },
+      },
+    });
   };
 
   const handleWishlistToggle = (productId, isAdding) => {
@@ -369,8 +372,6 @@ const ProductDetails = () => {
           </div>
         )}
       </div>
-      {/* FOOTER */}
-      <Footer />
     </div>
   );
 };

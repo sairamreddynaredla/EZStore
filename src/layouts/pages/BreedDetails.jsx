@@ -15,8 +15,14 @@ const BreedDetails = () => {
     );
   }
 
-  // BreedInfo expects flat object: {size, lifespan, weight, grooming}
+  // BreedInfo expects flat object: {size, lifespan, weight, grooming, summary}
   const infoData = {
+    summary:
+      breed.summary ||
+      breed.description ||
+      breed.info?.summary ||
+      breed.overview?.summary ||
+      `Learn about this breed: size, temperament, grooming and care recommendations.`,
     size: breed.info?.size || breed.overview?.size || "—",
     lifespan: breed.info?.lifespan || breed.overview?.lifespan || "—",
     weight: breed.info?.weight || breed.overview?.weight || "—",

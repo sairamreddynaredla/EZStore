@@ -213,24 +213,15 @@ const Shop = () => {
       />
       {/* NAVBAR */}
       <Navbar />
-
-      {/* PAGE */}
-      <div className="max-w-360 mx-auto px-4 md:px-8 py-12">
-        {/* HEADER */}
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
+      <div className="w-full px-2 sm:max-w-7xl sm:mx-auto sm:px-6 lg:px-8 py-14">
+        {/* TOP SECTION */}
+        <div className="hidden sm:flex items-center justify-between mb-10">
           <div>
-            <h1 className="text-5xl font-bold text-[#0D2B5C] mb-3">Pet Food Shop</h1>
-
-            <p className="text-gray-500 text-lg max-w-3xl">
-              Explore premium pet food products for dogs, cats, birds, fish, rabbits, hamsters, and
-              more.
-            </p>
+            <h1 className="text-4xl font-bold">Pet Food Shop</h1>
+            <p className="text-gray-500 mt-2">{filtered.length} Products Available</p>
           </div>
-
-          {/* SEARCH + SORT */}
-          <div className="flex flex-col md:flex-row gap-4 w-full lg:w-auto">
+          <div className="flex items-center gap-4">
             <ProductSearch value={search} onChange={(e) => setSearch(e.target.value)} />
-
             <ProductSort sort={sort} onSort={setSort} />
           </div>
         </div>
@@ -261,8 +252,8 @@ const Shop = () => {
           ))}
         </div>
 
-        {/* MAIN CONTENT */}
-        <div className="flex gap-8">
+        {/* MAIN LAYOUT */}
+        <div className="flex flex-col md:flex-row gap-8">
           {/* SIDEBAR */}
           <div className="hidden xl:block w-75 shrink-0">
             <ShopSidebar
@@ -291,6 +282,7 @@ const Shop = () => {
               products={filtered}
               onAddToCart={handleAddToCart}
               onWishlistToggle={handleWishlistToggle}
+              columns={3}
             />
           </div>
         </div>

@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { CartContext } from "./cart-context";
+import { useToast } from "./toast-context";
 
 const CartProvider = ({ children }) => {
+  const { success, error } = useToast();
   const [cartItems, setCartItems] = useState(() => {
     const storedCart = localStorage.getItem("cart");
 
@@ -40,113 +42,73 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
-
-    // Broadcast changes to other tabs/windows for real-time sync
-    try {
-      if (typeof BroadcastChannel !== "undefined") {
-        const bc = new BroadcastChannel("ezstore_cart");
-        bc.postMessage({ type: "cart:update", cart: cartItems });
-        bc.close();
-      }
-    } catch (e) {
-      // ignore if BroadcastChannel unsupported
-    }
   }, [cartItems]);
-
-  // Listen for storage events (fallback / other tabs)
-  useEffect(() => {
-    const onStorage = (e) => {
-      if (e.key === "cart") {
-        try {
-          const newCart = JSON.parse(e.newValue || "[]");
-          setCartItems(newCart);
-        } catch (err) {
-          // ignore parse errors
-        }
-      }
-    };
-
-    window.addEventListener("storage", onStorage);
-
-    // Also listen for BroadcastChannel messages
-    let bc;
-    try {
-      if (typeof BroadcastChannel !== "undefined") {
-        bc = new BroadcastChannel("ezstore_cart");
-        bc.onmessage = (msg) => {
-          try {
-            if (msg?.data?.type === "cart:update") {
-              setCartItems(msg.data.cart || []);
-            }
-          } catch (err) {}
-        };
-      }
-    } catch (err) {
-      // ignore
-    }
-
-    return () => {
-      window.removeEventListener("storage", onStorage);
-      try {
-        if (bc) bc.close();
-      } catch (err) {}
-    };
-  }, []);
 
   // ADD TO CART
 
   const addToCart = (product) => {
-    const selectedVariant =
-      product.selectedVariant ||
-      product.variants?.[0] || {
+    const { showToast = true, ...productData } = product;
+    const selectedVariant = productData.selectedVariant ||
+      productData.variants?.[0] || {
         weight: "1kg",
-        price: product.price || 0,
+        price: productData.price || 0,
       };
 
     const selectedWeight = selectedVariant.weight || "1kg";
 
-    setCartItems((prev) => {
-      const existingIndex = prev.findIndex(
-        (item) => item.id === product.id && (item.selectedVariant?.weight || "1kg") === selectedWeight
-      );
+    const existingProduct = cartItems.find(
+      (item) => item.id === productData.id && (item.selectedVariant?.weight || "1kg") === selectedWeight
+    );
 
-      if (existingIndex !== -1) {
-        return prev.map((item, idx) =>
-          idx === existingIndex
-            ? { ...item, quantity: item.quantity + (product.quantity || 1) }
+    if (existingProduct) {
+      setCartItems(
+        cartItems.map((item) =>
+          item.id === productData.id && (item.selectedVariant?.weight || "1kg") === selectedWeight
+            ? {
+                ...item,
+                quantity: item.quantity + (productData.quantity || 1),
+              }
             : item
-        );
-      }
+        )
+      );
+    } else {
+      setCartItems([
+        ...cartItems,
 
-      return [
-        ...prev,
         {
-          ...product,
+          ...productData,
           selectedVariant,
-          quantity: product.quantity || 1,
+          quantity: productData.quantity || 1,
         },
-      ];
-    });
+      ]);
+    }
 
+    if (showToast) {
+      success("Added to cart");
+    }
   };
 
   // REMOVE
 
   const removeFromCart = (id, weight) => {
-    setCartItems((prev) =>
-      prev.filter(
+    setCartItems(
+      cartItems.filter(
         (item) => !(item.id === id && (item.selectedVariant?.weight || "1kg") === (weight || "1kg"))
       )
     );
+    error("Removed from cart");
   };
 
   // INCREASE
 
   const increaseQuantity = (id, weight) => {
-    setCartItems((prev) =>
-      prev.map((item) =>
+    setCartItems(
+      cartItems.map((item) =>
         item.id === id && (item.selectedVariant?.weight || "1kg") === (weight || "1kg")
-          ? { ...item, quantity: item.quantity + 1 }
+          ? {
+              ...item,
+              quantity: item.quantity + 1,
+            }
           : item
       )
     );
@@ -155,15 +117,17 @@ const CartProvider = ({ children }) => {
   // DECREASE
 
   const decreaseQuantity = (id, weight) => {
-    setCartItems((prev) => {
-      return prev
-        .map((item) =>
-          item.id === id && (item.selectedVariant?.weight || "1kg") === (weight || "1kg")
-            ? { ...item, quantity: Math.max(0, (item.quantity || 0) - 1) }
-            : item
-        )
-        .filter((item) => (item.quantity || 0) > 0);
-    });
+    setCartItems(
+      cartItems.map((item) =>
+        item.id === id && (item.selectedVariant?.weight || "1kg") === (weight || "1kg")
+          ? {
+              ...item,
+
+              quantity: item.quantity > 1 ? item.quantity - 1 : 1,
+            }
+          : item
+      )
+    );
   };
 
   // TOTAL ITEMS
@@ -196,25 +160,7 @@ const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCartItems([]);
-  };
-
-  // REPLACE CART WITH A SINGLE ITEM (atomic, avoids race conditions)
-  const replaceCartWithItem = (product) => {
-    const selectedVariant =
-      product.selectedVariant ||
-      product.variants?.[0] ||
-      {
-        weight: "1kg",
-        price: product.price || 0,
-      };
-
-    const item = {
-      ...product,
-      selectedVariant,
-      quantity: product.quantity || 1,
-    };
-
-    setCartItems([item]);
+    error("Cart cleared");
   };
 
   return (
@@ -231,8 +177,6 @@ const CartProvider = ({ children }) => {
         decreaseQuantity,
 
         clearCart,
-
-        replaceCartWithItem,
 
         totalItems,
 

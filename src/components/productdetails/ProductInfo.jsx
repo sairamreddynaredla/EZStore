@@ -264,56 +264,7 @@ const ProductInfo = ({
         {/* Removed duplicate compact Product Details here — full details live in the accordion below. */}
       </div>
 
-      {/* Mobile sticky buy bar (visible on small screens) */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 p-3 bg-white border-t shadow-lg sm:hidden">
-        <div className="max-w-362.5 mx-auto px-4">
-          <div className="flex items-center justify-between gap-3">
-            <div>
-              <div className="text-lg font-bold text-green-600">
-                {"$" + (selectedVariant?.price || product.price)}
-              </div>
-              <div className="text-xs text-slate-600">
-                {product.stock > 0 ? "In stock" : "Out of stock"}
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <div className="flex items-center border rounded-lg overflow-hidden">
-                <button
-                  onClick={() => quantity > 1 && setQuantity(quantity - 1)}
-                  className="px-3 py-2"
-                >
-                  -
-                </button>
-                <div className="px-3 py-2 font-medium">{quantity}</div>
-                <button onClick={() => setQuantity(quantity + 1)} className="px-3 py-2">
-                  +
-                </button>
-              </div>
-
-              <div className="flex gap-2 items-center">
-                <div className="w-30">
-                  <AddToCartButton
-                    product={{ ...product, selectedVariant, quantity }}
-                    isOutOfStock={product.stock <= 0}
-                    onAddToCart={addToCart}
-                    quantity={quantity}
-                  />
-                </div>
-
-                <BuyNowButton
-                  onClick={handleBuyNow}
-                  disabled={product.stock === 0}
-                  className="w-24 py-2 text-sm"
-                  analyticsPayload={{ ...product, selectedVariant, quantity }}
-                >
-                  Buy
-                </BuyNowButton>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* Mobile sticky buy bar removed (mobile UX handled elsewhere) */}
     </>
   );
 };

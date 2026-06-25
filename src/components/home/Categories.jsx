@@ -83,7 +83,7 @@ function Categories({ selectedPet, setSelectedPet }) {
       </div>
 
       {/* HORIZONTAL CATEGORY SCROLLER */}
-      <div className="mt-12 relative overflow-visible">
+      <div className="mt-12 relative">
         <div
           ref={scrollRef}
           className="flex items-center gap-4 sm:gap-6 overflow-x-auto scroll-smooth py-4 px-2 md:px-6 snap-x snap-mandatory [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] scrollbar-none"
@@ -100,23 +100,23 @@ function Categories({ selectedPet, setSelectedPet }) {
           ))}
         </div>
 
-        <div className="absolute top-1/2 -translate-y-1/2 left-[-28px] md:left-[-40px] flex items-center">
+        <div className="absolute inset-y-0 -left-4 md:-left-10 flex items-center">
           <button
             onClick={() => handleScroll("left")}
-            className="bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:scale-105 transition-transform duration-300 z-50"
+            className="bg-white border border-slate-200 shadow-md w-12 h-12 rounded-full flex items-center justify-center text-slate-900 hover:scale-105 transition-transform duration-200"
             aria-label="Scroll categories left"
           >
-            <ChevronLeft size={16} className="md:w-[20px]" />
+            <ChevronLeft size={20} />
           </button>
         </div>
 
-        <div className="absolute top-1/2 -translate-y-1/2 right-[-28px] md:right-[-40px] flex items-center">
+        <div className="absolute inset-y-0 -right-4 md:-right-10 flex items-center">
           <button
             onClick={() => handleScroll("right")}
-            className="bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 rounded-full flex items-center justify-center hover:scale-105 transition-transform duration-300 z-50"
+            className="bg-white border border-slate-200 shadow-md w-12 h-12 rounded-full flex items-center justify-center text-slate-900 hover:scale-105 transition-transform duration-200"
             aria-label="Scroll categories right"
           >
-            <ChevronRight size={16} className="md:w-[20px]" />
+            <ChevronRight size={20} />
           </button>
         </div>
       </div>

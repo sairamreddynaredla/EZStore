@@ -1,7 +1,6 @@
 import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
 import useCart from "../../hooks/usecart";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import secureBadge from "../../assets/logo/secure-payment.webp";
 import easyReturnsBadge from "../../assets/logo/easy-returns.webp";
@@ -15,16 +14,19 @@ import codIcon from "../../assets/payments/cod.webp";
 
 const Checkout = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { cartItems, totalPrice, clearCart, removeFromCart, increaseQuantity, decreaseQuantity } =
     useCart();
 
+  const checkoutItem = location.state?.checkoutItem;
+  const [checkoutQuantity, setCheckoutQuantity] = useState(checkoutItem?.quantity || 1);
+
+  const items = checkoutItem
+    ? [{ ...checkoutItem, quantity: checkoutQuantity }]
+    : cartItems;
+
   // ─── STEP & NAVIGATION ───
   const [currentStep, setCurrentStep] = useState(1);
-
-  // Preserve navigation state but do not skip steps for Buy Now.
-  // The checkout should always start at the Address step so users can
-  // enter shipping details before choosing shipping/payment options.
-  const location = useLocation();
   const steps = [
     { step: 1, label: "Address", icon: "📍" },
     { step: 2, label: "Shipping", icon: "🚚" },
@@ -59,7 +61,7 @@ const Checkout = () => {
   const [selectedDelivery, setSelectedDelivery] = useState("standard");
   const [selectedPayment, setSelectedPayment] = useState("card");
   const [selectedDeliveryInstruction, setSelectedDeliveryInstruction] = useState("ring-bell");
-  const [expandDeliveryInstructions, setExpandDeliveryInstructions] = useState(true);
+  const [expandDeliveryInstructions, setExpandDeliveryInstructions] = useState(false);
 
   // ─── COUPON ───
   const [coupon, setCoupon] = useState("");
@@ -78,7 +80,10 @@ const Checkout = () => {
   const TAX_RATE = 0.1;
   const discount = appliedCoupon ? coupons[appliedCoupon].discount : 0;
   const shipping = selectedDelivery === "express" ? 99 : 0;
-  const subtotal = totalPrice;
+  const itemPrice = (item) => (item.selectedVariant?.price ?? item.price ?? 0) * item.quantity;
+  const subtotal = checkoutItem
+    ? Math.round(itemPrice({ ...checkoutItem, quantity: checkoutQuantity }) * 100) / 100
+    : totalPrice;
   const tax = Math.round(subtotal * TAX_RATE * 100) / 100;
   const total = Math.max(0, subtotal + tax - discount + shipping);
 
@@ -162,6 +167,11 @@ const Checkout = () => {
 
   // ─── QUANTITY HANDLER ───
   const handleQuantityChange = (idx, qty) => {
+    if (checkoutItem) {
+      setCheckoutQuantity(Math.max(1, qty));
+      return;
+    }
+
     const item = cartItems[idx];
     const currentQty = item.quantity;
     if (qty > currentQty) {
@@ -391,15 +401,12 @@ const Checkout = () => {
                   <h3 className="font-semibold text-gray-800 mb-4">Billing Address</h3>
                   <div className="flex items-center gap-3 mb-4">
                     <input
-                      id="same-as-shipping"
                       type="checkbox"
                       checked={sameAsShipping}
                       onChange={() => setSameAsShipping(!sameAsShipping)}
                       className="w-4 h-4"
                     />
-                    <label htmlFor="same-as-shipping" className="text-sm font-semibold cursor-pointer">
-                      Same as shipping address
-                    </label>
+                    <label className="text-sm font-semibold">Same as shipping address</label>
                   </div>
                   {!sameAsShipping && (
                     <div className="space-y-3">
@@ -819,9 +826,9 @@ const Checkout = () => {
               <h2 className="text-lg font-bold text-gray-800 mb-4">Order Summary</h2>
 
               {/* Items */}
-              <div className="space-y-3 border-b border-gray-200 pb-4 max-h-96 overflow-y-auto hide-scrollbar">
-                {cartItems && cartItems.length > 0 ? (
-                  cartItems.map((item, idx) => (
+              <div className="space-y-3 border-b border-gray-200 pb-4 max-h-96 overflow-y-auto">
+                {items && items.length > 0 ? (
+                  items.map((item, idx) => (
                     <div key={idx} className="flex items-center gap-3">
                       <img
                         src={item.image}
@@ -831,44 +838,34 @@ const Checkout = () => {
                       />
                       <div className="flex-1">
                         <div className="font-semibold text-sm">{item.name}</div>
-                        <div className="mt-2">
-                          <div className="inline-flex items-center gap-2 bg-white">
+                        <div className="text-xs text-gray-500 mb-1">Qty: {item.quantity}</div>
+                        <div className="flex gap-1">
+                          <button
+                            onClick={() => handleQuantityChange(idx, item.quantity - 1)}
+                            className="px-2 py-1 bg-gray-200 text-xs rounded"
+                          >
+                            −
+                          </button>
+                          <button
+                            onClick={() => handleQuantityChange(idx, item.quantity + 1)}
+                            className="px-2 py-1 bg-gray-200 text-xs rounded"
+                          >
+                            +
+                          </button>
+                          {!checkoutItem && (
                             <button
-                              onClick={() => handleQuantityChange(idx, item.quantity - 1)}
-                              className="px-2 py-1 bg-gray-200 text-xs rounded"
-                              aria-label="decrease quantity"
+                              onClick={() =>
+                                removeFromCart(item.id, item.selectedVariant?.weight || "1kg")
+                              }
+                              className="ml-auto text-xs text-red-600 hover:underline"
                             >
-                              −
+                              Remove
                             </button>
-                            <div className="px-3 py-1 bg-gray-100 text-sm rounded w-10 text-center">
-                              {item.quantity}
-                            </div>
-                            <button
-                              onClick={() => handleQuantityChange(idx, item.quantity + 1)}
-                              className="px-2 py-1 bg-gray-200 text-xs rounded"
-                              aria-label="increase quantity"
-                            >
-                              +
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex flex-col items-end justify-center">
-                        <button
-                          onClick={() =>
-                            removeFromCart(item.id, item.selectedVariant?.weight || "1kg")
-                          }
-                          className="text-xs text-red-600 hover:underline mb-2"
-                        >
-                          Remove
-                        </button>
-                        <div className="font-bold text-sm">
-                          $
-                          {((item.selectedVariant?.price ?? item.price ?? 0) * item.quantity).toFixed(
-                            0
                           )}
                         </div>
+                      </div>
+                      <div className="font-bold text-sm">
+                        ${itemPrice(item).toFixed(0)}
                       </div>
                     </div>
                   ))
@@ -997,8 +994,6 @@ const Checkout = () => {
           </div>
         </div>
       )}
-      {/* FOOTER */}
-      <Footer />
     </div>
   );
 };

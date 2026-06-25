@@ -322,7 +322,7 @@ const BrandProducts = () => {
             {filteredProducts.length > 0 ? (
               <div
                 ref={productsRef}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8"
+                  className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6"
               >
                 {displayedProducts.map((product) => (
                   <ProductCard
