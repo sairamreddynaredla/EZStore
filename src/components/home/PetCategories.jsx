@@ -53,7 +53,7 @@ const categories = [
 
 const PetCategories = () => {
   return (
-    <section className="px-6 md:px-10 py-16 bg-[#f8f6f2]">
+    <section className="px-6 md:px-10 py-20 bg-[#f8f6f2]">
       <div className="mb-10">
         <h2 className="text-xl sm:text-4xl font-bold whitespace-nowrap">Shop By Pet Food</h2>
 
@@ -65,10 +65,10 @@ const PetCategories = () => {
           <Link
             key={item.id}
             to={`/category/${item.slug}`}
-            className="group bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 min-w-[180px] flex-shrink-0 md:min-w-0"
+            className="group bg-white rounded-[28px] overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 min-w-[300px] w-[300px] flex-shrink-0 md:w-auto md:min-w-0"
           >
             {/* IMAGE */}
-            <div className="h-[220px] overflow-hidden bg-[#f7c66b]">
+            <div className="h-[300px] overflow-hidden bg-[#f7c66b]">
               <img
                 src={item.image}
                 alt={item.name}
@@ -77,7 +77,7 @@ const PetCategories = () => {
             </div>
 
             {/* TEXT */}
-            <div className="py-5 text-center">
+            <div className="py-6 text-center">
               <h3 className="text-lg font-semibold">{item.name}</h3>
             </div>
           </Link>

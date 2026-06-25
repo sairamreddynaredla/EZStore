@@ -1,7 +1,7 @@
 import Navbar from "../../components/Navbar";
 import useCart from "../../hooks/usecart";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import secureBadge from "../../assets/logo/secure-payment.webp";
 import easyReturnsBadge from "../../assets/logo/easy-returns.webp";
 import fastDeliveryBadge from "../../assets/logo/fast-delivery.webp";
@@ -14,8 +14,16 @@ import codIcon from "../../assets/payments/cod.webp";
 
 const Checkout = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const { cartItems, totalPrice, clearCart, removeFromCart, increaseQuantity, decreaseQuantity } =
     useCart();
+
+  const checkoutItem = location.state?.checkoutItem;
+  const [checkoutQuantity, setCheckoutQuantity] = useState(checkoutItem?.quantity || 1);
+
+  const items = checkoutItem
+    ? [{ ...checkoutItem, quantity: checkoutQuantity }]
+    : cartItems;
 
   // ─── STEP & NAVIGATION ───
   const [currentStep, setCurrentStep] = useState(1);
@@ -72,7 +80,10 @@ const Checkout = () => {
   const TAX_RATE = 0.1;
   const discount = appliedCoupon ? coupons[appliedCoupon].discount : 0;
   const shipping = selectedDelivery === "express" ? 99 : 0;
-  const subtotal = totalPrice;
+  const itemPrice = (item) => (item.selectedVariant?.price ?? item.price ?? 0) * item.quantity;
+  const subtotal = checkoutItem
+    ? Math.round(itemPrice({ ...checkoutItem, quantity: checkoutQuantity }) * 100) / 100
+    : totalPrice;
   const tax = Math.round(subtotal * TAX_RATE * 100) / 100;
   const total = Math.max(0, subtotal + tax - discount + shipping);
 
@@ -156,6 +167,11 @@ const Checkout = () => {
 
   // ─── QUANTITY HANDLER ───
   const handleQuantityChange = (idx, qty) => {
+    if (checkoutItem) {
+      setCheckoutQuantity(Math.max(1, qty));
+      return;
+    }
+
     const item = cartItems[idx];
     const currentQty = item.quantity;
     if (qty > currentQty) {
@@ -811,8 +827,8 @@ const Checkout = () => {
 
               {/* Items */}
               <div className="space-y-3 border-b border-gray-200 pb-4 max-h-96 overflow-y-auto">
-                {cartItems && cartItems.length > 0 ? (
-                  cartItems.map((item, idx) => (
+                {items && items.length > 0 ? (
+                  items.map((item, idx) => (
                     <div key={idx} className="flex items-center gap-3">
                       <img
                         src={item.image}
@@ -836,21 +852,20 @@ const Checkout = () => {
                           >
                             +
                           </button>
-                          <button
-                            onClick={() =>
-                              removeFromCart(item.id, item.selectedVariant?.weight || "1kg")
-                            }
-                            className="ml-auto text-xs text-red-600 hover:underline"
-                          >
-                            Remove
-                          </button>
+                          {!checkoutItem && (
+                            <button
+                              onClick={() =>
+                                removeFromCart(item.id, item.selectedVariant?.weight || "1kg")
+                              }
+                              className="ml-auto text-xs text-red-600 hover:underline"
+                            >
+                              Remove
+                            </button>
+                          )}
                         </div>
                       </div>
                       <div className="font-bold text-sm">
-                        $
-                        {((item.selectedVariant?.price ?? item.price ?? 0) * item.quantity).toFixed(
-                          0
-                        )}
+                        ${itemPrice(item).toFixed(0)}
                       </div>
                     </div>
                   ))

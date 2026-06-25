@@ -109,9 +109,9 @@ const BestSellerSection = () => {
         </div>
 
         {/* Laptop and Above: Grid Layout */}
-        <div className="hidden lg:grid grid-cols-4 gap-6 justify-items-center">
+        <div className="hidden lg:grid grid-cols-4 gap-6">
           {displayProducts.slice(0, 4).map((product) => (
-            <div key={product.id} className="flex justify-center">
+            <div key={product.id} className="w-full">
               <ProductCard
                 product={product}
                 onAddToCart={handleAddToCart}

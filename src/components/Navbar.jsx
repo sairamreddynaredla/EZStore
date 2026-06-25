@@ -1,27 +1,206 @@
-import { useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import NavbarDropdown from "./navbar/NavbarDropdown";
 import { FaShoppingCart, FaHeart, FaUser, FaBars, FaTimes, FaSearch, FaPaw, FaDog, FaCat, FaTags, FaStore, FaClinicMedical, FaBath, FaMapMarkerAlt, FaBlog, FaInfoCircle, FaFileContract, FaHeadset, FaHeartbeat, FaBone, FaFish } from "react-icons/fa";
 import { useCart } from "../hooks/usecart";
+import products from "../data/products";
+import breedData from "../data/breeds";
 import logo from "../assets/logo/ezstore-logo-optimized.webp";
 
 function Navbar() {
   const navigate = useNavigate();
-  const { totalItems, flash, hideFlash } = useCart();
+  const { totalItems } = useCart();
   const [mobileMenu, setMobileMenu] = useState(false);
   const [search, setSearch] = useState("");
+  const [searchHistory, setSearchHistory] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1);
+  const searchInputRef = useRef(null);
+  const suggestionRef = useRef(null);
 
-  
+  const SEARCH_HISTORY_KEY = "ezstore_search_history";
 
-  // Remove Home and Pets, Brands handled separately
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const stored = window.localStorage.getItem(SEARCH_HISTORY_KEY);
+      if (stored) {
+        setSearchHistory(JSON.parse(stored));
+      }
+    } catch (error) {
+      console.warn("Failed to load search history", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        suggestionRef.current &&
+        !suggestionRef.current.contains(event.target) &&
+        searchInputRef.current &&
+        !searchInputRef.current.contains(event.target)
+      ) {
+        setShowSuggestions(false);
+      }
+    };
+
+    window.addEventListener("mousedown", handleClickOutside);
+    return () => window.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const saveSearchHistory = (query) => {
+    const normalized = query.trim();
+    if (!normalized) return;
+
+    setSearchHistory((prev) => {
+      const next = [normalized, ...prev.filter((item) => item.toLowerCase() !== normalized.toLowerCase())].slice(0, 8);
+      try {
+        window.localStorage.setItem(SEARCH_HISTORY_KEY, JSON.stringify(next));
+      } catch (error) {
+        console.warn("Failed to save search history", error);
+      }
+      return next;
+    });
+  };
+
   const navLinks = [{ to: "/best-sellers", label: "Best Sellers" }];
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (search.trim()) {
-      navigate(`/pets?search=${search.trim()}`);
+    const query = search.trim();
+    if (query) {
+      saveSearchHistory(query);
+      navigate(`/pets?search=${encodeURIComponent(query)}`);
       setSearch("");
+      setShowSuggestions(false);
       setMobileMenu(false);
+    }
+  };
+
+  const normalizedQuery = search.trim().toLowerCase();
+
+  const productSuggestions = useMemo(() => {
+    if (!normalizedQuery) return [];
+    const seen = new Set();
+
+    return products
+      .filter((product) => {
+        const searchText = [product.name, product.brand, product.category, product.subCategory, product.breed, product.pet]
+          .filter(Boolean)
+          .join(" ")
+          .toLowerCase();
+        return searchText.includes(normalizedQuery);
+      })
+      .slice(0, 6)
+      .map((product) => ({
+        type: "product",
+        label: product.name,
+        subLabel: product.brand,
+        path: `/product/${product.id}`,
+      }))
+      .filter((item) => {
+        if (seen.has(item.label.toLowerCase())) return false;
+        seen.add(item.label.toLowerCase());
+        return true;
+      });
+  }, [normalizedQuery]);
+
+  const breedSuggestions = useMemo(() => {
+    if (!normalizedQuery) return [];
+    return breedData
+      .filter((breed) =>
+        breed.name.toLowerCase().includes(normalizedQuery) ||
+        String(breed.category || "").toLowerCase().includes(normalizedQuery)
+      )
+      .slice(0, 5)
+      .map((breed) => ({
+        type: "breed",
+        label: breed.name,
+        subLabel: breed.category ? `${breed.category} breed` : "Breed",
+        path: `/breed/${breed.slug}`,
+      }));
+  }, [normalizedQuery]);
+
+  const recentSuggestions = useMemo(() => {
+    if (!normalizedQuery) return searchHistory;
+    return searchHistory.filter((item) => item.toLowerCase().includes(normalizedQuery));
+  }, [normalizedQuery, searchHistory]);
+
+  const brandSuggestions = useMemo(() => {
+    if (!normalizedQuery) return [];
+    const brands = [];
+    const seen = new Set();
+
+    for (const product of products) {
+      const brand = String(product.brand || "").trim();
+      if (!brand) continue;
+      const lower = brand.toLowerCase();
+      if (seen.has(lower)) continue;
+      if (lower.includes(normalizedQuery)) {
+        brands.push({
+          type: "brand",
+          label: brand,
+          subLabel: "Brand",
+          path: `/pets?search=${encodeURIComponent(brand)}`,
+        });
+        seen.add(lower);
+      }
+      if (brands.length >= 5) break;
+    }
+
+    return brands;
+  }, [normalizedQuery]);
+
+  const suggestions = useMemo(() => {
+    return [
+      ...recentSuggestions.map((item) => ({ type: "recent", label: item })),
+      ...productSuggestions,
+      ...brandSuggestions,
+      ...breedSuggestions,
+    ];
+  }, [recentSuggestions, productSuggestions, brandSuggestions, breedSuggestions]);
+
+  const hasSuggestions = suggestions.length > 0;
+
+  const selectSuggestion = (item) => {
+    if (item.type === "product" || item.type === "breed") {
+      navigate(item.path);
+      setSearch("");
+      setShowSuggestions(false);
+      setActiveSuggestionIndex(-1);
+      return;
+    }
+
+    if (item.type === "recent") {
+      setSearch(item.label);
+      setShowSuggestions(true);
+      setActiveSuggestionIndex(-1);
+    }
+  };
+
+  const handleSearchKeyDown = (event) => {
+    if (!hasSuggestions) return;
+
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      setActiveSuggestionIndex((prev) => Math.min(prev + 1, suggestions.length - 1));
+      setShowSuggestions(true);
+    }
+
+    if (event.key === "ArrowUp") {
+      event.preventDefault();
+      setActiveSuggestionIndex((prev) => Math.max(prev - 1, 0));
+      setShowSuggestions(true);
+    }
+
+    if (event.key === "Enter" && activeSuggestionIndex >= 0) {
+      event.preventDefault();
+      selectSuggestion(suggestions[activeSuggestionIndex]);
+    }
+
+    if (event.key === "Escape") {
+      setShowSuggestions(false);
+      setActiveSuggestionIndex(-1);
     }
   };
 
@@ -88,21 +267,129 @@ function Navbar() {
           </nav>
 
           {/* Desktop search (md+) - restored inside header */}
-          <form
-            onSubmit={handleSearch}
-            className="hidden md:flex items-center bg-white border border-[#E5E7EB] rounded-full px-3 sm:px-5 py-2 sm:py-2.5 gap-2 sm:gap-3 flex-1 max-w-xs sm:max-w-md shadow-sm hover:shadow-md hover:border-[#1F6B52] focus-within:shadow-md focus-within:border-[#1F6B52] transition-all duration-300"
-          >
-            <FaSearch className="text-[#4B5563] text-sm flex-shrink-0" />
-            <input
-              type="text"
-              inputMode="search"
-              enterKeyHint="search"
-              placeholder="Search..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="bg-transparent text-[#1A1A1A] placeholder-[#4B5563] text-xs sm:text-sm outline-none w-full"
-            />
-          </form>
+          <div className="relative flex-1 max-w-xs sm:max-w-md">
+            <form
+              onSubmit={handleSearch}
+              className="flex items-center bg-white border border-[#E5E7EB] rounded-full px-3 sm:px-5 py-2 sm:py-2.5 gap-2 sm:gap-3 shadow-sm hover:shadow-md hover:border-[#1F6B52] focus-within:shadow-md focus-within:border-[#1F6B52] transition-all duration-300"
+              ref={searchInputRef}
+            >
+              <FaSearch className="text-[#4B5563] text-sm flex-shrink-0" />
+              <input
+                type="text"
+                inputMode="search"
+                enterKeyHint="search"
+                placeholder="Search for products, brands, breeds..."
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setShowSuggestions(true);
+                  setActiveSuggestionIndex(-1);
+                }}
+                onFocus={() => setShowSuggestions(true)}
+                onKeyDown={handleSearchKeyDown}
+                className="bg-transparent text-[#1A1A1A] placeholder-[#4B5563] text-xs sm:text-sm outline-none w-full"
+              />
+            </form>
+
+            {showSuggestions && hasSuggestions && (
+              <div
+                ref={suggestionRef}
+                className="absolute left-0 right-0 mt-2 rounded-[26px] bg-white border border-slate-200 shadow-xl overflow-hidden z-50"
+              >
+                <div className="px-4 py-3">
+                  {recentSuggestions.length > 0 && (
+                    <div className="mb-3">
+                      <div className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-2">Recent searches</div>
+                      <div className="grid gap-2">
+                        {recentSuggestions.slice(0, 5).map((item) => (
+                          <button
+                            type="button"
+                            key={item}
+                            onClick={() => {
+                              setSearch(item);
+                              setShowSuggestions(true);
+                            }}
+                            className="text-left text-sm text-slate-700 hover:text-[#1F6B52] hover:bg-slate-50 rounded-lg px-3 py-2 transition-colors"
+                          >
+                            {item}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {productSuggestions.length > 0 && (
+                    <div className="mb-3">
+                      <div className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-2">Products</div>
+                      <div className="grid gap-2">
+                        {productSuggestions.map((item) => {
+                          const index = suggestions.findIndex((suggestion) => suggestion.label === item.label && suggestion.type === item.type);
+                          const isActive = activeSuggestionIndex === index;
+                          return (
+                            <button
+                              type="button"
+                              key={`${item.type}-${item.label}`}
+                              onClick={() => selectSuggestion(item)}
+                              className={`text-left rounded-lg px-3 py-2 transition-colors ${isActive ? "bg-slate-100" : "hover:bg-slate-50"}`}
+                            >
+                              <div className="font-medium text-sm text-slate-900">{item.label}</div>
+                              <div className="text-xs text-slate-500">{item.subLabel}</div>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {brandSuggestions.length > 0 && (
+                    <div className="mb-3">
+                      <div className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-2">Brands</div>
+                      <div className="grid gap-2">
+                        {brandSuggestions.map((item) => {
+                          const index = suggestions.findIndex((suggestion) => suggestion.label === item.label && suggestion.type === item.type);
+                          const isActive = activeSuggestionIndex === index;
+                          return (
+                            <button
+                              type="button"
+                              key={`${item.type}-${item.label}`}
+                              onClick={() => selectSuggestion(item)}
+                              className={`text-left rounded-lg px-3 py-2 transition-colors ${isActive ? "bg-slate-100" : "hover:bg-slate-50"}`}
+                            >
+                              <div className="font-medium text-sm text-slate-900">{item.label}</div>
+                              <div className="text-xs text-slate-500">{item.subLabel}</div>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {breedSuggestions.length > 0 && (
+                    <div className="mb-3">
+                      <div className="text-xs uppercase tracking-[0.2em] text-slate-500 mb-2">Breeds</div>
+                      <div className="grid gap-2 pb-1">
+                        {breedSuggestions.map((item) => {
+                          const index = suggestions.findIndex((suggestion) => suggestion.label === item.label && suggestion.type === item.type);
+                          const isActive = activeSuggestionIndex === index;
+                          return (
+                            <button
+                              type="button"
+                              key={`${item.type}-${item.label}`}
+                              onClick={() => selectSuggestion(item)}
+                              className={`text-left rounded-lg px-3 py-2 transition-colors ${isActive ? "bg-slate-100" : "hover:bg-slate-50"}`}
+                            >
+                              <div className="font-medium text-sm text-slate-900">{item.label}</div>
+                              <div className="text-xs text-slate-500">{item.subLabel}</div>
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
 
           
 
@@ -322,20 +609,6 @@ function Navbar() {
           </div>
         )}
       </header>
-      {flash?.visible && (
-        <div
-          className={`fixed top-4 right-4 z-50 flex items-center gap-3 px-3 py-2 text-xs font-medium shadow-lg text-white ${flash.type === "success" ? "bg-emerald-600" : "bg-red-600"} rounded-md`}
-        >
-          <span className="leading-4">{flash.message}</span>
-          <button
-            onClick={() => hideFlash && hideFlash()}
-            aria-label="Close"
-            className="ml-1 text-white/80 hover:text-white text-sm leading-4"
-          >
-            ×
-          </button>
-        </div>
-      )}
       <div className="h-14 md:h-20 lg:h-24" aria-hidden="true" />
     </>
   );

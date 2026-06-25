@@ -89,7 +89,7 @@ const BreedDetailsLayout = () => {
 
         <div className="flex-1">
           <h1 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold leading-tight text-[#1d1d1d]">
-            {breed.banner.title}
+            {breed.name}
           </h1>
 
           <h3 className="text-base sm:text-lg md:text-2xl text-orange-500 mt-2 sm:mt-3 md:mt-5 font-semibold">{breed.banner.subtitle}</h3>

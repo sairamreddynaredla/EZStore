@@ -142,6 +142,12 @@ const breedData = [
       apartmentFriendly: true,
       sheddingLevel: "High",
     },
+    info: {
+      size: "Small",
+      lifespan: "12–17 years",
+      weight: "6-12lb",
+      grooming: "High",
+    },
     personality: {
       family: "Deeply bonds with family, follows favorite humans, loves gentle affection.",
       children: "Patient and tolerant with gentle children.",

@@ -209,7 +209,7 @@ const Shop = () => {
       <Navbar />
       <div className="w-full px-2 sm:max-w-7xl sm:mx-auto sm:px-6 lg:px-8 py-14">
         {/* TOP SECTION */}
-        <div className="flex items-center justify-between mb-10">
+        <div className="hidden sm:flex items-center justify-between mb-10">
           <div>
             <h1 className="text-4xl font-bold">Pet Food Shop</h1>
             <p className="text-gray-500 mt-2">{filtered.length} Products Available</p>

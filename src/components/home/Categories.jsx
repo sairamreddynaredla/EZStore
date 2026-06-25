@@ -100,23 +100,23 @@ function Categories({ selectedPet, setSelectedPet }) {
           ))}
         </div>
 
-        <div className="absolute inset-y-0 left-0 flex items-center sm:left-4">
+        <div className="absolute inset-y-0 -left-4 md:-left-10 flex items-center">
           <button
             onClick={() => handleScroll("left")}
-            className="bg-white shadow-xl w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 duration-300"
+            className="bg-white border border-slate-200 shadow-md w-12 h-12 rounded-full flex items-center justify-center text-slate-900 hover:scale-105 transition-transform duration-200"
             aria-label="Scroll categories left"
           >
-            <ChevronLeft size={22} />
+            <ChevronLeft size={20} />
           </button>
         </div>
 
-        <div className="absolute inset-y-0 right-0 flex items-center sm:right-4">
+        <div className="absolute inset-y-0 -right-4 md:-right-10 flex items-center">
           <button
             onClick={() => handleScroll("right")}
-            className="bg-white shadow-xl w-12 h-12 rounded-full flex items-center justify-center hover:scale-110 duration-300"
+            className="bg-white border border-slate-200 shadow-md w-12 h-12 rounded-full flex items-center justify-center text-slate-900 hover:scale-105 transition-transform duration-200"
             aria-label="Scroll categories right"
           >
-            <ChevronRight size={22} />
+            <ChevronRight size={20} />
           </button>
         </div>
       </div>

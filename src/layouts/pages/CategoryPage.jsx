@@ -20,62 +20,52 @@ import {
   resolveProductImage,
   resolveProductImageFallback,
 } from "../../utils/productImage";
+import AddToCartButton from "../../components/products/AddToCartButton";
 
 
 const CategoryPage = () => {
 
   const { category } = useParams();
 
-  const {
-    addToCart,
-    cartItems = [],
-    increaseQuantity,
-    decreaseQuantity,
-  } = useCart();
+  const { addToCart } = useCart();
 
-  const [filters, setFilters] =
-    useState({
-      petTypes: [],
-      productCategories: [],
-      productTypes: [],
-      shopByBreeds: [],
-      shopByConcerns: [],
-      vegTypes: [],
-      brands: [],
-      flavors: [],
-      weights: [],
-      lifeStages: [],
-      breedSizes: [],
-      specialDiets: [],
-      sizes: [],
-                [
-                  "Royal Canin",
-                  "Pedigree",
-                  "Drools",
-                  "Farmina",
-                  "Taste Of The Wild",
-                  "Purina",
-                ].map((brand) => (
-    useState({
-      availability: true,
-      price: true,
-      petTypes: true,
-      productCategories: true,
-      brands: true,
-      breedSizes: true,
-      productTypes: true,
-      shopByBreeds: true,
-      shopByConcerns: true,
-      flavors: true,
-      weights: true,
-      lifeStages: true,
-      specialDiets: true,
-      vegTypes: true,
-      sizes: true,
-    });
+  const [filters, setFilters] = useState({
+    petTypes: [],
+    productCategories: [],
+    productTypes: [],
+    shopByBreeds: [],
+    shopByConcerns: [],
+    vegTypes: [],
+    brands: [],
+    flavors: [],
+    weights: [],
+    lifeStages: [],
+    breedSizes: [],
+    specialDiets: [],
+    sizes: [],
+  });
 
-  const [sortBy, setSortBy] =
-    useState("");
+  const [openSections, setOpenSections] = useState({
+    availability: true,
+    price: true,
+    petTypes: true,
+    productCategories: true,
+    brands: true,
+    breedSizes: true,
+    productTypes: true,
+    shopByBreeds: true,
+    shopByConcerns: true,
+    flavors: true,
+    weights: true,
+    lifeStages: true,
+    specialDiets: true,
+    vegTypes: true,
+    sizes: true,
+  });
+
+  const [includeOutOfStock, setIncludeOutOfStock] = useState(false);
+  const [priceRange, setPriceRange] = useState("");
+  const [sortBy, setSortBy] = useState("");
 
   // TOGGLE FILTER SECTIONS
 
@@ -1534,14 +1524,6 @@ const CategoryPage = () => {
 
             {filteredProducts.map(
               (product) => {
-
-                const cartItem =
-                  cartItems.find(
-                    (item) =>
-                      item.id ===
-                      product.id
-                  );
-
                 return (
 
                   <div
@@ -1625,64 +1607,13 @@ const CategoryPage = () => {
 
                       </div>
 
-                      {/* CART */}
-
-                      {!cartItem ? (
-
-                        <button
-                          onClick={() =>
-                            addToCart(
-                              product
-                            )
-                          }
-                          className="w-full mt-5 py-3 rounded-2xl font-semibold transition bg-amber-400 hover:bg-amber-300 text-black"
-                        >
-
-                          Add To Cart
-
-                        </button>
-
-                      ) : (
-
-                        <div className="w-full mt-5 flex items-center justify-between border border-orange-500 rounded-2xl overflow-hidden">
-
-                          <button
-                            onClick={() =>
-                              decreaseQuantity(
-                                product.id
-                              )
-                            }
-                            className="w-14 h-12 text-xl font-bold hover:bg-orange-50 transition"
-                          >
-
-                            -
-
-                          </button>
-
-                          <span className="font-semibold text-lg">
-
-                            {
-                              cartItem.quantity
-                            }
-
-                          </span>
-
-                          <button
-                            onClick={() =>
-                              increaseQuantity(
-                                product.id
-                              )
-                            }
-                            className="w-14 h-12 text-xl font-bold hover:bg-orange-50 transition"
-                          >
-
-                            +
-
-                          </button>
-
-                        </div>
-
-                      )}
+                      {/* CART BUTTON - IMPROVED */}
+                      <AddToCartButton
+                        product={product}
+                        isOutOfStock={product.stock <= 0}
+                        onAddToCart={(prod, quantity) => addToCart({ ...prod, quantity })}
+                        quantity={1}
+                      />
 
                     </div>
 

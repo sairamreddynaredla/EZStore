@@ -20,7 +20,7 @@ const PetBreedsCarousel = ({ breeds, title }) => {
       <div className="relative">
         <button
           onClick={() => swiperRef.current?.slidePrev()}
-          className="absolute left-0 md:left-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
+          className="absolute -left-4 md:-left-10 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
           aria-label="Scroll breeds left"
         >
           <ChevronLeft size={16} className="md:w-[20px]" />
@@ -28,7 +28,7 @@ const PetBreedsCarousel = ({ breeds, title }) => {
 
         <button
           onClick={() => swiperRef.current?.slideNext()}
-          className="absolute right-0 md:right-2 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
+          className="absolute -right-4 md:-right-10 top-1/2 -translate-y-1/2 z-10 rounded-full bg-white shadow-xl w-8 h-8 md:w-12 md:h-12 flex items-center justify-center hover:scale-105 transition-transform duration-300"
           aria-label="Scroll breeds right"
         >
           <ChevronRight size={16} className="md:w-[20px]" />

@@ -98,7 +98,7 @@ const BuyBox = ({
           onClick={handleBuyNow}
           disabled={product.stock === 0}
           analyticsPayload={{ ...product, selectedVariant, quantity }}
-          className="mt-2 w-full rounded-full bg-orange-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-400"
+          className="mt-2 w-full rounded-full px-3 py-2 text-sm font-semibold text-black bg-amber-400 shadow-sm hover:bg-amber-300 transition-colors"
         >
           Buy Now
         </BuyNowButton>

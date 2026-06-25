@@ -8,7 +8,6 @@ const ProductGrid = ({
   loading = false,
   emptyMessage = "No products found",
   onVisibleProductChange, // (product) => void
-  columns = 4,
 }) => {
   if (!loading && products.length === 0) {
     return (
@@ -47,20 +46,8 @@ const ProductGrid = ({
     return () => obs.disconnect();
   }, [onVisibleProductChange, products]);
 
-  const cols = Math.max(1, Math.min(Number(columns) || 4, 6));
-
-  const colsMap = {
-    1: "grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1",
-    2: "grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2",
-    3: "grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3",
-    4: "grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4",
-    5: "grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5",
-    6: "grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6",
-  };
-
   return (
-    <div className="max-w-[1400px] mx-auto px-2 sm:px-6">
-      <div className={`grid gap-8 sm:gap-6 justify-center justify-items-center ${colsMap[cols]}`}>
+    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
       {loading
         ? Array.from({ length: 10 }).map((_, idx) => (
             <div
@@ -77,7 +64,7 @@ const ProductGrid = ({
             </div>
           ))
         : products.map((product, idx) => (
-            <div key={product.id} data-index={idx} ref={(el) => (itemRefs.current[idx] = el)} className="h-full">
+            <div key={product.id} data-index={idx} ref={(el) => (itemRefs.current[idx] = el)}>
               <ProductCard
                 product={product}
                 onAddToCart={onAddToCart}
@@ -85,8 +72,7 @@ const ProductGrid = ({
               />
             </div>
           ))}
-          </div>
-            </div>
+    </div>
   );
 };
 

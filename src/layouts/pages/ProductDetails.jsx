@@ -56,9 +56,16 @@ const ProductDetails = () => {
   };
 
   // BUY NOW HANDLER
-  const handleBuyNow = async () => {
-    await handleAddToCart(product.id, 1, false);
-    navigate("/checkout");
+  const handleBuyNow = () => {
+    navigate("/checkout", {
+      state: {
+        checkoutItem: {
+          ...product,
+          selectedVariant,
+          quantity,
+        },
+      },
+    });
   };
 
   const handleWishlistToggle = (productId, isAdding) => {

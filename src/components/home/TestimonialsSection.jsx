@@ -1,4 +1,4 @@
-import { Star, Quote, ChevronLeft, ChevronRight } from "lucide-react";
+import { Star, Quote, ArrowLeft, ArrowRight } from "lucide-react";
 
 import { useState, useRef, useEffect } from "react";
 
@@ -125,16 +125,16 @@ const TestimonialsSection = () => {
           <div className="hidden md:flex items-center gap-4 mt-8 md:mt-0">
             <button
               onClick={prevSlide}
-              className="w-14 h-14 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:shadow-xl transition"
+              className="w-14 h-14 rounded-full bg-[#16325B] text-white flex items-center justify-center hover:shadow-xl transition"
             >
-              <ChevronLeft size={24} />
+              <ArrowLeft size={20} className="text-white" />
             </button>
 
             <button
               onClick={nextSlide}
-              className="w-14 h-14 rounded-full bg-[#16325B] text-white flex items-center justify-center hover:bg-[#0d2240] transition"
+              className="w-14 h-14 rounded-full bg-white border border-gray-200 flex items-center justify-center hover:shadow-lg transition"
             >
-              <ChevronRight size={24} />
+              <ArrowRight size={20} className="text-[#16325B]" />
             </button>
           </div>
         </div>

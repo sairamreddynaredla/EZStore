@@ -11,7 +11,7 @@ import { trackAddToCart } from "../../utils/analytics";
  * - Synced to cart state
  */
 const AddToCartButton = ({ product, isOutOfStock = false, onAddToCart, btnClass }) => {
-  const { cartItems, increaseQuantity, decreaseQuantity, removeFromCart, showFlash } = useCart();
+  const { cartItems, increaseQuantity, decreaseQuantity, removeFromCart } = useCart();
   const [flash, setFlash] = useState(false);
   const [showVariantModal, setShowVariantModal] = useState(false);
   const [mobileVariantIdx, setMobileVariantIdx] = useState(0);
@@ -49,9 +49,6 @@ const AddToCartButton = ({ product, isOutOfStock = false, onAddToCart, btnClass 
     } catch (err) {
       /* ignore analytics errors */
     }
-    try {
-      showFlash && showFlash("Added to cart", "success");
-    } catch (err) {}
     setFlash(true);
     setTimeout(() => setFlash(false), 1200);
   };
@@ -69,9 +66,6 @@ const AddToCartButton = ({ product, isOutOfStock = false, onAddToCart, btnClass 
     e.stopPropagation();
     if (cartQty <= 1) {
       removeFromCart(product.id, weight);
-      try {
-        showFlash && showFlash("Removed from cart", "error");
-      } catch (err) {}
     } else decreaseQuantity(product.id, weight);
   };
 
@@ -187,7 +181,6 @@ const AddToCartButton = ({ product, isOutOfStock = false, onAddToCart, btnClass 
                     const payload = { ...product, selectedVariant: sel };
                     if (onAddToCart) onAddToCart(payload, 1);
                     setShowVariantModal(false);
-                    try { showFlash && showFlash("Added to cart", "success"); } catch (err) {}
                   }}
                   className="w-full py-2 sm:py-3 rounded-md sm:rounded-xl text-sm sm:text-[14px] font-semibold transition-all duration-200 active:scale-95 bg-[#F59E0B] hover:bg-[#D97706] text-white"
                 >
