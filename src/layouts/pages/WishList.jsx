@@ -171,11 +171,16 @@ const WishList = () => {
                           font-bold
                           text-[#0D2B5C]
                           leading-8
-                          line-clamp-2
+                          overflow-hidden
                           min-h-16
                           hover:text-[#F53B3B]
                           transition-all
                         "
+                        style={{
+                          display: "-webkit-box",
+                          WebkitLineClamp: 2,
+                          WebkitBoxOrient: "vertical",
+                        }}
                       >
                         {product.name}
                       </h2>

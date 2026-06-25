@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import useCart from "../../hooks/usecart";
-import AddToCartButton from "../products/AddToCartButton";
 import BuyNowButton from "../BuyNowButton";
 import { getBrandLogo } from "../../data/brands";
 import ReviewSummary from "./ReviewSummary";
 import OffersList from "./OffersList";
+import { normalizeFlavor, getFlavorMeatLabel } from "../../utils/productText";
 
 const ProductInfo = ({
   product,
@@ -15,7 +14,6 @@ const ProductInfo = ({
   quantity,
   setQuantity,
 }) => {
-  const { addToCart } = useCart();
   const navigate = useNavigate();
   const [showRatingDropdown, setShowRatingDropdown] = useState(false);
 
@@ -39,18 +37,21 @@ const ProductInfo = ({
 
   const productBadge = product.rating >= 4.8 ? "Top Rated" : null;
 
+  const flavorLabel = normalizeFlavor(product.flavor);
+  const meatLabel = getFlavorMeatLabel(product.flavor);
+
   const productTitleTop = [
     `${product.brand} ${product.productType || "Dry Dog Food"}`,
     selectedVariant?.weight || product.weight?.[0] || product.size,
-    `${product.flavor || "Chicken"} & Rice`,
-    `with Real ${product.flavor || "Chicken"} Meat`,
+    flavorLabel,
+    `with Real ${meatLabel} Meat`,
   ]
     .filter(Boolean)
     .join(" | ");
 
   const productTitleBottom = [
     product.lifeStage && `${product.lifeStage} ${product.petType || product.pet || "Dog"} Formula`,
-    product.specialDiet || (product.flavor && `${product.flavor} Flavor`),
+    product.specialDiet || (product.flavor && `${flavorLabel} Flavor`),
     product.breedSize && !/all/i.test(product.breedSize) ? `For ${product.breedSize} Breeds` : null,
   ]
     .filter(Boolean)
@@ -69,7 +70,7 @@ const ProductInfo = ({
   const productShareTitle = [
     `${product.brand} ${product.productType || "Dry Dog Food"}`,
     selectedVariantWeight,
-    product.flavor ? `${product.flavor} & Rice` : null,
+    product.flavor ? flavorLabel : null,
     product.lifeStage ? `${product.lifeStage} dog formula` : null,
   ]
     .filter(Boolean)
@@ -87,12 +88,15 @@ const ProductInfo = ({
 
   const productCategoryLabel = product.productCategory || formatCategoryLabel(product.category);
 
-  const productShareText = `Check out ${productShareTitle} on EZStore${productTitleBottom ? ` — ${productTitleBottom}` : ""}`;
-  const [isTitleExpanded, setIsTitleExpanded] = useState(false);
-
   const productFullTitle = `${productTitleTop}${productTitleBottom ? ` | ${productTitleBottom}` : ""}`;
-  const shouldShowTitleToggle = productFullTitle.length > 120;
-  const titleClassName = isTitleExpanded ? "font-bold text-black font-sans text-left wrap-break-word leading-tight" : "font-bold text-black font-sans text-left wrap-break-word leading-tight line-clamp-4";
+  const productMainTitle = product.name || productFullTitle;
+  const productSubtitle = productFullTitle && productFullTitle !== productMainTitle ? productFullTitle : "";
+  const [isSubtitleExpanded, setIsSubtitleExpanded] = useState(false);
+  const subtitleClassName = isSubtitleExpanded
+    ? "text-sm text-slate-600"
+    : "text-sm text-slate-600 line-clamp-2";
+  const shouldShowSubtitleToggle = productSubtitle.length > 120;
+  const productShareText = `Check out ${productShareTitle} on EZStore${productTitleBottom ? ` — ${productTitleBottom}` : ""}`;
 
   const handleShare = async () => {
     const shareData = {
@@ -132,19 +136,24 @@ const ProductInfo = ({
           <div className="flex items-start justify-between gap-3 sm:items-center">
             <div className="w-full flex justify-center sm:justify-start">
               <div className="w-full max-w-2xl mb-2">
-                <h1
-                  className={`${titleClassName} ${shouldShowTitleToggle ? "cursor-pointer" : ""}`}
-                  style={{
-                    fontSize: "20px",
-                  }}
-                  onClick={shouldShowTitleToggle ? () => setIsTitleExpanded((value) => !value) : undefined}
-                  role={shouldShowTitleToggle ? "button" : undefined}
-                  aria-expanded={shouldShowTitleToggle ? isTitleExpanded : undefined}
-                >
-                  <span className="block text-[20px] sm:text-[24px] md:text-[28px] lg:text-[30px] font-bold font-sans">
-                    {productFullTitle}
-                  </span>
-                </h1>
+                <div>
+                  <h1 className="font-bold text-black font-sans text-left wrap-break-word leading-tight text-[20px] sm:text-[24px] md:text-[28px] lg:text-[30px]">
+                    {productMainTitle}
+                  </h1>
+                  {productSubtitle && (
+                    <button
+                      type="button"
+                      onClick={() => setIsSubtitleExpanded((value) => !value)}
+                      className="mt-2 text-sm text-slate-600 text-left hover:text-slate-800 transition"
+                      aria-expanded={isSubtitleExpanded}
+                    >
+                      <span className={subtitleClassName}>{productSubtitle}</span>
+                      {shouldShowSubtitleToggle && (
+                        <span className="ml-2 text-blue-600">{isSubtitleExpanded ? "Show less" : "Show more"}</span>
+                      )}
+                    </button>
+                  )}
+                </div>
                 {variantOptions.length > 0 && (
                   <div className="mt-4">
                     <p className="mb-3 text-sm font-semibold text-slate-600">Size</p>

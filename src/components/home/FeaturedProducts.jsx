@@ -86,7 +86,7 @@ const FeaturedProducts = () => {
                   {product.brand}
                 </p>
 
-                <h3 className='text-lg font-semibold text-slate-900 line-clamp-2'>
+                <h3 className='text-lg font-semibold text-slate-900 overflow-hidden' style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>
                   {product.name}
                 </h3>
 

@@ -67,7 +67,13 @@ const ProductGrid = ({ products }) => {
                 {product.brand}
               </p>
               <Link to={`/product/${product.id}`} className="block">
-                <h2 className="line-clamp-2 min-h-12 text-sm font-semibold leading-6 text-slate-900 transition-colors duration-300 group-hover:text-orange-600">
+                <h2 className="overflow-hidden min-h-12 text-sm font-semibold leading-6 text-slate-900 transition-colors duration-300 group-hover:text-orange-600"
+                  style={{
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                  }}
+                >
                   {product.name}
                 </h2>
               </Link>

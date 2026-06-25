@@ -196,7 +196,7 @@ const HotPickSection = () => {
 
                   {/* NAME */}
 
-                  <h3 className="text-lg font-bold text-gray-900 leading-snug mb-4 min-h-15">
+                  <h3 className="text-lg font-bold text-gray-900 leading-6 mb-4 overflow-hidden min-h-[3rem]" style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}>
                     {product.name}
                   </h3>
 

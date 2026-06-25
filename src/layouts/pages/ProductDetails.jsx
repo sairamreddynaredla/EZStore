@@ -11,6 +11,7 @@ import SimilarProducts from "../../components/productdetails/SimilarProducts";
 import useCart from "../../hooks/usecart";
 import { useWishlist } from "../../context/usewishlist";
 import SEO from "../../components/SEO";
+import { normalizeFlavor } from "../../utils/productText";
 
 const ProductDetails = () => {
   const navigate = useNavigate();
@@ -343,7 +344,7 @@ const ProductDetails = () => {
                     <div className="flex items-center justify-between gap-4">
                       <span className="text-sm font-semibold text-slate-900">Flavor:</span>
                       <span className="text-sm text-slate-600 text-right">
-                        {product.flavor || "Chicken"}
+                        {normalizeFlavor(product.flavor)}
                       </span>
                     </div>
                   </div>

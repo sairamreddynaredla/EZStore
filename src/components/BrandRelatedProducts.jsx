@@ -40,7 +40,8 @@ const BrandRelatedProducts = ({ brand, products = [], limit = 4 }) => {
               <div className="flex-1">
                 <Link
                   to={`/product/${p.id}`}
-                  className="text-sm font-semibold text-gray-900 line-clamp-2 block"
+                  className="text-sm font-semibold text-gray-900 overflow-hidden block"
+                  style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}
                 >
                   {p.name}
                 </Link>

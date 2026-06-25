@@ -1577,7 +1577,9 @@ const CategoryPage = () => {
                         to={`/product/${product.id}`}
                       >
 
-                        <h3 className="font-semibold text-sm leading-6 line-clamp-2 min-h-12 hover:text-orange-500 transition">
+                        <h3 className="font-semibold text-sm leading-6 overflow-hidden min-h-12 hover:text-orange-500 transition"
+                          style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical" }}
+                        >
 
                           {product.name}
 

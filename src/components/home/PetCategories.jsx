@@ -57,7 +57,7 @@ const PetCategories = () => {
       <div className="mb-10">
         <h2 className="text-xl sm:text-4xl font-bold whitespace-nowrap">Shop By Pet Food</h2>
 
-        <p className="text-gray-500 mt-3">Find food collections for every pet</p>
+        <p className="text-gray-500 mt-3">Browse by Exclusive Category</p>
       </div>
 
       <div className="flex gap-6 overflow-x-auto pb-4 -mx-6 px-6 md:mx-0 md:px-0 md:grid md:grid-cols-3 lg:grid-cols-6 hide-scrollbar">

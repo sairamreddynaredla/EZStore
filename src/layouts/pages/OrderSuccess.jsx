@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const OrderSuccess = () => {
+
   return (
     <div className="min-h-screen bg-[#f8f8f8] flex items-center justify-center px-4">
       <div className="bg-white rounded-[40px] shadow-md p-8 sm:p-10 w-full max-w-xl text-center">

@@ -103,8 +103,19 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle, compact = false }
           </div>
 
           <div className="flex flex-col flex-1 px-3 sm:px-3 pb-3 sm:pb-3 pt-1 sm:pt-1">
-            <div className="flex items-center justify-between mb-1"><span className="text-sm sm:text-[12px] text-gray-500 font-medium truncate">{product.brand}</span></div>
-            <h3 className="text-sm sm:text-[12px] font-semibold text-gray-900 leading-snug line-clamp-2 min-h-10 mb-1 sm:mb-2">{product.name}</h3>
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-sm sm:text-[12px] text-gray-500 font-medium truncate">{product.brand}</span>
+            </div>
+            <h3
+              className="text-sm sm:text-[12px] font-semibold text-gray-900 leading-snug min-h-[3rem] mb-1 sm:mb-2 overflow-hidden"
+              style={{
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+              }}
+            >
+              {product.name}
+            </h3>
 
             {variants.length > 0 && (
               <div className="hidden sm:flex flex-wrap gap-1 sm:gap-1 mb-1 sm:mb-2 relative">

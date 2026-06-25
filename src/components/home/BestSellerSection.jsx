@@ -88,8 +88,8 @@ const BestSellerSection = () => {
           {/* no indicators on mobile */}
         </div>
 
-        {/* Tablet (sm - lg): Horizontal Scroll */}
-        <div className="hidden sm:block lg:hidden">
+        {/* Small tablet: Horizontal Scroll */}
+        <div className="hidden sm:block md:hidden">
           <div ref={containerRef} className="overflow-x-auto hide-scrollbar">
             <div className="flex gap-3 sm:gap-4 md:gap-6 pb-2 min-w-min px-2">
               {displayProducts.map((product) => (
@@ -105,11 +105,11 @@ const BestSellerSection = () => {
             </div>
           </div>
 
-          {/* no indicators on tablet */}
+          {/* no indicators on small tablet */}
         </div>
 
-        {/* Laptop and Above: Grid Layout */}
-        <div className="hidden lg:grid grid-cols-4 gap-6">
+        {/* Medium and above: 4-card grid layout */}
+        <div className="hidden md:grid grid-cols-2 lg:grid-cols-4 gap-6">
           {displayProducts.slice(0, 4).map((product) => (
             <div key={product.id} className="w-full">
               <ProductCard

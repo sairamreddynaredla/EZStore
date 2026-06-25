@@ -200,17 +200,15 @@ const BrandsMega = ({ isOpen, onOpen, onClose }) => {
                       <Link
                         key={brand.id || brand.slug}
                         to={`/brands/${brand.slug}`}
-                        className="group block rounded-2xl bg-white border border-gray-100 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-transform duration-300 overflow-hidden flex items-center justify-center p-4"
+                        className="group block overflow-hidden transition-transform duration-300 hover:-translate-y-1 flex items-center justify-center h-24"
                         onClick={() => onClose && onClose()}
                       >
-                        <div className="w-full h-24 flex items-center justify-center bg-white">
-                          <img
-                            src={logoMap[brand.logo] || banners[brand.logo]}
-                            alt={brand.name}
-                            className="max-h-20 max-w-full object-contain"
-                            loading="lazy"
-                          />
-                        </div>
+                        <img
+                          src={logoMap[brand.logo] || banners[brand.logo]}
+                          alt={brand.name}
+                          className="max-h-20 max-w-full object-contain"
+                          loading="lazy"
+                        />
                       </Link>
                     ))}
                   </div>

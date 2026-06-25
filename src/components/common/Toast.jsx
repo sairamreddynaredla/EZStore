@@ -35,7 +35,7 @@ const Toast = () => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-[9999] flex flex-col gap-2 max-w-sm">
+    <div className="fixed top-4 right-4 z-[9999] flex flex-col gap-2 max-w-sm">
       {toasts.map((toast) => (
         <div key={toast.id} className={getToastStyles(toast.type)}>
           <div className="flex-shrink-0">{getIcon(toast.type)}</div>
@@ -53,7 +53,7 @@ const Toast = () => {
       <style>{`
         @keyframes slide-in {
           from {
-            transform: translateX(400px);
+            transform: translateX(100%);
             opacity: 0;
           }
           to {

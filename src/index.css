@@ -21,6 +21,19 @@ a {
   text-decoration: none;
 }
 
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+a,
+label,
+summary,
+[role="button"],
+[role="link"],
+.cursor-pointer {
+  cursor: pointer;
+}
+
 @keyframes marquee {
   0% {
     transform: translateX(0%);

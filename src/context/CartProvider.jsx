@@ -176,7 +176,6 @@ const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCartItems([]);
-    error("Cart cleared");
   };
 
   return (

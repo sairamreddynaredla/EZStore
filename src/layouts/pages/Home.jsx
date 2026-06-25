@@ -4,13 +4,8 @@ import { useState } from "react";
 import HeroSlider from "../../components/home/HeroSlider";
 import SearchBelowHero from "../../components/home/SearchBelowHero";
 import Categories from "../../components/home/Categories";
-import PetBreedsCarousel from "../../components/home/PetBreedsCarousel";
-import petData from "../../data/petData";
-
 import FoodCategorySection from "../../components/home/FoodCategorySection";
-
 import PetCategories from "../../components/home/PetCategories";
-
 import PetBrands from "../../components/home/PetBrands";
 import BestSellerSection from "../../components/home/BestSellerSection";
 
@@ -39,17 +34,11 @@ const Home = () => {
       {/* SHOP CATEGORIES */}
       <Categories selectedPet={selectedPet} setSelectedPet={setSelectedPet} />
 
-      {/* PET BREEDS CAROUSEL (no hero banners) */}
-      <PetBreedsCarousel
-        breeds={petData[selectedPet]?.breeds}
-        title={`Popular ${selectedPet.charAt(0).toUpperCase() + selectedPet.slice(1)} Breeds`}
-      />
-
-      {/* FOOD CATEGORIES - Wet / Dry / Puppy & Kitten / Prescription */}
-      <FoodCategorySection />
-
-      {/* PET TYPES */}
+      {/* SHOP BY PET FOOD - mid page section */}
       <PetCategories />
+
+      {/* EXPLORE. PICK. PAMPER. - Food categories */}
+      <FoodCategorySection />
 
       {/* PREMIUM BRANDS */}
       <PetBrands />

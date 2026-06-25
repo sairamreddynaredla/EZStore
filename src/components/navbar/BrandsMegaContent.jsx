@@ -161,15 +161,13 @@ export default function BrandsMegaContent({ onClose }) {
                         key={brand.id}
                         to={`/brands/${brand.slug || brand.logo}`}
                         onClick={() => onClose && onClose()}
-                        className="group rounded-2xl bg-white border border-gray-100 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-transform duration-300 overflow-hidden flex items-center justify-center p-4"
+                        className="group overflow-hidden transition-transform duration-300 hover:-translate-y-1 flex items-center justify-center h-24"
                       >
-                        <div className="w-full h-24 flex items-center justify-center bg-white">
-                          <img
-                            src={banners[brand.logo] || banners[brand.slug]}
-                            alt={brand.name}
-                            className="max-h-20 max-w-full object-contain"
-                          />
-                        </div>
+                        <img
+                          src={banners[brand.logo] || banners[brand.slug]}
+                          alt={brand.name}
+                          className="max-h-20 max-w-full object-contain"
+                        />
                       </Link>
                     ))
                 : filteredBrandList.map((brand) => (
@@ -177,15 +175,13 @@ export default function BrandsMegaContent({ onClose }) {
                       key={brand.id}
                       to={`/brands/${brand.slug || brand.logo}`}
                       onClick={() => onClose && onClose()}
-                      className="group rounded-2xl bg-white border border-gray-100 shadow-sm hover:-translate-y-1 hover:shadow-lg transition-transform duration-300 overflow-hidden flex items-center justify-center p-4"
+                      className="group overflow-hidden transition-transform duration-300 hover:-translate-y-1 flex items-center justify-center h-24"
                     >
-                      <div className="w-full h-28 flex items-center justify-center bg-white">
-                        <img
-                          src={banners[brand.logo] || banners[brand.slug]}
-                          alt={brand.name}
-                          className="max-h-20 max-w-full object-contain"
-                        />
-                      </div>
+                      <img
+                        src={banners[brand.logo] || banners[brand.slug]}
+                        alt={brand.name}
+                        className="max-h-20 max-w-full object-contain"
+                      />
                     </Link>
                   ))}
             </div>

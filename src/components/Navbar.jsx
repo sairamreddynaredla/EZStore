@@ -272,10 +272,10 @@ function Navbar() {
                 key={link.to}
                 to={link.to}
                 className={({ isActive }) =>
-                  `font-medium transition-all duration-300 px-4 py-2.5 rounded-full whitespace-nowrap ${
+                  `text-[#4B5563] transition-all duration-300 px-4 py-2.5 rounded-full whitespace-nowrap ${
                     isActive
-                      ? "text-[#1F6B52] bg-[#E8F5F0]"
-                      : "text-[#4B5563] hover:text-[#1F6B52] hover:bg-[#F5F5F5]"
+                      ? "font-semibold text-[#1F6B52] bg-[#E8F5F0]"
+                      : "font-semibold hover:text-[#1F6B52] hover:bg-[#F5F5F5]"
                   }`
                 }
               >
