@@ -31,7 +31,7 @@ const BuyBox = ({
       <div className="space-y-3 sm:space-y-4 rounded-2xl sm:rounded-[20px] border border-slate-200 bg-white p-4 sm:p-5 shadow-sm">
         <div className="flex items-center justify-between gap-2 pb-3 border-b border-slate-200">
           <div className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-700">
-            Standard purchase
+            One-time purchase
           </div>
           <span className="h-3 w-3 rounded-full border-2 border-slate-700 bg-white" />
         </div>
@@ -98,7 +98,7 @@ const BuyBox = ({
           onClick={handleBuyNow}
           disabled={product.stock === 0}
           analyticsPayload={{ ...product, selectedVariant, quantity }}
-          className="mt-2 w-full rounded-full px-3 py-2 text-sm font-semibold text-black bg-amber-400 shadow-sm hover:bg-amber-300 transition-colors"
+          className="mt-2 w-full rounded-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base font-bold text-black bg-amber-400 shadow-sm hover:bg-amber-300 transition-colors"
         >
           Buy Now
         </BuyNowButton>

@@ -61,7 +61,6 @@ const Checkout = () => {
   const [selectedDelivery, setSelectedDelivery] = useState("standard");
   const [selectedPayment, setSelectedPayment] = useState("card");
   const [selectedDeliveryInstruction, setSelectedDeliveryInstruction] = useState("ring-bell");
-  const [expandDeliveryInstructions, setExpandDeliveryInstructions] = useState(false);
 
   // ─── COUPON ───
   const [coupon, setCoupon] = useState("");
@@ -179,6 +178,15 @@ const Checkout = () => {
     } else if (qty < currentQty && qty >= 1) {
       decreaseQuantity(item.id, item.selectedVariant?.weight || "1kg");
     }
+  };
+
+  const handleRemoveOrderItem = (item) => {
+    if (checkoutItem) {
+      navigate("/cart");
+      return;
+    }
+
+    removeFromCart(item.id, item.selectedVariant?.weight || "1kg");
   };
 
   const handlePlaceOrder = () => {
@@ -529,75 +537,54 @@ const Checkout = () => {
 
                 {/* ─── DELIVERY INSTRUCTIONS ─── */}
                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                  <button
-                    onClick={() => setExpandDeliveryInstructions(!expandDeliveryInstructions)}
-                    className="w-full flex items-center justify-between mb-4 text-left"
-                  >
-                    <h3 className="font-semibold text-gray-800">Delivery Instructions</h3>
-                    <svg
-                      className={`w-5 h-5 text-gray-600 transition-transform duration-300 ${expandDeliveryInstructions ? "rotate-180" : ""}`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                  <h3 className="font-semibold text-gray-800 mb-4">Delivery Instructions</h3>
+                  <div className="space-y-2">
+                    <label className="flex items-center gap-3 border border-gray-300 rounded-lg p-4 cursor-pointer hover:bg-green-50">
+                      <input
+                        type="radio"
+                        name="instruction"
+                        checked={selectedDeliveryInstruction === "ring-bell"}
+                        onChange={() => setSelectedDeliveryInstruction("ring-bell")}
                       />
-                    </svg>
-                  </button>
-
-                  {expandDeliveryInstructions && (
-                    <div className="space-y-2">
-                      <label className="flex items-center gap-3 border border-gray-300 rounded-lg p-3 cursor-pointer hover:bg-green-50">
-                        <input
-                          type="radio"
-                          name="instruction"
-                          checked={selectedDeliveryInstruction === "ring-bell"}
-                          onChange={() => setSelectedDeliveryInstruction("ring-bell")}
-                        />
-                        <span className="text-sm font-medium">Ring bell before delivery</span>
-                      </label>
-                      <label className="flex items-center gap-3 border border-gray-300 rounded-lg p-3 cursor-pointer hover:bg-green-50">
-                        <input
-                          type="radio"
-                          name="instruction"
-                          checked={selectedDeliveryInstruction === "leave-door"}
-                          onChange={() => setSelectedDeliveryInstruction("leave-door")}
-                        />
-                        <span className="text-sm font-medium">Leave at door</span>
-                      </label>
-                      <label className="flex items-center gap-3 border border-gray-300 rounded-lg p-3 cursor-pointer hover:bg-green-50">
-                        <input
-                          type="radio"
-                          name="instruction"
-                          checked={selectedDeliveryInstruction === "call-first"}
-                          onChange={() => setSelectedDeliveryInstruction("call-first")}
-                        />
-                        <span className="text-sm font-medium">Call me before delivery</span>
-                      </label>
-                      <label className="flex items-center gap-3 border border-gray-300 rounded-lg p-3 cursor-pointer hover:bg-green-50">
-                        <input
-                          type="radio"
-                          name="instruction"
-                          checked={selectedDeliveryInstruction === "signature"}
-                          onChange={() => setSelectedDeliveryInstruction("signature")}
-                        />
-                        <span className="text-sm font-medium">Require signature</span>
-                      </label>
-                      <label className="flex items-center gap-3 border border-gray-300 rounded-lg p-3 cursor-pointer hover:bg-green-50">
-                        <input
-                          type="radio"
-                          name="instruction"
-                          checked={selectedDeliveryInstruction === "neighbor"}
-                          onChange={() => setSelectedDeliveryInstruction("neighbor")}
-                        />
-                        <span className="text-sm font-medium">Leave with neighbor</span>
-                      </label>
-                    </div>
-                  )}
+                      <span className="text-sm font-medium">Ring bell before delivery</span>
+                    </label>
+                    <label className="flex items-center gap-3 border border-gray-300 rounded-lg p-4 cursor-pointer hover:bg-green-50">
+                      <input
+                        type="radio"
+                        name="instruction"
+                        checked={selectedDeliveryInstruction === "leave-door"}
+                        onChange={() => setSelectedDeliveryInstruction("leave-door")}
+                      />
+                      <span className="text-sm font-medium">Leave at door</span>
+                    </label>
+                    <label className="flex items-center gap-3 border border-gray-300 rounded-lg p-4 cursor-pointer hover:bg-green-50">
+                      <input
+                        type="radio"
+                        name="instruction"
+                        checked={selectedDeliveryInstruction === "call-first"}
+                        onChange={() => setSelectedDeliveryInstruction("call-first")}
+                      />
+                      <span className="text-sm font-medium">Call me before delivery</span>
+                    </label>
+                    <label className="flex items-center gap-3 border border-gray-300 rounded-lg p-4 cursor-pointer hover:bg-green-50">
+                      <input
+                        type="radio"
+                        name="instruction"
+                        checked={selectedDeliveryInstruction === "signature"}
+                        onChange={() => setSelectedDeliveryInstruction("signature")}
+                      />
+                      <span className="text-sm font-medium">Require signature</span>
+                    </label>
+                    <label className="flex items-center gap-3 border border-gray-300 rounded-lg p-4 cursor-pointer hover:bg-green-50">
+                      <input
+                        type="radio"
+                        name="instruction"
+                        checked={selectedDeliveryInstruction === "neighbor"}
+                        onChange={() => setSelectedDeliveryInstruction("neighbor")}
+                      />
+                      <span className="text-sm font-medium">Leave with neighbor</span>
+                    </label>
+                  </div>
                 </div>
 
                 <button
@@ -829,7 +816,7 @@ const Checkout = () => {
               <div className="space-y-3 border-b border-gray-200 pb-4 max-h-96 overflow-y-auto">
                 {items && items.length > 0 ? (
                   items.map((item, idx) => (
-                    <div key={idx} className="flex items-center gap-3">
+                    <div key={idx} className="flex items-start gap-3">
                       <img
                         src={item.image}
                         alt={item.name}
@@ -839,33 +826,30 @@ const Checkout = () => {
                       <div className="flex-1">
                         <div className="font-semibold text-sm">{item.name}</div>
                         <div className="text-xs text-gray-500 mb-1">Qty: {item.quantity}</div>
-                        <div className="flex gap-1">
+                        <div className="flex items-center gap-1">
                           <button
                             onClick={() => handleQuantityChange(idx, item.quantity - 1)}
                             className="px-2 py-1 bg-gray-200 text-xs rounded"
                           >
                             −
                           </button>
+                          <span className="px-3 py-1 text-xs font-semibold text-gray-700">{item.quantity}</span>
                           <button
                             onClick={() => handleQuantityChange(idx, item.quantity + 1)}
                             className="px-2 py-1 bg-gray-200 text-xs rounded"
                           >
                             +
                           </button>
-                          {!checkoutItem && (
-                            <button
-                              onClick={() =>
-                                removeFromCart(item.id, item.selectedVariant?.weight || "1kg")
-                              }
-                              className="ml-auto text-xs text-red-600 hover:underline"
-                            >
-                              Remove
-                            </button>
-                          )}
                         </div>
                       </div>
-                      <div className="font-bold text-sm">
-                        ${itemPrice(item).toFixed(0)}
+                      <div className="flex flex-col items-end gap-2">
+                        <div className="font-bold text-sm">${itemPrice(item).toFixed(0)}</div>
+                        <button
+                          onClick={() => handleRemoveOrderItem(item)}
+                          className="text-xs text-red-600 hover:underline"
+                        >
+                          Remove
+                        </button>
                       </div>
                     </div>
                   ))

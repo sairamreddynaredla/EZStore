@@ -6,7 +6,11 @@ import { useToast } from "./toast-context";
 const CartProvider = ({ children }) => {
   const { success, error } = useToast();
   const [cartItems, setCartItems] = useState(() => {
-    const storedCart = localStorage.getItem("cart");
+    if (typeof window === "undefined" || !window.localStorage) {
+      return [];
+    }
+
+    const storedCart = window.localStorage.getItem("cart");
 
     if (storedCart) {
       try {
@@ -30,7 +34,6 @@ const CartProvider = ({ children }) => {
         });
       } catch (error) {
         console.log(error);
-
         return [];
       }
     }
@@ -41,47 +44,60 @@ const CartProvider = ({ children }) => {
   // SAVE CART
 
   useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartItems));
+    if (typeof window === "undefined" || !window.localStorage) {
+      return;
+    }
+
+    window.localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
   // ADD TO CART
 
   const addToCart = (product) => {
-    const { showToast = true, ...productData } = product;
-    const selectedVariant = productData.selectedVariant ||
-      productData.variants?.[0] || {
+    if (!product || typeof product !== "object") {
+      error("Unable to add invalid product to cart");
+      return;
+    }
+
+    const { showToast = true, quantity = 1, ...productData } = product;
+    const selectedVariant =
+      productData.selectedVariant ||
+      productData.variants?.[0] ||
+      ({
         weight: "1kg",
-        price: productData.price || 0,
-      };
+        price: Number(productData.price) || 0,
+      });
 
     const selectedWeight = selectedVariant.weight || "1kg";
 
-    const existingProduct = cartItems.find(
-      (item) => item.id === productData.id && (item.selectedVariant?.weight || "1kg") === selectedWeight
-    );
+    setCartItems((currentItems) => {
+      const existingProduct = currentItems.find(
+        (item) =>
+          item.id === productData.id &&
+          (item.selectedVariant?.weight || "1kg") === selectedWeight
+      );
 
-    if (existingProduct) {
-      setCartItems(
-        cartItems.map((item) =>
-          item.id === productData.id && (item.selectedVariant?.weight || "1kg") === selectedWeight
+      if (existingProduct) {
+        return currentItems.map((item) =>
+          item.id === productData.id &&
+          (item.selectedVariant?.weight || "1kg") === selectedWeight
             ? {
                 ...item,
-                quantity: item.quantity + (productData.quantity || 1),
+                quantity: item.quantity + quantity,
               }
             : item
-        )
-      );
-    } else {
-      setCartItems([
-        ...cartItems,
+        );
+      }
 
+      return [
+        ...currentItems,
         {
           ...productData,
           selectedVariant,
-          quantity: productData.quantity || 1,
+          quantity,
         },
-      ]);
-    }
+      ];
+    });
 
     if (showToast) {
       success("Added to cart");
