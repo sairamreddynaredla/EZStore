@@ -36,8 +36,8 @@ const CategoryHero = ({ title, subtitle, highlights, image, breadcrumbs, imagePo
         <img
           src={image}
           alt={title || "banner"}
-          className={`w-full h-[240px] sm:h-[300px] md:h-[360px] lg:h-[420px] object-contain md:object-cover object-center`}
-          style={{ objectPosition: imagePosition || "center center" }}
+          className="w-full h-[240px] sm:h-[300px] md:h-[360px] lg:h-[420px] object-cover object-top"
+          style={{ objectPosition: imagePosition || "top center" }}
           loading="lazy"
         />
 

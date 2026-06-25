@@ -397,7 +397,8 @@ const CategoryPage = () => {
             <img
               src={banner.image}
               alt={banner.title}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover object-top"
+              style={{ objectPosition: "top center" }}
               loading="lazy"
             />
           </div>
