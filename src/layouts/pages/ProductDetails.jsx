@@ -48,16 +48,16 @@ const ProductDetails = () => {
 
   const productCategoryLabel = product?.productCategory || formatCategoryLabel(product?.category);
 
-  const handleAddToCart = async (productId, quantity = 1) => {
+  const handleAddToCart = async (productId, quantity = 1, showToast = true) => {
     const productToAdd = products.find((item) => item.id === Number(productId));
     if (productToAdd) {
-      addToCart({ ...productToAdd, quantity });
+      addToCart({ ...productToAdd, quantity, showToast });
     }
   };
 
   // BUY NOW HANDLER
   const handleBuyNow = async () => {
-    await handleAddToCart(product.id, 1);
+    await handleAddToCart(product.id, 1, false);
     navigate("/checkout");
   };
 

@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 
 import { CartContext } from "./cart-context";
+import { useToast } from "./toast-context";
 
 const CartProvider = ({ children }) => {
+  const { success, error } = useToast();
   const [cartItems, setCartItems] = useState(() => {
     const storedCart = localStorage.getItem("cart");
 
@@ -42,44 +44,29 @@ const CartProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // FLASH / TOAST MESSAGE
-  const [flash, setFlash] = useState({
-    visible: false,
-    message: "",
-    type: "success",
-  });
-
-  const showFlash = (message, type = "success", timeout = 1400) => {
-    setFlash({ visible: true, message, type });
-    setTimeout(() => setFlash((s) => ({ ...s, visible: false })), timeout);
-  };
-
-  const hideFlash = () => {
-    setFlash((s) => ({ ...s, visible: false }));
-  };
-
   // ADD TO CART
 
   const addToCart = (product) => {
-    const selectedVariant = product.selectedVariant ||
-      product.variants?.[0] || {
+    const { showToast = true, ...productData } = product;
+    const selectedVariant = productData.selectedVariant ||
+      productData.variants?.[0] || {
         weight: "1kg",
-        price: product.price || 0,
+        price: productData.price || 0,
       };
 
     const selectedWeight = selectedVariant.weight || "1kg";
 
     const existingProduct = cartItems.find(
-      (item) => item.id === product.id && (item.selectedVariant?.weight || "1kg") === selectedWeight
+      (item) => item.id === productData.id && (item.selectedVariant?.weight || "1kg") === selectedWeight
     );
 
     if (existingProduct) {
       setCartItems(
         cartItems.map((item) =>
-          item.id === product.id && (item.selectedVariant?.weight || "1kg") === selectedWeight
+          item.id === productData.id && (item.selectedVariant?.weight || "1kg") === selectedWeight
             ? {
                 ...item,
-                quantity: item.quantity + (product.quantity || 1),
+                quantity: item.quantity + (productData.quantity || 1),
               }
             : item
         )
@@ -89,16 +76,16 @@ const CartProvider = ({ children }) => {
         ...cartItems,
 
         {
-          ...product,
+          ...productData,
           selectedVariant,
-          quantity: product.quantity || 1,
+          quantity: productData.quantity || 1,
         },
       ]);
     }
-    // show flash
-    try {
-      showFlash("Added to cart", "success");
-    } catch (e) {}
+
+    if (showToast) {
+      success("Added to cart");
+    }
   };
 
   // REMOVE
@@ -109,9 +96,7 @@ const CartProvider = ({ children }) => {
         (item) => !(item.id === id && (item.selectedVariant?.weight || "1kg") === (weight || "1kg"))
       )
     );
-    try {
-      showFlash("Removed from cart", "error");
-    } catch (e) {}
+    error("Removed from cart");
   };
 
   // INCREASE
@@ -175,9 +160,7 @@ const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     setCartItems([]);
-    try {
-      showFlash("Cart cleared", "error");
-    } catch (e) {}
+    error("Cart cleared");
   };
 
   return (
@@ -198,10 +181,6 @@ const CartProvider = ({ children }) => {
         totalItems,
 
         totalPrice,
-        // flash helper & state
-        flash,
-        showFlash,
-        hideFlash,
       }}
     >
       {children}
