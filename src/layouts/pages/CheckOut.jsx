@@ -409,12 +409,15 @@ const Checkout = () => {
                   <h3 className="font-semibold text-gray-800 mb-4">Billing Address</h3>
                   <div className="flex items-center gap-3 mb-4">
                     <input
+                      id="same-as-shipping"
                       type="checkbox"
                       checked={sameAsShipping}
                       onChange={() => setSameAsShipping(!sameAsShipping)}
                       className="w-4 h-4"
                     />
-                    <label className="text-sm font-semibold">Same as shipping address</label>
+                    <label htmlFor="same-as-shipping" className="text-sm font-semibold cursor-pointer">
+                      Same as shipping address
+                    </label>
                   </div>
                   {!sameAsShipping && (
                     <div className="space-y-3">
