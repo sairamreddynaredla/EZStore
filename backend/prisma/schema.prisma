@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id            Int       @id @default(autoincrement())
+  email         String    @unique
+  password      String
+  name          String?
+  role          String    @default("admin")
+  status        String    @default("active")
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  deletedAt     DateTime?
+  createdById   Int?
+  updatedById   Int?
+  createdBy     Admin?    @relation("AdminCreatedBy", fields: [createdById], references: [id])
+  createdAdmins Admin[]   @relation("AdminCreatedBy")
+  updatedBy     Admin?    @relation("AdminUpdatedBy", fields: [updatedById], references: [id])
+  updatedAdmins Admin[]   @relation("AdminUpdatedBy")
+}
+
+model Customer {
+  id                          Int       @id @default(autoincrement())
+  email                       String    @unique
+  password                    String
+  firstName                   String?
+  lastName                    String?
+  fullName                    String?
+  phone                       String?
+  profileImage                String?
+  dateOfBirth                 DateTime?
+  gender                      String?
+  status                      String    @default("active")
+  emailVerified               Boolean   @default(false)
+  emailVerifiedAt             DateTime?
+  emailVerificationToken      String?
+  emailVerificationTokenSentAt DateTime?
+  resetPasswordToken          String?
+  resetPasswordTokenExpiresAt DateTime?
+  refreshTokenHash            String?
+  refreshTokenExpiresAt       DateTime?
+  lastLoginAt                 DateTime?
+  deletedAt                   DateTime?
+  createdAt                   DateTime  @default(now())
+  updatedAt                   DateTime  @updatedAt
+
+  orders                      Order[]
+  addresses                   Address[]
+  wishlistItems               WishlistItem[]
+}
+
+model Address {
+  id            Int       @id @default(autoincrement())
+  customer      Customer  @relation(fields: [customerId], references: [id])
+  customerId    Int
+  label         String    @default("Home")
+  recipientName String
+  phone         String
+  street        String
+  city          String
+  state         String
+  postalCode    String
+  country       String    @default("India")
+  isDefault     Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Order {
+  id          Int       @id @default(autoincrement())
+  customer    Customer  @relation(fields: [customerId], references: [id])
+  customerId  Int
+  orderNumber String    @unique
+  status      String    @default("pending")
+  totalAmount Float
+  items       Json
+  placedAt    DateTime  @default(now())
+}
+
+model WishlistItem {
+  id           Int       @id @default(autoincrement())
+  customer     Customer  @relation(fields: [customerId], references: [id])
+  customerId   Int
+  productId    Int
+  productName  String
+  productImage String?
+  productPrice Float
+  createdAt    DateTime  @default(now())
+}
