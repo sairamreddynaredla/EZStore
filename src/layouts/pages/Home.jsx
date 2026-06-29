@@ -3,7 +3,6 @@ import Navbar from "../../components/Navbar";
 import { useState } from "react";
 import HeroSlider from "../../components/home/HeroSlider";
 import SearchBelowHero from "../../components/home/SearchBelowHero";
-import Categories from "../../components/home/Categories";
 import FoodCategorySection from "../../components/home/FoodCategorySection";
 import PetCategories from "../../components/home/PetCategories";
 import PetBrands from "../../components/home/PetBrands";
@@ -31,11 +30,8 @@ const Home = () => {
       {/* HERO SLIDER - 4 Rotating Banners */}
       <HeroSlider />
 
-      {/* SHOP CATEGORIES */}
-      <Categories selectedPet={selectedPet} setSelectedPet={setSelectedPet} />
-
       {/* SHOP BY PET FOOD - mid page section */}
-      <PetCategories />
+      <PetCategories selectedPet={selectedPet} setSelectedPet={setSelectedPet} />
 
       {/* EXPLORE. PICK. PAMPER. - Food categories */}
       <FoodCategorySection />

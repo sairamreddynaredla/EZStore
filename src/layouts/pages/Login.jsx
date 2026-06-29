@@ -1,10 +1,46 @@
-import Navbar from "../../components/Navbar";
-
+import { useState } from "react";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import { Mail, Lock, PawPrint } from "lucide-react";
-
-import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import authApi from "../../services/authApi";
+import { useAuth } from "../../hooks/useAuth";
+import { useToast } from "../../context/toast-context";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { login } = useAuth();
+  const { error } = useToast();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!email || !password) {
+      error("Please enter both email and password.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const response = await authApi.post("/auth/login", {
+        email,
+        password,
+      });
+
+      login(response.data.user, response.data.token);
+      const redirectTo = location.state?.from?.pathname || "/";
+      navigate(redirectTo, { replace: true });
+    } catch (err) {
+      error(err.response?.data?.message || "Unable to sign in. Please check your credentials.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#f8f8f8]">
       {/* NAVBAR */}
@@ -24,9 +60,9 @@ const Login = () => {
                 <h1 className="text-5xl font-bold">Pet Store</h1>
               </div>
 
-              <h2 className="text-6xl font-bold leading-[75px] mb-8">Premium Food For Your Pets</h2>
+              <h2 className="text-6xl font-bold leading-18.75 mb-8">Premium Food For Your Pets</h2>
 
-              <p className="text-xl leading-[40px] text-orange-100">
+              <p className="text-xl leading-10 text-orange-100">
                 Shop high-quality nutrition, treats, supplements, and pet care essentials for dogs,
                 cats, birds, fish, rabbits, and more.
               </p>
@@ -43,8 +79,7 @@ const Login = () => {
             </div>
 
             {/* FORM */}
-            <div className="space-y-6">
-              {/* EMAIL */}
+            <form id="login-form" className="space-y-6" onSubmit={handleSubmit}>
               <div className="relative">
                 <Mail
                   className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
@@ -52,13 +87,15 @@ const Login = () => {
                 />
 
                 <input
+                  form="login-form"
                   type="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                   placeholder="Email Address"
                   className="w-full border border-gray-300 focus:border-orange-500 outline-none pl-14 pr-5 py-5 rounded-2xl text-lg"
                 />
               </div>
 
-              {/* PASSWORD */}
               <div className="relative">
                 <Lock
                   className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
@@ -66,49 +103,59 @@ const Login = () => {
                 />
 
                 <input
+                  id="login-password"
+                  name="password"
+                  form="login-form"
                   type="password"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
                   placeholder="Password"
                   className="w-full border border-gray-300 focus:border-orange-500 outline-none pl-14 pr-5 py-5 rounded-2xl text-lg"
                 />
               </div>
 
-              {/* REMEMBER + FORGOT */}
               <div className="flex items-center justify-between text-sm">
                 <label className="flex items-center gap-3 text-gray-600">
                   <input type="checkbox" />
                   Remember Me
                 </label>
 
-                <button className="text-orange-500 font-semibold">Forgot Password?</button>
+                <Link to="/forgot-password" className="text-orange-500 font-semibold">
+                  Forgot Password?
+                </Link>
               </div>
 
-              {/* LOGIN BUTTON */}
-              <button className="w-full bg-orange-500 hover:bg-orange-600 transition text-white py-5 rounded-2xl text-xl font-bold">
-                Login
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-orange-500 hover:bg-orange-600 transition text-white py-5 rounded-2xl text-xl font-bold disabled:cursor-not-allowed disabled:opacity-70"
+              >
+                {loading ? "Signing in..." : "Login"}
               </button>
 
-              {/* DIVIDER */}
               <div className="flex items-center gap-4 py-2">
-                <div className="flex-1 h-[1px] bg-gray-200"></div>
+                <div className="flex-1 h-px bg-gray-200"></div>
 
                 <span className="text-gray-400">OR</span>
 
-                <div className="flex-1 h-[1px] bg-gray-200"></div>
+                <div className="flex-1 h-px bg-gray-200"></div>
               </div>
 
-              {/* GOOGLE LOGIN */}
-              <button className="w-full border border-gray-300 hover:border-orange-500 transition py-5 rounded-2xl text-lg font-semibold">
+              <button
+                type="button"
+                className="w-full border border-gray-300 hover:border-orange-500 transition py-5 rounded-2xl text-lg font-semibold"
+              >
                 Continue With Google
               </button>
 
-              {/* SIGNUP */}
               <p className="text-center text-gray-500 text-lg">
                 Don’t have an account?
                 <Link to="/register" className="text-orange-500 font-semibold ml-2">
                   Create Account
                 </Link>
               </p>
-            </div>
+            </form>
           </div>
         </div>
       </div>

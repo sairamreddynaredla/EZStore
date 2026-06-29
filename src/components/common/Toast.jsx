@@ -35,14 +35,14 @@ const Toast = () => {
   };
 
   return (
-    <div className="fixed top-4 right-4 z-[9999] flex flex-col gap-2 max-w-sm">
+    <div className="fixed top-4 right-4 z-9999 flex max-w-sm flex-col gap-2" role="status" aria-live="polite">
       {toasts.map((toast) => (
-        <div key={toast.id} className={getToastStyles(toast.type)}>
-          <div className="flex-shrink-0">{getIcon(toast.type)}</div>
+        <div key={toast.id} className={`${getToastStyles(toast.type)} pointer-events-auto`}>
+          <div className="shrink-0">{getIcon(toast.type)}</div>
           <div className="flex-1">{toast.message}</div>
           <button
             onClick={() => removeToast(toast.id)}
-            className="flex-shrink-0 hover:opacity-80 transition-opacity"
+            className="shrink-0 rounded-full p-1 text-white/80 transition hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             aria-label="Close toast"
           >
             <X size={18} />

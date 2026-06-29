@@ -1,59 +1,48 @@
-import { useNavigate } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import dogExclusiveImage from "../../assets/Exclusive Category/dog exclusive.webp";
 import catExclusiveImage from "../../assets/Exclusive Category/cat-exclusive.webp";
 import birdExclusiveImage from "../../assets/Exclusive Category/bird-exclusive.webp";
 import fishExclusiveImage from "../../assets/Exclusive Category/fish-exclusive.webp";
 import hamsterExclusiveImage from "../../assets/Exclusive Category/hamster-exclusive.webp";
 import rabbitImage from "../../assets/categories/rabbit.webp";
-
-const dog = dogExclusiveImage;
-const cat = catExclusiveImage;
-const bird = birdExclusiveImage;
-const fish = fishExclusiveImage;
-const rabbit = rabbitImage;
-const hamster = hamsterExclusiveImage;
+import PetCategoryCard from "./PetCategoryCard";
 
 const categories = [
   {
     title: "Dog",
-    image: dog,
+    image: dogExclusiveImage,
     color: "bg-blue-100",
     slug: "dog",
   },
-
   {
     title: "Cat",
-    image: cat,
+    image: catExclusiveImage,
     color: "bg-orange-100",
     slug: "cat",
   },
-
   {
     title: "Bird",
-    image: bird,
+    image: birdExclusiveImage,
     color: "bg-yellow-100",
     slug: "bird",
   },
-
   {
     title: "Fish",
-    image: fish,
+    image: fishExclusiveImage,
     color: "bg-pink-100",
     slug: "fish",
   },
-
   {
     title: "Rabbit",
-    image: rabbit,
+    image: rabbitImage,
     color: "bg-green-100",
     slug: "rabbit",
   },
-
   {
     title: "Hamster",
-    image: hamster,
+    image: hamsterExclusiveImage,
     color: "bg-red-100",
     slug: "hamster",
   },
@@ -134,27 +123,18 @@ function CategoryCard({ item, selectedPet, setSelectedPet }) {
       return;
     }
 
-    // fallback for other categories
     navigate(`/category/${item.slug}`);
   };
 
   return (
-    <button
+    <PetCategoryCard
+      title={item.title}
+      image={item.image}
+      backgroundColor={item.color}
       onClick={handleClick}
-      className={`${item.color} rounded-[26px] p-4 sm:p-6 flex flex-col items-center justify-center text-center hover:scale-105 duration-300 cursor-pointer shadow-sm hover:shadow-xl snap-center shrink-0 w-[140px] sm:w-[180px] md:w-[240px] ${selectedPet === item.slug ? "ring-4 ring-orange-200" : ""}`}
-    >
-      <div className="w-20 h-20 sm:w-28 sm:h-28 md:w-36 md:h-36 rounded-full overflow-hidden border-4 border-white shadow-lg flex items-center justify-center">
-        <img
-          src={item.image}
-          alt={item.title}
-          className="w-full h-full object-cover object-center"
-        />
-      </div>
-
-      <h3 className="mt-3 sm:mt-4 font-bold text-lg sm:text-xl md:text-2xl text-gray-900">
-        {item.title}
-      </h3>
-    </button>
+      active={selectedPet === item.slug}
+      imageAlt={item.title}
+    />
   );
 }
 

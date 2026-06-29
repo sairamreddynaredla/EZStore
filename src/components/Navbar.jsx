@@ -3,6 +3,7 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import NavbarDropdown from "./navbar/NavbarDropdown";
 import { FaShoppingCart, FaHeart, FaUser, FaBars, FaTimes, FaSearch, FaPaw, FaDog, FaCat, FaTags, FaStore, FaClinicMedical, FaBath, FaMapMarkerAlt, FaBlog, FaInfoCircle, FaFileContract, FaHeadset, FaHeartbeat, FaBone, FaFish } from "react-icons/fa";
 import { useCart } from "../hooks/usecart";
+import { useAuth } from "../hooks/useAuth";
 import products from "../data/products";
 import breedData from "../data/breeds";
 import logo from "../assets/logo/ezstore-logo-optimized.webp";
@@ -10,6 +11,7 @@ import logo from "../assets/logo/ezstore-logo-optimized.webp";
 function Navbar() {
   const navigate = useNavigate();
   const { totalItems } = useCart();
+  const { user, logout, isAuthenticated } = useAuth();
   const [mobileMenu, setMobileMenu] = useState(false);
   const [search, setSearch] = useState("");
   const [searchHistory, setSearchHistory] = useState([]);
@@ -486,7 +488,7 @@ function Navbar() {
               <FaHeart className="text-lg sm:text-xl group-hover:scale-110 transition-transform duration-300" />
             </Link>
             <Link
-              to="/login"
+              to={isAuthenticated ? "/account" : "/login"}
               className="hidden md:block p-2.5 sm:p-3 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group"
             >
               <FaUser className="text-lg sm:text-xl group-hover:scale-110 transition-transform duration-300" />
@@ -622,14 +624,6 @@ function Navbar() {
               <div className="h-px bg-[#E5E7EB] my-2"></div>
 
               <div className="flex flex-col gap-1 px-2">
-                <NavLink to="/store-locator" onClick={() => setMobileMenu(false)} className="flex items-center gap-3 px-4 py-2 text-[#4B5563] rounded-lg hover:bg-[#F5F5F5]">
-                  <FaMapMarkerAlt className="text-lg" />
-                  Store Locator
-                </NavLink>
-                <NavLink to="/blogs" onClick={() => setMobileMenu(false)} className="flex items-center gap-3 px-4 py-2 text-[#4B5563] rounded-lg hover:bg-[#F5F5F5]">
-                  <FaBlog className="text-lg" />
-                  Blogs
-                </NavLink>
                 <NavLink to="/about" onClick={() => setMobileMenu(false)} className="flex items-center gap-3 px-4 py-2 text-[#4B5563] rounded-lg hover:bg-[#F5F5F5]">
                   <FaInfoCircle className="text-lg" />
                   About Us
@@ -671,7 +665,7 @@ function Navbar() {
               </Link>
 
               <Link
-                to="/login"
+                to={isAuthenticated ? "/account" : "/login"}
                 onClick={() => setMobileMenu(false)}
                 className="flex flex-col items-center gap-2 p-3 rounded-lg hover:bg-[#F5F5F5] hover:text-[#1F6B52] transition-all duration-300 group"
               >

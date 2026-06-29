@@ -1,60 +1,34 @@
+# Dependencies
 node_modules/
+
+# Build
 dist/
 build/
+
+# Environment
 .env
 .env.*
-.DS_Store
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-lock.yaml
-/.history
-/.vscode
-/.idea
-coverage/
-*.local
-*.log
-/.env.local
-/.env.development.local
-/.env.test.local
-/.env.production.local
-/.cache
-*.tgz
-/.parcel-cache
+!.env.example
+
 # Logs
-logs
+logs/
 *.log
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
 
-# temp files
-.tmp*
-.gitdiff_temp.txt
-image_list.txt
-print_titles.py
-update_images.py
+# Coverage
+coverage/
 
-# build files
-node_modules/
-dist/
-dist-ssr/
-build/
-*.local
+# IDE
+.vscode/
+.idea/
 
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
+# OS
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+Thumbs.db
 
-.vercel
-*.zip
-.env*
+# Reports
+reports/
+
+# Cache
+.cache/
+.parcel-cache/

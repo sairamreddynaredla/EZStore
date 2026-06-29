@@ -20,6 +20,14 @@ const BrandProducts = lazy(() => import("./layouts/pages/BrandProducts"));
 const BrandCollectionPage = lazy(() => import("./layouts/pages/BrandCollectionPage"));
 const CategoryProducts = lazy(() => import("./layouts/pages/CategoryProducts"));
 const Brands = lazy(() => import("./layouts/pages/Brands"));
+const ForgotPassword = lazy(() => import("./layouts/pages/ForgotPassword"));
+const ResetPassword = lazy(() => import("./layouts/pages/ResetPassword"));
+const Account = lazy(() => import("./layouts/pages/Account"));
+const ChangePassword = lazy(() => import("./layouts/pages/ChangePassword"));
+const Orders = lazy(() => import("./layouts/pages/Orders"));
+const Addresses = lazy(() => import("./layouts/pages/Addresses"));
+const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
+const AdminRoutes = lazy(() => import("./admin/routes/AdminRoutes"));
 
 import { ToastProvider } from "./context/toast-context";
 import Toast from "./components/common/Toast";
@@ -77,6 +85,16 @@ const App = () => {
 
               <Route path="/shop" element={<Shop />} />
 
+              {/* CUSTOMER AUTH */}
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
+              <Route path="/change-password" element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
+              <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+              <Route path="/addresses" element={<ProtectedRoute><Addresses /></ProtectedRoute>} />
+
+              {/* PETS */}
+
               {/* PETS */}
 
               <Route path="/pets" element={<Shop />} />
@@ -107,6 +125,8 @@ const App = () => {
               {/* CHECKOUT */}
 
               <Route path="/checkout" element={<Checkout />} />
+
+              <Route path="/admin/*" element={<AdminRoutes />} />
 
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>

@@ -1,10 +1,62 @@
-import Navbar from "../../components/Navbar";
-
+import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { User, Mail, Lock, PawPrint } from "lucide-react";
-
-import { Link } from "react-router-dom";
+import Navbar from "../../components/Navbar";
+import authApi from "../../services/authApi";
+import { useAuth } from "../../hooks/useAuth";
+import { useToast } from "../../context/toast-context";
 
 const Register = () => {
+  const [fullName, setFullName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const { login } = useAuth();
+  const { error } = useToast();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!email || !password || !confirmPassword) {
+      error("Please fill out all required fields.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      error("Passwords do not match.");
+      return;
+    }
+
+    if (!termsAccepted) {
+      error("You must accept the terms and conditions.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const [firstName, ...rest] = fullName.trim().split(" ");
+      const lastName = rest.join(" ") || undefined;
+
+      const response = await authApi.post("/auth/register", {
+        firstName: fullName ? firstName : undefined,
+        lastName: fullName ? lastName : undefined,
+        email,
+        password,
+      });
+
+      login(response.data.user, response.data.token);
+      navigate("/");
+    } catch (err) {
+      error(err.response?.data?.message || "Unable to create account. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#f8f8f8]">
       {/* NAVBAR */}
@@ -41,14 +93,11 @@ const Register = () => {
             <div className="mb-10">
               <h1 className="text-5xl font-bold mb-4">Create Account</h1>
 
-              <p className="text-gray-500 text-lg">
-                Start shopping premium products for your pets.
-              </p>
+              <p className="text-gray-500 text-lg">Start shopping premium products for your pets.</p>
             </div>
 
             {/* FORM */}
-            <div className="space-y-6">
-              {/* FULL NAME */}
+            <form id="register-form" className="space-y-6" onSubmit={handleSubmit}>
               <div className="relative">
                 <User
                   className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
@@ -56,15 +105,15 @@ const Register = () => {
                 />
 
                 <input
-                  id="register-fullname"
-                  name="fullName"
+                  form="register-form"
                   type="text"
+                  value={fullName}
+                  onChange={(event) => setFullName(event.target.value)}
                   placeholder="Full Name"
                   className="w-full border border-gray-300 focus:border-orange-500 outline-none pl-14 pr-5 py-5 rounded-2xl text-lg"
                 />
               </div>
 
-              {/* EMAIL */}
               <div className="relative">
                 <Mail
                   className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
@@ -72,15 +121,15 @@ const Register = () => {
                 />
 
                 <input
-                  id="register-email"
-                  name="email"
+                  form="register-form"
                   type="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                   placeholder="Email Address"
                   className="w-full border border-gray-300 focus:border-orange-500 outline-none pl-14 pr-5 py-5 rounded-2xl text-lg"
                 />
               </div>
 
-              {/* PASSWORD */}
               <div className="relative">
                 <Lock
                   className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
@@ -90,13 +139,16 @@ const Register = () => {
                 <input
                   id="register-password"
                   name="password"
+                  form="register-form"
                   type="password"
+                  autoComplete="new-password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
                   placeholder="Password"
                   className="w-full border border-gray-300 focus:border-orange-500 outline-none pl-14 pr-5 py-5 rounded-2xl text-lg"
                 />
               </div>
 
-              {/* CONFIRM PASSWORD */}
               <div className="relative">
                 <Lock
                   className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400"
@@ -107,26 +159,33 @@ const Register = () => {
                   id="register-confirm-password"
                   name="confirmPassword"
                   type="password"
+                  autoComplete="new-password"
+                  value={confirmPassword}
+                  onChange={(event) => setConfirmPassword(event.target.value)}
                   placeholder="Confirm Password"
                   className="w-full border border-gray-300 focus:border-orange-500 outline-none pl-14 pr-5 py-5 rounded-2xl text-lg"
                 />
               </div>
 
-              {/* TERMS */}
-              <label
-                htmlFor="register-terms"
-                className="flex items-start gap-3 text-gray-600 text-sm leading-7"
-              >
-                <input id="register-terms" name="terms" type="checkbox" className="mt-1" />I agree
-                to the Terms & Conditions and Privacy Policy.
+              <label htmlFor="register-terms" className="flex items-start gap-3 text-gray-600 text-sm leading-7">
+                <input
+                  id="register-terms"
+                  checked={termsAccepted}
+                  onChange={(event) => setTermsAccepted(event.target.checked)}
+                  type="checkbox"
+                  className="mt-1"
+                />
+                I agree to the Terms & Conditions and Privacy Policy.
               </label>
 
-              {/* REGISTER BUTTON */}
-              <button className="w-full bg-orange-500 hover:bg-orange-600 transition text-white py-5 rounded-2xl text-xl font-bold">
-                Create Account
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-orange-500 hover:bg-orange-600 transition text-white py-5 rounded-2xl text-xl font-bold disabled:cursor-not-allowed disabled:opacity-70"
+              >
+                {loading ? "Creating account..." : "Create Account"}
               </button>
 
-              {/* DIVIDER */}
               <div className="flex items-center gap-4 py-2">
                 <div className="flex-1 h-px bg-gray-200"></div>
 
@@ -135,19 +194,20 @@ const Register = () => {
                 <div className="flex-1 h-px bg-gray-200"></div>
               </div>
 
-              {/* GOOGLE SIGNUP */}
-              <button className="w-full border border-gray-300 hover:border-orange-500 transition py-5 rounded-2xl text-lg font-semibold">
+              <button
+                type="button"
+                className="w-full border border-gray-300 hover:border-orange-500 transition py-5 rounded-2xl text-lg font-semibold"
+              >
                 Continue With Google
               </button>
 
-              {/* LOGIN */}
               <p className="text-center text-gray-500 text-lg">
                 Already have an account?
                 <Link to="/login" className="text-orange-500 font-semibold ml-2">
                   Login
                 </Link>
               </p>
-            </div>
+            </form>
           </div>
         </div>
       </div>
