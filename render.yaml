@@ -1,0 +1,12 @@
+services:
+  - type: web_service
+    name: ezstore-backend
+    env: node
+    plan: free
+    root: backend
+    buildCommand: npm install
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
