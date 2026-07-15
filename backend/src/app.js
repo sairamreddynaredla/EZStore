@@ -25,6 +25,9 @@ const createApp = () => {
 
   const configuredOrigins = [
     config.FRONTEND_URL,
+    "https://ezstore-admin.vercel.app",
+    "https://ezstore.vercel.app",
+    "https://ezstore-pets.vercel.app",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://localhost:3000",
@@ -68,7 +71,7 @@ const createApp = () => {
       }
 
       const normalizedOrigin = origin.replace(/\/$/, "");
-      const isAllowedOrigin = configuredOrigins.includes(normalizedOrigin);
+      const isAllowedOrigin = configuredOrigins.includes(normalizedOrigin) || normalizedOrigin.endsWith(".vercel.app") || normalizedOrigin.endsWith(".onrender.com") || normalizedOrigin.endsWith(".render.com");
 
       if (isAllowedOrigin) {
         callback(null, true);
