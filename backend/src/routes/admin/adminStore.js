@@ -1,4 +1,7 @@
 import bcrypt from "bcrypt";
+import fs from "fs/promises";
+import path from "path";
+import { pathToFileURL } from "url";
 
 const initialState = {
   admins: [],
@@ -6,6 +9,7 @@ const initialState = {
     {
       id: "prod-1",
       title: "Premium Cat Litter",
+      name: "Premium Cat Litter",
       description: "Odor-control litter for modern homes.",
       price: 24.99,
       category: "Pet Supplies",
@@ -20,6 +24,7 @@ const initialState = {
     {
       id: "prod-2",
       title: "Luxury Dog Bed",
+      name: "Luxury Dog Bed",
       description: "Orthopedic comfort for your best friend.",
       price: 79.5,
       category: "Pet Supplies",
@@ -136,6 +141,105 @@ const initialState = {
   },
 };
 
+// Attempt to load static product arrays from the frontend `src/data` folder
+// and seed them into the admin in-memory store. This lets the frontend
+// display existing static products without migrating them immediately.
+const loadStaticProducts = async () => {
+  try {
+    // Try several likely locations for the frontend `src/data` folder so
+    // this works whether the backend process was started from `backend/`
+    // or the repository root.
+    const candidates = [
+      path.resolve(process.cwd(), "..", "src", "data"),
+      path.resolve(process.cwd(), "src", "data"),
+      path.resolve(process.cwd(), "..", "..", "src", "data"),
+      path.resolve(path.dirname(new URL(import.meta.url).pathname), "..", "..", "..", "src", "data"),
+    ];
+
+    let staticDir = null;
+    for (const cand of candidates) {
+      try {
+        await fs.access(cand);
+        staticDir = cand;
+        break;
+      } catch (e) {
+        // try next
+      }
+    }
+
+    if (!staticDir) return [];
+
+    const found = [];
+    const walk = async (dir) => {
+      let entries;
+      try {
+        entries = await fs.readdir(dir, { withFileTypes: true });
+      } catch (err) {
+        return;
+      }
+      for (const entry of entries) {
+        const full = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          await walk(full);
+        } else if (entry.isFile() && full.endsWith(".js")) {
+          found.push(full);
+        }
+      }
+    };
+
+    await walk(staticDir);
+
+    const products = [];
+    for (const file of found) {
+      try {
+        const mod = await import(pathToFileURL(file).href);
+        for (const key of Object.keys(mod)) {
+          const exported = mod[key];
+          if (Array.isArray(exported)) {
+            for (const item of exported) {
+              if (item && typeof item === "object" && (item.title || item.name || item.name === "")) {
+                const id = item.id || `prod-static-${Math.random().toString(16).slice(2, 8)}`;
+                const priceVal = parseNumber(item.price ?? (item.variants && item.variants[0] && item.variants[0].price) ?? 0, 0);
+                const originalPriceVal = parseNumber(item.originalPrice ?? (item.variants && item.variants[0] && item.variants[0].originalPrice) ?? priceVal, priceVal);
+                const normalized = {
+                  id,
+                  name: item.name || item.title || item.productName || "",
+                  title: item.title || item.name || item.productName || "",
+                  price: priceVal,
+                  originalPrice: originalPriceVal,
+                  variants: Array.isArray(item.variants) && item.variants.length ? item.variants : [{ price: priceVal, originalPrice: originalPriceVal, weight: item.weight ?? null }],
+                  category: item.category || item.productCategory || item.subCategory || "Pet Supplies",
+                  brand: item.brand || item.madeBy || "EZStore",
+                  stock: parseNumber(item.stock, 10),
+                  status: item.status || "active",
+                  tags: Array.isArray(item.tags) ? item.tags : [],
+                  imageUrl: item.imageUrl || item.image || (item.images && item.images[0]) || "",
+                  images: Array.isArray(item.images) ? item.images : item.image ? [item.image] : [],
+                  rating: parseNumber(item.rating, 0),
+                  createdAt: item.createdAt || new Date().toISOString(),
+                  ...item,
+                };
+                products.push(normalized);
+              }
+            }
+          }
+        }
+      } catch (e) {
+        // ignore individual file errors
+      }
+    }
+
+    return products;
+  } catch (e) {
+    return [];
+  }
+};
+
+const _seedStatic = await loadStaticProducts();
+if (Array.isArray(_seedStatic) && _seedStatic.length) {
+  initialState.products.push(..._seedStatic);
+}
+
 let state = structuredClone(initialState);
 
 const createId = (prefix) => `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
@@ -151,6 +255,16 @@ const applyPagination = (items, query = {}) => {
   const page = parseNumber(query.page, 1);
   const limit = parseNumber(query.limit, 10);
   const safePage = Math.max(1, page);
+  // If caller explicitly requested `limit=0`, treat as "all items"
+  if (query.limit !== undefined && Number(query.limit) === 0) {
+    return {
+      items: items.slice(),
+      total: items.length,
+      page: safePage,
+      pageSize: items.length,
+    };
+  }
+
   const safeLimit = Math.max(1, limit);
   const start = (safePage - 1) * safeLimit;
   const sliced = items.slice(start, start + safeLimit);
@@ -219,6 +333,7 @@ export const createProduct = (payload = {}) => {
   const created = {
     id: createId("prod"),
     title: payload.title || "Untitled Product",
+    name: payload.name || payload.title || "Untitled Product",
     description: payload.description || "",
     price: parseNumber(payload.price, 0),
     category: payload.category || "General",
@@ -443,15 +558,98 @@ export const updateSettings = (payload = {}) => {
   return { ...state.settings };
 };
 
+const getOrderTimestamp = (order) => order?.orderDate || order?.placedAt || order?.createdAt || order?.date || null;
+
+const getOrderStatus = (order) => String(order?.orderStatus || order?.status || "pending").toLowerCase();
+
+const getPaymentStatus = (order) => String(order?.paymentStatus || order?.payment?.status || "pending").toLowerCase();
+
+const getOrderValue = (order) => Number(order?.totalAmount ?? order?.grandTotal ?? 0);
+
+const getRevenueSeries = (orders) => {
+  return Array.from({ length: 6 }, (_, index) => {
+    const monthDate = new Date();
+    monthDate.setMonth(monthDate.getMonth() - (5 - index));
+    monthDate.setDate(1);
+    monthDate.setHours(0, 0, 0, 0);
+
+    const label = monthDate.toLocaleString("default", { month: "short" });
+    const total = orders.reduce((sum, order) => {
+      const orderDate = new Date(getOrderTimestamp(order));
+      if (Number.isNaN(orderDate.getTime())) {
+        return sum;
+      }
+
+      const sameMonth = orderDate.getFullYear() === monthDate.getFullYear() && orderDate.getMonth() === monthDate.getMonth();
+      return sameMonth ? sum + getOrderValue(order) : sum;
+    }, 0);
+
+    return { month: label, value: total };
+  });
+};
+
 export const getDashboardSummary = () => {
   const totalProducts = state.products.length;
   const totalCategories = state.categories.length;
   const totalCustomers = state.customers.length;
-  const totalOrders = state.orders.length;
-  const revenue = state.orders.reduce((sum, order) => sum + Number(order.totalAmount || 0), 0);
-  const pendingOrders = state.orders.filter((order) => order.orderStatus === "pending" || order.orderStatus === "processing").length;
+  const orders = state.orders.map((order) => ({ ...order }));
+  const totalOrders = orders.length;
+  const revenue = orders.reduce((sum, order) => sum + getOrderValue(order), 0);
+  const pendingOrders = orders.filter((order) => ["pending", "processing"].includes(getOrderStatus(order))).length;
+  const completedOrders = orders.filter((order) => ["delivered", "completed"].includes(getOrderStatus(order))).length;
+  const cancelledOrders = orders.filter((order) => ["cancelled", "refunded"].includes(getOrderStatus(order))).length;
+  const refundRequests = orders.filter((order) => getOrderStatus(order) === "refunded" || getPaymentStatus(order) === "refunded").length;
+  const averageOrderValue = totalOrders > 0 ? revenue / totalOrders : 0;
+  const conversionRate = totalCustomers > 0 ? (totalOrders / totalCustomers) * 100 : 0;
+
+  const now = new Date();
+  const todayStart = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const monthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+  const todayRevenue = orders.filter((order) => {
+    const orderDate = new Date(getOrderTimestamp(order));
+    return !Number.isNaN(orderDate.getTime()) && orderDate >= todayStart;
+  }).reduce((sum, order) => sum + getOrderValue(order), 0);
+  const monthlyRevenue = orders.filter((order) => {
+    const orderDate = new Date(getOrderTimestamp(order));
+    return !Number.isNaN(orderDate.getTime()) && orderDate >= monthStart;
+  }).reduce((sum, order) => sum + getOrderValue(order), 0);
+
+  const previousMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+  const previousMonthRevenue = orders.filter((order) => {
+    const orderDate = new Date(getOrderTimestamp(order));
+    return !Number.isNaN(orderDate.getTime()) && orderDate >= previousMonthStart && orderDate < monthStart;
+  }).reduce((sum, order) => sum + getOrderValue(order), 0);
+  const growthPercentage = previousMonthRevenue > 0 ? ((monthlyRevenue - previousMonthRevenue) / previousMonthRevenue) * 100 : 0;
+
   const lowStockProducts = state.products.filter((item) => Number(item.stock || 0) > 0 && Number(item.stock || 0) <= 10);
   const outOfStockProducts = state.products.filter((item) => Number(item.stock || 0) === 0);
+
+  const orderStatusBreakdown = ["pending", "processing", "shipped", "delivered", "cancelled", "refunded"].map((status) => ({
+    status,
+    count: orders.filter((order) => getOrderStatus(order) === status).length,
+  }));
+
+  const customerBreakdown = {
+    active: state.customers.filter((customer) => String(customer.status || "active").toLowerCase() !== "blocked").length,
+    blocked: state.customers.filter((customer) => String(customer.status || "active").toLowerCase() === "blocked").length,
+    newCustomers: state.customers.filter((customer) => Number(customer.totalOrders ?? customer.orderCount ?? 0) <= 1).length,
+    repeatCustomers: state.customers.filter((customer) => Number(customer.totalOrders ?? customer.orderCount ?? 0) > 1).length,
+  };
+
+  const productSales = orders.flatMap((order) => Array.isArray(order.items) ? order.items : []).reduce((map, item) => {
+    const name = item?.name || item?.title || item?.productName || "Untitled product";
+    const quantity = Number(item?.quantity ?? item?.qty ?? 0);
+    if (!name) {
+      return map;
+    }
+
+    const current = map.get(name) || { name, quantity: 0 };
+    current.quantity += quantity;
+    map.set(name, current);
+    return map;
+  }, new Map());
+
+  const topProducts = Array.from(productSales.values()).sort((left, right) => right.quantity - left.quantity).slice(0, 5);
 
   return {
     totalProducts,
@@ -459,11 +657,37 @@ export const getDashboardSummary = () => {
     totalCustomers,
     totalOrders,
     revenue,
+    todayRevenue,
+    monthlyRevenue,
+    completedOrders,
+    cancelledOrders,
     pendingOrders,
+    refundRequests,
+    averageOrderValue,
+    conversionRate,
+    growthPercentage,
     lowStockCount: lowStockProducts.length,
     outOfStockCount: outOfStockProducts.length,
     lowStockProducts: lowStockProducts.slice(0, 5),
     recentOrders: state.orders.slice(0, 5),
     recentCustomers: state.customers.slice(0, 5),
+    orderStatusBreakdown,
+    customerBreakdown,
+    topProducts,
+    revenueSeries: getRevenueSeries(orders),
+    recentActivities: [
+      ...state.orders.slice(0, 3).map((order) => ({
+        id: `order-${order.id}`,
+        title: `Order ${order.orderId || order.id} updated`,
+        detail: `${order.customerName || "Customer"} • ${order.orderStatus || "pending"}`,
+        createdAt: getOrderTimestamp(order),
+      })),
+      ...state.customers.slice(0, 2).map((customer) => ({
+        id: `customer-${customer.id}`,
+        title: "New customer registered",
+        detail: customer.name || customer.email || "Customer",
+        createdAt: customer.registeredAt || customer.createdAt,
+      })),
+    ].sort((left, right) => new Date(right.createdAt || 0) - new Date(left.createdAt || 0)).slice(0, 6),
   };
 };

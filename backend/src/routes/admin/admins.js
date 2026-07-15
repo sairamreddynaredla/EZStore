@@ -1,8 +1,8 @@
 import express from "express";
-import jwtAuth from "../../middleware/jwtAuth.js";
-import requireAdmin from "../../middleware/requireAdmin.js";
-import { createAdmin, getAdminById, listAdmins, softDeleteAdmin, updateAdmin } from "../../services/adminService.js";
-import { validateRequest } from "../../middleware/validateRequest.js";
+import jwtAuth from "../middleware/jwtAuth.js";
+import requireAdmin from "../middleware/requireAdmin.js";
+import { createAdmin, getAdminById, listAdmins, softDeleteAdmin, updateAdmin } from "../../services/admin/adminService.js";
+import { validateRequest } from "../middleware/validateRequest.js";
 import { adminIdParamSchema, adminUserCreateSchema, adminUserListQuerySchema, adminUserUpdateSchema } from "../../validators/admin.js";
 import { sendError, sendSuccess } from "../../utils/apiResponse.js";
 

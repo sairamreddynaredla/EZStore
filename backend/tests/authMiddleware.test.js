@@ -1,6 +1,35 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { requireAdmin } from "../src/middleware/requireAdmin.js";
+import jwt from "jsonwebtoken";
+import { requireAdmin } from "../src/routes/middleware/requireAdmin.js";
+import config from "../src/config/index.js";
+import { optionalJwtAuth } from "../src/routes/middleware/jwtAuth.js";
+
+test("optionalJwtAuth attaches a verified customer when a token is provided", () => {
+  const user = { id: 42, email: "customer@example.com", role: "customer" };
+  const token = jwt.sign(user, config.JWT_SECRET);
+  const req = { headers: { authorization: `Bearer ${token}` } };
+  let nextCalled = false;
+
+  optionalJwtAuth(req, {}, () => {
+    nextCalled = true;
+  });
+
+  assert.equal(nextCalled, true);
+  assert.equal(req.user.id, user.id);
+  assert.equal(req.user.email, user.email);
+  assert.equal(req.user.role, user.role);
+});
+
+test("optionalJwtAuth permits checkout without a token", () => {
+  let nextCalled = false;
+
+  optionalJwtAuth({ headers: {} }, {}, () => {
+    nextCalled = true;
+  });
+
+  assert.equal(nextCalled, true);
+});
 
 test("requireAdmin rejects users without an admin role", () => {
   const req = { user: { id: 1, email: "viewer@example.com", role: "viewer" } };

@@ -5,15 +5,16 @@ const allowedAdminStatuses = ["active", "inactive"];
 const allowedAdminSortFields = ["name", "email", "role", "status", "createdAt"];
 const allowedProductStatuses = ["active", "draft", "archived"];
 const allowedCategoryStatuses = ["active", "inactive"];
-const allowedOrderStatuses = ["pending", "processing", "shipped", "delivered", "cancelled"];
+const allowedOrderStatuses = ["pending", "confirmed", "processing", "packed", "shipped", "out_for_delivery", "delivered", "cancelled", "returned", "refund_requested", "refund_completed"];
 const allowedPaymentStatuses = ["pending", "paid", "failed", "refunded"];
 const allowedCustomerStatuses = ["active", "inactive", "blocked"];
 const allowedCouponStatuses = ["active", "inactive", "expired"];
 const allowedReviewStatuses = ["pending", "approved", "rejected"];
+const allowedInventoryUpdateTypes = ["set", "increase", "decrease"];
 
 const paginationQuerySchema = z.object({
   page: z.coerce.number().int().min(1, "Page must be at least 1").optional(),
-  limit: z.coerce.number().int().min(1, "Limit must be at least 1").optional(),
+  limit: z.coerce.number().int().min(0, "Limit must be at least 0").optional(),
   q: z.string().trim().max(100, "Search must be 100 characters or fewer").optional().or(z.literal("")),
   status: z.string().trim().max(50, "Status is too long").optional().or(z.literal("")),
   sortBy: z.string().trim().max(50, "Sort field is too long").optional(),
@@ -96,6 +97,16 @@ export const adminUserUpdateSchema = z.object({
   status: z.enum(allowedAdminStatuses).optional(),
 });
 
+const stringOrStringArrayUrl = z.union([
+  z.array(z.string().trim().url("Please provide a valid image URL")),
+  z.string().trim().optional(),
+]);
+
+const stringOrStringArray = z.union([
+  z.array(z.string().trim().min(1)),
+  z.string().trim().optional(),
+]);
+
 export const productCreateSchema = z.object({
   title: z.string().trim().min(2, "Title must be at least 2 characters long"),
   description: z.string().trim().max(2000, "Description is too long").optional(),
@@ -104,12 +115,26 @@ export const productCreateSchema = z.object({
   brand: z.string().trim().min(2, "Brand is required"),
   stock: z.coerce.number().int().nonnegative("Stock must be zero or greater"),
   status: z.enum(allowedProductStatuses).default("active"),
-  tags: z.array(z.string().trim().min(1)).optional(),
+  tags: stringOrStringArray.optional(),
+  existingImages: stringOrStringArrayUrl.optional(),
   imageUrl: z.string().trim().url("Please provide a valid image URL").optional().or(z.literal("")),
-  images: z.array(z.string().trim().url("Please provide a valid image URL")).optional(),
+  images: stringOrStringArrayUrl.optional(),
 });
 
 export const productUpdateSchema = productCreateSchema.partial();
+
+export const inventoryStockUpdateSchema = z.object({
+  stock: z.coerce.number().int().nonnegative("Stock must be zero or greater").optional(),
+  stockDelta: z.coerce.number().int().optional(),
+  type: z.enum(allowedInventoryUpdateTypes).optional(),
+  reason: z.string().trim().max(500, "Reason is too long").optional().or(z.literal("")),
+}).refine((data) => data.stock !== undefined || data.stockDelta !== undefined, {
+  message: "Provide either stock or stockDelta",
+});
+
+export const inventoryHistoryQuerySchema = paginationQuerySchema.extend({
+  sortBy: z.enum(["createdAt"]).optional(),
+});
 
 export const categoryCreateSchema = z.object({
   name: z.string().trim().min(2, "Name must be at least 2 characters long"),
@@ -121,8 +146,39 @@ export const categoryCreateSchema = z.object({
 
 export const categoryUpdateSchema = categoryCreateSchema.partial();
 
+export const brandIdParamSchema = z.object({
+  brandId: z.string().trim().min(1, "Brand ID is required"),
+});
+
+export const brandListQuerySchema = paginationQuerySchema.extend({
+  status: z.enum(allowedCategoryStatuses).optional().or(z.literal("")),
+  sortBy: z.enum(["name", "createdAt"]).optional(),
+});
+
+export const brandCreateSchema = z.object({
+  name: z.string().trim().min(2, "Name must be at least 2 characters long"),
+  slug: z.string().trim().min(2, "Slug must be at least 2 characters long"),
+  description: z.string().trim().max(1000, "Description is too long").optional(),
+  status: z.enum(allowedCategoryStatuses).default("active"),
+});
+
+export const brandUpdateSchema = brandCreateSchema.partial();
+
 export const orderStatusUpdateSchema = z.object({
   status: z.enum(allowedOrderStatuses, { errorMap: () => ({ message: "Please choose a valid order status" }) }),
+});
+
+export const refundRequestSchema = z.object({
+  reason: z.string().trim().min(3, "Refund reason is required").max(1000, "Refund reason is too long"),
+  note: z.string().trim().max(2000, "Note is too long").optional().or(z.literal("")),
+  amount: z.coerce.number().nonnegative("Refund amount must be zero or greater").optional(),
+});
+
+export const refundDecisionSchema = z.object({
+  action: z.enum(["approve", "reject"], { errorMap: () => ({ message: "Please choose approve or reject" }) }),
+  reason: z.string().trim().max(1000, "Refund reason is too long").optional().or(z.literal("")),
+  note: z.string().trim().max(2000, "Note is too long").optional().or(z.literal("")),
+  amount: z.coerce.number().nonnegative("Refund amount must be zero or greater").optional(),
 });
 
 export const customerStatusUpdateSchema = z.object({

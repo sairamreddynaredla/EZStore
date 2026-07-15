@@ -1,8 +1,10 @@
 version: '3.8'
+
 services:
-  db:
-    image: postgres:15
-    restart: unless-stopped
+  postgres:
+    image: postgres:15-alpine
+    container_name: ezstore_postgres
+    restart: always
     environment:
       POSTGRES_USER: ezstore
       POSTGRES_PASSWORD: password
@@ -10,7 +12,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ezstore-db-data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
 
 volumes:
-  ezstore-db-data:
+  postgres_data:

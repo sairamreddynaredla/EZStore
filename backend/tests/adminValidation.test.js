@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { validateRequest } from "../src/middleware/validateRequest.js";
+import { validateRequest } from "../src/routes/middleware/validateRequest.js";
 import { adminIdParamSchema, adminLoginSchema, adminUserCreateSchema, adminUserListQuerySchema, adminUserUpdateSchema } from "../src/validators/admin.js";
 
 test("adminLoginSchema rejects invalid login payloads", () => {

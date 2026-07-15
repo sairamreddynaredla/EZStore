@@ -1,14 +1,15 @@
-import dotenv from "dotenv";
 import createApp from "./app.js";
 import config from "./config/index.js";
+import { initSocket } from "./socket.js";
 
-dotenv.config();
-
-const app = createApp(config);
-
+const app = createApp();
 const port = config.PORT || 5000;
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`EZStore backend listening on http://localhost:${port}`);
+});
+
+initSocket(server, {
+  origin: [config.FRONTEND_URL || "http://localhost:5173", "http://127.0.0.1:5173"],
 });

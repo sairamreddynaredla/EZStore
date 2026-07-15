@@ -3,8 +3,8 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import prisma from "../../database/prismaClient.js";
 import config from "../../config/index.js";
-import jwtAuth from "../../middleware/jwtAuth.js";
-import { validateRequest } from "../../middleware/validateRequest.js";
+import jwtAuth from "../middleware/jwtAuth.js";
+import { validateRequest } from "../middleware/validateRequest.js";
 import { adminLoginSchema } from "../../validators/admin.js";
 import { sendError, sendSuccess } from "../../utils/apiResponse.js";
 
