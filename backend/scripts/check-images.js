@@ -1,6 +1,10 @@
 import http from 'http';
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJhZG1pbkBlenN0b3JlLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4NTQwOTgwNCwiZXhwIjoxNzg2MDE0NjA0fQ._6EpqG_oZek3l094NRaT9hZwuZIi_dhwLsyBKzMm-aw';
+const token = process.env.EZSTORE_ADMIN_TOKEN;
+
+if (!token) {
+  throw new Error('Set EZSTORE_ADMIN_TOKEN before running this diagnostic script.');
+}
 
 const req = http.request({
   host: 'localhost',

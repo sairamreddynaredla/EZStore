@@ -15,7 +15,7 @@ Set `VITE_STRIPE_PUBLISHABLE_KEY=pk_test_...` in the frontend environment. This 
 Install the [Stripe CLI](https://docs.stripe.com/stripe-cli), log in, and forward test events to the backend:
 
 ```bash
-stripe listen --forward-to http://localhost:3000/api/stripe/webhook
+stripe listen --forward-to http://localhost:5000/api/stripe/webhook
 ```
 
 For the repository's default backend port, use `http://localhost:5000/api/payment/webhook` instead. Copy the resulting `whsec_...` value into `STRIPE_WEBHOOK_SECRET`, restart the backend, then use Stripe test card `4242 4242 4242 4242`, any future expiry, any CVC, and any postal code. Payment status changes only after the signed webhook arrives.
