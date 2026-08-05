@@ -4,8 +4,7 @@ services:
     runtime: node
     plan: free
     rootDir: backend
-    buildCommand: npm ci
-    preDeployCommand: npm run prisma:migrate
+    buildCommand: npm ci && npm run prisma:migrate
     startCommand: npm start
     autoDeployTrigger: commit
     healthCheckPath: /health
