@@ -28,3 +28,17 @@ test("computeOrderSubtotal throws when product missing", () => {
     assert.ok(err.message.includes("Product not found"));
   }
 });
+
+test("computeOrderSubtotal supports order item productId when id is absent", () => {
+  const products = [{ id: 104, price: 12.5, metadata: {}, slug: "test-product" }];
+  const items = [{ productId: 104, quantity: 2 }];
+  const subtotal = computeOrderSubtotal(items, products);
+  assert.equal(subtotal, 12.5 * 2);
+});
+
+test("computeOrderSubtotal supports order item productSlug when id is absent", () => {
+  const products = [{ id: 105, price: 8.0, metadata: {}, slug: "product-105" }];
+  const items = [{ productSlug: "product-105", quantity: 3 }];
+  const subtotal = computeOrderSubtotal(items, products);
+  assert.equal(subtotal, 8.0 * 3);
+});

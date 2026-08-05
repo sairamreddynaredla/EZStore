@@ -95,7 +95,7 @@ router.post("/", optionalJwtAuth, validateRequest(orderCreateSchema), async (req
     }
 
     // Server-side price validation: compute authoritative subtotal from DB
-    const productIds = Array.from(new Set((items || []).map((it) => Number(it.id)).filter(Boolean)));
+    const productIds = Array.from(new Set((items || []).map((it) => Number(it.productId ?? it.id)).filter(Boolean)));
     if (!productIds.length) {
       return sendError(res, "Order must contain at least one valid product id", { status: 400 });
     }

@@ -113,7 +113,7 @@ export class PaymentService {
     }
 
     // Server-side price validation
-    const productIds = Array.from(new Set((items || []).map((it) => Number(it.id)).filter(Boolean)));
+    const productIds = Array.from(new Set((items || []).map((it) => Number(it.productId ?? it.id)).filter(Boolean)));
     const productSlugs = Array.from(new Set((items || []).map((it) => normalizeString(it.productSlug || it.slug)).filter(Boolean)));
 
     if (!productIds.length && !productSlugs.length) {

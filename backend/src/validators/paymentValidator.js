@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const orderItemSchema = z.object({
+  productId: z.coerce.number().int().positive().optional(),
   id: z.coerce.number().int().positive("Valid product id is required").optional(),
   productSlug: z.string().trim().optional(),
   productName: z.string().trim().optional(),

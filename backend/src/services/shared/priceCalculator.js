@@ -1,24 +1,41 @@
 // Helper to compute server-authoritative subtotal for an order
 // items: array of { id, quantity, selectedVariant? }
 // products: array of product records from DB with { id, price, metadata }
+const normalizeProductLookupKey = (value) => {
+  if (value === undefined || value === null) return "";
+  return String(value).trim();
+};
+
 export const computeOrderSubtotal = (items = [], products = []) => {
-  const productMap = new Map((products || []).map((p) => [p.id, p]));
+  const productMap = new Map();
+  (products || []).forEach((p) => {
+    if (p?.id !== undefined && p?.id !== null) {
+      productMap.set(normalizeProductLookupKey(p.id), p);
+    }
+    if (typeof p?.slug === "string" && p.slug.trim()) {
+      productMap.set(p.slug.trim(), p);
+    }
+  });
+
   let subtotal = 0;
 
   for (const item of items) {
-    const pid = Number(item.id);
-    const qty = Math.max(0, Number(item.quantity ?? 1));
-    const product = productMap.get(pid);
+    const lookupKey = normalizeProductLookupKey(item.productId ?? item.id ?? item.productSlug ?? item.slug);
+    const qty = Math.max(0, Number(item.quantity ?? item.qty ?? 1));
+    const product = productMap.get(lookupKey);
     if (!product) {
-      // Provide helpful error with more context
-      const itemName = item.name ? `"${item.name}"` : `product ${item.id}`;
+      const itemName = item.name
+        ? `"${item.name}"`
+        : item.productSlug
+        ? `product "${item.productSlug}"`
+        : `product ${normalizeProductLookupKey(item.productId ?? item.id)}`;
       const err = new Error(
         `Product not found: ${itemName}. Please update your cart and try again.`
       );
       err.status = 400;
       err.code = "PRODUCT_NOT_FOUND";
-      err.productId = pid;
-      err.itemName = item.name;
+      err.productId = Number(item.productId ?? item.id) || null;
+      err.itemName = item.name ?? item.productSlug ?? item.slug ?? null;
       throw err;
     }
 
