@@ -6,15 +6,15 @@
   "scripts": {
     "install:all": "npm install && npm run install:frontend && npm run install:admin && npm run install:backend",
     "install:frontend": "cd frontend && npm install",
-    "install:admin": "cd admin && npm install",
+    "install:admin": "cd frontend/admin && npm install",
     "install:backend": "cd backend && npm install",
     "dev": "npm run dev:frontend & npm run dev:admin & npm run dev:backend",
     "dev:frontend": "cd frontend && npm run dev",
-    "dev:admin": "cd admin && npm run dev",
+    "dev:admin": "cd frontend/admin && npm run dev",
     "dev:backend": "cd backend && npm run dev",
     "build": "npm run build:frontend",
     "build:frontend": "cd frontend && npm run build",
-    "build:admin": "cd admin && npm run build",
+    "build:admin": "cd frontend/admin && npm run build",
     "test:backend": "cd backend && npm test",
     "lint:frontend": "cd frontend && npm run lint",
     "format:frontend": "cd frontend && npm run format"

@@ -3,7 +3,7 @@ import { resolveAdminAssetUrl } from "../services/api";
 
 // The product seed data retains its storefront source asset paths. Bundle those
 // originals into the admin too, so those paths do not turn into broken URLs.
-const storefrontProductAssets = import.meta.glob("../../../frontend/src/assets/products/**/*.{png,jpg,jpeg,webp,gif,svg}", {
+const storefrontProductAssets = import.meta.glob("../../../src/assets/products/**/*.{png,jpg,jpeg,webp,gif,svg}", {
   eager: true,
   import: "default",
 });
