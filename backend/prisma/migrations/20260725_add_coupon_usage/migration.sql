@@ -28,6 +28,6 @@ CREATE TABLE IF NOT EXISTS "CouponUsage" (
 
 CREATE INDEX IF NOT EXISTS "CouponUsage_couponId_idx" ON "CouponUsage" ("couponId");
 CREATE INDEX IF NOT EXISTS "CouponUsage_customerId_idx" ON "CouponUsage" ("customerId");
-ALTER TABLE "CouponUsage" ADD CONSTRAINT IF NOT EXISTS "CouponUsage_coupon_customer_order_unique" UNIQUE ("couponId", "customerId", "orderId");
+ALTER TABLE "CouponUsage" ADD CONSTRAINT "CouponUsage_coupon_customer_order_unique" UNIQUE ("couponId", "customerId", "orderId");
 
 COMMIT;
