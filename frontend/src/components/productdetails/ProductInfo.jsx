@@ -13,9 +13,6 @@ const ProductInfo = ({
   setSelectedVariant,
   quantity,
   setQuantity,
-  onWishlistToggle,
-  isWishlisted,
-  wishlistCount,
   stockStatus,
 }) => {
   const navigate = useNavigate();
@@ -192,14 +189,6 @@ const ProductInfo = ({
             </div>
 
             <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => onWishlistToggle?.(product.id, !isWishlisted)}
-                className={`inline-flex h-10 items-center justify-center rounded-full border px-3 text-sm font-semibold transition ${isWishlisted ? "border-red-500 bg-red-50 text-red-600" : "border-slate-200 bg-slate-50 text-slate-700 hover:border-slate-300 hover:bg-slate-100"}`}
-                aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
-              >
-                {isWishlisted ? "♥" : "♡"} {wishlistCount > 0 ? `${wishlistCount}` : ""}
-              </button>
               <button
                 type="button"
                 onClick={handleShare}

@@ -7,7 +7,7 @@ const allowedProductStatuses = ["active", "draft", "archived"];
 const allowedCategoryStatuses = ["active", "inactive"];
 const allowedOrderStatuses = ["pending", "confirmed", "processing", "packed", "shipped", "out_for_delivery", "delivered", "cancelled", "returned", "refund_requested", "refund_completed"];
 const allowedPaymentStatuses = ["pending", "paid", "failed", "refunded"];
-const allowedCustomerStatuses = ["active", "inactive", "blocked"];
+const allowedCustomerStatuses = ["active", "inactive", "blocked", "abandoned"];
 const allowedCouponStatuses = ["active", "inactive", "expired"];
 const allowedReviewStatuses = ["pending", "approved", "rejected"];
 const allowedInventoryUpdateTypes = ["set", "increase", "decrease"];
@@ -63,7 +63,7 @@ export const orderListQuerySchema = paginationQuerySchema.extend({
 
 export const customerListQuerySchema = paginationQuerySchema.extend({
   status: z.enum(allowedCustomerStatuses).optional().or(z.literal("")),
-  sortBy: z.enum(["name", "email", "registeredAt", "totalSpent"]).optional(),
+  sortBy: z.enum(["name", "email", "registeredAt", "totalSpent", "totalOrders"]).optional(),
 });
 
 export const couponListQuerySchema = paginationQuerySchema.extend({
@@ -193,6 +193,7 @@ export const couponCreateSchema = z.object({
   status: z.enum(allowedCouponStatuses).default("active"),
   expiresAt: z.string().trim().optional().or(z.literal("")),
   usageLimit: z.coerce.number().int().nonnegative().optional(),
+  freeShipping: z.boolean().optional(),
 });
 
 export const couponUpdateSchema = couponCreateSchema.partial();
@@ -212,7 +213,6 @@ export const settingsUpdateSchema = z.object({
   flatShippingCharge: z.coerce.number().nonnegative().optional(),
   estimatedDeliveryDays: z.coerce.number().int().nonnegative().optional(),
   paymentMethods: z.array(z.string()).optional(),
-  cashOnDeliveryEnabled: z.boolean().optional(),
   onlinePaymentEnabled: z.boolean().optional(),
   emailNotificationsEnabled: z.boolean().optional(),
   orderNotificationsEnabled: z.boolean().optional(),

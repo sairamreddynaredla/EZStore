@@ -5,72 +5,6 @@ import farminaRenalImg from "../../assets/products/cats/prescription-food/farmin
 import royalCaninHypoallergenicImg from "../../assets/products/cats/prescription-food/royal-canin-hypoallergenic-cat-food.webp";
 
 export const catPrescriptionFood = [
-  {
-    id: 1801,
-    name: "Royal Canin Urinary SO Cat Food",
-    brand: "Royal Canin",
-    category: "cats-prescription-food",
-    subCategory: "prescription-food",
-    pet: "Cat",
-    petType: "Cat",
-    productCategory: "Cat Food",
-    productType: "Prescription Food",
-    flavor: "Chicken",
-    lifeStage: "Adult",
-    specialDiet: "Urinary Care",
-    vegType: "Non-Veg",
-
-    rating: 4.9,
-    reviews: 286,
-    soldCount: 892,
-    stock: 24,
-
-    fastDelivery: true,
-    isNew: false,
-    deliveryDate: "Tomorrow",
-
-    image: royalCaninUrinaryImg,
-
-    images: [
-      royalCaninUrinaryImg,
-      royalCaninUrinaryImg,
-      royalCaninUrinaryImg,
-      royalCaninUrinaryImg,
-    ],
-
-    description: "Veterinary diet formulated to support urinary tract health in adult cats.",
-
-    ingredients: ["Chicken Meal", "Rice", "Corn", "Fish Oil", "Minerals", "Vitamins"],
-
-    features: [
-      "Urinary tract support",
-      "Helps dissolve struvite stones",
-      "Balanced minerals",
-      "Veterinary formula",
-    ],
-
-    nutrition: {
-      protein: "32%",
-      fat: "15%",
-      fiber: "3%",
-      moisture: "10%",
-    },
-
-    manufacturer: "Royal Canin",
-    country: "France",
-
-    weight: ["3lb", "7lb"],
-
-    variants: [
-      { weight: "3lb", price: 29.99, originalPrice: 36.99 },
-      { weight: "7lb", price: 58.99, originalPrice: 69.99 },
-    ],
-
-    subscriptionEligible: true,
-    subscriptionDiscount: 0.1,
-
-    relatedProducts: [1802, 1803, 1804],
-  },
 
   {
     id: 1802,
@@ -253,72 +187,7 @@ export const catPrescriptionFood = [
     relatedProducts: [1801, 1803, 1805],
   },
 
-  {
-    id: 1805,
-    name: "Royal Canin Hypoallergenic Cat Food",
-    brand: "Royal Canin",
-    category: "cats-prescription-food",
-    subCategory: "prescription-food",
-    pet: "Cat",
-    petType: "Cat",
-    productCategory: "Cat Food",
-    productType: "Prescription Food",
-    flavor: "Hydrolyzed Protein",
-    lifeStage: "Adult",
-    specialDiet: "Hypoallergenic",
-    vegType: "Non-Veg",
-
-    rating: 4.9,
-    reviews: 214,
-    soldCount: 624,
-    stock: 18,
-
-    fastDelivery: true,
-    isNew: false,
-    deliveryDate: "Tomorrow",
-
-    image: royalCaninHypoallergenicImg,
-
-    images: [
-      royalCaninHypoallergenicImg,
-      royalCaninHypoallergenicImg,
-      royalCaninHypoallergenicImg,
-      royalCaninHypoallergenicImg,
-    ],
-
-    description: "Specialized veterinary diet for cats with food sensitivities.",
-
-    ingredients: ["Hydrolyzed Protein", "Rice Starch", "Fish Oil", "Vitamins", "Minerals"],
-
-    features: [
-      "Food allergy support",
-      "Skin barrier support",
-      "Highly digestible",
-      "Veterinary formula",
-    ],
-
-    nutrition: {
-      protein: "31%",
-      fat: "17%",
-      fiber: "2.8%",
-      moisture: "10%",
-    },
-
-    manufacturer: "Royal Canin",
-    country: "France",
-
-    weight: ["4lb", "9lb"],
-
-    variants: [
-      { weight: "4lb", price: 36.99, originalPrice: 44.99 },
-      { weight: "9lb", price: 74.99, originalPrice: 89.99 },
-    ],
-
-    subscriptionEligible: true,
-    subscriptionDiscount: 0.1,
-
-    relatedProducts: [1802, 1803, 1804],
-  },
+  
 ];
 
 export default catPrescriptionFood;

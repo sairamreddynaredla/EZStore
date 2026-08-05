@@ -1,5 +1,5 @@
 /* eslint-disable react-refresh/only-export-components */
-import { createContext, useContext, useEffect, useMemo, useReducer, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useReducer, useRef, useState } from "react";
 import { WISHLIST_ACTIONS } from "./wishlistconstants";
 import { trackAddToWishlist, trackRemoveFromWishlist } from "../utils/analytics";
 import customerCommerceApi from "../services/customerCommerceApi";
@@ -17,6 +17,35 @@ const toProductSlug = (product) => {
     .replace(/^-+|-+$/g, "");
 };
 
+const getWishlistKey = (item) => {
+  const rawId = item?.productId ?? item?.id ?? item?.product?.id;
+  const parsed = Number(rawId);
+  return Number.isFinite(parsed) && parsed > 0 ? String(parsed) : null;
+};
+
+const normalizeWishlistStateItem = (item = {}) => {
+  const key = getWishlistKey(item);
+  if (!key) return null;
+
+  return {
+    ...item,
+    id: Number(key),
+    productId: Number(key),
+  };
+};
+
+const dedupeWishlistItems = (items = []) => {
+  const seen = new Set();
+  return items.reduce((acc, item) => {
+    const normalized = normalizeWishlistStateItem(item);
+    const key = getWishlistKey(normalized);
+    if (!key || seen.has(key)) return acc;
+    seen.add(key);
+    acc.push(normalized);
+    return acc;
+  }, []);
+};
+
 const readStoredWishlist = () => {
   if (typeof window === "undefined" || !window.localStorage) {
     return [];
@@ -24,7 +53,9 @@ const readStoredWishlist = () => {
 
   try {
     const stored = window.localStorage.getItem("wishlist");
-    return stored ? JSON.parse(stored) : [];
+    const parsed = stored ? JSON.parse(stored) : [];
+    const merged = Array.isArray(parsed) ? mergeWishlistItems(parsed) : [];
+    return dedupeWishlistItems(merged);
   } catch (error) {
     console.warn("Failed to read wishlist", error);
     return [];
@@ -34,21 +65,29 @@ const readStoredWishlist = () => {
 const wishlistReducer = (state, action) => {
   switch (action.type) {
     case WISHLIST_ACTIONS.ADD_TO_WISHLIST: {
-      const exists = state.items.find((item) => String(item.id) === String(action.payload.id));
+      const normalizedPayload = normalizeWishlistStateItem(action.payload);
+      if (!normalizedPayload) return state;
 
-      if (exists) return state;
+      const payloadKey = getWishlistKey(normalizedPayload);
+      if (state.items.some((item) => getWishlistKey(item) === payloadKey)) {
+        return state;
+      }
 
       return {
         ...state,
-        items: [...state.items, action.payload],
+        items: dedupeWishlistItems([...state.items, normalizedPayload]),
       };
     }
 
-    case WISHLIST_ACTIONS.REMOVE_FROM_WISHLIST:
+    case WISHLIST_ACTIONS.REMOVE_FROM_WISHLIST: {
+      const payloadKey = getWishlistKey({ id: action.payload, productId: action.payload });
+      if (!payloadKey) return state;
+
       return {
         ...state,
-        items: state.items.filter((item) => String(item.id) !== String(action.payload)),
+        items: state.items.filter((item) => getWishlistKey(item) !== payloadKey),
       };
+    }
 
     case WISHLIST_ACTIONS.CLEAR_WISHLIST:
       return {
@@ -59,7 +98,7 @@ const wishlistReducer = (state, action) => {
     case "HYDRATE":
       return {
         ...state,
-        items: action.payload || [],
+        items: dedupeWishlistItems(action.payload || []),
       };
 
     default:
@@ -76,6 +115,7 @@ export const WishlistProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const { isAuthenticated, user } = useAuth();
+  const loadedUserIdRef = useRef(null);
 
   useEffect(() => {
     if (typeof window === "undefined" || !window.localStorage) return;
@@ -84,9 +124,16 @@ export const WishlistProvider = ({ children }) => {
 
   useEffect(() => {
     if (!isAuthenticated) {
+      loadedUserIdRef.current = null;
       dispatch({ type: "HYDRATE", payload: readStoredWishlist() });
       return;
     }
+
+    if (loadedUserIdRef.current === user?.id) {
+      return;
+    }
+
+    loadedUserIdRef.current = user?.id;
 
     const loadWishlist = async () => {
       setLoading(true);
@@ -167,21 +214,40 @@ export const WishlistProvider = ({ children }) => {
 
     if (isAuthenticated) {
       try {
-        const payload = {
-          productId: Number.isInteger(normalizedId) && normalizedId > 0 ? normalizedId : undefined,
-          productSlug: productSlug || undefined,
-          productName: product?.name ?? currentItem?.name ?? product?.productName ?? currentItem?.productName ?? "Product",
-          productImage: product?.image ?? currentItem?.image ?? product?.productImage ?? currentItem?.productImage ?? null,
-          price: Number(product?.price ?? currentItem?.price ?? currentItem?.unitPrice ?? 0),
-          unitPrice: Number(product?.price ?? currentItem?.price ?? currentItem?.unitPrice ?? 0),
-        };
+        const wishlistItemId = currentItem?.wishlistItemId ?? product?.wishlistItemId;
+        if (wishlistItemId && Number.isInteger(Number(wishlistItemId)) && Number(wishlistItemId) > 0) {
+          await customerCommerceApi.removeWishlistItem(wishlistItemId);
+        } else {
+          const payload = {
+            productId: Number.isInteger(normalizedId) && normalizedId > 0 ? normalizedId : undefined,
+            wishlistItemId: currentItem?.wishlistItemId,
+            productSlug: productSlug || undefined,
+            productName: product?.name ?? currentItem?.name ?? product?.productName ?? currentItem?.productName ?? "Product",
+            productImage: product?.image ?? currentItem?.image ?? product?.productImage ?? currentItem?.productImage ?? null,
+            price: Number(product?.price ?? currentItem?.price ?? currentItem?.unitPrice ?? 0),
+            unitPrice: Number(product?.price ?? currentItem?.price ?? currentItem?.unitPrice ?? 0),
+          };
 
-        await customerCommerceApi.toggleWishlist(payload);
+          await customerCommerceApi.toggleWishlist(payload);
+        }
+
         dispatch({ type: WISHLIST_ACTIONS.REMOVE_FROM_WISHLIST, payload: normalizedId });
         return;
       } catch (err) {
-        const message = err?.response?.data?.message || "Unable to remove item from wishlist";
-        setError(message);
+        // A stale local wishlist row can point to an item that has already
+        // been removed on the server (for example after an earlier sync).
+        // The requested end state is still achieved, so remove it locally.
+        if (err?.response?.status === 404) {
+          dispatch({ type: WISHLIST_ACTIONS.REMOVE_FROM_WISHLIST, payload: normalizedId });
+          setError("");
+          return;
+        }
+        if (err?.response?.status === 401) {
+          setError("Please sign in to update your wishlist");
+        } else {
+          const message = err?.response?.data?.message || "Unable to remove item from wishlist";
+          setError(message);
+        }
         console.error("Wishlist remove failed", err);
         return;
       }
@@ -203,7 +269,14 @@ export const WishlistProvider = ({ children }) => {
     return state.items.some((item) => String(item.id) === String(id));
   };
 
-  const wishlistCount = useMemo(() => state.items.length, [state.items]);
+  const wishlistCount = useMemo(() => {
+    const seen = new Set();
+    state.items.forEach((item) => {
+      const key = getWishlistKey(item);
+      if (key) seen.add(key);
+    });
+    return seen.size;
+  }, [state.items]);
 
   return (
     <WishlistContext.Provider

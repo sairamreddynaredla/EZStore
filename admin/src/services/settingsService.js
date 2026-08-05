@@ -19,8 +19,7 @@ const DEFAULT_SETTINGS = {
   freeShippingThreshold: 0,
   flatShippingCharge: 0,
   estimatedDeliveryDays: 3,
-  paymentMethods: ["card", "paypal", "bank_transfer", "cash_on_delivery"],
-  cashOnDeliveryEnabled: true,
+  paymentMethods: ["card", "paypal", "bank_transfer"],
   onlinePaymentEnabled: true,
   emailNotificationsEnabled: true,
   orderNotificationsEnabled: true,
@@ -78,7 +77,6 @@ const buildSettingsPayload = (settings) => {
     flatShippingCharge: settings.flatShippingCharge,
     estimatedDeliveryDays: settings.estimatedDeliveryDays,
     paymentMethods: settings.paymentMethods,
-    cashOnDeliveryEnabled: settings.cashOnDeliveryEnabled,
     onlinePaymentEnabled: settings.onlinePaymentEnabled,
     emailNotificationsEnabled: settings.emailNotificationsEnabled,
     orderNotificationsEnabled: settings.orderNotificationsEnabled,
@@ -138,7 +136,7 @@ export const getSettings = async () => {
 
 export const updateSettings = async (settings) => {
   const payload = buildSettingsPayload(settings);
-  const config = payload instanceof FormData ? { headers: { "Content-Type": "multipart/form-data" } } : undefined;
+  const config = payload instanceof FormData ? {} : undefined;
 
   try {
     const response = await adminApi.put("/settings", payload, config);

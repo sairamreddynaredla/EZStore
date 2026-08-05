@@ -6,6 +6,7 @@ import FilterGroup from "../components/FilterGroup";
 import Pagination from "../components/Pagination";
 import TableShell from "../components/TableShell";
 import Badge from "../components/Badge";
+import Select from "../components/common/Select";
 import { createAdminUser, deleteAdminUser, getAdminUsers, updateAdminUser } from "../services/adminUserService";
 
 const STATUS_OPTIONS = [
@@ -180,21 +181,30 @@ const UsersPage = () => {
           <SearchBar value={search} onChange={(value) => { setSearch(value); setCurrentPage(1); }} placeholder="Search name or email" label="Search admin users" />
 
           <FilterGroup label="Status">
-            <select value={statusFilter} onChange={(event) => { setStatusFilter(event.target.value); setCurrentPage(1); }} className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none">
-              {STATUS_OPTIONS.map((option) => (<option key={option.value} value={option.value}>{option.label}</option>))}
-            </select>
+            <Select
+              value={statusFilter}
+              onValueChange={(value) => { setStatusFilter(value); setCurrentPage(1); }}
+              options={STATUS_OPTIONS}
+              placeholder="All statuses"
+            />
           </FilterGroup>
 
           <FilterGroup label="Role">
-            <select value={roleFilter} onChange={(event) => { setRoleFilter(event.target.value); setCurrentPage(1); }} className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none">
-              {ROLE_OPTIONS.map((option) => (<option key={option.value} value={option.value}>{option.label}</option>))}
-            </select>
+            <Select
+              value={roleFilter}
+              onValueChange={(value) => { setRoleFilter(value); setCurrentPage(1); }}
+              options={ROLE_OPTIONS}
+              placeholder="All roles"
+            />
           </FilterGroup>
 
           <FilterGroup label="Sort">
-            <select value={sortValue} onChange={(event) => { setSortValue(event.target.value); setCurrentPage(1); }} className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none">
-              {SORT_OPTIONS.map((option) => (<option key={option.value} value={option.value}>{option.label}</option>))}
-            </select>
+            <Select
+              value={sortValue}
+              onValueChange={(value) => { setSortValue(value); setCurrentPage(1); }}
+              options={SORT_OPTIONS}
+              placeholder="Sort users"
+            />
           </FilterGroup>
         </div>
       </section>
@@ -254,22 +264,20 @@ const UsersPage = () => {
                   <span className="text-sm font-medium text-slate-700">Password</span>
                   <input type="password" value={formState.password} onChange={(event) => setFormState((current) => ({ ...current, password: event.target.value }))} className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none" placeholder={editingUser ? "Leave blank to keep current password" : "Set a secure password"} />
                 </label>
-                <label className="space-y-2">
-                  <span className="text-sm font-medium text-slate-700">Role</span>
-                  <select value={formState.role} onChange={(event) => setFormState((current) => ({ ...current, role: event.target.value }))} className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none">
-                    <option value="admin">Admin</option>
-                    <option value="super_admin">Super admin</option>
-                  </select>
-                </label>
+                <Select
+                  label="Role"
+                  value={formState.role}
+                  onValueChange={(value) => setFormState((current) => ({ ...current, role: value }))}
+                  options={ROLE_OPTIONS.filter((option) => option.value)}
+                />
               </div>
 
-              <label className="space-y-2">
-                <span className="text-sm font-medium text-slate-700">Status</span>
-                <select value={formState.status} onChange={(event) => setFormState((current) => ({ ...current, status: event.target.value }))} className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none">
-                  <option value="active">Active</option>
-                  <option value="inactive">Inactive</option>
-                </select>
-              </label>
+              <Select
+                label="Status"
+                value={formState.status}
+                onValueChange={(value) => setFormState((current) => ({ ...current, status: value }))}
+                options={STATUS_OPTIONS.filter((option) => option.value)}
+              />
 
               {formError && <p className="rounded-2xl border border-rose-100 bg-rose-50 p-3 text-sm text-rose-700">{formError}</p>}
 

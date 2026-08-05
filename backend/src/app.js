@@ -1,4 +1,6 @@
 import express from "express";
+import fs from "fs";
+import path from "path";
 import helmet from "helmet";
 import swaggerUi from "swagger-ui-express";
 import cors from "cors";
@@ -14,9 +16,13 @@ import { liveness, readiness } from "./routes/middleware/healthChecks.js";
 import rateLimit from "express-rate-limit";
 import config from "./config/index.js";
 import buildOpenApiDocument from "./swaggerDoc.js";
+import validateEnv from "./utils/envValidator.js";
 
 const createApp = () => {
   const app = express();
+
+  // Stripe configuration is mandatory; validation throws before the server starts.
+  validateEnv();
   // Respect the reverse proxy in production so rate limiting uses the real
   // client address rather than the proxy address.
   if (config.NODE_ENV === "production") {
@@ -37,21 +43,87 @@ const createApp = () => {
     .filter(Boolean)
     .map((value) => value.replace(/\/$/, ""));
 
+  const allowLocalDevOrigins = configuredOrigins.some((value) => value.includes("localhost") || value.includes("127.0.0.1"));
+  const isLocalhostOrigin = (origin) => {
+    try {
+      const originUrl = new URL(origin);
+      return originUrl.hostname === "localhost" || originUrl.hostname === "127.0.0.1";
+    } catch {
+      return false;
+    }
+  };
+
   app.use(helmet());
   app.use(requestContext);
-  app.use(json());
+  app.use(json({ verify: (req, _res, buf) => { req.rawBody = buf.toString(); } }));
   app.use(urlencoded({ extended: true }));
   app.use(cookieParser());
   app.use(inputSanitizer);
   app.use(requestLogger);
 
+  // Serve uploaded static files before rate limiting so local dev and proxies
+  // can fetch images without being affected by API request throttling.
+  // If a requested upload file is missing, return a tiny SVG placeholder
+  // instead of 404 so admin UI shows a visible fallback image without
+  // relying on external hosts.
+  app.use("/uploads", (req, res, next) => {
+    try {
+      const uploadsRoot = path.resolve(process.cwd(), "uploads");
+      const filePath = path.join(uploadsRoot, decodeURIComponent(req.path || "").replace(/^\//, ""));
+      if (!fs.existsSync(filePath)) {
+        res.setHeader("Content-Type", "image/svg+xml");
+        res.status(200).send(
+          '<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3" ry="3"/><path d="M8 14s1.5-2 4-2 4 2 4 2"/><circle cx="12" cy="10" r="2"/></svg>'
+        );
+        return;
+      }
+    } catch (err) {
+      // If any error occurs while checking, fall through to static handler
+      // which will return 404 as usual.
+    }
+    next();
+  });
+  app.use("/uploads", express.static("uploads"));
+
   const swaggerDocument = buildOpenApiDocument(config);
   app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument, { explorer: true }));
   app.get("/api/docs.json", (_req, res) => res.json(swaggerDocument));
 
+  const rateLimitWindowMs = Number(process.env.API_RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000;
+  const rateLimitMax = Number(process.env.API_RATE_LIMIT_MAX) || 1200;
+
+  const corsOptions = {
+    origin: (origin, callback) => {
+      if (!origin) {
+        callback(null, true);
+        return;
+      }
+
+      const normalizedOrigin = origin.replace(/\/$/, "");
+      const isAllowedOrigin = configuredOrigins.includes(normalizedOrigin)
+        || (allowLocalDevOrigins && isLocalhostOrigin(normalizedOrigin))
+        || normalizedOrigin.endsWith(".vercel.app")
+        || normalizedOrigin.endsWith(".onrender.com")
+        || normalizedOrigin.endsWith(".render.com");
+
+      if (isAllowedOrigin) {
+        callback(null, true);
+        return;
+      }
+
+      callback(new Error("Not allowed by CORS"));
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Idempotency-Key"],
+  };
+
+  app.use(cors(corsOptions));
+  app.options(/(.*)/, cors(corsOptions));
+
   const generalLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 300,
+    windowMs: rateLimitWindowMs,
+    max: rateLimitMax,
     standardHeaders: true,
     legacyHeaders: false,
     message: {
@@ -63,34 +135,9 @@ const createApp = () => {
   });
   app.use(generalLimiter);
 
-  const corsOptions = {
-    origin: (origin, callback) => {
-      if (!origin) {
-        callback(null, true);
-        return;
-      }
-
-      const normalizedOrigin = origin.replace(/\/$/, "");
-      const isAllowedOrigin = configuredOrigins.includes(normalizedOrigin) || normalizedOrigin.endsWith(".vercel.app") || normalizedOrigin.endsWith(".onrender.com") || normalizedOrigin.endsWith(".render.com");
-
-      if (isAllowedOrigin) {
-        callback(null, true);
-        return;
-      }
-
-      callback(new Error("Not allowed by CORS"));
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
-  };
-
-  app.use(cors(corsOptions));
-  app.options(/(.*)/, cors(corsOptions));
-
   app.get("/health", liveness);
   app.get("/ready", readiness);
-  app.use("/uploads", express.static("uploads"));
+  
 
   app.use("/api", routes);
 

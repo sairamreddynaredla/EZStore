@@ -4,6 +4,7 @@ import { getSettings, updateSettings } from "../services/settingsService";
 import SettingsCard from "../components/SettingsCard";
 import ToggleSwitch from "../components/ToggleSwitch";
 import PageHeader from "../components/PageHeader";
+import Select from "../components/common/Select";
 
 const CURRENCIES = ["USD", "EUR", "GBP", "INR", "AUD", "CAD"];
 const TIME_ZONES = [
@@ -29,7 +30,6 @@ const PAYMENT_METHODS = [
   { value: "card", label: "Credit / Debit Card" },
   { value: "paypal", label: "PayPal" },
   { value: "bank_transfer", label: "Bank Transfer" },
-  { value: "cash_on_delivery", label: "Cash on Delivery" },
 ];
 
 const SettingsPage = () => {
@@ -94,7 +94,6 @@ const SettingsPage = () => {
       "emailNotificationsEnabled",
       "orderNotificationsEnabled",
       "registrationNotificationsEnabled",
-      "cashOnDeliveryEnabled",
       "onlinePaymentEnabled",
       "twoFactorEnabled",
     ];
@@ -355,20 +354,12 @@ const SettingsPage = () => {
 
         <SettingsCard title="Localization" description="Set currency, timezone, and language preferences.">
           <div className="grid gap-4 sm:grid-cols-2">
-            <label className="space-y-2">
-              <span className="text-sm font-medium text-slate-700">Default Currency</span>
-              <select
-                value={settings.defaultCurrency}
-                onChange={(event) => updateField("defaultCurrency", event.target.value)}
-                className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-              >
-                {CURRENCIES.map((currency) => (
-                  <option key={currency} value={currency}>
-                    {currency}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <Select
+              label="Default Currency"
+              value={settings.defaultCurrency}
+              onValueChange={(value) => updateField("defaultCurrency", value)}
+              options={CURRENCIES.map((currency) => ({ value: currency, label: currency }))}
+            />
             <label className="space-y-2">
               <span className="text-sm font-medium text-slate-700">Currency Symbol</span>
               <input
@@ -378,34 +369,18 @@ const SettingsPage = () => {
                 className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
               />
             </label>
-            <label className="space-y-2">
-              <span className="text-sm font-medium text-slate-700">Time Zone</span>
-              <select
-                value={settings.timeZone}
-                onChange={(event) => updateField("timeZone", event.target.value)}
-                className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-              >
-                {TIME_ZONES.map((zone) => (
-                  <option key={zone} value={zone}>
-                    {zone}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label className="space-y-2">
-              <span className="text-sm font-medium text-slate-700">Language</span>
-              <select
-                value={settings.language}
-                onChange={(event) => updateField("language", event.target.value)}
-                className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-              >
-                {LANGUAGES.map((locale) => (
-                  <option key={locale.value} value={locale.value}>
-                    {locale.label}
-                  </option>
-                ))}
-              </select>
-            </label>
+            <Select
+              label="Time Zone"
+              value={settings.timeZone}
+              onValueChange={(value) => updateField("timeZone", value)}
+              options={TIME_ZONES.map((zone) => ({ value: zone, label: zone }))}
+            />
+            <Select
+              label="Language"
+              value={settings.language}
+              onValueChange={(value) => updateField("language", value)}
+              options={LANGUAGES}
+            />
           </div>
         </SettingsCard>
 
@@ -496,13 +471,7 @@ const SettingsPage = () => {
                 </label>
               ))}
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <ToggleSwitch
-                label="Cash on Delivery"
-                description="Allow customers to pay with cash when the order is delivered."
-                checked={settings.cashOnDeliveryEnabled}
-                onChange={(value) => saveQuickSetting("cashOnDeliveryEnabled", value)}
-              />
+            <div className="grid gap-4 sm:grid-cols-1">
               <ToggleSwitch
                 label="Online payment"
                 description="Accept card, PayPal, and bank transfer payments."

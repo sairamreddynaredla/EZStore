@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { CartContext } from "./cart-context";
 import { useToast } from "./toast-context";
 import customerCommerceApi from "../services/customerCommerceApi";
 import { useAuth } from "../hooks/useAuth";
 import { useWishlist } from "./usewishlist";
+import { normalizeCartItem, buildCartItemPayload } from "./cartItemUtils";
 
 const toProductSlug = (product) => {
   const value = product?.slug || product?.name || product?.title || "";
@@ -29,52 +30,119 @@ const readStoredCart = () => {
   try {
     const parsed = JSON.parse(storedCart);
 
-    return (parsed || []).map((item) => {
-      if (item && !item.selectedVariant) {
-        const defaultVariant = item.variants?.[0] || {
-          weight: "1kg",
-          price: item.price || 0,
-        };
-
-        return {
-          ...item,
-          selectedVariant: defaultVariant,
-        };
-      }
-
-      return item;
-    });
+    return (parsed || []).map((item) => normalizeCartItem(item));
   } catch (error) {
     console.log(error);
     return [];
   }
 };
 
-const normalizeCartItem = (item) => {
-  const selectedVariant = item.selectedVariant || item.variant || item.variants?.[0] || {
-    weight: "1kg",
-    price: Number(item.unitPrice ?? item.price ?? 0),
+const getCartItemKey = (item) => {
+  const productId = Number(item.productId ?? item.id) || undefined;
+  const variantKey = String(item.variantKey || item.selectedVariant?.weight || item.selectedVariant?.variantKey || "default").trim();
+  const productSlug = item.productSlug || toProductSlug(item);
+  return `${productId || productSlug || "unknown"}::${variantKey}`;
+};
+
+const groupLocalCartItems = (items) => {
+  const grouped = new Map();
+
+  for (const rawItem of items || []) {
+    const item = buildCartItemPayload(rawItem);
+    if (!item.productId && !item.productSlug) continue;
+
+    const key = getCartItemKey(item);
+    const existing = grouped.get(key);
+    if (existing) {
+      grouped.set(key, {
+        ...existing,
+        quantity: existing.quantity + item.quantity,
+        stock: Math.max(existing.stock || 0, item.stock || 0),
+      });
+    } else {
+      grouped.set(key, item);
+    }
+  }
+
+  return Array.from(grouped.values());
+};
+
+const mergeLocalCartToRemote = async (items) => {
+  const localItems = groupLocalCartItems(items);
+  if (!localItems.length) return;
+
+  let remoteItems = [];
+  try {
+    const response = await customerCommerceApi.getCart();
+    remoteItems = Array.isArray(response?.data?.items) ? response.data.items : [];
+  } catch (err) {
+    console.error("Unable to load authenticated cart before merge", err);
+    throw err;
+  }
+
+  const remoteMap = new Map();
+  for (const rawItem of remoteItems) {
+    const normalized = normalizeCartItem(rawItem);
+    remoteMap.set(getCartItemKey(normalized), normalized);
+  }
+
+  const failures = [];
+
+  const addToCartWithRetry = async (payload, retries = 1) => {
+    try {
+      await customerCommerceApi.addToCart(payload);
+      return null;
+    } catch (err) {
+      if (retries > 0) {
+        return addToCartWithRetry(payload, retries - 1);
+      }
+      return err;
+    }
   };
 
-  const unitPrice = Number(item.unitPrice ?? item.price ?? selectedVariant.price ?? 0);
-  const normalizedVariant = {
-    ...(selectedVariant || {}),
-    price: Number(selectedVariant?.price ?? unitPrice ?? 0),
-    weight: selectedVariant?.weight || selectedVariant?.variantKey || "1kg",
-  };
+  const mergePromises = localItems.map(async (localItem) => {
+    const key = getCartItemKey(localItem);
+    const remoteItem = remoteMap.get(key);
+    const alreadyInRemote = Number(remoteItem?.quantity ?? 0);
+    const requestedQuantity = Number(localItem.quantity ?? 1);
+    let delta = Math.max(0, requestedQuantity - alreadyInRemote);
 
-  return {
-    ...item,
-    id: item.productId ?? item.id,
-    productId: item.productId ?? item.id,
-    cartItemId: item.cartItemId ?? item.id,
-    name: item.productName ?? item.name ?? "Product",
-    image: item.productImage ?? item.image ?? item.product?.imageUrl ?? null,
-    price: unitPrice,
-    quantity: Number(item.quantity ?? 1),
-    selectedVariant: normalizedVariant,
-    stock: item.stock ?? 100,
-  };
+    if (delta <= 0) return;
+
+    if (localItem.stock > 0) {
+      const available = Math.max(0, localItem.stock - alreadyInRemote);
+      if (available <= 0) {
+        failures.push({ item: localItem, reason: "Stock unavailable for merged item" });
+        return;
+      }
+      if (delta > available) {
+        delta = available;
+      }
+    }
+
+    const payload = {
+      ...localItem,
+      quantity: delta,
+    };
+
+    const err = await addToCartWithRetry(payload, 1);
+    if (err) {
+      failures.push({ item: localItem, error: err });
+    }
+  });
+
+  await Promise.all(mergePromises);
+
+  if (failures.length === 0) {
+    try {
+      window.localStorage.removeItem("cart");
+    } catch {
+      // Ignore storage failures. Preserve merge success semantics if item data was already added.
+    }
+    return;
+  }
+
+  console.error("Guest cart merge partially failed", failures);
 };
 
 const CartProvider = ({ children }) => {
@@ -83,6 +151,7 @@ const CartProvider = ({ children }) => {
   const { addToWishlist } = useWishlist();
   const [cartItems, setCartItems] = useState(readStoredCart);
   const [hydrated, setHydrated] = useState(false);
+  const mergeLocalCartOnceRef = useRef(false);
 
   const loadRemoteCart = async () => {
     try {
@@ -97,13 +166,33 @@ const CartProvider = ({ children }) => {
     }
   };
 
+  const refreshCart = async () => {
+    await loadRemoteCart();
+  };
+
   useEffect(() => {
     if (typeof window === "undefined") {
       return;
     }
 
     if (isAuthenticated) {
-      loadRemoteCart();
+      const mergeAndLoad = async () => {
+        const storedCart = readStoredCart();
+        const shouldMerge = storedCart.length > 0 && !mergeLocalCartOnceRef.current;
+
+        if (shouldMerge) {
+          try {
+            await mergeLocalCartToRemote(storedCart);
+            mergeLocalCartOnceRef.current = true;
+          } catch (err) {
+            console.error("Guest cart merge failed, leaving guest cart intact", err);
+          }
+        }
+
+        await loadRemoteCart();
+      };
+
+      mergeAndLoad();
       return;
     }
 
@@ -119,11 +208,42 @@ const CartProvider = ({ children }) => {
     window.localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems, hydrated, isAuthenticated]);
 
+  const getCartItemVariantWeight = (item, fallbackWeight = null) => {
+    return String(
+      item?.selectedVariant?.weight ||
+        item?.selectedVariant?.variantKey ||
+        item?.variantKey ||
+        item?.variant?.weight ||
+        fallbackWeight ||
+        "1kg"
+    ).trim();
+  };
+
+  const getCartItemIdentity = (item, fallbackId = null, fallbackWeight = null) => {
+    const normalizedId = Number(item?.productId ?? item?.id ?? fallbackId ?? 0) || null;
+    const productSlug = item?.productSlug || toProductSlug(item) || "";
+    const variantWeight = getCartItemVariantWeight(item, fallbackWeight);
+
+    return {
+      id: normalizedId,
+      slug: productSlug,
+      variantWeight,
+    };
+  };
+
+  const matchesCartItem = (item, id, weight, slug = null) => {
+    const target = getCartItemIdentity({ id, productSlug: slug, selectedVariant: { weight } }, id, weight);
+    const source = getCartItemIdentity(item, id, weight);
+
+    const sameId = Boolean(source.id && target.id && source.id === target.id);
+    const sameSlug = Boolean(source.slug && target.slug && source.slug === target.slug);
+    const sameVariant = source.variantWeight === target.variantWeight;
+
+    return (sameId || sameSlug) && sameVariant;
+  };
+
   const findMatchingItem = (items, id, weight) => {
-    return items.find((item) => {
-      const itemWeight = item.selectedVariant?.weight || item.selectedVariant?.variantKey || "1kg";
-      return item.id === id && itemWeight === (weight || "1kg");
-    });
+    return items.find((item) => matchesCartItem(item, id, weight));
   };
 
   const addToCart = async (product) => {
@@ -142,51 +262,20 @@ const CartProvider = ({ children }) => {
       });
 
     const selectedWeight = selectedVariant.weight || "1kg";
-
-    if (isAuthenticated) {
-      try {
-        const payload = {
-          productId: Number(productData.id),
-          // Category pages use the local catalog, whose numeric IDs do not
-          // necessarily match the database IDs. The API resolves this slug
-          // to the authoritative product ID before storing the cart item.
-          productSlug: toProductSlug(productData),
-          productName: productData.name || "Product",
-          productImage: productData.image || productData.imageUrl || null,
-          price: Number(productData.price ?? selectedVariant.price ?? 0),
-          unitPrice: Number(productData.price ?? selectedVariant.price ?? 0),
-          quantity: Number(quantity) || 1,
-          variantKey: selectedWeight,
-          selectedVariant,
-        };
-
-        await customerCommerceApi.addToCart(payload);
-        await loadRemoteCart();
-
-        if (showToast) {
-          success("Added to cart");
-        }
-        return;
-      } catch (err) {
-        error(err?.response?.data?.message || "Unable to add item to cart");
-        return;
-      }
-    }
+    const productSlug = toProductSlug(productData);
+    const previousItems = [...cartItems];
 
     setCartItems((currentItems) => {
-      const existingProduct = currentItems.find(
-        (item) =>
-          item.id === productData.id &&
-          (item.selectedVariant?.weight || "1kg") === selectedWeight
+      const existingProduct = currentItems.find((item) =>
+        matchesCartItem(item, productData.id, selectedWeight, productSlug)
       );
 
       if (existingProduct) {
         return currentItems.map((item) =>
-          item.id === productData.id &&
-          (item.selectedVariant?.weight || "1kg") === selectedWeight
+          matchesCartItem(item, productData.id, selectedWeight, productSlug)
             ? {
                 ...item,
-                quantity: item.quantity + quantity,
+                quantity: Number(item.quantity || 0) + Number(quantity || 1),
               }
             : item
         );
@@ -194,16 +283,44 @@ const CartProvider = ({ children }) => {
 
       return [
         ...currentItems,
-        {
+        normalizeCartItem({
           ...productData,
+          id: productData.id ?? productData.productId,
+          productId: productData.productId ?? productData.id,
+          productSlug,
           selectedVariant,
-          quantity,
-        },
+          quantity: Number(quantity) || 1,
+        }),
       ];
     });
 
-    if (showToast) {
-      success("Added to cart");
+    if (!isAuthenticated) {
+      if (showToast) {
+        success("Added to cart");
+      }
+      return;
+    }
+
+    try {
+      const payload = buildCartItemPayload({
+        ...productData,
+        id: productData.id ?? productData.productId,
+        productSlug,
+        selectedVariant,
+        quantity: Number(quantity) || 1,
+      });
+      // Product payload normalization should preserve the cart image field
+      // regardless of whether the catalog uses image, imageUrl, or productImage.
+
+      await customerCommerceApi.addToCart(payload);
+      await loadRemoteCart();
+
+      if (showToast) {
+        success("Added to cart");
+      }
+    } catch (err) {
+      setCartItems(previousItems);
+      error(err?.response?.data?.message || "Unable to add item to cart");
     }
   };
 
@@ -351,6 +468,7 @@ const CartProvider = ({ children }) => {
         increaseQuantity,
         decreaseQuantity,
         clearCart,
+        refreshCart,
         totalItems,
         totalPrice,
       }}

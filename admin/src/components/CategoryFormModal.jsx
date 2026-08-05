@@ -1,13 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
+import AdminDialog from "./common/Dialog";
+import Select from "./common/Select";
 
 const defaultFormState = {
   name: "",
   slug: "",
   description: "",
   status: "active",
-  bannerUrl: "",
-  bannerFile: null,
-  existingBanner: "",
 };
 
 const statusOptions = [
@@ -25,35 +24,12 @@ const CategoryFormModal = ({ visible, onClose, onSave, initialCategory, isSaving
     setForm({
       ...defaultFormState,
       ...initialCategory,
-      bannerUrl: initialCategory?.banner || initialCategory?.bannerUrl || "",
-      existingBanner: initialCategory?.banner || initialCategory?.bannerUrl || "",
-      bannerFile: null,
     });
     setValidation({});
   }, [visible, initialCategory]);
 
-  const previewUrl = useMemo(() => {
-    if (form.bannerFile instanceof File) {
-      return URL.createObjectURL(form.bannerFile);
-    }
-    if (form.existingBanner) {
-      return form.existingBanner;
-    }
-    return null;
-  }, [form.bannerFile, form.existingBanner]);
-
   const handleChange = (field, value) => {
     setForm((current) => ({ ...current, [field]: value }));
-  };
-
-  const handleBannerChange = (event) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    setForm((current) => ({ ...current, bannerFile: file, existingBanner: current.existingBanner }));
-  };
-
-  const handleRemoveBanner = () => {
-    setForm((current) => ({ ...current, bannerFile: null, existingBanner: "", bannerUrl: "" }));
   };
 
   const validate = () => {
@@ -74,28 +50,14 @@ const CategoryFormModal = ({ visible, onClose, onSave, initialCategory, isSaving
       slug: form.slug.trim(),
       description: form.description.trim(),
       status: form.status,
-      bannerUrl: form.bannerUrl.trim(),
-      existingBanner: form.existingBanner,
-      bannerFile: form.bannerFile,
     });
   };
 
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <div className="w-full max-w-3xl overflow-hidden rounded-3xl bg-white shadow-2xl">
-        <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
-          <div>
-            <h2 className="text-xl font-semibold text-slate-900">{title}</h2>
-            <p className="text-sm text-slate-500">Manage category details, banner image, and status.</p>
-          </div>
-          <button type="button" className="rounded-2xl px-3 py-2 text-slate-600 hover:bg-slate-100" onClick={onClose}>
-            Close
-          </button>
-        </div>
-
-        <form className="space-y-6 px-6 py-5" onSubmit={handleSubmit}>
+    <AdminDialog open={visible} onOpenChange={onClose} title={title} description="Manage category details and status.">
+      <form className="space-y-6 px-6 py-5" onSubmit={handleSubmit}>
           <div className="grid gap-4 md:grid-cols-2">
             <label className="space-y-2">
               <span className="text-sm font-medium text-slate-700">Name</span>
@@ -128,48 +90,16 @@ const CategoryFormModal = ({ visible, onClose, onSave, initialCategory, isSaving
           </label>
 
           <div className="grid gap-4 md:grid-cols-2">
-            <label className="space-y-2">
-              <span className="text-sm font-medium text-slate-700">Status</span>
-              <select
+              <div className="space-y-2">
+              <Select
+                label="Status"
                 value={form.status}
-                onChange={(e) => handleChange("status", e.target.value)}
-                className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-              >
-                {statusOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-              {validation.status && <p className="text-sm text-rose-600">{validation.status}</p>}
-            </label>
-            <label className="space-y-2">
-              <span className="text-sm font-medium text-slate-700">Banner image URL</span>
-              <input
-                value={form.bannerUrl}
-                onChange={(e) => handleChange("bannerUrl", e.target.value)}
-                className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-                placeholder="Optional external image URL"
+                onValueChange={(value) => handleChange("status", value)}
+                options={statusOptions}
               />
-            </label>
-          </div>
-
-          <label className="space-y-2">
-            <span className="text-sm font-medium text-slate-700">Upload banner</span>
-            <input type="file" accept="image/*" onChange={handleBannerChange} />
-          </label>
-
-          {previewUrl && (
-            <div className="rounded-3xl border border-neutral-border bg-slate-50 p-4">
-              <div className="mb-3 flex items-center justify-between">
-                <p className="text-sm font-medium text-slate-700">Banner preview</p>
-                <button type="button" className="text-sm text-rose-600 hover:text-rose-800" onClick={handleRemoveBanner}>
-                  Remove
-                </button>
-              </div>
-              <img src={previewUrl} alt="Category banner preview" className="h-48 w-full rounded-3xl object-cover" />
+              {validation.status && <p className="text-sm text-rose-600">{validation.status}</p>}
             </div>
-          )}
+          </div>
 
           {error && <p className="text-sm text-rose-600">{error}</p>}
 
@@ -182,8 +112,7 @@ const CategoryFormModal = ({ visible, onClose, onSave, initialCategory, isSaving
             </button>
           </div>
         </form>
-      </div>
-    </div>
+    </AdminDialog>
   );
 };
 

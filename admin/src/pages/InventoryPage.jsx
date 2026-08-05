@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { Fragment, useCallback, useEffect, useMemo, useState } from "react";
 import { useToast } from "../context/toast-context";
 import { getInventory, getInventoryHistory, updateInventoryStock } from "../services/inventoryService";
 import Badge from "../components/Badge";
@@ -6,6 +6,7 @@ import Pagination from "../components/Pagination";
 import SearchBar from "../components/SearchBar";
 import FilterGroup from "../components/FilterGroup";
 import PageHeader from "../components/PageHeader";
+import Select from "../components/common/Select";
 
 const STOCK_FILTERS = [
   { value: "all", label: "All products" },
@@ -209,17 +210,12 @@ const InventoryPage = () => {
         />
 
         <FilterGroup label="Stock filter">
-          <select
+          <Select
             value={stockFilter}
-            onChange={(event) => setStockFilter(event.target.value)}
-            className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-          >
-            {STOCK_FILTERS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+            onValueChange={(value) => setStockFilter(value)}
+            options={STOCK_FILTERS}
+            placeholder="Filter stock"
+          />
         </FilterGroup>
       </div>
 
@@ -265,8 +261,8 @@ const InventoryPage = () => {
                   : draft.value !== "" && Number(draft.value) >= 0;
 
                 return (
-                  <>
-                    <tr key={product.id} className="border-t border-slate-100 hover:bg-slate-50">
+                  <Fragment key={product.id}>
+                    <tr className="border-t border-slate-100 hover:bg-slate-50">
                       <td className="px-5 py-4 align-top">
                         <div className="font-semibold text-slate-900">{product.title || product.name || "Untitled product"}</div>
                         <div className="text-xs text-slate-500">{product.description}</div>
@@ -279,32 +275,36 @@ const InventoryPage = () => {
                             min="0"
                             value={stockValue}
                             onChange={(event) => handleStockChange(product.id, event.target.value)}
-                            className="w-24 rounded-2xl border border-neutral-border bg-slate-50 px-3 py-2 focus:border-primary-500 focus:outline-none"
+                            className="w-24 rounded-2xl border border-neutral-border bg-slate-50 px-3 py-2 appearance-none focus:border-primary-500 focus:outline-none"
                           />
                           <div className="flex flex-wrap items-center gap-2">
-                            <select
-                              value={draft.type}
-                              onChange={(event) => handleAdjustmentChange(product.id, "type", event.target.value)}
-                              className="rounded-2xl border border-neutral-border bg-slate-50 px-3 py-2 text-sm focus:border-primary-500 focus:outline-none"
-                            >
-                              <option value="set">Set</option>
-                              <option value="increase">Increase by</option>
-                              <option value="decrease">Decrease by</option>
-                            </select>
+                            <div className="w-24">
+                              <Select
+                                value={draft.type}
+                                onValueChange={(value) => handleAdjustmentChange(product.id, "type", value)}
+                                options={[
+                                  { value: "set", label: "Set" },
+                                  { value: "increase", label: "Increase" },
+                                  { value: "decrease", label: "Decrease" },
+                                ]}
+                                placeholder="Set"
+                              />
+                            </div>
                             <input
                               type="number"
                               min="0"
-                              placeholder={draft.type === "set" ? "Set stock" : "Amount"}
+                              placeholder={draft.type === "set" ? "New stock" : "Amount"}
                               value={draft.value}
                               onChange={(event) => handleAdjustmentChange(product.id, "value", event.target.value)}
-                              className="w-24 rounded-2xl border border-neutral-border bg-slate-50 px-3 py-2 focus:border-primary-500 focus:outline-none"
+                              className="w-28 rounded-2xl border border-neutral-border bg-slate-50 px-3 py-2 appearance-none focus:border-primary-500 focus:outline-none"
                             />
                             <input
                               type="text"
                               placeholder="Reason"
                               value={draft.reason}
                               onChange={(event) => handleAdjustmentChange(product.id, "reason", event.target.value)}
-                              className="min-w-36 rounded-2xl border border-neutral-border bg-slate-50 px-3 py-2 focus:border-primary-500 focus:outline-none"
+                              style={{ minWidth: 140 }}
+                              className="flex-1 rounded-2xl border border-neutral-border bg-slate-50 px-3 py-2 focus:border-primary-500 focus:outline-none"
                             />
                           </div>
                         </div>
@@ -367,7 +367,7 @@ const InventoryPage = () => {
                         </td>
                       </tr>
                     ) : null}
-                  </>
+                  </Fragment>
                 );
               })
             )}

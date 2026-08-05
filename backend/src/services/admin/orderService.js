@@ -38,12 +38,12 @@ const toOrderPayload = (order) => {
     orderNumber: order.orderNumber,
     orderStatus: order.status,
     status: order.status,
-    paymentStatus: order.paymentStatus,
-    paymentMethod: order.paymentMethod,
+    paymentStatus: order.paymentStatus || order.payment?.status,
+    paymentMethod: order.paymentMethod || order.payment?.method,
     customerId: order.customerId,
     customerName: order.customer?.fullName || `${order.customer?.firstName || ""} ${order.customer?.lastName || ""}`.trim() || order.customer?.email || "Customer",
     customerEmail: order.customer?.email,
-    customerPhone: order.customer?.phone,
+    customerPhone: order.customer?.phone || order.shippingAddress?.phone,
     totalAmount: Number(order.totalAmount ?? 0),
     currency: order.currency,
     orderDate: order.orderDate,
@@ -56,6 +56,17 @@ const toOrderPayload = (order) => {
       state: order.shippingAddress.state,
       postalCode: order.shippingAddress.postalCode,
       country: order.shippingAddress.country,
+      phone: order.shippingAddress.phone,
+    } : null,
+    payment: order.payment ? {
+      method: order.payment.method,
+      status: order.payment.status,
+      provider: order.payment.provider,
+      transactionId: order.payment.transactionId,
+      amount: order.payment.amount,
+      currency: order.payment.currency,
+      metadata: order.payment.metadata,
+      createdAt: order.payment.createdAt,
     } : null,
     trackingNumber: order.trackingNumber || null,
     shippingProvider: order.shippingProvider || null,
@@ -186,6 +197,7 @@ export const getOrders = async (query = {}) => {
       include: {
         customer: true,
         shippingAddress: true,
+        payment: true,
         statusHistory: { orderBy: { createdAt: "asc" } },
         notes: { orderBy: { createdAt: "desc" } },
       },
@@ -209,6 +221,7 @@ export const getOrder = async (orderId) => {
     include: {
       customer: true,
       shippingAddress: true,
+      payment: true,
       statusHistory: { orderBy: { createdAt: "asc" } },
       notes: { orderBy: { createdAt: "desc" } },
     },
@@ -217,7 +230,7 @@ export const getOrder = async (orderId) => {
   return toOrderPayload(order);
 };
 
-const applyInventoryForStatus = async (tx, order, nextStatus, actorId = null) => {
+export const applyInventoryForStatus = async (tx, order, nextStatus, actorId = null) => {
   const transition = resolveOrderTransition(order.status, nextStatus);
   if (!transition.allowed) {
     return false;
@@ -228,33 +241,67 @@ const applyInventoryForStatus = async (tx, order, nextStatus, actorId = null) =>
     for (const item of items) {
       const productId = Number(item.productId ?? item.id);
       if (!productId) continue;
-      const product = await tx.product.findUnique({ where: { id: productId } });
+      // Lock the product row to avoid concurrent modifications
+      const locked = await tx.$queryRaw`SELECT * FROM "Product" WHERE id = ${productId} FOR UPDATE`;
+      const product = Array.isArray(locked) ? locked[0] : locked;
       if (!product) continue;
       const quantity = Number(item.quantity ?? 1);
-      if (quantity > 0 && product.stock >= quantity) {
+      if (quantity > 0 && Number(product.stock ?? 0) >= quantity) {
+        // decrement stock to reserve and record a reserve transaction so we can
+        // later detect that this order already reduced stock.
         await tx.product.update({
           where: { id: product.id },
-          data: { stock: Math.max(0, product.stock - quantity) },
+          data: { stock: Math.max(0, Number(product.stock ?? 0) - quantity) },
+        });
+        await tx.inventoryTransaction.create({
+          data: {
+            productId: product.id,
+            adminId: actorId ? Number(actorId) : null,
+            change: -quantity,
+            type: "reserve",
+            reason: `Order ${order.orderNumber} reserved`,
+          },
         });
       }
     }
-  }
 
   if (transition.inventoryAction === "deduct") {
     const items = Array.isArray(order.items) ? order.items : [];
     for (const item of items) {
       const productId = Number(item.productId ?? item.id);
       if (!productId) continue;
-      const product = await tx.product.findUnique({ where: { id: productId } });
+      // Lock the product row to avoid race conditions
+      const locked = await tx.$queryRaw`SELECT * FROM "Product" WHERE id = ${productId} FOR UPDATE`;
+      const product = Array.isArray(locked) ? locked[0] : locked;
       if (!product) continue;
       const quantity = Number(item.quantity ?? 1);
-      if (quantity > 0 && product.stock >= quantity) {
-        await tx.product.update({
-          where: { id: product.id },
-          data: {
-            stock: product.stock - quantity,
-          },
+      if (quantity <= 0) continue;
+
+      // If a prior reserve transaction for this order exists, the stock was
+      // already decremented during reservation. In that case we should not
+      // decrement again — instead mark the reserve as finalized.
+      const reserveTx = await tx.inventoryTransaction.findFirst({
+        where: {
+          productId: product.id,
+          reason: { contains: `Order ${order.orderNumber}` },
+          type: "reserve",
+        },
+      });
+
+      if (reserveTx) {
+        // update the reserve transaction to a final decrease record for audit
+        await tx.inventoryTransaction.update({
+          where: { id: reserveTx.id },
+          data: { type: "decrease", reason: `Order ${order.orderNumber} paid` },
         });
+      } else {
+        // No prior reserve found — perform a one-time decrease and log it.
+        if (Number(product.stock ?? 0) >= quantity) {
+          await tx.product.update({ where: { id: product.id }, data: { stock: Number(product.stock ?? 0) - quantity } });
+        } else {
+          // never allow negative stock — clamp to zero
+          await tx.product.update({ where: { id: product.id }, data: { stock: 0 } });
+        }
         await tx.inventoryTransaction.create({
           data: {
             productId: product.id,
@@ -273,25 +320,34 @@ const applyInventoryForStatus = async (tx, order, nextStatus, actorId = null) =>
     for (const item of items) {
       const productId = Number(item.productId ?? item.id);
       if (!productId) continue;
-      const product = await tx.product.findUnique({ where: { id: productId } });
+      // Lock the product row to avoid race conditions during restore
+      const locked = await tx.$queryRaw`SELECT * FROM "Product" WHERE id = ${productId} FOR UPDATE`;
+      const product = Array.isArray(locked) ? locked[0] : locked;
       if (!product) continue;
       const quantity = Number(item.quantity ?? 1);
-      if (quantity > 0) {
-        await tx.product.update({
-          where: { id: product.id },
-          data: {
-            stock: product.stock + quantity,
-          },
-        });
-        await tx.inventoryTransaction.create({
-          data: {
-            productId: product.id,
-            adminId: actorId ? Number(actorId) : null,
-            change: quantity,
-            type: "increase",
-            reason: `Order ${order.orderNumber} restored`,
-          },
-        });
+      if (quantity <= 0) continue;
+
+      // Prevent double-restores: if an increase transaction for this order
+      // already exists, skip.
+      const existingIncrease = await tx.inventoryTransaction.findFirst({
+        where: {
+          productId: product.id,
+          reason: { contains: `Order ${order.orderNumber}` },
+          type: "increase",
+        },
+      });
+      if (existingIncrease) continue;
+
+      await tx.product.update({ where: { id: product.id }, data: { stock: Number(product.stock ?? 0) + quantity } });
+      await tx.inventoryTransaction.create({
+        data: {
+          productId: product.id,
+          adminId: actorId ? Number(actorId) : null,
+          change: quantity,
+          type: "increase",
+          reason: `Order ${order.orderNumber} restored`,
+        },
+      });
       }
     }
   }
@@ -308,6 +364,11 @@ export const createRefundRequest = async (orderId, payload = {}) => {
   const normalizedReason = normalizeString(payload.reason || payload.refundReason || order.refundReason);
   const normalizedAmount = Number(payload.amount ?? payload.refundAmount ?? order.totalAmount ?? 0);
   const isPartial = Number.isFinite(normalizedAmount) && normalizedAmount > 0 && normalizedAmount < Number(order.totalAmount ?? 0);
+
+  // Validate refund request amount does not exceed order total
+  if (Number.isFinite(normalizedAmount) && normalizedAmount > Number(order.totalAmount ?? 0) + 0.005) {
+    throw Object.assign(new Error("Refund amount cannot exceed the order total"), { status: 400 });
+  }
 
   if (!order.status || !["delivered", "returned"].includes(order.status)) {
     throw Object.assign(new Error("Refund requests are only available for delivered or returned orders"), { status: 400 });
@@ -407,9 +468,23 @@ export const resolveRefundRequest = async (orderId, action, payload = {}) => {
     throw Object.assign(new Error("Refund action must be approve or reject"), { status: 400 });
   }
 
+  // Validate refund amount bounds when approving
+  if (normalizedAction === "approve" && (refundAmount <= 0 || refundAmount > Number(order.totalAmount ?? 0) + 0.005)) {
+    throw Object.assign(new Error("Invalid refund amount for approval"), { status: 400 });
+  }
+
   const updated = await prisma.$transaction(async (tx) => {
-    const nextStatus = normalizedAction === "approve" ? "refund_completed" : (order.status === "returned" ? "returned" : "delivered");
-    const nextPaymentStatus = normalizedAction === "approve" && (refundAmount <= 0 || refundAmount >= Number(order.totalAmount ?? 0)) ? "refunded" : order.paymentStatus;
+    // Lock order inside transaction and avoid duplicate resolution
+    const lockedOrderRows = await tx.$queryRaw`SELECT * FROM "Order" WHERE id = ${order.id} FOR UPDATE`;
+    const lockedOrder = Array.isArray(lockedOrderRows) ? lockedOrderRows[0] : lockedOrderRows;
+    if (!lockedOrder) throw new Error("Order not found during refund resolution");
+
+    const nextStatus = normalizedAction === "approve" ? "refund_completed" : (lockedOrder.status === "returned" ? "returned" : "delivered");
+    // If already in target state, act idempotently
+    if ((lockedOrder.status || "").toLowerCase() === nextStatus) {
+      return { order: lockedOrder, note: null };
+    }
+    const nextPaymentStatus = normalizedAction === "approve" && (refundAmount >= Number(order.totalAmount ?? 0) - 0.005) ? "refunded" : order.paymentStatus;
     const refundDecisionAt = new Date().toISOString();
     const metadata = {
       ...(order.metadata || {}),
@@ -499,6 +574,19 @@ export const updateOrderStatus = async (orderId, nextStatus, actor = {}) => {
   }
 
   const updated = await prisma.$transaction(async (tx) => {
+    // Re-fetch and lock the order row inside transaction to avoid concurrent
+    // transitions applying inventory or history twice.
+    const lockedOrderRows = await tx.$queryRaw`SELECT * FROM "Order" WHERE id = ${order.id} FOR UPDATE`;
+    const lockedOrder = Array.isArray(lockedOrderRows) ? lockedOrderRows[0] : lockedOrderRows;
+
+    if (!lockedOrder) throw new Error("Order not found during transition");
+
+    // If the order already has the desired status, treat as idempotent and
+    // return the current order without applying inventory or creating history.
+    if ((lockedOrder.status || "").toLowerCase() === normalizedNext) {
+      return lockedOrder;
+    }
+
     await applyInventoryForStatus(tx, order, normalizedNext, actor.id || null);
 
     const updateData = {

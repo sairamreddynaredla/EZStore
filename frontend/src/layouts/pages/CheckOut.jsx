@@ -1,30 +1,150 @@
 import Navbar from "../../components/Navbar";
 import useCart from "../../hooks/usecart";
-import { useState } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import customerCommerceApi from "../../services/customerCommerceApi";
 import secureBadge from "../../assets/logo/secure-payment.webp";
 import easyReturnsBadge from "../../assets/logo/easy-returns.webp";
 import fastDeliveryBadge from "../../assets/logo/fast-delivery.webp";
 import cardIcon from "../../assets/payments/card.webp";
-import gpayIcon from "../../assets/payments/google-pay.webp";
-import appleIcon from "../../assets/payments/apple-pay.webp";
-import paypalIcon from "../../assets/payments/paypal.webp";
-import netBankingIcon from "../../assets/payments/net banking.webp";
-import codIcon from "../../assets/payments/cod.webp";
+import products from "../../data/products";
+import { resolveProductImage, resolveProductImageFallback } from "../../utils/productImage";
+
+let cachedPaymentConfig = null;
+let activePaymentConfigRequest = null;
+let cachedSavedAddresses = null;
+let activeSavedAddressesRequest = null;
+
+const PaymentSection = ({
+  order,
+  error,
+  onError,
+  clearCart,
+  persistOrder,
+  clearPendingCheckout,
+  onSuccess,
+}) => {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [isSubmittingPayment, setIsSubmittingPayment] = useState(false);
+
+  const handleConfirmPayment = async () => {
+    if (!stripe || !elements) {
+      onError("Stripe payment service is not loaded yet. Please wait a moment.");
+      return;
+    }
+
+    setIsSubmittingPayment(true);
+    onError("");
+
+    try {
+      console.info("[EZStore] Stripe confirmPayment invoked", { orderId: order?.id, orderNumber: order?.orderNumber });
+      const result = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${window.location.origin}/order-success?orderNumber=${order.orderNumber}`,
+        },
+        redirect: "if_required",
+      });
+
+      if (import.meta.env.DEV) {
+        console.info("[EZStore] Stripe confirmPayment result:", {
+          stripeError: result?.error?.message || null,
+          paymentIntentId: result?.paymentIntent?.id || null,
+          paymentIntentStatus: result?.paymentIntent?.status || null,
+        });
+      }
+
+      if (result.error) {
+        console.error("[EZStore] Stripe confirmPayment error", result.error);
+        onError(result.error.message || "Payment confirmation failed. Please try again.");
+        return;
+      }
+
+      const intent = result.paymentIntent;
+      if (!intent) {
+        onError("Unable to read payment result. Please try again.");
+        return;
+      }
+
+      if (intent.status === "succeeded") {
+        // Payment status is updated exclusively by Stripe's signed webhook.
+        clearCart();
+        persistOrder(order);
+        clearPendingCheckout();
+        if (typeof onSuccess === "function") {
+          onSuccess();
+          return;
+        }
+      }
+
+      if (intent.status === "requires_action" || intent.status === "requires_confirmation") {
+        onError("Payment requires additional authentication. Follow the prompts to complete the payment.");
+        return;
+      }
+
+      if (intent.status === "requires_payment_method" || intent.status === "canceled" || intent.status === "failed") {
+        onError("Payment could not be completed. Please try again with a different payment method.");
+        return;
+      }
+
+      onError(`Payment status: ${intent.status}. Please refresh if your order is not complete.`);
+    } catch (error) {
+      onError(error?.response?.data?.message || error.message || "Payment confirmation failed.");
+    } finally {
+      setIsSubmittingPayment(false);
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+      <h3 className="font-semibold text-gray-800 mb-4">Complete Payment</h3>
+      <div className="space-y-4">
+        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+          <PaymentElement />
+        </div>
+        {error && <p className="text-xs text-red-500">{error}</p>}
+        <button
+          type="button"
+          onClick={handleConfirmPayment}
+          disabled={!stripe || !elements || isSubmittingPayment}
+          className="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isSubmittingPayment ? "Processing payment..." : "Pay Now"}
+        </button>
+      </div>
+    </div>
+  );
+};
 
 const Checkout = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { cartItems, totalPrice, clearCart, removeFromCart, increaseQuantity, decreaseQuantity } =
+  const { cartItems, totalPrice, clearCart, removeFromCart, increaseQuantity, decreaseQuantity, refreshCart } =
     useCart();
 
   const checkoutItem = location.state?.checkoutItem;
   const [checkoutQuantity, setCheckoutQuantity] = useState(checkoutItem?.quantity || 1);
+  const [updatedCartItems, setUpdatedCartItems] = useState(null);
 
-  const items = checkoutItem
-    ? [{ ...checkoutItem, quantity: checkoutQuantity }]
-    : cartItems;
+  const items = updatedCartItems ??
+    (checkoutItem
+      ? [{ ...checkoutItem, quantity: checkoutQuantity }]
+      : Array.isArray(cartItems)
+      ? cartItems
+      : []);
+
+  const getCatalogProduct = (item) => {
+    const itemId = Number(item.productId ?? item.id);
+    const itemName = String(item.name ?? item.productName ?? "").trim().toLowerCase();
+
+    return products.find((product) =>
+      (Number.isFinite(itemId) && Number(product.id) === itemId) ||
+      (itemName && String(product.name ?? "").trim().toLowerCase() === itemName)
+    );
+  };
 
   // ─── STEP & NAVIGATION ───
   const [currentStep, setCurrentStep] = useState(1);
@@ -47,6 +167,14 @@ const Checkout = () => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
   const [pincode, setPincode] = useState("");
+  const [savedAddresses, setSavedAddresses] = useState([]);
+  const [selectedSavedAddressId, setSelectedSavedAddressId] = useState("");
+  const [addressSuggestions, setAddressSuggestions] = useState([]);
+  const [isFetchingPincode, setIsFetchingPincode] = useState(false);
+  const [pincodeMessage, setPincodeMessage] = useState("");
+  const [isFetchingBillingPincode, setIsFetchingBillingPincode] = useState(false);
+  const [billingPincodeMessage, setBillingPincodeMessage] = useState("");
+  const [isLoadingAddresses, setIsLoadingAddresses] = useState(false);
 
   // ─── BILLING ADDRESS ───
   const [sameAsShipping, setSameAsShipping] = useState(true);
@@ -58,37 +186,343 @@ const Checkout = () => {
 
   // ─── DELIVERY & PAYMENT ───
   const [selectedDelivery, setSelectedDelivery] = useState("standard");
-  const [selectedPayment, setSelectedPayment] = useState("card");
   const [selectedDeliveryInstruction, setSelectedDeliveryInstruction] = useState("ring-bell");
+  const [stripeEnabled, setStripeEnabled] = useState(true);
+  const [backendStripePublishableKey, setBackendStripePublishableKey] = useState("");
+
+  const [isPlacingOrder, setIsPlacingOrder] = useState(false);
+  const isPlacingOrderRef = useRef(false);
+  const [paymentError, setPaymentError] = useState("");
+
+  useEffect(() => {
+    let active = true;
+
+    const loadPaymentConfig = async () => {
+      let request = cachedPaymentConfig ? Promise.resolve(cachedPaymentConfig) : activePaymentConfigRequest;
+      let shouldClearRequest = false;
+
+      if (!request) {
+        request = customerCommerceApi.getPaymentConfig();
+        activePaymentConfigRequest = request;
+        shouldClearRequest = true;
+      }
+
+      try {
+        const cfg = await request;
+        if (!cachedPaymentConfig) {
+          cachedPaymentConfig = cfg;
+        }
+
+        const enabled = cfg?.data?.stripeEnabled === true;
+        const backendKey = cfg?.data?.publishableKey || "";
+        if (active) {
+          setStripeEnabled(Boolean(enabled));
+          setBackendStripePublishableKey(backendKey);
+        }
+      } catch {
+        if (active) {
+          setStripeEnabled(false);
+        }
+      } finally {
+        if (shouldClearRequest && activePaymentConfigRequest === request) {
+          activePaymentConfigRequest = null;
+        }
+      }
+    };
+
+    loadPaymentConfig();
+    return () => {
+      active = false;
+    };
+  }, []);
 
   // ─── COUPON ───
   const [coupon, setCoupon] = useState("");
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [couponError, setCouponError] = useState("");
-  const coupons = {
-    WELCOME10: { discount: 5, description: "10% off on your first order" },
-    SAVE20: { discount: 10, description: "20% off on orders above $500" },
-    FREESHIP: { discount: 99, description: "Free shipping on any order" },
-  };
 
   // ─── MODALS ───
   const [showTermsModal, setShowTermsModal] = useState(false);
 
   // ─── ORDER ITEMS & PRICING ───
   const TAX_RATE = 0.1;
-  const discount = appliedCoupon ? coupons[appliedCoupon].discount : 0;
-  const shipping = selectedDelivery === "express" ? 99 : 0;
-  const itemPrice = (item) => (item.selectedVariant?.price ?? item.price ?? 0) * item.quantity;
+  const discount = Number(appliedCoupon?.discountAmount ?? 0);
+  const shipping = appliedCoupon?.freeShipping ? 0 : selectedDelivery === "express" ? 99 : 0;
+  const itemPrice = (item) => {
+    const price = Number(item.selectedVariant?.price ?? item.price ?? 0) || 0;
+    const quantity = Number(item.quantity ?? 1) || 1;
+    return price * quantity;
+  };
   const subtotal = checkoutItem
     ? Math.round(itemPrice({ ...checkoutItem, quantity: checkoutQuantity }) * 100) / 100
-    : totalPrice;
+    : Number(totalPrice || 0);
   const tax = Math.round(subtotal * TAX_RATE * 100) / 100;
-  const total = Math.max(0, subtotal + tax - discount + shipping);
+  const total = Number.isFinite(subtotal)
+    ? Math.max(0, subtotal + tax - discount + shipping)
+    : 0;
 
   // ─── ADDITIONAL SERVICES ───
   const [newsletter, setNewsletter] = useState(false);
   const [smsUpdates, setSmsUpdates] = useState(true);
   const [agreeTerms, setAgreeTerms] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+
+    const loadSavedAddresses = async () => {
+      setIsLoadingAddresses(true);
+      let request = cachedSavedAddresses ? Promise.resolve(cachedSavedAddresses) : activeSavedAddressesRequest;
+      let shouldClearRequest = false;
+
+      if (!request) {
+        request = customerCommerceApi.getAddresses({ limit: 50 });
+        activeSavedAddressesRequest = request;
+        shouldClearRequest = true;
+      }
+
+      try {
+        const response = await request;
+        if (!cachedSavedAddresses) {
+          cachedSavedAddresses = response;
+        }
+
+        if (active) setSavedAddresses(response.data?.addresses || []);
+      } catch {
+        if (active) setSavedAddresses([]);
+      } finally {
+        if (shouldClearRequest && activeSavedAddressesRequest === request) {
+          activeSavedAddressesRequest = null;
+        }
+        if (active) setIsLoadingAddresses(false);
+      }
+    };
+
+    loadSavedAddresses();
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    let timer;
+    let active = true;
+
+    const loadSuggestions = async () => {
+      if (!active) return;
+
+      const query = `${streetAddress} ${city}`.trim();
+      if (query.length < 3) {
+        setAddressSuggestions([]);
+        return;
+      }
+
+      try {
+        const params = new URLSearchParams({
+          format: "jsonv2",
+          addressdetails: "1",
+          limit: "5",
+          countrycodes: "us",
+          q: query,
+        });
+        const response = await fetch(`https://nominatim.openstreetmap.org/search?${params}`, { signal: controller.signal });
+        if (!response.ok) throw new Error("Address lookup failed");
+        const results = await response.json();
+        if (active) setAddressSuggestions(Array.isArray(results) ? results : []);
+      } catch (error) {
+        if (active && error.name !== "AbortError") setAddressSuggestions([]);
+      }
+    };
+
+    timer = window.setTimeout(loadSuggestions, 350);
+
+    return () => {
+      active = false;
+      controller.abort();
+      window.clearTimeout(timer);
+    };
+  }, [streetAddress, city]);
+
+  // ─── AUTOMATIC PINCODE / ZIP CODE LOOKUP (FREE PUBLIC API) ───
+  useEffect(() => {
+    const cleanCode = pincode.trim();
+    if (!cleanCode || !/^\d{5,6}$/.test(cleanCode)) {
+      setPincodeMessage("");
+      return;
+    }
+
+    let active = true;
+    const controller = new AbortController();
+
+    const fetchPincodeDetails = async () => {
+      setIsFetchingPincode(true);
+      setPincodeMessage("Auto-fetching city & state...");
+
+      try {
+        let fetchedState = "";
+        let fetchedCity = "";
+
+        // 1. Try Indian 6-digit PIN code API
+        if (cleanCode.length === 6) {
+          try {
+            const res = await fetch(`https://api.postalpincode.in/pincode/${cleanCode}`, { signal: controller.signal });
+            if (res.ok) {
+              const data = await res.json();
+              if (Array.isArray(data) && data[0]?.Status === "Success" && data[0]?.PostOffice?.length > 0) {
+                const po = data[0].PostOffice[0];
+                fetchedState = po.State || "";
+                fetchedCity = po.District || po.Block || po.Name || "";
+              }
+            }
+          } catch (e) {}
+        }
+
+        // 2. Try Zippopotam API (US 5-digit & India 6-digit)
+        if (!fetchedState) {
+          const country = cleanCode.length === 6 ? "in" : "us";
+          try {
+            const res = await fetch(`https://api.zippopotam.us/${country}/${cleanCode}`, { signal: controller.signal });
+            if (res.ok) {
+              const data = await res.json();
+              if (data.places && data.places.length > 0) {
+                fetchedState = data.places[0]["state"] || "";
+                fetchedCity = data.places[0]["place name"] || "";
+              }
+            }
+          } catch (e) {}
+        }
+
+        if (active) {
+          if (fetchedState) {
+            setState(fetchedState);
+            if (fetchedCity && (!city || city.trim() === "")) setCity(fetchedCity);
+            setPincodeMessage(`Auto-filled: ${fetchedCity ? fetchedCity + ", " : ""}${fetchedState}`);
+            setErrors((prev) => {
+              const next = { ...prev };
+              delete next.state;
+              delete next.pincode;
+              if (fetchedCity) delete next.city;
+              return next;
+            });
+          } else {
+            setPincodeMessage("");
+          }
+        }
+      } catch (err) {
+        if (active && err.name !== "AbortError") setPincodeMessage("");
+      } finally {
+        if (active) setIsFetchingPincode(false);
+      }
+    };
+
+    const timer = setTimeout(fetchPincodeDetails, 350);
+    return () => {
+      active = false;
+      controller.abort();
+      clearTimeout(timer);
+    };
+  }, [pincode]);
+
+  useEffect(() => {
+    if (sameAsShipping) return;
+    const cleanCode = billingPincode.trim();
+    if (!cleanCode || !/^\d{5,6}$/.test(cleanCode)) {
+      setBillingPincodeMessage("");
+      return;
+    }
+
+    let active = true;
+    const controller = new AbortController();
+
+    const fetchBillingPincodeDetails = async () => {
+      setIsFetchingBillingPincode(true);
+      setBillingPincodeMessage("Auto-fetching city & state...");
+
+      try {
+        let fetchedState = "";
+        let fetchedCity = "";
+
+        if (cleanCode.length === 6) {
+          try {
+            const res = await fetch(`https://api.postalpincode.in/pincode/${cleanCode}`, { signal: controller.signal });
+            if (res.ok) {
+              const data = await res.json();
+              if (Array.isArray(data) && data[0]?.Status === "Success" && data[0]?.PostOffice?.length > 0) {
+                const po = data[0].PostOffice[0];
+                fetchedState = po.State || "";
+                fetchedCity = po.District || po.Block || po.Name || "";
+              }
+            }
+          } catch (e) {}
+        }
+
+        if (!fetchedState) {
+          const country = cleanCode.length === 6 ? "in" : "us";
+          try {
+            const res = await fetch(`https://api.zippopotam.us/${country}/${cleanCode}`, { signal: controller.signal });
+            if (res.ok) {
+              const data = await res.json();
+              if (data.places && data.places.length > 0) {
+                fetchedState = data.places[0]["state"] || "";
+                fetchedCity = data.places[0]["place name"] || "";
+              }
+            }
+          } catch (e) {}
+        }
+
+        if (active) {
+          if (fetchedState) {
+            setBillingState(fetchedState);
+            if (fetchedCity && (!billingCity || billingCity.trim() === "")) setBillingCity(fetchedCity);
+            setBillingPincodeMessage(`Auto-filled: ${fetchedCity ? fetchedCity + ", " : ""}${fetchedState}`);
+            setErrors((prev) => {
+              const next = { ...prev };
+              delete next.billingPincode;
+              if (fetchedCity) delete next.billingCity;
+              return next;
+            });
+          } else {
+            setBillingPincodeMessage("");
+          }
+        }
+      } catch (err) {
+        if (active && err.name !== "AbortError") setBillingPincodeMessage("");
+      } finally {
+        if (active) setIsFetchingBillingPincode(false);
+      }
+    };
+
+    const timer = setTimeout(fetchBillingPincodeDetails, 350);
+    return () => {
+      active = false;
+      controller.abort();
+      clearTimeout(timer);
+    };
+  }, [billingPincode, sameAsShipping]);
+
+  const applySavedAddress = (addressId) => {
+    setSelectedSavedAddressId(addressId);
+    const address = savedAddresses.find((item) => String(item.id) === String(addressId));
+    if (!address) return;
+    setFullName(address.recipientName || "");
+    setPhone(address.phone || "");
+    setStreetAddress(address.street || "");
+    setCity(address.city || "");
+    setState(address.state || "");
+    setPincode(address.postalCode || "");
+    setErrors({});
+  };
+
+  const applyAddressSuggestion = (suggestion) => {
+    const details = suggestion.address || {};
+    const lineOne = [details.house_number, details.road || details.pedestrian || details.neighbourhood].filter(Boolean).join(" ") || suggestion.display_name.split(",")[0];
+    setStreetAddress(lineOne);
+    setCity(details.city || details.town || details.village || details.county || "");
+    setState(details.state || "");
+    setPincode(details.postcode || "");
+    setSelectedSavedAddressId("");
+    setAddressSuggestions([]);
+  };
 
   // ─── VALIDATION ───
   const validateField = (field, value) => {
@@ -140,8 +574,8 @@ const Checkout = () => {
         else delete newErrors.billingCity;
         break;
       case "billingPincode":
-        if (!sameAsShipping && (!value || !/^\d{5}(-\d{4})?$/.test(value))) {
-          newErrors.billingPincode = "Valid ZIP code is required";
+        if (!sameAsShipping && (!value || !/^\d{5,6}(-\d{4})?$/.test(value))) {
+          newErrors.billingPincode = "Valid ZIP/postal code is required";
         } else delete newErrors.billingPincode;
         break;
       default:
@@ -172,17 +606,27 @@ const Checkout = () => {
   };
 
   // ─── COUPON HANDLER ───
-  const handleApplyCoupon = () => {
+  const handleApplyCoupon = async () => {
     setCouponError("");
     if (!coupon.trim()) {
       setCouponError("Please enter a coupon code");
       return;
     }
-    if (coupons[coupon.toUpperCase()]) {
-      setAppliedCoupon(coupon.toUpperCase());
+    try {
+      const couponItems = (checkoutItem ? [{ ...checkoutItem, quantity: checkoutQuantity }] : cartItems).map((item) => ({
+        id: Number(item.productId ?? item.id) || undefined,
+        productId: Number(item.productId ?? item.id) || undefined,
+      }));
+      const response = await customerCommerceApi.validateCoupon({ code: coupon.trim(), subtotal, items: couponItems });
+      setAppliedCoupon({
+        code: response.data.coupon.code,
+        discountAmount: response.data.discountAmount,
+        description: response.data.coupon.description,
+        freeShipping: Boolean(response.data.coupon.freeShipping),
+      });
       setCoupon("");
-    } else {
-      setCouponError("Invalid coupon code");
+    } catch (error) {
+      setCouponError(error?.response?.data?.message || "Invalid coupon code");
     }
   };
 
@@ -211,19 +655,147 @@ const Checkout = () => {
     removeFromCart(item.id, item.selectedVariant?.weight || "1kg");
   };
 
+  const isPlaceholderStripePublishableKey = (key) =>
+    !key || /^(pk_test_replace_me|pk_live_replace_me)$/i.test(key);
+  const stripePublishableKey = (() => {
+    const envKey = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY;
+    if (envKey && !isPlaceholderStripePublishableKey(envKey)) return envKey;
+    if (backendStripePublishableKey && !isPlaceholderStripePublishableKey(backendStripePublishableKey)) return backendStripePublishableKey;
+    return "";
+  })();
+  const stripeJsConfigured = Boolean(stripePublishableKey && !isPlaceholderStripePublishableKey(stripePublishableKey));
+  const stripePromise = useMemo(() => {
+    if (!stripeJsConfigured || !stripeEnabled) return null;
+    return loadStripe(stripePublishableKey);
+  }, [stripeJsConfigured, stripePublishableKey, stripeEnabled]);
+
+  const stripeUnavailableMessage = !stripeEnabled || !stripeJsConfigured
+    ? "Online card payments are temporarily unavailable. Please contact support."
+    : "";
+
+  const [stripeClientSecret, setStripeClientSecret] = useState("");
+  const [stripeOrder, setStripeOrder] = useState(null);
+
+  useEffect(() => {
+    if (import.meta.env.DEV) {
+      const displayKey = stripePublishableKey
+        ? `${stripePublishableKey.slice(0, 8)}...${stripePublishableKey.slice(-8)}`
+        : "<missing>";
+      console.info("[EZStore] Stripe publishable key loaded:", displayKey);
+      console.info("[EZStore] Stripe configured:", stripeJsConfigured);
+    }
+  }, [stripePublishableKey, stripeJsConfigured]);
+
+  const getBackendStripeError = (error) => {
+    const response = error?.response?.data;
+    const code = response?.meta?.code;
+    // Map server error codes to customer-friendly messages
+    if (code === "STRIPE_NOT_CONFIGURED" || code === "STRIPE_AUTH_ERROR" || code === "STRIPE_CONFIGURATION_ERROR" || code === "PAYMENT_UNAVAILABLE") {
+      return "Online card payments are temporarily unavailable. Please try again later.";
+    }
+    return response?.message || error?.message || "Unable to place order. Please try again later.";
+  };
+
+  const pendingCheckoutKey = "ezstore_pending_checkout";
+  const savePendingCheckout = (checkoutData) => {
+    try {
+      window.localStorage.setItem(pendingCheckoutKey, JSON.stringify(checkoutData));
+    } catch {
+      // Ignore storage failures.
+    }
+  };
+  const loadPendingCheckout = () => {
+    try {
+      const raw = window.localStorage.getItem(pendingCheckoutKey);
+      if (!raw) return null;
+      return JSON.parse(raw);
+    } catch {
+      return null;
+    }
+  };
+  const clearPendingCheckout = () => {
+    try {
+      window.localStorage.removeItem(pendingCheckoutKey);
+    } catch {
+      // Ignore storage failures.
+    }
+  };
+
+  const persistOrderForSuccess = (order) => {
+    try {
+      window.localStorage.setItem(
+        `ezstore_recent_order_${order.orderNumber}`,
+        JSON.stringify({ orderId: order.id, orderNumber: order.orderNumber, order })
+      );
+    } catch {
+      // Ignore storage failures.
+    }
+  };
+
+  useEffect(() => {
+    const restorePending = () => {
+      try {
+        const pending = loadPendingCheckout();
+        if (pending?.clientSecret && pending?.order) {
+          setStripeClientSecret(pending.clientSecret);
+          setStripeOrder(pending.order);
+          setCurrentStep(4);
+        }
+      } catch {
+        // Ignore failures restoring pending checkout state.
+      }
+    };
+
+    restorePending();
+  }, []);
+
+  const handleProceedToPayment = () => {
+    const valid = validateCheckoutDetails();
+    if (!valid) {
+      setPaymentError("Please complete the address details before continuing to payment.");
+      return;
+    }
+
+    if (!items.length || !Number.isFinite(total) || Number(total) <= 0) {
+      setPaymentError("Your cart must contain at least one item with a valid total.");
+      return;
+    }
+
+    setCurrentStep(3);
+  };
+
   const handlePlaceOrder = async () => {
+    if (isPlacingOrderRef.current) {
+      console.warn("[EZStore] Duplicate place order invocation prevented");
+      return;
+    }
+
+    console.info("[EZStore] handlePlaceOrder invoked", { agreeTerms, currentStep });
+    setPaymentError("");
     if (!agreeTerms) {
-      alert("Please accept terms and conditions");
+      console.info("[EZStore] handlePlaceOrder aborted: agreeTerms not accepted");
+      setPaymentError("Please accept terms and conditions before confirming order.");
       return;
     }
 
     if (!validateCheckoutDetails()) {
+      setPaymentError("Please complete address details before confirming order.");
       setCurrentStep(1);
       return;
     }
 
-    if (!items.length || !Number.isFinite(Number(total)) || Number(total) <= 0) {
-      alert("Your cart must contain at least one item with a valid total.");
+    if (!items.length || !Number.isFinite(total) || Number(total) <= 0) {
+      setPaymentError("Your cart must contain at least one item with a valid total.");
+      return;
+    }
+
+    if (!stripeJsConfigured) {
+      setPaymentError("Online card payments are temporarily unavailable. Please try again later.");
+      return;
+    }
+
+    if (!stripeEnabled) {
+      setPaymentError("Online card payments are temporarily unavailable. Please try again later.");
       return;
     }
 
@@ -235,70 +807,106 @@ const Checkout = () => {
       city,
       state,
       postalCode: pincode,
-      country: "United States",
+      country: pincode.trim().length === 6 ? "India" : "United States",
     };
 
     const payload = {
       customerEmail: email.trim(),
+      customerName: fullName.trim(),
+      customerPhone: phone,
       items: items.map((item) => ({
-        id: item.id,
-        name: item.name,
+        id: Number(item.productId ?? item.id) || undefined,
+        productSlug: item.productSlug || item.slug || undefined,
+        productName: item.name,
         quantity: item.quantity,
         price: item.selectedVariant?.price ?? item.price,
+        selectedVariant: item.selectedVariant || undefined,
       })),
       totalAmount: Number(total),
       shippingAddress,
+      paymentMethod: "stripe",
+      currency: "USD",
+      metadata: {
+        deliveryMethod: selectedDelivery,
+        deliveryInstruction: selectedDeliveryInstruction,
+        coupon: appliedCoupon?.code || null,
+      },
+      couponCode: appliedCoupon?.code || undefined,
     };
 
+    isPlacingOrderRef.current = true;
+    setIsPlacingOrder(true);
+    setPaymentError("");
+
     try {
-      await customerCommerceApi.createOrder(payload);
-      clearCart();
-      navigate("/order-success");
+      const idempotencyKey = window.crypto?.randomUUID?.() || `${Date.now()}-${Math.random()}`;
+      console.info("[EZStore] Sending Payment Request", { idempotencyKey, payload: { items: payload.items.length, total: payload.totalAmount, paymentMethod: payload.paymentMethod } });
+      const response = await customerCommerceApi.createOrder(payload, idempotencyKey);
+
+      if (response?.success === false && response?.meta?.code === "CART_UPDATED") {
+        const warnings = Array.isArray(response?.warnings)
+          ? response.warnings
+          : Array.isArray(response?.data?.warnings)
+          ? response.data.warnings
+          : [];
+        const message = warnings.length > 0 ? warnings.join(" ") : "Your cart was updated before checkout.";
+
+        if (response?.data?.cart?.items) {
+          const normalizedItems = response.data.cart.items.map((item) => ({
+            ...item,
+            id: Number(item.productId ?? item.id) || item.id,
+            productId: Number(item.productId ?? item.id) || item.productId || item.id,
+            name: item.productName ?? item.name ?? "Product",
+            productName: item.productName ?? item.name ?? "Product",
+            price: Number(item.unitPrice ?? item.price ?? 0),
+            unitPrice: Number(item.unitPrice ?? item.price ?? 0),
+            image: item.productImage ?? item.image ?? null,
+            productImage: item.productImage ?? item.image ?? null,
+            selectedVariant: item.selectedVariant || item.variant || undefined,
+            quantity: Number(item.quantity ?? 1),
+            productSlug: item.productSlug ?? item.slug ?? undefined,
+          }));
+
+          setUpdatedCartItems(normalizedItems);
+        }
+
+        if (typeof refreshCart === "function") {
+          refreshCart().catch(() => {
+            // refresh is best-effort; local checkout state already updated
+          });
+        }
+
+        setPaymentError(message);
+        return;
+      }
+
+      console.info("[EZStore] Payment Response received", { status: response?.status || null, dataSummary: { orderId: response?.data?.order?.id, paymentProvider: response?.data?.payment?.provider } });
+      const order = response.data.order;
+      const stripeData = response.data.stripe;
+
+      // Persist order for the success page flow
+      persistOrderForSuccess(order);
+
+      if (!stripeData?.clientSecret) {
+        throw new Error("Unable to initiate Stripe payment. Please try again later.");
+      }
+
+      setStripeClientSecret(stripeData.clientSecret);
+      setStripeOrder(order);
+      savePendingCheckout({ clientSecret: stripeData.clientSecret, order });
+      return;
     } catch (error) {
-      const message = error.response?.data?.message || "Unable to place order. Please try again later.";
-      alert(message);
+      const isNetworkError = String(error?.message || "").toLowerCase().includes("network error");
+      const message = isNetworkError
+        ? "Unable to reach the backend. Make sure the backend is running on http://localhost:5000 and refresh the page."
+        : getBackendStripeError(error);
+      setPaymentError(message);
       console.error("Order placement error:", error);
+    } finally {
+      isPlacingOrderRef.current = false;
+      setIsPlacingOrder(false);
     }
   };
-
-  const paymentMethods = [
-    {
-      id: "card",
-      name: "Credit / Debit Card",
-      icon: cardIcon,
-      details: "Visa, MasterCard, American Express",
-    },
-    {
-      id: "gpay",
-      name: "Google Pay",
-      icon: gpayIcon,
-      details: "Pay with Google Pay",
-    },
-    {
-      id: "apple",
-      name: "Apple Pay",
-      icon: appleIcon,
-      details: "Pay with Apple Pay",
-    },
-    {
-      id: "paypal",
-      name: "PayPal",
-      icon: paypalIcon,
-      details: "Pay using your PayPal account",
-    },
-    {
-      id: "bank",
-      name: "Bank Transfer",
-      icon: netBankingIcon,
-      details: "Direct bank transfer",
-    },
-    {
-      id: "cod",
-      name: "Cash on Delivery",
-      icon: codIcon,
-      details: "Pay when you receive your order",
-    },
-  ];
 
   // ─── STEP VALIDATION ───
   return (
@@ -370,7 +978,27 @@ const Checkout = () => {
 
                 {/* Shipping Address */}
                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                  <h3 className="font-semibold text-gray-800 mb-4">Shipping Address</h3>
+                  <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+                    <h3 className="font-semibold text-gray-800">Shipping Address</h3>
+                    {isLoadingAddresses && <span className="text-xs text-gray-500">Loading saved addresses…</span>}
+                  </div>
+                  {savedAddresses.length > 0 && (
+                    <div className="mb-5">
+                      <label className="text-xs font-semibold text-gray-700">Use a saved address</label>
+                      <select
+                        value={selectedSavedAddressId}
+                        onChange={(event) => applySavedAddress(event.target.value)}
+                        className="mt-1 w-full rounded-lg border border-gray-300 p-3 text-sm"
+                      >
+                        <option value="">Enter a new address</option>
+                        {savedAddresses.map((address) => (
+                          <option key={address.id} value={address.id}>
+                            {address.isDefault ? "Default — " : ""}{address.label || "Address"}: {address.street}, {address.city}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )}
                   <div className="space-y-3">
                     <div>
                       <label className="text-xs font-semibold text-gray-700">Full Name *</label>
@@ -385,17 +1013,35 @@ const Checkout = () => {
                         <p className="text-xs text-red-500 mt-1">{errors.fullName}</p>
                       )}
                     </div>
-                    <div>
+                    <div className="relative">
                       <label className="text-xs font-semibold text-gray-700">
                         Street Address *
                       </label>
                       <input
                         value={streetAddress}
-                        onChange={(e) => setStreetAddress(e.target.value)}
+                        onChange={(e) => {
+                          setStreetAddress(e.target.value);
+                          setSelectedSavedAddressId("");
+                        }}
                         onBlur={() => validateField("streetAddress", streetAddress)}
                         className={`w-full border rounded-lg p-3 text-sm mt-1 ${errors.streetAddress ? "border-red-500" : "border-gray-300"}`}
                         placeholder="123 Oak Street"
+                        autoComplete="street-address"
                       />
+                      {addressSuggestions.length > 0 && (
+                        <div className="absolute z-20 mt-1 max-h-56 w-full overflow-y-auto rounded-lg border border-gray-200 bg-white shadow-lg">
+                          {addressSuggestions.map((suggestion) => (
+                            <button
+                              key={suggestion.place_id}
+                              type="button"
+                              onClick={() => applyAddressSuggestion(suggestion)}
+                              className="block w-full border-b border-gray-100 px-3 py-2 text-left text-sm text-gray-700 last:border-b-0 hover:bg-green-50"
+                            >
+                              {suggestion.display_name}
+                            </button>
+                          ))}
+                        </div>
+                      )}
                       {errors.streetAddress && (
                         <p className="text-xs text-red-500 mt-1">{errors.streetAddress}</p>
                       )}
@@ -425,59 +1071,32 @@ const Checkout = () => {
                       </div>
                       <div>
                         <label className="text-xs font-semibold text-gray-700">State *</label>
-                        <select
+                        <input
                           value={state}
                           onChange={(e) => setState(e.target.value)}
                           onBlur={() => validateField("state", state)}
                           className={`w-full border rounded-lg p-3 text-sm mt-1 ${errors.state ? "border-red-500" : "border-gray-300"}`}
-                        >
-                          <option value="">Select State</option>
-                          <option>Andhra Pradesh</option>
-                          <option>Arunachal Pradesh</option>
-                          <option>Assam</option>
-                          <option>Bihar</option>
-                          <option>Chhattisgarh</option>
-                          <option>Goa</option>
-                          <option>Gujarat</option>
-                          <option>Haryana</option>
-                          <option>Himachal Pradesh</option>
-                          <option>Jharkhand</option>
-                          <option>Karnataka</option>
-                          <option>Kerala</option>
-                          <option>Madhya Pradesh</option>
-                          <option>Maharashtra</option>
-                          <option>Manipur</option>
-                          <option>Meghalaya</option>
-                          <option>Mizoram</option>
-                          <option>Nagaland</option>
-                          <option>Odisha</option>
-                          <option>Punjab</option>
-                          <option>Rajasthan</option>
-                          <option>Sikkim</option>
-                          <option>Tamil Nadu</option>
-                          <option>Telangana</option>
-                          <option>Tripura</option>
-                          <option>Uttar Pradesh</option>
-                          <option>Uttarakhand</option>
-                          <option>West Bengal</option>
-                          <option>Andaman and Nicobar Islands</option>
-                          <option>Chandigarh</option>
-                          <option>Delhi</option>
-                          <option>Jammu and Kashmir</option>
-                          <option>Ladakh</option>
-                          <option>Puducherry</option>
-                        </select>
+                          placeholder="State"
+                        />
                         {errors.state && <p className="text-xs text-red-500 mt-1">{errors.state}</p>}
                       </div>
                       <div>
-                        <label className="text-xs font-semibold text-gray-700">ZIP Code *</label>
-                        <input
-                          value={pincode}
-                          onChange={(e) => setPincode(e.target.value)}
-                          onBlur={() => validateField("pincode", pincode)}
-                          className={`w-full border rounded-lg p-3 text-sm mt-1 ${errors.pincode ? "border-red-500" : "border-gray-300"}`}
-                          placeholder="10001"
-                        />
+                        <label className="text-xs font-semibold text-gray-700">ZIP / Pincode *</label>
+                        <div className="relative">
+                          <input
+                            value={pincode}
+                            onChange={(e) => setPincode(e.target.value)}
+                            onBlur={() => validateField("pincode", pincode)}
+                            className={`w-full border rounded-lg p-3 text-sm mt-1 ${errors.pincode ? "border-red-500" : "border-gray-300"}`}
+                            placeholder="10001 or 500072"
+                          />
+                          {isFetchingPincode && (
+                            <span className="absolute right-3 top-3 text-xs text-orange-500 font-medium animate-pulse">Fetching...</span>
+                          )}
+                        </div>
+                        {pincodeMessage && !errors.pincode && (
+                          <p className="text-xs text-emerald-600 font-medium mt-1">{pincodeMessage}</p>
+                        )}
                         {errors.pincode && (
                           <p className="text-xs text-red-500 mt-1">{errors.pincode}</p>
                         )}
@@ -549,13 +1168,21 @@ const Checkout = () => {
                           />
                         </div>
                         <div>
-                          <input
-                            placeholder="Pincode"
-                            className={`w-full border rounded-lg p-4 sm:p-3 text-sm ${errors.billingPincode ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-green-500`}
-                            value={billingPincode}
-                            onChange={(e) => setBillingPincode(e.target.value)}
-                            onBlur={() => validateField("billingPincode", billingPincode)}
-                          />
+                          <div className="relative">
+                            <input
+                              placeholder="Pincode"
+                              className={`w-full border rounded-lg p-4 sm:p-3 text-sm ${errors.billingPincode ? "border-red-500" : "border-gray-300"} focus:outline-none focus:border-green-500`}
+                              value={billingPincode}
+                              onChange={(e) => setBillingPincode(e.target.value)}
+                              onBlur={() => validateField("billingPincode", billingPincode)}
+                            />
+                            {isFetchingBillingPincode && (
+                              <span className="absolute right-3 top-3 text-xs text-orange-500 font-medium animate-pulse">Fetching...</span>
+                            )}
+                          </div>
+                          {billingPincodeMessage && !errors.billingPincode && (
+                            <p className="text-xs text-emerald-600 font-medium mt-1">{billingPincodeMessage}</p>
+                          )}
                           {errors.billingPincode && (
                             <p className="text-xs text-red-500 mt-2">{errors.billingPincode}</p>
                           )}
@@ -667,7 +1294,7 @@ const Checkout = () => {
                 </div>
 
                 <button
-                  onClick={() => setCurrentStep(3)}
+                  onClick={handleProceedToPayment}
                   className="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600"
                 >
                   Continue to Payment
@@ -679,45 +1306,25 @@ const Checkout = () => {
             {currentStep === 3 && (
               <>
                 <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                  <h3 className="font-semibold text-gray-800 mb-4">Payment Method</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    {paymentMethods.map((method) => (
-                      <label
-                        key={method.id}
-                        className={`flex items-center gap-3 border-2 rounded-lg p-4 cursor-pointer transition-all ${
-                          selectedPayment === method.id
-                            ? "border-green-500 bg-green-50"
-                            : "border-gray-200 hover:border-green-300"
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name="payment"
-                          checked={selectedPayment === method.id}
-                          onChange={() => setSelectedPayment(method.id)}
-                        />
-                        <img
-                          src={method.icon}
-                          alt={method.name}
-                          className="w-10 h-10 object-contain"
-                          loading="lazy"
-                        />
-                        <div className="flex-1">
-                          <div className="font-semibold text-sm">{method.name}</div>
-                          <div className="text-xs text-gray-500">{method.details}</div>
+                  <h3 className="font-semibold text-gray-800 mb-4">Stripe Payment</h3>
+                  <div className="flex flex-col gap-4 rounded-xl border border-gray-200 bg-white p-6">
+                    <div className="flex items-center gap-4">
+                      <img src={cardIcon} alt="Stripe" className="w-12 h-12 object-contain" />
+                      <div>
+                        <div className="font-semibold text-sm">Secure online payment with Stripe</div>
+                        <div className="text-xs text-gray-500">
+                          All card and wallet payments are handled securely by Stripe.
                         </div>
-                      </label>
-                    ))}
-                  </div>
-                  {!selectedPayment && (
-                    <p className="text-xs text-red-500 mt-3">Please select a payment method</p>
-                  )}
-                  <div className="mt-4 bg-gradient-to-r from-green-50 to-teal-50 border border-green-200 rounded-lg p-3">
-                    <div className="font-semibold text-green-800 text-sm">
-                      🔒 100% Secure Payment Gateway
+                      </div>
                     </div>
-                    <div className="text-xs text-green-700 mt-1">
-                      256-bit SSL encrypted. PCI DSS Compliant.
+                    <div className="text-sm text-gray-600">
+                      Secure Stripe payment. Your card is charged only after your order is confirmed.
+                    </div>
+                    <div className="bg-linear-to-r from-green-50 to-teal-50 border border-green-200 rounded-lg p-3">
+                      <div className="font-semibold text-green-800 text-sm">🔒 100% Secure Payment</div>
+                      <div className="text-xs text-green-700 mt-1">
+                        PCI DSS compliant and encrypted with Stripe.
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -742,13 +1349,10 @@ const Checkout = () => {
                         </button>
                       </div>
                       {couponError && <p className="text-xs text-red-500">{couponError}</p>}
-                      <div className="text-xs text-gray-500">
-                        Available: WELCOME10, SAVE20, FREESHIP
-                      </div>
                     </div>
                   ) : (
                     <div className="bg-green-50 border border-green-300 rounded-lg p-3 text-center">
-                      <div className="font-bold text-green-800">{appliedCoupon} Applied! ✓</div>
+                      <div className="font-bold text-green-800">{appliedCoupon.code} Applied! ✓</div>
                       <div className="text-sm text-green-700">You saved ${discount}</div>
                       <button
                         onClick={() => {
@@ -786,12 +1390,88 @@ const Checkout = () => {
                   </div>
                 </div>
 
-                <button
-                  onClick={() => setCurrentStep(4)}
-                  className="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600"
-                >
-                  Confirm Order
-                </button>
+                {(paymentError || stripeUnavailableMessage) && (
+                  <div className="mb-4 bg-red-50 border border-red-200 text-red-700 rounded-lg p-3 text-sm">
+                    {paymentError || stripeUnavailableMessage}
+                  </div>
+                )}
+
+                <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                  <h4 className="font-semibold mb-3">Payment Method</h4>
+                  <div className="space-y-3">
+                    <button
+                      type="button"
+                      onClick={stripeEnabled ? handleProceedToPayment : undefined}
+                      className={`w-full text-left flex items-center gap-3 rounded-2xl border p-4 transition ${
+                        stripeEnabled ? "border-gray-200 bg-slate-50 hover:bg-slate-100" : "border-gray-200 bg-gray-100 cursor-not-allowed"
+                      }`}
+                      disabled={!stripeEnabled}
+                    >
+                      <img src={cardIcon} alt="card" className="w-6 h-6" />
+                      <div className="flex flex-col">
+                        <span className="font-medium">Credit / Debit Card (Stripe)</span>
+                        {!stripeEnabled ? (
+                          <span className="text-xs text-orange-600">Temporarily unavailable</span>
+                        ) : (
+                          <span className="text-xs text-slate-500">Secure Stripe payments</span>
+                        )}
+                      </div>
+                    </button>
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={agreeTerms}
+                      onChange={() => setAgreeTerms(!agreeTerms)}
+                      className="mt-1"
+                    />
+                    <div className="flex-1 text-sm">
+                      I agree to the <button onClick={() => setShowTermsModal(true)} className="text-green-600 underline">Terms of Service</button> and <button onClick={() => setShowTermsModal(true)} className="text-green-600 underline">Privacy Policy</button>
+                    </div>
+                  </label>
+                </div>
+
+                {!stripeClientSecret ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      console.info("[EZStore] Confirm Order clicked", { agreeTerms, isPlacingOrder });
+                      handlePlaceOrder();
+                    }}
+                    disabled={!agreeTerms || isPlacingOrder}
+                    className="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isPlacingOrder ? "Processing order..." : "Confirm Order"}
+                  </button>
+                ) : null}
+                {stripeClientSecret && stripeOrder ? (
+                  <div className="mt-6">
+                    <div className="mb-4 rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-800">
+                      Your order is created. Complete the Stripe payment below.
+                    </div>
+                    <Elements stripe={stripePromise} options={{ clientSecret: stripeClientSecret }}>
+                      <PaymentSection
+                        order={stripeOrder}
+                        error={paymentError}
+                        onError={setPaymentError}
+                        clearCart={clearCart}
+                        persistOrder={persistOrderForSuccess}
+                        clearPendingCheckout={clearPendingCheckout}
+                        navigate={navigate}
+                        onSuccess={() => {
+                          clearCart();
+                          clearPendingCheckout();
+                          if (stripeOrder?.orderNumber) {
+                            navigate(`/order-success?orderNumber=${encodeURIComponent(stripeOrder.orderNumber)}`);
+                          }
+                        }}
+                      />
+                    </Elements>
+                  </div>
+                ) : null}
               </>
             )}
 
@@ -817,9 +1497,7 @@ const Checkout = () => {
                     </div>
                     <div className="pb-3 border-b border-gray-200">
                       <div className="font-semibold text-gray-700">Payment Method</div>
-                      <div className="text-gray-600">
-                        {paymentMethods.find((m) => m.id === selectedPayment)?.name}
-                      </div>
+                      <div className="text-gray-600">Stripe secure online payment</div>
                     </div>
                     <div className="pb-3 border-b border-gray-200">
                       <div className="font-semibold text-gray-700">Delivery Instructions</div>
@@ -835,53 +1513,35 @@ const Checkout = () => {
                       <div className="pb-3 border-b border-gray-200">
                         <div className="font-semibold text-gray-700">Coupon Applied</div>
                         <div className="text-green-600">
-                          {appliedCoupon} - Save ${discount}
+                          {appliedCoupon.code} - Save ${discount}
                         </div>
                       </div>
                     )}
                   </div>
                 </div>
 
-                {/* Terms & Conditions */}
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={agreeTerms}
-                      onChange={() => setAgreeTerms(!agreeTerms)}
-                      className="mt-1"
-                    />
-                    <div className="flex-1">
-                      <span className="text-sm">I agree to the </span>
-                      <button
-                        onClick={() => setShowTermsModal(true)}
-                        className="text-green-600 underline"
-                      >
-                        Terms of Service
-                      </button>
-                      <span className="text-sm"> and </span>
-                      <button
-                        onClick={() => setShowTermsModal(true)}
-                        className="text-green-600 underline"
-                      >
-                        Privacy Policy
-                      </button>
-                    </div>
-                  </label>
-                  {!agreeTerms && (
-                    <p className="text-xs text-red-500 mt-3">
-                      Please accept the terms and conditions
-                    </p>
-                  )}
-                </div>
+                {(paymentError || stripeUnavailableMessage) && (
+                  <div className="mb-4 bg-red-50 border border-red-200 text-red-700 rounded-lg p-3 text-sm">
+                    {paymentError || stripeUnavailableMessage}
+                  </div>
+                )}
 
-                <button
-                  onClick={handlePlaceOrder}
-                  disabled={!agreeTerms}
-                  className="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-4 rounded-lg font-bold hover:from-green-600 hover:to-green-700 disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  Place the Order
-                </button>
+                <div className="mt-6 space-y-4">
+                  <div className="rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-800">
+                    Your payment is confirmed and your order is now complete.
+                  </div>
+                  {stripeOrder?.orderNumber ? (
+                    <button
+                      type="button"
+                      onClick={() =>
+                        navigate(`/order-success?orderNumber=${encodeURIComponent(stripeOrder.orderNumber)}`)
+                      }
+                      className="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600"
+                    >
+                      View Order Details
+                    </button>
+                  ) : null}
+                </div>
               </>
             )}
           </div>
@@ -892,15 +1552,24 @@ const Checkout = () => {
               <h2 className="text-lg font-bold text-gray-800 mb-4">Order Summary</h2>
 
               {/* Items */}
-              <div className="space-y-3 border-b border-gray-200 pb-4 max-h-96 overflow-y-auto">
+              <div className="space-y-3 border-b border-gray-200 pb-4">
                 {items && items.length > 0 ? (
-                  items.map((item, idx) => (
+                  items.map((item, idx) => {
+                    const productForImage = getCatalogProduct(item) || item;
+                    const imageSrc = resolveProductImage(productForImage);
+                    const fallbackSrc = resolveProductImageFallback(productForImage);
+
+                    return (
                     <div key={idx} className="flex items-start gap-3">
                       <img
-                        src={item.image}
+                        src={imageSrc}
                         alt={item.name}
                         className="w-16 h-16 object-contain rounded"
                         loading="lazy"
+                        onError={(event) => {
+                          event.currentTarget.onerror = null;
+                          event.currentTarget.src = fallbackSrc;
+                        }}
                       />
                       <div className="flex-1">
                         <div className="font-semibold text-sm">{item.name}</div>
@@ -931,7 +1600,8 @@ const Checkout = () => {
                         </button>
                       </div>
                     </div>
-                  ))
+                    );
+                  })
                 ) : (
                   <div className="text-center text-gray-500 py-4">No items in cart</div>
                 )}
@@ -955,7 +1625,7 @@ const Checkout = () => {
                 </div>
                 {appliedCoupon && (
                   <div className="flex justify-between text-green-600 font-semibold">
-                    <span>Discount ({appliedCoupon})</span>
+                    <span>Discount ({appliedCoupon.code})</span>
                     <span>-${discount}</span>
                   </div>
                 )}
@@ -973,7 +1643,7 @@ const Checkout = () => {
                   <img
                     src={secureBadge}
                     alt="Secure"
-                    className="w-8 h-8 flex-shrink-0"
+                    className="w-8 h-8 shrink-0"
                     loading="lazy"
                   />
                   <div>
@@ -985,7 +1655,7 @@ const Checkout = () => {
                   <img
                     src={easyReturnsBadge}
                     alt="Returns"
-                    className="w-8 h-8 flex-shrink-0"
+                    className="w-8 h-8 shrink-0"
                     loading="lazy"
                   />
                   <div>
@@ -997,7 +1667,7 @@ const Checkout = () => {
                   <img
                     src={fastDeliveryBadge}
                     alt="Delivery"
-                    className="w-8 h-8 flex-shrink-0"
+                    className="w-8 h-8 shrink-0"
                     loading="lazy"
                   />
                   <div>

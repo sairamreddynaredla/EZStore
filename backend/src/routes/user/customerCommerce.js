@@ -11,6 +11,7 @@ import {
   listSavedItems,
   listWishlistItems,
   removeCartItem,
+  removeWishlistItem,
   upsertCartItem,
   upsertRecentlyViewedItem,
   upsertSavedItem,
@@ -18,11 +19,13 @@ import {
   updateCartItemQuantity,
 } from "../../services/user/customerCommerceService.js";
 import { z } from "zod";
+import couponService from "../../services/shared/couponService.js";
 
 const router = express.Router();
 
 const cartItemSchema = z.object({
   productId: z.coerce.number().int().positive("Product ID is required").optional(),
+  wishlistItemId: z.coerce.number().int().positive("Wishlist item ID is required").optional(),
   productSlug: z.string().trim().min(1).optional(),
   productName: z.string().trim().min(1, "Product name is required").optional(),
   productImage: z.string().trim().optional().or(z.literal("")).nullable(),
@@ -32,16 +35,21 @@ const cartItemSchema = z.object({
   variantKey: z.string().trim().optional().or(z.literal("")),
   selectedVariant: z.any().optional(),
 }).superRefine((data, ctx) => {
-  if (!data.productId && (!data.productSlug || !data.productSlug.trim())) {
+  if (!data.productId && !data.wishlistItemId && (!data.productSlug || !data.productSlug.trim())) {
     ctx.addIssue({
       code: z.ZodIssueCode.custom,
-      message: "Either productId or productSlug is required",
+      message: "Either productId, wishlistItemId or productSlug is required",
       path: ["productId"],
     });
   }
 });
 
 const quantitySchema = z.object({ quantity: z.coerce.number().int().min(1, "Quantity must be at least 1") });
+const couponValidationSchema = z.object({
+  code: z.string().trim().min(1, "Coupon code is required"),
+  subtotal: z.coerce.number().nonnegative(),
+  items: z.array(z.object({ id: z.coerce.number().int().positive().optional(), productId: z.coerce.number().int().positive().optional() })).default([]),
+});
 const reviewSchema = z.object({
   productId: z.coerce.number().int().positive("Product ID is required"),
   rating: z.coerce.number().int().min(1).max(5),
@@ -53,6 +61,23 @@ router.get("/cart", jwtAuth, async (req, res, next) => {
   try {
     const items = await listCartItems(req.user.id);
     return sendSuccess(res, { items }, { message: "Cart loaded" });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+router.post("/coupons/validate", jwtAuth, validateRequest({ body: couponValidationSchema }), async (req, res, next) => {
+  try {
+    const result = await couponService.validateAndComputeCoupon({
+      code: req.body.code,
+      customerId: req.user.id,
+      subtotal: req.body.subtotal,
+      items: req.body.items,
+    });
+    return sendSuccess(res, {
+      coupon: { code: result.coupon.code, description: result.coupon.description, freeShipping: result.coupon.freeShipping },
+      discountAmount: result.discountAmount,
+    }, { message: "Coupon applied" });
   } catch (error) {
     return next(error);
   }
@@ -107,6 +132,15 @@ router.post("/wishlist", jwtAuth, validateRequest(cartItemSchema), async (req, r
   try {
     const result = await toggleWishlistItem(req.user.id, req.body);
     return sendSuccess(res, { result }, { message: result.action === "added" ? "Added to wishlist" : "Removed from wishlist" });
+  } catch (error) {
+    return next(error);
+  }
+});
+
+router.delete("/wishlist/:wishlistItemId", jwtAuth, validateRequest({ params: z.object({ wishlistItemId: z.coerce.number().int().positive("Wishlist item ID is required") }) }), async (req, res, next) => {
+  try {
+    const result = await removeWishlistItem(req.user.id, req.params.wishlistItemId);
+    return sendSuccess(res, { result }, { message: "Wishlist item removed" });
   } catch (error) {
     return next(error);
   }

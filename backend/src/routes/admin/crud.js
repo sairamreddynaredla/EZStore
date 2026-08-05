@@ -38,20 +38,22 @@ import {
   settingsUpdateSchema,
 } from "../../validators/admin.js";
 import {
-  createCoupon,
-  deleteCoupon,
   deleteReview,
-  getCoupon,
-  getCoupons,
   getOrder,
   getOrders,
   getReviews,
   getSettings,
-  updateCoupon,
   updateOrderStatus,
   updateReviewStatus,
   updateSettings,
 } from "./adminStore.js";
+import {
+  createCoupon,
+  deleteCoupon,
+  getCoupon,
+  getCoupons,
+  updateCoupon,
+} from "../../services/admin/couponAdminService.js";
 import {
   addOrderNote,
   buildOrderDocuments,
@@ -166,13 +168,16 @@ router.put(
         // Emit price update event to all connected clients
         try {
           const socket = getSocket();
-          socket.emit(`product:priceUpdate:${updated.id}`, {
+          const payload = {
             productId: updated.id,
             price: updated.price,
             originalPrice: updated.originalPrice || updated.price,
             stock: updated.stock,
             updatedAt: new Date(),
-          });
+          };
+          socket.emit(`product:priceUpdate:${updated.id}`, payload);
+          // Also emit a generic product update event so admin clients can listen
+          socket.emit("product:update", { product: payload });
         } catch (socketError) {
           console.error("Socket emit error:", socketError);
         }
@@ -187,13 +192,15 @@ router.put(
       if (req.body.price !== undefined) {
         try {
           const socket = getSocket();
-          socket.emit(`product:priceUpdate:${updated.id}`, {
+          const payload = {
             productId: updated.id,
             price: updated.price,
             originalPrice: updated.originalPrice || updated.price,
             stock: updated.stock,
             updatedAt: new Date(),
-          });
+          };
+          socket.emit(`product:priceUpdate:${updated.id}`, payload);
+          socket.emit("product:update", { product: payload });
         } catch (socketError) {
           console.error("Socket emit error:", socketError);
         }
@@ -422,25 +429,32 @@ router.put("/customers/:customerId/status", jwtAuth, requireAdmin, validateReque
   }
 });
 
-router.get("/coupons", jwtAuth, requireAdmin, validateRequest({ query: couponListQuerySchema }), (req, res) => { sendSuccess(res, getCoupons(req.query), { message: "Coupons loaded" }); });
-router.get("/coupons/:couponId", jwtAuth, requireAdmin, validateRequest({ params: couponIdParamSchema }), (req, res) => {
-  const coupon = getCoupon(req.params.couponId);
-  if (!coupon) return sendError(res, "Coupon not found", { status: 404 });
-  return sendSuccess(res, coupon, { message: "Coupon loaded" });
+router.get("/coupons", jwtAuth, requireAdmin, validateRequest({ query: couponListQuerySchema }), async (req, res, next) => {
+  try { return sendSuccess(res, await getCoupons(req.query), { message: "Coupons loaded" }); } catch (error) { return next(error); }
 });
-router.post("/coupons", jwtAuth, requireAdmin, validateRequest({ body: couponCreateSchema }), (req, res) => {
-  const coupon = createCoupon(req.body);
-  return sendSuccess(res, coupon, { message: "Coupon created", status: 201 });
+router.get("/coupons/:couponId", jwtAuth, requireAdmin, validateRequest({ params: couponIdParamSchema }), async (req, res, next) => {
+  try {
+    const coupon = await getCoupon(req.params.couponId);
+    if (!coupon) return sendError(res, "Coupon not found", { status: 404 });
+    return sendSuccess(res, coupon, { message: "Coupon loaded" });
+  } catch (error) { return next(error); }
 });
-router.put("/coupons/:couponId", jwtAuth, requireAdmin, validateRequest({ params: couponIdParamSchema, body: couponUpdateSchema }), (req, res) => {
-  const updated = updateCoupon(req.params.couponId, req.body);
-  if (!updated) return sendError(res, "Coupon not found", { status: 404 });
-  return sendSuccess(res, updated, { message: "Coupon updated" });
+router.post("/coupons", jwtAuth, requireAdmin, validateRequest({ body: couponCreateSchema }), async (req, res, next) => {
+  try { return sendSuccess(res, await createCoupon(req.body), { message: "Coupon created", status: 201 }); } catch (error) { return next(error); }
 });
-router.delete("/coupons/:couponId", jwtAuth, requireAdmin, validateRequest({ params: couponIdParamSchema }), (req, res) => {
-  const deleted = deleteCoupon(req.params.couponId);
-  if (!deleted) return sendError(res, "Coupon not found", { status: 404 });
-  return sendSuccess(res, { deleted }, { message: "Coupon deleted" });
+router.put("/coupons/:couponId", jwtAuth, requireAdmin, validateRequest({ params: couponIdParamSchema, body: couponUpdateSchema }), async (req, res, next) => {
+  try {
+    const updated = await updateCoupon(req.params.couponId, req.body);
+    if (!updated) return sendError(res, "Coupon not found", { status: 404 });
+    return sendSuccess(res, updated, { message: "Coupon updated" });
+  } catch (error) { return next(error); }
+});
+router.delete("/coupons/:couponId", jwtAuth, requireAdmin, validateRequest({ params: couponIdParamSchema }), async (req, res, next) => {
+  try {
+    const deleted = await deleteCoupon(req.params.couponId);
+    if (!deleted) return sendError(res, "Coupon not found", { status: 404 });
+    return sendSuccess(res, { deleted: true }, { message: "Coupon deleted" });
+  } catch (error) { return next(error); }
 });
 
 router.get("/reviews", jwtAuth, requireAdmin, validateRequest({ query: reviewListQuerySchema }), (req, res) => { sendSuccess(res, getReviews(req.query), { message: "Reviews loaded" }); });

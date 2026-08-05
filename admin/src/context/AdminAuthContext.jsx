@@ -66,6 +66,8 @@ export const AdminAuthProvider = ({ children }) => {
       return cleanup;
     }
 
+    const fallbackUser = safeStorage.get(ADMIN_USER_KEY);
+
     adminApi
       .get("/auth/me")
       .then((response) => {
@@ -78,7 +80,19 @@ export const AdminAuthProvider = ({ children }) => {
       })
       .catch(() => {
         if (!isActive) return;
-        logoutHandler();
+
+        if (fallbackUser) {
+          try {
+            const parsedUser = JSON.parse(fallbackUser);
+            if (parsedUser) {
+              setUser(parsedUser);
+            }
+          } catch {
+            // Ignore malformed stored user data.
+          }
+        } else {
+          logoutHandler();
+        }
       })
       .finally(() => {
         if (!isActive) return;

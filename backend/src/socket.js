@@ -23,6 +23,12 @@ export const initSocket = (server, corsOptions = {}) => {
         socket.join(`customer_${customerId}`);
       }
     });
+
+    socket.on("joinOrderRoom", (orderId) => {
+      if (orderId) {
+        socket.join(`order_${orderId}`);
+      }
+    });
   });
 
   return io;

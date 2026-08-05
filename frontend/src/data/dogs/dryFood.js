@@ -5,88 +5,9 @@ import royalCaninImg from "../../assets/products/dogs/dry-food/royal-canin-maxi-
 import purinaImg from "../../assets/products/dogs/dry-food/purina-pro-plan-complete-essentials-adult-dry-dog-food.webp";
 import farminaImg from "../../assets/products/dogs/dry-food/farmina-nd-chicken-pomegranate-adult-medium-maxi-dry-dog-food.webp";
 import applodImg from "../../assets/Applod Dry  Chicken & Veg.jpg";
-import carniwelImg from "../../assets/Carniwel_Chicken_Small_Breed_Dogs_Puppy_Food_.webp";
 // acanaImg removed
 
 export const dogsDryFood = [
-  {
-    id: 102,
-    name: "Royal Canin Maxi Adult Dry Dog Food",
-    brand: "Royal Canin",
-    category: "dogs-dry-food",
-    subCategory: "dry-food",
-    pet: "Dog",
-    petType: "Dog",
-    productCategory: "Dog Food",
-    productType: "Dry Food",
-    breedSize: "Large",
-    shopByBreed: "Large",
-    flavor: "Chicken",
-    lifeStage: "Adult",
-    specialDiet: "High Protein",
-    vegType: "Non-Veg",
-    size: "Large",
-
-    rating: 4.8,
-    reviews: 142,
-    soldCount: 428,
-    stock: 18,
-
-    fastDelivery: true,
-    isNew: false,
-    deliveryDate: "Tomorrow",
-
-    image: royalCaninImg,
-
-    images: [royalCaninImg, royalCaninImg, royalCaninImg, royalCaninImg],
-
-    description: "Complete and balanced nutrition specially formulated for large breed adult dogs.",
-
-    ingredients: ["Chicken Meal", "Rice", "Corn", "Animal Fat", "Fish Oil", "Vitamins", "Minerals"],
-
-    features: [
-      "Supports healthy digestion",
-      "Strong bone support",
-      "Healthy skin",
-      "Ideal weight maintenance",
-    ],
-
-    nutrition: {
-      protein: "26%",
-      fat: "17%",
-      fiber: "3%",
-      moisture: "10%",
-    },
-
-    manufacturer: "Royal Canin",
-
-    country: "France",
-
-    weight: ["4lb", "15lb", "30lb"],
-
-    variants: [
-      {
-        weight: "4lb",
-        price: 24.99,
-        originalPrice: 32.99,
-      },
-      {
-        weight: "15lb",
-        price: 64.99,
-        originalPrice: 79.99,
-      },
-      {
-        weight: "30lb",
-        price: 109.99,
-        originalPrice: 129.99,
-      },
-    ],
-
-    subscriptionEligible: true,
-    subscriptionDiscount: 0.1,
-
-    relatedProducts: [103, 104],
-  },
 
   {
     id: 103,
@@ -291,38 +212,5 @@ export const dogsDryFood = [
     relatedProducts: [102, 103],
   },
 
-  // Sample product for Carniwel (emerging)
-  {
-    id: 107,
-    name: "Carniwel Puppy Growth Formula",
-    brand: "Carniwel",
-    category: "dogs-dry-food",
-    subCategory: "dry-food",
-    pet: "Dog",
-    petType: "Puppy",
-    productCategory: "Dog Food",
-    productType: "Dry Food",
-    breedSize: "Small",
-    flavor: "Chicken",
-    lifeStage: "Puppy",
-
-    rating: 4.6,
-    reviews: 20,
-    soldCount: 50,
-    stock: 15,
-
-    fastDelivery: true,
-    isNew: true,
-    deliveryDate: "Tomorrow",
-
-    image: carniwelImg,
-    images: [carniwelImg],
-
-    description: "Carniwel growth formula to support healthy puppy development.",
-
-    variants: [{ weight: "2lb", price: 12.99, originalPrice: 15.99 }],
-
-    subscriptionEligible: false,
-    relatedProducts: [102],
-  },
+  
 ];

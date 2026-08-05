@@ -6,6 +6,7 @@ import PageHeader from "../components/PageHeader";
 import SearchBar from "../components/SearchBar";
 import FilterGroup from "../components/FilterGroup";
 import Pagination from "../components/Pagination";
+import Select from "../components/common/Select";
 import TableShell from "../components/TableShell";
 
 const STATUS_LABELS = {
@@ -121,20 +122,15 @@ const ReviewsPage = () => {
         />
 
         <FilterGroup label="Review status">
-          <select
+          <Select
             value={statusFilter}
-            onChange={(event) => {
-              setStatusFilter(event.target.value);
+            onValueChange={(value) => {
+              setStatusFilter(value);
               setCurrentPage(1);
             }}
-            className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-          >
-            {STATUS_FILTERS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+            options={STATUS_FILTERS}
+            placeholder="All reviews"
+          />
         </FilterGroup>
       </div>
     </section>

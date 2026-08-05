@@ -22,10 +22,15 @@ const CategoryProducts = lazy(() => import("./layouts/pages/CategoryProducts"));
 const Brands = lazy(() => import("./layouts/pages/Brands"));
 const ForgotPassword = lazy(() => import("./layouts/pages/ForgotPassword"));
 const ResetPassword = lazy(() => import("./layouts/pages/ResetPassword"));
+const GoogleAuthCallback = lazy(() => import("./layouts/pages/GoogleAuthCallback"));
 const Account = lazy(() => import("./layouts/pages/Account"));
 const ChangePassword = lazy(() => import("./layouts/pages/ChangePassword"));
 const Orders = lazy(() => import("./layouts/pages/Orders"));
 const Addresses = lazy(() => import("./layouts/pages/Addresses"));
+const PaymentSuccess = lazy(() => import("./layouts/pages/PaymentSuccess"));
+const PaymentFailed = lazy(() => import("./layouts/pages/PaymentFailed"));
+const PaymentHistory = lazy(() => import("./layouts/pages/PaymentHistory"));
+const InvoiceReceipt = lazy(() => import("./layouts/pages/InvoiceReceipt"));
 const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
 
 import { ToastProvider } from "./context/toast-context";
@@ -87,6 +92,7 @@ const App = () => {
               {/* CUSTOMER AUTH */}
               <Route path="/forgot-password" element={<ForgotPassword />} />
               <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/auth/google/callback" element={<GoogleAuthCallback />} />
               <Route path="/account" element={<ProtectedRoute><Account /></ProtectedRoute>} />
               <Route path="/change-password" element={<ProtectedRoute><ChangePassword /></ProtectedRoute>} />
               <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
@@ -121,9 +127,13 @@ const App = () => {
 
               <Route path="/order-success" element={<OrderSuccess />} />
 
-              {/* CHECKOUT */}
-
+              {/* CHECKOUT & PAYMENTS */}
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/payment" element={<Navigate to="/checkout" replace />} />
+              <Route path="/payment/success" element={<PaymentSuccess />} />
+              <Route path="/payment/failed" element={<PaymentFailed />} />
+              <Route path="/payment/history" element={<ProtectedRoute><PaymentHistory /></ProtectedRoute>} />
+              <Route path="/payment/invoice/:orderId" element={<ProtectedRoute><InvoiceReceipt /></ProtectedRoute>} />
 
 
               <Route path="*" element={<Navigate to="/" replace />} />

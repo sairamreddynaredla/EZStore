@@ -5,68 +5,6 @@ import fancyFeastWetImg from "../../assets/products/cats/wet-food/fancy-feast-gr
 import purinaWetImg from "../../assets/products/cats/wet-food/purina-pro-plan-adult-wet-cat-food.webp";
 
 export const catWetFood = [
-  {
-    id: 1901,
-    name: "Royal Canin Instinctive Adult Wet Cat Food",
-    brand: "Royal Canin",
-    category: "cats-wet-food",
-    subCategory: "wet-food",
-    pet: "Cat",
-    petType: "Cat",
-    productCategory: "Cat Food",
-    productType: "Wet Food",
-    flavor: "Chicken",
-    lifeStage: "Adult",
-    specialDiet: "Complete Nutrition",
-    vegType: "Non-Veg",
-
-    rating: 4.9,
-    reviews: 342,
-    soldCount: 1284,
-    stock: 46,
-
-    fastDelivery: true,
-    isNew: false,
-    deliveryDate: "Tomorrow",
-
-    image: royalCaninWetImg,
-
-    images: [royalCaninWetImg, royalCaninWetImg, royalCaninWetImg, royalCaninWetImg],
-
-    description:
-      "Premium wet cat food formulated to match the nutritional profile preferred by adult cats.",
-
-    ingredients: ["Chicken", "Meat Derivatives", "Fish Oil", "Vitamins", "Minerals"],
-
-    features: [
-      "High moisture content",
-      "Complete nutrition",
-      "Healthy digestion",
-      "Highly palatable",
-    ],
-
-    nutrition: {
-      protein: "12%",
-      fat: "4%",
-      fiber: "1.5%",
-      moisture: "82%",
-    },
-
-    manufacturer: "Royal Canin",
-    country: "France",
-
-    weight: ["0.2lb", "12 x 0.2lb"],
-
-    variants: [
-      { weight: "0.2lb", price: 1.99, originalPrice: 2.49 },
-      { weight: "12 x 0.2lb", price: 19.99, originalPrice: 24.99 },
-    ],
-
-    subscriptionEligible: true,
-    subscriptionDiscount: 0.1,
-
-    relatedProducts: [1902, 1903, 1904],
-  },
 
   {
     id: 1902,

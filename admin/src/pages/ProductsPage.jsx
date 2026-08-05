@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import {
   createProduct,
   deleteProduct,
@@ -8,6 +9,9 @@ import {
 } from "../services/productService";
 import ProductFormModal from "../components/ProductFormModal";
 import PageHeader from "../components/PageHeader";
+import Select from "../components/common/Select";
+import { resolveAdminProductImage, getAdminImageCandidates } from "../utils/productImage";
+import { initSocket, subscribeToProductUpdates } from "../services/socket";
 
 const STATUS_MAP = {
   active: "Active",
@@ -61,9 +65,46 @@ const ProductsPage = () => {
     }
   };
 
+  // Accept optional overrides to fetch a specific page immediately
+  const loadProductsImmediate = async (overrides = {}) => {
+    setLoading(true);
+    setError("");
+    try {
+      const params = {
+        ...queryParams,
+        ...(overrides.page !== undefined ? { page: overrides.page } : {}),
+        ...(overrides.limit !== undefined ? { limit: overrides.limit } : {}),
+      };
+      const result = await getProducts(params);
+      setProducts(result.items);
+      setTotalItems(result.total);
+      setCurrentPage(result.page);
+      setPageSize(result.pageSize);
+    } catch (fetchError) {
+      setError("Unable to load products. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     loadProducts();
   }, [queryParams]);
+
+  useEffect(() => {
+    // init socket and subscribe to product updates
+    initSocket();
+    const unsub = subscribeToProductUpdates((payload) => {
+      try {
+        const updated = payload?.product || payload;
+        if (!updated || !updated.productId) return;
+        setProducts((prev) => prev.map((p) => (p.id === updated.productId ? { ...p, ...updated } : p)));
+      } catch (e) {
+        // ignore
+      }
+    });
+    return () => unsub && unsub();
+  }, []);
 
   const openCreateModal = () => {
     setEditingProduct(null);
@@ -99,7 +140,8 @@ const ProductsPage = () => {
       closeModal();
       await loadProducts();
     } catch (saveError) {
-      setFormError("Failed to save product. Please review the values and try again.");
+      const message = saveError?.response?.data?.message || saveError?.message || "Failed to save product. Please review the values and try again.";
+      setFormError(message);
     } finally {
       setSaving(false);
     }
@@ -151,40 +193,32 @@ const ProductsPage = () => {
               className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
             />
           </label>
-          <label className="space-y-2">
-            <span className="text-sm font-medium text-slate-700">Status</span>
-            <select
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-            >
-              <option value="">All statuses</option>
-              {Object.entries(STATUS_MAP).map(([value, label]) => (
-                <option key={value} value={value}>
-                  {label}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="space-y-2">
-            <span className="text-sm font-medium text-slate-700">Sort</span>
-            <select
-              value={`${sortBy}:${sortOrder}`}
-              onChange={(e) => {
-                const [field, order] = e.target.value.split(":");
-                setSortBy(field);
-                setSortOrder(order);
-              }}
-              className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-            >
-              <option value="title:asc">Name A → Z</option>
-              <option value="title:desc">Name Z → A</option>
-              <option value="price:asc">Price low → high</option>
-              <option value="price:desc">Price high → low</option>
-              <option value="stock:asc">Stock low → high</option>
-              <option value="stock:desc">Stock high → low</option>
-            </select>
-          </label>
+          <Select
+            label="Status"
+            value={statusFilter}
+            onValueChange={(value) => setStatusFilter(value)}
+            options={[
+              { value: "", label: "All statuses" },
+              ...Object.entries(STATUS_MAP).map(([value, label]) => ({ value, label }))
+            ]}
+          />
+          <Select
+            label="Sort"
+            value={`${sortBy}:${sortOrder}`}
+            onValueChange={(value) => {
+              const [field, order] = value.split(":");
+              setSortBy(field);
+              setSortOrder(order);
+            }}
+            options={[
+              { value: "title:asc", label: "Name A → Z" },
+              { value: "title:desc", label: "Name Z → A" },
+              { value: "price:asc", label: "Price low → high" },
+              { value: "price:desc", label: "Price high → low" },
+              { value: "stock:asc", label: "Stock low → high" },
+              { value: "stock:desc", label: "Stock high → low" }
+            ]}
+          />
         </div>
       </div>
       </section>
@@ -221,13 +255,44 @@ const ProductsPage = () => {
                 <tr key={product.id} className="border-t border-slate-100 hover:bg-slate-50">
                   <td className="px-5 py-4 align-top">
                     <div className="flex items-center gap-3">
-                      <div className="h-16 w-16 overflow-hidden rounded-2xl bg-slate-100">
-                        <img
-                          src={product.image || product.imageUrl || product.images?.[0] || "https://via.placeholder.com/80"}
-                          alt={product.title || product.name}
-                          className="h-full w-full object-cover"
-                        />
-                      </div>
+                        <div className="h-16 w-16 overflow-hidden rounded-2xl bg-slate-100">
+                          {(() => {
+                            const src = resolveAdminProductImage(product);
+                            const candidates = getAdminImageCandidates(product) || [];
+                            if (!src) {
+                              return <div className="h-full w-full bg-slate-100" />;
+                            }
+
+                            return (
+                              <img
+                                src={src}
+                                alt={product.title || product.name}
+                                className="h-full w-full object-cover"
+                                data-image-candidates={JSON.stringify(candidates)}
+                                data-image-index={0}
+                                onError={(event) => {
+                                  try {
+                                    event.currentTarget.onerror = null;
+                                    const raw = event.currentTarget.getAttribute("data-image-candidates");
+                                    const idxAttr = event.currentTarget.getAttribute("data-image-index");
+                                    const candidatesList = raw ? JSON.parse(raw) : [];
+                                    const idx = idxAttr ? Number(idxAttr) : 0;
+                                    const next = (idx || 0) + 1;
+                                    if (candidatesList && next < candidatesList.length) {
+                                      event.currentTarget.setAttribute("data-image-index", String(next));
+                                      event.currentTarget.src = candidatesList[next];
+                                    } else {
+                                      // No more candidates — hide image element (no placeholder)
+                                      try { event.currentTarget.style.display = 'none'; } catch(e){}
+                                    }
+                                  } catch (err) {
+                                    try { event.currentTarget.style.display = 'none'; } catch(e){}
+                                  }
+                                }}
+                              />
+                            );
+                          })()}
+                        </div>
                       <div>
                         <p className="font-semibold text-slate-900">{product.title || product.name}</p>
                         <p className="text-xs text-slate-500 line-clamp-2">{product.description}</p>
@@ -274,24 +339,24 @@ const ProductsPage = () => {
         <div className="flex flex-wrap items-center gap-3">
           <label className="flex items-center gap-2 text-sm text-slate-600">
             Show
-            <select
-              value={pageSize}
-              onChange={(e) => setPageSize(Number(e.target.value))}
-              className="rounded-2xl border border-neutral-border bg-slate-50 px-3 py-2 focus:border-primary-500 focus:outline-none"
-            >
-              {PAGE_SIZE_OPTIONS.map((size) => (
-                <option key={size} value={size}>
-                  {size}
-                </option>
-              ))}
-            </select>
+            <Select
+              value={String(pageSize)}
+              onValueChange={(value) => setPageSize(Number(value))}
+              options={PAGE_SIZE_OPTIONS.map((size) => ({ value: String(size), label: String(size) }))}
+              className="h-11 w-24"
+              placeholder="Page size"
+            />
             per page
           </label>
           <div className="flex items-center gap-2">
             <button
               type="button"
               disabled={currentPage <= 1}
-              onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
+              onClick={async () => {
+                const newPage = Math.max(1, currentPage - 1);
+                setCurrentPage(newPage);
+                await loadProductsImmediate({ page: newPage });
+              }}
               className="rounded-2xl border border-neutral-border bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
               Previous
@@ -299,7 +364,11 @@ const ProductsPage = () => {
             <button
               type="button"
               disabled={currentPage >= totalPages}
-              onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
+              onClick={async () => {
+                const newPage = Math.min(totalPages, currentPage + 1);
+                setCurrentPage(newPage);
+                await loadProductsImmediate({ page: newPage });
+              }}
               className="rounded-2xl border border-neutral-border bg-slate-50 px-4 py-2 text-sm font-semibold text-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
               Next

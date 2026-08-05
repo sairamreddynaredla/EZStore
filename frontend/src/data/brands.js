@@ -1,12 +1,6 @@
 // Brand data extracted from products
 export const brands = [
-  {
-    id: 1,
-    name: "Royal Canin",
-    logo: "royal-canin",
-    slug: "royal-canin",
-    featured: true,
-  },
+  
   {
     id: 2,
     name: "Pedigree",
@@ -147,12 +141,7 @@ export const brands = [
     logo: "applod",
     slug: "applod",
   },
-  {
-    id: 24,
-    name: "Carniwel",
-    logo: "carniwel",
-    slug: "carniwel",
-  },
+  
 ];
 
 // Get featured brands for carousel

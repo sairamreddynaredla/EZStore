@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import { brands } from "../../data/brands";
 import SEO from "../../components/SEO";
+import api from "../../services/api";
 
 import royalCaninLogo from "../../assets/brands/royal-canin.webp";
 import purinaLogo from "../../assets/brands/purina.webp";
@@ -50,11 +51,34 @@ const logoMap = {
   ezstore: ezstoreLogo,
 };
 
+const getBrandLogoSrc = (brand) =>
+  logoMap[brand.logo] || banners[brand.logo] || banners[String(brand.logo || "").replace(/-/g, "")] || null;
+
 const BrandsPage = () => {
   const [search, setSearch] = useState("");
   const [selectedLetter, setSelectedLetter] = useState("All");
+  const [databaseBrands, setDatabaseBrands] = useState([]);
 
-  const allBrands = useMemo(() => [...brands].sort((a, b) => a.name.localeCompare(b.name)), []);
+  useEffect(() => {
+    let active = true;
+    api.get("/brands")
+      .then((response) => {
+        const items = response?.data?.data?.items;
+        if (active && Array.isArray(items)) {
+          setDatabaseBrands(items.map((brand) => ({ ...brand, logo: brand.slug, featured: false, hidden: false })));
+        }
+      })
+      .catch(() => {
+        // The bundled list remains available if the public API is offline.
+      });
+    return () => { active = false; };
+  }, []);
+
+  const allBrands = useMemo(() => {
+    const merged = new Map(brands.map((brand) => [brand.slug, brand]));
+    databaseBrands.forEach((brand) => merged.set(brand.slug, { ...merged.get(brand.slug), ...brand }));
+    return [...merged.values()].sort((a, b) => a.name.localeCompare(b.name));
+  }, [databaseBrands]);
 
   const letters = useMemo(
     () => [
@@ -129,17 +153,11 @@ const BrandsPage = () => {
                         to={`/brands/${brand.slug}`}
                         className="flex items-center gap-3 rounded-2xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-700 hover:border-[#1F6B52] hover:bg-[#F5FBF6] transition"
                       >
-                        <img
-                          src={
-                            logoMap[brand.logo] ||
-                            banners[brand.logo] ||
-                            banners[String(brand.logo).replace(/-/g, "")] ||
-                            royalCaninLogo
-                          }
-                          alt={brand.name}
-                          className="h-8 w-8 object-contain"
-                          loading="lazy"
-                        />
+                        {getBrandLogoSrc(brand) ? (
+                          <img src={getBrandLogoSrc(brand)} alt={brand.name} className="h-8 w-8 object-contain" loading="lazy" />
+                        ) : (
+                          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#E8F3EC] font-semibold text-[#1F6B52]">{brand.name.charAt(0)}</span>
+                        )}
                         <span>{brand.name}</span>
                       </Link>
                     ))}
@@ -163,17 +181,11 @@ const BrandsPage = () => {
                   aria-label={brand.name}
                 >
                   <div className="w-full h-40 flex items-center justify-center bg-white">
-                    <img
-                      src={logoMap[brand.logo] || banners[brand.logo] || null}
-                      alt={brand.name}
-                      className="max-h-32 max-w-full object-contain"
-                      loading="lazy"
-                      onError={(e) => {
-                        console.log("FAILED:", brand.name);
-                        console.log("LOGO:", brand.logo);
-                        console.log("SRC:", e.currentTarget.src);
-                      }}
-                    />
+                    {getBrandLogoSrc(brand) ? (
+                      <img src={getBrandLogoSrc(brand)} alt={brand.name} className="max-h-32 max-w-full object-contain" loading="lazy" />
+                    ) : (
+                      <span className="text-5xl font-bold text-[#1F6B52]">{brand.name.charAt(0)}</span>
+                    )}
                   </div>
                 </Link>
               ))}

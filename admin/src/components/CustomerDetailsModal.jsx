@@ -1,9 +1,18 @@
+import AdminDialog from "./common/Dialog";
 import Badge from "./Badge";
 
 const currencyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
 });
+
+const ORDER_STATUS_LABELS = {
+  returned: "Returned",
+  refund_requested: "Refund Requested",
+  refund_approved: "Refund Approved",
+  refund_completed: "Refund Completed",
+  refunded: "Refunded",
+};
 
 const CustomerDetailsModal = ({
   visible,
@@ -18,14 +27,26 @@ const CustomerDetailsModal = ({
 
   const name = customer?.name || `${customer?.firstName || ""} ${customer?.lastName || ""}`.trim() || "Customer";
   const email = customer?.email || customer?.contactEmail || "—";
-  const phone = customer?.phone || customer?.contactPhone || "—";
+  const phone = customer?.phone || customer?.contactPhone || customer?.addresses?.[0]?.phone || "—";
   const status = customer?.status || (customer?.blocked ? "blocked" : "active") || "active";
   const totalOrders = customer?.totalOrders ?? customer?.orderCount ?? customer?.orders?.length ?? 0;
   const totalSpent = customer?.totalSpent ?? customer?.lifetimeValue ?? customer?.spending ?? 0;
   const wishlistCount = customer?.wishlistCount ?? customer?.wishlistItems?.length ?? 0;
   const registered = customer?.registeredAt || customer?.createdAt || "";
-  const lastLogin = customer?.lastLoginAt || customer?.lastLogin || "";
   const orderHistory = customer?.orders || customer?.orderHistory || [];
+  const returnOrders = orderHistory.filter((order) => {
+    const statusValue = order.orderStatus || order.status || "";
+    return statusValue === "returned";
+  }).length;
+  const refundRequests = orderHistory.filter((order) => {
+    const statusValue = order.orderStatus || order.status || "";
+    return statusValue === "refund_requested" || statusValue === "refund_approved";
+  }).length;
+  const refundsCompleted = orderHistory.filter((order) => {
+    const statusValue = order.orderStatus || order.status || "";
+    return statusValue === "refund_completed" || statusValue === "refunded";
+  }).length;
+  const lastLogin = customer?.lastLoginAt || customer?.lastLogin || "";
   const addresses = customer?.addresses || [];
   const wishlistItems = customer?.wishlistItems || [];
 
@@ -38,7 +59,10 @@ const CustomerDetailsModal = ({
             <h2 className="text-xl font-semibold text-slate-900">{name}</h2>
           </div>
           <div className="flex flex-wrap items-center gap-3">
-            <Badge label={status === "blocked" ? "Blocked" : "Active"} tone={status === "blocked" ? "danger" : "success"} />
+            <Badge
+              label={status === "blocked" ? "Blocked" : status === "abandoned" ? "Abandoned" : "Active"}
+              tone={status === "blocked" ? "danger" : status === "abandoned" ? "warning" : "success"}
+            />
             <button
               type="button"
               onClick={onClose}
@@ -61,7 +85,7 @@ const CustomerDetailsModal = ({
           <div className="mt-6 rounded-3xl border border-slate-200 bg-slate-50 p-6 text-sm text-slate-500">Customer details unavailable.</div>
         ) : (
           <div className="space-y-6">
-            <div className="grid gap-6 lg:grid-cols-[1fr_0.9fr]">
+            <div className="grid gap-6 lg:grid-cols-[1fr_1.15fr]">
               <section className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
                 <p className="text-sm text-slate-500">Profile</p>
                 <div className="mt-4 space-y-3 text-sm text-slate-700">
@@ -74,7 +98,7 @@ const CustomerDetailsModal = ({
               </section>
 
               <section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-                <div className="grid gap-4 sm:grid-cols-3">
+                <div className="grid gap-4 sm:grid-cols-4">
                   <div className="rounded-3xl bg-slate-50 p-4">
                     <p className="text-sm text-slate-500">Total orders</p>
                     <p className="mt-2 text-2xl font-semibold text-slate-900">{totalOrders}</p>
@@ -87,6 +111,14 @@ const CustomerDetailsModal = ({
                     <p className="text-sm text-slate-500">Wishlist items</p>
                     <p className="mt-2 text-2xl font-semibold text-slate-900">{wishlistCount}</p>
                   </div>
+                  <div className="rounded-3xl bg-slate-50 p-4">
+                    <p className="text-sm text-slate-500">Return / refund</p>
+                    <div className="mt-2 space-y-1 text-sm text-slate-700">
+                      <p className="break-words">Returned: {returnOrders}</p>
+                      <p className="break-words">Refund requests: {refundRequests}</p>
+                      <p className="break-words">Refunds complete: {refundsCompleted}</p>
+                    </div>
+                  </div>
                 </div>
                 <button
                   type="button"
@@ -94,7 +126,13 @@ const CustomerDetailsModal = ({
                   disabled={statusUpdating}
                   className="mt-6 w-full rounded-2xl bg-primary-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-primary-700 disabled:cursor-not-allowed disabled:bg-slate-300"
                 >
-                  {statusUpdating ? "Updating..." : status === "blocked" ? "Unblock customer" : "Block customer"}
+                  {statusUpdating
+                    ? "Updating..."
+                    : status === "blocked"
+                    ? "Unblock customer"
+                    : status === "abandoned"
+                    ? "Activate customer"
+                    : "Mark abandoned"}
                 </button>
               </section>
             </div>
@@ -127,8 +165,9 @@ const CustomerDetailsModal = ({
                       {orderHistory.map((order) => {
                         const orderId = order.orderId || order.id;
                         const amount = order.totalAmount ?? order.grandTotal ?? order.amount ?? 0;
-                        const date = order.orderDate || order.date || order.createdAt || "";
-                        const statusText = order.orderStatus || order.status || "—";
+                        const date = order.placedAt || order.orderDate || order.date || order.createdAt || "";
+                        const rawStatus = order.orderStatus || order.status || "";
+                        const statusText = ORDER_STATUS_LABELS[rawStatus] || rawStatus.replace(/_/g, " ") || "—";
 
                         return (
                           <tr key={orderId}>

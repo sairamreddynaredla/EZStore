@@ -6,62 +6,6 @@ import farminaKittenImg from "../../assets/products/cats/kitten-food/farmina-nd-
 
 export const kittenFood = [
   {
-    id: 1601,
-    name: "Royal Canin Kitten Dry Cat Food",
-    brand: "Royal Canin",
-    category: "cats-kitten-food",
-    subCategory: "kitten-food",
-    pet: "Cat",
-    petType: "Cat",
-    productCategory: "Kitten Food",
-    productType: "Dry Food",
-    flavor: "Chicken",
-    lifeStage: "Kitten",
-    specialDiet: "Growth Support",
-    vegType: "Non-Veg",
-
-    rating: 4.9,
-    reviews: 328,
-    soldCount: 1180,
-    stock: 42,
-
-    fastDelivery: true,
-    isNew: false,
-    deliveryDate: "Tomorrow",
-
-    image: royalCaninKittenImg,
-
-    images: [royalCaninKittenImg, royalCaninKittenImg, royalCaninKittenImg, royalCaninKittenImg],
-
-    description: "Complete nutrition specially formulated for growing kittens up to 12 months.",
-
-    ingredients: ["Chicken Meal", "Rice", "Corn", "Fish Oil", "Vitamins", "Minerals"],
-
-    features: ["Supports growth", "Immune support", "Healthy digestion", "Strong bones"],
-
-    nutrition: {
-      protein: "34%",
-      fat: "20%",
-      fiber: "3%",
-      moisture: "10%",
-    },
-
-    manufacturer: "Royal Canin",
-    country: "France",
-
-    weight: ["4lb", "8lb"],
-
-    variants: [
-      { weight: "4lb", price: 29.99, originalPrice: 36.99 },
-      { weight: "8lb", price: 54.99, originalPrice: 64.99 },
-    ],
-
-    subscriptionEligible: true,
-    subscriptionDiscount: 0.1,
-
-    relatedProducts: [1602, 1603, 1604],
-  },
-  {
     id: 1602,
     name: "Hill's Science Diet Kitten Cat Food",
     brand: "Hill's",

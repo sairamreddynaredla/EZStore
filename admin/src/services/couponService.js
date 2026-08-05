@@ -12,23 +12,23 @@ const normalizeListResponse = (response) => {
     };
   }
 
+  const meta = data?.meta || data?.pagination || {};
+
   if (data && Array.isArray(data.data)) {
-    const meta = data.meta || data.pagination || {};
     return {
       items: data.data,
       total: meta.total ?? data.data.length,
-      page: meta.page ?? meta.currentPage ?? 1,
-      pageSize: meta.pageSize ?? meta.limit ?? data.data.length,
+      page: data.page ?? meta.page ?? meta.currentPage ?? 1,
+      pageSize: data.pageSize ?? meta.pageSize ?? meta.limit ?? data.data.length,
     };
   }
 
   if (data && Array.isArray(data.items)) {
-    const meta = data.meta || data.pagination || {};
     return {
       items: data.items,
       total: meta.total ?? data.total ?? data.items.length,
-      page: meta.page ?? meta.currentPage ?? 1,
-      pageSize: meta.pageSize ?? meta.limit ?? data.items.length,
+      page: data.page ?? meta.page ?? meta.currentPage ?? 1,
+      pageSize: data.pageSize ?? meta.pageSize ?? meta.limit ?? data.items.length,
     };
   }
 
@@ -45,10 +45,12 @@ const buildPayload = (coupon) => {
     code: coupon.code?.trim(),
     description: coupon.description?.trim(),
     discount: Number(coupon.discount) || 0,
-    discountType: coupon.discountType,
-    shippingDiscount: !!coupon.shippingDiscount,
+    // The checkout API uses percent/fixed; older admin UI values are mapped
+    // here too so existing edit forms remain valid.
+    discountType: coupon.discountType === "percentage" ? "percent" : coupon.discountType === "amount" ? "fixed" : coupon.discountType,
+    freeShipping: !!coupon.shippingDiscount,
     usageLimit: coupon.usageLimit ? Number(coupon.usageLimit) : undefined,
-    expiresAt: coupon.expiresAt || null,
+    expiresAt: coupon.expiresAt || "",
     status: coupon.status,
   };
 

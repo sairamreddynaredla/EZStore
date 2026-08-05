@@ -36,6 +36,21 @@ const initialState = {
       images: [],
       createdAt: new Date().toISOString(),
     },
+    {
+      id: "prod-3",
+      title: "Dreamies Cheese Crunchy Cat Treats",
+      name: "Dreamies Cheese Crunchy Cat Treats",
+      description: "Crunchy cheese flavored cat treats with a delicious soft center.",
+      price: 12.99,
+      category: "Cat Treats",
+      brand: "Dreamies",
+      stock: 50,
+      status: "active",
+      tags: ["cat", "treats", "dreamies"],
+      imageUrl: "../../frontend/src/assets/products/cats/crunchy-treats/dreamies-cheese-crunchy-cat-treats.webp",
+      images: ["../../frontend/src/assets/products/cats/crunchy-treats/dreamies-cheese-crunchy-cat-treats.webp"],
+      createdAt: new Date().toISOString(),
+    },
   ],
   categories: [
     {
@@ -126,8 +141,7 @@ const initialState = {
     freeShippingThreshold: 75,
     flatShippingCharge: 4.99,
     estimatedDeliveryDays: 3,
-    paymentMethods: ["card", "paypal", "cash_on_delivery"],
-    cashOnDeliveryEnabled: true,
+    paymentMethods: ["card"],
     onlinePaymentEnabled: true,
     emailNotificationsEnabled: true,
     orderNotificationsEnabled: true,
@@ -501,6 +515,7 @@ export const createCoupon = (payload = {}) => {
     status: payload.status || "active",
     expiresAt: payload.expiresAt || null,
     usageLimit: payload.usageLimit ?? null,
+    freeShipping: Boolean(payload.freeShipping),
   };
   state.coupons.unshift(created);
   return created;

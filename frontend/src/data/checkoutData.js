@@ -60,22 +60,10 @@ export const PAYMENT_METHODS = [
     icon: "apple-pay",
   },
   {
-    id: "paypal",
-    name: "PayPal",
-    description: "Pay with PayPal",
-    icon: "paypal",
-  },
-  {
     id: "bank",
     name: "Bank Transfer",
     description: "Direct bank transfer",
     icon: "net banking",
-  },
-  {
-    id: "cod",
-    name: "Cash on Delivery",
-    description: "Pay when you receive",
-    icon: "cod",
   },
 ];
 

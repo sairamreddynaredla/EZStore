@@ -12,23 +12,23 @@ const normalizeListResponse = (response) => {
     };
   }
 
+  const meta = data?.meta || data?.pagination || {};
+
   if (data && Array.isArray(data.data)) {
-    const meta = data.meta || data.pagination || {};
     return {
       items: data.data,
       total: meta.total ?? data.data.length,
-      page: meta.page ?? meta.currentPage ?? 1,
-      pageSize: meta.pageSize ?? meta.limit ?? data.data.length,
+      page: data.page ?? meta.page ?? meta.currentPage ?? 1,
+      pageSize: data.pageSize ?? meta.pageSize ?? meta.limit ?? data.data.length,
     };
   }
 
   if (data && Array.isArray(data.items)) {
-    const meta = data.meta || data.pagination || {};
     return {
       items: data.items,
       total: meta.total ?? data.total ?? data.items.length,
-      page: meta.page ?? meta.currentPage ?? 1,
-      pageSize: meta.pageSize ?? meta.limit ?? data.items.length,
+      page: data.page ?? meta.page ?? meta.currentPage ?? 1,
+      pageSize: data.pageSize ?? meta.pageSize ?? meta.limit ?? data.items.length,
     };
   }
 
@@ -82,15 +82,13 @@ const buildPayload = (product) => {
 
 export const createProduct = async (payload) => {
   const body = buildPayload(payload);
-  const config = body instanceof FormData ? { headers: { "Content-Type": "multipart/form-data" } } : undefined;
-  const response = await adminApi.post("/products", body, config);
+  const response = await adminApi.post("/products", body);
   return response.data;
 };
 
 export const updateProduct = async (productId, payload) => {
   const body = buildPayload(payload);
-  const config = body instanceof FormData ? { headers: { "Content-Type": "multipart/form-data" } } : undefined;
-  const response = await adminApi.put(`/products/${productId}`, body, config);
+  const response = await adminApi.put(`/products/${productId}`, body);
   return response.data;
 };
 

@@ -32,20 +32,22 @@ const NAV_ITEMS = [
   { label: "Settings", to: "/admin/settings", icon: Settings2 },
 ];
 
-const SidebarLink = ({ to, label, Icon, onClick, showLabel }) => (
+const SidebarLink = ({ to, label, Icon, onClick, showLabel, collapsed }) => (
   <NavLink
     to={to}
     end={to === "/admin"}
     onClick={onClick}
     className={({ isActive }) =>
-      `group flex items-center gap-3 rounded-3xl px-4 py-3 text-sm font-medium transition ${
+      `group flex h-12 items-center gap-3 rounded-2xl py-3 text-base font-medium transition-colors duration-200 ${
+        collapsed ? "justify-center px-0" : "px-4"
+      } ${
         isActive
-          ? "bg-primary-600 text-white shadow-lg shadow-primary-500/20"
-          : "text-slate-300 hover:bg-slate-800 hover:text-white"
+          ? "bg-primary-600 text-white shadow-md shadow-primary-950/30"
+          : "text-slate-300 hover:bg-slate-800/80 hover:text-white"
       }`
     }
   >
-    <Icon className="h-4 w-4 shrink-0" />
+    <Icon className="h-5 w-5 shrink-0" />
     <span className={`transition ${showLabel ? "block" : "hidden"}`}>{label}</span>
   </NavLink>
 );
@@ -67,23 +69,21 @@ const AdminLayout = () => {
     <div className="relative min-h-screen bg-slate-50 text-slate-900">
       <div className="lg:flex lg:min-h-screen">
         <aside
-          className={`fixed inset-0 z-40 flex flex-col border-b border-slate-200 bg-slate-950 px-4 text-white shadow-sm transition duration-200 ease-out ${sidebarOpen ? "block h-screen w-full" : "hidden"} lg:fixed lg:left-0 lg:top-0 lg:block lg:h-screen lg:border-b-0 lg:border-r lg:border-slate-900/10 lg:overflow-y-auto ${
-            sidebarCollapsed ? "lg:w-20" : "lg:w-72"
+          className={`fixed inset-0 z-40 flex flex-col border-b border-slate-200 bg-slate-950 px-4 text-white shadow-sm transition duration-200 ease-out ${sidebarOpen ? "block h-screen w-full" : "hidden"} lg:fixed lg:left-0 lg:top-0 lg:block lg:h-screen lg:overflow-x-hidden lg:overflow-y-auto ${
+            sidebarCollapsed ? "lg:w-20 lg:px-2" : "lg:w-72"
           }`}
           aria-label="Admin sidebar"
         >
-          <div className="flex items-center justify-between gap-3 py-4 lg:py-0">
-            <div className="flex items-center gap-3">
-              <div className={`flex h-12 w-12 items-center justify-center rounded-3xl bg-primary-600 text-white ${sidebarCollapsed ? "mx-auto" : ""}`}>
-                <ShieldCheck size={20} />
-              </div>
-              <div className={`transition ${sidebarCollapsed ? "hidden" : "block"}`}>
-                <p className="text-sm uppercase tracking-[0.24em] text-slate-300">EZStore Admin</p>
-                <p className="text-base font-semibold text-white">Control Center</p>
+          <div className={`flex min-h-24 items-center justify-between gap-3 border-b border-slate-800/80 py-4 ${sidebarCollapsed ? "lg:justify-center" : ""}`}>
+            <div className="flex min-w-0 items-center">
+              <div className={`flex items-center justify-center ${sidebarCollapsed ? "h-11 w-11" : "h-auto w-48"}`}>
+                <span className={`text-white font-bold tracking-tight ${sidebarCollapsed ? "text-base" : "text-xl"}`}>
+                  {sidebarCollapsed ? "EZ" : "EZSTORE"}
+                </span>
               </div>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className={`flex items-center gap-2 ${sidebarCollapsed ? "lg:w-full lg:justify-center" : ""}`}>
               <button
                 type="button"
                 className="lg:hidden rounded-2xl border border-slate-700 p-3 text-slate-300 hover:bg-slate-800 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500"
@@ -96,19 +96,19 @@ const AdminLayout = () => {
               <button
                 type="button"
                 onClick={() => setSidebarCollapsed((value) => !value)}
-                className="hidden items-center gap-2 rounded-2xl border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-200 transition hover:bg-slate-800 lg:inline-flex"
+                aria-label={sidebarCollapsed ? "Expand sidebar" : "Collapse sidebar"}
+                className="hidden h-11 w-11 items-center justify-center rounded-2xl border border-slate-700 bg-slate-900 text-slate-200 transition hover:border-slate-600 hover:bg-slate-800 lg:inline-flex"
               >
                 {sidebarCollapsed ? <ChevronsRight size={16} /> : <ChevronsLeft size={16} />}
-                <span className={`${sidebarCollapsed ? "hidden" : "block"}`}>Collapse</span>
               </button>
             </div>
           </div>
 
           <nav
-            className={`overflow-y-auto transition-all ${sidebarOpen ? "block" : "hidden"} lg:block lg:mt-6`}
+            className={`overflow-y-auto transition-all ${sidebarOpen ? "block" : "hidden"} lg:block lg:mt-5`}
             aria-label="Primary admin navigation"
           >
-            <div className={`space-y-2 ${sidebarCollapsed ? "items-center" : "items-stretch"}`}>
+            <div className={`space-y-1.5 ${sidebarCollapsed ? "items-center" : "items-stretch"}`}>
               {NAV_ITEMS.map((item) => (
                 <SidebarLink
                   key={item.to}
@@ -117,6 +117,7 @@ const AdminLayout = () => {
                   Icon={item.icon}
                   onClick={() => setSidebarOpen(false)}
                   showLabel={showSidebarLabels}
+                  collapsed={sidebarCollapsed}
                 />
               ))}
             </div>
@@ -135,7 +136,6 @@ const AdminLayout = () => {
           <header className="sticky top-0 z-20 flex h-20 items-center justify-between border-b border-slate-200 bg-slate-50 px-4 shadow-sm shadow-slate-200/40 lg:hidden">
             <div>
               <p className="text-sm text-slate-500">EZStore Admin</p>
-              <p className="font-semibold text-slate-900">Control Center</p>
             </div>
             <button
               type="button"

@@ -4,36 +4,47 @@ import { useToast } from "../context/toast-context";
 import { getOrder, updateOrderStatus } from "../services/orderService";
 import Badge from "../components/Badge";
 import PageHeader from "../components/PageHeader";
+import Select from "../components/common/Select";
 
 const STATUS_LABELS = {
   pending: "Pending",
   confirmed: "Confirmed",
   processing: "Processing",
+  packed: "Packed",
   shipped: "Shipped",
+  out_for_delivery: "Out for Delivery",
   delivered: "Delivered",
   cancelled: "Cancelled",
-  refunded: "Refunded",
+  returned: "Returned",
+  refund_requested: "Refund Requested",
+  refund_completed: "Refund Completed",
 };
 
 const STATUS_TONES = {
   pending: "warning",
   confirmed: "info",
   processing: "info",
+  packed: "info",
   shipped: "info",
+  out_for_delivery: "info",
   delivered: "success",
   cancelled: "danger",
-  refunded: "danger",
+  returned: "warning",
+  refund_requested: "warning",
+  refund_completed: "danger",
 };
 
-const supportedStatuses = [
-  "pending",
-  "confirmed",
-  "processing",
-  "shipped",
-  "delivered",
-  "cancelled",
-  "refunded",
-];
+const ORDER_STATUS_TRANSITIONS = {
+  pending: ["confirmed", "cancelled"],
+  confirmed: ["processing", "cancelled"],
+  processing: ["packed", "cancelled"],
+  packed: ["shipped", "cancelled"],
+  shipped: ["out_for_delivery", "cancelled"],
+  out_for_delivery: ["delivered", "cancelled"],
+  delivered: ["returned", "refund_requested"],
+  returned: ["refund_requested"],
+  refund_requested: ["refund_completed"],
+};
 
 const OrderDetailsPage = () => {
   const { orderId } = useParams();
@@ -44,6 +55,8 @@ const OrderDetailsPage = () => {
   const [updating, setUpdating] = useState(false);
   const [selectedStatus, setSelectedStatus] = useState("");
   const [loadError, setLoadError] = useState("");
+  const currentStatus = order?.orderStatus || order?.status || "pending";
+  const availableStatuses = [currentStatus, ...(ORDER_STATUS_TRANSITIONS[currentStatus] || [])];
 
   useEffect(() => {
     const loadOrder = async () => {
@@ -90,7 +103,7 @@ const OrderDetailsPage = () => {
   const customer = order?.customer || {
     name: order?.customerName || "—",
     email: order?.customerEmail || order?.email || "—",
-    phone: order?.customerPhone || order?.phone || "—",
+    phone: order?.customerPhone || order?.customer?.phone || order?.shippingAddress?.phone || order?.phone || "—",
   };
 
   const shipping = order?.shippingAddress || order?.shipping || {};
@@ -171,20 +184,12 @@ const OrderDetailsPage = () => {
               <h3 className="text-lg font-semibold text-slate-900">Update status</h3>
               <p className="text-sm text-slate-500">Change the order fulfillment state and save the new status.</p>
               <div className="mt-5 space-y-4">
-                <label className="space-y-2">
-                  <span className="text-sm font-medium text-slate-700">New status</span>
-                  <select
-                    className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-                    value={selectedStatus}
-                    onChange={(event) => setSelectedStatus(event.target.value)}
-                  >
-                    {supportedStatuses.map((status) => (
-                      <option key={status} value={status}>
-                        {STATUS_LABELS[status]}
-                      </option>
-                    ))}
-                  </select>
-                </label>
+                <Select
+                label="New status"
+                value={selectedStatus}
+                onValueChange={(value) => setSelectedStatus(value)}
+                options={availableStatuses.map((status) => ({ value: status, label: STATUS_LABELS[status] }))}
+              />
                 <button
                   type="button"
                   disabled={updating || selectedStatus === (order.orderStatus || order.status)}

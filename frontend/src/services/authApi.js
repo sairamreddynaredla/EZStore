@@ -1,4 +1,5 @@
 import axios from "axios";
+import { getApiBaseUrl } from "./apiConfig";
 
 const unwrapApiResponse = (response) => {
   const payload = response?.data;
@@ -22,7 +23,7 @@ const unwrapApiResponse = (response) => {
 };
 
 const authApi = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:5000/api",
+  baseURL: getApiBaseUrl(),
   headers: {
     "Content-Type": "application/json",
   },

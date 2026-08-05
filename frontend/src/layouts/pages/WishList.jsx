@@ -2,6 +2,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 
 import { Link } from "react-router-dom";
+import { useMemo } from "react";
 
 import { FaHeart } from "react-icons/fa";
 import { resolveProductImage, resolveProductImageFallback } from "../../utils/productImage";
@@ -17,9 +18,20 @@ const WishList = () => {
 
   const { addToCart } = useCart();
 
+  const dedupedWishlistItems = useMemo(() => {
+    const seenIds = new Set();
+    return wishlistItems.reduce((items, product) => {
+      const normalizedProduct = normalizeWishlistItem(product);
+      const productKey = normalizedProduct.productId ?? normalizedProduct.id;
+      if (!productKey || seenIds.has(String(productKey))) return items;
+      seenIds.add(String(productKey));
+      return [...items, normalizedProduct];
+    }, []);
+  }, [wishlistItems]);
+
   const handleAddToCart = (product, quantity) => {
     addToCart({ ...product, quantity });
-    removeFromWishlist(product.id);
+    removeFromWishlist(product.id ?? product.productId);
   };
 
   return (
@@ -39,7 +51,7 @@ const WishList = () => {
 
           <div className="bg-white px-6 py-4 rounded-2xl shadow-sm">
             <span className="text-lg font-semibold text-[#0D2B5C]">
-              {wishlistItems.length} Items
+              {dedupedWishlistItems.length} Items
             </span>
           </div>
         </div>
@@ -56,7 +68,7 @@ const WishList = () => {
           </div>
         )}
 
-        {!loading && wishlistItems.length === 0 ? (
+        {!loading && dedupedWishlistItems.length === 0 ? (
           <div className="bg-white rounded-[35px] p-20 text-center shadow-sm">
             <div className="flex justify-center mb-6">
               <div className="w-24 h-24 rounded-full bg-red-100 flex items-center justify-center">
@@ -83,8 +95,8 @@ const WishList = () => {
               Your wishlist is synced and ready for checkout.
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
-            {wishlistItems.map((product) => {
-              const normalizedProduct = normalizeWishlistItem(product);
+            {dedupedWishlistItems.map((product) => {
+              const normalizedProduct = product;
               const productForDetails = normalizedProduct.catalogProduct
                 ? { ...normalizedProduct.catalogProduct, selectedVariant: normalizedProduct.selectedVariant }
                 : normalizedProduct;
@@ -238,7 +250,6 @@ const WishList = () => {
                       isOutOfStock={normalizedProduct.stock <= 0}
                       onAddToCart={(prod, quantity) => {
                         handleAddToCart(prod, quantity);
-                        removeFromWishlist(normalizedProduct.id ?? product.id);
                       }}
                       quantity={1}
                       btnClass="w-full mt-auto pt-2 py-3 rounded-xl text-sm font-semibold bg-[#F59E0B] hover:bg-[#D97706] text-white"

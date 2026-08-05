@@ -15,6 +15,9 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { COUPONS } from "../../data/checkoutData";
+import products from "../../data/products";
+import { getAvailability } from "../../utils/inventory";
+import { resolveProductImage, resolveProductImageFallback } from "../../utils/productImage";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -24,6 +27,16 @@ const Cart = () => {
 
   const visibleItems = cartItems.filter((item) => item && item.selectedVariant);
 
+  const getCatalogProduct = (item) => {
+    const itemId = Number(item.productId ?? item.id);
+    const itemName = String(item.name ?? item.productName ?? "").trim().toLowerCase();
+
+    return products.find((product) =>
+      (Number.isFinite(itemId) && Number(product.id) === itemId) ||
+      (itemName && String(product.name ?? "").trim().toLowerCase() === itemName)
+    );
+  };
+
   // Coupon state
   const [coupon, setCoupon] = useState("");
   const [couponMessage, setCouponMessage] = useState("");
@@ -32,12 +45,13 @@ const Cart = () => {
   // New features state
   const [selectedDelivery, setSelectedDelivery] = useState("standard");
   const [cartNotes, setCartNotes] = useState("");
-  const [showRecentlyViewed, setShowRecentlyViewed] = useState(true);
-  const [recentlyViewed, setRecentlyViewed] = useState([]);
   const [showBulkOffers, setShowBulkOffers] = useState(false);
   const [deletedItems, setDeletedItems] = useState([]);
   const [showClearModal, setShowClearModal] = useState(false);
   const [showTaxBreakdown, setShowTaxBreakdown] = useState(false);
+
+  
+
 
   // Calculate bulk discount
   const getBulkDiscount = (item) => {
@@ -58,12 +72,20 @@ const Cart = () => {
   // TAX RATE
   const TAX_RATE = 0.1; // 10% tax
 
-  // Get stock status
+  // Get stock status (uses local inventory util when available)
   const getStockStatus = (item) => {
-    const stock = item.stock || 100;
-    if (stock <= 0) return { status: "Out of Stock", color: "text-red-600" };
-    if (stock <= 5) return { status: `Only ${stock} left!`, color: "text-orange-600" };
-    return { status: "In Stock", color: "text-green-600" };
+    try {
+      const availability = getAvailability(item);
+      if (availability.discontinued) return { status: "Discontinued", color: "text-gray-600" };
+      if (!availability.isAvailable) return { status: availability.availabilityMessage || "Unavailable", color: "text-red-600" };
+      if (availability.stock <= availability.lowStockThreshold) return { status: `Only ${availability.stock} left!`, color: "text-orange-600" };
+      return { status: "In Stock", color: "text-green-600" };
+    } catch (err) {
+      const stock = item.stock || 100;
+      if (stock <= 0) return { status: "Out of Stock", color: "text-red-600" };
+      if (stock <= 5) return { status: `Only ${stock} left!`, color: "text-orange-600" };
+      return { status: "In Stock", color: "text-green-600" };
+    }
   };
 
   // Get estimated delivery date
@@ -133,13 +155,7 @@ const Cart = () => {
     }
   };
 
-  // Load recently viewed from localStorage
-  useEffect(() => {
-    const saved = localStorage.getItem("recentlyViewed");
-    if (saved) {
-      setRecentlyViewed(JSON.parse(saved));
-    }
-  }, []);
+  
 
   // Handle coupon removal
   const handleRemoveCoupon = () => {
@@ -214,20 +230,13 @@ const Cart = () => {
                     >
                       <div className="flex gap-2 sm:gap-4 flex-col sm:flex-row">
                         {/* Product Image */}
-                        <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0 relative mx-auto sm:mx-0">
+                        <div className="w-24 h-24 sm:w-32 sm:h-32 bg-gray-100 rounded-lg flex items-center justify-center shrink-0 relative mx-auto sm:mx-0">
                           {(() => {
-                            const placeholder = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='100%' height='100%' fill='%23f3f4f6'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' fill='%239ca3af' font-size='14'>No image</text></svg>";
-
-                            const resolveImage = (img) => {
-                              if (!img) return placeholder;
-                              if (typeof img === "string") return img;
-                              if (typeof img === "object") {
-                                return img.default || img.src || img[0] || placeholder;
-                              }
-                              return placeholder;
-                            };
-
-                            const imgSrc = resolveImage(item.image) || resolveImage(item.images?.[0]);
+                            // A cart can retain an old API/CDN URL. The catalog contains the
+                            // bundled image for the actual product, so prefer it when available.
+                            const productForImage = getCatalogProduct(item) || item;
+                            const imgSrc = resolveProductImage(productForImage);
+                            const fallbackSrc = resolveProductImageFallback(productForImage);
 
                             return (
                               <img
@@ -235,6 +244,11 @@ const Cart = () => {
                                 alt={item.name}
                                 className="w-full h-full object-contain p-2"
                                 loading="lazy"
+                                onError={(event) => {
+                                  // Use a safe fallback only if the catalog image itself cannot load.
+                                  event.currentTarget.onerror = null;
+                                  event.currentTarget.src = fallbackSrc;
+                                }}
                               />
                             );
                           })()}
@@ -254,7 +268,7 @@ const Cart = () => {
                             </h3>
 
                             {/* Rating */}
-                            <div className="flex items-center gap-2 mb-2 hidden sm:flex">
+                            <div className="hidden sm:flex items-center gap-2 mb-2">
                               <div className="flex text-yellow-400 text-sm">
                                 {[...Array(4)].map((_, i) => (
                                   <span key={i}>★</span>
@@ -592,44 +606,7 @@ const Cart = () => {
                   </button>
                 </div>
 
-                {/* Recently Viewed Items */}
-                {recentlyViewed.length > 0 && (
-                  <div className="mt-8 border-t-2 pt-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <h2 className="text-lg font-bold">Recently Viewed</h2>
-                      <button
-                        onClick={() => setShowRecentlyViewed(!showRecentlyViewed)}
-                        className="text-blue-600 text-sm"
-                      >
-                        {showRecentlyViewed ? "Hide" : "Show"}
-                      </button>
-                    </div>
-                    {showRecentlyViewed && (
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                        {recentlyViewed.slice(0, 6).map((item, idx) => (
-                          <div
-                            key={idx}
-                            className="border border-gray-200 rounded-lg p-3 hover:shadow-md transition-shadow cursor-pointer"
-                            onClick={() => navigate(`/product/${item.id}`)}
-                          >
-                            <div className="w-full aspect-square bg-gray-100 rounded mb-2 flex items-center justify-center">
-                              <img
-                                src={item.image}
-                                alt={item.name}
-                                className="w-full h-full object-contain p-2"
-                                loading="lazy"
-                              />
-                            </div>
-                            <h4 className="text-xs font-semibold text-gray-900 line-clamp-2 mb-1">
-                              {item.name}
-                            </h4>
-                            <p className="text-sm font-bold text-red-600">${item.price}</p>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
+                
               </div>
             </div>
           ) : (
@@ -649,12 +626,12 @@ const Cart = () => {
         </div>
       </div>
       {showClearModal && (
-        <div className="fixed inset-0 flex items-center justify-center z-[9999]">
+        <div className="fixed inset-0 flex items-center justify-center z-9999">
           <div className="absolute inset-0 bg-black/40" onClick={handleCancelClear} />
           <div
             role="dialog"
             aria-modal="true"
-            className="relative bg-white rounded-lg shadow-lg max-w-md w-full mx-4 p-6 z-[10000]"
+            className="relative bg-white rounded-lg shadow-lg max-w-md w-full mx-4 p-6 z-10000"
           >
             <h3 className="text-lg font-semibold mb-2">Clear Cart</h3>
             <p className="text-sm text-gray-700 mb-4">

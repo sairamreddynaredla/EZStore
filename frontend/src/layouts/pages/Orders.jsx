@@ -1,7 +1,9 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Navbar from "../../components/Navbar";
 import authApi from "../../services/authApi";
 import { useToast } from "../../context/toast-context";
+import { useAuth } from "../../hooks/useAuth";
+import { initSocket, joinCustomerRoom, subscribeToCustomerOrderEvents } from "../../services/socket";
 
 const Orders = () => {
   const [orders, setOrders] = useState([]);
@@ -12,31 +14,79 @@ const Orders = () => {
   const [total, setTotal] = useState(0);
   const [actionLoading, setActionLoading] = useState({});
   const { error, success } = useToast();
+  const { user } = useAuth();
 
-  const loadOrders = async (nextPage = 1) => {
+  const controllerRef = useRef(null);
+  const hasSearchMounted = useRef(false);
+
+  const loadOrders = useCallback(async (nextPage = 1, signal) => {
     try {
-      const response = await authApi.get("/orders", { params: { page: nextPage, limit: pageSize, q: search } });
+      setLoading(true);
+      const response = await authApi.get("/orders", {
+        params: { page: nextPage, limit: pageSize, q: search },
+        signal,
+      });
       setOrders(response.data.orders || []);
       setTotal(response.data.total || 0);
       setPage(response.data.page || 1);
     } catch (err) {
+      if (err?.name === "CanceledError" || err?.message === "canceled") return;
       error(err.response?.data?.message || "Unable to load orders.");
     } finally {
       setLoading(false);
     }
-  };
+  }, [pageSize, search, error]);
 
   useEffect(() => {
-    loadOrders(1);
-  }, [pageSize]);
+    const controller = new AbortController();
+    controllerRef.current = controller;
+    const run = async () => {
+      await loadOrders(1, controller.signal);
+    };
+    run();
+
+    const socket = initSocket();
+    if (user?.id) {
+      joinCustomerRoom(user.id);
+    }
+
+    const unsubscribe = subscribeToCustomerOrderEvents((event) => {
+      if (event.type === "orderCreated") {
+        success("A new order was created successfully.");
+        loadOrders(1);
+      }
+      if (event.type === "orderUpdated") {
+        success("Order status updated.");
+        loadOrders(page);
+      }
+    });
+
+    return () => {
+      controller.abort();
+      if (unsubscribe) unsubscribe();
+    };
+  }, [loadOrders, page, success, user?.id]);
 
   useEffect(() => {
+    if (!hasSearchMounted.current) {
+      hasSearchMounted.current = true;
+      return;
+    }
+
+    const controller = new AbortController();
+    controllerRef.current = controller;
     const debounce = setTimeout(() => {
-      loadOrders(1);
+      const run = async () => {
+        await loadOrders(1, controller.signal);
+      };
+      run();
     }, 250);
 
-    return () => clearTimeout(debounce);
-  }, [search]);
+    return () => {
+      clearTimeout(debounce);
+      controller.abort();
+    };
+  }, [loadOrders, search]);
 
   const filteredOrders = useMemo(() => orders.filter((order) => {
     const haystack = `${order.orderNumber || ""} ${order.status || ""}`.toLowerCase();

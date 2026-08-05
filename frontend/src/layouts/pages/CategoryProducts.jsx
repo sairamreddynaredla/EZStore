@@ -415,7 +415,6 @@ const CategoryProducts = ({ petType }) => {
             aria-expanded={isMobileFilterOpen}
           >
             <span>{isMobileFilterOpen ? "✕" : "☰"}</span>
-            {isMobileFilterOpen ? "Close Filters" : "Show Filters"}
           </button>
 
           {/* Mobile Overlay Background */}

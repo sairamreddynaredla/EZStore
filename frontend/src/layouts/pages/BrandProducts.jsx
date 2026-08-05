@@ -281,7 +281,6 @@ const BrandProducts = () => {
             aria-expanded={isMobileFilterOpen}
           >
             <span>{isMobileFilterOpen ? "✕" : "☰"}</span>
-            {isMobileFilterOpen ? "Close Filters" : "Show Filters"}
           </button>
 
           {isMobileFilterOpen && (

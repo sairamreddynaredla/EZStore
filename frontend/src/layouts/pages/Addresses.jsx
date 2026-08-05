@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Navbar from "../../components/Navbar";
 import authApi from "../../services/authApi";
 import { useToast } from "../../context/toast-context";
@@ -27,30 +27,57 @@ const Addresses = () => {
   const [submitting, setSubmitting] = useState(false);
   const { error, success } = useToast();
 
-  const loadAddresses = async (nextPage = 1) => {
+  const controllerRef = useRef(null);
+  const hasSearchMounted = useRef(false);
+
+  const loadAddresses = useCallback(async (nextPage = 1, signal) => {
     try {
-      const response = await authApi.get("/addresses", { params: { page: nextPage, limit: pageSize, q: search } });
+      setLoading(true);
+      const response = await authApi.get("/addresses", {
+        params: { page: nextPage, limit: pageSize, q: search },
+        signal,
+      });
       setAddresses(response.data.addresses || []);
       setTotal(response.data.total || 0);
       setPage(response.data.page || 1);
     } catch (err) {
+      if (err?.name === "CanceledError" || err?.message === "canceled") return;
       error(err.response?.data?.message || "Unable to load saved addresses.");
     } finally {
       setLoading(false);
     }
-  };
+  }, [pageSize, search, error]);
 
   useEffect(() => {
-    loadAddresses(1);
-  }, [pageSize]);
+    const controller = new AbortController();
+    controllerRef.current = controller;
+    const run = async () => {
+      await loadAddresses(1, controller.signal);
+    };
+    run();
+    return () => controller.abort();
+  }, [loadAddresses]);
 
   useEffect(() => {
+    if (!hasSearchMounted.current) {
+      hasSearchMounted.current = true;
+      return;
+    }
+
+    const controller = new AbortController();
+    controllerRef.current = controller;
     const debounce = setTimeout(() => {
-      loadAddresses(1);
+      const run = async () => {
+        await loadAddresses(1, controller.signal);
+      };
+      run();
     }, 250);
 
-    return () => clearTimeout(debounce);
-  }, [search]);
+    return () => {
+      clearTimeout(debounce);
+      controller.abort();
+    };
+  }, [loadAddresses, search]);
 
   const filteredAddresses = useMemo(() => addresses.filter((address) => {
     const haystack = `${address.label || ""} ${address.recipientName || ""} ${address.city || ""}`.toLowerCase();

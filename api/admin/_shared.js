@@ -15,6 +15,16 @@ const ALLOWED_ORIGINS = [
   .filter(Boolean)
   .map((value) => value.trim().replace(/\/$/, ""));
 
+const allowLocalDevOrigins = ALLOWED_ORIGINS.some((value) => value.includes("localhost") || value.includes("127.0.0.1"));
+const isLocalhostOrigin = (origin) => {
+  try {
+    const originUrl = new URL(origin);
+    return originUrl.hostname === "localhost" || originUrl.hostname === "127.0.0.1";
+  } catch {
+    return false;
+  }
+};
+
 const toBase64Url = (value) => Buffer.from(value).toString("base64url");
 const fromBase64Url = (value) => Buffer.from(value, "base64url").toString("utf8");
 
@@ -97,7 +107,14 @@ export const setCorsHeaders = (req, res) => {
       const host = originUrl.hostname;
       const requestHost = req.headers.host ? req.headers.host.split(":")[0] : "";
 
-      if (ALLOWED_ORIGINS.includes(normalizedOrigin) || (requestHost && host === requestHost) || host.endsWith(".vercel.app") || host.endsWith(".vercel.dev") || host.endsWith(".now.sh")) {
+      if (
+        ALLOWED_ORIGINS.includes(normalizedOrigin)
+        || (allowLocalDevOrigins && isLocalhostOrigin(normalizedOrigin))
+        || (requestHost && host === requestHost)
+        || host.endsWith(".vercel.app")
+        || host.endsWith(".vercel.dev")
+        || host.endsWith(".now.sh")
+      ) {
         res.setHeader("Access-Control-Allow-Origin", normalizedOrigin);
         res.setHeader("Vary", "Origin");
       } else if (FRONTEND_URL) {

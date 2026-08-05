@@ -6,6 +6,7 @@ import PageHeader from "../components/PageHeader";
 import SearchBar from "../components/SearchBar";
 import FilterGroup from "../components/FilterGroup";
 import Pagination from "../components/Pagination";
+import Select from "../components/common/Select";
 import TableShell from "../components/TableShell";
 import Badge from "../components/Badge";
 
@@ -163,20 +164,15 @@ const CouponsPage = () => {
         />
 
         <FilterGroup label="Status">
-          <select
+          <Select
             value={statusFilter}
-            onChange={(event) => {
-              setStatusFilter(event.target.value);
+            onValueChange={(value) => {
+              setStatusFilter(value);
               setCurrentPage(1);
             }}
-            className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-          >
-            {STATUS_OPTIONS.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
+            options={STATUS_OPTIONS}
+            placeholder="All statuses"
+          />
         </FilterGroup>
       </div>
       </section>
@@ -192,9 +188,9 @@ const CouponsPage = () => {
           <tr key={coupon.id} className="border-t border-slate-100 hover:bg-slate-50">
             <td className="px-5 py-4 align-top font-semibold text-slate-900">{coupon.code}</td>
             <td className="px-5 py-4 align-top text-slate-700">
-              {coupon.shippingDiscount
+              {coupon.shippingDiscount || coupon.freeShipping
                 ? "Free shipping"
-                : coupon.discountType === "amount"
+                : coupon.discountType === "fixed"
                 ? `$${Number(coupon.discount ?? 0).toFixed(2)} off`
                 : `${Number(coupon.discount ?? 0).toFixed(0)}% off`}
             </td>

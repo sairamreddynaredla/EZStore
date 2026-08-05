@@ -22,6 +22,38 @@ const slugify = (value) => {
 
 const normalizeString = (value) => (typeof value === "string" ? value.trim() : "");
 
+const categoryRelationSelect = {
+  id: true,
+  name: true,
+  slug: true,
+};
+
+const brandRelationSelect = {
+  id: true,
+  name: true,
+  slug: true,
+};
+
+const productListSelect = {
+  id: true,
+  slug: true,
+  name: true,
+  description: true,
+  price: true,
+  stock: true,
+  status: true,
+  imageUrl: true,
+  images: true,
+  tags: true,
+  categoryId: true,
+  brandId: true,
+  createdAt: true,
+  updatedAt: true,
+  deletedAt: true,
+  category: { select: categoryRelationSelect },
+  brand: { select: brandRelationSelect },
+};
+
 const parseJsonArray = (value) => {
   if (Array.isArray(value)) {
     return value.filter(Boolean).map((item) => String(item).trim()).filter(Boolean);
@@ -106,6 +138,10 @@ const getOrCreateBrand = async (name) => {
 
 const buildProductResponse = (product) => {
   if (!product) return null;
+  const isActiveValue = product.isActive === undefined ? product.status === "active" : Boolean(product.isActive);
+  const trackInventoryValue = product.trackInventory === undefined ? true : Boolean(product.trackInventory);
+  const lowStockThresholdValue = Number(product.lowStockThreshold ?? 5);
+
   return {
     id: product.id,
     sku: product.sku ?? null,
@@ -116,6 +152,20 @@ const buildProductResponse = (product) => {
     price: product.price,
     stock: product.stock,
     status: product.status,
+    trackInventory: trackInventoryValue,
+    lowStockThreshold: lowStockThresholdValue,
+    isActive: isActiveValue,
+    isAvailable:
+      isActiveValue && (trackInventoryValue ? Number(product.stock ?? 0) > 0 : true),
+    availabilityMessage: (() => {
+      const status = product.status || "active";
+      const stock = Number(product.stock ?? 0);
+      if (status === "discontinued") return "This product has been discontinued.";
+      if (!isActiveValue) return "Currently unavailable.";
+      if (trackInventoryValue && stock <= 0) return "Out of Stock";
+      if (trackInventoryValue && stock > 0 && stock <= lowStockThresholdValue) return `Only ${stock} left`;
+      return "In Stock";
+    })(),
     category: product.category?.name ?? "",
     brand: product.brand?.name ?? "",
     imageUrl: product.imageUrl ?? "",
@@ -132,6 +182,9 @@ const buildProductPayload = async (payload = {}, files = []) => {
   const price = Number(payload.price ?? 0);
   const stock = Number(payload.stock ?? 0);
   const status = normalizeString(payload.status) || "active";
+  const trackInventory = payload.trackInventory === undefined ? true : Boolean(payload.trackInventory);
+  const lowStockThreshold = Number(payload.lowStockThreshold ?? 5);
+  const isActive = payload.isActive === undefined ? status === "active" : Boolean(payload.isActive);
   const categoryName = normalizeString(payload.category);
   const brandName = normalizeString(payload.brand);
   const existingImages = normalizeImages(payload.existingImages);
@@ -149,7 +202,7 @@ const buildProductPayload = async (payload = {}, files = []) => {
   const slugBase = slugify(title) || `product-${Date.now()}`;
   const slug = await getUniqueSlug(slugBase, "product");
 
-  return {
+  const data = {
     name: title,
     slug,
     description,
@@ -157,11 +210,16 @@ const buildProductPayload = async (payload = {}, files = []) => {
     stock,
     status,
     imageUrl,
-    images: images.length ? images : null,
-    tags: tags.length ? tags : null,
+    tags: tags.length ? tags : undefined,
     categoryId: category?.id ?? undefined,
     brandId: brand?.id ?? undefined,
   };
+
+  if (images.length) {
+    data.images = images;
+  }
+
+  return data;
 };
 
 const buildProductUpdatePayload = async (product, payload = {}, files = []) => {
@@ -223,7 +281,7 @@ const buildProductUpdatePayload = async (product, payload = {}, files = []) => {
 
   if (payload.tags !== undefined) {
     const tags = normalizeTags(payload.tags);
-    data.tags = tags.length ? tags : null;
+    data.tags = tags.length ? tags : [];
   }
 
   if (mergedImages.length) {
@@ -309,7 +367,7 @@ export const getProducts = async (query = {}) => {
     orderBy,
     skip: limit === 0 ? undefined : skip,
     take: limit === 0 ? undefined : Math.max(1, limit),
-    include: { category: true, brand: true },
+    select: productListSelect,
   });
 
   return {
@@ -332,7 +390,7 @@ export const getProduct = async (productId) => {
   const where = resolveProductWhere(productId);
   const product = await prisma.product.findFirst({
     where: { ...where, deletedAt: null },
-    include: { category: true, brand: true },
+    select: productListSelect,
   });
   return buildProductResponse(product);
 };
@@ -341,28 +399,28 @@ export const createProduct = async (payload = {}, files = []) => {
   const data = await buildProductPayload(payload, files);
   const product = await prisma.product.create({
     data,
-    include: { category: true, brand: true },
+    select: productListSelect,
   });
   return buildProductResponse(product);
 };
 
 export const updateProduct = async (productId, payload = {}, files = []) => {
   const where = resolveProductWhere(productId);
-  const existing = await prisma.product.findFirst({ where: { ...where, deletedAt: null } });
+  const existing = await prisma.product.findFirst({ where: { ...where, deletedAt: null }, select: productListSelect });
   if (!existing) return null;
 
   const data = await buildProductUpdatePayload(existing, payload, files);
   const updated = await prisma.product.update({
     where: { id: existing.id },
     data,
-    include: { category: true, brand: true },
+    select: productListSelect,
   });
   return buildProductResponse(updated);
 };
 
 export const updateProductStock = async (productId, payload = {}, actorId = null) => {
   const where = resolveProductWhere(productId);
-  const existing = await prisma.product.findFirst({ where: { ...where, deletedAt: null } });
+  const existing = await prisma.product.findFirst({ where: { ...where, deletedAt: null }, select: productListSelect });
   if (!existing) return null;
 
   const updatePayload = typeof payload === "number" ? { stock: payload } : payload ?? {};
@@ -371,7 +429,7 @@ export const updateProductStock = async (productId, payload = {}, actorId = null
     const product = await tx.product.update({
       where: { id: existing.id },
       data: { stock: resolved.stock },
-      include: { category: true, brand: true },
+      select: productListSelect,
     });
 
     await tx.inventoryTransaction.create({
@@ -392,7 +450,7 @@ export const updateProductStock = async (productId, payload = {}, actorId = null
 
 export const getProductInventoryHistory = async (productId, query = {}) => {
   const where = resolveProductWhere(productId);
-  const existing = await prisma.product.findFirst({ where: { ...where, deletedAt: null } });
+  const existing = await prisma.product.findFirst({ where: { ...where, deletedAt: null }, select: productListSelect });
   if (!existing) {
     return {
       items: [],
@@ -449,7 +507,7 @@ export const getRecommendedProducts = async (productId, limit = 5) => {
   const where = resolveProductWhere(productId);
   const currentProduct = await prisma.product.findFirst({
     where: { ...where, deletedAt: null },
-    include: { category: true, brand: true },
+    select: productListSelect,
   });
 
   if (!currentProduct) return [];

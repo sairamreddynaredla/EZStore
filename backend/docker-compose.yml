@@ -13,6 +13,37 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ezstore -d ezstore"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: ezstore_backend
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - PORT=5000
+      - NODE_ENV=development
+      - DATABASE_URL=postgresql://ezstore:password@postgres:5432/ezstore?schema=public
+      - JWT_SECRET=change_this_to_a_strong_secret
+      - JWT_REFRESH_SECRET=change_this_to_a_different_strong_secret
+      - JWT_EXPIRES_IN=7d
+      - JWT_REFRESH_EXPIRES_IN=30d
+      - FRONTEND_URL=http://localhost:5173
+      - BACKEND_URL=http://localhost:5000
+      - ALLOWED_ORIGINS=http://localhost:5173,http://localhost:5174,http://localhost:5175
+      - STRIPE_SECRET_KEY
+      - STRIPE_PUBLISHABLE_KEY
+      - STRIPE_WEBHOOK_SECRET
+    depends_on:
+      postgres:
+        condition: service_healthy
 
 volumes:
   postgres_data:

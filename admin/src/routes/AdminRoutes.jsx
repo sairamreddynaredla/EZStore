@@ -6,6 +6,8 @@ import AdminProtectedRoute from "../components/AdminProtectedRoute";
 import AdminLayout from "../layouts/AdminLayout";
 
 const AdminLogin = lazy(() => import("../pages/AdminLogin"));
+const ForgotPassword = lazy(() => import("../pages/ForgotPassword"));
+const ResetPassword = lazy(() => import("../pages/ResetPassword"));
 const DashboardPage = lazy(() => import("../pages/DashboardPage"));
 const ProductsPage = lazy(() => import("../pages/ProductsPage"));
 const CategoriesPage = lazy(() => import("../pages/CategoriesPage"));
@@ -24,6 +26,8 @@ const AdminRoutes = () => (
     <Suspense fallback={<PageLoader />}>
       <Routes>
         <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/forgot-password" element={<ForgotPassword />} />
+        <Route path="/admin/reset-password" element={<ResetPassword />} />
         <Route
           path="/admin"
           element={

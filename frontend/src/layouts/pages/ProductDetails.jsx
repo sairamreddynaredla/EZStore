@@ -1,9 +1,7 @@
 import Navbar from "../../components/Navbar";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
-import { products } from "../../data/products";
-import customerCommerceApi from "../../services/customerCommerceApi";
-import { useAuth } from "../../hooks/useAuth";
+import { fetchProductById, fetchRecommendedProducts } from "../../services/productApi";
 
 import ProductGallery from "../../components/productdetails/ProductGallery";
 import ProductInfo from "../../components/productdetails/ProductInfo";
@@ -11,7 +9,6 @@ import BuyBox from "../../components/productdetails/BuyBox";
 import DeliveryBox from "../../components/productdetails/DeliveryBox";
 import SimilarProducts from "../../components/productdetails/SimilarProducts";
 import useCart from "../../hooks/usecart";
-import { useWishlist } from "../../context/usewishlist";
 import SEO from "../../components/SEO";
 import { normalizeFlavor } from "../../utils/productText";
 
@@ -30,28 +27,107 @@ const ProductDetails = () => {
   const { id } = useParams();
   const location = useLocation();
 
+  const productFromState = location?.state?.product;
+  const [fetchedProduct, setFetchedProduct] = useState(productFromState ?? null);
+  const [loadingProduct, setLoadingProduct] = useState(!productFromState);
+
   const [openSection, setOpenSection] = useState("details");
 
   const toggleSection = (section) => {
     setOpenSection(openSection === section ? null : section);
   };
 
-  // FIND PRODUCT — prefer router state when navigating from a product list to
-  // avoid accidental collisions when product IDs are duplicated across
-  // different sections of the data file. Fall back to lookup by `id` so
-  // direct URLs still work.
-  const productFromState = location?.state?.product;
-  const product = productFromState ?? products.find((item) => item.id === Number(id));
+  useEffect(() => {
+    let cancelled = false;
+
+    if (!productFromState) {
+      setLoadingProduct(true);
+      fetchProductById(id)
+        .then((item) => {
+          if (!cancelled) setFetchedProduct(item);
+        })
+        .catch(() => {
+          if (!cancelled) setFetchedProduct(null);
+        })
+        .finally(() => {
+          if (!cancelled) setLoadingProduct(false);
+        });
+    }
+
+    return () => {
+      cancelled = true;
+    };
+  }, [id, productFromState]);
+
+  const product = productFromState ?? fetchedProduct;
 
   const [selectedVariant, setSelectedVariant] = useState(product?.variants?.[0] || {});
+  const [recommendedProducts, setRecommendedProducts] = useState([]);
+  const [loadingRecommendations, setLoadingRecommendations] = useState(true);
   const [quantity, setQuantity] = useState(1);
-  const [recentlyViewed, setRecentlyViewed] = useState([]);
-  const [, setLoadingCommerce] = useState(false);
-  const [commerceError, setCommerceError] = useState("");
 
   const { addToCart } = useCart();
-  const { addToWishlist, removeFromWishlist, isInWishlist, wishlistCount } = useWishlist();
-  const { isAuthenticated } = useAuth();
+
+  useEffect(() => {
+    setSelectedVariant(product?.variants?.[0] || {});
+  }, [product?.id]);
+
+  useEffect(() => {
+    let mounted = true;
+    if (!product) {
+      setRecommendedProducts([]);
+      setLoadingRecommendations(false);
+      return () => {
+        mounted = false;
+      };
+    }
+
+    const loadRecommendations = async () => {
+      setLoadingRecommendations(true);
+      try {
+        const items = await fetchRecommendedProducts(product.id, { limit: 6 });
+        if (mounted) {
+          setRecommendedProducts(items.filter((item) => item.id !== product.id));
+        }
+      } catch {
+        if (mounted) {
+          setRecommendedProducts([]);
+        }
+      } finally {
+        if (mounted) {
+          setLoadingRecommendations(false);
+        }
+      }
+    };
+
+    loadRecommendations();
+    return () => {
+      mounted = false;
+    };
+  }, [product]);
+
+  if (loadingProduct) {
+    return (
+      <div className="min-h-screen bg-[#f8f8f8]">
+        <Navbar />
+        <div className="flex items-center justify-center h-[70vh]">
+          <p className="text-xl font-medium text-slate-700">Loading product...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className="min-h-screen bg-[#f8f8f8]">
+        <Navbar />
+
+        <div className="flex items-center justify-center h-[70vh]">
+          <h1 className="text-4xl font-bold text-gray-700">Product Not Found</h1>
+        </div>
+      </div>
+    );
+  }
 
   const formatCategoryLabel = (category) => {
     if (!category) return "Unknown";
@@ -67,7 +143,7 @@ const ProductDetails = () => {
   const handleAddToCart = async (productOrId, quantityValue = 1, showToast = true) => {
     const suppliedProduct =
       productOrId && typeof productOrId === "object" ? productOrId : null;
-    const productToAdd = suppliedProduct || products.find((item) => item.id === Number(productOrId));
+    const productToAdd = suppliedProduct || (product && String(product.id) === String(productOrId) ? product : product);
 
     if (!productToAdd) return;
 
@@ -93,80 +169,25 @@ const ProductDetails = () => {
     });
   };
 
-  const handleWishlistToggle = async (productId, isAdding) => {
-    const productToUpdate = products.find((item) => item.id === Number(productId));
-    if (!productToUpdate) return;
-
-    if (isAdding) {
-      await addToWishlist(productToUpdate);
-    } else {
-      await removeFromWishlist(productId, productToUpdate);
-    }
-  };
-
   // Wrapper for SimilarProducts to accept either product object or id
   const similarOnAddToCart = (productOrId, quantity = 1) => {
     if (!productOrId) return;
     if (typeof productOrId === "number" || typeof productOrId === "string") {
-      const prod = products.find((p) => p.id === Number(productOrId));
-      if (prod) addToCart({ ...prod, quantity });
+      if (product && String(product.id) === String(productOrId)) {
+        addToCart({ ...product, quantity });
+      }
     } else if (typeof productOrId === "object") {
-      const prod = productOrId.id ? products.find((p) => p.id === Number(productOrId.id)) : null;
-      // prefer using the passed object fully if it's complete
       if (productOrId && productOrId.name) {
         addToCart({ ...productOrId, quantity });
-      } else if (prod) {
-        addToCart({ ...prod, quantity });
+      } else if (product && String(product.id) === String(productOrId.id)) {
+        addToCart({ ...product, quantity });
       }
     }
   };
 
-  const similarOnWishlistToggle = (productOrId, isAdding) => {
-    if (!productOrId) return;
-    const productToUpdate =
-      typeof productOrId === "object"
-        ? productOrId
-        : products.find((item) => item.id === Number(productOrId));
-
-    if (!productToUpdate) return;
-
-    if (isAdding) addToWishlist(productToUpdate);
-    else removeFromWishlist(productToUpdate.id, productToUpdate);
-  };
-
-  const lastViewedProductIdRef = useRef(null);
-
   const currentProductPrice = Number(
     selectedVariant?.price ?? product?.price ?? product?.variants?.[0]?.price ?? 0
   );
-
-  useEffect(() => {
-    if (!product?.id || !isAuthenticated || lastViewedProductIdRef.current === product.id) return;
-
-    lastViewedProductIdRef.current = product.id;
-    const trackView = async () => {
-      try {
-        setLoadingCommerce(true);
-        await customerCommerceApi.trackRecentlyViewed({
-          productId: Number(product.id),
-          productSlug: toProductSlug(product) || undefined,
-          productName: product.name,
-          productImage: product.image || product.images?.[0],
-          price: currentProductPrice,
-          unitPrice: currentProductPrice,
-        });
-        const recentResponse = await customerCommerceApi.getRecentlyViewed();
-        const items = Array.isArray(recentResponse?.data?.items) ? recentResponse.data.items : [];
-        setRecentlyViewed(items);
-      } catch (err) {
-        setCommerceError(err?.response?.data?.message || "Unable to sync recently viewed");
-      } finally {
-        setLoadingCommerce(false);
-      }
-    };
-
-    trackView();
-  }, [isAuthenticated, product?.id, currentProductPrice]);
 
   const productStockStatus = useMemo(() => {
     if (product?.stock <= 0) return "Out of stock";
@@ -174,30 +195,17 @@ const ProductDetails = () => {
     return "In stock";
   }, [product?.stock]);
 
-  // PRODUCT NOT FOUND
-  if (!product) {
-    return (
-      <div className="min-h-screen bg-[#f8f8f8]">
-        <Navbar />
-
-        <div className="flex items-center justify-center h-[70vh]">
-          <h1 className="text-4xl font-bold text-gray-700">Product Not Found</h1>
-        </div>
-      </div>
-    );
-  }
-
-  // SIMILAR PRODUCTS
-  const similarProducts = products
-    .filter((item) => item.category === product.category && item.id !== product.id)
-    .slice(0, 6);
+  const similarProducts = useMemo(() => {
+    if (!recommendedProducts || recommendedProducts.length === 0) return [];
+    return recommendedProducts.filter((item) => item.id !== product?.id).slice(0, 6);
+  }, [recommendedProducts, product?.id]);
 
   return (
     <div className="bg-[#f8f8f8] min-h-screen">
       <SEO
         title={product.name}
         description={product.description || `Buy ${product.name} online at EZStore`}
-        image={product.images?.[0] || product.image}
+        image={product.images?.[0] || product.imageUrl || product.image}
         keywords={(product.tags || []).join(", ")}
         type="product"
       />
@@ -242,9 +250,6 @@ const ProductDetails = () => {
               setSelectedVariant={setSelectedVariant}
               quantity={quantity}
               setQuantity={setQuantity}
-              onWishlistToggle={handleWishlistToggle}
-              isWishlisted={isInWishlist(product.id)}
-              wishlistCount={wishlistCount}
               stockStatus={productStockStatus}
             />
           </div>
@@ -259,8 +264,6 @@ const ProductDetails = () => {
               setQuantity={setQuantity}
               addToCart={handleAddToCart}
               handleBuyNow={handleBuyNow}
-              onWishlistToggle={handleWishlistToggle}
-              isWishlisted={isInWishlist(product.id)}
               stockStatus={productStockStatus}
             />
           </div>
@@ -425,33 +428,6 @@ const ProductDetails = () => {
           </div>
         </div>
 
-        {commerceError && <div className="mt-6 rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{commerceError}</div>}
-
-        {recentlyViewed.length > 0 && (
-          <div className="mt-16">
-            <div className="mb-8">
-              <p className="text-orange-500 uppercase tracking-[3px] text-sm font-semibold">Recently viewed</p>
-              <h2 className="text-4xl font-black mt-2">Continue where you left off</h2>
-            </div>
-            <SimilarProducts products={recentlyViewed.map((item) => {
-              const catalogProduct = products.find(
-                (catalogItem) => Number(catalogItem.id) === Number(item.productId ?? item.product?.id ?? item.id)
-              );
-              const savedPrice = [item.productPrice, item.unitPrice, item.product?.price, item.price]
-                .map(Number)
-                .find((price) => Number.isFinite(price) && price > 0);
-
-              return {
-                ...item,
-                id: item.productId ?? item.product?.id ?? item.id,
-                name: item.productName ?? item.product?.name ?? item.name,
-                image: item.productImage ?? item.product?.imageUrl ?? item.image,
-                price: savedPrice ?? catalogProduct?.variants?.[0]?.price ?? catalogProduct?.price ?? 0,
-              };
-            })} onAddToCart={similarOnAddToCart} onWishlistToggle={similarOnWishlistToggle} />
-          </div>
-        )}
-
         {/* RELATED PRODUCTS */}
         {similarProducts.length > 0 && (
           <div className="mt-16">
@@ -466,7 +442,6 @@ const ProductDetails = () => {
             <SimilarProducts
               products={similarProducts}
               onAddToCart={similarOnAddToCart}
-              onWishlistToggle={similarOnWishlistToggle}
             />
           </div>
         )}

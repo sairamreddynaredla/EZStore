@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
+import AdminDialog from "./common/Dialog";
+import Select from "./common/Select";
+import ToggleSwitch from "../components/ToggleSwitch";
 
 const defaultFormState = {
   code: "",
   description: "",
   discount: "",
-  discountType: "percentage",
+  discountType: "percent",
   shippingDiscount: false,
   usageLimit: "",
   expiresAt: "",
@@ -17,8 +20,8 @@ const statusOptions = [
 ];
 
 const discountTypeOptions = [
-  { value: "percentage", label: "% Off" },
-  { value: "amount", label: "$ Off" },
+  { value: "percent", label: "% Off" },
+  { value: "fixed", label: "$ Off" },
 ];
 
 const CouponFormModal = ({ visible, onClose, onSave, initialCoupon, isSaving, error, title }) => {
@@ -32,10 +35,16 @@ const CouponFormModal = ({ visible, onClose, onSave, initialCoupon, isSaving, er
     setForm({
       ...defaultFormState,
       ...initialCoupon,
+      discountType:
+        initialCoupon?.discountType === "percentage"
+          ? "percent"
+          : initialCoupon?.discountType === "amount"
+            ? "fixed"
+            : initialCoupon?.discountType ?? defaultFormState.discountType,
       discount: initialCoupon?.discount ?? "",
       usageLimit: initialCoupon?.usageLimit ?? "",
       expiresAt: initialCoupon?.expiresAt?.split("T")[0] ?? "",
-      shippingDiscount: Boolean(initialCoupon?.shippingDiscount),
+      shippingDiscount: Boolean(initialCoupon?.shippingDiscount ?? initialCoupon?.freeShipping),
     });
     setValidation({});
   }, [visible, initialCoupon]);
@@ -73,19 +82,8 @@ const CouponFormModal = ({ visible, onClose, onSave, initialCoupon, isSaving, er
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <div className="w-full max-w-2xl overflow-hidden rounded-3xl bg-white shadow-2xl">
-        <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
-          <div>
-            <h2 className="text-xl font-semibold text-slate-900">{title}</h2>
-            <p className="text-sm text-slate-500">Configure coupon details, usage limits, and expiration.</p>
-          </div>
-          <button type="button" className="rounded-2xl px-3 py-2 text-slate-600 hover:bg-slate-100" onClick={onClose}>
-            Close
-          </button>
-        </div>
-
-        <form className="space-y-6 px-6 py-5" onSubmit={handleSubmit}>
+    <AdminDialog open={visible} onOpenChange={onClose} title={title} description="Configure coupon details, usage limits, and expiration.">
+      <form className="space-y-6 px-6 py-5" onSubmit={handleSubmit}>
           <div className="grid gap-4 md:grid-cols-2">
             <label className="space-y-2">
               <span className="text-sm font-medium text-slate-700">Code</span>
@@ -96,20 +94,14 @@ const CouponFormModal = ({ visible, onClose, onSave, initialCoupon, isSaving, er
               />
               {validation.code && <p className="text-sm text-rose-600">{validation.code}</p>}
             </label>
-            <label className="space-y-2">
-              <span className="text-sm font-medium text-slate-700">Status</span>
-              <select
+            <div className="space-y-2">
+              <Select
+                label="Status"
                 value={form.status}
-                onChange={(e) => handleChange("status", e.target.value)}
-                className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-              >
-                {statusOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </label>
+                onValueChange={(value) => handleChange("status", value)}
+                options={statusOptions}
+              />
+            </div>
           </div>
 
           <label className="space-y-2">
@@ -123,20 +115,14 @@ const CouponFormModal = ({ visible, onClose, onSave, initialCoupon, isSaving, er
           </label>
 
           <div className="grid gap-4 md:grid-cols-3">
-            <label className="space-y-2">
-              <span className="text-sm font-medium text-slate-700">Discount type</span>
-              <select
+            <div className="space-y-2">
+              <Select
+                label="Discount type"
                 value={form.discountType}
-                onChange={(e) => handleChange("discountType", e.target.value)}
-                className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-              >
-                {discountTypeOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </label>
+                onValueChange={(value) => handleChange("discountType", value)}
+                options={discountTypeOptions}
+              />
+            </div>
             <label className="space-y-2">
               <span className="text-sm font-medium text-slate-700">Discount value</span>
               <input
@@ -199,8 +185,7 @@ const CouponFormModal = ({ visible, onClose, onSave, initialCoupon, isSaving, er
             </button>
           </div>
         </form>
-      </div>
-    </div>
+    </AdminDialog>
   );
 };
 

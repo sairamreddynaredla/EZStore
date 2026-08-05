@@ -74,9 +74,7 @@ const getOrderBy = (sortBy, order = "asc") => {
   const direction = order === "desc" ? "desc" : "asc";
   switch (sortBy) {
     case "totalOrders":
-      return { createdAt: direction };
-    case "totalSpent":
-      return { createdAt: direction };
+      return { orders: { _count: { _all: direction } } };
     case "registeredAt":
       return { createdAt: direction };
     case "name":
@@ -88,6 +86,28 @@ const getOrderBy = (sortBy, order = "asc") => {
   }
 };
 
+const sortCustomerSummaries = (customers, sortBy, order = "asc") => {
+  const direction = order === "desc" ? -1 : 1;
+  return [...customers].sort((left, right) => {
+    if (sortBy === "totalSpent") {
+      return (Number(left.totalSpent ?? 0) - Number(right.totalSpent ?? 0)) * direction;
+    }
+    if (sortBy === "totalOrders") {
+      return (Number(left.totalOrders ?? 0) - Number(right.totalOrders ?? 0)) * direction;
+    }
+    if (sortBy === "name") {
+      return String(left.name ?? "").localeCompare(String(right.name ?? "")) * direction;
+    }
+    if (sortBy === "email") {
+      return String(left.email ?? "").localeCompare(String(right.email ?? "")) * direction;
+    }
+    if (sortBy === "registeredAt") {
+      return (new Date(left.registeredAt || 0) - new Date(right.registeredAt || 0)) * direction;
+    }
+    return 0;
+  });
+};
+
 export const getCustomers = async (query = {}) => {
   const page = Number(query.page ?? 1);
   const limit = Number(query.limit ?? 10);
@@ -95,14 +115,15 @@ export const getCustomers = async (query = {}) => {
   const safeLimit = Number.isFinite(limit) && limit >= 0 ? limit : 10;
   const skip = safeLimit === 0 ? 0 : Math.max(0, (safePage - 1) * safeLimit);
   const where = buildCustomerWhere(query);
-  const orderBy = getOrderBy(query.sortBy, query.order);
+  const sortBy = query.sortBy;
+  const shouldSortInMemory = sortBy === "totalSpent";
+  const orderBy = shouldSortInMemory ? undefined : getOrderBy(sortBy, query.order);
 
   const [items, total] = await Promise.all([
     prisma.customer.findMany({
       where,
-      orderBy,
-      skip: safeLimit === 0 ? undefined : skip,
-      take: safeLimit === 0 ? undefined : Math.max(1, safeLimit),
+      ...(orderBy ? { orderBy } : {}),
+      ...(shouldSortInMemory ? {} : { skip: safeLimit === 0 ? undefined : skip, take: safeLimit === 0 ? undefined : Math.max(1, safeLimit) }),
       include: {
         addresses: true,
         orders: {
@@ -114,8 +135,16 @@ export const getCustomers = async (query = {}) => {
     prisma.customer.count({ where }),
   ]);
 
+  let customerSummaries = items.map(buildCustomerSummary);
+  if (shouldSortInMemory) {
+    customerSummaries = sortCustomerSummaries(customerSummaries, sortBy, query.order);
+    if (safeLimit !== 0) {
+      customerSummaries = customerSummaries.slice(skip, skip + Math.max(1, safeLimit));
+    }
+  }
+
   return {
-    items: items.map(buildCustomerSummary),
+    items: customerSummaries,
     total,
     page: safePage,
     pageSize: safeLimit === 0 ? total : Math.max(1, safeLimit),

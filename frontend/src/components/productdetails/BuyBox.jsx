@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import BuyNowButton from "../BuyNowButton";
+import { getAvailability } from "../../utils/inventory";
 
 const BuyBox = ({
   product,
@@ -9,12 +10,12 @@ const BuyBox = ({
   setQuantity,
   addToCart,
   handleBuyNow,
-  onWishlistToggle,
-  isWishlisted,
   stockStatus,
 }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [wasAdded, setWasAdded] = useState(false);
+
+  const availability = getAvailability(product);
 
   // Prefer explicit product.shipFrom, then company, then brand; avoid hardcoding 'Amazon'
   const shipFrom = product.shipFrom || product.company || product.brand || "ETrade Online";
@@ -73,7 +74,15 @@ const BuyBox = ({
           </div>
         </div>
 
-        <div className="mt-4 sm:mt-5 text-sm font-semibold text-emerald-700">{stockStatus || "In stock"}</div>
+        <div className="mt-4 sm:mt-5 text-sm font-semibold">
+          {availability.isAvailable ? (
+            <span className="text-emerald-700">✔ {availability.availabilityMessage}</span>
+          ) : availability.discontinued ? (
+            <span className="text-gray-500">{availability.availabilityMessage}</span>
+          ) : (
+            <span className="text-red-600">{availability.availabilityMessage}</span>
+          )}
+        </div>
 
         <div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-4">
           <label className="block text-xs sm:text-sm font-medium text-slate-700">Quantity</label>
@@ -96,28 +105,20 @@ const BuyBox = ({
         <button
           type="button"
           onClick={handleAddToCart}
-          disabled={isAdding || product.stock === 0}
+          disabled={isAdding || !availability.canAddToCart}
           className="mt-4 w-full rounded-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base font-bold shadow-sm bg-amber-400 hover:bg-amber-300 text-black transition-colors disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {product.stock === 0 ? "Out of stock" : isAdding ? "Adding…" : wasAdded ? "Added to cart" : "Add to cart"}
+          {!availability.canAddToCart ? (availability.discontinued ? "Discontinued" : "Currently unavailable") : isAdding ? "Adding…" : wasAdded ? "Added to cart" : "Add to cart"}
         </button>
 
         <BuyNowButton
           onClick={handleBuyNow}
-          disabled={product.stock === 0}
+          disabled={!availability.canAddToCart}
           analyticsPayload={{ ...product, selectedVariant, quantity }}
           className="mt-2 w-full rounded-full px-4 sm:px-5 py-3 sm:py-4 text-sm sm:text-base font-bold text-black bg-amber-400 shadow-sm hover:bg-amber-300 transition-colors"
         >
           Buy Now
         </BuyNowButton>
-
-        <button
-          type="button"
-          onClick={() => onWishlistToggle?.(product.id, !isWishlisted)}
-          className={`mt-2 w-full rounded-full border px-4 py-3 text-sm font-semibold transition ${isWishlisted ? "border-red-500 bg-red-50 text-red-600" : "border-slate-300 bg-white text-slate-700 hover:border-slate-400"}`}
-        >
-          {isWishlisted ? "Remove from Wishlist" : "Add to Wishlist"}
-        </button>
 
         <div className="mt-4 text-sm text-slate-700 space-y-2">
           <div className="flex items-center justify-between">

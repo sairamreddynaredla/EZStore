@@ -33,7 +33,6 @@ const ProductFilterSidebar = ({
         aria-expanded={isMobileOpen}
       >
         <span>{isMobileOpen ? "✕" : "☰"}</span>
-        {isMobileOpen ? "Close Filters" : "Show Filters"}
       </button>
 
       {/* Mobile Overlay Background */}

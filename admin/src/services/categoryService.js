@@ -12,23 +12,23 @@ const normalizeListResponse = (response) => {
     };
   }
 
+  const meta = data?.meta || data?.pagination || {};
+
   if (data && Array.isArray(data.data)) {
-    const meta = data.meta || data.pagination || {};
     return {
       items: data.data,
       total: meta.total ?? data.data.length,
-      page: meta.page ?? meta.currentPage ?? 1,
-      pageSize: meta.pageSize ?? meta.limit ?? data.data.length,
+      page: data.page ?? meta.page ?? meta.currentPage ?? 1,
+      pageSize: data.pageSize ?? meta.pageSize ?? meta.limit ?? data.data.length,
     };
   }
 
   if (data && Array.isArray(data.items)) {
-    const meta = data.meta || data.pagination || {};
     return {
       items: data.items,
       total: meta.total ?? data.total ?? data.items.length,
-      page: meta.page ?? meta.currentPage ?? 1,
-      pageSize: meta.pageSize ?? meta.limit ?? data.items.length,
+      page: data.page ?? meta.page ?? meta.currentPage ?? 1,
+      pageSize: data.pageSize ?? meta.pageSize ?? meta.limit ?? data.items.length,
     };
   }
 
@@ -79,14 +79,14 @@ export const getCategory = async (categoryId) => {
 
 export const createCategory = async (payload) => {
   const body = buildPayload(payload);
-  const config = body instanceof FormData ? { headers: { "Content-Type": "multipart/form-data" } } : undefined;
+  const config = body instanceof FormData ? {} : undefined;
   const response = await adminApi.post("/categories", body, config);
   return response.data;
 };
 
 export const updateCategory = async (categoryId, payload) => {
   const body = buildPayload(payload);
-  const config = body instanceof FormData ? { headers: { "Content-Type": "multipart/form-data" } } : undefined;
+  const config = body instanceof FormData ? {} : undefined;
   const response = await adminApi.put(`/categories/${categoryId}`, body, config);
   return response.data;
 };

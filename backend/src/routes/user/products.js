@@ -8,6 +8,10 @@ const router = express.Router();
 
 router.get("/", validateRequest({ query: productListQuerySchema }), async (req, res, next) => {
   try {
+    // By default only return active products unless explicitly requested
+    if (!req.query.includeDiscontinued) {
+      req.query.status = req.query.status || "active";
+    }
     const products = await getProducts(req.query);
     return sendSuccess(res, products, { message: "Products loaded" });
   } catch (error) {

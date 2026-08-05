@@ -1,4 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
+import AdminDialog from "./common/Dialog";
+import Select from "./common/Select";
+import { resolveAdminProductImage } from "../utils/productImage";
 
 const defaultFormState = {
   title: "",
@@ -51,10 +54,17 @@ const ProductFormModal = ({
 
   const imagePreviews = useMemo(() => {
     const previews = [];
-    if (form.imageUrl) previews.push(form.imageUrl);
-    if (Array.isArray(form.existingImages)) {
-      previews.push(...form.existingImages.filter(Boolean));
+    const normalizedExistingImages = Array.isArray(form.existingImages) ? form.existingImages.filter(Boolean) : [];
+    const normalizedImageUrl = form.imageUrl || initialProduct?.image || initialProduct?.imageUrl || "";
+
+    if (normalizedImageUrl) {
+      previews.push(normalizedImageUrl);
     }
+
+    if (normalizedExistingImages.length) {
+      previews.push(...normalizedExistingImages);
+    }
+
     if (Array.isArray(form.images)) {
       form.images.forEach((file) => {
         if (file instanceof File) {
@@ -62,8 +72,9 @@ const ProductFormModal = ({
         }
       });
     }
-    return previews;
-  }, [form.imageUrl, form.existingImages, form.images]);
+
+    return previews.filter(Boolean);
+  }, [form.imageUrl, form.existingImages, form.images, initialProduct]);
 
   const handleChange = (field, value) => {
     setForm((current) => ({
@@ -142,23 +153,8 @@ const ProductFormModal = ({
   if (!visible) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
-      <div className="w-full max-w-3xl overflow-hidden rounded-2xl bg-white shadow-2xl">
-        <div className="flex items-center justify-between border-b border-neutral-border px-6 py-4">
-          <div>
-            <h2 className="text-xl font-semibold text-slate-900">{title}</h2>
-            <p className="text-sm text-slate-500">Manage product details and inventory.</p>
-          </div>
-          <button
-            type="button"
-            className="rounded-lg px-3 py-2 text-slate-500 transition hover:bg-slate-100"
-            onClick={onClose}
-          >
-            Close
-          </button>
-        </div>
-
-        <form className="space-y-6 px-6 py-5" onSubmit={handleSubmit}>
+    <AdminDialog open={visible} onOpenChange={onClose} title={title} description="Manage product details and inventory.">
+      <form className="space-y-6 px-6 py-5" onSubmit={handleSubmit}>
           <div className="grid gap-4 md:grid-cols-2">
             <label className="space-y-2">
               <span className="text-sm font-medium text-slate-700">Title</span>
@@ -218,20 +214,14 @@ const ProductFormModal = ({
                 className="w-full rounded-xl border border-neutral-border px-4 py-3 bg-slate-50 focus:border-primary-500 focus:outline-none"
               />
             </label>
-            <label className="space-y-2">
-              <span className="text-sm font-medium text-slate-700">Status</span>
-              <select
+            <div className="space-y-2">
+              <Select
+                label="Status"
                 value={form.status}
-                onChange={(e) => handleChange("status", e.target.value)}
-                className="w-full rounded-xl border border-neutral-border bg-slate-50 px-4 py-3 text-slate-700 focus:border-primary-500 focus:outline-none"
-              >
-                {statusOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </label>
+                onValueChange={(value) => handleChange("status", value)}
+                options={statusOptions}
+              />
+            </div>
           </div>
 
           <label className="space-y-2">
@@ -260,18 +250,32 @@ const ProductFormModal = ({
               <input type="file" multiple accept="image/*" onChange={handleImagesChange} />
             </div>
             <div className="flex flex-wrap gap-3">
-              {imagePreviews.map((src, index) => (
-                <div key={`${src}-${index}`} className="relative w-24 overflow-hidden rounded-xl border border-neutral-border bg-slate-50">
-                  <img src={src} alt={`preview-${index}`} className="h-24 w-full object-cover" />
-                  <button
-                    type="button"
-                    onClick={() => (index < (form.existingImages?.length ?? 0) ? handleRemoveExistingImage(index) : handleRemoveNewImage(index - (form.existingImages?.length ?? 0)))}
-                    className="absolute right-1 top-1 rounded-full bg-white/90 px-2 text-sm text-slate-600 shadow-sm"
-                  >
-                    ×
-                  </button>
+              {imagePreviews.length > 0 ? (
+                imagePreviews.map((src, index) => (
+                  <div key={`${src}-${index}`} className="relative w-24 overflow-hidden rounded-xl border border-neutral-border bg-slate-50">
+                    <img
+                      src={src.startsWith("blob:") || src.startsWith("data:") ? src : resolveAdminProductImage({ image: src, imageUrl: src, images: [src] })}
+                      alt={`preview-${index}`}
+                      className="h-24 w-full object-cover"
+                      onError={(event) => {
+                        event.currentTarget.onerror = null;
+                        event.currentTarget.src = resolveAdminProductImage({ image: null, imageUrl: null, images: [] });
+                      }}
+                    />
+                    <button
+                      type="button"
+                      onClick={() => (index < (form.existingImages?.length ?? 0) ? handleRemoveExistingImage(index) : handleRemoveNewImage(index - (form.existingImages?.length ?? 0)))}
+                      className="absolute right-1 top-1 rounded-full bg-white/90 px-2 text-sm text-slate-600 shadow-sm"
+                    >
+                      ×
+                    </button>
+                  </div>
+                ))
+              ) : (
+                <div className="flex h-24 w-24 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-sm text-slate-500">
+                  No image
                 </div>
-              ))}
+              )}
             </div>
           </div>
 
@@ -294,8 +298,7 @@ const ProductFormModal = ({
             </button>
           </div>
         </form>
-      </div>
-    </div>
+    </AdminDialog>
   );
 };
 

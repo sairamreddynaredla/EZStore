@@ -1,8 +1,10 @@
 import { io } from "socket.io-client";
+import { getBackendBaseUrl } from "./apiConfig";
 
 let socket = null;
 
-const SOCKET_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
+const SOCKET_PATH = import.meta.env.VITE_SOCKET_PATH || "/socket.io";
+const SOCKET_URL = getBackendBaseUrl();
 
 /**
  * Initialize socket connection
@@ -12,12 +14,18 @@ export const initSocket = () => {
     return socket;
   }
 
-  socket = io(SOCKET_URL, {
+  const opts = {
+    path: SOCKET_PATH,
     reconnection: true,
     reconnectionDelay: 1000,
     reconnectionDelayMax: 5000,
     reconnectionAttempts: 5,
-  });
+  };
+
+  // If a backend origin is known (production absolute URL), connect directly.
+  // Otherwise let the client connect to the current origin so the Vite dev
+  // server proxy forwards the socket connection to the backend.
+  socket = SOCKET_URL ? io(SOCKET_URL, opts) : io(opts);
 
   socket.on("connect", () => {
     console.log("Socket connected:", socket.id);
@@ -65,20 +73,30 @@ export const subscribeToPriceUpdates = (productId, callback) => {
 };
 
 /**
- * Subscribe to real-time recommended products
- * @param {string} productId - Product ID
- * @param {function} callback - Callback function when recommendations update
+ * Join a customer-specific socket room for real-time order updates
+ * @param {number|string} customerId - Customer ID
  */
-export const subscribeToRecommendations = (productId, callback) => {
+export const joinCustomerRoom = (customerId) => {
+  if (!customerId) return;
   const socketInstance = getSocket();
-  
-  const eventName = `product:recommendations:${productId}`;
-  socketInstance.on(eventName, (data) => {
-    callback(data);
-  });
+  socketInstance.emit("joinCustomerRoom", customerId);
+};
+
+/**
+ * Subscribe to customer order events
+ * @param {function} callback - Callback for order events
+ */
+export const subscribeToCustomerOrderEvents = (callback) => {
+  const socketInstance = getSocket();
+  const orderCreated = (data) => callback({ type: "orderCreated", ...data });
+  const orderUpdated = (data) => callback({ type: "orderUpdated", ...data });
+
+  socketInstance.on("orderCreated", orderCreated);
+  socketInstance.on("orderUpdated", orderUpdated);
 
   return () => {
-    socketInstance.off(eventName, callback);
+    socketInstance.off("orderCreated", orderCreated);
+    socketInstance.off("orderUpdated", orderUpdated);
   };
 };
 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ShieldCheck, Mail, Lock } from "lucide-react";
 import adminApi from "../services/api";
@@ -7,6 +7,8 @@ import { useAdminAuth } from "../hooks/useAdminAuth";
 const AdminLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [remember, setRemember] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -14,6 +16,18 @@ const AdminLogin = () => {
   const { login } = useAdminAuth();
 
   const from = location.state?.from?.pathname || "/admin";
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem("admin_email");
+      if (saved) {
+        setEmail(saved);
+        setRemember(true);
+      }
+    } catch (e) {
+      // ignore
+    }
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,6 +49,11 @@ const AdminLogin = () => {
       }
 
       login({ token, user });
+      if (remember) {
+        localStorage.setItem("admin_email", email);
+      } else {
+        localStorage.removeItem("admin_email");
+      }
       navigate(from, { replace: true });
     } catch (err) {
       setError(err.response?.data?.message || err.message || "Unable to sign in. Please check your credentials.");
@@ -66,6 +85,7 @@ const AdminLogin = () => {
             <input
               type="email"
               placeholder="Email address"
+              autoComplete="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-4 text-sm outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-600/20"
@@ -73,14 +93,43 @@ const AdminLogin = () => {
           </div>
           <div className="relative">
             <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-            <input
-              type="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-4 text-sm outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-600/20"
-            />
+              <div className="flex items-center">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 pl-10 pr-4 text-sm outline-none focus:border-primary-600 focus:ring-2 focus:ring-primary-600/20"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword((s) => !s)}
+                  className="ml-2 text-sm text-slate-500 hover:text-slate-700"
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </div>
           </div>
+            <div className="flex items-center justify-between">
+              <label className="inline-flex items-center text-sm text-slate-600">
+                <input
+                  type="checkbox"
+                  checked={remember}
+                  onChange={(e) => setRemember(e.target.checked)}
+                  className="mr-2 h-4 w-4 rounded border-slate-300 text-primary-600 focus:ring-primary-500"
+                />
+                Remember me
+              </label>
+              <button
+                type="button"
+                onClick={() => navigate("/admin/forgot-password")}
+                className="text-sm text-primary-600 hover:underline"
+              >
+                Forgot password?
+              </button>
+            </div>
           <button
             type="submit"
             disabled={loading}

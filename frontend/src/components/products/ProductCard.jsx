@@ -6,8 +6,9 @@ import { useWishlist } from "../../context/usewishlist";
 import { useSocket } from "../../hooks/useSocket";
 import { useRealtimeProductPrice } from "../../hooks/useRealtimeProductPrice";
 import { resolveProductImage, resolveProductImageFallback } from "../../utils/productImage";
+import { getAvailability } from "../../utils/inventory";
 
-const ProductCard = ({ product, onAddToCart, onWishlistToggle, compact = false }) => {
+const ProductCard = ({ product, onAddToCart, onWishlistToggle, compact = false, showWishlistButton = true }) => {
   const { isInWishlist, addToWishlist, removeFromWishlist } = useWishlist();
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
   const [imageSrc, setImageSrc] = useState(resolveProductImage(product));
@@ -37,15 +38,25 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle, compact = false }
   const currentPrice = realtimePrice.price !== 0 ? realtimePrice.price : Number(selectedVariant.price ?? product.price ?? 0);
   const originalPrice = realtimePrice.originalPrice !== 0 ? realtimePrice.originalPrice : Number(selectedVariant.originalPrice ?? product.originalPrice ?? 0);
   const discount = originalPrice > currentPrice ? Math.round(((originalPrice - currentPrice) / originalPrice) * 100) : 0;
-  const isOutOfStock = (product.stock ?? 1) <= 0;
+  const availability = getAvailability(product);
+  const isOutOfStock = availability.outOfStock;
+  const canAddToCart = availability.canAddToCart;
+  const showAvailabilityBadge = availability.badge.text !== "In Stock";
   const wishlisted = isInWishlist(product.id);
 
   const handleWishlist = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    if (wishlisted) removeFromWishlist(product.id);
-    else addToWishlist(product);
-    if (onWishlistToggle) onWishlistToggle(product, !wishlisted);
+    // Pages that provide a handler already update the shared wishlist context.
+    // Calling both paths sends two toggle requests, which can undo the first
+    // request and leave the heart button in the wrong state.
+    if (onWishlistToggle) {
+      onWishlistToggle(product, !wishlisted);
+    } else if (wishlisted) {
+      removeFromWishlist(product.id, product);
+    } else {
+      addToWishlist(product);
+    }
   };
 
   const handleVariantClick = (e, idx) => {
@@ -69,9 +80,11 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle, compact = false }
       {compact ? (
         <div className="flex flex-col h-full">
             <div className="relative flex-1 flex items-center justify-center bg-white">
-            <button onClick={handleWishlist} className="absolute top-2 right-2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-white/90 hover:scale-105 shadow-sm" aria-label="Wishlist">
-              <Heart size={18} className={wishlisted ? "fill-red-500 text-red-500" : "text-gray-400 hover:text-red-400"} />
-            </button>
+            {showWishlistButton && (
+              <button onClick={handleWishlist} className="absolute top-2 right-2 z-10 w-9 h-9 flex items-center justify-center rounded-full bg-white/90 hover:scale-105 shadow-sm" aria-label="Wishlist">
+                <Heart size={18} className={wishlisted ? "fill-red-500 text-red-500" : "text-gray-400 hover:text-red-400"} />
+              </button>
+            )}
             <img src={imageSrc} alt={product.name} className="max-w-[66%] sm:max-w-[86%] max-h-[66%] sm:max-h-[86%] object-contain transform transition-transform duration-300 group-hover:scale-105 group-hover:-translate-y-1 group-hover:shadow-lg p-0 sm:p-1" />
           </div>
           <div className="p-3 bg-[#f7f3ee] sm:bg-white">
@@ -94,9 +107,11 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle, compact = false }
       ) : (
         <>
           <div className="relative bg-white px-3 sm:px-3 pt-2 sm:pt-3 pb-1 sm:pb-2">
-            <button onClick={handleWishlist} className="absolute top-2 sm:top-3 right-2 sm:right-3 z-10 w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center rounded-full bg-white/85 backdrop-blur-sm hover:scale-110 hover:bg-white shadow-md hover:shadow-lg transition-all" aria-label="Wishlist">
-              <Heart size={20} className={wishlisted ? "fill-red-500 text-red-500" : "text-gray-400 hover:text-red-400"} />
-            </button>
+            {showWishlistButton && (
+              <button onClick={handleWishlist} className="absolute top-2 sm:top-3 right-2 sm:right-3 z-10 w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center rounded-full bg-white/85 backdrop-blur-sm hover:scale-110 hover:bg-white shadow-md hover:shadow-lg transition-all" aria-label="Wishlist">
+                <Heart size={20} className={wishlisted ? "fill-red-500 text-red-500" : "text-gray-400 hover:text-red-400"} />
+              </button>
+            )}
 
             <div className="absolute top-3 left-3 z-10">
               {product.vegType === "Veg" ? (
@@ -111,6 +126,12 @@ const ProductCard = ({ product, onAddToCart, onWishlistToggle, compact = false }
 
               {product.rating > 0 && (
                 <div className="absolute bottom-2 left-2 flex items-center gap-1 bg-white rounded-full px-2 py-0.5 shadow-sm border border-gray-100 z-10"><span className="text-[11px] font-bold text-gray-800">{product.rating.toFixed(2)}</span><span className="text-yellow-400 text-[11px]">★</span></div>
+              )}
+              {/* Availability badge */}
+              {showAvailabilityBadge && (
+                <div className="absolute top-3 right-3 z-20">
+                  <span className={`px-2 py-1 rounded-full text-[12px] font-semibold ${availability.badge.color}`}>{availability.badge.text}</span>
+                </div>
               )}
             </div>
           </div>

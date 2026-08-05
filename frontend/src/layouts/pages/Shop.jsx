@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { useLocation } from "react-router-dom";
 
@@ -10,7 +10,7 @@ import ProductSort from "../../components/products/ProductSort";
 import ProductSearch from "../../components/products/ProductSearch";
 import Footer from "../../components/Footer";
 
-import { products } from "../../data/products";
+import { fetchProducts } from "../../services/productApi";
 import useCart from "../../hooks/usecart";
 import { useWishlist } from "../../context/WishListContext";
 
@@ -40,6 +40,22 @@ const Shop = () => {
 
   const searchParam = queryParams.get("search");
 
+  useEffect(() => {
+    const loadProducts = async () => {
+      setLoadingProducts(true);
+      try {
+        const items = await fetchProducts();
+        setProducts(items);
+      } catch (err) {
+        setProducts([]);
+      } finally {
+        setLoadingProducts(false);
+      }
+    };
+
+    loadProducts();
+  }, []);
+
   const saleParam = queryParams.get("sale");
 
   // SEARCH
@@ -68,6 +84,8 @@ const Shop = () => {
     specialDiets: [],
   };
 
+  const [products, setProducts] = useState([]);
+  const [loadingProducts, setLoadingProducts] = useState(true);
   const [filters, setFilters] = useState(DEFAULT_FILTERS);
 
   // SORT

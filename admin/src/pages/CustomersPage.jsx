@@ -9,14 +9,17 @@ import Badge from "../components/Badge";
 import Pagination from "../components/Pagination";
 import CustomerDetailsModal from "../components/CustomerDetailsModal";
 import PageHeader from "../components/PageHeader";
+import Select from "../components/common/Select";
 
-const CUSTOMER_STATUSES = ["active", "blocked"];
+const CUSTOMER_STATUSES = ["active", "abandoned", "blocked"];
 const STATUS_LABELS = {
   active: "Active",
+  abandoned: "Abandoned",
   blocked: "Blocked",
 };
 const STATUS_TONES = {
   active: "success",
+  abandoned: "warning",
   blocked: "danger",
 };
 const SORT_OPTIONS = [
@@ -115,16 +118,17 @@ const CustomersPage = () => {
   };
 
   const handleStatusUpdate = async (customerId, currentStatus) => {
-    const nextStatus = currentStatus === "blocked" ? "active" : "blocked";
+    const nextStatus = currentStatus === "blocked" || currentStatus === "abandoned" ? "active" : "abandoned";
+    const actionText = currentStatus === "blocked" ? "unblock" : currentStatus === "abandoned" ? "activate" : "mark abandoned";
     const confirmed = window.confirm(
-      `Are you sure you want to ${nextStatus === "blocked" ? "block" : "unblock"} this customer?`
+      `Are you sure you want to ${actionText} this customer?`
     );
     if (!confirmed) return;
 
     setStatusUpdating(true);
     try {
       await updateCustomerStatus(customerId, nextStatus);
-      success(`Customer ${nextStatus === "blocked" ? "blocked" : "unblocked"} successfully.`);
+      success(`Customer ${actionText === "mark abandoned" ? "marked abandoned" : `${actionText}d`} successfully.`);
       await loadCustomers();
       if (selectedCustomer?.id === customerId || selectedCustomer?.customerId === customerId) {
         setSelectedCustomer((current) => ({ ...current, status: nextStatus }));
@@ -159,39 +163,25 @@ const CustomersPage = () => {
               className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
             />
           </label>
-          <label className="space-y-2">
-            <span className="text-sm font-medium text-slate-700">Status</span>
-            <select
-              value={statusFilter}
-              onChange={(event) => setStatusFilter(event.target.value)}
-              className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-            >
-              <option value="">All statuses</option>
-              {CUSTOMER_STATUSES.map((status) => (
-                <option key={status} value={status}>
-                  {STATUS_LABELS[status]}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="space-y-2">
-            <span className="text-sm font-medium text-slate-700">Sort</span>
-            <select
-              value={`${sortBy}:${sortOrder}`}
-              onChange={(event) => {
-                const [field, order] = event.target.value.split(":");
-                setSortBy(field);
-                setSortOrder(order);
-              }}
-              className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-            >
-              {SORT_OPTIONS.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
-          </label>
+          <Select
+            value={statusFilter}
+            onValueChange={(value) => setStatusFilter(value)}
+            options={[
+              { value: "", label: "All statuses" },
+              ...CUSTOMER_STATUSES.map((status) => ({ value: status, label: STATUS_LABELS[status] }))
+            ]}
+            placeholder="All statuses"
+          />
+          <Select
+            value={`${sortBy}:${sortOrder}`}
+            onValueChange={(value) => {
+              const [field, order] = value.split(":");
+              setSortBy(field);
+              setSortOrder(order);
+            }}
+            options={SORT_OPTIONS}
+            placeholder="Sort reviews"
+          />
         </div>
       </div>
       </section>
@@ -231,7 +221,7 @@ const CustomersPage = () => {
                 const id = customer.id ?? customer.customerId;
                 const name = customer.name || `${customer.firstName || ""} ${customer.lastName || ""}`.trim() || "—";
                 const email = customer.email || customer.contactEmail || "—";
-                const phone = customer.phone || customer.contactPhone || "—";
+                const phone = customer.phone || customer.contactPhone || customer.addresses?.[0]?.phone || "—";
                 const totalOrders = customer.totalOrders ?? customer.orderCount ?? customer.orders?.length ?? 0;
                 const totalSpent = customer.totalSpent ?? customer.lifetimeValue ?? customer.spending ?? 0;
                 const registered = customer.registeredAt || customer.createdAt || "";
@@ -241,7 +231,7 @@ const CustomersPage = () => {
                   <tr key={id} className="border-t border-slate-100 hover:bg-slate-50">
                     <td className="px-5 py-4 font-semibold text-slate-900">{name}</td>
                     <td className="px-5 py-4 text-slate-700">{email}</td>
-                    <td className="px-5 py-4 text-slate-700">{phone}</td>
+                    <td className="px-5 py-4 text-slate-700 whitespace-nowrap">{phone}</td>
                     <td className="px-5 py-4 text-slate-700">{totalOrders}</td>
                     <td className="px-5 py-4 text-slate-700">{formatCurrency(totalSpent)}</td>
                     <td className="px-5 py-4 text-slate-700">{registered ? new Date(registered).toLocaleDateString() : "—"}</td>
@@ -262,7 +252,7 @@ const CustomersPage = () => {
                           onClick={() => handleStatusUpdate(id, status)}
                           className="rounded-2xl border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-primary-500 hover:text-primary-600"
                         >
-                          {status === "blocked" ? "Unblock" : "Block"}
+                          {status === "blocked" ? "Unblock" : status === "abandoned" ? "Activate" : "Mark abandoned"}
                         </button>
                       </div>
                     </td>

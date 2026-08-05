@@ -5,10 +5,11 @@ import { addOrderNote, createRefundRequest, getOrders, getOrder, resolveRefundRe
 import Badge from "../components/Badge";
 import Pagination from "../components/Pagination";
 import PageHeader from "../components/PageHeader";
+import Select from "../components/common/Select";
 
-const ORDER_STATUS = ["pending", "confirmed", "processing", "shipped", "delivered", "cancelled", "refunded"];
+const ORDER_STATUS = ["pending", "confirmed", "processing", "packed", "shipped", "out_for_delivery", "delivered", "cancelled", "returned", "refund_requested", "refund_completed"];
 const PAYMENT_STATUS = ["paid", "pending", "failed", "refunded"];
-const PAYMENT_METHODS = ["card", "paypal", "bank_transfer", "cash_on_delivery"];
+const PAYMENT_METHODS = ["card", "paypal", "bank_transfer"];
 
 const ORDER_STATUS_LABELS = {
   pending: "Pending",
@@ -36,7 +37,6 @@ const PAYMENT_METHOD_LABELS = {
   card: "Card",
   paypal: "PayPal",
   bank_transfer: "Bank Transfer",
-  cash_on_delivery: "Cash on delivery",
 };
 
 const STATUS_TONE = {
@@ -52,6 +52,18 @@ const STATUS_TONE = {
   refund_requested: "warning",
   refund_approved: "warning",
   refund_completed: "danger",
+};
+
+const NEXT_ORDER_STATUS = {
+  pending: "confirmed",
+  confirmed: "processing",
+  processing: "packed",
+  packed: "shipped",
+  shipped: "out_for_delivery",
+  out_for_delivery: "delivered",
+  delivered: "returned",
+  returned: "refund_requested",
+  refund_requested: "refund_completed",
 };
 
 const debounce = (fn, delay) => {
@@ -261,51 +273,33 @@ const OrdersPage = () => {
               className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
             />
           </label>
-          <label className="space-y-2">
-            <span className="text-sm font-medium text-slate-700">Order status</span>
-            <select
-              value={statusFilter}
-              onChange={(event) => setStatusFilter(event.target.value)}
-              className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-            >
-              <option value="">All statuses</option>
-              {ORDER_STATUS.map((status) => (
-                <option key={status} value={status}>
-                  {ORDER_STATUS_LABELS[status]}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="space-y-2">
-            <span className="text-sm font-medium text-slate-700">Payment status</span>
-            <select
-              value={paymentStatusFilter}
-              onChange={(event) => setPaymentStatusFilter(event.target.value)}
-              className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-            >
-              <option value="">All payment statuses</option>
-              {PAYMENT_STATUS.map((status) => (
-                <option key={status} value={status}>
-                  {PAYMENT_STATUS_LABELS[status]}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label className="space-y-2">
-            <span className="text-sm font-medium text-slate-700">Payment method</span>
-            <select
-              value={paymentMethodFilter}
-              onChange={(event) => setPaymentMethodFilter(event.target.value)}
-              className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-            >
-              <option value="">All methods</option>
-              {PAYMENT_METHODS.map((method) => (
-                <option key={method} value={method}>
-                  {PAYMENT_METHOD_LABELS[method]}
-                </option>
-              ))}
-            </select>
-          </label>
+          <Select
+            label="Order status"
+            value={statusFilter}
+            onValueChange={(value) => setStatusFilter(value)}
+            options={[
+              { value: "", label: "All statuses" },
+              ...ORDER_STATUS.map((status) => ({ value: status, label: ORDER_STATUS_LABELS[status] }))
+            ]}
+          />
+          <Select
+            label="Payment status"
+            value={paymentStatusFilter}
+            onValueChange={(value) => setPaymentStatusFilter(value)}
+            options={[
+              { value: "", label: "All payment statuses" },
+              ...PAYMENT_STATUS.map((status) => ({ value: status, label: PAYMENT_STATUS_LABELS[status] }))
+            ]}
+          />
+          <Select
+            label="Payment method"
+            value={paymentMethodFilter}
+            onValueChange={(value) => setPaymentMethodFilter(value)}
+            options={[
+              { value: "", label: "All methods" },
+              ...PAYMENT_METHODS.map((method) => ({ value: method, label: PAYMENT_METHOD_LABELS[method] }))
+            ]}
+          />
           <label className="space-y-2">
             <span className="text-sm font-medium text-slate-700">From date</span>
             <input
@@ -324,25 +318,23 @@ const OrdersPage = () => {
               className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
             />
           </label>
-          <label className="space-y-2">
-            <span className="text-sm font-medium text-slate-700">Sort</span>
-            <select
-              value={`${sortBy}:${sortOrder}`}
-              onChange={(event) => {
-                const [field, order] = event.target.value.split(":");
-                setSortBy(field);
-                setSortOrder(order);
-              }}
-              className="w-full rounded-2xl border border-neutral-border bg-slate-50 px-4 py-3 focus:border-primary-500 focus:outline-none"
-            >
-              <option value="orderDate:desc">Date newest</option>
-              <option value="orderDate:asc">Date oldest</option>
-              <option value="totalAmount:desc">Amount high → low</option>
-              <option value="totalAmount:asc">Amount low → high</option>
-              <option value="customerName:asc">Customer A → Z</option>
-              <option value="customerName:desc">Customer Z → A</option>
-            </select>
-          </label>
+          <Select
+            label="Sort"
+            value={`${sortBy}:${sortOrder}`}
+            onValueChange={(value) => {
+              const [field, order] = value.split(":");
+              setSortBy(field);
+              setSortOrder(order);
+            }}
+            options={[
+              { value: "orderDate:desc", label: "Date newest" },
+              { value: "orderDate:asc", label: "Date oldest" },
+              { value: "totalAmount:desc", label: "Amount high → low" },
+              { value: "totalAmount:asc", label: "Amount low → high" },
+              { value: "customerName:asc", label: "Customer A → Z" },
+              { value: "customerName:desc", label: "Customer Z → A" }
+            ]}
+          />
         </div>
       </div>
       </section>
@@ -387,6 +379,7 @@ const OrdersPage = () => {
                 const paymentMethod = order.paymentMethod || order.payment?.method || "—";
                 const paymentStatus = order.paymentStatus || order.payment?.status || "—";
                 const orderStatus = order.orderStatus || order.status || "pending";
+                const nextStatus = NEXT_ORDER_STATUS[orderStatus];
                 const date = order.orderDate || order.date || order.createdAt || "";
                 return (
                   <tr key={orderId} className="border-t border-slate-100 hover:bg-slate-50">
@@ -411,13 +404,15 @@ const OrdersPage = () => {
                         >
                           View
                         </button>
-                        <button
-                          type="button"
-                          onClick={() => updateStatus(orderId, orderStatus === "cancelled" ? "pending" : "confirmed")}
-                          className="rounded-2xl border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-primary-500 hover:text-primary-600"
-                        >
-                          Update
-                        </button>
+                        {nextStatus ? (
+                          <button
+                            type="button"
+                            onClick={() => updateStatus(orderId, nextStatus)}
+                            className="rounded-2xl border border-slate-200 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-primary-500 hover:text-primary-600"
+                          >
+                            Mark {ORDER_STATUS_LABELS[nextStatus]}
+                          </button>
+                        ) : null}
                       </div>
                     </td>
                   </tr>
@@ -469,9 +464,9 @@ const OrdersPage = () => {
                     <div className="mt-6 space-y-2 text-sm text-slate-700">
                       <p><span className="font-semibold">Customer:</span> {orderDetails.customerName || orderDetails.customer?.name}</p>
                       <p><span className="font-semibold">Email:</span> {orderDetails.customerEmail || orderDetails.customer?.email}</p>
-                      <p><span className="font-semibold">Phone:</span> {orderDetails.customerPhone || orderDetails.customer?.phone}</p>
-                      <p><span className="font-semibold">Payment:</span> {orderDetails.paymentMethod || orderDetails.payment?.method}</p>
-                      <p><span className="font-semibold">Payment status:</span> {orderDetails.paymentStatus || orderDetails.payment?.status}</p>
+                      <p><span className="font-semibold">Phone:</span> {orderDetails.customerPhone || orderDetails.customer?.phone || orderDetails.shippingAddress?.phone || "—"}</p>
+                      <p><span className="font-semibold">Payment:</span> {orderDetails.paymentMethod || orderDetails.payment?.method || "—"}</p>
+                      <p><span className="font-semibold">Payment status:</span> {orderDetails.paymentStatus || orderDetails.payment?.status || "—"}</p>
                       <p><span className="font-semibold">Order status:</span> {ORDER_STATUS_LABELS[orderDetails.orderStatus || orderDetails.status] || orderDetails.orderStatus || orderDetails.status}</p>
                     </div>
                   </div>

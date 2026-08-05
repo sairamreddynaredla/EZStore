@@ -4,67 +4,6 @@ import tasteWildImg from "../../assets/products/cats/grain-free-food/taste-of-th
 import farminaImg from "../../assets/products/cats/grain-free-food/farmina-nd-chicken-pomegranate-grain-free-cat-food.webp";
 
 export const grainFreeFood = [
-  {
-    id: 1501,
-    name: "Royal Canin Grain Free Adult Cat Food",
-    brand: "Royal Canin",
-    category: "cats-grain-free-food",
-    subCategory: "grain-free-food",
-    pet: "Cat",
-    petType: "Cat",
-    productCategory: "Cat Food",
-    productType: "Grain Free Food",
-    flavor: "Chicken",
-    lifeStage: "Adult",
-    specialDiet: "Grain Free",
-    vegType: "Non-Veg",
-
-    rating: 4.8,
-    reviews: 245,
-    soldCount: 864,
-    stock: 36,
-
-    fastDelivery: true,
-    isNew: false,
-    deliveryDate: "Tomorrow",
-
-    image: royalCaninGrainFreeImg,
-
-    images: [
-      royalCaninGrainFreeImg,
-      royalCaninGrainFreeImg,
-      royalCaninGrainFreeImg,
-      royalCaninGrainFreeImg,
-    ],
-
-    description: "High protein grain-free nutrition formulated for healthy adult cats.",
-
-    ingredients: ["Chicken", "Peas", "Potatoes", "Fish Oil", "Vitamins", "Minerals"],
-
-    features: ["Grain free recipe", "High protein", "Supports digestion", "Healthy skin and coat"],
-
-    nutrition: {
-      protein: "34%",
-      fat: "18%",
-      fiber: "4%",
-      moisture: "10%",
-    },
-
-    manufacturer: "Royal Canin",
-    country: "France",
-
-    weight: ["4lb", "8lb"],
-
-    variants: [
-      { weight: "4lb", price: 28.99, originalPrice: 34.99 },
-      { weight: "8lb", price: 52.99, originalPrice: 62.99 },
-    ],
-
-    subscriptionEligible: true,
-    subscriptionDiscount: 0.1,
-
-    relatedProducts: [1502, 1504],
-  },
 
   {
     id: 1502,
