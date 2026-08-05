@@ -28,7 +28,14 @@ export const createOrder = async (req, res, next) => {
       idempotencyKey: req.headers["idempotency-key"] || req.headers["idempotency_key"],
     });
 
-    return sendSuccess(res, result, { message: "Payment order created successfully", status: 201 });
+    if (result.idempotencyPending) {
+      return sendSuccess(res, result, { message: "Payment request is already being processed", status: 202 });
+    }
+
+    return sendSuccess(res, result, {
+      message: result.idempotencyReplay ? "Payment order replayed" : "Payment order created successfully",
+      status: 200,
+    });
   } catch (err) {
     logger.error("paymentController.createOrder_failed", { error: String(err) });
     return next(err);

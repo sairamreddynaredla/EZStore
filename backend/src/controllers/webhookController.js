@@ -20,11 +20,12 @@ export const handleWebhook = (providerKey) => async (req, res, next) => {
     }
 
     const { eventId, eventType, status: webhookStatus, orderNumber, providerOrderId, payload } = parsedEvent;
+    const webhookEvents = prisma.stripeWebhookEvent || prisma.webhookLog;
 
-    // Deduplicate: log into WebhookLog table if available
-    if (prisma.webhookLog) {
+    // Deduplicate before processing a provider event.
+    if (webhookEvents) {
       try {
-        await prisma.webhookLog.create({
+        await webhookEvents.create({
           data: {
             provider: providerInstance.name,
             eventId: eventId || `${providerName}_${Date.now()}_${Math.random().toString(36).slice(2, 6)}`,
@@ -40,8 +41,8 @@ export const handleWebhook = (providerKey) => async (req, res, next) => {
     }
 
     if (webhookStatus === "ignored" || (!orderNumber && !providerOrderId)) {
-      if (prisma.webhookLog) {
-        await prisma.webhookLog.updateMany({ where: { eventId }, data: { status: "ignored" } });
+      if (webhookEvents) {
+        await webhookEvents.updateMany({ where: { eventId }, data: { status: "ignored" } });
       }
       return sendSuccess(res, { message: "Webhook event acknowledged but ignored" });
     }
@@ -58,8 +59,8 @@ export const handleWebhook = (providerKey) => async (req, res, next) => {
 
     if (!payment) {
       logger.warn("webhook.payment_not_found", { provider: providerName, eventId, orderNumber, providerOrderId });
-      if (prisma.webhookLog) {
-        await prisma.webhookLog.updateMany({ where: { eventId }, data: { status: "ignored", errorMessage: "Payment record not found" } });
+      if (webhookEvents) {
+        await webhookEvents.updateMany({ where: { eventId }, data: { status: "ignored", errorMessage: "Payment record not found" } });
       }
       return sendSuccess(res, { message: "Webhook acknowledged: payment not found" });
     }
@@ -166,8 +167,8 @@ export const handleWebhook = (providerKey) => async (req, res, next) => {
       });
     }
 
-    if (prisma.webhookLog) {
-      await prisma.webhookLog.updateMany({ where: { eventId }, data: { status: "processed", processedAt: new Date() } });
+    if (webhookEvents) {
+      await webhookEvents.updateMany({ where: { eventId }, data: { status: "processed", processedAt: new Date() } });
     }
 
     try {

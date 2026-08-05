@@ -27,8 +27,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: npm
 
-      - name: Install root dependencies
-        run: npm ci
+      - name: Install frontend dependencies
+        run: cd frontend && npm ci
+
+      - name: Install admin dependencies
+        run: cd frontend/admin && npm ci
 
       - name: Install backend dependencies
         run: cd backend && npm ci
@@ -40,10 +43,13 @@ jobs:
         run: cd backend && npx prisma validate --schema prisma/schema.prisma
 
       - name: Run frontend lint
-        run: npm run lint
+        run: npm run lint:frontend
 
       - name: Build frontend
-        run: npm run build
+        run: npm run build:frontend
+
+      - name: Build admin frontend
+        run: npm run build:admin
 
       - name: Run backend tests
         run: cd backend && npm test

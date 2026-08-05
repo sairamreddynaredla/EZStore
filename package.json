@@ -3,6 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "engines": {
+    "node": ">=20.19.0 <23"
+  },
   "scripts": {
     "install:all": "npm install && npm run install:frontend && npm run install:admin && npm run install:backend",
     "install:frontend": "cd frontend && npm install",

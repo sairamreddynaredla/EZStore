@@ -17,6 +17,7 @@ export default defineConfig({
   },
   server: {
     port: 5174,
+    strictPort: true,
     fs: {
       allow: [path.resolve(__dirname), frontendAssetsPath],
     },

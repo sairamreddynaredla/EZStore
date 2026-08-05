@@ -264,6 +264,7 @@ export const applyInventoryForStatus = async (tx, order, nextStatus, actorId = n
         });
       }
     }
+  }
 
   if (transition.inventoryAction === "deduct") {
     const items = Array.isArray(order.items) ? order.items : [];
@@ -348,7 +349,6 @@ export const applyInventoryForStatus = async (tx, order, nextStatus, actorId = n
           reason: `Order ${order.orderNumber} restored`,
         },
       });
-      }
     }
   }
 
@@ -458,6 +458,7 @@ export const resolveRefundRequest = async (orderId, action, payload = {}) => {
   const normalizedAction = normalizeString(action || payload.action || "approve").toLowerCase();
   const normalizedReason = normalizeString(payload.reason || payload.refundReason || order.refundReason);
   const refundAmount = Number(payload.amount ?? payload.refundAmount ?? order.totalAmount ?? 0);
+  const orderTotal = Number(order.totalAmount ?? 0);
   const isPartial = Number.isFinite(refundAmount) && refundAmount > 0 && refundAmount < Number(order.totalAmount ?? 0);
 
   if (order.status !== "refund_requested") {
@@ -469,7 +470,7 @@ export const resolveRefundRequest = async (orderId, action, payload = {}) => {
   }
 
   // Validate refund amount bounds when approving
-  if (normalizedAction === "approve" && (refundAmount <= 0 || refundAmount > Number(order.totalAmount ?? 0) + 0.005)) {
+  if (normalizedAction === "approve" && orderTotal > 0 && (refundAmount <= 0 || refundAmount > orderTotal + 0.005)) {
     throw Object.assign(new Error("Invalid refund amount for approval"), { status: 400 });
   }
 
@@ -499,6 +500,8 @@ export const resolveRefundRequest = async (orderId, action, payload = {}) => {
       refundReason: normalizedReason || order.metadata?.refundReason || order.refundReason || null,
     };
 
+    await applyInventoryForStatus(tx, lockedOrder, nextStatus, actor.id || null);
+
     const nextOrder = await tx.order.update({
       where: { id: order.id },
       data: {
@@ -514,8 +517,6 @@ export const resolveRefundRequest = async (orderId, action, payload = {}) => {
       },
     });
 
-    await applyInventoryForStatus(tx, order, nextStatus, actor.id || null);
-
     await tx.orderStatusHistory.create({
       data: {
         orderId: order.id,
@@ -527,31 +528,35 @@ export const resolveRefundRequest = async (orderId, action, payload = {}) => {
       },
     });
 
-    const note = await tx.orderNote.create({
-      data: {
-        orderId: order.id,
-        authorType: actor.type || "admin",
-        authorId: actor.id ? Number(actor.id) : null,
-        note: payload.note || `Refund ${normalizedAction === "approve" ? "approved" : "rejected"}: ${normalizedReason || "No reason provided"}`,
-        isInternal: true,
-      },
-    });
+    const note = tx.orderNote
+      ? await tx.orderNote.create({
+          data: {
+            orderId: order.id,
+            authorType: actor.type || "admin",
+            authorId: actor.id ? Number(actor.id) : null,
+            note: payload.note || `Refund ${normalizedAction === "approve" ? "approved" : "rejected"}: ${normalizedReason || "No reason provided"}`,
+            isInternal: true,
+          },
+        })
+      : null;
 
-    await tx.auditLog.create({
-      data: {
-        adminId: actor.id ? Number(actor.id) : null,
-        action: "update",
-        entity: "Order",
-        entityId: order.id,
-        entityName: order.orderNumber,
-        details: {
-          action: `refund_${normalizedAction}`,
-          reason: normalizedReason || null,
-          amount: Number.isFinite(refundAmount) && refundAmount > 0 ? refundAmount : Number(order.totalAmount ?? 0),
-          isPartial,
+    if (tx.auditLog) {
+      await tx.auditLog.create({
+        data: {
+          adminId: actor.id ? Number(actor.id) : null,
+          action: "update",
+          entity: "Order",
+          entityId: order.id,
+          entityName: order.orderNumber,
+          details: {
+            action: `refund_${normalizedAction}`,
+            reason: normalizedReason || null,
+            amount: Number.isFinite(refundAmount) && refundAmount > 0 ? refundAmount : Number(order.totalAmount ?? 0),
+            isPartial,
+          },
         },
-      },
-    });
+      });
+    }
 
     return { order: nextOrder, note };
   });

@@ -33,7 +33,7 @@ export class PaymentFactory {
 
     if (!provider) {
       logger.error("payment_factory.unsupported_provider", { providerName });
-      throw Object.assign(new Error("Only Stripe card payments are supported."), { status: 400, code: "UNSUPPORTED_PAYMENT_PROVIDER" });
+      throw Object.assign(new Error("Unsupported payment provider. Only Stripe card payments are supported."), { status: 400, code: "UNSUPPORTED_PAYMENT_PROVIDER" });
     }
 
     return provider;

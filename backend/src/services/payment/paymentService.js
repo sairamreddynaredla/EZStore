@@ -75,13 +75,41 @@ export class PaymentService {
   }) {
     const requestedMethod = normalizeString(paymentMethod).toLowerCase();
     if (requestedMethod !== "stripe" && requestedMethod !== "card") {
-      throw Object.assign(new Error("Only Stripe card payments are supported."), { status: 400, code: "UNSUPPORTED_PAYMENT_PROVIDER" });
+      throw Object.assign(new Error("Unsupported payment provider. Only Stripe card payments are supported."), { status: 400, code: "UNSUPPORTED_PAYMENT_PROVIDER" });
     }
     const providerName = "stripe";
     const provider = paymentFactory.getProvider(providerName);
 
     if (!provider.isConfigured()) {
       throw Object.assign(new Error(`Payment provider '${provider.name}' is currently unavailable.`), { status: 503, code: "PROVIDER_UNAVAILABLE" });
+    }
+
+    const normalizedIdempotencyKey = normalizeString(idempotencyKey);
+    if (normalizedIdempotencyKey) {
+      const existing = await prisma.idempotencyKey.findUnique({ where: { key: normalizedIdempotencyKey } });
+      if (existing?.status === "processed" && existing.response) {
+        return { ...existing.response, idempotencyReplay: true };
+      }
+      if (existing?.status === "processing") {
+        return { idempotencyPending: true };
+      }
+
+      try {
+        await prisma.idempotencyKey.create({
+          data: {
+            key: normalizedIdempotencyKey,
+            request: { items, totalAmount, couponCode, paymentMethod, currency },
+            status: "processing",
+          },
+        });
+      } catch (error) {
+        if (error?.code !== "P2002") throw error;
+        const reserved = await prisma.idempotencyKey.findUnique({ where: { key: normalizedIdempotencyKey } });
+        if (reserved?.status === "processed" && reserved.response) {
+          return { ...reserved.response, idempotencyReplay: true };
+        }
+        return { idempotencyPending: true };
+      }
     }
 
     // Server-side price validation
@@ -241,7 +269,7 @@ export class PaymentService {
       // socket non-blocking
     }
 
-    return {
+    const response = {
       order: result.order,
       payment: result.payment,
       providerData,
@@ -251,6 +279,15 @@ export class PaymentService {
       },
       serverCalculation: { subtotal: computedSubtotal, discount: discountAmount, shipping: shippingAmount, tax: taxAmount, finalTotal },
     };
+
+    if (normalizedIdempotencyKey) {
+      await prisma.idempotencyKey.update({
+        where: { key: normalizedIdempotencyKey },
+        data: { status: "processed", response },
+      });
+    }
+
+    return response;
   }
 
   async getCustomerPaymentHistory(customerId) {

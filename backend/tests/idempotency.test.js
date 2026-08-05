@@ -262,6 +262,7 @@ test("Idempotency: concurrent requests with same key create only one payment", a
   resetStore();
   wirePrismaMocks();
   const { server, base } = await startServer();
+  t.after(() => server.close());
 
   const payload = { items: [{ id: 1, quantity: 1 }], totalAmount: 10, customerEmail: "user1@example.com", paymentMethod: "card" };
   const headers = { "Content-Type": "application/json", "Idempotency-Key": "concurrent-key-1" };
@@ -279,10 +280,9 @@ test("Idempotency: concurrent requests with same key create only one payment", a
   assert.equal(store.orders.length, 1);
   assert.equal(stripeCalls.created.length, 1);
 
-  server.close();
 });
 
-test("Checkout continues when Stripe Customer creation fails", async () => {
+test("Checkout continues when Stripe Customer creation fails", async (t) => {
   resetStore();
   wirePrismaMocks();
   stripeMock.customers.create = async () => {
@@ -295,6 +295,7 @@ test("Checkout continues when Stripe Customer creation fails", async () => {
   };
 
   const { server, base } = await startServer();
+  t.after(() => server.close());
   try {
     const response = await fetch(`${base}/payment/create-order`, {
       method: "POST",
@@ -312,7 +313,6 @@ test("Checkout continues when Stripe Customer creation fails", async () => {
     assert.equal(stripeCalls.created[0].data.customer, undefined);
     assert.equal(store.payments[0].stripeCustomerId, null);
   } finally {
-    server.close();
     stripeMock.customers.create = async () => ({ id: "cus_test" });
   }
 });

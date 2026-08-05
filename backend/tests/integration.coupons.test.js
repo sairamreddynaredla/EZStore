@@ -74,7 +74,9 @@ const wirePrismaMocks = () => {
   // products
   prisma.product = {
     findMany: async ({ where, select }) => {
-      const ids = where.id.in;
+      const ids = (where?.OR || [])
+        .flatMap((condition) => condition?.id?.in || [])
+        .map(Number);
       return store.products.filter((p) => ids.includes(p.id)).map((p) => ({ id: p.id, price: p.price, metadata: p.metadata, stock: p.stock }));
     },
   };

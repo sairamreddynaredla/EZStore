@@ -16,9 +16,17 @@ import {
   requestRefund,
 } from "../controllers/paymentController.js";
 import { handleWebhook } from "../controllers/webhookController.js";
+import paymentFactory from "../services/payment/paymentFactory.js";
 
 
 const router = express.Router();
+
+// Test hook: inject a Stripe-compatible client without changing production
+// configuration or the provider selection logic.
+export const setStripeClientForTests = (client) => {
+  const stripeProvider = paymentFactory.getProvider("stripe");
+  stripeProvider.client = client;
+};
 
 // Public payment configuration endpoint
 router.get("/config", getPaymentConfig);

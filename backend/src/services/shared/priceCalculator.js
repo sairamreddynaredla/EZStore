@@ -13,7 +13,7 @@ export const computeOrderSubtotal = (items = [], products = []) => {
       // Provide helpful error with more context
       const itemName = item.name ? `"${item.name}"` : `product ${item.id}`;
       const err = new Error(
-        `Product ${itemName} is no longer available. Please update your cart and try again.`
+        `Product not found: ${itemName}. Please update your cart and try again.`
       );
       err.status = 400;
       err.code = "PRODUCT_NOT_FOUND";

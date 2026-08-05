@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.*
+.DS_Store
+Thumbs.db
+logs/
+coverage/
+.cache/
+*.log
+.idea/
+.vscode/
+
+# Ignore nested git metadata from the parent repo
+.git

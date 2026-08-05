@@ -1,21 +1,31 @@
 services:
-  - type: web_service
+  - type: web
     name: ezstore-backend
-    env: node
+    runtime: node
     plan: free
-    root: backend
-    buildCommand: npm install
+    rootDir: backend
+    buildCommand: npm ci
+    preDeployCommand: npm run prisma:migrate
     startCommand: npm start
-    autoDeploy: true
+    autoDeployTrigger: commit
+    healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
-      # Set these values in the Render dashboard; never commit real Stripe keys.
-      - key: STRIPE_SECRET_KEY
+      # Set secure values in the Render dashboard; never commit real credentials.
+      - key: DATABASE_URL
         sync: false
-      - key: STRIPE_WEBHOOK_SECRET
+      - key: JWT_SECRET
+        sync: false
+      - key: JWT_REFRESH_SECRET
         sync: false
       - key: FRONTEND_URL
         sync: false
-      - key: JWT_SECRET
+      - key: BACKEND_URL
+        sync: false
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_PUBLISHABLE_KEY
+        sync: false
+      - key: STRIPE_WEBHOOK_SECRET
         sync: false

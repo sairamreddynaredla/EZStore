@@ -1,6 +1,6 @@
 import { useEffect, lazy, Suspense } from "react";
 import PageLoader from "./components/common/PageLoader";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 
 // Lazy-load route pages to reduce initial bundle size
 const Home = lazy(() => import("./layouts/pages/Home"));
@@ -36,6 +36,27 @@ const ProtectedRoute = lazy(() => import("./components/ProtectedRoute"));
 import { ToastProvider } from "./context/toast-context";
 import Toast from "./components/common/Toast";
 import CartProvider from "./context/CartProvider";
+
+const AdminRedirect = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    const configuredAdminUrl = import.meta.env.VITE_ADMIN_APP_URL;
+    const adminOrigin = configuredAdminUrl || (
+      window.location.hostname === "localhost"
+        ? "http://localhost:5174"
+        : "https://ezstore-admin.vercel.app"
+    );
+
+    const destination = new URL(adminOrigin);
+    destination.pathname = location.pathname;
+    destination.search = location.search;
+    destination.hash = location.hash;
+    window.location.replace(destination.toString());
+  }, [location]);
+
+  return <PageLoader />;
+};
 
 const App = () => {
   useEffect(() => {
@@ -135,6 +156,8 @@ const App = () => {
               <Route path="/payment/history" element={<ProtectedRoute><PaymentHistory /></ProtectedRoute>} />
               <Route path="/payment/invoice/:orderId" element={<ProtectedRoute><InvoiceReceipt /></ProtectedRoute>} />
 
+              {/* ADMIN: hosted as a separate application */}
+              <Route path="/admin/*" element={<AdminRedirect />} />
 
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
