@@ -1,3 +1,0 @@
-# Unused Images
-
-- None
