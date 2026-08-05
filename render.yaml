@@ -5,7 +5,7 @@ services:
     plan: free
     rootDir: backend
     # Prisma is a development dependency but is required to run deploy-time migrations.
-    buildCommand: npm ci --include=dev && npm run prisma:generate && npm run prisma:migrate
+    buildCommand: npm ci --include=dev && npm run prisma:generate && npm run prisma:migrate && npm run db:seed
     startCommand: npm start
     autoDeployTrigger: commit
     healthCheckPath: /health
