@@ -13,6 +13,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Prisma needs a syntactically valid connection URL to load the schema.
+      # CI validation does not connect to this database.
+      DATABASE_URL: postgresql://ci:ci@localhost:5432/ezstore_ci?schema=public
     strategy:
       matrix:
         node-version: [20.x]
