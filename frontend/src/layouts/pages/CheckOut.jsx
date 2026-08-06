@@ -4,6 +4,7 @@ import { useEffect, useState, useMemo, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { BadgeCheck, Bell, CreditCard, LockKeyhole, ShieldCheck, TicketPercent } from "lucide-react";
 import customerCommerceApi from "../../services/customerCommerceApi";
 import secureBadge from "../../assets/logo/secure-payment.webp";
 import easyReturnsBadge from "../../assets/logo/easy-returns.webp";
@@ -139,21 +140,35 @@ const PaymentSection = ({
   };
 
   return (
-    <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-      <h3 className="font-semibold text-gray-800 mb-4">Complete Payment</h3>
+    <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+      <div className="flex items-center gap-3 border-b border-slate-100 bg-slate-50 px-5 py-4">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700">
+          <LockKeyhole className="h-5 w-5" aria-hidden="true" />
+        </div>
+        <div>
+          <h3 className="font-semibold text-slate-900">Enter payment details</h3>
+          <p className="text-xs text-slate-500">Your card details are securely processed by Stripe.</p>
+        </div>
+      </div>
       <div className="space-y-4">
-        <div ref={paymentElementRef} className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+        <div ref={paymentElementRef} className="mx-5 mt-5 rounded-xl border border-slate-200 bg-white p-4">
           <PaymentElement />
         </div>
-        {error && <p className="text-xs text-red-500">{error}</p>}
+        {error && <p className="mx-5 text-xs text-red-600">{error}</p>}
         <button
           type="button"
           onClick={handleConfirmPayment}
           disabled={!stripe || !elements || !isElementsReady || isSubmittingPayment}
-          className="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="mx-5 mb-3 flex w-[calc(100%-2.5rem)] items-center justify-center gap-2 rounded-xl bg-emerald-600 py-3.5 font-semibold text-white shadow-sm transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          {isSubmittingPayment ? "Processing payment..." : !isElementsReady ? "Loading payment form..." : "Pay Now"}
+          <LockKeyhole className="h-4 w-4" aria-hidden="true" />
+          {isSubmittingPayment
+            ? "Processing secure payment..."
+            : !isElementsReady
+              ? "Loading secure payment form..."
+              : `Pay $${Number(order?.totalAmount ?? 0).toFixed(2)} securely`}
         </button>
+        <p className="pb-5 text-center text-xs text-slate-500">Encrypted and securely processed by Stripe.</p>
       </div>
     </div>
   );
@@ -780,7 +795,10 @@ const Checkout = () => {
         if (pending?.clientSecret && pending?.order) {
           setStripeClientSecret(pending.clientSecret);
           setStripeOrder(pending.order);
-          setCurrentStep(4);
+          // A saved checkout has an order and PaymentIntent, but the card
+          // payment has not been confirmed yet. Return to the payment step so
+          // the Stripe form remains visible instead of showing confirmation.
+          setCurrentStep(3);
           setPaymentConfirmed(false);
         }
       } catch {
@@ -952,11 +970,11 @@ const Checkout = () => {
 
   // ─── STEP VALIDATION ───
   return (
-    <div className="bg-white min-h-screen">
+    <div className="min-h-screen bg-slate-50">
       <Navbar />
 
       {/* ─── PROGRESS STEPPER ─── */}
-      <div className="bg-gray-50 border-b border-gray-200 sticky top-16 z-40">
+      <div className="sticky top-16 z-40 border-b border-slate-200 bg-white/95 shadow-sm backdrop-blur">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
           <div className="grid grid-cols-4 gap-2 py-1 sm:flex sm:gap-3">
             {steps.map((s, idx) => (
@@ -964,14 +982,14 @@ const Checkout = () => {
                 <div
                   onClick={() => currentStep > s.step && setCurrentStep(s.step)}
                   className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center font-bold cursor-pointer transition-all ${
-                    currentStep >= s.step ? "bg-green-500 text-white" : "bg-gray-300 text-gray-600"
+                    currentStep >= s.step ? "bg-emerald-600 text-white shadow-sm" : "bg-slate-200 text-slate-500"
                   }`}
                 >
                   {currentStep > s.step ? "✓" : s.step}
                 </div>
                 <div className="mt-1 text-[11px] sm:mt-0 sm:ml-3 font-semibold text-center sm:text-left leading-tight">{s.label}</div>
                 {idx < steps.length - 1 && (
-                  <div className={`hidden sm:block flex-1 h-1 sm:ml-3 ${currentStep > s.step ? "bg-green-500" : "bg-gray-300"}`}></div>
+                  <div className={`hidden sm:block flex-1 h-1 sm:ml-3 ${currentStep > s.step ? "bg-emerald-600" : "bg-slate-200"}`}></div>
                 )}
               </div>
             ))}
@@ -1347,21 +1365,22 @@ const Checkout = () => {
             {/* ─── STEP 3: PAYMENT ─── */}
             {currentStep === 3 && (
               <>
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                  <h3 className="font-semibold text-gray-800 mb-4">Stripe Payment</h3>
-                  <div className="flex flex-col gap-4 rounded-xl border border-gray-200 bg-white p-6">
+                <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                  <div className="border-b border-slate-100 px-6 py-5">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700"><CreditCard className="h-5 w-5" /></div>
+                      <div><h3 className="font-bold text-slate-900">Secure payment</h3><p className="mt-0.5 text-xs text-slate-500">Choose a payment method to complete your order.</p></div>
+                    </div>
+                  </div>
+                  <div className="m-5 flex flex-col gap-4 rounded-xl border border-emerald-200 bg-emerald-50/40 p-5">
                     <div className="flex items-center gap-4">
-                      <img src={cardIcon} alt="Stripe" className="w-12 h-12 object-contain" />
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm"><img src={cardIcon} alt="Stripe" className="w-8 h-8 object-contain" /></div>
                       <div>
-                        <div className="font-semibold text-sm">Secure online payment with Stripe</div>
-                        <div className="text-xs text-gray-500">
-                          All card and wallet payments are handled securely by Stripe.
-                        </div>
+                        <div className="flex items-center gap-2 font-semibold text-sm text-slate-900">Card, wallet or bank payment <span className="rounded-full bg-emerald-600 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">Recommended</span></div>
+                        <div className="mt-1 text-xs text-slate-500">All supported payment methods are handled securely by Stripe.</div>
                       </div>
                     </div>
-                    <div className="text-sm text-gray-600">
-                      Secure Stripe payment. Your card is charged only after your order is confirmed.
-                    </div>
+                    <div className="text-sm text-slate-600">Your payment details are encrypted. You will review the final amount before completing payment.</div>
                     <div className="bg-linear-to-r from-green-50 to-teal-50 border border-green-200 rounded-lg p-3">
                       <div className="font-semibold text-green-800 text-sm">🔒 100% Secure Payment</div>
                       <div className="text-xs text-green-700 mt-1">
@@ -1372,8 +1391,8 @@ const Checkout = () => {
                 </div>
 
                 {/* Coupon */}
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                  <h3 className="font-semibold text-gray-800 mb-4">Apply Coupon</h3>
+                <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+                  <div className="mb-4 flex items-center gap-3"><div className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-50 text-amber-600"><TicketPercent className="h-4 w-4" /></div><div><h3 className="font-semibold text-slate-900">Promo code</h3><p className="text-xs text-slate-500">Apply a discount before you pay.</p></div></div>
                   {!appliedCoupon ? (
                     <div className="space-y-2">
                       <div className="flex gap-2">
@@ -1381,11 +1400,11 @@ const Checkout = () => {
                           value={coupon}
                           onChange={(e) => setCoupon(e.target.value.toUpperCase())}
                           placeholder="Enter coupon code (Try: WELCOME10)"
-                          className="flex-1 border border-gray-300 rounded-lg p-3 text-sm"
+                          className="flex-1 rounded-xl border border-slate-300 px-3 py-3 text-sm outline-none transition focus:border-emerald-500 focus:ring-2 focus:ring-emerald-100"
                         />
                         <button
                           onClick={handleApplyCoupon}
-                          className="px-6 bg-green-500 text-white rounded-lg font-bold"
+                          className="rounded-xl bg-slate-900 px-5 text-sm font-semibold text-white transition hover:bg-slate-800"
                         >
                           Apply
                         </button>
@@ -1410,10 +1429,10 @@ const Checkout = () => {
                 </div>
 
                 {/* Communication Preferences */}
-                <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-                  <h3 className="font-semibold text-gray-800 mb-4">Communication</h3>
-                  <div className="space-y-3">
-                    <label className="flex items-center gap-3 cursor-pointer">
+                <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+                  <h3 className="font-semibold text-slate-900">Order updates</h3><p className="mt-1 text-xs text-slate-500">Choose how you’d like to hear from us.</p>
+                  <div className="mt-4 space-y-3">
+                    <label className="flex items-center gap-3 text-sm text-slate-700 cursor-pointer">
                       <input
                         type="checkbox"
                         checked={smsUpdates}
@@ -1421,7 +1440,7 @@ const Checkout = () => {
                       />
                       <span>Get SMS updates on order status</span>
                     </label>
-                    <label className="flex items-center gap-3 cursor-pointer">
+                    <label className="flex items-center gap-3 text-sm text-slate-700 cursor-pointer">
                       <input
                         type="checkbox"
                         checked={newsletter}
@@ -1438,31 +1457,31 @@ const Checkout = () => {
                   </div>
                 )}
 
-                <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
-                  <h4 className="font-semibold mb-3">Payment Method</h4>
-                  <div className="space-y-3">
+                <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+                  <h4 className="font-semibold text-slate-900">Selected payment method</h4><p className="mt-1 text-xs text-slate-500">You can choose your preferred available option in the secure payment form.</p>
+                  <div className="mt-4 space-y-3">
                     <button
                       type="button"
                       onClick={stripeEnabled ? handleProceedToPayment : undefined}
-                      className={`w-full text-left flex items-center gap-3 rounded-2xl border p-4 transition ${
-                        stripeEnabled ? "border-gray-200 bg-slate-50 hover:bg-slate-100" : "border-gray-200 bg-gray-100 cursor-not-allowed"
+                      className={`w-full text-left flex items-center gap-3 rounded-xl border-2 p-4 transition ${
+                        stripeEnabled ? "border-emerald-500 bg-emerald-50/60 hover:bg-emerald-50" : "border-slate-200 bg-slate-100 cursor-not-allowed"
                       }`}
                       disabled={!stripeEnabled}
                     >
                       <img src={cardIcon} alt="card" className="w-6 h-6" />
                       <div className="flex flex-col">
-                        <span className="font-medium">Credit / Debit Card (Stripe)</span>
+                        <span className="font-semibold text-slate-900">Credit, debit card or wallet</span>
                         {!stripeEnabled ? (
                           <span className="text-xs text-orange-600">Temporarily unavailable</span>
                         ) : (
-                          <span className="text-xs text-slate-500">Secure Stripe payments</span>
+                          <span className="text-xs text-slate-500">Securely processed by Stripe</span>
                         )}
                       </div>
                     </button>
                   </div>
                 </div>
 
-                <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+                <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                   <label className="flex items-start gap-3 cursor-pointer">
                     <input
                       type="checkbox"
@@ -1470,8 +1489,8 @@ const Checkout = () => {
                       onChange={() => setAgreeTerms(!agreeTerms)}
                       className="mt-1"
                     />
-                    <div className="flex-1 text-sm">
-                      I agree to the <button onClick={() => setShowTermsModal(true)} className="text-green-600 underline">Terms of Service</button> and <button onClick={() => setShowTermsModal(true)} className="text-green-600 underline">Privacy Policy</button>
+                    <div className="flex-1 text-sm text-slate-600">
+                      I agree to the <button type="button" onClick={() => setShowTermsModal(true)} className="font-medium text-emerald-700 underline">Terms of Service</button> and <button type="button" onClick={() => setShowTermsModal(true)} className="font-medium text-emerald-700 underline">Privacy Policy</button>
                     </div>
                   </label>
                 </div>
@@ -1484,15 +1503,17 @@ const Checkout = () => {
                       handlePlaceOrder();
                     }}
                     disabled={!agreeTerms || isPlacingOrder}
-                    className="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 py-3.5 font-bold text-white shadow-sm transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-50"
                   >
-                    {isPlacingOrder ? "Processing order..." : "Confirm Order"}
+                    <LockKeyhole className="h-4 w-4" aria-hidden="true" />
+                    {isPlacingOrder ? "Preparing secure payment..." : `Continue to secure payment · $${total.toFixed(2)}`}
                   </button>
                 ) : null}
                 {stripeClientSecret && stripeOrder ? (
                   <div className="mt-6">
-                    <div className="mb-4 rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-800">
-                      Your order is created. Complete the Stripe payment below.
+                    <div className="mb-4 flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
+                      <BadgeCheck className="h-5 w-5 shrink-0 text-emerald-600" />
+                      <span><strong>Order reserved.</strong> Complete the secure payment below to finish your purchase.</span>
                     </div>
                     <Elements stripe={stripePromise} options={{ clientSecret: stripeClientSecret }}>
                       <PaymentSection
