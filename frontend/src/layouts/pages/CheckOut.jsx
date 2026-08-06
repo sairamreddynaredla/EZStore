@@ -4,7 +4,7 @@ import { useEffect, useState, useMemo, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements, PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { BadgeCheck, Bell, CreditCard, LockKeyhole, ShieldCheck, TicketPercent } from "lucide-react";
+import { BadgeCheck, CreditCard, LockKeyhole, TicketPercent } from "lucide-react";
 import customerCommerceApi from "../../services/customerCommerceApi";
 import secureBadge from "../../assets/logo/secure-payment.webp";
 import easyReturnsBadge from "../../assets/logo/easy-returns.webp";
@@ -34,32 +34,7 @@ const PaymentSection = ({
   const paymentElementRef = useRef(null);
 
   useEffect(() => {
-    if (!elements || !paymentElementRef.current) {
-      return;
-    }
-
-    // Wait for PaymentElement to actually render in DOM
-    const checkPaymentElement = setInterval(() => {
-      const stripeForm = paymentElementRef.current?.querySelector('[data-testid="payment-element"]') ||
-                         paymentElementRef.current?.querySelector('iframe') ||
-                         paymentElementRef.current?.querySelector('[id*="stripe"]');
-      
-      if (stripeForm) {
-        setIsElementsReady(true);
-        clearInterval(checkPaymentElement);
-      }
-    }, 100);
-
-    // Fallback timeout: if element doesn't appear in 5 seconds, assume it's ready
-    const fallbackTimeout = setTimeout(() => {
-      setIsElementsReady(true);
-      clearInterval(checkPaymentElement);
-    }, 5000);
-
-    return () => {
-      clearInterval(checkPaymentElement);
-      clearTimeout(fallbackTimeout);
-    };
+    setIsElementsReady(false);
   }, [elements]);
 
   const handleConfirmPayment = async () => {
@@ -72,15 +47,6 @@ const PaymentSection = ({
     onError("");
 
     try {
-      // Final safety check: ensure PaymentElement is in DOM before submission
-      const paymentElement = paymentElementRef.current?.querySelector('iframe') ||
-                             paymentElementRef.current?.querySelector('[id*="stripe"]');
-      if (!paymentElement) {
-        onError("Payment form failed to load. Please refresh the page and try again.");
-        setIsSubmittingPayment(false);
-        return;
-      }
-
       console.info("[EZStore] Stripe confirmPayment invoked", { orderId: order?.id, orderNumber: order?.orderNumber });
       const result = await stripe.confirmPayment({
         elements,
@@ -152,7 +118,7 @@ const PaymentSection = ({
       </div>
       <div className="space-y-4">
         <div ref={paymentElementRef} className="mx-5 mt-5 rounded-xl border border-slate-200 bg-white p-4">
-          <PaymentElement />
+          <PaymentElement onReady={() => setIsElementsReady(true)} />
         </div>
         {error && <p className="mx-5 text-xs text-red-600">{error}</p>}
         <button
@@ -317,8 +283,6 @@ const Checkout = () => {
     : 0;
 
   // ─── ADDITIONAL SERVICES ───
-  const [newsletter, setNewsletter] = useState(false);
-  const [smsUpdates, setSmsUpdates] = useState(true);
   const [agreeTerms, setAgreeTerms] = useState(false);
 
   useEffect(() => {
@@ -1365,23 +1329,23 @@ const Checkout = () => {
             {/* ─── STEP 3: PAYMENT ─── */}
             {currentStep === 3 && (
               <>
-                <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-                  <div className="border-b border-slate-100 px-6 py-5">
+                <div className="rounded-xl border border-slate-200 bg-white shadow-sm">
+                  <div className="border-b border-slate-100 px-6 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-100 text-emerald-700"><CreditCard className="h-5 w-5" /></div>
-                      <div><h3 className="font-bold text-slate-900">Secure payment</h3><p className="mt-0.5 text-xs text-slate-500">Choose a payment method to complete your order.</p></div>
+                      <CreditCard className="h-5 w-5 text-slate-600" />
+                      <div><h3 className="font-semibold text-slate-900">Payment</h3><p className="mt-0.5 text-xs text-slate-500">Card and wallet payments are processed by Stripe.</p></div>
                     </div>
                   </div>
-                  <div className="m-5 flex flex-col gap-4 rounded-xl border border-emerald-200 bg-emerald-50/40 p-5">
+                  <div className="m-5 flex flex-col gap-3 rounded-lg border border-slate-200 bg-slate-50 p-4">
                     <div className="flex items-center gap-4">
                       <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white shadow-sm"><img src={cardIcon} alt="Stripe" className="w-8 h-8 object-contain" /></div>
                       <div>
-                        <div className="flex items-center gap-2 font-semibold text-sm text-slate-900">Card, wallet or bank payment <span className="rounded-full bg-emerald-600 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-white">Recommended</span></div>
-                        <div className="mt-1 text-xs text-slate-500">All supported payment methods are handled securely by Stripe.</div>
+                        <div className="font-semibold text-sm text-slate-900">Credit card, debit card or wallet</div>
+                        <div className="mt-1 text-xs text-slate-500">Enter your details on the next screen.</div>
                       </div>
                     </div>
-                    <div className="text-sm text-slate-600">Your payment details are encrypted. You will review the final amount before completing payment.</div>
-                    <div className="bg-linear-to-r from-green-50 to-teal-50 border border-green-200 rounded-lg p-3">
+                    <div className="text-xs text-slate-500">Your payment details are encrypted and are not stored by EZStore.</div>
+                    <div className="hidden bg-linear-to-r from-green-50 to-teal-50 border border-green-200 rounded-lg p-3">
                       <div className="font-semibold text-green-800 text-sm">🔒 100% Secure Payment</div>
                       <div className="text-xs text-green-700 mt-1">
                         PCI DSS compliant and encrypted with Stripe.
@@ -1391,7 +1355,7 @@ const Checkout = () => {
                 </div>
 
                 {/* Coupon */}
-                <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+                <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
                   <div className="mb-4 flex items-center gap-3"><div className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber-50 text-amber-600"><TicketPercent className="h-4 w-4" /></div><div><h3 className="font-semibold text-slate-900">Promo code</h3><p className="text-xs text-slate-500">Apply a discount before you pay.</p></div></div>
                   {!appliedCoupon ? (
                     <div className="space-y-2">
@@ -1428,58 +1392,11 @@ const Checkout = () => {
                   )}
                 </div>
 
-                {/* Communication Preferences */}
-                <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-                  <h3 className="font-semibold text-slate-900">Order updates</h3><p className="mt-1 text-xs text-slate-500">Choose how you’d like to hear from us.</p>
-                  <div className="mt-4 space-y-3">
-                    <label className="flex items-center gap-3 text-sm text-slate-700 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={smsUpdates}
-                        onChange={() => setSmsUpdates(!smsUpdates)}
-                      />
-                      <span>Get SMS updates on order status</span>
-                    </label>
-                    <label className="flex items-center gap-3 text-sm text-slate-700 cursor-pointer">
-                      <input
-                        type="checkbox"
-                        checked={newsletter}
-                        onChange={() => setNewsletter(!newsletter)}
-                      />
-                      <span>Subscribe to our newsletter for deals & updates</span>
-                    </label>
-                  </div>
-                </div>
-
                 {(paymentError || stripeUnavailableMessage) && (
                   <div className="mb-4 bg-red-50 border border-red-200 text-red-700 rounded-lg p-3 text-sm">
                     {paymentError || stripeUnavailableMessage}
                   </div>
                 )}
-
-                <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                  <h4 className="font-semibold text-slate-900">Selected payment method</h4><p className="mt-1 text-xs text-slate-500">You can choose your preferred available option in the secure payment form.</p>
-                  <div className="mt-4 space-y-3">
-                    <button
-                      type="button"
-                      onClick={stripeEnabled ? handleProceedToPayment : undefined}
-                      className={`w-full text-left flex items-center gap-3 rounded-xl border-2 p-4 transition ${
-                        stripeEnabled ? "border-emerald-500 bg-emerald-50/60 hover:bg-emerald-50" : "border-slate-200 bg-slate-100 cursor-not-allowed"
-                      }`}
-                      disabled={!stripeEnabled}
-                    >
-                      <img src={cardIcon} alt="card" className="w-6 h-6" />
-                      <div className="flex flex-col">
-                        <span className="font-semibold text-slate-900">Credit, debit card or wallet</span>
-                        {!stripeEnabled ? (
-                          <span className="text-xs text-orange-600">Temporarily unavailable</span>
-                        ) : (
-                          <span className="text-xs text-slate-500">Securely processed by Stripe</span>
-                        )}
-                      </div>
-                    </button>
-                  </div>
-                </div>
 
                 <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                   <label className="flex items-start gap-3 cursor-pointer">
@@ -1506,14 +1423,14 @@ const Checkout = () => {
                     className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 py-3.5 font-bold text-white shadow-sm transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     <LockKeyhole className="h-4 w-4" aria-hidden="true" />
-                    {isPlacingOrder ? "Preparing secure payment..." : `Continue to secure payment · $${total.toFixed(2)}`}
+                    {isPlacingOrder ? "Opening payment..." : `Continue to payment · $${total.toFixed(2)}`}
                   </button>
                 ) : null}
                 {stripeClientSecret && stripeOrder ? (
                   <div className="mt-6">
                     <div className="mb-4 flex items-center gap-3 rounded-xl border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900">
                       <BadgeCheck className="h-5 w-5 shrink-0 text-emerald-600" />
-                      <span><strong>Order reserved.</strong> Complete the secure payment below to finish your purchase.</span>
+                      <span><strong>Almost done.</strong> Enter your payment details below.</span>
                     </div>
                     <Elements stripe={stripePromise} options={{ clientSecret: stripeClientSecret }}>
                       <PaymentSection
