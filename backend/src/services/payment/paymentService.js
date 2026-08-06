@@ -154,18 +154,45 @@ export class PaymentService {
     const orderNumber = generateOrderNumber();
     const paymentNumber = generatePaymentNumber();
 
-    // Initialize provider order/intent
+    // Initialize the provider intent before the database transaction. If the
+    // transaction cannot be committed, the intent is cancelled below so a
+    // customer is never left with a payable orphaned intent.
     const providerData = await provider.createPaymentOrder({
       orderNumber,
       amount: finalTotal,
       currency,
       customer: { email: customer.email, fullName: customer.fullName, phone: customer.phone },
-      metadata,
+      metadata: {
+        ...metadata,
+        ...(appliedCoupon ? { couponCode: appliedCoupon.code } : {}),
+      },
       idempotencyKey,
     });
 
     // Create DB Order, Payment, and Transaction inside database transaction
-    const result = await prisma.$transaction(async (tx) => {
+    let result;
+    try {
+      result = await prisma.$transaction(async (tx) => {
+        let lockedCoupon = null;
+        if (appliedCoupon) {
+          const rows = await tx.$queryRaw`SELECT * FROM "Coupon" WHERE id = ${appliedCoupon.id} FOR UPDATE`;
+          lockedCoupon = Array.isArray(rows) ? rows[0] : rows;
+          if (!lockedCoupon) {
+            throw Object.assign(new Error("Coupon not found"), { status: 400 });
+          }
+          if (lockedCoupon.usageLimit && lockedCoupon.usageCount >= lockedCoupon.usageLimit) {
+            throw Object.assign(new Error("Usage limit exceeded"), { status: 400 });
+          }
+          if (lockedCoupon.perUserLimit) {
+            const usedByCustomer = await tx.couponUsage.count({
+              where: { couponId: appliedCoupon.id, customerId: customer.id },
+            });
+            if (usedByCustomer >= lockedCoupon.perUserLimit) {
+              throw Object.assign(new Error("Coupon already used by this customer"), { status: 400 });
+            }
+          }
+        }
+
       let shippingAddressId = null;
       if (shippingAddress && typeof shippingAddress === "object" && shippingAddress.street) {
         const addr = await tx.address.create({
@@ -184,7 +211,7 @@ export class PaymentService {
         shippingAddressId = addr.id;
       }
 
-      const order = await tx.order.create({
+        const order = await tx.order.create({
         data: {
           customerId: customer.id,
           orderNumber,
@@ -205,7 +232,7 @@ export class PaymentService {
         },
       });
 
-      const payment = await tx.payment.create({
+        const payment = await tx.payment.create({
         data: {
           orderId: order.id,
           method: providerName,
@@ -226,8 +253,8 @@ export class PaymentService {
         },
       });
 
-      let initialTransaction = null;
-      if (tx.transaction) {
+        let initialTransaction = null;
+        if (tx.transaction) {
         try {
           initialTransaction = await tx.transaction.create({
             data: {
@@ -248,7 +275,17 @@ export class PaymentService {
         }
       }
 
-      await tx.orderStatusHistory.create({
+        if (appliedCoupon) {
+          await tx.couponUsage.create({
+            data: { couponId: appliedCoupon.id, customerId: customer.id, orderId: order.id },
+          });
+          await tx.coupon.update({
+            where: { id: appliedCoupon.id },
+            data: { usageCount: { increment: 1 } },
+          });
+        }
+
+        await tx.orderStatusHistory.create({
         data: {
           orderId: order.id,
           status: "pending",
@@ -259,8 +296,12 @@ export class PaymentService {
         },
       });
 
-      return { order, payment, initialTransaction };
-    });
+        return { order, payment, initialTransaction };
+      });
+    } catch (error) {
+      await provider.cancelPaymentOrder?.(providerData.providerOrderId);
+      throw error;
+    }
 
     try {
       const socket = getSocket();

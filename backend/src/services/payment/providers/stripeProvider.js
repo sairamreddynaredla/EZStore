@@ -68,6 +68,23 @@ export default class StripeProvider {
     };
   }
 
+  async cancelPaymentOrder(providerOrderId) {
+    if (!this.client || !providerOrderId) return null;
+
+    try {
+      return await this.client.paymentIntents.cancel(providerOrderId);
+    } catch (error) {
+      // The database error remains the primary failure. Cancellation is a
+      // best-effort cleanup and may legitimately fail for an already-settled
+      // PaymentIntent.
+      logger.warn("stripe.payment_intent_cancel_failed", {
+        providerOrderId,
+        error: String(error),
+      });
+      return null;
+    }
+  }
+
   async processRefund({ transactionId, amount, reason }) {
     if (!this.client) {
       throw Object.assign(new Error("Stripe client not configured"), { status: 503, code: "STRIPE_CONFIGURATION_ERROR" });

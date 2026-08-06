@@ -74,9 +74,11 @@ const wirePrismaMocks = () => {
   // products
   prisma.product = {
     findMany: async ({ where, select }) => {
-      const ids = (where?.OR || [])
+      const ids = [
+        ...(where?.id?.in || []),
+        ...(where?.OR || [])
         .flatMap((condition) => condition?.id?.in || [])
-        .map(Number);
+      ].map(Number);
       return store.products.filter((p) => ids.includes(p.id)).map((p) => ({ id: p.id, price: p.price, metadata: p.metadata, stock: p.stock }));
     },
   };
@@ -246,7 +248,8 @@ test("Integration: create-order with coupon succeeds and records usage", async (
   assert.ok(body.data.payment);
   // Server calculation should be present
   assert.equal(body.data.serverCalculation.discount, 10); // 50% of subtotal 20 -> 10
-  assert.equal(body.data.serverCalculation.finalTotal, 10);
+  // The authoritative total includes the 10% tax applied after the coupon.
+  assert.equal(body.data.serverCalculation.finalTotal, 11);
   // coupon usage recorded
   assert.equal(store.couponUsages.length, 1);
   assert.equal(store.coupons[0].usageCount, 1);
@@ -299,17 +302,12 @@ test("Transaction rollback cancels PaymentIntent and does not persist coupon usa
 
   // modify prisma.$transaction to throw after creating order to simulate DB failure
   const originalTransaction = prisma.$transaction;
-  prisma.$transaction = async (fn) => {
-    // use original but inject failure by throwing after fn runs
-    try {
-      const result = await originalTransaction(fn);
-      // simulate later failure
-      throw new Error("Simulated DB failure after transaction");
-    } catch (err) {
-      // ensure cancellation path in code gets exercised (payments.js cancels intent on transaction error)
-      throw err;
-    }
-  };
+  prisma.$transaction = async (fn) => originalTransaction(async (transaction) => {
+    await fn(transaction);
+    // Throw inside the transaction so the mock performs its rollback, matching
+    // real database transaction semantics.
+    throw new Error("Simulated DB failure during transaction");
+  });
 
   // To capture cancel calls, ensure Stripe prototype cancel is present (already mocked)
   const { server, base } = await startServer();
