@@ -56,8 +56,11 @@ const Shop = () => {
             break;
           } catch (error) {
             lastError = error;
-            if (attempt < 2) {
+            const status = error?.response?.status;
+            if (attempt < 2 && (!status || status >= 500)) {
               await new Promise((resolve) => window.setTimeout(resolve, 800 * (attempt + 1)));
+            } else {
+              break;
             }
           }
         }

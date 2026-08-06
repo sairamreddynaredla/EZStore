@@ -91,6 +91,7 @@ const createApp = () => {
 
   const rateLimitWindowMs = Number(process.env.API_RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000;
   const rateLimitMax = Number(process.env.API_RATE_LIMIT_MAX) || 1200;
+  const shouldRateLimit = config.NODE_ENV === "production" || Boolean(process.env.API_RATE_LIMIT_IN_DEVELOPMENT);
 
   const corsOptions = {
     origin: (origin, callback) => {
@@ -133,7 +134,12 @@ const createApp = () => {
       meta: { code: "TOO_MANY_REQUESTS", status: 429 },
     },
   });
-  app.use(generalLimiter);
+  // Local development can mount components more than once under React Strict
+  // Mode, which should not exhaust a production-oriented shared IP limit.
+  // Keep the limiter enabled in production, or locally when explicitly asked.
+  if (shouldRateLimit) {
+    app.use(generalLimiter);
+  }
 
   app.get("/health", liveness);
   app.get("/ready", readiness);

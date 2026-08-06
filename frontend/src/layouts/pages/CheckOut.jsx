@@ -118,7 +118,14 @@ const PaymentSection = ({
       </div>
       <div className="space-y-4">
         <div ref={paymentElementRef} className="mx-5 mt-5 rounded-xl border border-slate-200 bg-white p-4">
-          <PaymentElement onReady={() => setIsElementsReady(true)} />
+          <PaymentElement
+            onReady={() => setIsElementsReady(true)}
+            onLoadError={() => {
+              setIsElementsReady(false);
+              clearPendingCheckout();
+              onError("This payment session is no longer valid. Refresh the page to start a new payment.");
+            }}
+          />
         </div>
         {error && <p className="mx-5 text-xs text-red-600">{error}</p>}
         <button
@@ -208,7 +215,7 @@ const Checkout = () => {
   // ─── DELIVERY & PAYMENT ───
   const [selectedDelivery, setSelectedDelivery] = useState("standard");
   const [selectedDeliveryInstruction, setSelectedDeliveryInstruction] = useState("ring-bell");
-  const [stripeEnabled, setStripeEnabled] = useState(true);
+  const [stripeEnabled, setStripeEnabled] = useState(false);
   const [backendStripePublishableKey, setBackendStripePublishableKey] = useState("");
 
   const [isPlacingOrder, setIsPlacingOrder] = useState(false);
@@ -755,8 +762,13 @@ const Checkout = () => {
   useEffect(() => {
     const restorePending = () => {
       try {
+        if (!stripePublishableKey) return;
+
         const pending = loadPendingCheckout();
-        if (pending?.clientSecret && pending?.order) {
+        const isCurrentStripeAccount = pending?.stripePublishableKey === stripePublishableKey;
+        const isRecent = Number(pending?.createdAt) > Date.now() - 30 * 60 * 1000;
+
+        if (pending?.clientSecret && pending?.order && isCurrentStripeAccount && isRecent) {
           setStripeClientSecret(pending.clientSecret);
           setStripeOrder(pending.order);
           // A saved checkout has an order and PaymentIntent, but the card
@@ -764,6 +776,8 @@ const Checkout = () => {
           // the Stripe form remains visible instead of showing confirmation.
           setCurrentStep(3);
           setPaymentConfirmed(false);
+        } else if (pending) {
+          clearPendingCheckout();
         }
       } catch {
         // Ignore failures restoring pending checkout state.
@@ -771,7 +785,7 @@ const Checkout = () => {
     };
 
     restorePending();
-  }, []);
+  }, [stripePublishableKey]);
 
   const handleProceedToPayment = () => {
     const valid = validateCheckoutDetails();
@@ -917,14 +931,59 @@ const Checkout = () => {
 
       setStripeClientSecret(stripeData.clientSecret);
       setStripeOrder(order);
-      savePendingCheckout({ clientSecret: stripeData.clientSecret, order });
+      savePendingCheckout({
+        clientSecret: stripeData.clientSecret,
+        order,
+        stripePublishableKey,
+        createdAt: Date.now(),
+      });
       return;
     } catch (error) {
       const isNetworkError = String(error?.message || "").toLowerCase().includes("network error");
-      const message = isNetworkError
-        ? "Unable to reach the backend. Make sure the backend is running on http://localhost:5000 and refresh the page."
-        : getBackendStripeError(error);
-      setPaymentError(message);
+      const errorMessage = getBackendStripeError(error);
+      
+      // Handle "Product not found" errors by removing the problematic product from cart
+      if (errorMessage.includes("Product not found:")) {
+        const productMatch = errorMessage.match(/product (\d+)/i);
+        if (productMatch) {
+          const productId = parseInt(productMatch[1], 10);
+          console.warn(`[EZStore] Removing product ${productId} that was not found in inventory`);
+          
+          // Find and remove the product from cart
+          const productToRemove = items.find(item => Number(item.productId ?? item.id) === productId);
+          if (productToRemove) {
+            removeFromCart(productToRemove.id, productToRemove.selectedVariant?.weight || "1kg");
+          }
+          
+          const updatedItems = items.filter(item => Number(item.productId ?? item.id) !== productId);
+          
+          if (updatedItems.length > 0) {
+            // Only show message about removal if there are remaining items
+            setPaymentError(`Product ${productId} is no longer available and has been removed from your cart. Please review your cart and try again.`);
+            
+            // Trigger a refresh to sync with server
+            if (typeof refreshCart === "function") {
+              refreshCart().catch(() => {
+                // refresh is best-effort
+              });
+            }
+          } else {
+            // If no items remain, show a different message
+            setPaymentError("All items in your cart are no longer available. Please add items to your cart and try again.");
+          }
+        } else {
+          const message = isNetworkError
+            ? "Unable to reach the backend. Make sure the backend is running on http://localhost:5000 and refresh the page."
+            : errorMessage;
+          setPaymentError(message);
+        }
+      } else {
+        const message = isNetworkError
+          ? "Unable to reach the backend. Make sure the backend is running on http://localhost:5000 and refresh the page."
+          : errorMessage;
+        setPaymentError(message);
+      }
+      
       console.error("Order placement error:", error);
     } finally {
       isPlacingOrderRef.current = false;
@@ -1432,25 +1491,31 @@ const Checkout = () => {
                       <BadgeCheck className="h-5 w-5 shrink-0 text-emerald-600" />
                       <span><strong>Almost done.</strong> Enter your payment details below.</span>
                     </div>
-                    <Elements stripe={stripePromise} options={{ clientSecret: stripeClientSecret }}>
-                      <PaymentSection
-                        order={stripeOrder}
-                        error={paymentError}
-                        onError={setPaymentError}
-                        clearCart={clearCart}
-                        persistOrder={persistOrderForSuccess}
-                        clearPendingCheckout={clearPendingCheckout}
-                        navigate={navigate}
-                        onSuccess={() => {
-                          clearCart();
-                          clearPendingCheckout();
-                          setPaymentConfirmed(true);
-                          if (stripeOrder?.orderNumber) {
-                            navigate(`/order-success?orderNumber=${encodeURIComponent(stripeOrder.orderNumber)}`);
-                          }
-                        }}
-                      />
-                    </Elements>
+                    {stripePromise ? (
+                      <Elements stripe={stripePromise} options={{ clientSecret: stripeClientSecret }}>
+                        <PaymentSection
+                          order={stripeOrder}
+                          error={paymentError}
+                          onError={setPaymentError}
+                          clearCart={clearCart}
+                          persistOrder={persistOrderForSuccess}
+                          clearPendingCheckout={clearPendingCheckout}
+                          navigate={navigate}
+                          onSuccess={() => {
+                            clearCart();
+                            clearPendingCheckout();
+                            setPaymentConfirmed(true);
+                            if (stripeOrder?.orderNumber) {
+                              navigate(`/order-success?orderNumber=${encodeURIComponent(stripeOrder.orderNumber)}`);
+                            }
+                          }}
+                        />
+                      </Elements>
+                    ) : (
+                      <div className="rounded-xl border border-slate-200 bg-white p-5 text-sm text-slate-600">
+                        Loading the secure payment form...
+                      </div>
+                    )}
                   </div>
                 ) : null}
               </>

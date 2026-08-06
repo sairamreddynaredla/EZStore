@@ -16,6 +16,11 @@ const normalizeProductName = (value) =>
 const catalogProductByName = new Map(
   catalogProducts.map((product) => [normalizeProductName(product.name), product])
 );
+const productListCache = new Map();
+const productListRequests = new Map();
+
+const getProductListCacheKey = (params) =>
+  JSON.stringify(Object.entries(params || {}).sort(([left], [right]) => left.localeCompare(right)));
 
 const withStorefrontImages = (product) => {
   const catalogProduct = catalogProductByName.get(normalizeProductName(product?.name || product?.title));
@@ -78,9 +83,25 @@ const normalizeListResponse = (response) => {
 };
 
 export const fetchProducts = async (params = {}) => {
-  const response = await api.get("/products", { params });
-  const normalized = normalizeListResponse(response);
-  return normalized.items.map(withStorefrontImages);
+  const cacheKey = getProductListCacheKey(params);
+  if (productListCache.has(cacheKey)) {
+    return productListCache.get(cacheKey);
+  }
+  if (productListRequests.has(cacheKey)) {
+    return productListRequests.get(cacheKey);
+  }
+
+  const request = api
+    .get("/products", { params })
+    .then((response) => normalizeListResponse(response).items.map(withStorefrontImages))
+    .then((items) => {
+      productListCache.set(cacheKey, items);
+      return items;
+    })
+    .finally(() => productListRequests.delete(cacheKey));
+
+  productListRequests.set(cacheKey, request);
+  return request;
 };
 
 export const fetchProductById = async (productId) => {
