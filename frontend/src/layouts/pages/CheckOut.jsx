@@ -29,10 +29,17 @@ const PaymentSection = ({
   const stripe = useStripe();
   const elements = useElements();
   const [isSubmittingPayment, setIsSubmittingPayment] = useState(false);
+  const [isElementsReady, setIsElementsReady] = useState(false);
+
+  useEffect(() => {
+    if (elements) {
+      setIsElementsReady(true);
+    }
+  }, [elements]);
 
   const handleConfirmPayment = async () => {
-    if (!stripe || !elements) {
-      onError("Stripe payment service is not loaded yet. Please wait a moment.");
+    if (!stripe || !elements || !isElementsReady) {
+      onError("Payment form is still loading. Please wait a moment and try again.");
       return;
     }
 
@@ -109,10 +116,10 @@ const PaymentSection = ({
         <button
           type="button"
           onClick={handleConfirmPayment}
-          disabled={!stripe || !elements || isSubmittingPayment}
+          disabled={!stripe || !elements || !isElementsReady || isSubmittingPayment}
           className="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          {isSubmittingPayment ? "Processing payment..." : "Pay Now"}
+          {isSubmittingPayment ? "Processing payment..." : !isElementsReady ? "Loading payment form..." : "Pay Now"}
         </button>
       </div>
     </div>
@@ -675,6 +682,7 @@ const Checkout = () => {
 
   const [stripeClientSecret, setStripeClientSecret] = useState("");
   const [stripeOrder, setStripeOrder] = useState(null);
+  const [paymentConfirmed, setPaymentConfirmed] = useState(false);
 
   useEffect(() => {
     if (import.meta.env.DEV) {
@@ -740,6 +748,7 @@ const Checkout = () => {
           setStripeClientSecret(pending.clientSecret);
           setStripeOrder(pending.order);
           setCurrentStep(4);
+          setPaymentConfirmed(false);
         }
       } catch {
         // Ignore failures restoring pending checkout state.
@@ -1464,6 +1473,7 @@ const Checkout = () => {
                         onSuccess={() => {
                           clearCart();
                           clearPendingCheckout();
+                          setPaymentConfirmed(true);
                           if (stripeOrder?.orderNumber) {
                             navigate(`/order-success?orderNumber=${encodeURIComponent(stripeOrder.orderNumber)}`);
                           }
@@ -1526,22 +1536,24 @@ const Checkout = () => {
                   </div>
                 )}
 
-                <div className="mt-6 space-y-4">
-                  <div className="rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-800">
-                    Your payment is confirmed and your order is now complete.
+                {paymentConfirmed ? (
+                  <div className="mt-6 space-y-4">
+                    <div className="rounded-xl border border-green-200 bg-green-50 p-4 text-sm text-green-800">
+                      Your payment is confirmed and your order is now complete.
+                    </div>
+                    {stripeOrder?.orderNumber ? (
+                      <button
+                        type="button"
+                        onClick={() =>
+                          navigate(`/order-success?orderNumber=${encodeURIComponent(stripeOrder.orderNumber)}`)
+                        }
+                        className="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600"
+                      >
+                        View Order Details
+                      </button>
+                    ) : null}
                   </div>
-                  {stripeOrder?.orderNumber ? (
-                    <button
-                      type="button"
-                      onClick={() =>
-                        navigate(`/order-success?orderNumber=${encodeURIComponent(stripeOrder.orderNumber)}`)
-                      }
-                      className="w-full bg-green-500 text-white py-3 rounded-lg font-bold hover:bg-green-600"
-                    >
-                      View Order Details
-                    </button>
-                  ) : null}
-                </div>
+                ) : null}
               </>
             )}
           </div>
