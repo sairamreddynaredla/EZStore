@@ -152,22 +152,30 @@ const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState(readStoredCart);
   const [hydrated, setHydrated] = useState(false);
   const mergeLocalCartOnceRef = useRef(false);
+  const cartLoadRequestRef = useRef(0);
 
-  const loadRemoteCart = async () => {
+  const loadRemoteCart = async ({ force = false } = {}) => {
+    const requestId = ++cartLoadRequestRef.current;
     try {
-      const response = await customerCommerceApi.getCart();
+      const response = await customerCommerceApi.getCart({ force });
       const items = Array.isArray(response?.data?.items) ? response.data.items : [];
-      setCartItems(items.map(normalizeCartItem));
+      if (requestId === cartLoadRequestRef.current) {
+        setCartItems(items.map(normalizeCartItem));
+      }
     } catch (err) {
       console.error(err);
-      setCartItems([]);
+      if (requestId === cartLoadRequestRef.current) {
+        setCartItems([]);
+      }
     } finally {
-      setHydrated(true);
+      if (requestId === cartLoadRequestRef.current) {
+        setHydrated(true);
+      }
     }
   };
 
   const refreshCart = async () => {
-    await loadRemoteCart();
+    await loadRemoteCart({ force: true });
   };
 
   useEffect(() => {
@@ -350,9 +358,10 @@ const CartProvider = ({ children }) => {
 
   const clearCart = async () => {
     if (isAuthenticated) {
+      setCartItems([]);
       try {
         await customerCommerceApi.clearCart();
-        await loadRemoteCart();
+        await loadRemoteCart({ force: true });
         success("Cart cleared");
         return true;
       } catch (err) {

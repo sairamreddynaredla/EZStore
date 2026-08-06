@@ -84,6 +84,11 @@ export const handleWebhook = (providerKey) => async (req, res, next) => {
           },
         });
 
+        // Payment webhooks are the source of truth for completed orders. Clear
+        // the persisted cart here so redirect-based payments cannot leave old
+        // items behind in a customer's next checkout.
+        await tx.cartItem.deleteMany({ where: { customerId: payment.order.customerId } });
+
         if (tx.transaction) {
           try {
             await tx.transaction.create({

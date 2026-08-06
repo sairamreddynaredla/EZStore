@@ -7,16 +7,19 @@ let savedAddressesRequest = null;
 let cartRequest = null;
 
 const customerCommerceApi = {
-  getCart: () => {
-    if (cartRequest) {
+  getCart: ({ force = false } = {}) => {
+    if (cartRequest && !force) {
       return cartRequest;
     }
 
-    cartRequest = authApi.get("/customer/cart").finally(() => {
-      cartRequest = null;
+    const request = authApi.get("/customer/cart").finally(() => {
+      if (cartRequest === request) {
+        cartRequest = null;
+      }
     });
+    cartRequest = request;
 
-    return cartRequest;
+    return request;
   },
   addToCart: (payload) => authApi.post("/customer/cart", payload),
   updateCartItem: (itemId, quantity) => authApi.patch(`/customer/cart/${itemId}`, { quantity }),
