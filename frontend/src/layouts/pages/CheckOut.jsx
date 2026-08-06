@@ -30,11 +30,35 @@ const PaymentSection = ({
   const elements = useElements();
   const [isSubmittingPayment, setIsSubmittingPayment] = useState(false);
   const [isElementsReady, setIsElementsReady] = useState(false);
+  const paymentElementRef = useRef(null);
 
   useEffect(() => {
-    if (elements) {
-      setIsElementsReady(true);
+    if (!elements || !paymentElementRef.current) {
+      return;
     }
+
+    // Wait for PaymentElement to actually render in DOM
+    const checkPaymentElement = setInterval(() => {
+      const stripeForm = paymentElementRef.current?.querySelector('[data-testid="payment-element"]') ||
+                         paymentElementRef.current?.querySelector('iframe') ||
+                         paymentElementRef.current?.querySelector('[id*="stripe"]');
+      
+      if (stripeForm) {
+        setIsElementsReady(true);
+        clearInterval(checkPaymentElement);
+      }
+    }, 100);
+
+    // Fallback timeout: if element doesn't appear in 5 seconds, assume it's ready
+    const fallbackTimeout = setTimeout(() => {
+      setIsElementsReady(true);
+      clearInterval(checkPaymentElement);
+    }, 5000);
+
+    return () => {
+      clearInterval(checkPaymentElement);
+      clearTimeout(fallbackTimeout);
+    };
   }, [elements]);
 
   const handleConfirmPayment = async () => {
@@ -47,6 +71,15 @@ const PaymentSection = ({
     onError("");
 
     try {
+      // Final safety check: ensure PaymentElement is in DOM before submission
+      const paymentElement = paymentElementRef.current?.querySelector('iframe') ||
+                             paymentElementRef.current?.querySelector('[id*="stripe"]');
+      if (!paymentElement) {
+        onError("Payment form failed to load. Please refresh the page and try again.");
+        setIsSubmittingPayment(false);
+        return;
+      }
+
       console.info("[EZStore] Stripe confirmPayment invoked", { orderId: order?.id, orderNumber: order?.orderNumber });
       const result = await stripe.confirmPayment({
         elements,
@@ -109,7 +142,7 @@ const PaymentSection = ({
     <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
       <h3 className="font-semibold text-gray-800 mb-4">Complete Payment</h3>
       <div className="space-y-4">
-        <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+        <div ref={paymentElementRef} className="bg-gray-50 border border-gray-200 rounded-lg p-4">
           <PaymentElement />
         </div>
         {error && <p className="text-xs text-red-500">{error}</p>}
