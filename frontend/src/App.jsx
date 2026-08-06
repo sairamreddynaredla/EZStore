@@ -45,7 +45,7 @@ const AdminRedirect = () => {
     const adminOrigin = configuredAdminUrl || (
       window.location.hostname === "localhost"
         ? "http://localhost:5174"
-        : "https://ezstore-admin.vercel.app"
+        : "https://admin-sairamreddynaredlas-projects.vercel.app"
     );
 
     const destination = new URL(adminOrigin);
