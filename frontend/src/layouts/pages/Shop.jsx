@@ -11,6 +11,7 @@ import ProductSearch from "../../components/products/ProductSearch";
 import Footer from "../../components/Footer";
 
 import { fetchProducts } from "../../services/productApi";
+import catalogProducts from "../../data/products";
 import useCart from "../../hooks/usecart";
 import { useWishlist } from "../../context/WishListContext";
 
@@ -60,10 +61,16 @@ const Shop = () => {
             }
           }
         }
-        if (lastError && items.length === 0) throw lastError;
+        // The storefront catalog is bundled too, so browsing remains usable
+        // while the remote service wakes up or has a temporary outage.
+        if (items.length === 0) {
+          if (lastError) console.warn("[EZStore] Catalog API unavailable; using bundled catalog.", lastError);
+          items = catalogProducts;
+        }
         setProducts(items);
       } catch (err) {
-        setProducts([]);
+        console.warn("[EZStore] Catalog load failed; using bundled catalog.", err);
+        setProducts(catalogProducts);
       } finally {
         setLoadingProducts(false);
       }
