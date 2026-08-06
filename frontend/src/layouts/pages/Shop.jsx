@@ -44,7 +44,9 @@ const Shop = () => {
     const loadProducts = async () => {
       setLoadingProducts(true);
       try {
-        const items = await fetchProducts();
+        // The shop is a full catalog view, not a paginated preview. The API
+        // treats `limit: 0` as "return all".
+        const items = await fetchProducts({ limit: 0 });
         setProducts(items);
       } catch (err) {
         setProducts([]);
@@ -78,7 +80,7 @@ const Shop = () => {
     sizes: [],
     vegTypes: [],
     price: [0, 99999],
-    includeOutOfStock: false,
+    includeOutOfStock: true,
     ratings: [],
     dealsOnly: false,
     specialDiets: [],
@@ -185,8 +187,14 @@ const Shop = () => {
       ? filters.productTypes.includes(product.subCategory)
       : true;
 
+    const productPrices = (product.variants || [])
+      .map((variant) => Number(variant.price))
+      .filter(Number.isFinite);
+    if (productPrices.length === 0 && Number.isFinite(Number(product.price))) {
+      productPrices.push(Number(product.price));
+    }
     const matchesPrice = Array.isArray(filters.price)
-      ? (product.variants || []).some((variant) => variant.price <= Number(filters.price[1]))
+      ? productPrices.some((price) => price >= Number(filters.price[0]) && price <= Number(filters.price[1]))
       : true;
 
     return (
@@ -211,11 +219,11 @@ const Shop = () => {
 
   // SORTING
   if (sort === "priceLow") {
-    filtered = [...filtered].sort((a, b) => a.variants[0].price - b.variants[0].price);
+    filtered = [...filtered].sort((a, b) => Number(a.variants?.[0]?.price ?? a.price ?? 0) - Number(b.variants?.[0]?.price ?? b.price ?? 0));
   }
 
   if (sort === "priceHigh") {
-    filtered = [...filtered].sort((a, b) => b.variants[0].price - a.variants[0].price);
+    filtered = [...filtered].sort((a, b) => Number(b.variants?.[0]?.price ?? b.price ?? 0) - Number(a.variants?.[0]?.price ?? a.price ?? 0));
   }
 
   if (sort === "new") {
@@ -298,6 +306,7 @@ const Shop = () => {
             {/* GRID */}
             <ProductGrid
               products={filtered}
+              loading={loadingProducts}
               onAddToCart={handleAddToCart}
               onWishlistToggle={handleWishlistToggle}
               columns={3}
