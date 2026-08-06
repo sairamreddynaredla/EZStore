@@ -1,5 +1,31 @@
 import prisma from "../../database/prismaClient.js";
 
+// Keep dashboard reads compatible with databases that were provisioned before
+// optional payment fields were introduced. `include: { payment: true }` makes
+// Prisma select every Payment column and fails the entire dashboard when an
+// older database is missing one of those optional columns.
+const dashboardOrderSelect = {
+  id: true,
+  orderNumber: true,
+  status: true,
+  totalAmount: true,
+  placedAt: true,
+  customer: {
+    select: {
+      email: true,
+      fullName: true,
+      firstName: true,
+      lastName: true,
+    },
+  },
+  payment: {
+    select: {
+      status: true,
+      method: true,
+    },
+  },
+};
+
 const getStartOfToday = () => {
   const now = new Date();
   now.setHours(0, 0, 0, 0);
@@ -148,7 +174,7 @@ export const getDashboardSummary = async () => {
     prisma.order.findMany({
       orderBy: { placedAt: "desc" },
       take: 5,
-      include: { customer: true, payment: true },
+      select: dashboardOrderSelect,
     }),
     prisma.customer.findMany({
       where: { deletedAt: null },

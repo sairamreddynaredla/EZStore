@@ -80,7 +80,13 @@ export const getDashboardSummary = async () => {
     const response = await adminApi.get("/dashboard/summary");
     return response.data;
   } catch (error) {
-    if (error.response?.status === 404 || error.response?.status === 501) {
+    const status = error.response?.status;
+    const code = error.response?.data?.meta?.code;
+
+    // Older deployed database schemas can make the aggregate dashboard route
+    // fail with Prisma P2022. Fall back to the individual endpoints so an
+    // admin can still use the dashboard while the backend is being updated.
+    if (status === 404 || status === 501 || code === "P2022") {
       return getFallbackDashboardSummary();
     }
 

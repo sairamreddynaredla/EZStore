@@ -3,19 +3,25 @@ import { resolveAdminAssetUrl } from "../services/api";
 
 // The product seed data retains its storefront source asset paths. Bundle those
 // originals into the admin too, so those paths do not turn into broken URLs.
-const storefrontProductAssets = import.meta.glob("../../../src/assets/products/**/*.{png,jpg,jpeg,webp,gif,svg}", {
+const storefrontProductAssets = import.meta.glob("../../../src/assets/**/*.{png,jpg,jpeg,webp,gif,svg}", {
   eager: true,
   import: "default",
 });
 
 const normalizeAssetKey = (value) => {
   if (!value || typeof value !== "string") return "";
-  return String(value)
+  const normalized = String(value)
     .replace(/\\/g, "/")
     .replace(/^\.+\//, "")
-    .replace(/^.*(?:frontend\/src\/)?/, "")
-    .replace(/^\//, "")
     .toLowerCase();
+
+  // Convert both Vite glob paths (../../../src/assets/...) and product paths
+  // stored in the database (/assets/...) to the same lookup key.
+  const assetsMarker = "src/assets/";
+  const markerIndex = normalized.lastIndexOf(assetsMarker);
+  if (markerIndex >= 0) return normalized.slice(markerIndex + "src/".length);
+
+  return normalized.replace(/^\/+/, "");
 };
 
 const assetByFileName = new Map(
@@ -35,6 +41,13 @@ const toImageValue = (value) => {
 const resolveImageSource = (value) => {
   const image = toImageValue(value);
   if (!image) return "";
+
+  // Seeded products keep paths from the storefront source tree (and older
+  // records may already contain the Render equivalent). The admin publishes a
+  // copy of those assets from public/assets, so keep the request on the Vercel
+  // origin instead of forwarding it to the API server.
+  const assetMatch = image.replace(/\\/g, "/").match(/(?:^|\/)assets\/(.+)$/i);
+  if (assetMatch) return `/assets/${assetMatch[1]}`;
 
   // Imported storefront assets are stored in the database as relative source
   // paths (for example, ../../assets/products/.../product.webp). We'll
