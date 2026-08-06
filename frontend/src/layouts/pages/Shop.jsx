@@ -44,9 +44,23 @@ const Shop = () => {
     const loadProducts = async () => {
       setLoadingProducts(true);
       try {
-        // The shop is a full catalog view, not a paginated preview. The API
-        // treats `limit: 0` as "return all".
-        const items = await fetchProducts({ limit: 0 });
+        // Render free instances can briefly wake from sleep. Retry before
+        // showing an empty catalog, and use an explicit catalog-sized limit
+        // for compatibility with proxies that normalize zero values.
+        let items = [];
+        let lastError;
+        for (let attempt = 0; attempt < 3; attempt += 1) {
+          try {
+            items = await fetchProducts({ limit: 100 });
+            break;
+          } catch (error) {
+            lastError = error;
+            if (attempt < 2) {
+              await new Promise((resolve) => window.setTimeout(resolve, 800 * (attempt + 1)));
+            }
+          }
+        }
+        if (lastError && items.length === 0) throw lastError;
         setProducts(items);
       } catch (err) {
         setProducts([]);

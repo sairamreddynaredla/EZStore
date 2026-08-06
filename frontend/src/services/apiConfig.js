@@ -9,7 +9,15 @@ export const getApiBaseUrl = () => {
   const configuredBase = normalizeUrl(import.meta.env.VITE_API_BASE_URL);
   let baseUrl;
 
-  if (!configuredBase) {
+  // The Vercel deployment has an `/api` rewrite to the Render backend. Use
+  // that same-origin proxy even when a stale dashboard environment variable
+  // still points directly to Render; it avoids transient CORS/cold-start
+  // failures leaving catalog pages permanently empty.
+  const isVercelStorefront = typeof window !== "undefined" && /\.vercel\.app$/i.test(window.location.hostname);
+
+  if (isVercelStorefront) {
+    baseUrl = "/api";
+  } else if (!configuredBase) {
     if (typeof window !== "undefined" && window.location.hostname === "localhost") {
       baseUrl = "http://localhost:5000/api";
     } else {
