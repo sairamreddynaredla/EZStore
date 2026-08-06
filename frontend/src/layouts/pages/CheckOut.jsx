@@ -71,7 +71,7 @@ const PaymentSection = ({
 
       if (intent.status === "succeeded") {
         // Payment status is updated exclusively by Stripe's signed webhook.
-        clearCart();
+        await clearCart();
         persistOrder(order);
         clearPendingCheckout();
         if (typeof onSuccess === "function") {

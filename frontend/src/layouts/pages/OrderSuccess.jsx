@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
+import useCart from "../../hooks/usecart";
 import { initSocket, joinCustomerRoom, subscribeToCustomerOrderEvents } from "../../services/socket";
 import customerCommerceApi from "../../services/customerCommerceApi";
 
@@ -19,6 +20,7 @@ const OrderSuccess = () => {
   const [verificationMessage, setVerificationMessage] = useState("");
 
   const { user } = useAuth();
+  const { clearCart } = useCart();
   const storageKey = orderNumber ? `ezstore_recent_order_${orderNumber}` : null;
 
   const formatCurrency = (amount, currency = "USD") => {
@@ -30,6 +32,32 @@ const OrderSuccess = () => {
   };
 
   const hasInitializedRef = useRef(false);
+  const clearedOrderRef = useRef("");
+
+  useEffect(() => {
+    const paymentStatus = String(order?.paymentStatus || order?.payment?.status || "").toLowerCase();
+    const paymentConfirmed = paymentStatus === "paid" || paymentStatus === "succeeded" || redirectStatus === "succeeded";
+    const orderKey = order?.id || order?.orderNumber || orderNumber;
+
+    if (!paymentConfirmed || !orderKey || clearedOrderRef.current === String(orderKey)) {
+      return;
+    }
+
+    let active = true;
+
+    const clearCompletedOrderCart = async () => {
+      const cleared = await clearCart();
+      if (active && cleared) {
+        clearedOrderRef.current = String(orderKey);
+      }
+    };
+
+    clearCompletedOrderCart();
+
+    return () => {
+      active = false;
+    };
+  }, [clearCart, order?.id, order?.orderNumber, order?.payment?.status, order?.paymentStatus, orderNumber, redirectStatus]);
 
   useEffect(() => {
     if (hasInitializedRef.current) {

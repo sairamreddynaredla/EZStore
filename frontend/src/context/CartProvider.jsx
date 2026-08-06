@@ -354,15 +354,21 @@ const CartProvider = ({ children }) => {
         await customerCommerceApi.clearCart();
         await loadRemoteCart();
         success("Cart cleared");
-        return;
+        return true;
       } catch (err) {
         error(err?.response?.data?.message || "Unable to clear cart");
-        return;
+        return false;
       }
     }
 
     setCartItems([]);
+    try {
+      window.localStorage.removeItem("cart");
+    } catch {
+      // The in-memory cart is still cleared when browser storage is unavailable.
+    }
     success("Cart cleared");
+    return true;
   };
 
   const saveForLater = async (id, weight, fallbackItem = null) => {
