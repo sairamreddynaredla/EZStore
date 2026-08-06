@@ -20,9 +20,13 @@ export const computeOrderSubtotal = (items = [], products = []) => {
   let subtotal = 0;
 
   for (const item of items) {
-    const lookupKey = normalizeProductLookupKey(item.productId ?? item.id ?? item.productSlug ?? item.slug);
+    // Frontend catalog IDs are not guaranteed to match database IDs after a
+    // catalog import. When a trusted product slug accompanies an old ID, use
+    // the slug as a fallback instead of rejecting an otherwise valid cart.
+    const productIdKey = normalizeProductLookupKey(item.productId ?? item.id);
+    const productSlugKey = normalizeProductLookupKey(item.productSlug ?? item.slug);
     const qty = Math.max(0, Number(item.quantity ?? item.qty ?? 1));
-    const product = productMap.get(lookupKey);
+    const product = productMap.get(productIdKey) || productMap.get(productSlugKey);
     if (!product) {
       const itemName = item.name
         ? `"${item.name}"`

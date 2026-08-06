@@ -42,3 +42,10 @@ test("computeOrderSubtotal supports order item productSlug when id is absent", (
   const subtotal = computeOrderSubtotal(items, products);
   assert.equal(subtotal, 8.0 * 3);
 });
+
+test("computeOrderSubtotal falls back to the product slug when a frontend ID is stale", () => {
+  const products = [{ id: 3, price: 28.99, metadata: {}, slug: "purina-pro-plan-complete-essentials-adult-dry-dog-food" }];
+  const items = [{ productId: 103, productSlug: "purina-pro-plan-complete-essentials-adult-dry-dog-food", quantity: 1 }];
+
+  assert.equal(computeOrderSubtotal(items, products), 28.99);
+});
